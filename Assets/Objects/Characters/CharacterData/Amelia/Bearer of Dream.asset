@@ -15,17 +15,16 @@ MonoBehaviour:
   Id: 3
   Name: Amelia
   Title: Saviour of Hope
-  Level: 1
-  Experience: 0
   CharacterCard: {fileID: 21300000, guid: 76e88f4ed2405e54ca0764c5886ab1b4, type: 3}
   TransparentCard: {fileID: 21300000, guid: aef692bfd6e7c3e4a8a49178f0eff002, type: 3}
   Avatar: {fileID: 21300000, guid: fd153f11e28955040b09dceff27bf402, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 59f796fd782b1f0478e6ee080ac69e78, type: 3}
   CharacterGachaArt: {fileID: 21300000, guid: 2b7df0d71d484364492082de27d0d9b1, type: 3}
   PassiveDescription: Starts with low HP but heals over time. Gains additional projectile
-    every 15 levels (up to +3) and increase enemy spawn rate and health by 7% every
-    15 levels<br>At SS no longer increases enemy health, on ability cast instantly
-    summon 3 constructs<br>At SSS increase flat damage by 1 point every 13 levels
+    every 15 levels (up to <color=green>+3</color>) and increase enemy spawn rate
+    and health by <color=red>7%</color> every 15 levels<br>At SS no longer increases
+    enemy health, on ability cast instantly summon 3 constructs<br>At SSS increase
+    flat damage by <color=green>1</color> point every 13 levels
   AbilityName: Final Wish
   AbilityDescription: Shoot a projectile ahead that travels a certain distance and
     explodes causing damage in a huge area
@@ -33,13 +32,9 @@ MonoBehaviour:
   AbilityPrefab: {fileID: 4238375383337323453, guid: 7197088e9865c2d498b163f4bd80c079,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: e817619ddba684d47883195bbaf53dd5, type: 3}
-  IsUnlocked: 0
   IsActive: 0
   ColorTheme: {r: 0.93725497, g: 0.8313726, b: 0.6862745, a: 1}
   StarRating: 5
-  RankUpLevel: 0
-  KillCount: 0
-  HighestInGameLevel: 0
   StartingWeapon: {fileID: 3707545571287273477, guid: 3fc78551d1d24334faecf12f2c66cc6b,
     type: 3}
   IsPullable: 1
@@ -68,4 +63,7 @@ MonoBehaviour:
     EnemySpawnRateIncreasePercentage: 0
     EnemyHealthIncreasePercentage: 0
     EnemyMaxCountIncreasePercentage: 0
+    ItemRewardIncrease: 0
+    Revives: 0
+    ProjectileLifeTimeIncreasePercentage: 0
   loreEntries: []

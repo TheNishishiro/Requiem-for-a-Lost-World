@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using DefaultNamespace.Data;
 using Objects.Players;
 using Objects.Stage;
@@ -41,6 +42,11 @@ namespace Objects.Characters
 		public void Deactivate()
 		{
 			IsActive = false;
+		}
+
+		public IEnumerable<CharacterStats> GetStatsList()
+		{
+			return Stats.GetStatsList();
 		}
 	}
 }

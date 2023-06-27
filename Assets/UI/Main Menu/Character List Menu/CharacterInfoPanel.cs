@@ -27,6 +27,8 @@ namespace UI.Main_Menu.Character_List_Menu
 		[SerializeField] private Image separationLine1;
 		[SerializeField] private Image separationLine2;
 		[SerializeField] private Image separationLine3;
+		[SerializeField] private Image separationLine4;
+		[SerializeField] private GameObject statsPanel;
 
 		public void SetCharacterData(CharacterData characterData, CharacterSaveData characterSaveData)
 		{
@@ -36,7 +38,7 @@ namespace UI.Main_Menu.Character_List_Menu
 			expTextField.text = $"EXP ► {(characterSaveData.Experience / (float) characterSaveData.ExperienceNeeded):P}";
 			expSlider.SetValue(characterSaveData.Experience, characterSaveData.ExperienceNeeded);
 			characterImage.sprite = characterData.TransparentCard;
-			separationLine1.color = separationLine2.color = separationLine3.color = characterData.ColorTheme;
+			separationLine1.color = separationLine2.color = separationLine3.color = separationLine4.color = characterData.ColorTheme;
 			rankUpTextField.text = characterSaveData.GetRank();
 			killCountTextField.text = Utilities.GetShortNumberFormatted(characterSaveData.KillCount);
 			highestLevelTextField.text = characterSaveData.HighestInGameLevel.ToString();
@@ -47,10 +49,19 @@ namespace UI.Main_Menu.Character_List_Menu
 			skillIcon.GetComponent<Tooltip>().message = characterData.AbilityDescription;
 			skillName.text = characterData.AbilityName;
 			passiveDescription.text = characterData.PassiveDescription;
+			
+			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();
+			statsPanelComponent.ClearEntries();
+			foreach (var statEntry in characterData.GetStatsList())
+			{
+				statsPanelComponent.AddEntry(statEntry.Name, statEntry.Value);
+			}
 		}
 
 		public void Close()
 		{
+			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();
+			statsPanelComponent.ClearEntries();
 			gameObject.SetActive(false);
 		}
 	}

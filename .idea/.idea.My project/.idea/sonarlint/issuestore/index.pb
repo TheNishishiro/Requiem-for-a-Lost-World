@@ -139,8 +139,6 @@ _
 /Assets/UI/Labels/InGame/PauseMenu/ExitButton.cs,0\3\0352d89bf5fcec75fdd204bd3d5a498bc89d25ab
 P
  Assets/UI/Main Menu/GoldLabel.cs,4\c\4c962312d9cca96663b15462933cf18634b1d9b7
-Z
-*Assets/Objects/Characters/CharacterData.cs,2\0\20348fc29d2bae33c1b657cd1442fe28666d20e8
 _
 /Assets/Scripts Shared/Managers/PickupManager.cs,c\1\c172ce3892ed1feb4cbf01d818d90bc0a2722cb4
 h
@@ -155,8 +153,6 @@ g
 -Assets/Scripts Shared/Managers/GameManager.cs,1\e\1e8c5da0e1c5848a2593bdd2fcc8a9970a61f4b0
 f
 6Assets/Scripts Shared/Managers/CharacterListManager.cs,1\a\1a5b60c2a8a281f651393563b99df669abcbef0c
-m
-=Assets/UI/Main Menu/Character List Menu/CharacterInfoPanel.cs,b\6\b6487d255c24118ea17820f0ebbf25096011e590
 h
 8Assets/UI/Main Menu/End Screen/DamageSummaryContainer.cs,5\8\5882e62d1c52bac66dcc275b185aee7869cea956
 d
@@ -177,8 +173,6 @@ q
 AAssets/UI/Main Menu/Recollection Menu/RecollectionPanelManager.cs,e\3\e371925c9e8b06389c5222b28364c7e050189291
 Z
 *Assets/Objects/Characters/CharacterRank.cs,b\5\b59b9c3489ead8d7cc03c7ffb10221a0e1e8c222
-l
-<Assets/UI/Main Menu/Character List Menu/CharacterListMenu.cs,8\7\8720acd70e91dbe620f445b275d885f15e4d444d
 T
 $Assets/UI/Labels/InGame/LabelTime.cs,3\4\34e302abcf6ff1fa8765df29e79c8ea91aec4bde
 e
@@ -217,8 +211,6 @@ f
 6Assets/UI/Main Menu/Lore library/LoreEntryContainer.cs,3\0\30126c940f19517f1be2d0bd9f5b8647de984a34
 b
 2Assets/UI/Main Menu/Lore library/LoreEntryPanel.cs,c\b\cb90e82e0f916599748dc37d75c2161a098ca69a
-R
-"Assets/Scripts Shared/Utilities.cs,3\9\392185a05b6c1129334716e51d691e9703c11eef
 e
 5Assets/Objects/Abilities/Boomerang/BoomerangWeapon.cs,0\5\059c6529865630d04cd1614668b673e57cdde838
 i
@@ -247,8 +239,6 @@ j
 :Assets/Objects/Abilities/Black Hole/BlackHoleProjectile.cs,7\2\72fd3cd851ad155fdedf99ddb3e861c9c15a70f3
 Q
 !Assets/Objects/Items/ItemStats.cs,1\0\10bb3eca4f60d696b5b86208f4e2b069aad5886c
-U
-%Assets/Objects/Players/PlayerStats.cs,8\6\8685964808bcab8c1887ad0b3f39953449cd4e1a
 _
 /Assets/Scripts Shared/Weapons/ProjectileBase.cs,b\9\b91f5ee0e4ed609c221dc89d9fc0fdff86f7d5e9
 W
@@ -299,8 +289,6 @@ b
 2Assets/UI/Main Menu/Recollection Menu/LootPanel.cs,e\d\ed6fbebe80a3608918f5f4c14c422cef7a321cff
 d
 4Assets/Scripts Shared/Managers/AchievementManager.cs,3\1\3136ea51f45049a096f83fdfe9ef8f5ef18824bc
-m
-=Assets/UI/Main Menu/Character List Menu/CharacterListPanel.cs,a\e\ae3d4ee80e4c71f48e52ac209251eb7d7db56068
 [
 +Assets/Objects/Characters/CharactersEnum.cs,a\8\a8da474d567c49a90cf702ad8c6fe373ca53f25d
 P

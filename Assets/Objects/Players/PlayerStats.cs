@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using DefaultNamespace.Extensions;
 using Objects.Abilities;
+using Objects.Characters;
 using Objects.Items;
 using Objects.Players.PermUpgrades;
 using Unity.VisualScripting;
@@ -134,6 +137,38 @@ namespace Objects.Players
 			ItemRewardIncrease = playerStats.ItemRewardIncrease;
 			Revives = playerStats.Revives;
 			ProjectileLifeTimeIncreasePercentage = playerStats.ProjectileLifeTimeIncreasePercentage;
+		}
+
+		public IEnumerable<CharacterStats> GetStatsList()
+		{
+			var stats = new List<CharacterStats>();
+			stats.Add(new CharacterStats("Health", HealthMax));
+			stats.Add(new CharacterStats("Magnet", MagnetSize));
+			stats.Add(new CharacterStats("CDR", CooldownReduction));
+			stats.Add(new CharacterStats("CDR%", CooldownReductionPercentage, true));
+			stats.Add(new CharacterStats("Projectiles", AttackCount));
+			stats.Add(new CharacterStats("Damage", Damage));
+			stats.Add(new CharacterStats("Projectile size", Scale, true));
+			stats.Add(new CharacterStats("Projectile speed", Speed));
+			stats.Add(new CharacterStats("Attack duration", TimeToLive));
+			stats.Add(new CharacterStats("Weapon range", DetectionRange));
+			stats.Add(new CharacterStats("Damage%", DamagePercentageIncrease, true));
+			stats.Add(new CharacterStats("EXP%", ExperienceIncreasePercentage, true));
+			stats.Add(new CharacterStats("Movement speed", MovementSpeed));
+			stats.Add(new CharacterStats("Skill CDR%", SkillCooldownReductionPercentage, true));
+			stats.Add(new CharacterStats("Health regen", HealthRegen));
+			stats.Add(new CharacterStats("Crit rate", CritRate));
+			stats.Add(new CharacterStats("Crit damage", CritDamage));
+			stats.Add(new CharacterStats("Pass through", PassThroughCount));
+			stats.Add(new CharacterStats("Armor", Armor));
+			stats.Add(new CharacterStats("Enemy speed%", EnemySpeedIncreasePercentage, true, true));
+			stats.Add(new CharacterStats("Enemy spawn rate%", EnemySpawnRateIncreasePercentage, true, true));
+			stats.Add(new CharacterStats("Enemy health%", EnemyHealthIncreasePercentage, true, true));
+			stats.Add(new CharacterStats("Enemy count%", EnemyMaxCountIncreasePercentage, true, true));
+			stats.Add(new CharacterStats("Reward increase", ItemRewardIncrease, true));
+			stats.Add(new CharacterStats("Revives", Revives));
+			stats.Add(new CharacterStats("Weapon duration%", ProjectileLifeTimeIncreasePercentage, true));
+			return stats;
 		}
 
 		public void Add(PermUpgradeType permUpgradeType, float value)
