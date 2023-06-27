@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7250782437978023446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1704665094604379769}
+  - component: {fileID: 3707545571287273477}
+  m_Layer: 0
+  m_Name: Laser Gun Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1704665094604379769
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7250782437978023446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3707545571287273477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7250782437978023446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2b32a378cef43f3b9f43b4d8b95f729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 2402120471238580864, guid: 3628eb11f781e5b4191628a32966436e,
+    type: 3}
+  Name: Gem of Dream
+  Description: Create a hovering weapon that shoot and tracks nearby targets
+  Icon: {fileID: 21300000, guid: 843bbe2c3c1380a4196ffc79cc5dc3e6, type: 3}
+  weaponStats:
+    Damage: 1
+    Cooldown: 4
+    Scale: 1
+    Speed: 0
+    TimeToLive: 2
+    AttackCount: 1
+    PassThroughCount: 0
+    DamageCooldown: 0.25
+    DuplicateSpawnDelay: 0.2
+    DetectionRange: 5
+  availableUpgrades:
+  - {fileID: 11400000, guid: 420a7b69e1b0d0840b826ded5d20e49b, type: 2}
+  - {fileID: 11400000, guid: ddc5e220ca31e4548bdc535100e5bf8a, type: 2}
+  - {fileID: 11400000, guid: a40f57a444c3bb44dbb2a7afd4e4aeb5, type: 2}
+  - {fileID: 11400000, guid: 4959634606bf57d49a9d9f046bc99bdd, type: 2}
+  - {fileID: 11400000, guid: b04064b551009784d96af9cac96ecc0a, type: 2}
+  - {fileID: 11400000, guid: cdf70402ce8716c47aa4318841b361ba, type: 2}
+  - {fileID: 11400000, guid: 3f8a53d8e212e4e4e898baac8d02627c, type: 2}
+  - {fileID: 11400000, guid: 9ee81fa2c666c794eb4e1e4de8cb70c3, type: 2}
+  - {fileID: 11400000, guid: bc02c83a5d578ab42812d7ab2db98d4c, type: 2}
+  - {fileID: 11400000, guid: 73c1a78fccf174247a95205c8ce729f1, type: 2}
+  - {fileID: 11400000, guid: 33a418332c767874aa9d95a5635d4aea, type: 2}
+  - {fileID: 11400000, guid: da1abc6543931704ba1f8072dbb28c2a, type: 2}
+  - {fileID: 11400000, guid: cb5c2bd42bf6a45419a353752c0c7c64, type: 2}

@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5064242657095341949
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8361625019833694591}
+  - component: {fileID: 3892008192163857434}
+  m_Layer: 0
+  m_Name: Armor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8361625019833694591
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5064242657095341949}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3892008192163857434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5064242657095341949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Armor
+  Description: Decrease incomming damage by 1
+  Icon: {fileID: 21300000, guid: 1279e6533ef6a2d449c89132b57f6901, type: 3}
+  ItemUpgrades:
+  - {fileID: 11400000, guid: 1d18318c82f039f43aef91e8e26c57bd, type: 2}
+  - {fileID: 11400000, guid: 5daae33e8fc44f8439f25c3037b6a4f8, type: 2}
+  - {fileID: 11400000, guid: 6093e519c64b28e48ae25e6241d0a9d8, type: 2}
+  - {fileID: 11400000, guid: e343a72f61de39f4e981d3cd2ae672d4, type: 2}
+  - {fileID: 11400000, guid: 690a79b7b53030341a681da2fa7eb66e, type: 2}
+  ItemStats:
+    Health: 0
+    HealthMax: 0
+    MagnetSize: 0
+    CooldownReduction: 0
+    CooldownReductionPercentage: 0
+    AttackCount: 0
+    Damage: 0
+    Scale: 0
+    Speed: 0
+    TimeToLive: 0
+    DetectionRange: 0
+    DamagePercentageIncrease: 0
+    ExperienceIncreasePercentage: 0
+    MovementSpeed: 0
+    SkillCooldownReductionPercentage: 0
+    HealthRegen: 0
+    CritRate: 0
+    CritDamage: 0
+    PassThroughCount: 0
+    Armor: 1

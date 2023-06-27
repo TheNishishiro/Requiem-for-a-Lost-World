@@ -1,0 +1,99 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using DefaultNamespace.Data;
+using Interfaces;
+using Objects.Abilities;
+using Objects.Players.Scripts;
+using UnityEngine;
+using UnityEngine.Serialization;
+
+namespace Weapons
+{
+	public abstract class WeaponBase : MonoBehaviour, IPlayerItem
+	{
+		[SerializeField] protected GameObject spawnPrefab;
+		[SerializeField] public string Name;
+		[SerializeField] public string Description;
+		[SerializeField] public Sprite Icon;
+		[SerializeField] protected WeaponStats weaponStats;
+		[SerializeField] List<UpgradeData> availableUpgrades;
+		private PlayerStatsComponent _playerStatsComponent;
+		protected float _timer;
+		
+		public string NameField => Name;
+		public string DescriptionField => Description;
+		public Sprite IconField => Icon;
+		public int LevelField { get; private set; } = 1;
+
+		public virtual void Awake()
+		{
+			_playerStatsComponent = GetComponentInParent<PlayerStatsComponent>();
+			weaponStats.AssignPlayerStatsComponent(_playerStatsComponent);
+			
+			_timer = weaponStats.GetCooldown();
+			StartCoroutine(AttackProcess());
+		}
+
+		public List<UpgradeData> GetAvailableUpgrades()
+		{
+			return availableUpgrades;
+		}
+
+		public void Upgrade(UpgradeData upgradeData)
+		{
+			LevelField++;
+			availableUpgrades.Remove(upgradeData);
+			weaponStats.Sum(upgradeData.WeaponStats);
+			OnLevelUp();
+		}
+
+		
+		public virtual void Update()
+		{
+			_timer -= Time.deltaTime;
+			if (_timer >= 0f) return;
+
+			_timer = weaponStats.GetCooldown();
+			StartCoroutine(AttackProcess());
+		}
+
+		protected virtual IEnumerator AttackProcess()
+		{
+			OnAttackStart();
+			for (var i = 0; i < GetAttackCount(); i++)
+			{
+				Attack();
+				yield return new WaitForSeconds(weaponStats.DuplicateSpawnDelay);
+			}
+			OnAttackEnd();
+		}
+
+		protected virtual int GetAttackCount()
+		{
+			return weaponStats.GetAttackCount();
+		}
+		
+		protected float GetRotationByAttackCount()
+		{
+			return 360 / weaponStats.GetAttackCount();
+		}
+		
+		public abstract void Attack();
+
+		protected virtual void OnLevelUp() {}
+
+		protected virtual void OnAttackStart() {}
+		
+		protected virtual void OnAttackEnd() {}
+
+		public void ReduceCooldown(float reductionPercentage)
+		{
+			_timer -= _timer * (1 - reductionPercentage);
+		}
+		
+		public virtual bool IsUnlocked(SaveFile saveFile)
+		{
+			return true;
+		}
+	}
+}

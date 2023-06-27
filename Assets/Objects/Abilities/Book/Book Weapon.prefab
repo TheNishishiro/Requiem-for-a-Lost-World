@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8165470861929940787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7924165796724085440}
+  - component: {fileID: -1502213842381667073}
+  m_Layer: 0
+  m_Name: Book Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7924165796724085440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8165470861929940787}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-1502213842381667073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8165470861929940787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bd67e499a544bb3b069bf437feb19a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 1701135520514003166, guid: 12d666c9b8858e2449773b8cd1b48900,
+    type: 3}
+  Name: Gem of Lonliness
+  Description: Create a wheel of orbitting projectiles
+  Icon: {fileID: 21300000, guid: 731ecbe1e9163a542a002aa9b5032694, type: 3}
+  weaponStats:
+    Damage: 2
+    Cooldown: 10
+    Scale: 1
+    Speed: 100
+    TimeToLive: 6
+    AttackCount: 1
+    PassThroughCount: 0
+    DamageCooldown: 0
+    DuplicateSpawnDelay: 0.2
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 1
+    Weakness: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: 06ad88406cae517409d8eee1c9eeb29e, type: 2}
+  - {fileID: 11400000, guid: d867236135b30944284237ae161c5d32, type: 2}
+  - {fileID: 11400000, guid: af0bbcf4260c3f947bfefc17c3ba4937, type: 2}
+  - {fileID: 11400000, guid: 59effdf6d3a1ee4428c9ab9bed554bac, type: 2}
+  - {fileID: 11400000, guid: a3899650e36f374448971436c2d69130, type: 2}
+  - {fileID: 11400000, guid: bcff176fa118b55498baf04813faaf0f, type: 2}
+  - {fileID: 11400000, guid: f7d82acfa1df1784697e0e61d1420416, type: 2}
+  - {fileID: 11400000, guid: b3b2d1a022b7c8a4cb4433ea10ebc3d4, type: 2}
+  - {fileID: 11400000, guid: bba4a9df45b1e0d408fc0efd090988dd, type: 2}
+  IsShadowBurst: 0
+  ExplosionPrefab: {fileID: 3449805462167584819, guid: a38636c9d0f79d047a7212005520b387,
+    type: 3}

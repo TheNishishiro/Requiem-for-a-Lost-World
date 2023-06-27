@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4267231853459298443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5632513315175676413}
+  - component: {fileID: -7012863991258313292}
+  m_Layer: 0
+  m_Name: Meteor Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5632513315175676413
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4267231853459298443}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7012863991258313292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4267231853459298443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dcddc53beb942ee9b3e402305fa631c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 1830482525884650664, guid: 8ad831e06f5149c488ea627b5d0de3af,
+    type: 3}
+  Name: Meteor
+  Description: Summon meteors on your enemies
+  Icon: {fileID: 21300000, guid: 459b8f7754ce6454da749d5dec4065b1, type: 3}
+  weaponStats:
+    Damage: 15
+    Cooldown: 5
+    Scale: 1
+    Speed: 6
+    TimeToLive: 5
+    AttackCount: 1
+    PassThroughCount: 0
+    DamageCooldown: 0
+    DuplicateSpawnDelay: 0.2
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: 65b13b62bbfc2fb4f940409c3bf13ee8, type: 2}
+  - {fileID: 11400000, guid: 2fc0c1795d030f941ae8df6e2cce0fa1, type: 2}
+  - {fileID: 11400000, guid: 55cd5340f99396642bdc50a7f4a553dd, type: 2}
+  - {fileID: 11400000, guid: 1bd90397294c45b4b87c6d55974ec6fc, type: 2}
+  - {fileID: 11400000, guid: 785ec838fb880ae4193c35797fdbc550, type: 2}
+  - {fileID: 11400000, guid: a505d9f8de4f53448a3a25c03090dac0, type: 2}
+  - {fileID: 11400000, guid: a37088da674786b41961d17e23a892e4, type: 2}
+  - {fileID: 11400000, guid: 3e48fd71f3969fa47a47690621141f82, type: 2}
+  - {fileID: 11400000, guid: fee71fbeed023514f89790fb5d8a3d44, type: 2}

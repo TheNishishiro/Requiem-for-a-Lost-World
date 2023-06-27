@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1024498798920258173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4097735147005755284}
+  - component: {fileID: 3162085336551074921}
+  m_Layer: 0
+  m_Name: Quicken
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4097735147005755284
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024498798920258173}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3162085336551074921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024498798920258173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Quicken
+  Description: Increase movement speed by 0.1 m/s
+  Icon: {fileID: 21300000, guid: 6fa1baa7b85bf93478c0d8a807111693, type: 3}
+  ItemUpgrades:
+  - {fileID: 11400000, guid: 5dcb46ecc0356424e89291c353d7fe3c, type: 2}
+  - {fileID: 11400000, guid: d51999e2f3872ac4b89e2cb376034476, type: 2}
+  - {fileID: 11400000, guid: 7a491a4d69233f6448b800b0b5f2347d, type: 2}
+  - {fileID: 11400000, guid: 50d5d4be73f4683498ad4af0b3059ccc, type: 2}
+  - {fileID: 11400000, guid: fbfc2f32e6feeb548a7e67c542753bdf, type: 2}
+  ItemStats:
+    Health: 0
+    HealthMax: 0
+    MagnetSize: 0
+    CooldownReduction: 0
+    CooldownReductionPercentage: 0
+    AttackCount: 0
+    Damage: 0
+    Scale: 0
+    Speed: 0
+    TimeToLive: 0
+    DetectionRange: 0
+    DamagePercentageIncrease: 0
+    ExperienceIncreasePercentage: 0
+    MovementSpeed: 0.1
+    SkillCooldownReductionPercentage: 0
+    HealthRegen: 0
+    CritRate: 0
+    CritDamage: 0

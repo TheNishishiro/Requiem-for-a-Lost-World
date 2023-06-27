@@ -1,0 +1,42 @@
+﻿using System;
+using DefaultNamespace;
+using UnityEngine;
+using Weapons;
+using Random = UnityEngine.Random;
+
+namespace Objects.Abilities.BindingField
+{
+	public class BindingFieldProjectile : ProjectileBase
+	{
+		private BindingFieldWeapon BindingFieldWeapon => ParentWeapon as BindingFieldWeapon;
+		
+		void Update()
+		{
+			TickLifeTime();
+		}
+
+		private void OnTriggerEnter(Collider other)
+		{
+			var chaseComponent = other.GetComponentInParent<ChaseComponent>();
+			var damageable = other.GetComponent<Damageable>();
+			
+			if (chaseComponent != null && Random.value < BindingFieldWeapon.ChanceToBind)
+			{
+				if (BindingFieldWeapon.IsBurstDamage)
+				{
+					ProjectileDamageIncreasePercentage = 20;
+					SimpleDamage(other, false);
+					ProjectileDamageIncreasePercentage = 0;
+				}
+
+				damageable?.SetVulnerable(TimeToLive, WeaponStats.GetWeakness());
+				chaseComponent.SetImmobile(TimeToLive);
+			}
+		}
+
+		private void OnTriggerStay(Collider other)
+		{
+			DamageArea(other, out _);
+		}
+	}
+}

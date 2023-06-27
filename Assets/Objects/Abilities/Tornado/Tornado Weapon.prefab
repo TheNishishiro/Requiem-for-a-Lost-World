@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5830582431621250717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2549462236484285106}
+  - component: {fileID: -1210981128314417668}
+  m_Layer: 0
+  m_Name: Tornado Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2549462236484285106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5830582431621250717}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.3203804, y: 1.2809412, z: 5.689239}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-1210981128314417668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5830582431621250717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eac81465a424009bd3a4d2bfd8c5450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 6690290332192192340, guid: 80b17ffb0144cf14c97dea5e458c7c96,
+    type: 3}
+  Name: Tornado
+  Description: Summon a tornado at random location that travels around the field
+  Icon: {fileID: 21300000, guid: f672b49b2c80bd7448d44cbde605960c, type: 3}
+  weaponStats:
+    Damage: 3
+    Cooldown: 15
+    Scale: 0.5
+    Speed: 0.2
+    TimeToLive: 5
+    AttackCount: 1
+    PassThroughCount: 0
+    DamageCooldown: 0.5
+    DuplicateSpawnDelay: 0.05
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: 315f6da1fc2b92b4886fd77b60ad0011, type: 2}
+  - {fileID: 11400000, guid: e08b79527e76f6d4aab7550b211928ca, type: 2}
+  - {fileID: 11400000, guid: 1ab9894303028c84ca57e22112c01487, type: 2}
+  - {fileID: 11400000, guid: d715fa96ad451b04086bc4161ee397a9, type: 2}
+  - {fileID: 11400000, guid: 59a503d1fb611074fa7bff65df1710db, type: 2}
+  - {fileID: 11400000, guid: 31cf9500e4ebd964c91aa023c9fa5d74, type: 2}
+  - {fileID: 11400000, guid: 2ceddd11741ee3848b4c272303ec0841, type: 2}
+  - {fileID: 11400000, guid: c4ef3cff851eee946ad4b6ec547a4315, type: 2}
+  - {fileID: 11400000, guid: 19e34f5729e976b4c88eb542e7d6e7b6, type: 2}
+  - {fileID: 11400000, guid: d0ced37b240d73b498ced1015434e0f9, type: 2}

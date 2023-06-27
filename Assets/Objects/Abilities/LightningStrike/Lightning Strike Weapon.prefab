@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5404342619103735050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5111058563969813059}
+  - component: {fileID: 8000290219869719478}
+  m_Layer: 0
+  m_Name: Lightning Strike Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5111058563969813059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5404342619103735050}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8000290219869719478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5404342619103735050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cac0801f19643d38deab2b38bda0bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 9182164364222965760, guid: 99faf397097c503498a816950c8c7d18,
+    type: 3}
+  Name: Lightning strike
+  Description: Summon lightning down on your enemies
+  Icon: {fileID: 21300000, guid: fe1afa3df66cc3246b64f986bcb77adf, type: 3}
+  weaponStats:
+    Damage: 5
+    Cooldown: 3
+    Scale: 1
+    Speed: 0
+    TimeToLive: 0.25
+    AttackCount: 1
+    PassThroughCount: 0
+    DamageCooldown: 0
+    DuplicateSpawnDelay: 0.05
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: bc2676d731cc6ef459323a4bcd2c6648, type: 2}
+  - {fileID: 11400000, guid: 5a42629ff7ad7504a9ad6fe39e9289a7, type: 2}
+  - {fileID: 11400000, guid: 0cdf5cf7d157cac439ef5fbfe196a092, type: 2}
+  - {fileID: 11400000, guid: 1cfdeb3172dcce142b2f651d2970a872, type: 2}
+  - {fileID: 11400000, guid: 0aa881d84ad65184791b25412b886d36, type: 2}
+  - {fileID: 11400000, guid: dae39c290ae89dd48ab0cefc3e3eb9c0, type: 2}
+  - {fileID: 11400000, guid: e670e728919a40a469e5abfeed15b58b, type: 2}
+  - {fileID: 11400000, guid: 6062e176911115b458aa6d682a43cc9f, type: 2}
+  - {fileID: 11400000, guid: 6d0866518e427b041a4744c67fc9b668, type: 2}
+  - {fileID: 11400000, guid: e9d0eafc9bd215943886a5c235f6fcea, type: 2}
+  chainLightningPrefab: {fileID: 6496525642434034257, guid: 34d129e5813150745a9b8b023b999f11,
+    type: 3}
+  IsChainLightning: 0

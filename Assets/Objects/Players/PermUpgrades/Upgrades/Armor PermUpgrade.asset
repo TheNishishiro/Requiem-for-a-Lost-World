@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ff42dac91494d4993e4547fd56cf4e7, type: 3}
+  m_Name: Armor PermUpgrade
+  m_EditorClassIdentifier: 
+  type: 6
+  name: Armor
+  description: Increase armor by 1 per level, reducing incoming damage
+  icon: {fileID: 21300000, guid: 1279e6533ef6a2d449c89132b57f6901, type: 3}
+  costPerLevel: 500
+  maxLevel: 3
+  increasePerLevel: 1

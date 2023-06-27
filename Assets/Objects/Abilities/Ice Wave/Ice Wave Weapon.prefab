@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5318042843912152711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6738992312318805021}
+  - component: {fileID: -3280506597268986020}
+  m_Layer: 0
+  m_Name: Ice Wave Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6738992312318805021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5318042843912152711}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3280506597268986020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5318042843912152711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab4ad29002441c789f84f6d2805debc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 424337869251227983, guid: 435ef4253c4a1e248843a6e2bcbef8fe,
+    type: 3}
+  Name: Ice age
+  Description: Send waves of ice spikes from the ground, sprading outwards from the
+    character
+  Icon: {fileID: 21300000, guid: 07b81c92237892b48bdbf50cf5aaa2c0, type: 3}
+  weaponStats:
+    Damage: 5
+    Cooldown: 5
+    Scale: 1
+    Speed: 0
+    TimeToLive: 1
+    AttackCount: 2
+    PassThroughCount: 0
+    DamageCooldown: 0
+    DuplicateSpawnDelay: 0.2
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: 3270eb0e1055b744ab9317ae749a2113, type: 2}
+  - {fileID: 11400000, guid: 6c9533fcb4f49c44292dada72d1a879e, type: 2}
+  - {fileID: 11400000, guid: c1c313c75eae61e4b947055a25d99e8c, type: 2}
+  - {fileID: 11400000, guid: 733c35e34a3dd7546899cf3abda2381e, type: 2}
+  - {fileID: 11400000, guid: afcfe24d39cff6f4982ec883a11b7109, type: 2}
+  - {fileID: 11400000, guid: 82d8ce5d3a801634eacd6e49f1010dea, type: 2}
+  - {fileID: 11400000, guid: ff62cc71b4dadf342a9f2e7905a256a9, type: 2}
+  - {fileID: 11400000, guid: e52f6a3995129674c8587eb299b8da51, type: 2}
+  - {fileID: 11400000, guid: 8aaedca613103bf40b87de19d86a5299, type: 2}
+  - {fileID: 11400000, guid: 900e7def25276ec4981122576a95a472, type: 2}
+  waveCount: 3
+  scaleChangePerWave: 0.25

@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &239619484866729390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 235781281760766737}
+  - component: {fileID: 4937499201459452257}
+  m_Layer: 0
+  m_Name: Black Hole Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &235781281760766737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239619484866729390}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4937499201459452257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239619484866729390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53404135f3914aa98021c33647d5a0d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 5403249586319908733, guid: c417452db2bf47344a8a57ba0f2fe28e,
+    type: 3}
+  Name: Gem of Emptiness
+  Description: Spawn black holes in random locations
+  Icon: {fileID: 21300000, guid: ed2efe38a1ef55942bc9ebb4128e5ab0, type: 3}
+  weaponStats:
+    Damage: 1
+    Cooldown: 15
+    Scale: 0.7
+    Speed: 0
+    TimeToLive: 2
+    AttackCount: 1
+    PassThroughCount: 0
+    DamageCooldown: 1
+    DuplicateSpawnDelay: 0.2
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 1
+    Weakness: 0
+    DamageIncreasePercentage: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: 477e6b22ae45f364caa794741c825510, type: 2}
+  - {fileID: 11400000, guid: 0b331f883f4e1374eb1e6ce5e20a36a1, type: 2}
+  - {fileID: 11400000, guid: 3d11ae95e8d442744a3d064f2e2854f2, type: 2}
+  - {fileID: 11400000, guid: 31ddeefbf523a2240bb93fa9e85dfe03, type: 2}
+  - {fileID: 11400000, guid: 1112c05bd4eb0fc4b9af51960e054379, type: 2}
+  - {fileID: 11400000, guid: 577173a3d00f69c40982a649400f9136, type: 2}
+  - {fileID: 11400000, guid: f1138023794868446b158a202989b006, type: 2}
+  - {fileID: 11400000, guid: 4e030f0adf154bf4387682c71f068e22, type: 2}
+  - {fileID: 11400000, guid: 04cd00d69208e9d4e90f560c95156b76, type: 2}

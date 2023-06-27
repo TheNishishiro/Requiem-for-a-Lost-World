@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5020866937677424725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 929721770223231084}
+  - component: {fileID: -3886955019502428694}
+  m_Layer: 0
+  m_Name: Throwing Knife Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &929721770223231084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020866937677424725}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3886955019502428694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020866937677424725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2481156a8644bcb8383fdcfdadb6a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 2183727061146650386, guid: 604e514b983b94f4787e4df0cb627acb,
+    type: 3}
+  Name: Throwing knife
+  Description: Throw knifes forward
+  Icon: {fileID: 21300000, guid: 7c2f251ad06413545b28cc5af1670563, type: 3}
+  weaponStats:
+    Damage: 5
+    Cooldown: 1
+    Scale: 1
+    Speed: 5
+    TimeToLive: 3
+    AttackCount: 1
+    PassThroughCount: 0
+    DamageCooldown: 0
+    DuplicateSpawnDelay: 0.2
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 1
+    Weakness: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: fa2bf92f6c1b8bb4bb58b0ca8d61fef5, type: 2}
+  - {fileID: 11400000, guid: 18b875762cf061a469c087415ad38793, type: 2}
+  - {fileID: 11400000, guid: 052c2a3e9b856d244892c2441ea39326, type: 2}
+  - {fileID: 11400000, guid: 2cc4bc35eed7548468d327f0e2aeb328, type: 2}
+  - {fileID: 11400000, guid: 9610d69c4d625f5478ca9e104520f50a, type: 2}
+  - {fileID: 11400000, guid: 0d8096ebd83bf4740a53ca244933bc0d, type: 2}
+  - {fileID: 11400000, guid: a5483e4d581946c4c9f344571d758c16, type: 2}
+  - {fileID: 11400000, guid: cb2b5cb37e6d6f549986977bf08a5e8a, type: 2}

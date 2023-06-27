@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2422135028545754748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2749852520599593777}
+  - component: {fileID: -7728612429544217329}
+  m_Layer: 0
+  m_Name: Space Ball Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2749852520599593777
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2422135028545754748}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7728612429544217329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2422135028545754748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9898a35336d442cd9c1153dd0f4bc1ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 1270610944524131206, guid: d4bb4b7bbcc928a48b4abd4e53f6672b,
+    type: 3}
+  Name: Bubble Universe
+  Description: Spawn bubble universe traveling in a random direction that expands
+    after traveling a certain distance
+  Icon: {fileID: 21300000, guid: 929005b6272430c4f92e6e479e935d33, type: 3}
+  weaponStats:
+    Damage: 10
+    Cooldown: 7
+    Scale: 1
+    Speed: 1
+    TimeToLive: 5
+    AttackCount: 1
+    PassThroughCount: 10
+    DamageCooldown: 0
+    DuplicateSpawnDelay: 1
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: 88f5f7e47025a7b42bc0f561b13692d4, type: 2}
+  - {fileID: 11400000, guid: 39b8157c3bd30214d8726146c3cc8165, type: 2}
+  - {fileID: 11400000, guid: fc9454863ba5f3f48a13bef3a682caaf, type: 2}
+  - {fileID: 11400000, guid: b9b60e322696a2448ba4c89464f561d2, type: 2}
+  - {fileID: 11400000, guid: e24628f8c9d9bd1468a88ffed61d0d3d, type: 2}
+  - {fileID: 11400000, guid: 2a62628a7386f6349b72864b6a77de27, type: 2}
+  - {fileID: 11400000, guid: a0001b3c098d0c14db6ec97c0f08d9a6, type: 2}
+  - {fileID: 11400000, guid: 427aee3cb9b1cc440835e34841c8057c, type: 2}
+  - {fileID: 11400000, guid: 29457e482eb3f6f41b1f786bf4d6888d, type: 2}
+  IsGallacticCollapse: 0
+  ExplosionPrefab: {fileID: 968566149119224290, guid: c6834181c69f8d84e9a8b264d921a8b4,
+    type: 3}
