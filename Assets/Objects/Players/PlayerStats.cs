@@ -141,33 +141,35 @@ namespace Objects.Players
 
 		public IEnumerable<CharacterStats> GetStatsList()
 		{
-			var stats = new List<CharacterStats>();
-			stats.Add(new CharacterStats("Health", HealthMax));
-			stats.Add(new CharacterStats("Magnet", MagnetSize));
-			stats.Add(new CharacterStats("CDR", CooldownReduction));
-			stats.Add(new CharacterStats("CDR%", CooldownReductionPercentage, true));
-			stats.Add(new CharacterStats("Projectiles", AttackCount));
-			stats.Add(new CharacterStats("Damage", Damage));
-			stats.Add(new CharacterStats("Projectile size", Scale, true));
-			stats.Add(new CharacterStats("Projectile speed", Speed));
-			stats.Add(new CharacterStats("Attack duration", TimeToLive));
-			stats.Add(new CharacterStats("Weapon range", DetectionRange));
-			stats.Add(new CharacterStats("Damage%", DamagePercentageIncrease, true));
-			stats.Add(new CharacterStats("EXP%", ExperienceIncreasePercentage, true));
-			stats.Add(new CharacterStats("Movement speed", MovementSpeed));
-			stats.Add(new CharacterStats("Skill CDR%", SkillCooldownReductionPercentage, true));
-			stats.Add(new CharacterStats("Health regen", HealthRegen));
-			stats.Add(new CharacterStats("Crit rate", CritRate));
-			stats.Add(new CharacterStats("Crit damage", CritDamage));
-			stats.Add(new CharacterStats("Pass through", PassThroughCount));
-			stats.Add(new CharacterStats("Armor", Armor));
-			stats.Add(new CharacterStats("Enemy speed%", EnemySpeedIncreasePercentage, true, true));
-			stats.Add(new CharacterStats("Enemy spawn rate%", EnemySpawnRateIncreasePercentage, true, true));
-			stats.Add(new CharacterStats("Enemy health%", EnemyHealthIncreasePercentage, true, true));
-			stats.Add(new CharacterStats("Enemy count%", EnemyMaxCountIncreasePercentage, true, true));
-			stats.Add(new CharacterStats("Reward increase", ItemRewardIncrease, true));
-			stats.Add(new CharacterStats("Revives", Revives));
-			stats.Add(new CharacterStats("Weapon duration%", ProjectileLifeTimeIncreasePercentage, true));
+			var stats = new List<CharacterStats>
+			{
+				new("Health", HealthMax),
+				new("Magnet", MagnetSize),
+				new("CDR", CooldownReduction),
+				new("CDR%", CooldownReductionPercentage, true),
+				new("Projectiles", AttackCount),
+				new("Damage", Damage),
+				new("Projectile size", Scale, true),
+				new("Projectile speed", Speed),
+				new("Attack duration", TimeToLive),
+				new("Weapon range", DetectionRange),
+				new("Damage%", DamagePercentageIncrease, true),
+				new("EXP%", ExperienceIncreasePercentage, true),
+				new("Movement speed", MovementSpeed),
+				new("Skill CDR%", SkillCooldownReductionPercentage, true),
+				new("Health regen", HealthRegen),
+				new("Crit rate", CritRate),
+				new("Crit damage", CritDamage),
+				new("Pass through", PassThroughCount),
+				new("Armor", Armor),
+				new("Enemy speed%", EnemySpeedIncreasePercentage, true, true),
+				new("Enemy spawn rate%", EnemySpawnRateIncreasePercentage, true, true),
+				new("Enemy health%", EnemyHealthIncreasePercentage, true, true),
+				new("Enemy count%", EnemyMaxCountIncreasePercentage, true, true),
+				new("Reward increase", ItemRewardIncrease, true),
+				new("Revives", Revives),
+				new("Weapon duration%", ProjectileLifeTimeIncreasePercentage, true)
+			};
 			return stats;
 		}
 
