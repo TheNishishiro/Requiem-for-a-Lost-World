@@ -1,4 +1,7 @@
 ﻿using Managers;
+using Objects.Players.Scripts;
+using Objects.Stage;
+using UI.Main_Menu.Character_List_Menu;
 using UnityEngine;
 
 namespace UI.Labels.InGame.PauseMenu
@@ -13,6 +16,8 @@ namespace UI.Labels.InGame.PauseMenu
 		[SerializeField] private PauseManager pauseManager;
 		[SerializeField] private UnlockedUpgradesPanel unlockedWeaponsPanel;
 		[SerializeField] private UnlockedUpgradesPanel unlockedItemsPanel;
+		[SerializeField] private GameObject statsPanel;
+		[SerializeField] private PlayerStatsComponent playerStatsComponent;
 
 		private void Update()
 		{
@@ -28,6 +33,9 @@ namespace UI.Labels.InGame.PauseMenu
 		{
 			cursorManager.HideCursor();
 			pauseManager.UnPauseGame();
+			
+			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();
+			statsPanelComponent.ClearEntries();
 			panel.SetActive(false);
 		}
 		
@@ -37,6 +45,12 @@ namespace UI.Labels.InGame.PauseMenu
 			pauseManager.PauseGame();
 			panel.SetActive(true);
 			
+			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();
+			statsPanelComponent.ClearEntries();
+			foreach (var statEntry in playerStatsComponent.GetStats())
+			{
+				statsPanelComponent.AddEntry(statEntry.Name, statEntry.Value);
+			}
 			unlockedWeaponsPanel.UpdatePanel();
 			unlockedItemsPanel.UpdatePanel();
 		}

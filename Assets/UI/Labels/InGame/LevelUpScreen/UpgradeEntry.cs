@@ -16,10 +16,10 @@ namespace UI.Labels.InGame.LevelUpScreen
 		public ItemUpgrade ItemUpgrade { get; set; }
 		public int Rarity { get; private set; } = Random.value switch
 		{
-			<= 0.6f => 1,
-			<= 0.7f => 2,
-			<= 0.8f => 3,
-			<= 0.9f => 4,
+			<= 0.75f => 1,
+			<= 0.85f => 2,
+			<= 0.9f => 3,
+			<= 0.97f => 4,
 			<= 1f => 5,
 		};
 			

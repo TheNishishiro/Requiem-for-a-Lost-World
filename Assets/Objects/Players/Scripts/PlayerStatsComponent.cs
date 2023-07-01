@@ -27,6 +27,11 @@ namespace Objects.Players.Scripts
 				_playerStats.SkillCooldownReductionPercentage += 0.25f;
 		}
 
+		public IEnumerable<CharacterStats> GetStats()
+		{
+			return _playerStats.GetStatsList();
+		}
+
 		public void SetInvincible(bool isInvincible)
 		{
 			IsInvincible = isInvincible;

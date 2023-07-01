@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using DefaultNamespace.Extensions;
 using Objects.Players.Scripts;
 using Unity.Mathematics;
 using Random = UnityEngine.Random;
@@ -52,7 +54,7 @@ namespace Objects.Abilities
 		
 		public void Sum(WeaponStats weaponStats, int rarity)
         {
-            var rarityFactor = 1 + ((rarity - 1) * 0.1f); // This will result in a increase from no increase(rarity 1) to 50% (rarity 5)
+            var rarityFactor = 1 + ((rarity - 1) * 0.1f);
         
             Damage += weaponStats.Damage * rarityFactor;
             Cooldown += weaponStats.Cooldown * rarityFactor;
@@ -60,7 +62,6 @@ namespace Objects.Abilities
             Scale += weaponStats.Scale * rarityFactor;
             Speed += weaponStats.Speed * rarityFactor;
             TimeToLive += weaponStats.TimeToLive * rarityFactor;
-            AttackCount += weaponStats.AttackCount;
             PassThroughCount += weaponStats.PassThroughCount; 
             DamageCooldown += weaponStats.DamageCooldown * rarityFactor;
             DuplicateSpawnDelay += weaponStats.DuplicateSpawnDelay * rarityFactor;
@@ -68,6 +69,27 @@ namespace Objects.Abilities
             CritDamage += weaponStats.CritDamage * rarityFactor;
             Weakness += weaponStats.Weakness * rarityFactor;
             DamageIncreasePercentage += weaponStats.DamageIncreasePercentage * rarityFactor;
+        }
+
+		public string GetDescription(int rarity)
+        {
+            var builder = new StringBuilder();
+        
+            builder.AppendStat("Damage", Damage, rarity);
+            builder.AppendStat("Damage%", DamageIncreasePercentage*100, rarity, "%");
+            builder.AppendStat("Cooldown", Cooldown, rarity, "sec");
+            builder.AppendStat("Cooldown%", CooldownReduction*100, rarity, "%");
+            builder.AppendStat("Scale", Scale, rarity);
+            builder.AppendStat("Speed", Speed, rarity, "m/s");
+            builder.AppendStat("Projectile time", TimeToLive, rarity, "sec");
+            builder.AppendStat("Hit count", PassThroughCount, rarity);
+            builder.AppendStat("Damage delay", DamageCooldown, rarity, "sec");
+            builder.AppendStat("Attack delay", DuplicateSpawnDelay, rarity, "sec");
+            builder.AppendStat("Critical rate", CritRate*100, rarity, "%");
+            builder.AppendStat("Critical damage", CritDamage*100, rarity, "%");
+            builder.AppendStat("Weakness", Weakness*100, rarity, "%");
+        
+            return builder.ToString();
         }
 
 		public float GetCooldown()

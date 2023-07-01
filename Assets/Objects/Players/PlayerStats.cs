@@ -86,7 +86,6 @@ namespace Objects.Players
             MagnetSize += item.MagnetSize * rarityFactor;
             CooldownReduction += item.CooldownReduction * rarityFactor;
             CooldownReductionPercentage += item.CooldownReductionPercentage * rarityFactor;
-            AttackCount += item.AttackCount;
             Damage += item.Damage * rarityFactor;
             Scale += item.Scale * rarityFactor;
             Speed += item.Speed * rarityFactor;
@@ -99,14 +98,12 @@ namespace Objects.Players
             HealthRegen += item.HealthRegen * rarityFactor;
             CritRate += item.CritRate * rarityFactor;
             CritDamage += item.CritDamage * rarityFactor;
-            PassThroughCount += item.PassThroughCount;
             Armor += (int)(item.Armor * rarityFactor);
             EnemySpeedIncreasePercentage += item.EnemySpeedIncreasePercentage * rarityFactor;
             EnemySpawnRateIncreasePercentage += item.EnemySpawnRateIncreasePercentage * rarityFactor;
             EnemyHealthIncreasePercentage += item.EnemyHealthIncreasePercentage * rarityFactor;
             EnemyMaxCountIncreasePercentage += item.EnemyMaxCountIncreasePercentage * rarityFactor;
             ItemRewardIncrease += item.ItemRewardIncrease * rarityFactor;
-            Revives += item.Revives;
             ProjectileLifeTimeIncreasePercentage += item.ProjectileLifeTimeIncreasePercentage * rarityFactor;
         }
 
