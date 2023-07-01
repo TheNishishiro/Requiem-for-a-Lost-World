@@ -55,7 +55,8 @@ namespace Objects.Abilities
 		public void Sum(WeaponStats weaponStats, int rarity)
         {
             var rarityFactor = 1 + ((rarity - 1) * 0.1f);
-        
+              
+            AttackCount += weaponStats.AttackCount;
             Damage += weaponStats.Damage * rarityFactor;
             Cooldown += weaponStats.Cooldown * rarityFactor;
             CooldownReduction += weaponStats.CooldownReduction * rarityFactor;
@@ -68,7 +69,7 @@ namespace Objects.Abilities
             CritRate += weaponStats.CritRate * rarityFactor;
             CritDamage += weaponStats.CritDamage * rarityFactor;
             Weakness += weaponStats.Weakness * rarityFactor;
-            DamageIncreasePercentage += weaponStats.DamageIncreasePercentage * rarityFactor;
+            DamageIncreasePercentage += weaponStats.DamageIncreasePercentage * rarityFactor;      
         }
 
 		public string GetDescription(int rarity)
@@ -88,6 +89,7 @@ namespace Objects.Abilities
             builder.AppendStat("Critical rate", CritRate*100, rarity, "%");
             builder.AppendStat("Critical damage", CritDamage*100, rarity, "%");
             builder.AppendStat("Weakness", Weakness*100, rarity, "%");
+            builder.AppendStat("Attack count", AttackCount, rarity);
         
             return builder.ToString();
         }

@@ -81,6 +81,9 @@ namespace Objects.Players
         {
             var rarityFactor = 1 + ((rarity - 1) * 0.1f); 
         
+            AttackCount += item.AttackCount;
+            PassThroughCount += item.PassThroughCount;            
+            Revives += item.Revives;
             Health += item.Health * rarityFactor;
             HealthMax += item.HealthMax * rarityFactor;
             MagnetSize += item.MagnetSize * rarityFactor;
