@@ -14,6 +14,7 @@ namespace UI.Labels.InGame.LevelUpScreen
 		[SerializeField] private Image icon;
 		[SerializeField] private TextMeshProUGUI upgradeName;
 		[SerializeField] private TextMeshProUGUI upgradeDescription;
+		[SerializeField] private Image panelBackground;
 		
 		private void Awake()
 		{
@@ -28,7 +29,9 @@ namespace UI.Labels.InGame.LevelUpScreen
 			icon.color = Color.white;
 			icon.sprite = _upgradeEntry.GetUnlockIcon();
 
-			upgradeName.text = _upgradeEntry.GetUnlockName();
+			panelBackground.color = _upgradeEntry.GetUpgradeColor();
+
+			upgradeName.text = $"{_upgradeEntry.GetUnlockName()} +{_upgradeEntry.Rarity - 1}";
 			upgradeDescription.text = _upgradeEntry.GetUnlockDescription();
 		}
 

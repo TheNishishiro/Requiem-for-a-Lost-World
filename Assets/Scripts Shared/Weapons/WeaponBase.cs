@@ -39,11 +39,16 @@ namespace Weapons
 			return availableUpgrades;
 		}
 
-		public void Upgrade(UpgradeData upgradeData)
+		public void ApplyRarity(int rarity)
+		{
+			weaponStats.ApplyRarity(rarity);
+		}
+
+		public void Upgrade(UpgradeData upgradeData, int rarity)
 		{
 			LevelField++;
 			availableUpgrades.Remove(upgradeData);
-			weaponStats.Sum(upgradeData.WeaponStats);
+			weaponStats.Sum(upgradeData.WeaponStats, rarity);
 			OnLevelUp();
 		}
 

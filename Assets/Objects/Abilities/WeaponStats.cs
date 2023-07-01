@@ -10,8 +10,9 @@ namespace Objects.Abilities
 	{
 		private PlayerStatsComponent _playerStatsComponent;
 		private bool _isInitialized;
-		public int Damage;
+		public float Damage;
 		public float Cooldown;
+		public float CooldownReduction;
 		public float Scale;
 		public float Speed;
 		public float TimeToLive;
@@ -30,29 +31,50 @@ namespace Objects.Abilities
 			_playerStatsComponent = playerStatsComponent;
 			_isInitialized = _playerStatsComponent != null; 
 		}
+
+		public void ApplyRarity(int rarity)
+         {
+             var rarityFactor = 1 + ((rarity - 1) * 0.1f); // This will result in an increase from no increase (rarity 1) to 50% (rarity 5)
+         
+             Damage *= rarityFactor;
+             Cooldown *= 2 - rarityFactor;
+             CooldownReduction *= rarityFactor;
+             Scale *= rarityFactor;
+             Speed *= rarityFactor;
+             TimeToLive *= rarityFactor;
+             DamageCooldown *= rarityFactor;
+             DuplicateSpawnDelay *= rarityFactor;
+             CritRate *= rarityFactor;
+             CritDamage *= rarityFactor;
+             Weakness *= rarityFactor;
+             DamageIncreasePercentage *= rarityFactor;
+         }
 		
-		public void Sum(WeaponStats weaponStats)
-		{
-			Damage += weaponStats.Damage;
-			Cooldown += weaponStats.Cooldown;
-			Scale += weaponStats.Scale;
-			Speed += weaponStats.Speed;
-			TimeToLive += weaponStats.TimeToLive;
-			AttackCount += weaponStats.AttackCount;
-			PassThroughCount += weaponStats.PassThroughCount;
-			DamageCooldown += weaponStats.DamageCooldown;
-			DuplicateSpawnDelay += weaponStats.DuplicateSpawnDelay;
-			CritRate += weaponStats.CritRate;
-			CritDamage += weaponStats.CritDamage;
-			Weakness += weaponStats.Weakness;
-			DamageIncreasePercentage += weaponStats.DamageIncreasePercentage;
-		}
+		public void Sum(WeaponStats weaponStats, int rarity)
+        {
+            var rarityFactor = 1 + ((rarity - 1) * 0.1f); // This will result in a increase from no increase(rarity 1) to 50% (rarity 5)
+        
+            Damage += weaponStats.Damage * rarityFactor;
+            Cooldown += weaponStats.Cooldown * rarityFactor;
+            CooldownReduction += weaponStats.CooldownReduction * rarityFactor;
+            Scale += weaponStats.Scale * rarityFactor;
+            Speed += weaponStats.Speed * rarityFactor;
+            TimeToLive += weaponStats.TimeToLive * rarityFactor;
+            AttackCount += weaponStats.AttackCount;
+            PassThroughCount += weaponStats.PassThroughCount; 
+            DamageCooldown += weaponStats.DamageCooldown * rarityFactor;
+            DuplicateSpawnDelay += weaponStats.DuplicateSpawnDelay * rarityFactor;
+            CritRate += weaponStats.CritRate * rarityFactor;
+            CritDamage += weaponStats.CritDamage * rarityFactor;
+            Weakness += weaponStats.Weakness * rarityFactor;
+            DamageIncreasePercentage += weaponStats.DamageIncreasePercentage * rarityFactor;
+        }
 
 		public float GetCooldown()
 		{
-			if (!_isInitialized) return Cooldown;
+			if (!_isInitialized) return Cooldown * (1 + CooldownReduction);
 
-			var calculatedCooldown = (Cooldown - _playerStatsComponent.GetCooldownReduction()) * _playerStatsComponent.GetCooldownReductionPercentage();
+			var calculatedCooldown = (Cooldown - _playerStatsComponent.GetCooldownReduction()) * (_playerStatsComponent.GetCooldownReductionPercentage() + CooldownReduction);
 			return calculatedCooldown <= 0 ? 0.01f : calculatedCooldown;
 		}
 		
@@ -63,7 +85,7 @@ namespace Objects.Abilities
 		}
 		
 
-		public int GetDamage()
+		public float GetDamage()
 		{
 			if (!_isInitialized) 
 				return (int) ((Random.value < CritRate ? Damage * CritDamage : Damage) * (1 + DamageIncreasePercentage));
@@ -71,7 +93,7 @@ namespace Objects.Abilities
 			var damage = (Damage + _playerStatsComponent.GetDamage());
 			var critRate = CritRate + _playerStatsComponent.GetCritRate();
 			var critDamage = CritDamage + _playerStatsComponent.GetCritDamage();
-			return  (int)Math.Ceiling((Random.value < critRate ? damage * critDamage : damage) * (_playerStatsComponent.GetDamageIncreasePercentage() + DamageIncreasePercentage));
+			return (float)(Random.value < critRate ? damage * critDamage : damage * (_playerStatsComponent.GetDamageIncreasePercentage() + DamageIncreasePercentage));
 		}
 		
 		public float GetScale()

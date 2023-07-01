@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Regeneration Upgrade 2
   m_EditorClassIdentifier: 
   Name: Regeneration (II)
-  Description: Increase health regen by 1 per 5 sec.
+  Description: Increase health regen by 0.1 per second
   ItemStats:
     Health: 0
     HealthMax: 0
@@ -28,6 +28,17 @@ MonoBehaviour:
     DetectionRange: 0
     DamagePercentageIncrease: 0
     ExperienceIncreasePercentage: 0
-    MovementSpeedIncrease: 0
+    MovementSpeed: 0
     SkillCooldownReductionPercentage: 0
-    HealthRegen: 1
+    HealthRegen: 0.1
+    CritRate: 0
+    CritDamage: 0
+    PassThroughCount: 0
+    Armor: 0
+    EnemySpeedIncreasePercentage: 0
+    EnemySpawnRateIncreasePercentage: 0
+    EnemyHealthIncreasePercentage: 0
+    EnemyMaxCountIncreasePercentage: 0
+    ItemRewardIncrease: 0
+    Revives: 0
+    ProjectileLifeTimeIncreasePercentage: 0

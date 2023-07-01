@@ -26,7 +26,7 @@ namespace Managers
 				var permUpgrade = permUpgrades.FirstOrDefault(x => x.type == permUpgradesSaveData.Key);
 				if (permUpgrade != null)
 				{
-					playerStatsComponent.Apply(permUpgrade, permUpgradesSaveData.Value);
+					playerStatsComponent.ApplyPermanent(permUpgrade, permUpgradesSaveData.Value);
 				}
 			}
 		}

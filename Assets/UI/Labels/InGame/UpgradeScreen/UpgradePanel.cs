@@ -10,12 +10,14 @@ namespace UI.Labels.InGame.UpgradeScreen
 		[SerializeField] private TextMeshProUGUI upgradeName;
 		[SerializeField] private TextMeshProUGUI upgradeDescription;
 		[SerializeField] private Image upgradeIcon;
+		[SerializeField] private Image panelBackground;
 		
 		public void SetUpgradeData(UpgradeEntry upgradeEntry)
 		{
-			upgradeName.text = upgradeEntry.GetUnlockName();
+			upgradeName.text = $"{upgradeEntry.GetUnlockName()} +{upgradeEntry.Rarity - 1}";
 			upgradeDescription.text = upgradeEntry.GetUnlockDescription();
 			upgradeIcon.sprite = upgradeEntry.GetUnlockIcon();
+			panelBackground.color = upgradeEntry.GetUpgradeColor();
 		}
 
 		public void Clean()

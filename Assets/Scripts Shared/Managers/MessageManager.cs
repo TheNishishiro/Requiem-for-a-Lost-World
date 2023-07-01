@@ -8,7 +8,7 @@ namespace Managers
 	{
 		public static MessageManager instance;
 		[SerializeField] private GameObject damageMessage;
-		private List<TMPro.TextMeshPro> _messagePool;
+		private List<TextMeshPro> _messagePool;
 		private int _objectCount = 30;
 		private int _count;
 		
@@ -27,7 +27,7 @@ namespace Managers
 		public void Populate()
 		{
 			var go = Instantiate(damageMessage, transform);
-			_messagePool.Add(go.GetComponent<TMPro.TextMeshPro>());
+			_messagePool.Add(go.GetComponent<TextMeshPro>());
 			go.SetActive(false);
 		}
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Objects.Players.PermUpgrades;
+using UnityEngine;
 
 namespace Objects.Items
 {

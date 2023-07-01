@@ -33,6 +33,7 @@ namespace Managers
 			Cursor.lockState = CursorLockMode.None;
 			starterAssetsInputs.cursorInputForLook = false;
 			starterAssetsInputs.cursorLocked = false;
+			starterAssetsInputs.LookInput(Vector2.zero);
 		}
 
 		public void HideCursor()

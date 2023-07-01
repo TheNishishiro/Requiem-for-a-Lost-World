@@ -5,10 +5,10 @@ namespace Interfaces
 {
 	public interface IDamageable
 	{
-		void TakeDamage(int damage, WeaponBase damageSource);
-		void SetHealth(int health);
+		void TakeDamage(float damage, WeaponBase damageSource);
+		void SetHealth(float health);
 		bool IsDestroyed();
-		void TakeDamageWithCooldown(int damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase);
+		void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase);
 		void SetVulnerable(float time, float percentage);
 	}
 }

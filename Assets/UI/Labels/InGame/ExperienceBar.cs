@@ -9,7 +9,7 @@ namespace UI.Labels.InGame
 		[SerializeField] private Slider slider;
 		[SerializeField] private TextMeshProUGUI levelText;
 
-		public void UpdateSlider(int value, int maxValue)
+		public void UpdateSlider(float value, float maxValue)
 		{
 			slider.maxValue = maxValue;
 			slider.value = value;

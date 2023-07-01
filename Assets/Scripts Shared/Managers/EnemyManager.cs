@@ -129,7 +129,7 @@ public class EnemyManager : MonoBehaviour
 		return _isTimeStop;
 	}
 
-	public void GlobalDamage(int damage, WeaponBase weapon)
+	public void GlobalDamage(float damage, WeaponBase weapon)
 	{
 		var enemies = FindObjectsOfType<Damageable>();
 		foreach (var enemy in enemies)

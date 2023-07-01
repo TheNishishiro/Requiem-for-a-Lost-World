@@ -11,10 +11,10 @@ namespace Objects.Players.Scripts
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
 		[SerializeField] private ExperienceBar healthBar;
 		[SerializeField] private GameOverScreenManager gameOverScreenManager;
-		private float healthRegenCooldown = 5;
-		private float healthRegenCurrentCooldown = 5;
+		private const float HealthRegenCooldown = 1;
+		private float _healthRegenCurrentCooldown = 1;
 		
-		public void Damage(int amount)
+		public void Damage(float amount)
 		{
 			if (amount > 0)
 			{
@@ -32,10 +32,10 @@ namespace Objects.Players.Scripts
 
 		public void Update()
 		{
-			healthRegenCurrentCooldown -= Time.deltaTime;
-			if (healthRegenCurrentCooldown >= 0) return;
+			_healthRegenCurrentCooldown -= Time.deltaTime;
+			if (_healthRegenCurrentCooldown >= 0) return;
 			
-			healthRegenCurrentCooldown = healthRegenCooldown;
+			_healthRegenCurrentCooldown = HealthRegenCooldown;
 			Regen();
 		}
 

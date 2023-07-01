@@ -5,8 +5,8 @@ namespace Objects.Enemies
 	[Serializable]
 	public class EnemyStats
 	{
-		public int hp;
-		public int damage;
+		public float hp;
+		public float damage;
 		public float speed;
 
 		public EnemyStats()

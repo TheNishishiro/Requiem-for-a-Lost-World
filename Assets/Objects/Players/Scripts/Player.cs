@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 		levelComponent.AddExperience(amount);
 	}
 
-	public void TakeDamage(int amount)
+	public void TakeDamage(float amount)
 	{
 		healthComponent.Damage(amount);
 	}

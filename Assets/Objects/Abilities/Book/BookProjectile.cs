@@ -35,7 +35,7 @@ namespace Objects.Abilities.Book
 			simpleDamageProjectile.SetStats(new WeaponStats()
 			{
 				TimeToLive = 0.5f,
-				Damage = (int)(WeaponStats.GetDamage() * 0.25f),
+				Damage = WeaponStats.GetDamage() * 0.25f,
 				Scale = WeaponStats.GetScale()
 			});
 		}

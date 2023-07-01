@@ -1,7 +1,10 @@
-﻿using Objects.Abilities;
+﻿using System;
+using Objects.Abilities;
 using Objects.Items;
+using Unity.VisualScripting;
 using UnityEngine;
 using Weapons;
+using Random = UnityEngine.Random;
 
 namespace UI.Labels.InGame.LevelUpScreen
 {
@@ -11,6 +14,15 @@ namespace UI.Labels.InGame.LevelUpScreen
 		public UpgradeData Upgrade { get; set; }
 		public ItemBase Item { get; set; }
 		public ItemUpgrade ItemUpgrade { get; set; }
+		public int Rarity { get; private set; } = Random.value switch
+		{
+			<= 0.6f => 1,
+			<= 0.7f => 2,
+			<= 0.8f => 3,
+			<= 0.9f => 4,
+			<= 1f => 5,
+		};
+			
 
 		public bool IsWeaponUpgrade => Weapon != null && Upgrade != null;
 		public bool IsWeaponUnlock => Weapon != null && Upgrade == null;
@@ -21,23 +33,23 @@ namespace UI.Labels.InGame.LevelUpScreen
 		{
 			if (IsWeaponUpgrade)
 			{
-				weaponManager.UpgradeWeapon(Weapon, Upgrade);
+				weaponManager.UpgradeWeapon(Weapon, Upgrade, Rarity);
 				return;
 			}
 
 			if (IsWeaponUnlock)
 			{
-				weaponManager.AddWeapon(Weapon);
+				weaponManager.AddWeapon(Weapon, Rarity);
 				return;
 			}
 
 			if (IsItemUnlock)
 			{
-				weaponManager.AddItem(Item);
+				weaponManager.AddItem(Item, Rarity);
 				return;
 			}
 			
-			weaponManager.UpgradeItem(Item, ItemUpgrade);
+			weaponManager.UpgradeItem(Item, ItemUpgrade, Rarity);
 		}
 
 		public string GetUnlockName()
@@ -73,6 +85,21 @@ namespace UI.Labels.InGame.LevelUpScreen
 			if (IsItemUnlock || IsItemUpgrade)
 				return Item.Icon;
 			return null;
+		}
+
+		public Color GetUpgradeColor()
+		{
+			var color = Rarity switch
+			{
+				1 => Color.white,
+				2 => Color.blue,
+				3 => Color.green,
+				4 => Color.yellow,
+				5 => Color.red,
+				_ => Color.gray
+			};
+			
+			return new Color(color.r, color.g, color.b,0.2f);
 		}
 	}
 }

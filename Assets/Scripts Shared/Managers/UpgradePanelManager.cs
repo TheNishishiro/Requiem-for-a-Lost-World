@@ -23,7 +23,7 @@ namespace Managers
 
 		public void OpenPanel()
 		{
-			var upgradeEntries = weaponManager.GetUpgrades().OrderBy(x => Random.value).Take(Random.Range(3, 4)).ToList();
+			var upgradeEntries = weaponManager.GetUpgrades().OrderBy(x => Random.value).Take(Random.Range(3, 5)).ToList();
 			if (upgradeEntries.Count == 0)
 				return;
 			

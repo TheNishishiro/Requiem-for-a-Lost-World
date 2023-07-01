@@ -63,7 +63,7 @@ namespace Objects.Abilities.Tornado
 			lightingChainProjectile.SetStats(new WeaponStats()
 			{
 				TimeToLive = 0.3f,
-				Damage = (int)(WeaponStats.GetDamage() * 2.5f),
+				Damage = WeaponStats.GetDamage() * 2.5f,
 				Scale = 1f,
 				DetectionRange = 2f
 			});

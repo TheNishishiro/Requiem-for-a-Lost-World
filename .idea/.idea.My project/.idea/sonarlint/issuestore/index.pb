@@ -107,8 +107,6 @@ HAssets/Objects/Characters/CharacterData/Chitose/Lore Entries/Entry 0.txt,9\6\9
 _Assets/Polytope Studio/Lowpoly_Environments/Sources/Shaders/PT_Vegetation_Foliage_Shader.shader,5\e\5ea84a5a50bc35d17716b7df70b6db4b41558a67
 _
 /Assets/Scripts Shared/Managers/CursorManager.cs,c\6\c6890e25c6c46ef6c1ca6ad376d4538e2d37062f
-_
-/Assets/Objects/Characters/CharacterLoreEntry.cs,d\b\db2ad29d215cc92674e9912bde925f3388a8e6b2
 V
 &Assets/UI/Main Menu/ShowPanelButton.cs,2\f\2fac535eaba8c8f88d8cbef1e9568eac13f6f1e4
 o
@@ -171,8 +169,6 @@ e
 5Assets/UI/Main Menu/Recollection Menu/GemTextLabel.cs,e\b\eb63f8d50ccaca13f9c6e535f833066e04c74f2d
 q
 AAssets/UI/Main Menu/Recollection Menu/RecollectionPanelManager.cs,e\3\e371925c9e8b06389c5222b28364c7e050189291
-Z
-*Assets/Objects/Characters/CharacterRank.cs,b\5\b59b9c3489ead8d7cc03c7ffb10221a0e1e8c222
 T
 $Assets/UI/Labels/InGame/LabelTime.cs,3\4\34e302abcf6ff1fa8765df29e79c8ea91aec4bde
 e
@@ -255,8 +251,6 @@ X
 (Assets/Scripts Shared/SpriteBillboard.cs,3\3\33ddc26e16ea4a561e3cf08af0537034ecabf130
 z
 JAssets/Objects/Characters/CharacterData/Chronastra/Skill/ChronastaSkill.cs,d\1\d12b3a7d2a7fe4923b6064a1afa76dc9deb60f99
-_
-/Assets/Objects/Characters/CharacterSkillBase.cs,d\0\d06bd4cd2859a630832e55a7606b66a8aa7c1d58
 U
 %Assets/Objects/Drops/DropOnDestroy.cs,c\c\cc9d485462acf3456a95957c01a5f126da65a0a9
 _
@@ -289,8 +283,6 @@ b
 2Assets/UI/Main Menu/Recollection Menu/LootPanel.cs,e\d\ed6fbebe80a3608918f5f4c14c422cef7a321cff
 d
 4Assets/Scripts Shared/Managers/AchievementManager.cs,3\1\3136ea51f45049a096f83fdfe9ef8f5ef18824bc
-[
-+Assets/Objects/Characters/CharactersEnum.cs,a\8\a8da474d567c49a90cf702ad8c6fe373ca53f25d
 P
  Assets/Objects/Stage/GameData.cs,f\2\f2d1fcaeabc19eb78cf3ecc7f3b5b767cfbc6390
 n
@@ -299,3 +291,51 @@ g
 7Assets/UI/Main Menu/Achievement Menu/AchievementMenu.cs,5\a\5a54167e6a19068c2ce5dcff78828db2e773f335
 h
 8Assets/UI/Main Menu/Achievement Menu/AchievementEntry.cs,7\e\7e0a9dade1a0a9904605b3f1962ca92a0dd4757f
+j
+:Assets/Scripts Shared/Data/Achievements/AchievementEnum.cs,1\0\10a36384bb2eea1de5baae5f0f4fd75bcd26bff9
+z
+JAssets/Scripts Shared/Data/Achievements/AchievementDescriptionAttribute.cs,e\a\ea7552a6b267a431f5e144fe21c813a133e67c38
+Y
+)Assets/UI/Shared/AchievementGetDisplay.cs,3\1\3164e375b55f5565a47ea231f5d0c0153c738cd4
+T
+$Assets/UI/Labels/InGame/UiManager.cs,9\5\9508640b172b213fe595a9d1a3acd152ac1ca336
+c
+3Assets/UI/Labels/InGame/Minimap/MinimapComponent.cs,f\b\fbaa0dfefbe7954933df2d4aa12771bdaf9c53f9
+j
+:Assets/UI/Main Menu/Recollection Menu/GachaDisplayPanel.cs,c\9\c9450e0ba1da436dbbf699871d9a00bfe8b055f2
+_
+/Assets/Objects/Players/Scripts/WeaponManager.cs,4\5\45741c2b225a281ac052718b79f4f5db1d65031d
+e
+5Assets/Scripts Shared/Data/Saves/CharacterSaveData.cs,8\8\884f7910928cad8215dc30acefa012e31c82c37c
+\
+,Assets/Scripts Shared/Data/Saves/SaveFile.cs,6\1\6189b58b23e204a25ddad5ec1cfaa763e8d855f5
+m
+=Assets/UI/Main Menu/Character List Menu/CharacterListPanel.cs,a\e\ae3d4ee80e4c71f48e52ac209251eb7d7db56068
+l
+<Assets/UI/Main Menu/Character List Menu/CharacterListMenu.cs,8\7\8720acd70e91dbe620f445b275d885f15e4d444d
+c
+3Assets/Scripts Shared/Extensions/StringExtension.cs,4\e\4eb4c6bc6a0263e568340e992cf07138f14f5ff3
+i
+9Assets/UI/Main Menu/Character List Menu/StatsMenuEntry.cs,f\4\f487d642c96a11e8f78048581e830790242d25a2
+o
+?Assets/UI/Main Menu/Character List Menu/StatsScrollMenuPanel.cs,d\9\d94a4d1e8bb1d54d59b981adc0579927494760a6
+R
+"Assets/Scripts Shared/Utilities.cs,3\9\392185a05b6c1129334716e51d691e9703c11eef
+m
+=Assets/UI/Main Menu/Character List Menu/CharacterInfoPanel.cs,b\6\b6487d255c24118ea17820f0ebbf25096011e590
+[
++Assets/Objects/Characters/CharactersEnum.cs,a\8\a8da474d567c49a90cf702ad8c6fe373ca53f25d
+Z
+*Assets/Objects/Characters/CharacterRank.cs,b\5\b59b9c3489ead8d7cc03c7ffb10221a0e1e8c222
+c
+3Assets/Objects/Characters/CharacterNameAttribute.cs,6\8\68f6c9cde8c59aa324868860e8e531a6531896d8
+_
+/Assets/Objects/Characters/CharacterLoreEntry.cs,d\b\db2ad29d215cc92674e9912bde925f3388a8e6b2
+_
+/Assets/Objects/Characters/CharacterSkillBase.cs,d\0\d06bd4cd2859a630832e55a7606b66a8aa7c1d58
+Z
+*Assets/Objects/Characters/CharacterData.cs,2\0\20348fc29d2bae33c1b657cd1442fe28666d20e8
+[
++Assets/Objects/Characters/CharacterStats.cs,f\d\fd9434dad66d9e427261e7f509a41f4321a507ea
+U
+%Assets/Objects/Players/PlayerStats.cs,8\6\8685964808bcab8c1887ad0b3f39953449cd4e1a

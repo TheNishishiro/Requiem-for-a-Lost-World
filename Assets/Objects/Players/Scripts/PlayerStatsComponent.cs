@@ -37,24 +37,24 @@ namespace Objects.Players.Scripts
 			_playerStats.Revives--;
 		}
 
-		public void Apply(ItemStats itemStats)
+		public void Apply(ItemStats itemStats, int rarity)
 		{
-			_playerStats.Sum(itemStats);
+			_playerStats.Sum(itemStats, rarity);
 		}
 
-		public void Apply(PermUpgrade permUpgrade, int upgradeLevel)
+		public void ApplyPermanent(PermUpgrade permUpgrade, int upgradeLevel)
 		{
 			_playerStats.Add(permUpgrade.type, permUpgrade.increasePerLevel * upgradeLevel);
 		}
 
-		public void SetHealth(int health)
+		public void SetHealth(float health)
 		{
 			_playerStats.Health = health;
 		}
 
 		public bool IsFullHealth()
 		{
-			return _playerStats?.Health == _playerStats?.HealthMax;
+			return _playerStats?.Health - _playerStats?.HealthMax < 0.01f;
 		}
 
 		public bool IsDead()
@@ -120,12 +120,12 @@ namespace Objects.Players.Scripts
 			return  (int)Math.Ceiling((Random.value < critRate ? damage * critDamage : damage) * GetDamageIncreasePercentage());
 		}
 
-		public int GetHealth()
+		public float GetHealth()
 		{
 			return _playerStats?.Health ?? 0;
 		}
 
-		public int GetMaxHealth()
+		public float GetMaxHealth()
 		{
 			return _playerStats?.HealthMax ?? 0;
 		}
@@ -170,7 +170,7 @@ namespace Objects.Players.Scripts
 			return 1 - _playerStats?.SkillCooldownReductionPercentage ?? 0;
 		}
 
-		public void TakeDamage(int amount)
+		public void TakeDamage(float amount)
 		{
 			_playerStats.Health -= amount;
 			
@@ -205,7 +205,7 @@ namespace Objects.Players.Scripts
 			return 1 + (_playerStats?.DamagePercentageIncrease ?? 0);
 		}
 
-		public int GetDamage()
+		public float GetDamage()
 		{
 			return _playerStats?.Damage ?? 0;
 		}

@@ -6,13 +6,13 @@ namespace Objects.Items
 	[Serializable]
 	public class ItemStats
 	{
-		public int Health;
-		public int HealthMax;
+		public float Health;
+		public float HealthMax;
 		public float MagnetSize;
 		public float CooldownReduction;
 		public float CooldownReductionPercentage;
 		public int AttackCount;
-		public int Damage;
+		public float Damage;
 		public float Scale;
 		public float Speed;
 		public float TimeToLive;
@@ -21,7 +21,7 @@ namespace Objects.Items
 		public float ExperienceIncreasePercentage;
 		public float MovementSpeed;
 		public float SkillCooldownReductionPercentage;
-		public int HealthRegen;
+		public float HealthRegen;
 		public float CritRate;
 		public float CritDamage;
 		public int PassThroughCount;

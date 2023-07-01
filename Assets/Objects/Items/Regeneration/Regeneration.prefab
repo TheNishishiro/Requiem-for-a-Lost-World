@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Core of Vitality
-  Description: Increase health regen by 1 per 5 sec.
+  Description: Increase health regen by 0.1 per second
   Icon: {fileID: 21300000, guid: 936cf08ef0afac84c9f0918b7e431d20, type: 3}
   ItemUpgrades:
   - {fileID: 11400000, guid: 39c91570aed5c174680643ed95c7c274, type: 2}
@@ -67,8 +67,17 @@ MonoBehaviour:
     DetectionRange: 0
     DamagePercentageIncrease: 0
     ExperienceIncreasePercentage: 0
-    MovementSpeedIncrease: 0
+    MovementSpeed: 0
     SkillCooldownReductionPercentage: 0
-    HealthRegen: 1
+    HealthRegen: 0.1
     CritRate: 0
     CritDamage: 0
+    PassThroughCount: 0
+    Armor: 0
+    EnemySpeedIncreasePercentage: 0
+    EnemySpawnRateIncreasePercentage: 0
+    EnemyHealthIncreasePercentage: 0
+    EnemyMaxCountIncreasePercentage: 0
+    ItemRewardIncrease: 0
+    Revives: 0
+    ProjectileLifeTimeIncreasePercentage: 0

@@ -18,7 +18,7 @@ namespace Objects.Stage
 		public int Level;
 		public int CharacterExp => (int) (MonstersKilled / 1000.0f + Gold * 0.5f + Time * 0.1f);
 
-		public void AddDamage(int damage, WeaponBase weaponBase)
+		public void AddDamage(float damage, WeaponBase weaponBase)
 		{
 			ItemDamage ??= new Dictionary<WeaponBase, ulong>();
 			if (!ItemDamage.ContainsKey(weaponBase))

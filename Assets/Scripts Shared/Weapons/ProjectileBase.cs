@@ -84,7 +84,7 @@ namespace Weapons
 			if (damageable == null)
 				return;
 
-			damageable.TakeDamage((int)(WeaponStats.GetDamage() * (1.0f + ProjectileDamageIncreasePercentage)), ParentWeapon);
+			damageable.TakeDamage(WeaponStats.GetDamage() * (1.0f + ProjectileDamageIncreasePercentage), ParentWeapon);
 			
 			if (isLimitedUsage && _currentPassedEnemies-- <= 0)
 				Destroy(gameObject);
@@ -95,7 +95,7 @@ namespace Weapons
 			if (damageable == null)
 				return;
 
-			damageable.TakeDamage((int)(WeaponStats.GetDamage() * (1.0f + ProjectileDamageIncreasePercentage)), ParentWeapon);
+			damageable.TakeDamage(WeaponStats.GetDamage() * (1.0f + ProjectileDamageIncreasePercentage), ParentWeapon);
 			
 			if (isLimitedUsage && _currentPassedEnemies-- <= 0)
 				Destroy(gameObject);
@@ -108,7 +108,7 @@ namespace Weapons
 				return;
 			
 			damageable = other.GetComponent<IDamageable>();
-			damageable?.TakeDamageWithCooldown((int)(WeaponStats.GetDamage() * (1.0f + ProjectileDamageIncreasePercentage)), gameObject, WeaponStats.DamageCooldown, ParentWeapon);
+			damageable?.TakeDamageWithCooldown(WeaponStats.GetDamage() * (1.0f + ProjectileDamageIncreasePercentage), gameObject, WeaponStats.DamageCooldown, ParentWeapon);
 		}
 	}
 }

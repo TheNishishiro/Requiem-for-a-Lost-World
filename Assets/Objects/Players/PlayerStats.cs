@@ -13,13 +13,13 @@ namespace Objects.Players
 	[Serializable]
 	public class PlayerStats
 	{
-		public int Health;
-		public int HealthMax;
+		public float Health;
+		public float HealthMax;
 		public float MagnetSize;
 		public float CooldownReduction;
 		public float CooldownReductionPercentage;
 		public int AttackCount;
-		public int Damage;
+		public float Damage;
 		public float Scale;
 		public float Speed;
 		public float TimeToLive;
@@ -28,7 +28,7 @@ namespace Objects.Players
 		public float ExperienceIncreasePercentage;
 		public float MovementSpeed;
 		public float SkillCooldownReductionPercentage;
-		public int HealthRegen;
+		public float HealthRegen;
 		public float CritRate;
 		public float CritDamage;
 		public int PassThroughCount;
@@ -77,36 +77,38 @@ namespace Objects.Players
 			ProjectileLifeTimeIncreasePercentage = 0;
 		}
 
-		public void Sum(ItemStats item)
-		{
-			Health += item.Health;
-			HealthMax += item.HealthMax;
-			MagnetSize += item.MagnetSize;
-			CooldownReduction += item.CooldownReduction;
-			CooldownReductionPercentage += item.CooldownReductionPercentage;
-			AttackCount += item.AttackCount;
-			Damage += item.Damage;
-			Scale += item.Scale;
-			Speed += item.Speed;
-			TimeToLive += item.TimeToLive;
-			DetectionRange += item.DetectionRange;
-			DamagePercentageIncrease += item.DamagePercentageIncrease;
-			ExperienceIncreasePercentage += item.ExperienceIncreasePercentage;
-			MovementSpeed += item.MovementSpeed;
-			SkillCooldownReductionPercentage += item.SkillCooldownReductionPercentage;
-			HealthRegen += item.HealthRegen;
-			CritRate += item.CritRate;
-			CritDamage += item.CritDamage;
-			PassThroughCount += item.PassThroughCount;
-			Armor += item.Armor;
-			EnemySpeedIncreasePercentage = item.EnemySpeedIncreasePercentage;
-			EnemySpawnRateIncreasePercentage = item.EnemySpawnRateIncreasePercentage;
-			EnemyHealthIncreasePercentage = item.EnemyHealthIncreasePercentage;
-			EnemyMaxCountIncreasePercentage = item.EnemyMaxCountIncreasePercentage;
-			ItemRewardIncrease = item.ItemRewardIncrease;
-			Revives = item.Revives;
-			ProjectileLifeTimeIncreasePercentage = item.ProjectileLifeTimeIncreasePercentage;
-		}
+		public void Sum(ItemStats item, int rarity)
+        {
+            var rarityFactor = 1 + ((rarity - 1) * 0.1f); 
+        
+            Health += item.Health * rarityFactor;
+            HealthMax += item.HealthMax * rarityFactor;
+            MagnetSize += item.MagnetSize * rarityFactor;
+            CooldownReduction += item.CooldownReduction * rarityFactor;
+            CooldownReductionPercentage += item.CooldownReductionPercentage * rarityFactor;
+            AttackCount += item.AttackCount;
+            Damage += item.Damage * rarityFactor;
+            Scale += item.Scale * rarityFactor;
+            Speed += item.Speed * rarityFactor;
+            TimeToLive += item.TimeToLive * rarityFactor;
+            DetectionRange += item.DetectionRange * rarityFactor;
+            DamagePercentageIncrease += item.DamagePercentageIncrease * rarityFactor;
+            ExperienceIncreasePercentage += item.ExperienceIncreasePercentage * rarityFactor;
+            MovementSpeed += item.MovementSpeed * rarityFactor;
+            SkillCooldownReductionPercentage += item.SkillCooldownReductionPercentage * rarityFactor;
+            HealthRegen += item.HealthRegen * rarityFactor;
+            CritRate += item.CritRate * rarityFactor;
+            CritDamage += item.CritDamage * rarityFactor;
+            PassThroughCount += item.PassThroughCount;
+            Armor += (int)(item.Armor * rarityFactor);
+            EnemySpeedIncreasePercentage += item.EnemySpeedIncreasePercentage * rarityFactor;
+            EnemySpawnRateIncreasePercentage += item.EnemySpawnRateIncreasePercentage * rarityFactor;
+            EnemyHealthIncreasePercentage += item.EnemyHealthIncreasePercentage * rarityFactor;
+            EnemyMaxCountIncreasePercentage += item.EnemyMaxCountIncreasePercentage * rarityFactor;
+            ItemRewardIncrease += item.ItemRewardIncrease * rarityFactor;
+            Revives += item.Revives;
+            ProjectileLifeTimeIncreasePercentage += item.ProjectileLifeTimeIncreasePercentage * rarityFactor;
+        }
 
 		public void Set(PlayerStats playerStats)
 		{

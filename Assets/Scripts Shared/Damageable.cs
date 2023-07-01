@@ -14,7 +14,7 @@ namespace DefaultNamespace
 {
 	public class Damageable : MonoBehaviour, IDamageable
 	{
-		[HideInInspector] public int Health;
+		[HideInInspector] public float Health;
 		[SerializeField] private GameResultData gameResultData;
 		public Dictionary<GameObject, float> sourceDamageCooldown = new ();
 		public float vulnerabilityTimer;
@@ -38,25 +38,25 @@ namespace DefaultNamespace
 			}
 		}
 
-		public void SetHealth(int health)
+		public void SetHealth(float health)
 		{
 			Health = health;
 		}
 		
-		public void TakeDamage(int damage, WeaponBase weaponBase)
+		public void TakeDamage(float damage, WeaponBase weaponBase)
 		{
 			gameResultData.AddDamage(damage, weaponBase);
 			TakeDamage(damage);
 		}
 		
-		public void TakeDamage(int damage)
+		public void TakeDamage(float damage)
 		{
-			var damageTaken = vulnerabilityTimer > 0 ? (int) (damage * (1 + vulnerabilityPercentage)) : damage;
-			MessageManager.instance.PostMessage(damageTaken.ToString(), transform.position, transform.localRotation);
+			var damageTaken = vulnerabilityTimer > 0 ? damage * (1 + vulnerabilityPercentage) : damage;
+			MessageManager.instance.PostMessage(damageTaken.ToString("0"), transform.position, transform.localRotation);
 			Health -= damageTaken;
 		}
 		
-		public void TakeDamageWithCooldown(int damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase)
+		public void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase)
 		{
 			if (!sourceDamageCooldown.ContainsKey(damageSource))
 			{
@@ -74,12 +74,12 @@ namespace DefaultNamespace
 			sourceDamageCooldown[damageSource] = damageCooldown;
 		}
 
-		public void ApplyDamageOverTime(int damage, float damageFrequency, float damageDuration, WeaponBase weaponBase)
+		public void ApplyDamageOverTime(float damage, float damageFrequency, float damageDuration, WeaponBase weaponBase)
 		{
 			StartCoroutine(DamageOverTime(damage, damageFrequency, damageDuration, weaponBase));
 		}
 
-		private IEnumerator DamageOverTime(int damage, float damageFrequency, float damageDuration, WeaponBase weaponBase)
+		private IEnumerator DamageOverTime(float damage, float damageFrequency, float damageDuration, WeaponBase weaponBase)
 		{
 			var timer = damageDuration;
 			while (timer > 0)
