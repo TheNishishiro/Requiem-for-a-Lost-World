@@ -14,7 +14,6 @@ namespace UI.Main_Menu.Character_List_Menu
 		[SerializeField] private TextMeshProUGUI titleTextField;
 		[SerializeField] private TextMeshProUGUI levelTextField;
 		[SerializeField] private TextMeshProUGUI expTextField;
-		[SerializeField] private TextMeshProUGUI rankUpTextField;
 		[SerializeField] private TextMeshProUGUI killCountTextField;
 		[SerializeField] private TextMeshProUGUI highestLevelTextField;
 		[SerializeField] private CharacterExpBar expSlider;
@@ -29,9 +28,14 @@ namespace UI.Main_Menu.Character_List_Menu
 		[SerializeField] private Image separationLine3;
 		[SerializeField] private Image separationLine4;
 		[SerializeField] private GameObject statsPanel;
+		[SerializeField] private GameObject RankDisplayPanel;
+		private CharacterData _characterData;
+		private CharacterSaveData _characterSaveData;
 
 		public void SetCharacterData(CharacterData characterData, CharacterSaveData characterSaveData)
 		{
+			_characterData = characterData;
+			_characterSaveData = characterSaveData;
 			nameTextField.text = characterData.Name;
 			titleTextField.text = characterData.Title;
 			levelTextField.text = characterSaveData.Level.ToString();
@@ -39,7 +43,6 @@ namespace UI.Main_Menu.Character_List_Menu
 			expSlider.SetValue(characterSaveData.Experience, characterSaveData.ExperienceNeeded);
 			characterImage.sprite = characterData.TransparentCard;
 			separationLine1.color = separationLine2.color = separationLine3.color = separationLine4.color = characterData.ColorTheme;
-			rankUpTextField.text = characterSaveData.GetRank();
 			killCountTextField.text = Utilities.GetShortNumberFormatted(characterSaveData.KillCount);
 			highestLevelTextField.text = characterSaveData.HighestInGameLevel.ToString();
 			weaponIcon.GetComponent<Image>().sprite = characterData.StartingWeapon?.Icon;
@@ -56,6 +59,11 @@ namespace UI.Main_Menu.Character_List_Menu
 			{
 				statsPanelComponent.AddEntry(statEntry.Name, statEntry.Value);
 			}
+		}
+
+		public void OpenShardsMenu()
+		{
+			RankDisplayPanel.GetComponent<RankDisplayPanel>().Open(_characterData, _characterSaveData.GetRankEnum());
 		}
 
 		public void Close()

@@ -97,6 +97,7 @@ namespace DefaultNamespace.Data
 
 		public CharacterSaveData GetCharacterSaveData(CharactersEnum characterId)
 		{
+			Initialize();
 			return CharacterSaveData.ContainsKey(characterId) ? CharacterSaveData[characterId] : null;
 		}
 

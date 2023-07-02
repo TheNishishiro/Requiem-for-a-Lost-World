@@ -77,14 +77,14 @@ namespace Objects.Players.Scripts
 
 		private void ChitoseLevelUp(CharacterRank rank)
 		{
-			var reduction = rank >= CharacterRank.SSS ? 5 : 0;
+			var reduction = rank >= CharacterRank.E5 ? 5 : 0;
 					
 			if (level % (10 - reduction) == 0)
 			{
 				playerStatsComponent.IncreaseSpeed(0.05f);
 			}
 
-			if (rank >= CharacterRank.SS && level % (20 - reduction) == 0)
+			if (rank >= CharacterRank.E3 && level % (20 - reduction) == 0)
 			{
 				playerStatsComponent.IncreaseCooldownReductionPercentage(0.08f);
 			}
@@ -92,14 +92,14 @@ namespace Objects.Players.Scripts
 
 		private void MaidLevelUp(CharacterRank rank)
 		{
-			var maxCritRate = rank >= CharacterRank.SS ? 70 : 40;
+			var maxCritRate = rank >= CharacterRank.E3 ? 70 : 40;
 			
 			if (level <= maxCritRate && level % 10 == 0)
 			{
 				playerStatsComponent.IncreaseCritRate(0.05f);
 			}
 
-			if (rank >= CharacterRank.SSS && level % 5 == 0)
+			if (rank >= CharacterRank.E5 && level % 5 == 0)
 			{
 				playerStatsComponent.IncreaseCritDamage(0.03f);
 			}
@@ -112,12 +112,12 @@ namespace Objects.Players.Scripts
 				playerStatsComponent.IncreaseAttackCount(1);
 			}
 
-			if (level % 15 == 0 && rank < CharacterRank.SS)
+			if (level % 15 == 0 && rank < CharacterRank.E3)
 			{
 				playerStatsComponent.IncreaseEnemyHealth(0.07f);
 			}
 			
-			if (level % 13 == 0 && rank >= CharacterRank.SSS)
+			if (level % 13 == 0 && rank >= CharacterRank.E5)
 			{
 				playerStatsComponent.IncreaseFlatDamage(1);
 			}
@@ -125,7 +125,7 @@ namespace Objects.Players.Scripts
 
 		private void DavidLevelUp(CharacterRank rankup)
 		{
-			if (level % 12 == 0 && rankup >= CharacterRank.SS)
+			if (level % 12 == 0 && rankup >= CharacterRank.E3)
 			{
 				playerStatsComponent.IncreaseDamageIncreasePercentage(0.05f);
 			}
@@ -135,7 +135,7 @@ namespace Objects.Players.Scripts
 		{
 			if (level % 20 == 0)
 			{
-				var amount = rankup >= CharacterRank.SS ? 0.07f : 0.1f;
+				var amount = rankup >= CharacterRank.E3 ? 0.07f : 0.1f;
 				playerStatsComponent.IncreaseProjectileSize(amount);
 			}
 		}

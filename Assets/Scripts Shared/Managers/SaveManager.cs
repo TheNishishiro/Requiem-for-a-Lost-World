@@ -33,6 +33,7 @@ namespace Managers
 
 		public void LoadGame()
 		{
+			_saveData.Initialize();
 			_saveData.Load();
 			_saveData.UpdateMissingCharacterEntries(CharacterListManager.instance.GetCharacters());
 			_saveData.UpdateMissingAchievementEntries();

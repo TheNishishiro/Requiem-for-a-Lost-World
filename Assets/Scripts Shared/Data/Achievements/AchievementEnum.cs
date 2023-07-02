@@ -84,87 +84,61 @@ namespace DefaultNamespace.Data.Achievements
 		#region Obtain characters
 		
 		[AchievementValue("Obtain Corina")]
-		ObtainCorina_S,
-		[AchievementValue("Rank up Corina to SS")]
-		ObtainCorina_SS,
-		[AchievementValue("Rank up Corina to SSS")]
-		ObtainCorina_SSS,
-		[AchievementValue("Obtain Lucy")]
-		ObtainLucy_S,
-		[AchievementValue("Rank up Lucy to SS")]
-		ObtainLucy_SS,
-		[AchievementValue("Rank up Lucy to SSS")]
-		ObtainLucy_SSS,
-		[AchievementValue("Obtain Amelia")]
-		ObtainAmelia_S,
-		[AchievementValue("Rank up Amelia to SS")]
-		ObtainAmelia_SS,
-		[AchievementValue("Rank up Amelia to SSS")]
-		ObtainAmelia_SSS,
-		[AchievementValue("Obtain David")]
-		ObtainDavid_S,
-		[AchievementValue("Rank up David to SS")]
-		ObtainDavid_SS,
-		[AchievementValue("Rank up David to SSS")]
-		ObtainDavid_SSS,
-		[AchievementValue("Obtain Oana")]
-		ObtainOana_S,
-		[AchievementValue("Rank up Oana to SS")]
-		ObtainOana_SS,
-		[AchievementValue("Rank up Oana to SSS")]
-		ObtainOana_SSS,
-		[AchievementValue("Obtain Alice")]
-		ObtainAlice_S,
-		[AchievementValue("Rank up Alice to SS")]
-		ObtainAlice_SS,
-		[AchievementValue("Rank up Alice to SSS")]
-		ObtainAlice_SSS,
-		[AchievementValue("Obtain Amelisana")]
-		ObtainAmelisana_S,
-		[AchievementValue("Rank up Amelisana to SS")]
-		ObtainAmelisana_SS,
-		[AchievementValue("Rank up Amelisana to SSS")]
-		ObtainAmelisana_SSS,
-		[AchievementValue("Obtain Chornastra")]
-		ObtainChornastra_S,
-		[AchievementValue("Rank up Chronastra to SS")]
-		ObtainChornastra_SS,
-		[AchievementValue("Rank up Chronastra to SSS")]
-		ObtainChornastra_SSS,
-		[AchievementValue("Obtain Truzi")]
-		ObtainTruzi_S,
-		[AchievementValue("Rank up Truzi to SS")]
-		ObtainTruzi_SS,
-		[AchievementValue("Rank up Truzi to SSS")]
-		ObtainTruzi_SSS,
-		[AchievementValue("Obtain Arika")]
-		ObtainArika_S,
-		[AchievementValue("Rank up Arika to SS")]
-		ObtainArika_SS,
-		[AchievementValue("Rank up Arika to SSS")]
-		ObtainArika_SSS,
-		[AchievementValue("Obtain Natalie")]
-		ObtainNatalie_S,
-		[AchievementValue("Rank up Natalie to SS")]
-		ObtainNatalie_SS,
-		[AchievementValue("Rank up Natalie to SSS")]
-		ObtainNatalie_SSS,
-		[AchievementValue("Rank up Chitose to SS")]
-		ObtainChitose_SS,
-		[AchievementValue("Rank up Chitose to SSS")]
-		ObtainChitose_SSS,
-		[AchievementValue("Obtain Eliza")]
-		ObtainEliza_S,
-		[AchievementValue("Rank up Eliza to SS")]
-		ObtainEliza_SS,
-		[AchievementValue("Rank up Eliza to SSS")]
-		ObtainEliza_SSS,
-		[AchievementValue("Obtain Arthur")]
-		ObtainArthur_S,
-		[AchievementValue("Rank up Arthur to SS")]
-		ObtainArthur_SS,
-		[AchievementValue("Rank up Arthur to SSS")]
-		ObtainArthur_SSS,
+        ObtainCorina_E0,
+        [AchievementValue("Unlock final shard of Corina")]
+        ObtainCorina_E5,
+        [AchievementValue("Obtain Lucy")]
+        ObtainLucy_E0,
+        [AchievementValue("Unlock final shard of Lucy")]
+        ObtainLucy_E5,
+        [AchievementValue("Obtain Amelia")]
+        ObtainAmelia_E0,
+        [AchievementValue("Unlock final shard of Amelia")]
+        ObtainAmelia_E5,
+        [AchievementValue("Obtain David")]
+        ObtainDavid_E0,
+        [AchievementValue("Unlock final shard of David")]
+        ObtainDavid_E5,
+        [AchievementValue("Obtain Oana")]
+        ObtainOana_E0,
+        [AchievementValue("Unlock final shard of Oana")]
+        ObtainOana_E5,
+        [AchievementValue("Obtain Alice")]
+        ObtainAlice_E0,
+        [AchievementValue("Unlock final shard of Alice")]
+        ObtainAlice_E5,
+        [AchievementValue("Obtain Amelisana")]
+        ObtainAmelisana_E0,
+        [AchievementValue("Unlock final shard of Amelisana")]
+        ObtainAmelisana_E5,
+        [AchievementValue("Obtain Chornastra")]
+        ObtainChornastra_E0,
+        [AchievementValue("Unlock final shard of Chronastra")]
+        ObtainChornastra_E5,
+        [AchievementValue("Obtain Truzi")]
+        ObtainTruzi_E0,
+        [AchievementValue("Unlock final shard of Truzi")]
+        ObtainTruzi_E5,
+        [AchievementValue("Obtain Arika")]
+        ObtainArika_E0,
+        [AchievementValue("Unlock final shard of Arika")]
+        ObtainArika_E5,
+        [AchievementValue("Obtain Natalie")]
+        ObtainNatalie_E0,
+        [AchievementValue("Unlock final shard of Natalie")]
+        ObtainNatalie_E5,
+        [AchievementValue("Obtain Chitose")]
+        ObtainChitose_E0,
+        [AchievementValue("Unlock final shard of Chitose")]
+        ObtainChitose_E5,
+        [AchievementValue("Obtain Eliza")]
+        ObtainEliza_E0,
+        [AchievementValue("Unlock final shard of Eliza")]
+        ObtainEliza_E5,
+        [AchievementValue("Obtain Arthur")]
+        ObtainArthur_E0,
+        [AchievementValue("Unlock final shard of Arthur")]
+        ObtainArthur_E5,
 		
 		#endregion
 

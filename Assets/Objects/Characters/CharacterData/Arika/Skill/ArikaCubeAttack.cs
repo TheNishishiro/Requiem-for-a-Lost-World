@@ -28,7 +28,7 @@ namespace Objects.Characters.Arika.Skill
 					
 					foreach (var chaseComponent in FindObjectsOfType<ChaseComponent>())
 					{
-						if (arikaRank < CharacterRank.SSS)
+						if (arikaRank < CharacterRank.E5)
 						{
 							var distance = Vector3.Distance(transform.position, chaseComponent.transform.position);
 							if (distance > 5f)

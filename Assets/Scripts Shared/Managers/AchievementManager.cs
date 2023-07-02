@@ -59,7 +59,7 @@ namespace Managers
 
 		public void OnCharacterUnlocked(CharactersEnum characterId, CharacterRank rank)
 		{
-			if (rank is CharacterRank.S or CharacterRank.SS or CharacterRank.SSS)
+			if (rank is CharacterRank.E0 or CharacterRank.E5)
 				SaveFile.Instance.UnlockAchievement($"Obtain{characterId.GetName()}_{rank}");
 		}
 

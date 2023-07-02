@@ -32,6 +32,7 @@ namespace Objects.Characters
 		public WeaponBase StartingWeapon;
 		public bool IsPullable;
 		public PlayerStats Stats;
+		public List<EidolonData> Eidolons;
 		public List<CharacterLoreEntry> loreEntries;
 
 		public void Activate()

@@ -86,8 +86,8 @@ namespace Objects.Players.Scripts
 		private IEnumerator MaidSkill()
 		{
 			var rank = GameData.GetPlayerCharacterRank();
-			var damageIncreasePercentage = rank >= CharacterRank.SS ? 0.75f : 0.5f;
-			var skillDuration = rank >= CharacterRank.SSS ? 12f : 8f;
+			var damageIncreasePercentage = rank >= CharacterRank.E3 ? 0.75f : 0.5f;
+			var skillDuration = rank >= CharacterRank.E5 ? 12f : 8f;
 			
 			var obj = Instantiate(GameData.GetSkillPrefab(), abilityContainer);
 			obj.LifeTime = skillDuration;
@@ -107,9 +107,9 @@ namespace Objects.Players.Scripts
 			var rank = GameData.GetPlayerCharacterRank();
 			const float skillDuration = 10f;
 			var hpPenalty = 40;
-			if (rank >= CharacterRank.SS)
+			if (rank >= CharacterRank.E3)
 				hpPenalty = 80;
-			if (rank >= CharacterRank.SSS)
+			if (rank >= CharacterRank.E5)
 				hpPenalty = 120;
 			
 			playerStatsComponent.SetInvincible(true);

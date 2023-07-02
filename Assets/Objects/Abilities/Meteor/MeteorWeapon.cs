@@ -35,7 +35,7 @@ namespace Objects.Abilities.Meteor
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.David_BoF)
 			{
 				baseCount += 2;
-				if (GameData.GetPlayerCharacterRank() >= CharacterRank.SSS)
+				if (GameData.GetPlayerCharacterRank() >= CharacterRank.E5)
 					baseCount += (int)Math.Ceiling(baseCount * 0.5f);
 			}
 

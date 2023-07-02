@@ -23,7 +23,7 @@ namespace Objects.Players.Scripts
 			if (playerStats != null)
 				_playerStats.Set(playerStats);
 
-			if (GameData.GetPlayerCharacterId() == CharactersEnum.Arika_BoV && GameData.GetPlayerCharacterRank() == CharacterRank.SS)
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Arika_BoV && GameData.GetPlayerCharacterRank() == CharacterRank.E3)
 				_playerStats.SkillCooldownReductionPercentage += 0.25f;
 		}
 

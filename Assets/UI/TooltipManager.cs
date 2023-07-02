@@ -30,11 +30,14 @@ namespace UI
 		}
 
 		private void Update()
-		{
-			var mousePosition = Input.mousePosition;
-			mousePosition.z = -camera.transform.position.z;
-			var worldPosition = camera.ScreenToWorldPoint(mousePosition);
-			transform.position = worldPosition;
-		}
+        {
+            var mousePosition = Input.mousePosition;
+            mousePosition.z = -camera.transform.position.z;
+            var worldPosition= camera.ScreenToWorldPoint(mousePosition);
+        
+            var offset = new Vector3(100,100,0); // Change this to your desired offset
+            
+            transform.position = worldPosition + offset;
+        }
 	}
 }

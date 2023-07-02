@@ -68,7 +68,7 @@ namespace Managers
 			var activeCharacterId = GetActiveCharacter().Id;
 			if (_saveFile.CharacterSaveData.ContainsKey(activeCharacterId))
 				return (CharacterRank) _saveFile.CharacterSaveData[activeCharacterId].RankUpLevel;
-			return CharacterRank.S;
+			return CharacterRank.E0;
 		}
 	}
 }

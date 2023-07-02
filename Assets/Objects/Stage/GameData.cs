@@ -44,7 +44,7 @@ namespace Objects.Stage
 		
 		public static CharacterRank GetPlayerCharacterRank()
 		{
-			return CharacterListManager.instance?.GetActiveRankCharacter() ?? CharacterRank.S;
+			return CharacterListManager.instance?.GetActiveRankCharacter() ?? CharacterRank.E0;
 		}
 		
 		public static float GetCharacterSkillCooldown()
