@@ -15,8 +15,6 @@ MonoBehaviour:
   Id: 13
   Name: Eliza
   Title: The Royal Maid
-  Level: 1
-  Experience: 0
   CharacterCard: {fileID: 21300000, guid: 9debafb8a0322ef4990fe7fd28fb3628, type: 3}
   TransparentCard: {fileID: 21300000, guid: fab570cc76f1a7247a2548f6d33db5b6, type: 3}
   Avatar: {fileID: 21300000, guid: fc95ef9c7d235eb47959f93bac8eb32e, type: 3}
@@ -33,13 +31,9 @@ MonoBehaviour:
   AbilityPrefab: {fileID: -1432332605348777518, guid: 23f4a09b31a004d40ba84eadfd4a2546,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 5e6400d2d57dad34c8c628e364371df8, type: 3}
-  IsUnlocked: 0
   IsActive: 0
   ColorTheme: {r: 0.52156866, g: 0.38431376, b: 0.5764706, a: 1}
   StarRating: 4
-  RankUpLevel: 0
-  KillCount: 0
-  HighestInGameLevel: 0
   StartingWeapon: {fileID: -3886955019502428694, guid: ae1c2329b1daebc4aa1983817da70386,
     type: 3}
   IsPullable: 1
@@ -68,4 +62,23 @@ MonoBehaviour:
     EnemySpawnRateIncreasePercentage: 0
     EnemyHealthIncreasePercentage: 0
     EnemyMaxCountIncreasePercentage: 0
+    ItemRewardIncrease: 0
+    Revives: 0
+    ProjectileLifeTimeIncreasePercentage: 0
+  Eidolons:
+  - EidolonTexture: {fileID: 21300000, guid: aa57eb58854930840b967e820e155b25, type: 3}
+    EidolonName: My first day!
+    EidolonDescription: 
+  - EidolonTexture: {fileID: 21300000, guid: 749e99d021fc81142953863e1545cce1, type: 3}
+    EidolonName: Self reflection
+    EidolonDescription: 
+  - EidolonTexture: {fileID: 21300000, guid: b4b2a3b13dba8f546840fd78000368f8, type: 3}
+    EidolonName: Smile that kills
+    EidolonDescription: 
+  - EidolonTexture: {fileID: 21300000, guid: eac8f3a3f55b9d4448b15b86be522ffc, type: 3}
+    EidolonName: For thee will I fight
+    EidolonDescription: 
+  - EidolonTexture: {fileID: 21300000, guid: bd58faa285463d846895c418504294ab, type: 3}
+    EidolonName: 'Promises unfulfilled '
+    EidolonDescription: 
   loreEntries: []
