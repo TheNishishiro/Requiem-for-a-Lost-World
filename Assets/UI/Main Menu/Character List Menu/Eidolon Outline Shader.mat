@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3184999481513610827
+--- !u!114 &-2131778433269391734
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,30 +20,22 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Glass Shader
-  m_Shader: {fileID: -6465566751694194690, guid: 7cd3ba5544da0a54db76f0c6a03e92c6,
+  m_Name: Eidolon Outline Shader
+  m_Shader: {fileID: -6465566751694194690, guid: ab29239d681c46e42b65124c5756381d,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2005
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainText:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Mask:
-        m_Texture: {fileID: 2800000, guid: 65d29c0d0987db94f9667fbb59154a3b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 37ca679ad6b1afd4fbca5bde5833d685, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -60,14 +52,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DistortionStrength: 1
-    - _Metallic: 1
-    - _NoiseScale: 10
-    - _NormalStrength: 0.201
+    - _DisabledNoiseSpeed: -0.1
+    - _Inner_Edge: 1
+    - _Inner_Falloff: 1
+    - _Noise_Speed: 0.4
+    - _Noise_Strength: 15
+    - _Outer_Edge: 1
+    - _Outer_Falloff: 1
     - _QueueControl: 0
-    - _QueueOffset: 5
-    - _ReflectionStrength: 0.15
-    - _Smoothness: 0.5
+    - _QueueOffset: 0
+    - _Sprite_Edge_Alpha: 0.5
+    - _Thickness: 0.003
     m_Colors:
-    - _GlassColor: {r: 1, g: 1, b: 1, a: 0.078431375}
+    - _Color: {r: 22.627417, g: 0, b: 0, a: 1}
+    - _Inner_Glow_Color: {r: 51.98414, g: 21.496872, b: 0, a: 0}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 0}
+    - _Outer_Glow_Color: {r: 51.98414, g: 21.496872, b: 0, a: 0}
   m_BuildTextureStacks: []
