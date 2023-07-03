@@ -5,6 +5,7 @@ using Objects.Abilities;
 using Objects.Characters;
 using Objects.Items;
 using Objects.Players.PermUpgrades;
+using Objects.Stage;
 using Unity.VisualScripting;
 using UnityEngine.Serialization;
 
@@ -40,10 +41,16 @@ namespace Objects.Players
 		public float ItemRewardIncrease;
 		public int Revives;
 		public float ProjectileLifeTimeIncreasePercentage;
+		public float DodgeChance;
 
 		public PlayerStats()
 		{
 			ApplyDefaultStats();
+		}
+
+		public PlayerStats(PlayerStats playerStats)
+		{
+			Set(playerStats);
 		}
 		
 		public void ApplyDefaultStats()
@@ -75,6 +82,7 @@ namespace Objects.Players
 			ItemRewardIncrease = 0;
 			Revives = 0;
 			ProjectileLifeTimeIncreasePercentage = 0;
+			DodgeChance = 0;
 		}
 
 		public void Sum(ItemStats item, int rarity)
@@ -101,17 +109,21 @@ namespace Objects.Players
             HealthRegen += item.HealthRegen * rarityFactor;
             CritRate += item.CritRate * rarityFactor;
             CritDamage += item.CritDamage * rarityFactor;
-            Armor += (int)(item.Armor * rarityFactor);
+            Armor += item.Armor != 0 ? item.Armor + (rarity - 1) : item.Armor;
             EnemySpeedIncreasePercentage += item.EnemySpeedIncreasePercentage * rarityFactor;
             EnemySpawnRateIncreasePercentage += item.EnemySpawnRateIncreasePercentage * rarityFactor;
             EnemyHealthIncreasePercentage += item.EnemyHealthIncreasePercentage * rarityFactor;
             EnemyMaxCountIncreasePercentage += item.EnemyMaxCountIncreasePercentage * rarityFactor;
             ItemRewardIncrease += item.ItemRewardIncrease * rarityFactor;
             ProjectileLifeTimeIncreasePercentage += item.ProjectileLifeTimeIncreasePercentage * rarityFactor;
+            DodgeChance += item.DodgeChance * rarityFactor;
         }
 
 		public void Set(PlayerStats playerStats)
 		{
+			var characterId = GameData.GetPlayerCharacterId();
+			var characterRank = GameData.GetPlayerCharacterRank();
+            
 			Health = playerStats.Health;
 			HealthMax = playerStats.HealthMax;
 			MagnetSize = playerStats.MagnetSize;
@@ -139,6 +151,14 @@ namespace Objects.Players
 			ItemRewardIncrease = playerStats.ItemRewardIncrease;
 			Revives = playerStats.Revives;
 			ProjectileLifeTimeIncreasePercentage = playerStats.ProjectileLifeTimeIncreasePercentage;
+			DodgeChance = playerStats.DodgeChance;
+
+			switch (characterId)
+			{
+				case CharactersEnum.Chitose when characterRank >= CharacterRank.E1:
+					DodgeChance += 0.1f;
+					break;
+			}
 		}
 
 		public IEnumerable<CharacterStats> GetStatsList()
@@ -170,7 +190,8 @@ namespace Objects.Players
 				new("Enemy count%", EnemyMaxCountIncreasePercentage, true, true),
 				new("Reward increase", ItemRewardIncrease, true),
 				new("Revives", Revives),
-				new("Weapon duration%", ProjectileLifeTimeIncreasePercentage, true)
+				new("Weapon duration%", ProjectileLifeTimeIncreasePercentage, true),
+				new("Dodge chance%", DodgeChance, true)
 			};
 			return stats;
 		}

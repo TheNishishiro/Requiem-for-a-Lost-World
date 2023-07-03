@@ -33,5 +33,6 @@ namespace Objects.Items
 		public float ItemRewardIncrease;
 		public int Revives;
 		public float ProjectileLifeTimeIncreasePercentage;
+		public float DodgeChance;
 	}
 }

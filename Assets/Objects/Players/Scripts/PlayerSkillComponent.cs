@@ -2,12 +2,15 @@
 using System.Collections;
 using DefaultNamespace;
 using Managers;
+using Objects.Abilities;
+using Objects.Abilities.Laser_Gun;
 using Objects.Characters;
 using Objects.Characters.Chronastra.Skill;
 using Objects.Stage;
 using UI.Labels.InGame;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Objects.Players.Scripts
 {

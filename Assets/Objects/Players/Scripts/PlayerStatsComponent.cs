@@ -264,5 +264,10 @@ namespace Objects.Players.Scripts
 		{
 			return 1 + (_playerStats?.ProjectileLifeTimeIncreasePercentage ?? 0);
 		}
+
+		public float GetDodgeChance()
+		{
+			return _playerStats?.DodgeChance ?? 0;
+		}
 	}
 }

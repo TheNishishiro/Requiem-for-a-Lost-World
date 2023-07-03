@@ -1,6 +1,7 @@
 ﻿using DefaultNamespace;
 using DefaultNamespace.Data;
 using Objects.Characters;
+using Objects.Players;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -55,7 +56,8 @@ namespace UI.Main_Menu.Character_List_Menu
 			
 			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();
 			statsPanelComponent.ClearEntries();
-			foreach (var statEntry in characterData.GetStatsList())
+			var characterStats = new PlayerStats(characterData.Stats);
+			foreach (var statEntry in characterStats.GetStatsList())
 			{
 				statsPanelComponent.AddEntry(statEntry.Name, statEntry.Value);
 			}
