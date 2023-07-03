@@ -18,9 +18,14 @@ namespace Objects.Players.Scripts
 		{
 			if (amount > 0)
 			{
+				amount *= playerStatsComponent.GetDamageTakenIncrease();
 				amount -= playerStatsComponent.GetArmor();
 				if (amount < 0)
 					amount = 0;
+			}
+			else if (amount < 0)
+			{
+				amount *= playerStatsComponent.GetHealingIncrease();
 			}
 			
 			playerStatsComponent.TakeDamage(amount);

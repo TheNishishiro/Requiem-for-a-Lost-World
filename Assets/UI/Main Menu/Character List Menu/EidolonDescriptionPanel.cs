@@ -1,4 +1,5 @@
 ﻿using System;
+using Objects.Characters;
 using TMPro;
 using UnityEngine;
 
@@ -15,10 +16,12 @@ namespace UI.Main_Menu.Character_List_Menu
 			descriptionText.text = string.Empty;
 		}
 
-		public void Open(string title, string description)
+		public void Open(EidolonData eidolonData, bool isUnlocked)
 		{
-			titleText.text = title;
-			descriptionText.text = description;
+			titleText.text = eidolonData.EidolonName;
+			descriptionText.text = eidolonData.EidolonDescription;
+			if (isUnlocked)
+				descriptionText.text += $"<br><br><br><color=#797979><i>{eidolonData.EidolonQuote}</i></color>";
 		}
 	}
 }

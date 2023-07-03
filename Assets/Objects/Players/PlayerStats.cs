@@ -5,6 +5,7 @@ using Objects.Abilities;
 using Objects.Characters;
 using Objects.Items;
 using Objects.Players.PermUpgrades;
+using Objects.Players.Scripts;
 using Objects.Stage;
 using Unity.VisualScripting;
 using UnityEngine.Serialization;
@@ -42,6 +43,8 @@ namespace Objects.Players
 		public int Revives;
 		public float ProjectileLifeTimeIncreasePercentage;
 		public float DodgeChance;
+		public float DamageTakenIncreasePercentage;
+		public float HealingIncreasePercentage;
 
 		public PlayerStats()
 		{
@@ -52,7 +55,7 @@ namespace Objects.Players
 		{
 			Set(playerStats);
 		}
-		
+
 		public void ApplyDefaultStats()
 		{
 			Health = 100;
@@ -83,6 +86,8 @@ namespace Objects.Players
 			Revives = 0;
 			ProjectileLifeTimeIncreasePercentage = 0;
 			DodgeChance = 0;
+			DamageTakenIncreasePercentage = 0;
+			HealingIncreasePercentage = 0;
 		}
 
 		public void Sum(ItemStats item, int rarity)
@@ -117,49 +122,54 @@ namespace Objects.Players
             ItemRewardIncrease += item.ItemRewardIncrease * rarityFactor;
             ProjectileLifeTimeIncreasePercentage += item.ProjectileLifeTimeIncreasePercentage * rarityFactor;
             DodgeChance += item.DodgeChance * rarityFactor;
+            DamageTakenIncreasePercentage += item.DamageTakenIncreasePercentage * rarityFactor;
+            HealingIncreasePercentage += item.HealingReceivedIncreasePercentage * rarityFactor;
         }
 
 		public void Set(PlayerStats playerStats)
-		{
-			var characterId = GameData.GetPlayerCharacterId();
-			var characterRank = GameData.GetPlayerCharacterRank();
-            
-			Health = playerStats.Health;
-			HealthMax = playerStats.HealthMax;
-			MagnetSize = playerStats.MagnetSize;
-			CooldownReduction = playerStats.CooldownReduction;
-			CooldownReductionPercentage = playerStats.CooldownReductionPercentage;
-			AttackCount = playerStats.AttackCount;
-			Damage = playerStats.Damage;
-			Scale = playerStats.Scale;
-			Speed = playerStats.Speed;
-			TimeToLive = playerStats.TimeToLive;
-			DetectionRange = playerStats.DetectionRange;
-			DamagePercentageIncrease = playerStats.DamagePercentageIncrease;
-			ExperienceIncreasePercentage = playerStats.ExperienceIncreasePercentage;
-			MovementSpeed = playerStats.MovementSpeed;
-			SkillCooldownReductionPercentage = playerStats.SkillCooldownReductionPercentage;
-			HealthRegen = playerStats.HealthRegen;
-			CritRate = playerStats.CritRate;
-			CritDamage = playerStats.CritDamage;
-			PassThroughCount = playerStats.PassThroughCount;
-			Armor = playerStats.Armor;
-			EnemySpeedIncreasePercentage = playerStats.EnemySpeedIncreasePercentage;
-			EnemySpawnRateIncreasePercentage = playerStats.EnemySpawnRateIncreasePercentage;
-			EnemyHealthIncreasePercentage = playerStats.EnemyHealthIncreasePercentage;
-			EnemyMaxCountIncreasePercentage = playerStats.EnemyMaxCountIncreasePercentage;
-			ItemRewardIncrease = playerStats.ItemRewardIncrease;
-			Revives = playerStats.Revives;
-			ProjectileLifeTimeIncreasePercentage = playerStats.ProjectileLifeTimeIncreasePercentage;
-			DodgeChance = playerStats.DodgeChance;
-
-			switch (characterId)
-			{
-				case CharactersEnum.Chitose when characterRank >= CharacterRank.E1:
-					DodgeChance += 0.1f;
-					break;
-			}
-		}
+        {
+            var characterId = GameData.GetPlayerCharacterId();
+            var characterRank = GameData.GetPlayerCharacterRank();
+        
+            CopyPlayerStats(playerStats);
+        
+            var playerStatsUpdater = new PlayerStatsUpdater();
+            playerStatsUpdater.ApplyStrategy(characterId, characterRank, this);
+        }
+        
+        private void CopyPlayerStats(PlayerStats playerStats)
+        {
+            Health = playerStats.Health;
+            HealthMax = playerStats.HealthMax;
+            MagnetSize = playerStats.MagnetSize;
+            CooldownReduction = playerStats.CooldownReduction;
+            CooldownReductionPercentage = playerStats.CooldownReductionPercentage;
+            AttackCount = playerStats.AttackCount;
+            Damage = playerStats.Damage;
+            Scale = playerStats.Scale;
+            Speed = playerStats.Speed;
+            TimeToLive = playerStats.TimeToLive;
+            DetectionRange = playerStats.DetectionRange;
+            DamagePercentageIncrease = playerStats.DamagePercentageIncrease;
+            ExperienceIncreasePercentage = playerStats.ExperienceIncreasePercentage;
+            MovementSpeed = playerStats.MovementSpeed;
+            SkillCooldownReductionPercentage = playerStats.SkillCooldownReductionPercentage;
+            HealthRegen = playerStats.HealthRegen;
+            CritRate = playerStats.CritRate;
+            CritDamage = playerStats.CritDamage;
+            PassThroughCount = playerStats.PassThroughCount;
+            Armor = playerStats.Armor;
+            EnemySpeedIncreasePercentage = playerStats.EnemySpeedIncreasePercentage;
+            EnemySpawnRateIncreasePercentage = playerStats.EnemySpawnRateIncreasePercentage;
+            EnemyHealthIncreasePercentage = playerStats.EnemyHealthIncreasePercentage;
+            EnemyMaxCountIncreasePercentage = playerStats.EnemyMaxCountIncreasePercentage;
+            ItemRewardIncrease = playerStats.ItemRewardIncrease;
+            Revives = playerStats.Revives;
+            ProjectileLifeTimeIncreasePercentage = playerStats.ProjectileLifeTimeIncreasePercentage;
+            DodgeChance = playerStats.DodgeChance;
+            DamageTakenIncreasePercentage = playerStats.DamageTakenIncreasePercentage;
+            HealingIncreasePercentage = playerStats.HealingIncreasePercentage;
+        }
 
 		public IEnumerable<CharacterStats> GetStatsList()
 		{
@@ -191,7 +201,9 @@ namespace Objects.Players
 				new("Reward increase", ItemRewardIncrease, true),
 				new("Revives", Revives),
 				new("Weapon duration%", ProjectileLifeTimeIncreasePercentage, true),
-				new("Dodge chance%", DodgeChance, true)
+				new("Dodge chance%", DodgeChance, true),
+				new("Damage increase%", DamageTakenIncreasePercentage, true, true),
+				new("Heal increase%", HealingIncreasePercentage, true)
 			};
 			return stats;
 		}

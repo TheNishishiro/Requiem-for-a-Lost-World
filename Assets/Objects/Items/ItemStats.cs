@@ -34,5 +34,7 @@ namespace Objects.Items
 		public int Revives;
 		public float ProjectileLifeTimeIncreasePercentage;
 		public float DodgeChance;
+		public float DamageTakenIncreasePercentage;
+		public float HealingReceivedIncreasePercentage;
 	}
 }

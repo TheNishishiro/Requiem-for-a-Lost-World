@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using UI.Main_Menu.Character_List_Menu;
 using UnityEngine.EventSystems;
 
-public class EidolonComponent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class EidolonComponent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {   
     public Image TargetImage;
     public Image GlassImage;
@@ -26,6 +26,7 @@ public class EidolonComponent : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private Vector3 idlePositionOffset;      // The offset for the idle position
     private Quaternion idleRotationOffset; 
     private Vector3 originalPosition;
+    private bool _isUnlocked;
     
     private void Start()
     {
@@ -45,16 +46,16 @@ public class EidolonComponent : MonoBehaviour, IPointerEnterHandler, IPointerExi
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, Input.mousePosition, canvas.worldCamera, out localMousePosition))
             {
                 // The mouse position (localMousePosition) is now in local space. Let's get its relative position in terms of the RectTransform's dimension (from -0.5 to 0.5).
-                Vector2 relativePosition = new Vector2(
+                var relativePosition = new Vector2(
                     localMousePosition.x / rectTransform.rect.width,
                     localMousePosition.y / rectTransform.rect.height);
 
                 // Normalize the vector. Here the magnitude may exceed 1 (since it's not a unit square) which can result in a tilt greater than max tilt angle.
-                Vector2 directionToMouse = relativePosition.normalized;
+                var directionToMouse = relativePosition.normalized;
 
                 // Calculate the tilt angle
-                float tiltX = directionToMouse.y * maxTiltAngle * Mathf.Abs(relativePosition.y);
-                float tiltY = -directionToMouse.x * maxTiltAngle * Mathf.Abs(relativePosition.x);
+                var tiltX = directionToMouse.y * maxTiltAngle * Mathf.Abs(relativePosition.y);
+                var tiltY = -directionToMouse.x * maxTiltAngle * Mathf.Abs(relativePosition.x);
 
                 // Apply the tilt rotation.
                 rectTransform.localRotation = Quaternion.Euler(tiltX, tiltY, 0f);
@@ -82,7 +83,7 @@ public class EidolonComponent : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerEnter(PointerEventData eventData)
     {
         isMouseOver = true;
-        FindObjectOfType<EidolonDescriptionPanel>().Open(eidolonData.EidolonName, eidolonData.EidolonDescription);
+        FindObjectOfType<EidolonDescriptionPanel>().Open(eidolonData, _isUnlocked);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -92,6 +93,7 @@ public class EidolonComponent : MonoBehaviour, IPointerEnterHandler, IPointerExi
     
     public void Setup(EidolonData eidolon, Color borderColor, bool isUnlocked)
     {
+        _isUnlocked = isUnlocked;
         eidolonData = eidolon;
         TargetImage.sprite = eidolon.EidolonTexture;
         var clonedGlassMaterial = new Material(GlassImage.material);
@@ -120,10 +122,5 @@ public class EidolonComponent : MonoBehaviour, IPointerEnterHandler, IPointerExi
     void SetSpriteColor(Material material, bool isUnlocked)
     {
         material.SetColor(MainColor, isUnlocked ? Color.white : Color.black);
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        FindObjectOfType<EidolonDescriptionPanel>().Open(eidolonData.EidolonName, eidolonData.EidolonDescription);
     }
 }

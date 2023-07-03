@@ -269,5 +269,15 @@ namespace Objects.Players.Scripts
 		{
 			return _playerStats?.DodgeChance ?? 0;
 		}
+
+		public float GetDamageTakenIncrease()
+		{
+			return 1 + (_playerStats?.DamageTakenIncreasePercentage ?? 0);
+		}
+
+		public float GetHealingIncrease()
+		{
+			return 1 + (_playerStats?.HealingIncreasePercentage ?? 0);
+		}
 	}
 }

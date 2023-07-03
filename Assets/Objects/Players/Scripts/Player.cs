@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
 	{
 		if (amount > 0 && playerStatsComponent.GetDodgeChance() > Random.value)
 			return;
-		
+        
 		healthComponent.Damage(amount);
 	}
 

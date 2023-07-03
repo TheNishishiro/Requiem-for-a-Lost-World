@@ -10,5 +10,7 @@ namespace Objects.Characters
 		public string EidolonName;
 		[TextArea]
 		public string EidolonDescription;
+		[TextArea]
+		public string EidolonQuote;
 	}
 }
