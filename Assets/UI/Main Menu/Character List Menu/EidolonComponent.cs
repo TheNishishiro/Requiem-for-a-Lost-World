@@ -82,6 +82,7 @@ public class EidolonComponent : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnPointerEnter(PointerEventData eventData)
     {
         isMouseOver = true;
+        FindObjectOfType<EidolonDescriptionPanel>().Open(eidolonData.EidolonName, eidolonData.EidolonDescription);
     }
 
     public void OnPointerExit(PointerEventData eventData)
