@@ -21,7 +21,7 @@ namespace UI.Main_Menu.Character_List_Menu
 			titleText.text = eidolonData.EidolonName;
 			descriptionText.text = eidolonData.EidolonDescription;
 			if (isUnlocked)
-				descriptionText.text += $"<br><br><br><color=#797979><i>{eidolonData.EidolonQuote}</i></color>";
+				descriptionText.text += $"<br><br><br><color=#797979><size=80%><i>{eidolonData.EidolonQuote}</i></size></color>";
 		}
 	}
 }
