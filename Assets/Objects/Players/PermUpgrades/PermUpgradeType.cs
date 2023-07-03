@@ -19,5 +19,6 @@
 		EffectDuration = 15,
 		ExpIncrease = 16,
 		Greed = 17,
+		Luck = 18,
 	}
 }

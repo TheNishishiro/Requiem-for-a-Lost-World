@@ -1,6 +1,7 @@
 ﻿using System;
 using Objects.Abilities;
 using Objects.Items;
+using Objects.Stage;
 using Unity.VisualScripting;
 using UnityEngine;
 using Weapons;
@@ -14,15 +15,14 @@ namespace UI.Labels.InGame.LevelUpScreen
 		public UpgradeData Upgrade { get; set; }
 		public ItemBase Item { get; set; }
 		public ItemUpgrade ItemUpgrade { get; set; }
-		public int Rarity { get; private set; } = Random.value switch
+		public int Rarity { get; private set; } = (Random.value + GameData.GetPlayerCharacterData().Stats.Luck) switch
 		{
-			<= 0.75f => 1,
+			<= 0.75f =>  1,
 			<= 0.85f => 2,
 			<= 0.9f => 3,
 			<= 0.97f => 4,
-			<= 1f => 5,
+			_ => 5
 		};
-			
 
 		public bool IsWeaponUpgrade => Weapon != null && Upgrade != null;
 		public bool IsWeaponUnlock => Weapon != null && Upgrade == null;

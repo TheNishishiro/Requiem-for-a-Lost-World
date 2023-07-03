@@ -279,5 +279,10 @@ namespace Objects.Players.Scripts
 		{
 			return 1 + (_playerStats?.HealingIncreasePercentage ?? 0);
 		}
+
+		public float GetLuck()
+		{
+			return _playerStats?.Luck ?? 0;
+		}
 	}
 }

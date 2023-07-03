@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4983040325007987317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5168740827976247089}
+  - component: {fileID: 2124623914327689410}
+  m_Layer: 0
+  m_Name: Crit Rate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5168740827976247089
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4983040325007987317}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -321.44955, y: 27.021223, z: -9.088037}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2124623914327689410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4983040325007987317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99f41ba8b33ae314dbb5c61003501c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Precision Strike
+  Description: Increase critical strike rate by 10%
+  Icon: {fileID: 21300000, guid: 6c84f5aae15fbb44f9f0db672715eb62, type: 3}
+  ItemUpgrades:
+  - {fileID: 11400000, guid: afde7db5ac1c34b40964b6e95fd5777f, type: 2}
+  - {fileID: 11400000, guid: 7985bcb7314c9064c83c08f2024c8463, type: 2}
+  - {fileID: 11400000, guid: 57f701c272ffeea47b02839dc9824c87, type: 2}
+  - {fileID: 11400000, guid: b32e53595182baa44aa65e364230e795, type: 2}
+  - {fileID: 11400000, guid: 4bf24f38deed59f4fb0914c8d9a516df, type: 2}
+  ItemStats:
+    Health: 0
+    HealthMax: 0
+    MagnetSize: 0
+    CooldownReduction: 0
+    CooldownReductionPercentage: 0
+    AttackCount: 0
+    Damage: 0
+    Scale: 0
+    Speed: 0
+    TimeToLive: 0
+    DetectionRange: 0
+    DamagePercentageIncrease: 0
+    ExperienceIncreasePercentage: 0
+    MovementSpeed: 0
+    SkillCooldownReductionPercentage: 0
+    HealthRegen: 0
+    CritRate: 0.1
+    CritDamage: 0
+    PassThroughCount: 0
+    Armor: 0
+    EnemySpeedIncreasePercentage: 0
+    EnemySpawnRateIncreasePercentage: 0
+    EnemyHealthIncreasePercentage: 0
+    EnemyMaxCountIncreasePercentage: 0
+    ItemRewardIncrease: 0
+    Revives: 0
+    ProjectileLifeTimeIncreasePercentage: 0
+    DodgeChance: 0
+    DamageTakenIncreasePercentage: 0
+    HealingReceivedIncreasePercentage: 0
+    Luck: 0

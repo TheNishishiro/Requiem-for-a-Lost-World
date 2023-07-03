@@ -9,6 +9,7 @@ using Objects.Stage;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace Objects.Enemies
 {
@@ -18,6 +19,8 @@ namespace Objects.Enemies
 		[SerializeField] private GameResultData gameResultData;
 		[SerializeField] private GameObject chestDrop;
 		[SerializeField] private GameObject expDrop;
+		[SerializeField] private GameObject goldDrop;
+		[SerializeField] private GameObject gemDrop;
 		[SerializeField] private UnityEvent<Enemy> OnEnemyDeath;
 		private EnemyManager _enemyManager;
 		private Damageable damageable;
@@ -68,6 +71,19 @@ namespace Objects.Enemies
 				}
 			}
 
+			dropOnDestroyComponent.AddDrop(new ChanceDrop()
+			{
+				chance = playerTarget?.playerStatsComponent?.GetLuck() ?? 0,
+				amount = Random.Range(1, 5),
+				gameObject = goldDrop,
+			});
+			dropOnDestroyComponent.AddDrop(new ChanceDrop()
+			{
+				chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 2,
+				amount = Random.Range(1, 5),
+				gameObject = gemDrop,
+			});
+			
 			stats.hp = (int)(stats.hp * playerStats.GetEnemyHealthIncrease());
 			stats.speed *= playerStats.GetEnemySpeedIncrease();
 			chaseComponent.FollowYAxis = newStats.allowFlying;

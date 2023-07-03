@@ -123,19 +123,19 @@ namespace Objects.Players.Scripts
 			}
 		}
 
-		private void DavidLevelUp(CharacterRank rankup)
+		private void DavidLevelUp(CharacterRank rank)
 		{
-			if (level % 12 == 0 && rankup >= CharacterRank.E3)
+			if (level % 12 == 0 && rank >= CharacterRank.E3)
 			{
 				playerStatsComponent.IncreaseDamageIncreasePercentage(0.05f);
 			}
 		}
 
-		private void ArikaLevelUp(CharacterRank rankup)
+		private void ArikaLevelUp(CharacterRank rank)
 		{
 			if (level % 20 == 0)
 			{
-				var amount = rankup >= CharacterRank.E3 ? 0.07f : 0.1f;
+				var amount = rank >= CharacterRank.E3 ? 0.07f : 0.1f;
 				playerStatsComponent.IncreaseProjectileSize(amount);
 			}
 		}

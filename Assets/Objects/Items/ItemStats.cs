@@ -36,5 +36,6 @@ namespace Objects.Items
 		public float DodgeChance;
 		public float DamageTakenIncreasePercentage;
 		public float HealingReceivedIncreasePercentage;
+		public float Luck;
 	}
 }

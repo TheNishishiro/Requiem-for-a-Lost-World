@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2518235789927939182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7265575690765007492}
+  - component: {fileID: -4319694756786890401}
+  m_Layer: 0
+  m_Name: Luck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7265575690765007492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2518235789927939182}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4319694756786890401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2518235789927939182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b9e6860bb3063a49ba940138b0a7456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Lucky clover
+  Description: Increase luck by 5%
+  Icon: {fileID: 21300000, guid: 160afce1088b70c41add0bf84c636f22, type: 3}
+  ItemUpgrades:
+  - {fileID: 11400000, guid: 6157030fad20d5b4392d93a9974b0ecb, type: 2}
+  - {fileID: 11400000, guid: 265f590f717471c49bb59c00ad757efa, type: 2}
+  - {fileID: 11400000, guid: 8469fec0dc2aab243a4c31942c7c0f35, type: 2}
+  - {fileID: 11400000, guid: 9a0cf482360418243887a39d772d2b85, type: 2}
+  - {fileID: 11400000, guid: 6d0311fe6af5dcb4aa1fafce37499731, type: 2}
+  ItemStats:
+    Health: 0
+    HealthMax: 0
+    MagnetSize: 0
+    CooldownReduction: 0
+    CooldownReductionPercentage: 0
+    AttackCount: 0
+    Damage: 0
+    Scale: 0
+    Speed: 0
+    TimeToLive: 0
+    DetectionRange: 0
+    DamagePercentageIncrease: 0
+    ExperienceIncreasePercentage: 0
+    MovementSpeed: 0
+    SkillCooldownReductionPercentage: 0
+    HealthRegen: 0
+    CritRate: 0
+    CritDamage: 0
+    PassThroughCount: 0
+    Armor: 0
+    EnemySpeedIncreasePercentage: 0
+    EnemySpawnRateIncreasePercentage: 0
+    EnemyHealthIncreasePercentage: 0
+    EnemyMaxCountIncreasePercentage: 0
+    ItemRewardIncrease: 0
+    Revives: 0
+    ProjectileLifeTimeIncreasePercentage: 0
+    DodgeChance: 0
+    DamageTakenIncreasePercentage: 0
+    HealingReceivedIncreasePercentage: 0
+    Luck: 0.05

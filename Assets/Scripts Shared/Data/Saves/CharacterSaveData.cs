@@ -26,13 +26,6 @@ namespace DefaultNamespace.Data
 			return (CharacterRank)RankUpLevel;
 		}
 		
-		public string GetRank()
-		{
-			var rankDigit = RankUpLevel % 4;
-			var displaySubDigit = rankDigit == 0 ? "" : rankDigit.ToString();
-			return $"<cspace=-0.3em>{GetRankEnum()}</cspace><sub>{displaySubDigit}</sub>";
-		}
-		
 		public void Unlock()
 		{
 			if (!IsUnlocked)

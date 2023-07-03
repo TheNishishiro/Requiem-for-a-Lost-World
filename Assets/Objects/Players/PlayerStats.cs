@@ -45,6 +45,7 @@ namespace Objects.Players
 		public float DodgeChance;
 		public float DamageTakenIncreasePercentage;
 		public float HealingIncreasePercentage;
+		public float Luck;
 
 		public PlayerStats()
 		{
@@ -88,6 +89,7 @@ namespace Objects.Players
 			DodgeChance = 0;
 			DamageTakenIncreasePercentage = 0;
 			HealingIncreasePercentage = 0;
+			Luck = 0;
 		}
 
 		public void Sum(ItemStats item, int rarity)
@@ -124,6 +126,7 @@ namespace Objects.Players
             DodgeChance += item.DodgeChance * rarityFactor;
             DamageTakenIncreasePercentage += item.DamageTakenIncreasePercentage * rarityFactor;
             HealingIncreasePercentage += item.HealingReceivedIncreasePercentage * rarityFactor;
+            Luck += item.Luck * rarityFactor;
         }
 
 		public void Set(PlayerStats playerStats)
@@ -169,6 +172,7 @@ namespace Objects.Players
             DodgeChance = playerStats.DodgeChance;
             DamageTakenIncreasePercentage = playerStats.DamageTakenIncreasePercentage;
             HealingIncreasePercentage = playerStats.HealingIncreasePercentage;
+            Luck = playerStats.Luck;
         }
 
 		public IEnumerable<CharacterStats> GetStatsList()
@@ -203,7 +207,8 @@ namespace Objects.Players
 				new("Weapon duration%", ProjectileLifeTimeIncreasePercentage, true),
 				new("Dodge chance%", DodgeChance, true),
 				new("Damage increase%", DamageTakenIncreasePercentage, true, true),
-				new("Heal increase%", HealingIncreasePercentage, true)
+				new("Heal increase%", HealingIncreasePercentage, true),
+				new("Luck%", Luck, true),
 			};
 			return stats;
 		}
@@ -265,6 +270,9 @@ namespace Objects.Players
 					break;
 				case PermUpgradeType.Greed:
 					ItemRewardIncrease += value;
+					break;
+				case PermUpgradeType.Luck:
+					Luck += value;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(permUpgradeType), permUpgradeType, null);
