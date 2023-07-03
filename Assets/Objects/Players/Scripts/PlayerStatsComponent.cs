@@ -59,7 +59,7 @@ namespace Objects.Players.Scripts
 
 		public bool IsFullHealth()
 		{
-			return _playerStats?.Health - _playerStats?.HealthMax < 0.01f;
+			return Math.Abs((_playerStats?.Health - _playerStats?.HealthMax).GetValueOrDefault()) < 0.01f;
 		}
 
 		public bool IsDead()
