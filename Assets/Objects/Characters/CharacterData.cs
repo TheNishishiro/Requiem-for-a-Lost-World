@@ -20,8 +20,10 @@ namespace Objects.Characters
 		public Sprite Avatar;
 		public Sprite CharacterSprite;
 		public Sprite CharacterGachaArt;
+		[TextArea]
 		public string PassiveDescription;
 		public string AbilityName;
+		[TextArea]
 		public string AbilityDescription;
 		public float AbilityCooldown;
 		public CharacterSkillBase AbilityPrefab;

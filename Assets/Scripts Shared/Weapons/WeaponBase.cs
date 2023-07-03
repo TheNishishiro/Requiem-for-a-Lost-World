@@ -13,7 +13,7 @@ namespace Weapons
 	{
 		[SerializeField] protected GameObject spawnPrefab;
 		[SerializeField] public string Name;
-		[SerializeField] public string Description;
+		[SerializeField][TextArea] public string Description;
 		[SerializeField] public Sprite Icon;
 		[SerializeField] protected WeaponStats weaponStats;
 		[SerializeField] List<UpgradeData> availableUpgrades;

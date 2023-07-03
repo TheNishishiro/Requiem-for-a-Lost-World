@@ -8,6 +8,7 @@ namespace Objects.Characters
 	{
 		public Sprite EidolonTexture;
 		public string EidolonName;
+		[TextArea]
 		public string EidolonDescription;
 	}
 }
