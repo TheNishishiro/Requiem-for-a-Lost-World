@@ -88,13 +88,14 @@ namespace Objects.Players.Scripts
 		{
 			healthComponent.Damage(playerStatsComponent.GetHealth() * 0.9f);
 			healthComponent.UpdateHealthBar();
-			var attackCount = 10;
+			var rank = GameData.GetPlayerCharacterRank();
+			var attackCount = rank > CharacterRank.E4 ? 20 : 10;
 			var enemies = FindObjectsOfType<Enemy>().OrderBy(x => Random.value).Take(attackCount);
 
 			foreach (var enemy in enemies)
 			{
 				var result = Utilities.GetPointOnColliderSurface(enemy.transform.position, transform);
-				enemy.GetComponent<ChaseComponent>().SetImmobile(1.5f);
+				enemy.GetComponent<ChaseComponent>().SetImmobile(rank == CharacterRank.E5 ? 2f : 1.5f);
 				SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject);
 			}
 
@@ -145,7 +146,11 @@ namespace Objects.Players.Scripts
 			var obj = Instantiate(GameData.GetSkillPrefab(), abilityContainer);
 			obj.LifeTime = skillDuration;
 
-			var damageIncrease = Math.Abs(playerStatsComponent.GetHealth() - playerStatsComponent.GetMaxHealth()) / 150.0f;
+			var damageFactor = 150f;
+			if (rank >= CharacterRank.E4)
+				damageFactor = 105f;
+			
+			var damageIncrease = Math.Abs(playerStatsComponent.GetHealth() - playerStatsComponent.GetMaxHealth()) / damageFactor;
 			playerStatsComponent.IncreaseDamageIncreasePercentage(damageIncrease);
 			yield return new WaitForSeconds(skillDuration);
 			playerStatsComponent.IncreaseDamageIncreasePercentage(-damageIncrease);

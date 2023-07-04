@@ -72,6 +72,9 @@ namespace Objects.Players.Scripts
 				case CharactersEnum.Arika_BoV:
 					ArikaLevelUp(rankup);
 					break;
+				case CharactersEnum.Corina_BoB:
+					CorinaLevelUp(rankup);
+					break;
 			}
 		}
 
@@ -138,6 +141,12 @@ namespace Objects.Players.Scripts
 				var amount = rank >= CharacterRank.E3 ? 0.07f : 0.1f;
 				playerStatsComponent.IncreaseProjectileSize(amount);
 			}
+		}
+
+		private void CorinaLevelUp(CharacterRank rankup)
+		{
+			if (level % 2 == 0 && rankup >= CharacterRank.E2)
+				playerStatsComponent.IncreaseHealingReceived(0.01f);
 		}
 	}
 }

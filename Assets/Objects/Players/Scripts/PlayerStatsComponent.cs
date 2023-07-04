@@ -119,7 +119,12 @@ namespace Objects.Players.Scripts
 
 		public void IncreaseMaxHealth(float amount)
 		{
-			_playerStats.HealthMax = amount;
+			_playerStats.HealthMax += amount;
+		}
+
+		public void IncreaseHealingReceived(float amount)
+		{
+			_playerStats.HealingIncreasePercentage += amount;
 		}
 
 		public int GetTotalDamage(int baseDamage)
