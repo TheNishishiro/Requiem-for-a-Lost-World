@@ -28,7 +28,7 @@ public class EidolonComponent : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private Vector3 originalPosition;
     private bool _isUnlocked;
     
-    private void Start()
+    private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
