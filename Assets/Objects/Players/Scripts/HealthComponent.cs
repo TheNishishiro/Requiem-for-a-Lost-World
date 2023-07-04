@@ -2,6 +2,7 @@
 using Managers;
 using UI.Labels.InGame;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 namespace Objects.Players.Scripts
@@ -13,6 +14,9 @@ namespace Objects.Players.Scripts
 		[SerializeField] private GameOverScreenManager gameOverScreenManager;
 		private const float HealthRegenCooldown = 1;
 		private float _healthRegenCurrentCooldown = 1;
+		[SerializeField] private UnityEvent onDeath;
+		[SerializeField] private UnityEvent<float> onHealing;
+		[SerializeField] private UnityEvent<float> onDamageTaken;
 		
 		public void Damage(float amount)
 		{
@@ -22,10 +26,13 @@ namespace Objects.Players.Scripts
 				amount -= playerStatsComponent.GetArmor();
 				if (amount < 0)
 					amount = 0;
+				
+				onDamageTaken?.Invoke(amount);
 			}
 			else if (amount < 0)
 			{
 				amount *= playerStatsComponent.GetHealingIncrease();
+				onHealing?.Invoke(amount);
 			}
 			
 			playerStatsComponent.TakeDamage(amount);
@@ -67,7 +74,13 @@ namespace Objects.Players.Scripts
 				return;
 			}
 			
+			onDeath?.Invoke();
 			gameOverScreenManager.OpenPanel(false);
+		}
+
+		public void IncreaseMaxHealth(float amount)
+		{
+			playerStatsComponent.IncreaseMaxHealth(amount);
 		}
 	}
 }

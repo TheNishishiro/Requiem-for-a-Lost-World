@@ -3,6 +3,9 @@ using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using Managers;
+using Objects.Characters;
+using Objects.Stage;
+using UnityEditor.Experimental;
 using UnityEngine;
 using Weapons;
 using Random = UnityEngine.Random;
@@ -28,6 +31,16 @@ namespace Objects.Abilities.Laser_Gun
 		public override bool IsUnlocked(SaveFile saveFile)
 		{
 			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithAmelia);
+		}
+
+		protected override int GetAttackCount()
+		{
+			var count = weaponStats.GetAttackCount();
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Amelia_BoD &&
+			    GameData.GetPlayerCharacterRank() >= CharacterRank.E4)
+				count += 2;
+
+			return count;
 		}
 	}
 }

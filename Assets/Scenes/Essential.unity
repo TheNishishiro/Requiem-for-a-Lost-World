@@ -320,6 +320,7 @@ MonoBehaviour:
   - {fileID: 693573438688654377, guid: b2c971a91b4815d4e81ba1fd64a5ceeb, type: 3}
   - {fileID: -3886955019502428694, guid: ae1c2329b1daebc4aa1983817da70386, type: 3}
   - {fileID: 8639696691735580533, guid: c4ce03c63c596e6488c51640328921da, type: 3}
+  - {fileID: 8385973842094059995, guid: 98b1589fbfbea4b47a134ef36e0b9a6e, type: 3}
   availableItems:
   - {fileID: 4578624666743270089, guid: dca97a02f88726d40a7c30c5984616a4, type: 3}
   - {fileID: 3162085336551074921, guid: f1a8619bf257fb34da252825d2139554, type: 3}
@@ -327,13 +328,13 @@ MonoBehaviour:
   - {fileID: 3162085336551074921, guid: 01300dc2e5cf26748bcf2dac21ec3b86, type: 3}
   - {fileID: 3162085336551074921, guid: 4ca5853751b608b4e8f2374e362ddf62, type: 3}
   - {fileID: 3162085336551074921, guid: bf6edd3f3ecbc2845b035d8b4652ee9d, type: 3}
-  - {fileID: 3162085336551074921, guid: 8334ab49efdf2a649898bace31cef0d8, type: 3}
+  - {fileID: 890768549074142792, guid: 8334ab49efdf2a649898bace31cef0d8, type: 3}
   - {fileID: -6118446651191132146, guid: 70eb6dc9093ec4642a429bdcae9ccbba, type: 3}
   - {fileID: 6203031225689082248, guid: fbdf7a88597cbab479181fc2074602f0, type: 3}
   - {fileID: 7436907905085026516, guid: 2e7d29c5ab54b2e42a4aa129b5c7cd33, type: 3}
-  - {fileID: 3892008192163857434, guid: c7928bc286892ee4d8606e2aa5217a03, type: 3}
-  - {fileID: -483951224690846745, guid: 8d3cde987ec6dd24eb7e402158e9c23f, type: 3}
-  - {fileID: 7268738904405252404, guid: 3d7861d1112a6384ea55544ac5651a05, type: 3}
+  - {fileID: -4836827936417267590, guid: c7928bc286892ee4d8606e2aa5217a03, type: 3}
+  - {fileID: 6129760405626194525, guid: 8d3cde987ec6dd24eb7e402158e9c23f, type: 3}
+  - {fileID: 3948809700522220736, guid: 3d7861d1112a6384ea55544ac5651a05, type: 3}
   - {fileID: -3256828938893779718, guid: e7cc2067bffb3314ba08b14b9738bc5e, type: 3}
   - {fileID: -4319694756786890401, guid: 550ddf67bf6c5d64d8a6d256ccc688d2, type: 3}
   - {fileID: 7100778922492729244, guid: 7e6c989984bb2e24698e65783566e5dd, type: 3}
@@ -1412,7 +1413,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -15.628723, y: 0}
+  m_AnchoredPosition: {x: -15.628784, y: 0}
   m_SizeDelta: {x: -833.06, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &215713708
@@ -7559,7 +7560,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641499482}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.004, y: 0.055, z: 0}
   m_LocalScale: {x: 0.09, y: 0.09, z: 0.09}
   m_ConstrainProportionsScale: 1
@@ -7626,7 +7627,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 7.68, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -8875,6 +8876,54 @@ MonoBehaviour:
   playerStatsComponent: {fileID: 8997996947100127260}
   healthBar: {fileID: 1783569565}
   gameOverScreenManager: {fileID: 1557294566}
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1279709384511189508, guid: 68a329e6ff192984283abbd09d0c154d,
+          type: 3}
+        m_TargetAssemblyTypeName: Managers.AchievementManager, Assembly-CSharp
+        m_MethodName: OnDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHealing:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1279709384511189508, guid: 68a329e6ff192984283abbd09d0c154d,
+          type: 3}
+        m_TargetAssemblyTypeName: Managers.AchievementManager, Assembly-CSharp
+        m_MethodName: OnHealing
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDamageTaken:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1279709384511189508, guid: 68a329e6ff192984283abbd09d0c154d,
+          type: 3}
+        m_TargetAssemblyTypeName: Managers.AchievementManager, Assembly-CSharp
+        m_MethodName: OnDamageTaken
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8997996947100127260
 MonoBehaviour:
   m_ObjectHideFlags: 0

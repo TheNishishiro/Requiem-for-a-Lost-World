@@ -10,5 +10,6 @@ namespace Interfaces
 		bool IsDestroyed();
 		void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase);
 		void SetVulnerable(float time, float percentage);
+		void ApplyDamageOverTime(float damage, float damageFrequency, float damageDuration, WeaponBase weaponBase);
 	}
 }

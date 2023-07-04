@@ -10,13 +10,16 @@ namespace Objects.Characters
 			Value = value;
 		}
 		
-		public CharacterStats(string name, object value, bool isPercentage = false, bool isInvertedColor = false)
+		public CharacterStats(string name, object value, bool isPercentage = false, bool isInvertedColor = false, float baseValue = 0)
         {
             Name = name;
             var floatValue = float.Parse(value.ToString());
-            var isNegative = floatValue < 0 && !isInvertedColor;
+            var color = "white";
+            if (baseValue > floatValue)
+	            color = isInvertedColor ? "green" : "red";
+            else if (baseValue < floatValue)
+	            color = isInvertedColor ? "red" : "green";
         
-            var color = floatValue == 0 ? "white" : isNegative ? "red" : "green";
             var stringValue = isPercentage ? floatValue.ToPercentage() : value.ToString();
         
             Value = $"<color={color}>{stringValue}</color>";

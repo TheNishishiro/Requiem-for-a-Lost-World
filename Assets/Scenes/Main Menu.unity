@@ -760,7 +760,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 75.599976, y: 421.33}
+  m_AnchoredPosition: {x: 126.5, y: 516.6}
   m_SizeDelta: {x: -665.38, y: 27.1584}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &77829194
@@ -1314,6 +1314,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &181092944 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1279709384511189508, guid: 68a329e6ff192984283abbd09d0c154d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1279709385433935347}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af040e3838334ae29953f2ebd02951aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &186707351
 GameObject:
   m_ObjectHideFlags: 0
@@ -3169,7 +3181,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -169.01987, y: -32.254242}
+  m_AnchoredPosition: {x: -331, y: -36.1}
   m_SizeDelta: {x: 36.556, y: 36.556}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &412225744
@@ -5377,7 +5389,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -169.01987, y: -32.254242}
+  m_AnchoredPosition: {x: -331, y: -32.254242}
   m_SizeDelta: {x: 36.556, y: 36.556}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &682904177
@@ -6674,6 +6686,7 @@ MonoBehaviour:
   winLoseText: {fileID: 1116569431}
   characterImage: {fileID: 1558134544}
   saveManager: {fileID: 41929807}
+  achievementManager: {fileID: 181092944}
 --- !u!114 &791454445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8840,7 +8853,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 75.599976, y: 347.72977}
+  m_AnchoredPosition: {x: 126.5, y: 442.99973}
   m_SizeDelta: {x: -665.38, y: 27.1584}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1008991796
@@ -13501,7 +13514,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 5
+  m_lineSpacing: 30
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

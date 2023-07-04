@@ -117,6 +117,11 @@ namespace Objects.Players.Scripts
 			_playerStats.DamagePercentageIncrease += damageIncreasePercentage;
 		}
 
+		public void IncreaseMaxHealth(float amount)
+		{
+			_playerStats.HealthMax = amount;
+		}
+
 		public int GetTotalDamage(int baseDamage)
 		{
 			var damage = (baseDamage + GetDamage());
@@ -283,6 +288,11 @@ namespace Objects.Players.Scripts
 		public float GetLuck()
 		{
 			return _playerStats?.Luck ?? 0;
+		}
+
+		public float GetDamageOverTime()
+		{
+			return _playerStats?.DamageOverTime ?? 0;
 		}
 	}
 }

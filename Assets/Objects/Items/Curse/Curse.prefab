@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1601610120296713520}
-  - component: {fileID: -483951224690846745}
+  - component: {fileID: 6129760405626194525}
   m_Layer: 0
   m_Name: Curse
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-483951224690846745
+--- !u!114 &6129760405626194525
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 133336205035326675}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
+  m_Script: {fileID: 11500000, guid: 194cc7a85b349ac4295346e431704f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Curse of the Past
@@ -86,3 +86,8 @@ MonoBehaviour:
     ItemRewardIncrease: 0
     Revives: 0
     ProjectileLifeTimeIncreasePercentage: 0
+    DodgeChance: 0
+    DamageTakenIncreasePercentage: 0
+    HealingReceivedIncreasePercentage: 0
+    Luck: 0
+    DamageOverTime: 0

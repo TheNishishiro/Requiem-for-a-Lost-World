@@ -14,15 +14,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 1
   Name: Corina Alter
-  Title: 
-  Level: 1
-  Experience: 0
+  Title: Shard of Pain
   CharacterCard: {fileID: 21300000, guid: 71152079f81e80345aeea8e17fe62bfc, type: 3}
   TransparentCard: {fileID: 21300000, guid: 85a7ce7abee5951408aecb2901553149, type: 3}
-  Avatar: {fileID: 0}
-  IsUnlocked: 0
-  IsActive: 0
+  Avatar: {fileID: 21300000, guid: 57c7916c77b52ff45a5b3cff436361f6, type: 3}
+  CharacterSprite: {fileID: 21300000, guid: 5f3b9b8cad10219488e231f02ff232a9, type: 3}
+  CharacterGachaArt: {fileID: 21300000, guid: 2e16cb243fb31da4b9728b62f7c602d2, type: 3}
+  PassiveDescription: "Increase all incoming healing by <color=green>50%</color>
+    \nStarts with <color=green>30%</color> damage increase and <color=green>20%</color>
+    crit rate.\nShard attraction is reduced by <color=red>50%</color>\nMovement speed
+    reduces by <color=red>0.05 m/s</color>"
+  AbilityName: Impale!
+  AbilityDescription: 'Summon bloody spikes on 10 random enemies dealing damage,
+    imparing them for 1.5 second and healing Corina for each enemy hit. Casting this
+    ability costs 90% of Corina''s current health '
+  AbilityCooldown: 30
+  AbilityPrefab: {fileID: 8835472784573972083, guid: bdf65f1ee5ca7404eaf4dffa8c3ac486,
+    type: 3}
+  AbilityIcon: {fileID: 21300000, guid: 102251c1cecbdf84db96ccf400d14b59, type: 3}
+  IsActive: 1
   ColorTheme: {r: 0.27058825, g: 0.27058825, b: 0.32156864, a: 1}
   StarRating: 5
-  RankUpLevel: 0
+  StartingWeapon: {fileID: 8385973842094059995, guid: 98b1589fbfbea4b47a134ef36e0b9a6e,
+    type: 3}
+  IsPullable: 1
+  Stats:
+    Health: 60
+    HealthMax: 60
+    MagnetSize: 0.3
+    CooldownReduction: 0
+    CooldownReductionPercentage: 0
+    AttackCount: 0
+    Damage: 0
+    Scale: 0
+    Speed: 0
+    TimeToLive: 0
+    DetectionRange: 0
+    DamagePercentageIncrease: 0.3
+    ExperienceIncreasePercentage: 0
+    MovementSpeed: 1.55
+    SkillCooldownReductionPercentage: 0
+    HealthRegen: 0
+    CritRate: 0.2
+    CritDamage: 0
+    PassThroughCount: 0
+    Armor: 0
+    EnemySpeedIncreasePercentage: 0
+    EnemySpawnRateIncreasePercentage: 0
+    EnemyHealthIncreasePercentage: 0
+    EnemyMaxCountIncreasePercentage: 0
+    ItemRewardIncrease: 0
+    Revives: 0
+    ProjectileLifeTimeIncreasePercentage: 0
+    DodgeChance: 0
+    DamageTakenIncreasePercentage: 0
+    HealingIncreasePercentage: 0.5
+    Luck: 0
+  Eidolons: []
   loreEntries: []

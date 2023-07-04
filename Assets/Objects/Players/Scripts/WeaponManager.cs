@@ -24,10 +24,10 @@ public class WeaponManager : MonoBehaviour
     public int maxItemCount = 6;
     private int _weaponsUpgraded;
     private int _itemsUpgraded;
-    [SerializeField] private UnityEvent<WeaponBase, int> onWeaponAdded;
-    [SerializeField] private UnityEvent<WeaponBase, int> onWeaponUpgraded;
-    [SerializeField] private UnityEvent<ItemBase, int> onItemAdded;
-    [SerializeField] private UnityEvent<ItemBase, int> onItemUpgraded;
+    [SerializeField] private UnityEvent<WeaponBase, int, int> onWeaponAdded;
+    [SerializeField] private UnityEvent<WeaponBase, int, int> onWeaponUpgraded;
+    [SerializeField] private UnityEvent<ItemBase, int, int> onItemAdded;
+    [SerializeField] private UnityEvent<ItemBase, int, int> onItemUpgraded;
     private SaveFile _saveFile;
     
     private void Start()
@@ -47,7 +47,7 @@ public class WeaponManager : MonoBehaviour
         weapon.ApplyRarity(rarity);
         availableWeapons.Remove(weapon);
         _unlockedWeapons.Add(weaponGameObject);
-        onWeaponAdded?.Invoke(weapon, _unlockedWeapons.Count);
+        onWeaponAdded?.Invoke(weapon, _unlockedWeapons.Count, rarity);
     }
 
     public void AddItem(ItemBase item, int rarity)
@@ -55,20 +55,20 @@ public class WeaponManager : MonoBehaviour
         availableItems.Remove(item);
         _playerStatsComponent.Apply(item.ItemStats, rarity);
         _unlockedItems.Add(item);
-        onItemAdded?.Invoke(item, _unlockedItems.Count);
+        onItemAdded?.Invoke(item, _unlockedItems.Count, rarity);
     }
 
     public void UpgradeWeapon(WeaponBase weapon, UpgradeData upgradeData, int rarity)
     {
         weapon.Upgrade(upgradeData, rarity);
-        onWeaponUpgraded?.Invoke(weapon, ++_weaponsUpgraded);
+        onWeaponUpgraded?.Invoke(weapon, ++_weaponsUpgraded, rarity);
     }
 
     public void UpgradeItem(ItemBase itemBase, ItemUpgrade itemUpgrade, int rarity)
     {
         itemBase.RemoveUpgrade(itemUpgrade);
         _playerStatsComponent.Apply(itemUpgrade.ItemStats, rarity);
-        onItemUpgraded?.Invoke(itemBase, ++_itemsUpgraded);
+        onItemUpgraded?.Invoke(itemBase, ++_itemsUpgraded, rarity);
     }
     
     public List<IPlayerItem> GetUnlockedWeaponsAsInterface()

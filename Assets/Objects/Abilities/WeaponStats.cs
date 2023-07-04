@@ -27,6 +27,10 @@ namespace Objects.Abilities
 		public float CritDamage;
 		public float Weakness;
 		public float DamageIncreasePercentage;
+		public float HealPerHit;
+		public float DamageOverTime;
+		public float DamageOverTimeDuration;
+		public float DamageOverTimeFrequency;
 
 		public void AssignPlayerStatsComponent(PlayerStatsComponent playerStatsComponent)
 		{
@@ -50,6 +54,10 @@ namespace Objects.Abilities
              CritDamage *= rarityFactor;
              Weakness *= rarityFactor;
              DamageIncreasePercentage *= rarityFactor;
+             HealPerHit *= rarityFactor;
+             DamageOverTime *= rarityFactor;
+             DamageOverTimeDuration *= rarityFactor;
+             DamageOverTimeFrequency *= 2 - rarityFactor;
          }
 		
 		public void Sum(WeaponStats weaponStats, int rarity)
@@ -70,6 +78,10 @@ namespace Objects.Abilities
             CritDamage += weaponStats.CritDamage * rarityFactor;
             Weakness += weaponStats.Weakness * rarityFactor;
             DamageIncreasePercentage += weaponStats.DamageIncreasePercentage * rarityFactor;      
+            HealPerHit += weaponStats.HealPerHit * rarityFactor;      
+            DamageOverTime += weaponStats.DamageOverTime * rarityFactor;      
+            DamageOverTimeDuration += weaponStats.DamageOverTimeDuration * rarityFactor;      
+            DamageOverTimeFrequency += weaponStats.DamageOverTimeFrequency * rarityFactor;      
         }
 
 		public string GetDescription(int rarity)
@@ -90,6 +102,10 @@ namespace Objects.Abilities
             builder.AppendStat("Critical damage", CritDamage*100, rarity, "%");
             builder.AppendStat("Weakness", Weakness*100, rarity, "%");
             builder.AppendStat("Attack count", AttackCount, rarity);
+            builder.AppendStat("Regen per hit", HealPerHit, rarity);
+            builder.AppendStat("Damage over time", DamageOverTime, rarity);
+            builder.AppendStat("DoT duration", DamageOverTimeDuration, rarity);
+            builder.AppendStat("DoT frequency", DamageOverTimeFrequency, rarity);
         
             return builder.ToString();
         }
@@ -117,7 +133,19 @@ namespace Objects.Abilities
 			var damage = (Damage + _playerStatsComponent.GetDamage());
 			var critRate = CritRate + _playerStatsComponent.GetCritRate();
 			var critDamage = CritDamage + _playerStatsComponent.GetCritDamage();
-			return (float)(Random.value < critRate ? damage * critDamage : damage * (_playerStatsComponent.GetDamageIncreasePercentage() + DamageIncreasePercentage));
+			return (float)(Random.value < critRate ? damage * critDamage : damage) * (_playerStatsComponent.GetDamageIncreasePercentage() + DamageIncreasePercentage);
+		}
+
+		public float GetDamageOverTime()
+		{
+			if (!_isInitialized) return DamageOverTime * DamageIncreasePercentage;
+			return (DamageOverTime + _playerStatsComponent.GetDamageOverTime()) * (_playerStatsComponent.GetDamageIncreasePercentage() + DamageIncreasePercentage);
+		}
+
+		public float GetDamageIncreasePercentage()
+		{
+			if (!_isInitialized) return DamageIncreasePercentage;
+			return DamageIncreasePercentage + _playerStatsComponent.GetDamageIncreasePercentage();
 		}
 		
 		public float GetScale()

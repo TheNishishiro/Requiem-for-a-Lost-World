@@ -26,9 +26,14 @@ namespace Weapons
 		{
 			WeaponStats = weaponStats;
 			transform.localScale *= WeaponStats.GetScale();
-			TimeToLive = weaponStats.GetTimeToLive();
+			TimeToLive = GetTimeToLive();
 			DamageCooldown = weaponStats.DamageCooldown;
 			_currentPassedEnemies = weaponStats.GetPassThroughCount();
+		}
+
+		protected virtual float GetTimeToLive()
+		{
+			return WeaponStats.GetTimeToLive();
 		}
 
 		public void TickProjectile()
@@ -109,6 +114,23 @@ namespace Weapons
 			
 			damageable = other.GetComponent<IDamageable>();
 			damageable?.TakeDamageWithCooldown(WeaponStats.GetDamage() * (1.0f + ProjectileDamageIncreasePercentage), gameObject, WeaponStats.DamageCooldown, ParentWeapon);
+		}
+
+		protected void DamageOverTime(Collider other)
+		{
+			if (!other.CompareTag("Enemy") && !other.CompareTag("Destructible"))
+				return;
+			
+			var damageable = other.GetComponent<IDamageable>();
+			DamageOverTime(damageable, other);
+		}
+
+		protected void DamageOverTime(IDamageable damageable, Collider other)
+		{
+			if (!other.CompareTag("Enemy") && !other.CompareTag("Destructible"))
+				return;
+			
+			damageable.ApplyDamageOverTime(WeaponStats.GetDamageOverTime(), WeaponStats.DamageOverTimeFrequency, WeaponStats.DamageOverTimeDuration, ParentWeapon);
 		}
 	}
 }

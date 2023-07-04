@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using DefaultNamespace;
+using Interfaces;
 using Managers;
 using Objects.Abilities;
 using Objects.Abilities.Laser_Gun;
 using Objects.Characters;
 using Objects.Characters.Chronastra.Skill;
+using Objects.Enemies;
 using Objects.Stage;
 using UI.Labels.InGame;
 using UnityEngine;
@@ -75,7 +78,27 @@ namespace Objects.Players.Scripts
 				case CharactersEnum.Arika_BoV:
 					ArikaSkill();
 					break;
+				case CharactersEnum.Corina_BoB:
+					StartCoroutine(CorinaSkill());
+					break;
 			}
+		}
+
+		private IEnumerator CorinaSkill()
+		{
+			healthComponent.Damage(playerStatsComponent.GetHealth() * 0.9f);
+			healthComponent.UpdateHealthBar();
+			var attackCount = 10;
+			var enemies = FindObjectsOfType<Enemy>().OrderBy(x => Random.value).Take(attackCount);
+
+			foreach (var enemy in enemies)
+			{
+				var result = Utilities.GetPointOnColliderSurface(enemy.transform.position, transform);
+				enemy.GetComponent<ChaseComponent>().SetImmobile(1.5f);
+				SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject);
+			}
+
+			yield return null;
 		}
 
 		private void ChitoseSkill()

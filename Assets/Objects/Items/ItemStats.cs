@@ -37,5 +37,6 @@ namespace Objects.Items
 		public float DamageTakenIncreasePercentage;
 		public float HealingReceivedIncreasePercentage;
 		public float Luck;
+		public float DamageOverTime;
 	}
 }

@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3290538614869850728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7715423523019682236}
+  - component: {fileID: 8385973842094059995}
+  m_Layer: 0
+  m_Name: Scythe Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7715423523019682236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290538614869850728}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8385973842094059995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290538614869850728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c73b435645e19b42a0cad505ed751be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 661893610970110655, guid: 24f47af2419eb644bbc4ba8b8e1940da,
+    type: 3}
+  Name: Blood's Embrace
+  Description: Swing a bloody scythe dealing damage around the character and healing
+    for every enemy hit
+  Icon: {fileID: 21300000, guid: 7114b987320ec9240a03a3d597f5ae52, type: 3}
+  weaponStats:
+    Damage: 5
+    Cooldown: 4
+    CooldownReduction: 0
+    Scale: 1
+    Speed: 0
+    TimeToLive: 1.4
+    AttackCount: 1
+    PassThroughCount: 0
+    DamageCooldown: 0
+    DuplicateSpawnDelay: 0.2
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0.05
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: 5c945845ef36cef40b59b8d3d1d0b906, type: 2}
+  - {fileID: 11400000, guid: 11bdce4d65027c344bb414ace1a552e0, type: 2}
+  - {fileID: 11400000, guid: f395250c2f1152745aa4fe30a9c6c990, type: 2}
+  - {fileID: 11400000, guid: 232dfd5104a557d4aac366a2291b7d77, type: 2}
+  - {fileID: 11400000, guid: c4affa11ecc80274c9d2a479ff5078e8, type: 2}
+  - {fileID: 11400000, guid: a7342f8f0eee54a44bd4642d47b68ee9, type: 2}
+  - {fileID: 11400000, guid: ecd7a40620eadae43a773dbc3ed2247b, type: 2}
+  - {fileID: 11400000, guid: e309530d565ed254e9fecc97f201b18e, type: 2}
+  - {fileID: 11400000, guid: 461246b62476e3348be50cac09e875c0, type: 2}
+  - {fileID: 11400000, guid: 6a08b1af68542754ba52b0e33f4cb264, type: 2}
+  IsBloodEmbrace: 0
+  IsCursedStrikes: 0
+  IsSoulHarvest: 0

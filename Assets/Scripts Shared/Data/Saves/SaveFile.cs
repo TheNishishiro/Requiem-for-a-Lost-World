@@ -25,6 +25,7 @@ namespace DefaultNamespace.Data
 		public ulong EnemiesKilled;
 		public ulong PickupsCollected;
 		public ulong PullsPerformed;
+		public ulong Deaths;
 		public UnityEvent<AchievementEnum> AchievementUnlocked;
 		public UnityEvent<CharactersEnum, CharacterRank> OnCharacterUnlocked;
 		
@@ -70,6 +71,10 @@ namespace DefaultNamespace.Data
 		{
 			Gold = saveData.Gold;
 			Gems = saveData.Gems;
+			Deaths = saveData.Deaths;
+			EnemiesKilled = saveData.EnemiesKilled;
+			PickupsCollected = saveData.PickupsCollected;
+			PullsPerformed = saveData.PullsPerformed;
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
 			AchievementSaveData = saveData.AchievementSaveData ?? new Dictionary<AchievementEnum, bool>();
@@ -166,6 +171,7 @@ namespace DefaultNamespace.Data
 		public ulong EnemiesKilled;
 		public ulong PickupsCollected;
 		public ulong PullsPerformed;
+		public ulong Deaths;
 
 		public SaveData(){}
 		
@@ -179,6 +185,7 @@ namespace DefaultNamespace.Data
 			EnemiesKilled = saveFile.EnemiesKilled;
 			PickupsCollected = saveFile.PickupsCollected;
 			PullsPerformed = saveFile.PullsPerformed;
+			Deaths = saveFile.Deaths;
 		}
 	}
 }

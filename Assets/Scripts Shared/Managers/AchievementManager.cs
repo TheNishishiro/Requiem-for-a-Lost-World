@@ -14,6 +14,11 @@ namespace Managers
 {
 	public class AchievementManager : MonoBehaviour
 	{
+		private int _enemiesKilled;
+		private int _highRarityPickupsObtained;
+		private float _healAmountInOneGame;
+		private float _damageTakenInOneGame;
+        
 		public void Awake()
 		{
 			var instances = FindObjectsOfType<AchievementManager>();
@@ -23,6 +28,14 @@ namespace Managers
 				return;
 			}
 			DontDestroyOnLoad(gameObject);
+		}
+		
+		public void ClearPerGameStats()
+		{
+			_enemiesKilled = 0;
+			_highRarityPickupsObtained = 0;
+			_healAmountInOneGame = 0;
+			_damageTakenInOneGame = 0;
 		}
 
 		public void OnStageTimeUpdated(float time)
@@ -39,22 +52,63 @@ namespace Managers
 					break;
 			}
 		}
-		public void OnWeaponUnlocked(WeaponBase weapon, int unlockedCount)
+		public void OnWeaponUnlocked(WeaponBase weapon, int unlockedCount, int rarity)
 		{
+			if (rarity >= 3)
+				_highRarityPickupsObtained++;
+			if (_highRarityPickupsObtained > 10)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.Obtain10HighRarityItems);
+			
+			if (unlockedCount == 2 && rarity == 5)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.HaveFirst5StarWeapon);
+			
 			if (unlockedCount == 6)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Hold6Weapons);
 		}
-		public void OnItemUnlocked(ItemBase item, int unlockedCount)
+		public void OnItemUnlocked(ItemBase item, int unlockedCount, int rarity)
 		{
+			if (rarity >= 3)
+				_highRarityPickupsObtained++;
+			if (_highRarityPickupsObtained > 10)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.Obtain10HighRarityItems);
+			
+			if (unlockedCount == 1 && rarity == 5)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.HaveFirst5StarItem);
+			
 			if (unlockedCount == 6)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Hold6Items);
 		}
 		
 		public void OnEnemyKilled(Enemy enemy)
 		{
+			_enemiesKilled++;
 			SaveFile.Instance.EnemiesKilled++;
 			if (SaveFile.Instance.EnemiesKilled >= 100000)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Kill100000Enemies);
+			if (_enemiesKilled >= 1000)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.Kill1000EnemiesInOneGame);
+		}
+
+		public void OnDeath()
+		{
+			SaveFile.Instance.UnlockAchievement(AchievementEnum.DieOnce);
+			SaveFile.Instance.Deaths++;
+			if (SaveFile.Instance.Deaths >= 20)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.Die20Times);
+		}
+
+		public void OnHealing(float amount)
+		{
+			_healAmountInOneGame += amount;
+			if (_healAmountInOneGame >= 1000)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.Heal1000HealthInOneGame);
+		}
+
+		public void OnDamageTaken(float amount)
+		{
+			_damageTakenInOneGame += amount;
+			if (_damageTakenInOneGame >= 1000)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.Take1000DamageInOneGame);
 		}
 
 		public void OnCharacterUnlocked(CharactersEnum characterId, CharacterRank rank)

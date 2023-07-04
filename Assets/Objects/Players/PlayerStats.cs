@@ -46,6 +46,7 @@ namespace Objects.Players
 		public float DamageTakenIncreasePercentage;
 		public float HealingIncreasePercentage;
 		public float Luck;
+		public float DamageOverTime;
 
 		public PlayerStats()
 		{
@@ -90,6 +91,7 @@ namespace Objects.Players
 			DamageTakenIncreasePercentage = 0;
 			HealingIncreasePercentage = 0;
 			Luck = 0;
+			DamageOverTime = 0;
 		}
 
 		public void Sum(ItemStats item, int rarity)
@@ -127,6 +129,7 @@ namespace Objects.Players
             DamageTakenIncreasePercentage += item.DamageTakenIncreasePercentage * rarityFactor;
             HealingIncreasePercentage += item.HealingReceivedIncreasePercentage * rarityFactor;
             Luck += item.Luck * rarityFactor;
+            DamageOverTime += item.DamageOverTime * rarityFactor;
         }
 
 		public void Set(PlayerStats playerStats)
@@ -173,29 +176,31 @@ namespace Objects.Players
             DamageTakenIncreasePercentage = playerStats.DamageTakenIncreasePercentage;
             HealingIncreasePercentage = playerStats.HealingIncreasePercentage;
             Luck = playerStats.Luck;
+            DamageOverTime = playerStats.DamageOverTime;
         }
 
 		public IEnumerable<CharacterStats> GetStatsList()
 		{
 			var stats = new List<CharacterStats>
 			{
-				new("Health", HealthMax),
-				new("Magnet", MagnetSize),
+				new("Health", HealthMax, baseValue: 80),
+				new("Magnet", MagnetSize, baseValue: 0.6f),
 				new("CDR", CooldownReduction),
 				new("CDR%", CooldownReductionPercentage, true),
 				new("Projectiles", AttackCount),
 				new("Damage", Damage),
+				new("DamageOverTime", Luck),
 				new("Projectile size", Scale, true),
 				new("Projectile speed", Speed),
 				new("Attack duration", TimeToLive),
 				new("Weapon range", DetectionRange),
 				new("Damage%", DamagePercentageIncrease, true),
 				new("EXP%", ExperienceIncreasePercentage, true),
-				new("Movement speed", MovementSpeed),
+				new("Movement speed", MovementSpeed, baseValue: 1.6f),
 				new("Skill CDR%", SkillCooldownReductionPercentage, true),
 				new("Health regen", HealthRegen),
-				new("Crit rate", CritRate),
-				new("Crit damage", CritDamage),
+				new("Crit rate", CritRate, true),
+				new("Crit damage", CritDamage, true),
 				new("Pass through", PassThroughCount),
 				new("Armor", Armor),
 				new("Enemy speed%", EnemySpeedIncreasePercentage, true, true),
@@ -206,7 +211,7 @@ namespace Objects.Players
 				new("Revives", Revives),
 				new("Weapon duration%", ProjectileLifeTimeIncreasePercentage, true),
 				new("Dodge chance%", DodgeChance, true),
-				new("Damage increase%", DamageTakenIncreasePercentage, true, true),
+				new("Damage increase%", DamageTakenIncreasePercentage, true),
 				new("Heal increase%", HealingIncreasePercentage, true),
 				new("Luck%", Luck, true),
 			};

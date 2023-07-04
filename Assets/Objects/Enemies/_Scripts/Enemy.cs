@@ -33,6 +33,7 @@ namespace Objects.Enemies
 		private bool _isBossEnemy = false;
 		private float _removeCollisionsTimer;
 		private bool _isRemoveCollisions;
+		private float _damageReduction;
 		private List<Collision> _ignoredEnemyColliders = new List<Collision>();
 
 
@@ -73,14 +74,14 @@ namespace Objects.Enemies
 
 			dropOnDestroyComponent.AddDrop(new ChanceDrop()
 			{
-				chance = playerTarget?.playerStatsComponent?.GetLuck() ?? 0,
-				amount = Random.Range(1, 5),
+				chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 8,
+				amount = Random.Range(1, 25),
 				gameObject = goldDrop,
 			});
 			dropOnDestroyComponent.AddDrop(new ChanceDrop()
 			{
-				chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 2,
-				amount = Random.Range(1, 5),
+				chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 16,
+				amount = Random.Range(1, 50),
 				gameObject = gemDrop,
 			});
 			
@@ -175,13 +176,18 @@ namespace Objects.Enemies
 				return;
 
 			_currentDamageCooldown = _damageCooldown;
-			player.TakeDamage(stats.damage);
+			player.TakeDamage(stats.damage * (1 + Math.Max(_damageReduction, -1)));
 		}
 
 		public void SetNoCollisions(float timer)
 		{
 			if (_removeCollisionsTimer < timer)
 				_removeCollisionsTimer = timer;
+		}
+
+		public void AddDamageReduction(float amount)
+		{
+			_damageReduction -= amount;
 		}
 	}
 }

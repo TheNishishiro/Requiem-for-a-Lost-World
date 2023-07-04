@@ -19,6 +19,7 @@ namespace UI.Main_Menu.End_Screen
 		[SerializeField] private TextMeshProUGUI winLoseText;
 		[SerializeField] private Image characterImage;
 		[SerializeField] private SaveManager saveManager;
+		[SerializeField] private AchievementManager achievementManager;
 		private SaveFile _saveFile;
 		
 		private void Start()
@@ -44,6 +45,7 @@ namespace UI.Main_Menu.End_Screen
 				characterListMenu.UpdateCharacterPanels();
 				gameResultData.IsGameEnd = false;
 				saveManager.SaveGame();
+				achievementManager.ClearPerGameStats();
 			}
 			
 			gameResultData.Reset();

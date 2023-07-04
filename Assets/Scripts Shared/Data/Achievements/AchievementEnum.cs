@@ -19,6 +19,22 @@ namespace DefaultNamespace.Data.Achievements
 		PerformGacha,
 		[AchievementValue("Succumb to gambling addiction")]
 		PerformGacha100Times,
+		[AchievementValue("Kill a 1000 enemies in one game")]
+		Kill1000EnemiesInOneGame,
+		[AchievementValue("Lucky draw (I)")]
+		HaveFirst5StarWeapon,
+		[AchievementValue("Lucky draw (II)")]
+		HaveFirst5StarItem,
+		[AchievementValue("Who needs a lucky clover?")]
+		Obtain10HighRarityItems,
+		[AchievementValue("Sometimes death is just the beginning")]
+		DieOnce,
+		[AchievementValue("Be healthy on your adventures")]
+		Heal1000HealthInOneGame,
+		[AchievementValue("Sticks and stones can break my bones...")]
+		Take1000DamageInOneGame,
+		[AchievementValue("And he welcomed her as his old friend")]
+		Die20Times,
 		
 		#region Survive with characters
 
