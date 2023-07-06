@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Objects.Characters;
 using UnityEngine;
 
@@ -20,6 +21,12 @@ namespace UI.Main_Menu.Character_List_Menu
 		public void Close()
 		{
 			gameObject.SetActive(false);
+		}
+
+		private void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.Escape))
+				Close();
 		}
 	}
 }

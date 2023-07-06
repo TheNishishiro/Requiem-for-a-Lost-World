@@ -17,7 +17,9 @@ namespace UI.Labels.InGame.PauseMenu
 		[SerializeField] private UnlockedUpgradesPanel unlockedWeaponsPanel;
 		[SerializeField] private UnlockedUpgradesPanel unlockedItemsPanel;
 		[SerializeField] private GameObject statsPanel;
+		[SerializeField] private GameObject weaponStatsPanel;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
+		
 
 		private void Update()
 		{
@@ -51,8 +53,10 @@ namespace UI.Labels.InGame.PauseMenu
 			{
 				statsPanelComponent.AddEntry(statEntry.Name, statEntry.Value);
 			}
-			unlockedWeaponsPanel.UpdatePanel();
-			unlockedItemsPanel.UpdatePanel();
+			
+			var weaponStatsComponent = weaponStatsPanel.GetComponent<StatsScrollMenuPanel>();
+			unlockedWeaponsPanel.UpdatePanel(weaponStatsComponent);
+			unlockedItemsPanel.UpdatePanel(weaponStatsComponent);
 		}
 	}
 }

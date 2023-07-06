@@ -17,6 +17,7 @@ namespace Managers
 		private void Awake()
 		{
 			_saveData = FindObjectOfType<SaveFile>();
+			Time.timeScale = 1f;
 			if (_isFirstLoad)
 			{
 				_isFirstLoad = false;

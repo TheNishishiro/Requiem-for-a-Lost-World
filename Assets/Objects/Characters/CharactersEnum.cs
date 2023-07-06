@@ -2,33 +2,33 @@
 {
 	public enum CharactersEnum
 	{
-		[CharacterName("Corina")]
+		[Character("Corina")]
 		Corina_BoB = 1,
-		[CharacterName("Lucy")]
+		[Character("Lucy")]
 		Lucy_BoC = 2,
-		[CharacterName("Amelia")]
+		[Character("Amelia")]
 		Amelia_BoD = 3,
-		[CharacterName("David")]
+		[Character("David")]
 		David_BoF = 4,
-		[CharacterName("Oana")]
+		[Character("Oana")]
 		Oana_BoI = 5,
-		[CharacterName("Alice")]
+		[Character("Alice")]
 		Alice_BoL = 6,
-		[CharacterName("Amelisana")]
+		[Character("Amelisana")]
 		Amelisana_BoN = 7,
-		[CharacterName("Chornastra")]
+		[Character("Chornastra")]
 		Chornastra_BoR = 8,
-		[CharacterName("Truzi")]
+		[Character("Truzi")]
 		Truzi_BoT = 9,
-		[CharacterName("Arika")]
+		[Character("Arika")]
 		Arika_BoV = 10,
-		[CharacterName("Natalie")]
+		[Character("Natalie")]
 		Natalie_BoW = 11,
-		[CharacterName("Chitose")]
+		[Character("Chitose")]
 		Chitose = 12,
-		[CharacterName("Eliza")]
+		[Character("Eliza")]
 		Maid = 13,
-		[CharacterName("Arthur")]
+		[Character("Arthur")]
 		Arthur_OBoV = 14
 	}
 }

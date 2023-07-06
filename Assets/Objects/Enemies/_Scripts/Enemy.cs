@@ -74,13 +74,13 @@ namespace Objects.Enemies
 
 			dropOnDestroyComponent.AddDrop(new ChanceDrop()
 			{
-				chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 8,
+				chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 16,
 				amount = Random.Range(1, 25),
 				gameObject = goldDrop,
 			});
 			dropOnDestroyComponent.AddDrop(new ChanceDrop()
 			{
-				chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 16,
+				chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 100,
 				amount = Random.Range(1, 50),
 				gameObject = gemDrop,
 			});

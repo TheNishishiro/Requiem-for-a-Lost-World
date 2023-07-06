@@ -42,5 +42,11 @@ namespace UI.Main_Menu.Recollection_Menu
 		{
 			recollectionPanel.SetActive(false);
 		}
+
+		private void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.Escape))
+				CloseRecollectionPanel();
+		}
 	}
 }

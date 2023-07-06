@@ -20,10 +20,8 @@ MonoBehaviour:
   Avatar: {fileID: 21300000, guid: fc95ef9c7d235eb47959f93bac8eb32e, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 4235027d6d80b2242b8ce8e6909e438b, type: 3}
   CharacterGachaArt: {fileID: 21300000, guid: b90bbb2ac7cd8a04798e56ad6842e86c, type: 3}
-  PassiveDescription: Every 10 levels increase crit rate by 5% up to 20%.<br>At SS
-    rank rise the crit rate cap to 35% and her skill grants additional 25% damage
-    increase<br>At SSS increase crit damage by 3% per 5 levels and increase skill
-    duration to 12 s.
+  PassiveDescription: Every 10 levels increase crit rate by <color=green>5%</color>
+    up to 20%
   AbilityName: Precision Strike
   AbilityDescription: Increase damage dealt by all weapons by additional 50% for
     8 seconds
@@ -65,20 +63,59 @@ MonoBehaviour:
     ItemRewardIncrease: 0
     Revives: 0
     ProjectileLifeTimeIncreasePercentage: 0
+    DodgeChance: 0
+    DamageTakenIncreasePercentage: 0
+    HealingIncreasePercentage: 0
+    Luck: 0
+    DamageOverTime: 0
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: aa57eb58854930840b967e820e155b25, type: 3}
     EidolonName: My first day!
-    EidolonDescription: 
+    EidolonDescription: Increase movement speed by <color=green>0.1 m/s</color>
+    EidolonQuote: Serving the royal family, hmpf, what a joke! I'm still young with
+      great many things to achieve. Imagine thinking that they could lock me up in
+      these empy hallways! Of course I would sneak out to do the great things I was
+      always meant for. Those old farts can clean after themselves!
   - EidolonTexture: {fileID: 21300000, guid: 749e99d021fc81142953863e1545cce1, type: 3}
     EidolonName: Self reflection
-    EidolonDescription: 
+    EidolonDescription: Increase dodge chance by <color=green>8%</color>
+    EidolonQuote: 'Age changes your perspective of things, or so I believe, frankly,
+      I wouldn''t know!
+
+      Being a royal maid has it''s benefits, sure dusting
+      and sewing isn''t really fun but compared to lifes of those down under the
+      castle, mine would be considered to be of a very high status... Not a peak
+      human performance but I don''t need to work myself to death like they do.'
   - EidolonTexture: {fileID: 21300000, guid: b4b2a3b13dba8f546840fd78000368f8, type: 3}
     EidolonName: Smile that kills
-    EidolonDescription: 
+    EidolonDescription: 'Increase passive crit rate cap to <color=green>35%</color>
+
+      Skill
+      cast increases damage by <color=green>25%</color>'
+    EidolonQuote: "People move in and out, parties day after day like nothing ever
+      happened! Those old farts have it too good let me tell you that much. Can't
+      wait to sneak into their shoes once they pass away one. by. one. \nI wouldn't
+      make for a bad queen would I?"
   - EidolonTexture: {fileID: 21300000, guid: eac8f3a3f55b9d4448b15b86be522ffc, type: 3}
     EidolonName: For thee will I fight
-    EidolonDescription: 
+    EidolonDescription: Increase projectile speed by <color=green>15%</color>
+    EidolonQuote: 'A new duo appeared in a castle a couple days ago with some big
+      news, unfortunately all I can go off of is a gossip of other maids, how irritating!
+
+      Regardless,
+      there is something special about those two. If I were to take her place...
+      Would I finally have somethin to fight for?'
   - EidolonTexture: {fileID: 21300000, guid: bd58faa285463d846895c418504294ab, type: 3}
     EidolonName: 'Promises unfulfilled '
-    EidolonDescription: 
+    EidolonDescription: 'Increase crit damage by <color=green>3%</color> per 5 levels
+
+      Increase
+      skill duration to 12 seconds
+
+      Lower max health by <color=red>10</color>'
+    EidolonQuote: "The head maid used to say that getting a good night sleep is of
+      utmost importance for every maid. \nI would and I tried but I always struggle
+      to fall asleep... So I usually take a walk while everyone else is asleep, helps
+      me shake away that rather irrational fear of going to sleep just to... never
+      wake up again..."
   loreEntries: []

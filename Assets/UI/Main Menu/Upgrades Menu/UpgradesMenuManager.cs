@@ -60,5 +60,11 @@ namespace UI.Main_Menu.Upgrades_Menu
 			}
 			Open();
 		}
+
+		private void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.Escape))
+				Close();
+		}
 	}
 }

@@ -21,9 +21,7 @@ MonoBehaviour:
   CharacterSprite: {fileID: 21300000, guid: 59d5b419fb163ff4d93b66a5dab59bef, type: 3}
   CharacterGachaArt: {fileID: 21300000, guid: f03d55e3d9e41a64380b50cba929ad74, type: 3}
   PassiveDescription: Radius and cooldown of black hole spawns is reduced for the
-    first 5 minutes in combat, also gain projectile size every 20 levels<br>At SS
-    increase projectile size by additional 3% per 20 levels and lower ability cooldown
-    by 25%<br>At SSS ability sucks in all enemies currently present on the field
+    first 5 minutes in combat, also gain projectile size every 20 levels
   AbilityName: Singularity
   AbilityDescription: Create a temporary black hole in front of her that sucks enemies
     in and deals damage after short delay
@@ -31,7 +29,7 @@ MonoBehaviour:
   AbilityPrefab: {fileID: 8699453097623444231, guid: dd8a0e0db35b86d4aae6ac40a2b03893,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 89aed4a773ec0294fb9d1c14880b782c, type: 3}
-  IsActive: 0
+  IsActive: 1
   ColorTheme: {r: 0.13333334, g: 0.41176474, b: 0.63529414, a: 1}
   StarRating: 5
   StartingWeapon: {fileID: 4937499201459452257, guid: e5b694096ad9bf54cbcc9ac2b3a2ba7a,
@@ -65,20 +63,88 @@ MonoBehaviour:
     ItemRewardIncrease: 0
     Revives: 0
     ProjectileLifeTimeIncreasePercentage: 0
+    DodgeChance: 0
+    DamageTakenIncreasePercentage: 0
+    HealingIncreasePercentage: 0
+    Luck: 0
+    DamageOverTime: 0
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: d48a50f3615d21a4fbcf5b6c393261d5, type: 3}
-    EidolonName: 'Who am I '
-    EidolonDescription: 
+    EidolonName: Emptiness
+    EidolonDescription: Increase projectile duration by <color=green>30%</color>
+    EidolonQuote: 'Endless emptiness is what I call home.
+
+
+      This bottomless
+      abyss is where I store my humanity.
+
+
+      So is the purpose of the my existance.
+      To be the vessel to unite them all.
+
+
+      With that being said, I will just
+      stick around and be sure to see my mission through.'
   - EidolonTexture: {fileID: 21300000, guid: 2e4a987013d49124fb373c2ade67da21, type: 3}
     EidolonName: The past I long for
-    EidolonDescription: 
+    EidolonDescription: 'Increase enemy spawn rate by <color=red>7%</color>
+
+      Increase
+      projectile duration by <color=green>20%</color>
+
+      Increase EXP gain by
+      <color=green>20%</color>'
+    EidolonQuote: 'There was one person that peaked my curiosty ages ago and so I''ve
+      chosen him.
+
+      Too bad he''s so reserved... But it''s alright, they all
+      break eventually.
+
+      After all we should have all the fun possible while
+      we still can!'
   - EidolonTexture: {fileID: 21300000, guid: f3e2273db888f824c8c49149642b5b92, type: 3}
     EidolonName: Her will, my body
-    EidolonDescription: 
+    EidolonDescription: Increase projectile size by additional <color=green>3%</color>
+      per 20 levels and lower ability cooldown by <color=green>25%</color>
+    EidolonQuote: "Uhhhhh, you are so persistent! \nAlright, alright, I'll let you
+      in on a secret! \nThere were 12 of us and together we form a key!\n...\nA key
+      to what? I'm not telling you! How about you let me free and I'll show you myself!\n...\nWe
+      did go over it already, didn't we... What do you mean hundreds died... Oh well,
+      I tried."
   - EidolonTexture: {fileID: 21300000, guid: 33fea0b86a437ae4487219fcd1b1d69b, type: 3}
     EidolonName: Of me and ages long gone
-    EidolonDescription: 
+    EidolonDescription: 'Increase damage by <color=green>2</color> points
+
+      Increase
+      shard pull range by <color=green>1</color>
+
+      Increase enemy quantity by
+      <color=red>15%</color>'
+    EidolonQuote: 'Whenever I close my eyes and pass through that void in my mind
+      I end up in a familiar looking place soon before it was all turned into dust...
+
+      Puny
+      humans trying to play with what they were yet to understand. If I knew any
+      better, I would have stopped them...
+
+      Now I can only follow the instructions
+      given to me at my birth... How pitiful.
+
+      Ah! Better keep my eyes opened,
+      dwelling on the past won''t do any good either.'
   - EidolonTexture: {fileID: 21300000, guid: 828dc5811bde5864280b1e678cea2d8b, type: 3}
-    EidolonName: The void... No longer empty
-    EidolonDescription: 
+    EidolonName: Recharging the Void
+    EidolonDescription: 'Her ability will suck in all enemies currently present on
+      the field
+
+      Lower ability cooldown by another <color=green>25%</color>
+
+      Increase
+      enemy speed by <color=red>10%</color> '
+    EidolonQuote: "We were all created of basic emotions, except for me of course,
+      I've been devoid of them as the kind of link, I'm prone to absorbing everything
+      around me so I quickly regained concept of feelings but my basic function was
+      never overriten.\nOne day I will find them all and join in with them and rise
+      above these insignificant walls, marking the end of an era... \n\nWhat a sad
+      end to meet..."
   loreEntries: []

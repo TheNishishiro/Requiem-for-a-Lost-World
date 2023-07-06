@@ -47,7 +47,7 @@ namespace Objects.Characters
 			IsActive = false;
 		}
 
-		public IEnumerable<CharacterStats> GetStatsList()
+		public IEnumerable<StatsDisplayData> GetStatsList()
 		{
 			return Stats.GetStatsList();
 		}

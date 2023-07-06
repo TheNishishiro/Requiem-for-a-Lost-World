@@ -179,9 +179,9 @@ namespace Objects.Players
             DamageOverTime = playerStats.DamageOverTime;
         }
 
-		public IEnumerable<CharacterStats> GetStatsList()
+		public IEnumerable<StatsDisplayData> GetStatsList()
 		{
-			var stats = new List<CharacterStats>
+			var stats = new List<StatsDisplayData>
 			{
 				new("Health", HealthMax, baseValue: 80),
 				new("Magnet", MagnetSize, baseValue: 0.6f),
@@ -189,7 +189,7 @@ namespace Objects.Players
 				new("CDR%", CooldownReductionPercentage, true),
 				new("Projectiles", AttackCount),
 				new("Damage", Damage),
-				new("DamageOverTime", Luck),
+				new("DamageOverTime", DamageOverTime),
 				new("Projectile size", Scale, true),
 				new("Projectile speed", Speed),
 				new("Attack duration", TimeToLive),

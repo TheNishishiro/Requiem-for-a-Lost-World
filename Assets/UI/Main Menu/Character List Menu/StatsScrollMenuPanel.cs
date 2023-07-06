@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace UI.Main_Menu.Character_List_Menu
@@ -8,24 +9,39 @@ namespace UI.Main_Menu.Character_List_Menu
 		[SerializeField] private GameObject statsMenuEntryPrefab;
 		[SerializeField] private GameObject statsMenuEntryContainer;
 		private List<GameObject> _statsMenuEntries;
+		private int _currentEntryIndex;
 
 		public void AddEntry(string entryName, string value)
 		{
-			_statsMenuEntries ??= new List<GameObject>();
-			var entry = Instantiate(statsMenuEntryPrefab, statsMenuEntryContainer.transform);
+			InstantiateList();
+			var entry = _statsMenuEntries[_currentEntryIndex++];
 			entry.GetComponent<StatsMenuEntry>().Setup(entryName, value);
-			_statsMenuEntries.Add(entry);
+			entry.SetActive(true);
 		}
 		
 		public void ClearEntries()
 		{
-			_statsMenuEntries ??= new List<GameObject>();
+			InstantiateList();
 			foreach (var entry in _statsMenuEntries)
 			{
-				Destroy(entry.gameObject);
+				entry.SetActive(false);
 			}
+
+			_currentEntryIndex = 0;
+		}
+		
+		private void InstantiateList()
+		{
+			_statsMenuEntries ??= new List<GameObject>();
+			if (_statsMenuEntries.Any())
+				return;
 			
-			_statsMenuEntries.Clear();
+			for (var i = 0; i < 50; i++)
+			{
+				var entry = Instantiate(statsMenuEntryPrefab, statsMenuEntryContainer.transform);
+				entry.SetActive(false);
+				_statsMenuEntries.Add(entry);
+			}
 		}
 	}
 }

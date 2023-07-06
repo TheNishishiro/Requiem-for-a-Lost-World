@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
 
 namespace UI.Main_Menu
 {
@@ -19,6 +21,12 @@ namespace UI.Main_Menu
 		public void TogglePanel()
 		{
 			panelToShow.SetActive(!panelToShow.activeSelf);
+		}
+
+		private void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.Escape))
+				HidePanel();
 		}
 	}
 }

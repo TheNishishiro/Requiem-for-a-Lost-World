@@ -2,11 +2,11 @@
 
 namespace Objects.Characters
 {
-	public class CharacterNameAttribute : Attribute
+	public class CharacterAttribute : Attribute
 	{
 		public string Name { get; protected set; }
 		
-		public CharacterNameAttribute(string name)
+		public CharacterAttribute(string name)
 		{
 			Name = name;
 		}
@@ -17,7 +17,7 @@ namespace Objects.Characters
 		public static string GetName(this CharactersEnum charactersEnum)
 		{
 			var fieldInfo = charactersEnum.GetType().GetField(charactersEnum.ToString());
-			var attributes = fieldInfo.GetCustomAttributes(typeof(CharacterNameAttribute), false) as CharacterNameAttribute[];
+			var attributes = fieldInfo.GetCustomAttributes(typeof(CharacterAttribute), false) as CharacterAttribute[];
 			return attributes?.Length > 0 ? attributes[0].Name : null;
 		}
 	}

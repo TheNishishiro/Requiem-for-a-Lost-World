@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Interfaces;
+using UI.Main_Menu.Character_List_Menu;
 using UnityEngine;
 
 namespace UI.Labels.InGame.PauseMenu
@@ -12,7 +13,7 @@ namespace UI.Labels.InGame.PauseMenu
 		[SerializeField] private bool isWeaponPanel;
 		private List<UnlockedItemPanel> _unlockedItemPanels;
 
-		public void UpdatePanel()
+		public void UpdatePanel(StatsScrollMenuPanel statsScrollMenuPanel)
 		{
 			_unlockedItemPanels ??= new List<UnlockedItemPanel>();
 			foreach (var unlockedItemPanel in _unlockedItemPanels)
@@ -26,7 +27,7 @@ namespace UI.Labels.InGame.PauseMenu
 			{
 				var upgradeEntryGameObject = Instantiate(upgradeEntryPrefab, transform);
 				var unlockedItemPanel = upgradeEntryGameObject.GetComponent<UnlockedItemPanel>();
-				unlockedItemPanel.SetUpgradeEntry(item);
+				unlockedItemPanel.SetUpgradeEntry(item, statsScrollMenuPanel);
 				_unlockedItemPanels.Add(unlockedItemPanel);
 			}
 		}

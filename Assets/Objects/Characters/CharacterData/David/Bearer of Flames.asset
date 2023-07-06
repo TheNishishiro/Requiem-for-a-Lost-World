@@ -22,11 +22,10 @@ MonoBehaviour:
   CharacterGachaArt: {fileID: 21300000, guid: 37ca679ad6b1afd4fbca5bde5833d685, type: 3}
   PassiveDescription: Send additional 2 meteors per attack and increase crit damage
     by 80%. Starts with high HP, 1 armor and increased projectile speed but receives
-    20% less EXP.<br>At SS increase damage dealt by 8% every 12 levels.<br>At SSS
-    increase the amount of meteors sent by 50%
+    20% less EXP
   AbilityName: Firey Rage
-  AbilityDescription: Decrease current HP by 40 * major rankup and turn invincible
-    for 10 seconds and increase damage dealt by percentage of missing health
+  AbilityDescription: Decrease current HP by 40 and turn invincible for 10 seconds
+    and increase damage dealt by percentage of missing health
   AbilityCooldown: 40
   AbilityPrefab: {fileID: -4520040666531008762, guid: de45e94a07fd2fa4caecb2582d5798cd,
     type: 3}
@@ -65,20 +64,56 @@ MonoBehaviour:
     ItemRewardIncrease: 0
     Revives: 0
     ProjectileLifeTimeIncreasePercentage: 0
+    DodgeChance: 0
+    DamageTakenIncreasePercentage: 0
+    HealingIncreasePercentage: 0
+    Luck: 0
+    DamageOverTime: 0
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 56ed3ffff00db3c46a57bd57e5277aab, type: 3}
     EidolonName: For victory I stand
-    EidolonDescription: 
+    EidolonDescription: Regenerate <color=green>0.2</color> HP every second
+    EidolonQuote: 'I grew up in a poor side of the city, not slams by any means but
+      life didn''t treat me well there either. I persevered. Bullies or gangs would
+      always pick a young boy as their target, too bad for them to misjudge. '
   - EidolonTexture: {fileID: 21300000, guid: ba29e2173e1fc9342b174250fff7d07f, type: 3}
     EidolonName: Anger surfaced
-    EidolonDescription: 
+    EidolonDescription: Increase armor by <color=green>1</color>
+    EidolonQuote: People say that I'm talented... Huh, way to justify your own shortcomings
+      which you where too lazy to fix before getting old. I personally hate that
+      term. I got into this position with my own sweat and tears, I won't let the
+      so called "talent" still away my hard work.
   - EidolonTexture: {fileID: 21300000, guid: 1d1014d831922be44a1662087b9fa4ee, type: 3}
     EidolonName: With pride I fight
-    EidolonDescription: 
+    EidolonDescription: 'Increase damage dealt by <color=green>8%</color> every 12
+      levels
+
+      Increase skill HP penalty to <color=green>80</color> health points'
+    EidolonQuote: All the suckups aside, I do enjoy the feeling of superiority over
+      others but... I think I got plenty more humble since the day I first placed
+      foot into my barrack. Watching the new generation growing in strength, their
+      eyes burning with passion I never had. Feels like I missed the point, maybe
+      it is less about me and more about others in this whole "fighting for better
+      tomorrow" thing.
   - EidolonTexture: {fileID: 21300000, guid: f2b1e1bdc570dee4791f79e64fdc91d0, type: 3}
     EidolonName: When I'm with Her
-    EidolonDescription: 
+    EidolonDescription: Increase damage dealt during David's skill by <color=green>30%</color>
+    EidolonQuote: Clara has been around for the better part of my life and I would
+      lie if I said I didn't crush on her ever since I was a little boy. She's probably
+      the reason why I achieved all I did. She assured me many times I don't need
+      to be the best, of course I get that, but how am I going to protect her if
+      I'm weak.
   - EidolonTexture: {fileID: 21300000, guid: e0ab369a6a2895640b27bd4080d19387, type: 3}
     EidolonName: Final Regret
-    EidolonDescription: 
+    EidolonDescription: 'Increase amount of meteors sent with each attack by 50%
+
+      Increase
+      skill HP penalty to <color=green>120</color> health points'
+    EidolonQuote: "A lot has happened ever since I started working under that new
+      queen. Excuse my rudness but she is rather... incapable, if I have to be honest.\nOne
+      thing peaks my curiosity though. Those glass shards of hers, I've never seen
+      anything like that. \nOne day it landed on my palm and I got striken with this
+      sudden pain in my abdomen, sharp as getting pierced right through then the
+      feeling of an overwhelming anger and regret rippled through my mind... \n\nNeedless
+      to say, I stay away from them as best as I can"
   loreEntries: []

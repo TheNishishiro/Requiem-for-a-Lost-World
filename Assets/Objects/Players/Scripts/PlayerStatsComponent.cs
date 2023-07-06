@@ -27,7 +27,7 @@ namespace Objects.Players.Scripts
 				_playerStats.SkillCooldownReductionPercentage += 0.25f;
 		}
 
-		public IEnumerable<CharacterStats> GetStats()
+		public IEnumerable<StatsDisplayData> GetStats()
 		{
 			return _playerStats.GetStatsList();
 		}

@@ -1,4 +1,5 @@
-﻿using DefaultNamespace;
+﻿using System;
+using DefaultNamespace;
 using DefaultNamespace.Data;
 using Objects.Characters;
 using Objects.Players;
@@ -73,6 +74,12 @@ namespace UI.Main_Menu.Character_List_Menu
 			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();
 			statsPanelComponent.ClearEntries();
 			gameObject.SetActive(false);
+		}
+
+		private void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.Escape))
+				Close();
 		}
 	}
 }

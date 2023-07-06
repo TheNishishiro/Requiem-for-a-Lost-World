@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using DefaultNamespace.Data;
 using Interfaces;
 using Objects.Abilities;
+using Objects.Items;
 using Objects.Players.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -24,6 +26,10 @@ namespace Weapons
 		public string DescriptionField => Description;
 		public Sprite IconField => Icon;
 		public int LevelField { get; private set; } = 1;
+		public ICollection<StatsDisplayData> GetStatsData()
+		{
+			return weaponStats.GetDescription();
+		}
 
 		public virtual void Awake()
 		{

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using DefaultNamespace.Extensions;
 using Objects.Players.Scripts;
@@ -40,7 +42,7 @@ namespace Objects.Abilities
 
 		public void ApplyRarity(int rarity)
          {
-             var rarityFactor = 1 + ((rarity - 1) * 0.1f); // This will result in an increase from no increase (rarity 1) to 50% (rarity 5)
+	         var rarityFactor = 1.0f + ((rarity - 1.0f) * 0.1f);// This will result in an increase from no increase (rarity 1) to 50% (rarity 5)
          
              Damage *= rarityFactor;
              Cooldown *= 2 - rarityFactor;
@@ -62,7 +64,7 @@ namespace Objects.Abilities
 		
 		public void Sum(WeaponStats weaponStats, int rarity)
         {
-            var rarityFactor = 1 + ((rarity - 1) * 0.1f);
+            var rarityFactor = 1.0f + ((rarity - 1.0f) * 0.1f);
               
             AttackCount += weaponStats.AttackCount;
             Damage += weaponStats.Damage * rarityFactor;
@@ -84,30 +86,31 @@ namespace Objects.Abilities
             DamageOverTimeFrequency += weaponStats.DamageOverTimeFrequency * rarityFactor;      
         }
 
-		public string GetDescription(int rarity)
+		public ICollection<StatsDisplayData> GetDescription()
         {
-            var builder = new StringBuilder();
+            var stats = new List<StatsDisplayData>
+            {
+	            new("Damage", Damage),
+	            new("Damage%", DamageIncreasePercentage, true),
+	            new("Cooldown", Cooldown),
+	            new("Cooldown%", CooldownReduction, true),
+	            new("Scale", Scale),
+	            new("Speed", Speed),
+	            new("Projectile time", TimeToLive),
+	            new("Pierce", PassThroughCount),
+	            new("Damage delay", DamageCooldown),
+	            new("Attack delay", DuplicateSpawnDelay, baseValue:0.2f),
+	            new("Critical rate", CritRate, true),
+	            new("Critical damage", CritDamage, true),
+	            new("Weakness", Weakness, true),
+	            new("Attack count", AttackCount),
+	            new("Regen per hit", HealPerHit),
+	            new("Damage over time", DamageOverTime),
+	            new("DoT duration", DamageOverTimeDuration),
+	            new("DoT frequency", DamageOverTimeFrequency),
+            };
         
-            builder.AppendStat("Damage", Damage, rarity);
-            builder.AppendStat("Damage%", DamageIncreasePercentage*100, rarity, "%");
-            builder.AppendStat("Cooldown", Cooldown, rarity, "sec");
-            builder.AppendStat("Cooldown%", CooldownReduction*100, rarity, "%");
-            builder.AppendStat("Scale", Scale, rarity);
-            builder.AppendStat("Speed", Speed, rarity, "m/s");
-            builder.AppendStat("Projectile time", TimeToLive, rarity, "sec");
-            builder.AppendStat("Hit count", PassThroughCount, rarity);
-            builder.AppendStat("Damage delay", DamageCooldown, rarity, "sec");
-            builder.AppendStat("Attack delay", DuplicateSpawnDelay, rarity, "sec");
-            builder.AppendStat("Critical rate", CritRate*100, rarity, "%");
-            builder.AppendStat("Critical damage", CritDamage*100, rarity, "%");
-            builder.AppendStat("Weakness", Weakness*100, rarity, "%");
-            builder.AppendStat("Attack count", AttackCount, rarity);
-            builder.AppendStat("Regen per hit", HealPerHit, rarity);
-            builder.AppendStat("Damage over time", DamageOverTime, rarity);
-            builder.AppendStat("DoT duration", DamageOverTimeDuration, rarity);
-            builder.AppendStat("DoT frequency", DamageOverTimeFrequency, rarity);
-        
-            return builder.ToString();
+            return stats;
         }
 
 		public float GetCooldown()

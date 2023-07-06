@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using DefaultNamespace.Data;
 using Interfaces;
 using UnityEngine;
@@ -18,6 +19,10 @@ namespace Objects.Items
 		public string DescriptionField => Description;
 		public Sprite IconField => Icon;
 		public int LevelField { get; private set; } = 1;
+		public ICollection<StatsDisplayData> GetStatsData()
+		{
+			return ItemStats.GetDescription();
+		}
 
 		public IEnumerable<ItemUpgrade> GetAvailableUpgrades()
 		{
@@ -33,6 +38,16 @@ namespace Objects.Items
 		public virtual bool IsUnlocked(SaveFile saveFile)
 		{
 			return true;
+		}
+
+		public void ApplyUpgrade(ItemUpgrade itemUpgrade, int rarity)
+		{
+			ItemStats.Apply(itemUpgrade.ItemStats, rarity);
+		}
+
+		public void ApplyRarity(int rarity)
+		{
+			ItemStats.ApplyRarity(rarity);
 		}
 	}
 }
