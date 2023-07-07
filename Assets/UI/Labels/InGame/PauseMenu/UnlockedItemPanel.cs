@@ -10,7 +10,7 @@ using Weapons;
 
 namespace UI.Labels.InGame.PauseMenu
 {
-	public class UnlockedItemPanel : MonoBehaviour, IPointerEnterHandler
+	public class UnlockedItemPanel : MonoBehaviour, IPointerClickHandler
 	{
 		[SerializeField] private TextMeshProUGUI upgradeLevel;
 		[SerializeField] private Image icon;
@@ -26,7 +26,7 @@ namespace UI.Labels.InGame.PauseMenu
 
 		}
 
-		public void OnPointerEnter(PointerEventData eventData)
+		public void OnPointerClick(PointerEventData eventData)
 		{
 			_statsScrollMenuPanel.ClearEntries();
 			foreach (var statsDisplayData in _playerItem.GetStatsData())

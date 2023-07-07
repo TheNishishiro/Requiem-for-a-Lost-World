@@ -38,7 +38,7 @@ public class WeaponManager : MonoBehaviour
         _unlockedItems = new List<ItemBase>();
 
         var characterStartingWeapon = GameData.GetPlayerCharacterStartingWeapon() ?? availableWeapons.FirstOrDefault();
-        AddWeapon(characterStartingWeapon, 4);
+        AddWeapon(characterStartingWeapon, 1);
     }
 
     public void AddWeapon(WeaponBase weapon, int rarity)
