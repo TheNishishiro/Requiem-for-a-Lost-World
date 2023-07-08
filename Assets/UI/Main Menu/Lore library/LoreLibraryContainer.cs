@@ -9,33 +9,43 @@ namespace UI.Main_Menu.Lore_library
 {
 	public class LoreLibraryContainer : MonoBehaviour
 	{
-		[SerializeField] private LoreEntry entryPrefab;
-		[SerializeField] private LoreEntryPanel loreEntryPanel;
-		private List<LoreEntry> _entries;
+		[SerializeField] private LoreChapterPanel loreChapterPanelPrefab;
+		[SerializeField] private LoreChapterContainer chapterEntryContainerPrefab;
+		private List<GameObject> _entries;
 		
 		public void Refresh(CharacterData characterData, CharacterSaveData characterSaveData)
 		{
-			_entries ??= new List<LoreEntry>();
-			foreach(var loreEntry in characterData.loreEntries.Where(x => x.LevelRequirement <= characterSaveData.Level))
+			_entries ??= new List<GameObject>();
+			characterData.loreEntries
+				.Where(x => x.LevelRequirement <= characterSaveData.Level)
+				.GroupBy(x => x.Chapter)
+				.ToList()
+				.ForEach(CreateChapter);
+		}
+
+		private void CreateChapter(IGrouping<int, CharacterLoreEntry> characterLoreEntries)
+		{
+			var chapterPanel = Instantiate(loreChapterPanelPrefab, transform);
+			chapterPanel.SetTitle($"Chapter {characterLoreEntries.Key}");
+			_entries.Add(chapterPanel.gameObject);
+			var chapterContainer = Instantiate(chapterEntryContainerPrefab, transform);
+			chapterContainer.gameObject.SetActive(false);
+			_entries.Add(chapterContainer.gameObject);
+			chapterPanel.SetContainer(chapterContainer);
+			
+			foreach(var loreEntry in characterLoreEntries)
 			{
-				var loreEntryObject = Instantiate(entryPrefab, transform);
-				loreEntryObject.SetEntry(loreEntry);
-				_entries.Add(loreEntryObject);
+				chapterContainer.AddEntry(loreEntry);
 			}
 		}
 
 		public void Clear()
 		{
-			_entries ??= new List<LoreEntry>();
+			_entries ??= new List<GameObject>();
 			foreach (var entry in _entries)
 			{
 				Destroy(entry.gameObject);
 			}
-		}
-
-		public void OpenEntryPanel(CharacterLoreEntry loreEntry)
-		{
-			loreEntryPanel.Open(loreEntry);
 		}
 	}
 }

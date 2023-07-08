@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Katana Upgrade 6
   m_EditorClassIdentifier: 
   Name: Swift Strike (II)
-  Description: Increase attack speed by 0.8s
+  Description: Increase attack speed by 20%
   WeaponStats:
     Damage: 0
-    Cooldown: -0.8
+    Cooldown: 0
+    CooldownReduction: 0.2
     Scale: 0
     Speed: 0
     TimeToLive: 0
@@ -27,3 +28,9 @@ MonoBehaviour:
     DetectionRange: 0
     CritRate: 0
     CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

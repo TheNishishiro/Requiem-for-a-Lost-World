@@ -3703,9 +3703,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 976dd4904de34857bab68c716c598e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entryPrefab: {fileID: -4322547017901239501, guid: 8d6f2508d3302e74789f6178e61a03a6,
-    type: 3}
-  loreEntryPanel: {fileID: 1359203107}
+  loreChapterPanelPrefab: {fileID: 0}
+  chapterEntryContainerPrefab: {fileID: 0}
 --- !u!114 &452900861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15107,8 +15106,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1794787362}
-  - component: {fileID: 1794787363}
   - component: {fileID: 1794787364}
+  - component: {fileID: 1794787366}
+  - component: {fileID: 1794787365}
   m_Layer: 5
   m_Name: Container
   m_TagString: Untagged
@@ -15134,32 +15134,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 1447.4171}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &1794787363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794787361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 50
-    m_Right: 50
-    m_Top: 50
-    m_Bottom: 50
-  m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 175, y: 200}
-  m_Spacing: {x: 25, y: 25}
-  m_Constraint: 0
-  m_ConstraintCount: 6
 --- !u!114 &1794787364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15172,9 +15148,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 976dd4904de34857bab68c716c598e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entryPrefab: {fileID: -4322547017901239501, guid: 8d6f2508d3302e74789f6178e61a03a6,
+  loreChapterPanelPrefab: {fileID: 1254886149111163330, guid: d4229412212a07649ba40609130bc9ad,
     type: 3}
-  loreEntryPanel: {fileID: 1359203107}
+  chapterEntryContainerPrefab: {fileID: 7132672599666765410, guid: 83e18f8ca6bd5ec4c81a0b11cfeed185,
+    type: 3}
+--- !u!114 &1794787365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794787361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!114 &1794787366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794787361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 10
+    m_Right: 500
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 20
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &1799226833
 GameObject:
   m_ObjectHideFlags: 0

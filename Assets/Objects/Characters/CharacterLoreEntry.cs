@@ -6,6 +6,7 @@ namespace Objects.Characters
 	[Serializable]
 	public class CharacterLoreEntry
 	{
+		public int Chapter;
 		public int LevelRequirement;
 		public LoreEntryType Type;
 		public string Title;
