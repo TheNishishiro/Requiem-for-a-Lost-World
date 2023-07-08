@@ -50,8 +50,9 @@ MonoBehaviour:
   Description: Create a wheel of orbitting projectiles
   Icon: {fileID: 21300000, guid: 731ecbe1e9163a542a002aa9b5032694, type: 3}
   weaponStats:
-    Damage: 2
+    Damage: 5
     Cooldown: 10
+    CooldownReduction: 0
     Scale: 1
     Speed: 100
     TimeToLive: 6
@@ -63,6 +64,11 @@ MonoBehaviour:
     CritRate: 0
     CritDamage: 1
     Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 06ad88406cae517409d8eee1c9eeb29e, type: 2}
   - {fileID: 11400000, guid: d867236135b30944284237ae161c5d32, type: 2}

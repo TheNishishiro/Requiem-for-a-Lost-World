@@ -200,7 +200,7 @@ namespace Objects.Players
 				new("Movement speed", MovementSpeed, "Flat character movement speed increase", baseValue: 1.6f),
 				new("Skill CDR%", SkillCooldownReductionPercentage, "Percentage of character skill cooldown reduction", true),
 				new("Health regen", HealthRegen, "Amount of health character regenerates per second"),
-				new("Crit rate", CritRate, "The chance of any weapon hit to critically strike each, dealing additional damage controlled by crit damage", true),
+				new("Crit rate", CritRate, "The chance of any weapon hit to critically strike, each hit deals additional damage based on crit damage", true),
 				new("Crit damage", CritDamage, "Percentage damage increase during critical strikes", true),
 				new("Pass through", PassThroughCount, "How many times a projectile can pass through enemies before disappearing (with applicable weapons)"),
 				new("Armor", Armor, "Flat damage reduction from enemy attacks"),
