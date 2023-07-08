@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 namespace UI.Main_Menu.Character_List_Menu
@@ -8,9 +9,15 @@ namespace UI.Main_Menu.Character_List_Menu
 	{
 		[SerializeField] private GameObject statsMenuEntryPrefab;
 		[SerializeField] private GameObject statsMenuEntryContainer;
+		[SerializeField] private TextMeshProUGUI title;
 		private List<GameObject> _statsMenuEntries;
 		private int _currentEntryIndex;
 
+		public void SetTitle(string titleText)
+		{
+			title.text = titleText;
+		}
+		
 		public void AddEntry(string entryName, string value)
 		{
 			InstantiateList();

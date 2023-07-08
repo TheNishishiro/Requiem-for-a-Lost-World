@@ -29,6 +29,7 @@ namespace UI.Labels.InGame.PauseMenu
 		public void OnPointerClick(PointerEventData eventData)
 		{
 			_statsScrollMenuPanel.ClearEntries();
+			_statsScrollMenuPanel.SetTitle(_playerItem.NameField);
 			foreach (var statsDisplayData in _playerItem.GetStatsData())
 			{
 				_statsScrollMenuPanel.AddEntry(statsDisplayData.Name, statsDisplayData.Value);
