@@ -1,11 +1,12 @@
 ﻿using Interfaces;
 using Objects.Players;
+using Objects.Players.Scripts;
 
 namespace Objects.Characters.Corina_Alter
 {
 	public class CorinaStrategy : ICharacterStrategy
 	{
-		public void Apply(PlayerStats stats, CharacterRank characterRank)
+		public void ApplyRank(PlayerStats stats, CharacterRank characterRank)
 		{
 			if (characterRank >= CharacterRank.E1)
 			{
@@ -26,6 +27,12 @@ namespace Objects.Characters.Corina_Alter
 				stats.DamagePercentageIncrease += 0.5f;
 				stats.MagnetSize += 0.2f;
 			}
+		}
+
+		public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)
+		{
+			if (currentLevel % 2 == 0 && rank >= CharacterRank.E2)
+				playerStatsComponent.IncreaseHealingReceived(0.01f);
 		}
 	}
 }

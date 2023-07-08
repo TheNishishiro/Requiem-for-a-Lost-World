@@ -11,7 +11,7 @@ using Objects.Characters.Maid;
 
 namespace Objects.Players.Scripts
 {
-	public class PlayerStatsUpdater
+	public class PlayerStrategyApplier
 	{
 		private readonly Dictionary<CharactersEnum, ICharacterStrategy> _characterStrategies = new()
 		{
@@ -23,11 +23,19 @@ namespace Objects.Players.Scripts
 			{ CharactersEnum.Maid, new ElizaStrategy() },
 		};
 
-		public void ApplyStrategy(CharactersEnum characterId, CharacterRank characterRank, PlayerStats playerStats)
+		public void ApplyRankStrategy(CharactersEnum characterId, CharacterRank characterRank, PlayerStats playerStats)
 		{
 			if (_characterStrategies.TryGetValue(characterId, out var characterStrategy))
 			{
-				characterStrategy.Apply(playerStats, characterRank);
+				characterStrategy.ApplyRank(playerStats, characterRank);
+			}
+		}
+
+		public void ApplyLevelUpStrategy(CharactersEnum characterId, CharacterRank characterRank, int currentLevel, PlayerStatsComponent playerStatsComponent)
+		{
+			if (_characterStrategies.TryGetValue(characterId, out var characterStrategy))
+			{
+				characterStrategy.ApplyLevelUp(characterRank, currentLevel, playerStatsComponent);
 			}
 		}
 	}

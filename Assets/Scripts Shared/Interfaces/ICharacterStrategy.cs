@@ -3,8 +3,8 @@ using Objects.Players;
 
 namespace Interfaces
 {
-	public interface ICharacterStrategy
+	public interface ICharacterStrategy : ICharacterSkillStrategy, ICharacterLevelUpStrategy
 	{
-		void Apply(PlayerStats stats, CharacterRank characterRank);
+		void ApplyRank(PlayerStats stats, CharacterRank characterRank);
 	}
 }

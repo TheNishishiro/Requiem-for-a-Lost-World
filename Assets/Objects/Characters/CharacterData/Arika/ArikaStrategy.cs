@@ -1,11 +1,12 @@
 ﻿using Interfaces;
 using Objects.Players;
+using Objects.Players.Scripts;
 
 namespace Objects.Characters.Arika
 {
 	public class ArikaStrategy : ICharacterStrategy
 	{
-		public void Apply(PlayerStats stats, CharacterRank characterRank)
+		public void ApplyRank(PlayerStats stats, CharacterRank characterRank)
 		{
 			if (characterRank >= CharacterRank.E1)
 				stats.ProjectileLifeTimeIncreasePercentage += 0.3f;
@@ -28,6 +29,15 @@ namespace Objects.Characters.Arika
 			{
 				stats.SkillCooldownReductionPercentage += 0.25f;
 				stats.EnemySpeedIncreasePercentage += 0.1f;
+			}
+		}
+
+		public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)
+		{
+			if (currentLevel % 20 == 0)
+			{
+				var amount = rank >= CharacterRank.E3 ? 0.07f : 0.1f;
+				playerStatsComponent.IncreaseProjectileSize(amount);
 			}
 		}
 	}

@@ -139,8 +139,8 @@ namespace Objects.Players
         
             CopyPlayerStats(playerStats);
         
-            var playerStatsUpdater = new PlayerStatsUpdater();
-            playerStatsUpdater.ApplyStrategy(characterId, characterRank, this);
+            var playerStatsUpdater = new PlayerStrategyApplier();
+            playerStatsUpdater.ApplyRankStrategy(characterId, characterRank, this);
         }
         
         private void CopyPlayerStats(PlayerStats playerStats)
