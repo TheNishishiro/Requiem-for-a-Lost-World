@@ -10,6 +10,8 @@ namespace UI.Main_Menu.Character_List_Menu
 		[SerializeField] private GameObject statsMenuEntryPrefab;
 		[SerializeField] private GameObject statsMenuEntryContainer;
 		[SerializeField] private TextMeshProUGUI title;
+		[SerializeField] private TextMeshProUGUI descriptionField;
+		[SerializeField] private bool showDescription;
 		private List<GameObject> _statsMenuEntries;
 		private int _currentEntryIndex;
 
@@ -18,11 +20,11 @@ namespace UI.Main_Menu.Character_List_Menu
 			title.text = titleText;
 		}
 		
-		public void AddEntry(string entryName, string value)
+		public void AddEntry(string entryName, string value, string description)
 		{
 			InstantiateList();
 			var entry = _statsMenuEntries[_currentEntryIndex++];
-			entry.GetComponent<StatsMenuEntry>().Setup(entryName, value);
+			entry.GetComponent<StatsMenuEntry>().Setup(entryName, value, descriptionField, showDescription, description);
 			entry.SetActive(true);
 		}
 		

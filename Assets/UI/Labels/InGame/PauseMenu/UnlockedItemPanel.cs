@@ -32,7 +32,7 @@ namespace UI.Labels.InGame.PauseMenu
 			_statsScrollMenuPanel.SetTitle(_playerItem.NameField);
 			foreach (var statsDisplayData in _playerItem.GetStatsData())
 			{
-				_statsScrollMenuPanel.AddEntry(statsDisplayData.Name, statsDisplayData.Value);
+				_statsScrollMenuPanel.AddEntry(statsDisplayData.Name, statsDisplayData.Value, statsDisplayData.Description);
 			}
 		}
 	}

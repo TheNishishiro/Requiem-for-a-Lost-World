@@ -19,16 +19,16 @@ namespace UI.Main_Menu.Character_List_Menu
 		[SerializeField] private TextMeshProUGUI killCountTextField;
 		[SerializeField] private TextMeshProUGUI highestLevelTextField;
 		[SerializeField] private CharacterExpBar expSlider;
-		[SerializeField] private GameObject weaponIcon;
-		[SerializeField] private TextMeshProUGUI weaponName;
-		[SerializeField] private GameObject skillIcon;
-		[SerializeField] private TextMeshProUGUI skillName;
+		[SerializeField] private StarterEntry startingWeapon;
+		[SerializeField] private StarterEntry startingSkill;
+		[SerializeField] private GameObject startingSkillInfoPanel;
 		[SerializeField] private TextMeshProUGUI passiveDescription;
 		[SerializeField] private Image characterImage;
 		[SerializeField] private Image separationLine1;
 		[SerializeField] private Image separationLine2;
 		[SerializeField] private Image separationLine3;
 		[SerializeField] private Image separationLine4;
+		[SerializeField] private Image separationLine5;
 		[SerializeField] private GameObject statsPanel;
 		[SerializeField] private GameObject RankDisplayPanel;
 		private CharacterData _characterData;
@@ -44,23 +44,20 @@ namespace UI.Main_Menu.Character_List_Menu
 			expTextField.text = $"EXP ► {(characterSaveData.Experience / (float) characterSaveData.ExperienceNeeded):P}";
 			expSlider.SetValue(characterSaveData.Experience, characterSaveData.ExperienceNeeded);
 			characterImage.sprite = characterData.TransparentCard;
-			separationLine1.color = separationLine2.color = separationLine3.color = separationLine4.color = characterData.ColorTheme;
+			separationLine1.color = separationLine2.color = separationLine3.color = separationLine4.color = separationLine5.color = characterData.ColorTheme;
 			killCountTextField.text = Utilities.GetShortNumberFormatted(characterSaveData.KillCount);
 			highestLevelTextField.text = characterSaveData.HighestInGameLevel.ToString();
-			weaponIcon.GetComponent<Image>().sprite = characterData.StartingWeapon?.Icon;
-			weaponIcon.GetComponent<Tooltip>().message = characterData.StartingWeapon?.Description;
-			weaponName.text = characterData.StartingWeapon?.Name;
-			skillIcon.GetComponent<Image>().sprite = characterData.AbilityIcon;
-			skillIcon.GetComponent<Tooltip>().message = characterData.AbilityDescription;
-			skillName.text = characterData.AbilityName;
+			startingWeapon.Set(characterData.StartingWeapon.Icon, characterData.StartingWeapon.Name, characterData.StartingWeapon.Description);
+			startingSkill.Set(characterData.AbilityIcon, characterData.AbilityName, characterData.AbilityDescription);
 			passiveDescription.text = characterData.PassiveDescription;
+			startingSkillInfoPanel.SetActive(false);
 			
 			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();
 			statsPanelComponent.ClearEntries();
 			var characterStats = new PlayerStats(characterData.Stats);
 			foreach (var statEntry in characterStats.GetStatsList())
 			{
-				statsPanelComponent.AddEntry(statEntry.Name, statEntry.Value);
+				statsPanelComponent.AddEntry(statEntry.Name, statEntry.Value, statEntry.Description);
 			}
 		}
 
@@ -74,6 +71,7 @@ namespace UI.Main_Menu.Character_List_Menu
 			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();
 			statsPanelComponent.ClearEntries();
 			gameObject.SetActive(false);
+			startingSkillInfoPanel.SetActive(false);
 		}
 
 		private void Update()

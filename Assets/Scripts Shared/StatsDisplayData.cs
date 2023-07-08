@@ -8,9 +8,10 @@ public class StatsDisplayData
 		Value = value;
 	}
 		
-	public StatsDisplayData(string name, object value, bool isPercentage = false, bool isInvertedColor = false, float baseValue = 0)
+	public StatsDisplayData(string name, object value, string description = null, bool isPercentage = false, bool isInvertedColor = false, float baseValue = 0)
 	{
 		Name = name;
+		Description = description;
 		var floatValue = float.Parse(value.ToString());
 		var color = "white";
 		if (baseValue > floatValue)
@@ -25,4 +26,5 @@ public class StatsDisplayData
 
 	public string Name { get; set; }
 	public string Value { get; set; }
+	public string Description { get; set; }
 }
