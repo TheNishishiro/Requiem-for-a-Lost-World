@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using DefaultNamespace;
 using DefaultNamespace.Data;
 using Objects.Characters;
@@ -30,10 +32,11 @@ namespace UI.Main_Menu.Character_List_Menu
 		[SerializeField] private Image separationLine4;
 		[SerializeField] private Image separationLine5;
 		[SerializeField] private GameObject statsPanel;
-		[SerializeField] private GameObject RankDisplayPanel;
+		[SerializeField] public VerticalLayoutGroup verticalLayout;
+		private RankDisplayPanel _rankDisplayPanel;
 		private CharacterData _characterData;
 		private CharacterSaveData _characterSaveData;
-
+        
 		public void SetCharacterData(CharacterData characterData, CharacterSaveData characterSaveData)
 		{
 			_characterData = characterData;
@@ -60,20 +63,24 @@ namespace UI.Main_Menu.Character_List_Menu
 				statsPanelComponent.AddEntry(statEntry.Name, statEntry.Value, statEntry.Description);
 			}
 		}
+		
+		public void SetRankDisplayPanelReference(RankDisplayPanel rankDisplayPanel)
+		{
+			_rankDisplayPanel = rankDisplayPanel;
+		}
 
 		public void OpenShardsMenu()
 		{
-			RankDisplayPanel.GetComponent<RankDisplayPanel>().Open(_characterData, _characterSaveData.GetRankEnum());
+			_rankDisplayPanel.Open(_characterData, _characterSaveData.GetRankEnum());
 		}
 
 		public void Close()
 		{
 			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();
 			statsPanelComponent.ClearEntries();
-			gameObject.SetActive(false);
 			startingSkillInfoPanel.SetActive(false);
 		}
-
+		
 		private void Update()
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))

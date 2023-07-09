@@ -12,7 +12,9 @@ namespace UI.Main_Menu.Character_List_Menu
 	public class CharacterListMenu : MonoBehaviour
 	{
 		[SerializeField] private GameObject cardPrefab;
-		[SerializeField] private CharacterInfoPanel characterInfoPanel;
+		[SerializeField] private GameObject characterInfoPanelPrefab;
+		[SerializeField] private RankDisplayPanel rankDisplayPanel;
+		[SerializeField] private ScrollRect scrollRect;
 		private SaveFile _saveFile;
 		private List<CharacterListPanel> _characterListPanels;
 
@@ -30,31 +32,58 @@ namespace UI.Main_Menu.Character_List_Menu
 			{
 				characterListPanel.UpdateDisplayInfo();
 			}
+
+			foreach (var characterInfoPanel in FindObjectsOfType<CharacterInfoPanel>())
+			{
+				characterInfoPanel.gameObject.SetActive(false);
+			}
 		}
 
 		private void LoadCharacters()
 		{
 			_characterListPanels = new List<CharacterListPanel>();
-			var rectTransform = GetComponent<RectTransform>();
-			rectTransform.sizeDelta = new Vector2(CharacterListManager.instance.GetCharactersCount() * 350, rectTransform.sizeDelta.y);
-			
 			foreach (var character in CharacterListManager.instance.GetCharacters())
 			{
-				var listPanel = Instantiate(cardPrefab, transform).GetComponent<CharacterListPanel>().Setup(character);
-				_characterListPanels.Add(listPanel);
+				var listPanel = Instantiate(cardPrefab, transform);
+				var infoPanel = Instantiate(characterInfoPanelPrefab, transform);
+				var infoPanelComponent = infoPanel.GetComponent<CharacterInfoPanel>();
+				infoPanelComponent.SetRankDisplayPanelReference(rankDisplayPanel);
+				infoPanel.SetActive(false);
+					
+                var listPanelComponent = listPanel.GetComponent<CharacterListPanel>();
+                listPanelComponent.Setup(character, infoPanelComponent, scrollRect);
+				_characterListPanels.Add(listPanelComponent);
 			}
 		}
-
-		public void ActivateCharacter(CharacterData characterData)
+		
+		private void Update()
 		{
-			foreach (var character in CharacterListManager.instance.GetCharacters())
+			if (Input.GetKeyDown(KeyCode.LeftArrow))
 			{
-				character.Deactivate();
+				var activeIndex = _characterListPanels.FindIndex(x => x.characterData.IsActive);
+				while (activeIndex-- > 0)
+				{
+					var _characterSaveData = _saveFile.GetCharacterSaveData(_characterListPanels[activeIndex].characterData.Id);
+					if (_characterSaveData.IsUnlocked)
+					{
+						_characterListPanels[activeIndex].OnClick();
+						break;
+					}
+				}
 			}
-			
-			characterData.Activate();
-			characterInfoPanel.gameObject.SetActive(true);
-			characterInfoPanel.SetCharacterData(characterData, _saveFile.GetCharacterSaveData(characterData.Id));
+			if (Input.GetKeyDown(KeyCode.RightArrow))
+			{
+				var activeIndex = _characterListPanels.FindIndex(x => x.characterData.IsActive);
+				while (activeIndex++ < _characterListPanels.Count-1)
+				{
+					var _characterSaveData = _saveFile.GetCharacterSaveData(_characterListPanels[activeIndex].characterData.Id);
+					if (_characterSaveData.IsUnlocked)
+					{
+						_characterListPanels[activeIndex].OnClick();
+						break;
+					}
+				}
+			}
 		}
 	}
 }
