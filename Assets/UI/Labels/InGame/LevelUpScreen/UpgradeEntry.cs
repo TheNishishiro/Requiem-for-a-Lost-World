@@ -17,10 +17,10 @@ namespace UI.Labels.InGame.LevelUpScreen
 		public ItemUpgrade ItemUpgrade { get; set; }
 		public int Rarity { get; private set; } = (Random.value + GameData.GetPlayerCharacterData().Stats.Luck) switch
 		{
-			//<= 0.75f =>  1,
-			//<= 0.85f => 2,
-			//<= 0.9f => 3,
-			//<= 0.97f => 4,
+			<= 0.75f =>  1,
+			<= 0.85f => 2,
+			<= 0.9f => 3,
+			<= 0.97f => 4,
 			_ => 5
 		};
 
