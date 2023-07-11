@@ -1151,9 +1151,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LorePanelManager, Assembly-CSharp
-        m_MethodName: Open
+      - m_Target: {fileID: 602783783590854215}
+        m_TargetAssemblyTypeName: UI.Main_Menu.Character_List_Menu.CharacterInfoPanel,
+          Assembly-CSharp
+        m_MethodName: OpenStoryMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3185,7 +3186,6 @@ GameObject:
   m_Component:
   - component: {fileID: 602783783588188608}
   - component: {fileID: 602783783588188611}
-  - component: {fileID: 2778766876930394569}
   m_Layer: 5
   m_Name: Scroll
   m_TagString: Untagged
@@ -3244,18 +3244,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2778766876930394569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 602783783588188609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8208b6ed4c0fe6f47ba2e45cf7d7ff46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &602783783590854213
 GameObject:
   m_ObjectHideFlags: 0
@@ -3374,7 +3362,6 @@ MonoBehaviour:
   separationLine4: {fileID: 602783783428381127}
   separationLine5: {fileID: 602783783123354834}
   statsPanel: {fileID: 602783783316327416}
-  verticalLayout: {fileID: 602783782659267705}
 --- !u!1 &602783783621770556
 GameObject:
   m_ObjectHideFlags: 0

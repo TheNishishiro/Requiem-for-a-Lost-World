@@ -32,8 +32,8 @@ namespace UI.Main_Menu.Character_List_Menu
 		[SerializeField] private Image separationLine4;
 		[SerializeField] private Image separationLine5;
 		[SerializeField] private GameObject statsPanel;
-		[SerializeField] public VerticalLayoutGroup verticalLayout;
 		private RankDisplayPanel _rankDisplayPanel;
+		private LorePanelManager _lorePanelManager;
 		private CharacterData _characterData;
 		private CharacterSaveData _characterSaveData;
         
@@ -64,27 +64,27 @@ namespace UI.Main_Menu.Character_List_Menu
 			}
 		}
 		
-		public void SetRankDisplayPanelReference(RankDisplayPanel rankDisplayPanel)
+		public void SetRankDisplayPanelReference(RankDisplayPanel rankDisplayPanel, LorePanelManager lorePanelManager)
 		{
 			_rankDisplayPanel = rankDisplayPanel;
+			_lorePanelManager = lorePanelManager;
 		}
 
 		public void OpenShardsMenu()
 		{
 			_rankDisplayPanel.Open(_characterData, _characterSaveData.GetRankEnum());
 		}
+		
+		public void OpenStoryMenu()
+		{
+			_lorePanelManager.Open();
+		}
 
 		public void Close()
 		{
 			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();
 			statsPanelComponent.ClearEntries();
-			startingSkillInfoPanel.SetActive(false);
-		}
-		
-		private void Update()
-		{
-			if (Input.GetKeyDown(KeyCode.Escape))
-				Close();
+			gameObject.SetActive(false);
 		}
 	}
 }

@@ -15,6 +15,7 @@ namespace UI.Main_Menu.Character_List_Menu
 		[SerializeField] private GameObject characterInfoPanelPrefab;
 		[SerializeField] private RankDisplayPanel rankDisplayPanel;
 		[SerializeField] private ScrollRect scrollRect;
+		[SerializeField] private LorePanelManager lorePanelManager;
 		private SaveFile _saveFile;
 		private List<CharacterListPanel> _characterListPanels;
 
@@ -47,7 +48,7 @@ namespace UI.Main_Menu.Character_List_Menu
 				var listPanel = Instantiate(cardPrefab, transform);
 				var infoPanel = Instantiate(characterInfoPanelPrefab, transform);
 				var infoPanelComponent = infoPanel.GetComponent<CharacterInfoPanel>();
-				infoPanelComponent.SetRankDisplayPanelReference(rankDisplayPanel);
+				infoPanelComponent.SetRankDisplayPanelReference(rankDisplayPanel, lorePanelManager);
 				infoPanel.SetActive(false);
 					
                 var listPanelComponent = listPanel.GetComponent<CharacterListPanel>();

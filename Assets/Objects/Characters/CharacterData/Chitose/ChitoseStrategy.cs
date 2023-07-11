@@ -41,7 +41,7 @@ namespace Objects.Characters.Chitose
 
 			if (rank >= CharacterRank.E3 && currentLevel % (20 - reduction) == 0)
 			{
-				playerStatsComponent.IncreaseCooldownReductionPercentage(0.08f);
+				playerStatsComponent.IncreaseExperienceGain(0.08f);
 			}
 		}
 	}

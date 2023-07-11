@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Data.ToggleableEntries;
 using DefaultNamespace.Data;
 using Interfaces;
 using Objects.Abilities;
@@ -10,12 +12,13 @@ using Objects.Stage;
 using UI.Labels.InGame.LevelUpScreen;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem.UI;
 using Weapons;
 
 public class WeaponManager : MonoBehaviour
 {
-    [SerializeField] private List<WeaponBase> availableWeapons;
-    [SerializeField] private List<ItemBase> availableItems;
+    [SerializeField] private List<WeaponToggleableEntry> availableWeapons;
+    [SerializeField] private List<ItemToggleableEntry> availableItems;
     [SerializeField] private Transform weaponContainer;
     private List<WeaponBase> _unlockedWeapons;
     private List<ItemBase> _unlockedItems;
@@ -37,7 +40,7 @@ public class WeaponManager : MonoBehaviour
         _unlockedWeapons = new List<WeaponBase>();
         _unlockedItems = new List<ItemBase>();
 
-        var characterStartingWeapon = GameData.GetPlayerCharacterStartingWeapon() ?? availableWeapons.FirstOrDefault();
+        var characterStartingWeapon = GameData.GetPlayerCharacterStartingWeapon() ?? availableWeapons.FirstOrDefault()?.weaponBase;
         AddWeapon(characterStartingWeapon, 1);
     }
 
@@ -45,7 +48,7 @@ public class WeaponManager : MonoBehaviour
     {
         var weaponGameObject = Instantiate(weapon, weaponContainer);
         weaponGameObject.ApplyRarity(rarity);
-        availableWeapons.Remove(weapon);
+        availableWeapons.RemoveAll(x => x.weaponBase == weapon);
         _unlockedWeapons.Add(weaponGameObject);
         onWeaponAdded?.Invoke(weapon, _unlockedWeapons.Count, rarity);
     }
@@ -53,9 +56,9 @@ public class WeaponManager : MonoBehaviour
     public void AddItem(ItemBase item, int rarity)
     {
         var itemGameObject = Instantiate(item, weaponContainer);
-        availableItems.Remove(item);
+        availableItems.RemoveAll(x => x.itemBase == item);
         itemGameObject.ApplyRarity(rarity);
-        _playerStatsComponent.Apply(item.ItemStats, 1);
+        _playerStatsComponent.Apply(itemGameObject.ItemStats, 1);
         _unlockedItems.Add(itemGameObject);
         onItemAdded?.Invoke(item, _unlockedItems.Count, rarity);
     }
@@ -124,9 +127,9 @@ public class WeaponManager : MonoBehaviour
         if (_unlockedWeapons.Count >= maxWeaponCount)
             return new List<UpgradeEntry>();
         
-        return availableWeapons.Where(x => x.IsUnlocked(_saveFile)).Select(availableWeapon => new UpgradeEntry()
+        return availableWeapons.Where(x => x.isEnabled && x.weaponBase.IsUnlocked(_saveFile)).Select(availableWeapon => new UpgradeEntry()
         {
-            Weapon = availableWeapon
+            Weapon = availableWeapon.weaponBase
         });
     }
     
@@ -135,9 +138,9 @@ public class WeaponManager : MonoBehaviour
         if (_unlockedItems.Count >= maxItemCount)
             return new List<UpgradeEntry>();
         
-        return availableItems.Where(x => x.IsUnlocked(_saveFile)).Select(availableItem => new UpgradeEntry()
+        return availableItems.Where(x => x.isEnabled && x.itemBase.IsUnlocked(_saveFile)).Select(availableItem => new UpgradeEntry()
         {
-            Item = availableItem
+            Item = availableItem.itemBase
         });
     }
     

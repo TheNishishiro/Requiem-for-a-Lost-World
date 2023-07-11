@@ -127,6 +127,11 @@ namespace Objects.Players.Scripts
 			_playerStats.HealingIncreasePercentage += amount;
 		}
 
+		public void IncreaseExperienceGain(float amount)
+		{
+			_playerStats.ExperienceIncreasePercentage += amount;
+		}
+
 		public int GetTotalDamage(int baseDamage)
 		{
 			var damage = (baseDamage + GetDamage());

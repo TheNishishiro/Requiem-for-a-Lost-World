@@ -8,7 +8,7 @@ using System.Reflection;
 
 [CustomEditor(typeof(Readme))]
 [InitializeOnLoad]
-public class ReadmeEditor : Editor {
+public class ReadmeEditor : UnityEditor.Editor {
 	
 	static string kShowedReadmeSessionStateName = "ReadmeEditor.showedReadme";
 	
