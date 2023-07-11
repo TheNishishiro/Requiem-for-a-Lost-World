@@ -20,6 +20,7 @@ namespace UI.Main_Menu.End_Screen
 		[SerializeField] private Image characterImage;
 		[SerializeField] private SaveManager saveManager;
 		[SerializeField] private AchievementManager achievementManager;
+		[SerializeField] private TitleScreen.TitleScreen titleScreen;
 		private SaveFile _saveFile;
 		
 		private void Start()
@@ -27,6 +28,7 @@ namespace UI.Main_Menu.End_Screen
 			_saveFile = FindObjectOfType<SaveFile>();
 			if (gameResultData.IsGameEnd)
 			{
+				titleScreen.gameObject.SetActive(false);
 				winLoseText.text = gameResultData.IsWin ? "Victory" : "Defeat";
 				panel.SetActive(true);
 				
@@ -46,6 +48,10 @@ namespace UI.Main_Menu.End_Screen
 				gameResultData.IsGameEnd = false;
 				saveManager.SaveGame();
 				achievementManager.ClearPerGameStats();
+			}
+			else
+			{
+				titleScreen.gameObject.SetActive(true);
 			}
 			
 			gameResultData.Reset();
