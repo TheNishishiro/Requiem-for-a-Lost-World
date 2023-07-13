@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Managers;
+using UnityEngine;
 
 namespace UI.Main_Menu
 {
@@ -6,6 +7,7 @@ namespace UI.Main_Menu
 	{
 		public void QuitApplication()
 		{
+			FindObjectOfType<DiscordManager>().ClearActivity();
 			Application.Quit();
 		}
 	}

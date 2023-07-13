@@ -1,5 +1,7 @@
 ﻿using System;
 using Discord;
+using Objects.Characters;
+using Objects.Stage;
 using UnityEngine;
 using Discord = Discord.Discord;
 
@@ -7,8 +9,10 @@ namespace Managers
 {
 	public class DiscordManager : MonoBehaviour
 	{
+		[SerializeField] private bool isEnabled;
 		private global::Discord.Discord _discord;
 		private ActivityManager _activityManager;
+		private bool UseDiscord => isEnabled && !Application.isEditor;
 		
 		public void Awake()
 		{
@@ -26,22 +30,50 @@ namespace Managers
 
 		private void Update()
 		{
+			if (!UseDiscord)
+				return;
+			
 			_discord.RunCallbacks();
+		}
+
+		public void SetInGame()
+		{
+			UpdateActivity(
+				"In game", 
+				null,
+				$"{GameData.GetPlayerCharacterId().GetName()}avatar",
+				$"{GameData.GetPlayerCharacterId().GetName()} ({GameData.GetPlayerCharacterRank()})");
+		}
+
+		public void SetMainMenu()
+		{
+			UpdateActivity("In menu", null, null, null);
+		}
+
+		public void SetEndMenu(bool isWin)
+		{
+			UpdateActivity("End screen", isWin ? "Victory" : "Defeat", null, null);
+		}
+		
+		public void ClearActivity()
+		{
+			_activityManager.ClearActivity((res) => { });
 		}
 
 		public void UpdateActivity(string details, string state, string image, string imageTitle)
 		{
-			return;
+			if (!UseDiscord)
+				return;
 			
-			var activity = new global::Discord.Activity()
+			var activity = new Activity()
 			{
 				State = state,
 				Details = details,
 				Assets =
 				{
 					LargeImage = "icon",
-					LargeText = "RogueLite",
-					SmallImage = image.ToLower(),
+					LargeText = "Requiem for a Lost World",
+					SmallImage = image?.ToLower(),
 					SmallText = imageTitle
 				},
 				Timestamps =
@@ -50,7 +82,7 @@ namespace Managers
 				},
 				Type = ActivityType.Playing
 			};
-
+			
 			_activityManager.UpdateActivity(activity, (res) =>
 			{
 				if (res == global::Discord.Result.Ok)

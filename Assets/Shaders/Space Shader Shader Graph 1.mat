@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 5
+  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -23,6 +23,8 @@ Material:
   m_Name: Space Shader Shader Graph 1
   m_Shader: {fileID: -6465566751694194690, guid: 6fa47878640207049b21c75927500464,
     type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
@@ -31,10 +33,15 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _Texture2DAsset_c2511bbfada743c394353d58bb5441ba_Out_0:
+        m_Texture: {fileID: 2800000, guid: 77a2212d45fc4cb4ead09c0c3db72185, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_c2511bbfada743c394353d58bb5441ba_Out_0_Texture2D:
         m_Texture: {fileID: 2800000, guid: 77a2212d45fc4cb4ead09c0c3db72185, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}

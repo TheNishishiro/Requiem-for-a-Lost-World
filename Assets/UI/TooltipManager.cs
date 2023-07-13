@@ -35,7 +35,7 @@ namespace UI
             mousePosition.z = -camera.transform.position.z;
             var worldPosition= camera.ScreenToWorldPoint(mousePosition);
         
-            var offset = new Vector3(10,10,0); // Change this to your desired offset
+            var offset = new Vector3(10,10,0);
             
             transform.position = worldPosition + offset;
         }

@@ -52,6 +52,7 @@ MonoBehaviour:
   weaponStats:
     Damage: 5
     Cooldown: 2.5
+    CooldownReduction: 0
     Scale: 1
     Speed: 3
     TimeToLive: 5
@@ -64,6 +65,10 @@ MonoBehaviour:
     CritDamage: 0
     Weakness: 0
     DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 821e3669f77176c4b95d1686efcc62b0, type: 2}
   - {fileID: 11400000, guid: bef8c5f10e62a1849ae7168bc84f0d67, type: 2}
@@ -75,3 +80,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 647a97eec68eb9540ae4dbfbeedabaa6, type: 2}
   - {fileID: 11400000, guid: aded2257282bf8f43a889bd546b31cf6, type: 2}
   - {fileID: 11400000, guid: f36395fbdc2f4e749a72a4cee85d2ba8, type: 2}
+  fireballSpawnSound: {fileID: 8300000, guid: de5ee96aa65ef0d468c9b1cc448a4f97, type: 3}

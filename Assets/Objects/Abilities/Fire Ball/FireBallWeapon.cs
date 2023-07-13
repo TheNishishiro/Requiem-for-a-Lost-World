@@ -11,19 +11,23 @@ using Weapons;
 
 public class FireBallWeapon : WeaponBase
 {
+    [SerializeField] private AudioClip fireballSpawnSound;
+    
     public override void Attack()
     {
-        var closestTarget = Utilities.FindClosestDamageable(transform.position, FindObjectsOfType<Damageable>(), out var distanceToClosest);
+        var currentPosition = transform.position;
+        var closestTarget = Utilities.FindClosestDamageable(currentPosition, FindObjectsOfType<Damageable>(), out var distanceToClosest);
         if (closestTarget is null)
             return;
-        
-        var fireBall = SpawnManager.instance.SpawnObject(transform.position, spawnPrefab);
+
+        var fireBall = SpawnManager.instance.SpawnObject(currentPosition, spawnPrefab);
         var projectileComponent = fireBall.GetComponent<FireBallProjectile>();
         projectileComponent.SetStats(weaponStats);
         var transform1 = closestTarget.transform;
         var position = transform1.position;
         projectileComponent.SetParentWeapon(this);
         projectileComponent.SetDirection(position.x, position.y, position.z);
+        AudioSource.PlayClipAtPoint(fireballSpawnSound, currentPosition, 0.2f);
     }
 
     public override bool IsUnlocked(SaveFile saveFile)

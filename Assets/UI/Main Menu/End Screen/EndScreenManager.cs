@@ -25,9 +25,12 @@ namespace UI.Main_Menu.End_Screen
 		
 		private void Start()
 		{
+			var discordManager = FindObjectOfType<DiscordManager>();
 			_saveFile = FindObjectOfType<SaveFile>();
 			if (gameResultData.IsGameEnd)
 			{
+				discordManager.SetEndMenu(gameResultData.IsWin);
+				AudioListener.volume = 1;
 				titleScreen.gameObject.SetActive(false);
 				winLoseText.text = gameResultData.IsWin ? "Victory" : "Defeat";
 				panel.SetActive(true);
@@ -51,9 +54,10 @@ namespace UI.Main_Menu.End_Screen
 			}
 			else
 			{
+				discordManager.SetMainMenu();
 				titleScreen.gameObject.SetActive(true);
 			}
-			
+            
 			gameResultData.Reset();
 		}
 		

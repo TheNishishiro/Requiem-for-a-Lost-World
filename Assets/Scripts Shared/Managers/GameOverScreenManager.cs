@@ -14,7 +14,7 @@ namespace Managers
 		
 		public void OpenPanel(bool isWin)
 		{
-			gameOverText.text = isWin ? "Victory!" : "Overwhelmed!";
+			gameOverText.text = isWin ? "Victory!" : "Retreat!";
 			victoryButton.SetActive(isWin);
 			defeatButton.SetActive(!isWin);
 			

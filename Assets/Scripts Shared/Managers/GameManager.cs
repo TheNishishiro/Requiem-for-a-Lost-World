@@ -18,6 +18,7 @@ namespace Managers
 
 		private void Start()
 		{
+			AudioListener.volume = 0;
 			var saveFile = FindObjectOfType<SaveFile>();
 			playerStatsComponent.Set(GameData.GetPlayerStartingStats());
             
@@ -31,12 +32,7 @@ namespace Managers
 				}
 			}
 			
-			var discordManager = FindObjectOfType<DiscordManager>();
-			discordManager.UpdateActivity(
-				"In game", 
-				null,
-				$"{GameData.GetPlayerCharacterId().GetName()}avatar",
-				$"{GameData.GetPlayerCharacterId().GetName()} ({GameData.GetPlayerCharacterRank()})");
+			FindObjectOfType<DiscordManager>().SetInGame();
 		}
 	}
 }

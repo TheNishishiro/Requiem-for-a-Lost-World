@@ -19,6 +19,8 @@ namespace UI.Main_Menu.End_Screen
 				return;
 			
 			var maxDamage = gameResultData.ItemDamage.Values.Max();
+			var delay = 0f;
+			var entryId = 0;
 			foreach (var damageSummaryEntry in gameResultData.ItemDamage.OrderByDescending(x => x.Value))
 			{
 				var panelDamageSummary = Instantiate(panelDamageSummaryPrefab, transform);
@@ -28,7 +30,7 @@ namespace UI.Main_Menu.End_Screen
 					RawDamage = damageSummaryEntry.Value,
 					MaxDamage = maxDamage,
 					Name = damageSummaryEntry.Key.Name
-				});
+				}, entryId++ % 2 != 0, delay+=0.1f);
 				_panelDamageSummaries.Add(panelDamageSummary.gameObject);
 			}
 		}

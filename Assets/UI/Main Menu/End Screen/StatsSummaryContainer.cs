@@ -13,10 +13,12 @@ namespace UI.Main_Menu.End_Screen
 		public void Setup(GameResultData gameResultData)
 		{
 			_statsSummaries ??= new List<GameObject>();
+			var entryId = 0;
+			var delay = 0f;
 			foreach (var statSummary in gameResultData.GetStatsSummary())
 			{
 				var panelStatsSummary = Instantiate(panelStatsSummaryPrefab, transform);
-				panelStatsSummary.Setup(statSummary);
+				panelStatsSummary.Setup(statSummary, entryId++ % 2 != 0, delay += 0.1f);
 				_statsSummaries.Add(panelStatsSummary.gameObject);
 			}
 		}
