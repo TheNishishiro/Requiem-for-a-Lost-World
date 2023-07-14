@@ -107,8 +107,14 @@ MonoBehaviour:
     type: 3}
   lightPillarCount: 80
   lightPillarAttackDelay: 1
-  lightPillarAttackArea: 6
+  lightPillarAttackArea: 7
   attackCooldown: 3
+  spawnableEnemies:
+  - {fileID: 11400000, guid: c2a805eede02d8f43875a5a9daeb79d4, type: 2}
+  - {fileID: 11400000, guid: 75246ff61684c704aafb28d258294e18, type: 2}
+  - {fileID: 11400000, guid: 2bff21d33dac5af43a1c0117c6f17c65, type: 2}
+  enemySpawnCountMin: 10
+  enemySpawnCountMax: 20
 --- !u!114 &710560463947878724
 MonoBehaviour:
   m_ObjectHideFlags: 0

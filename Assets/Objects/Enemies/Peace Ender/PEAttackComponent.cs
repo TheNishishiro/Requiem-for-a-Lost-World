@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using DefaultNamespace;
 using Managers;
 using Objects.Stage;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace Objects.Enemies.Peace_Ender
 {
@@ -17,6 +19,9 @@ namespace Objects.Enemies.Peace_Ender
 		[SerializeField] private float lightPillarAttackDelay;
 		[SerializeField] private float lightPillarAttackArea;
 		[SerializeField] private float attackCooldown;
+		[SerializeField] public List<EnemyData> spawnableEnemies;
+		[SerializeField] private int enemySpawnCountMin;
+		[SerializeField] private int enemySpawnCountMax;
 		private float _currentCooldown;
 
 		private void Awake()
@@ -27,14 +32,22 @@ namespace Objects.Enemies.Peace_Ender
 		public void Update()
 		{
 			_currentCooldown -= Time.deltaTime;
-			if (_currentCooldown <= 0)
+			if (_currentCooldown > 0) return;
+			
+			_currentCooldown = attackCooldown;
+			var randomValue = Random.Range(0, 100);
+
+			if (randomValue < 80)
 			{
-				_currentCooldown = attackCooldown;
 				LightPillarAttack();
+			}
+			else
+			{
+				SpawnEnemies();
 			}
 		}
 
-		public void LightPillarAttack()
+		private void LightPillarAttack()
 		{
 			for (var i = 0; i < lightPillarCount; i++)
 			{
@@ -50,7 +63,12 @@ namespace Objects.Enemies.Peace_Ender
 		{
 			yield return new WaitForSeconds(lightPillarAttackDelay);
 			Destroy(indicator);
-			Instantiate(lightPillarPrefab, position, Quaternion.identity);
+			SpawnManager.instance.SpawnObject(position, lightPillarPrefab);
+		}
+
+		private void SpawnEnemies()
+		{
+			FindObjectOfType<EnemyManager>().BurstSpawn(spawnableEnemies, Random.Range(enemySpawnCountMin, enemySpawnCountMax));
 		}
 	}
 }
