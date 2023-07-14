@@ -39,14 +39,14 @@ public class EaseInOutAnimator : MonoBehaviour
 
     private IEnumerator AnimateToObjectState(Vector3 targetScale, float delay)
     {
-        float progress = 0;
+        var progress = 0f;
         var animationDelay = delay == 0 ? preferredDelay : delay;
         
         yield return new WaitForSeconds(animationDelay);
         while(progress < 1)
         {
             progress += Time.deltaTime / animationDuration;
-            float evaluatedLerp = easeInOutCurve.Evaluate(progress);
+            var evaluatedLerp = easeInOutCurve.Evaluate(progress);
 
             targetObject.transform.localScale = Vector3.Lerp(Vector3.zero, targetScale, evaluatedLerp);
 
