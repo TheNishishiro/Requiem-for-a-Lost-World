@@ -1,54 +1,53 @@
 using System;
-using System.Collections.Generic;
+                                                   using System.Collections.Generic;
 using DefaultNamespace;
 using Managers.StageEvents;
-using Objects.Enemies;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 
 [CustomEditor(typeof(StageData))]
 public class StageDataEditor : Editor
 {
-	public override void OnInspectorGUI()
-	{
-		serializedObject.Update();
+    private ReorderableList reorderableList;
 
-		var stageData = target as StageData;
+    private void OnEnable()
+    {
+        var itemsProperty = serializedObject.FindProperty("stageEvents");
 
-		var eventList = serializedObject.FindProperty("stageEvents");
+        reorderableList = new ReorderableList(serializedObject, itemsProperty, true, true, true, true)
+            {
+                drawHeaderCallback = rect => {
+                    EditorGUI.LabelField(rect, "Events:");
+                },
+                drawElementCallback = (rect, index, isActive, isFocused) => {
+                    var elementProperty = itemsProperty.GetArrayElementAtIndex(index);
 
-		EditorGUILayout.LabelField("Events:");
+                    var triggerTimeProperty = elementProperty.FindPropertyRelative("triggerTime");
+                    var eventTimeSpan = Utilities.FloatToTimeString(triggerTimeProperty.floatValue);
+                    var eventName = $"{eventTimeSpan}";
 
-		EditorGUI.indentLevel++;
+                    EditorGUI.PropertyField(
+                        new Rect(rect.x, rect.y, rect.width - 100, EditorGUIUtility.singleLineHeight),
+                        elementProperty, new GUIContent(eventName), true);
+        
+                    if (GUI.Button(
+                            new Rect(rect.x + rect.width - 100, rect.y, 100, EditorGUIUtility.singleLineHeight),
+                            "Delete Event"))
+                    {
+                        itemsProperty.DeleteArrayElementAtIndex(index);
+                    }
+                },
+                elementHeightCallback = (index) => EditorGUI.GetPropertyHeight(itemsProperty.GetArrayElementAtIndex(index)) + 5
+            };
+    }
 
-		for (var i = 0; i < eventList.arraySize; i++)
-		{
-			var eventProperty = eventList.GetArrayElementAtIndex(i);
+    public override void OnInspectorGUI()
+    {
+        serializedObject.Update();
 
-			var triggerTimeProperty = eventProperty.FindPropertyRelative("triggerTime");
-			var eventTimeSpan = Utilities.FloatToTimeString(triggerTimeProperty.floatValue);
-			var eventName = $"{eventTimeSpan}";
+        reorderableList.DoLayoutList();
 
-			EditorGUILayout.PropertyField(eventProperty, new GUIContent(eventName), true);
-
-			GUILayout.BeginHorizontal();
-			GUILayout.FlexibleSpace();
-			if (GUILayout.Button("Delete Event", GUILayout.Width(100)))
-			{
-				eventList.DeleteArrayElementAtIndex(i);
-				serializedObject.ApplyModifiedProperties();
-				break;
-			}
-			GUILayout.EndHorizontal();
-		}
-
-		EditorGUI.indentLevel--;
-
-		if (GUILayout.Button("Add Event"))
-		{
-			eventList.InsertArrayElementAtIndex(eventList.arraySize);
-		}
-
-		serializedObject.ApplyModifiedProperties();
-	}
+        serializedObject.ApplyModifiedProperties();
+    }
 }
