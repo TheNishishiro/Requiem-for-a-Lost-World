@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace.Data;
 using Managers;
+using UI.Shared.Animations;
 using UnityEngine;
 
 namespace UI.Main_Menu.Upgrades_Menu
@@ -12,6 +13,7 @@ namespace UI.Main_Menu.Upgrades_Menu
 		[SerializeField] private GameObject panel;
 		[SerializeField] private GameObject container;
 		[SerializeField] private UpgradeEntryPanel upgradeEntryPanelPrefab;
+		[SerializeField] private SlideAnimator slideAnimator;
 		private List<UpgradeEntryPanel> _upgradeEntryPanels = new ();
 		private SaveFile _saveFile;
 
@@ -22,7 +24,7 @@ namespace UI.Main_Menu.Upgrades_Menu
 
 		public void Open()
 		{
-			panel.SetActive(true);
+			slideAnimator.ShowPanel();
 		
 			var permUpgrades = PermUpgradeListManager.instance.GetUpgrades();
 			foreach (var permUpgrade in permUpgrades)
@@ -40,15 +42,20 @@ namespace UI.Main_Menu.Upgrades_Menu
 				upgradePanel.Set(0, permUpgrade);
 			}
 		}
-	
+
 		public void Close()
 		{
-			panel.SetActive(false);
+			slideAnimator.HidePanel();
+		}
+
+		public void OnPanelClose()
+		{
 			foreach (var upgradeEntryPanel in _upgradeEntryPanels)
 			{
 				Destroy(upgradeEntryPanel.gameObject);
 			}
 			_upgradeEntryPanels.Clear();
+			panel.SetActive(false);
 		}
 		
 		public void Toggle()

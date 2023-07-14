@@ -47,6 +47,8 @@ namespace Objects.Players
 		public float HealingIncreasePercentage;
 		public float Luck;
 		public float DamageOverTime;
+		public int Rerolls;
+		public int Skips;
 
 		public PlayerStats()
 		{
@@ -92,6 +94,8 @@ namespace Objects.Players
 			HealingIncreasePercentage = 0;
 			Luck = 0;
 			DamageOverTime = 0;
+			Rerolls = 0;
+			Skips = 0;
 		}
 
 		public void Sum(ItemStats item, int rarity)
@@ -130,6 +134,8 @@ namespace Objects.Players
             HealingIncreasePercentage += item.HealingReceivedIncreasePercentage * rarityFactor;
             Luck += item.Luck * rarityFactor;
             DamageOverTime += item.DamageOverTime * rarityFactor;
+            Rerolls += item.Rerolls != 0 ? item.Rerolls + (rarity - 1) : item.Rerolls;
+            Skips += item.Skips != 0 ? item.Skips + (rarity - 1) : item.Skips;
         }
 
 		public void Set(PlayerStats playerStats)
@@ -177,6 +183,8 @@ namespace Objects.Players
             HealingIncreasePercentage = playerStats.HealingIncreasePercentage;
             Luck = playerStats.Luck;
             DamageOverTime = playerStats.DamageOverTime;
+            Rerolls = playerStats.Rerolls;
+            Skips = playerStats.Skips;
         }
 
 		public IEnumerable<StatsDisplayData> GetStatsList()
@@ -214,6 +222,8 @@ namespace Objects.Players
 				new("Damage taken%", DamageTakenIncreasePercentage, "The increase of damage taken by the player from any source", true),
 				new("Heal increase%", HealingIncreasePercentage, "The increase of healing received by the player from any source", true),
 				new("Luck%", Luck, "Increase the chance of high rarity items appearing in chests of after leveling up. Also increases the chance of enemies dropping gold coins and gems upon death", true),
+				new("Rerolls", Rerolls, "The amount of times each set of upgrades to pick from level ups can be rerolled"),
+				new("Skips", Skips, "The amount of times each level up choice can be skipped")
 			};
 			return stats;
 		}
@@ -278,6 +288,12 @@ namespace Objects.Players
 					break;
 				case PermUpgradeType.Luck:
 					Luck += value;
+					break;
+				case PermUpgradeType.Reroll:
+					Rerolls += (int) value;
+					break;
+				case PermUpgradeType.Skip:
+					Skips += (int) value;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(permUpgradeType), permUpgradeType, null);

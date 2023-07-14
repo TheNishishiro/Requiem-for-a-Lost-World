@@ -20,5 +20,7 @@
 		ExpIncrease = 16,
 		Greed = 17,
 		Luck = 18,
+		Reroll = 19,
+		Skip = 20
 	}
 }

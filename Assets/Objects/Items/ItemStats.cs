@@ -39,6 +39,8 @@ namespace Objects.Items
 		public float HealingReceivedIncreasePercentage;
 		public float Luck;
 		public float DamageOverTime;
+		public int Rerolls;
+		public int Skips;
 		
 		public void ApplyRarity(int rarity)
 		{
@@ -74,6 +76,8 @@ namespace Objects.Items
 			HealingReceivedIncreasePercentage *= rarityFactor;
 			Luck *= rarityFactor;
 			DamageOverTime *= rarityFactor;
+			Rerolls = Rerolls != 0 ? Rerolls + (rarity - 1) : Rerolls;
+			Skips = Skips != 0 ? Skips + (rarity - 1) : Skips;
 		}
 		
 		public void Apply(ItemStats itemUpgradeItemStats, int rarity)
@@ -112,6 +116,8 @@ namespace Objects.Items
             HealingReceivedIncreasePercentage += itemUpgradeItemStats.HealingReceivedIncreasePercentage * rarityFactor;
             Luck += itemUpgradeItemStats.Luck * rarityFactor;
             DamageOverTime += itemUpgradeItemStats.DamageOverTime * rarityFactor;
+            Rerolls += itemUpgradeItemStats.Rerolls == 0 ? 0 : itemUpgradeItemStats.Rerolls + (rarity - 1);
+            Skips += itemUpgradeItemStats.Skips == 0 ? 0 : itemUpgradeItemStats.Skips + (rarity - 1);
         }
 		
 		public ICollection<StatsDisplayData> GetDescription()
@@ -149,6 +155,8 @@ namespace Objects.Items
 				new("Damage increase%", DamageTakenIncreasePercentage, isPercentage: true),
 				new("Heal increase%", HealingReceivedIncreasePercentage, isPercentage: true),
 				new("Luck%", Luck, isPercentage: true),
+				new("Rerolls", Rerolls),
+				new("Skips", Skips),
 			};
 			return stats;
 		}

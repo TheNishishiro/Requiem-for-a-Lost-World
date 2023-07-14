@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2666470977727701774}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.059, y: -0.000000022352, z: 0.063}
+  m_LocalPosition: {x: 0.059, y: -0.000000022352, z: 0.367}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -195,9 +195,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3634895298855100171}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 0.21661335, y: 1.00864, z: 0.1697278}
   m_Center: {x: -0.009350449, y: 0.42931998, z: 0.009682417}
 --- !u!114 &3634895298855100166
@@ -214,6 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   expAmount: 200
   gemImage: {fileID: 3634895298855100165}
+  gemMinimapIcon: {fileID: 2706402273898009707}
 --- !u!114 &3634895298855100167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +254,7 @@ MonoBehaviour:
   PickupEnum: 0
 --- !u!95 &5213355489588195026
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -262,4 +271,5 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

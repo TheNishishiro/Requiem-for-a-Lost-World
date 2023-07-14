@@ -9,6 +9,7 @@ namespace Objects.Drops.ExpDrop
 	{
 		[SerializeField] public int expAmount;
 		[SerializeField] private SpriteRenderer gemImage;
+		[SerializeField] private SpriteRenderer gemMinimapIcon;
 		
 		public void OnPickUp(Player player)
 		{
@@ -32,18 +33,24 @@ namespace Objects.Drops.ExpDrop
 
 		private void AdjustColor()
 		{
-			if (expAmount < 200)
-				gemImage.color = Color.white;
-			else if (expAmount < 500)
-				gemImage.color = Color.green;
-			else if (expAmount < 1000)
-				gemImage.color = Color.blue;
-			else if (expAmount < 2000)
-				gemImage.color = Color.yellow;
-			else if (expAmount < 5000)
-				gemImage.color = Color.red;
-			else
-				gemImage.color = Color.magenta;
+			var color = GetColorBasedOnExpHeld();
+			gemImage.color = color;
+			gemMinimapIcon.color = color;
+		}
+
+		private Color GetColorBasedOnExpHeld()
+		{
+			return Color.Lerp(Color.white, Color.red, expAmount / 5000f);
+			return expAmount switch
+			{
+				< 200 => Color.white,
+				< 500 => Color.green,
+				< 1000 => Color.cyan,
+				< 2000 => Color.blue,
+				< 5000 => Color.yellow,
+				< 10000 => Color.red,
+				_ => Color.magenta
+			};
 		}
 	}
 }

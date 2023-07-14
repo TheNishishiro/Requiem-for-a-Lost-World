@@ -19,7 +19,7 @@ public class StatsDisplayData
 		else if (baseValue < floatValue)
 			color = isInvertedColor ? "red" : "green";
         
-		var stringValue = isPercentage ? floatValue.ToPercentage() : value.ToString();
+		var stringValue = isPercentage ? floatValue.ToPercentage() : floatValue.ToString("0.00");
         
 		Value = $"<color={color}>{stringValue}</color>";
 	}

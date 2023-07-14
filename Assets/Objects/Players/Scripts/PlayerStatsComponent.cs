@@ -132,6 +132,16 @@ namespace Objects.Players.Scripts
 			_playerStats.ExperienceIncreasePercentage += amount;
 		}
 
+		public void IncreaseSkip(int amount)
+		{
+			_playerStats.Skips += amount;
+		}
+
+		public void IncreaseReroll(int amount)
+		{
+			_playerStats.Rerolls += amount;
+		}
+
 		public int GetTotalDamage(int baseDamage)
 		{
 			var damage = (baseDamage + GetDamage());
@@ -303,6 +313,26 @@ namespace Objects.Players.Scripts
 		public float GetDamageOverTime()
 		{
 			return _playerStats?.DamageOverTime ?? 0;
+		}
+
+		public bool HasRerolls()
+		{
+			return _playerStats?.Rerolls > 0;
+		}
+
+		public bool HasSkips()
+		{
+			return _playerStats?.Skips > 0;
+		}
+
+		public int GetSkips()
+		{
+			return _playerStats?.Skips ?? 0;
+		}
+
+		public int GetRerolls()
+		{
+			return _playerStats?.Rerolls ?? 0;
 		}
 	}
 }

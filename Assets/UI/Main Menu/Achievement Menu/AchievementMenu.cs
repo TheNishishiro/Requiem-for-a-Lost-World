@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
+using UI.Shared.Animations;
 using UnityEngine;
 
 namespace UI.Main_Menu.Achievement_Menu
@@ -12,6 +13,7 @@ namespace UI.Main_Menu.Achievement_Menu
 		[SerializeField] private SaveFile SaveFile;
 		[SerializeField] private GameObject achievementEntryPrefab;
 		[SerializeField] private GameObject achievementEntryContainer;
+		[SerializeField] private SlideAnimator slideAnimator;
 		private List<AchievementEntry> _achievementEntries;
 		
 		public void Open()
@@ -40,12 +42,12 @@ namespace UI.Main_Menu.Achievement_Menu
 				}
 			}
 
-			gameObject.SetActive(true);
+			slideAnimator.ShowPanel();
 		}
 		
 		public void Close()
 		{
-			gameObject.SetActive(false);
+			slideAnimator.HidePanel();
 		}
 
 		public void Toggle()

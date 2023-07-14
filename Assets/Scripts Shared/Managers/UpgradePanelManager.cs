@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
+using Objects.Players.Scripts;
+using Objects.Stage;
 using StarterAssets;
+using TMPro;
 using UI.Labels.InGame.LevelUpScreen;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Managers
 {
@@ -15,6 +19,9 @@ namespace Managers
 		[SerializeField] private PauseManager pauseManager;
 		[SerializeField] private WeaponManager weaponManager;
 		[SerializeField] private CursorManager cursorManager;
+		[SerializeField] private Button skipButton;
+		[SerializeField] private Button rerollButton;
+		[SerializeField] private PlayerStatsComponent playerStatsComponent;
 
 		private void Start()
 		{
@@ -23,20 +30,7 @@ namespace Managers
 
 		public void OpenPanel()
 		{
-			var upgradeEntries = weaponManager.GetUpgrades().OrderBy(x => Random.value).Take(Random.Range(3, 5)).ToList();
-			if (upgradeEntries.Count == 0)
-				return;
-			
-			cursorManager.ShowCursor();
-			pauseManager.PauseGame();
-			Clean();
-			panel.SetActive(true);
-			
-			for (var i = 0; i < upgradeEntries.Count; i++)
-			{
-				upgradeButtons[i].gameObject.SetActive(true);
-				upgradeButtons[i].Set(upgradeEntries[i]);
-			}
+			ReloadUpgrades();
 		}
 
 		public void ClosePanel()
@@ -57,6 +51,41 @@ namespace Managers
 		{
 			foreach (var upgradeButton in upgradeButtons)
 				upgradeButton.gameObject.SetActive(false);
+		}
+
+		public void Reroll()
+		{
+			playerStatsComponent.IncreaseReroll(-1);
+			rerollButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Reroll ({playerStatsComponent.GetRerolls()})";
+			ReloadUpgrades();
+		}
+
+		public void Skip()
+		{
+			playerStatsComponent.IncreaseSkip(-1);
+			skipButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Skip ({playerStatsComponent.GetSkips()})";
+			ClosePanel();
+		}
+
+		private void ReloadUpgrades()
+		{
+			HideButtons();
+			rerollButton.gameObject.SetActive(playerStatsComponent.HasRerolls());
+			skipButton.gameObject.SetActive(playerStatsComponent.HasSkips());
+			var upgradeEntries = weaponManager.GetUpgrades().OrderBy(x => Random.value).Take(Random.Range(3, 5)).ToList();
+			if (upgradeEntries.Count == 0)
+				return;
+            
+			cursorManager.ShowCursor();
+			pauseManager.PauseGame();
+			Clean();
+			panel.SetActive(true);
+			
+			for (var i = 0; i < upgradeEntries.Count; i++)
+			{
+				upgradeButtons[i].gameObject.SetActive(true);
+				upgradeButtons[i].Set(upgradeEntries[i]);
+			}
 		}
 	}
 }
