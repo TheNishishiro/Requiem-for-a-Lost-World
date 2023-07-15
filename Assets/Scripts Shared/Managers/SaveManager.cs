@@ -40,6 +40,10 @@ namespace Managers
 			_saveData.UpdateMissingAchievementEntries();
 			if (!_saveData.CharacterSaveData[CharactersEnum.Chitose].IsUnlocked)
 				_saveData.CharacterSaveData[CharactersEnum.Chitose].Unlock();
+			if (!_saveData.CharacterSaveData[CharactersEnum.Nishi].IsUnlocked)
+				_saveData.CharacterSaveData[CharactersEnum.Nishi].Unlock();
+			if (!_saveData.CharacterSaveData[CharactersEnum.Amelia].IsUnlocked)
+				_saveData.CharacterSaveData[CharactersEnum.Amelia].Unlock();
 			characterListMenu.UpdateCharacterPanels();
 		}
 	}

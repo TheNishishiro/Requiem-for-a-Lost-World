@@ -29,6 +29,12 @@
 		[Character("Eliza")]
 		Maid = 13,
 		[Character("Arthur")]
-		Arthur_OBoV = 14
+		Arthur_OBoV = 14,
+		[Character("Amelia")]
+		Amelia = 15,
+		[Character("Nishi")]
+		Nishi = 16,
+		[Character("Nishi")]
+		Nishi_BoR = 17,
 	}
 }

@@ -103,7 +103,7 @@ namespace DefaultNamespace.Data
 		public CharacterSaveData GetCharacterSaveData(CharactersEnum characterId)
 		{
 			Initialize();
-			return CharacterSaveData.ContainsKey(characterId) ? CharacterSaveData[characterId] : null;
+			return CharacterSaveData.ContainsKey(characterId) ? CharacterSaveData[characterId] : new CharacterSaveData();
 		}
 
 		public void UpdateMissingCharacterEntries(List<CharacterData> characterData)
