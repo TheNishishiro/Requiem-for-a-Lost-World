@@ -36,6 +36,9 @@ namespace Objects.Characters
 		public PlayerStats Stats;
 		public List<EidolonData> Eidolons;
 		public List<CharacterLoreEntry> loreEntries;
+		public bool UseSpecialBar;
+		public float SpecialMaxValue;
+		public float SpecialIncrementValue;
 
 		public void Activate()
 		{

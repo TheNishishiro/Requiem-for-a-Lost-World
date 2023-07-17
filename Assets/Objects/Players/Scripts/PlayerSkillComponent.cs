@@ -26,6 +26,7 @@ namespace Objects.Players.Scripts
 		[SerializeField] private Transform abilityContainer;
 		[SerializeField] private HealthComponent healthComponent;
 		[SerializeField] private ChronastaSkill chronastaSkill;
+		[SerializeField] private SpecialBar specialBar;
 		private float _currentSkillCooldown = 0f;
 		private float _skillCooldown = 5f;
 
@@ -81,7 +82,18 @@ namespace Objects.Players.Scripts
 				case CharactersEnum.Corina_BoB:
 					StartCoroutine(CorinaSkill());
 					break;
+				case CharactersEnum.Nishi:
+					NishiSkill();
+					break;
 			}
+		}
+
+		private void NishiSkill()
+		{
+			var forward = transform.forward;
+			forward.y = 0f;
+			StartCoroutine(IFrames(0.5f));
+			controller.Move(forward * 0.2f);
 		}
 
 		private IEnumerator CorinaSkill()

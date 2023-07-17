@@ -15,13 +15,16 @@ namespace Managers
 	public class GameManager : MonoBehaviour
 	{
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
+		[SerializeField] private SpecialBarManager specialBarManager;
 
 		private void Start()
 		{
 			AudioListener.volume = 0;
 			var saveFile = FindObjectOfType<SaveFile>();
 			playerStatsComponent.Set(GameData.GetPlayerStartingStats());
-            
+            if (GameData.GetPlayerCharacterData()?.UseSpecialBar == true)
+	            specialBarManager.gameObject.SetActive(true);
+			
 			var permUpgrades = GameData.GetPermUpgrades().ToList();
 			foreach (var permUpgradesSaveData in saveFile.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>())
 			{
