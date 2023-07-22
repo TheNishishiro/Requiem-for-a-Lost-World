@@ -29,7 +29,7 @@ namespace Objects.Players.Scripts
 					amount = 0;
 				
 				onDamageTaken?.Invoke(amount);
-				DamageTakenStaticEvent.Invoke(amount);
+				DamageTakenEvent.Invoke(amount);
 			}
 			else if (amount < 0)
 			{

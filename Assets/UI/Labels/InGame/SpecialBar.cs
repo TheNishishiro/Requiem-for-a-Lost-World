@@ -16,6 +16,10 @@ namespace UI.Labels.InGame
 		public void Increment(float value)
 		{
 			slider.value += value;
+			if (slider.value > slider.maxValue)
+				slider.value = slider.maxValue;
+			else if (slider.value < 0)
+				slider.value = 0;
 		}
 
 		public void SetMax(float maxValue)

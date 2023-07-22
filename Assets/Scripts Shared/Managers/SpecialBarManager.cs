@@ -1,4 +1,5 @@
 ﻿using System;
+using Events.Scripts;
 using Objects.Characters;
 using Objects.Enemies;
 using Objects.Stage;
@@ -11,14 +12,12 @@ namespace Managers
 	public class SpecialBarManager : MonoBehaviour
 	{
 		[SerializeField] private SpecialBar specialBar;
-		[SerializeField] private UnityEvent onSpecialBarFull;
 
 		private void Awake()
 		{
 			ResetBar();
 			SetMaxValue(GameData.GetPlayerCharacterData().SpecialMaxValue);
 		}
-
 		public void SetMaxValue(float maxValue)
 		{
 			specialBar.SetMax(maxValue);
@@ -34,18 +33,20 @@ namespace Managers
 			return specialBar.IsFull();
 		}
 
+		public void Increment()
+		{
+			specialBar.Increment(GameData.GetPlayerCharacterData().SpecialIncrementValue);
+		}
+
+		public void Increment(float amount)
+		{
+			specialBar.Increment(amount);
+		}
+
 		private void Update()
 		{
 			if (IsFull())
-				onSpecialBarFull?.Invoke();
-		}
-		
-		public void OnEnemyKilled(Enemy enemy)
-		{
-			if (GameData.GetPlayerCharacterId() != CharactersEnum.Nishi)
-				return;
-			
-			specialBar.Increment(GameData.GetPlayerCharacterData().SpecialIncrementValue);
+				SpecialBarFilledEvent.Invoke();
 		}
 	}
 }

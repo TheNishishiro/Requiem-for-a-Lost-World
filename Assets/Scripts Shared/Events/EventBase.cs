@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DefaultNamespace.Events
+namespace Events
 {
 	public class EventBase<T>
 	{

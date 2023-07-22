@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using Events.Scripts;
+using Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 using Image = UnityEngine.UIElements.Image;
@@ -14,6 +15,7 @@ namespace Objects.Drops.ExpDrop
 		public void OnPickUp(Player player)
 		{
 			player.AddExperience(expAmount);
+			ExpPickedUpEvent.Invoke(expAmount);
 		}
 
 		public void SetAmount(int amount)

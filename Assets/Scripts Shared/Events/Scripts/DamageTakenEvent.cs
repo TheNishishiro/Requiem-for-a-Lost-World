@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using DefaultNamespace.Events;
 using Events.Handlers;
 
 namespace Events.Scripts
 {
-	public abstract class DamageTakenStaticEvent : EventBase<IDamageTakenHandler>
+	public abstract class DamageTakenEvent : EventBase<IDamageTakenHandler>
 	{
 		public static void Invoke(float damage)
 		{
