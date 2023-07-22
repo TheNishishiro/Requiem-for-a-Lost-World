@@ -1,22 +1,11 @@
 ﻿using System.Collections.Generic;
+using DefaultNamespace.Events;
 using Events.Handlers;
 
 namespace Events.Scripts
 {
-	public static class DamageTakenStaticEvent
+	public abstract class DamageTakenStaticEvent : EventBase<IDamageTakenHandler>
 	{
-		private static List<IDamageTakenHandler> listeners = new ();
-
-		public static void Register(IDamageTakenHandler listener)
-		{
-			listeners.Add(listener);
-		}
-
-		public static void Unregister(IDamageTakenHandler listener)
-		{
-			listeners.Remove(listener);
-		}
-
 		public static void Invoke(float damage)
 		{
 			for(var i = listeners.Count - 1; i >= 0; i--)

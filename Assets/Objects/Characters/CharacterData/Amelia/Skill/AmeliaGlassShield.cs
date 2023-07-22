@@ -33,19 +33,16 @@ public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler
 
     private void OnEnable()
     {
-        Debug.Log("Registering");
         DamageTakenStaticEvent.Register(this);
     }
     
     private void OnDisable()
     {
-        Debug.Log("Unregistering");
         DamageTakenStaticEvent.Unregister(this);
     }
 
     public void OnDamageTaken(float amount)
     {
-        Debug.Log(activeShards.Count);
         if (activeShards.Count == 0)
             return;
         
