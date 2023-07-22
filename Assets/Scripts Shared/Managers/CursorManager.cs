@@ -1,4 +1,5 @@
 ﻿using System;
+using Objects.Stage;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,7 +12,8 @@ namespace Managers
 
 		private void Start()
 		{
-			HideCursor();
+			if (!GameData.GetPlayerCharacterData().PickWeaponOnStart)
+				HideCursor();
 		}
 
 		private void Update()
