@@ -26,11 +26,18 @@ namespace Managers
 		private void Start()
 		{
 			HideButtons();
+			if (GameData.GetPlayerCharacterData().PickWeaponOnStart)
+				OpenPickWeapon();
 		}
 
 		public void OpenPanel()
 		{
 			ReloadUpgrades();
+		}
+
+		public void OpenPickWeapon()
+		{
+			ReloadUpgrades(true);
 		}
 
 		public void ClosePanel()
@@ -67,12 +74,15 @@ namespace Managers
 			ClosePanel();
 		}
 
-		private void ReloadUpgrades()
+		private void ReloadUpgrades(bool isWeaponOnly = false)
 		{
 			HideButtons();
 			rerollButton.gameObject.SetActive(playerStatsComponent.HasRerolls());
 			skipButton.gameObject.SetActive(playerStatsComponent.HasSkips());
-			var upgradeEntries = weaponManager.GetUpgrades().OrderBy(x => Random.value).Take(Random.Range(3, 5)).ToList();
+			var upgradeEntries = (isWeaponOnly ? weaponManager.GetWeaponUnlocks() : weaponManager.GetUpgrades())
+				.OrderBy(_ => Random.value)
+				.Take(Random.Range(3, 5))
+				.ToList();
 			if (upgradeEntries.Count == 0)
 				return;
             

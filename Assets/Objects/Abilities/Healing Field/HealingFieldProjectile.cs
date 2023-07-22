@@ -14,7 +14,7 @@ namespace Objects.Abilities.Healing_Field
         public override void SetStats(WeaponStats weaponStats)
         {
 	        base.SetStats(weaponStats);
-	        _currentHealingFrequency = healingFrequency;
+	        _currentHealingFrequency = 0;
         }
 
         private void Update()
@@ -31,7 +31,8 @@ namespace Objects.Abilities.Healing_Field
         private void SpawnHealingField()
 		{
 	        var healingField = SpawnManager.instance.SpawnObject(transform.position, healingFieldPrefab);
-	        healingField.GetComponent<HealingField>().SetHealAmount(WeaponStats.GetDamage());
+	        healingField.transform.localScale *= WeaponStats.GetScale();
+	        healingField.GetComponent<HealingField>().SetHealAmount(WeaponStats.HealPerHit);
 		}
 	}
 }

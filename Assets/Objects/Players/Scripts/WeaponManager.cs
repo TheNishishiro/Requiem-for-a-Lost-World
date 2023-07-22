@@ -122,7 +122,7 @@ public class WeaponManager : MonoBehaviour
         }).Where(x => x != null);
     }
     
-    private IEnumerable<UpgradeEntry> GetWeaponUnlocks()
+    public IEnumerable<UpgradeEntry> GetWeaponUnlocks()
     {
         if (_unlockedWeapons.Count >= maxWeaponCount)
             return new List<UpgradeEntry>();

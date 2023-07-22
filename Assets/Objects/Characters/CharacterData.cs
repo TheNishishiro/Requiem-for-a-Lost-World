@@ -33,12 +33,13 @@ namespace Objects.Characters
 		public int StarRating;
 		public WeaponBase StartingWeapon;
 		public bool IsPullable;
-		public PlayerStats Stats;
-		public List<EidolonData> Eidolons;
-		public List<CharacterLoreEntry> loreEntries;
 		public bool UseSpecialBar;
 		public float SpecialMaxValue;
 		public float SpecialIncrementValue;
+		public bool PickWeaponOnStart;
+		public PlayerStats Stats;
+		public List<EidolonData> Eidolons;
+		public List<CharacterLoreEntry> loreEntries;
 
 		public void Activate()
 		{

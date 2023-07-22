@@ -26,12 +26,16 @@ MonoBehaviour:
   AbilityCooldown: 0
   AbilityPrefab: {fileID: 0}
   AbilityIcon: {fileID: 0}
-  IsActive: 0
+  IsActive: 1
   ColorTheme: {r: 1, g: 0.868332, b: 0, a: 1}
   StarRating: 4
-  StartingWeapon: {fileID: -1502213842381667073, guid: 035688860c19f5d4b8ab1db361189ebe,
+  StartingWeapon: {fileID: 4342425474514187230, guid: c24275b5471901b4baa533e2360c9b70,
     type: 3}
   IsPullable: 1
+  UseSpecialBar: 1
+  SpecialMaxValue: 150
+  SpecialIncrementValue: 1
+  PickWeaponOnStart: 1
   Stats:
     Health: 100
     HealthMax: 100
@@ -89,6 +93,3 @@ MonoBehaviour:
     EidolonDescription: 
     EidolonQuote: 
   loreEntries: []
-  UseSpecialBar: 1
-  SpecialMaxValue: 150
-  SpecialIncrementValue: 1

@@ -1,4 +1,8 @@
-﻿using Weapons;
+﻿using DefaultNamespace;
+using Managers;
+using Objects.Abilities.BindingField;
+using UnityEngine;
+using Weapons;
 
 namespace Objects.Abilities.Healing_Field
 {
@@ -6,7 +10,12 @@ namespace Objects.Abilities.Healing_Field
 	{
 		public override void Attack()
 		{
-			throw new System.NotImplementedException();
+			var pointOnSurface = Utilities.GetPointOnColliderSurface(new Vector3(transform.position.x, 0, transform.position.z), transform);
+			var healingField = SpawnManager.instance.SpawnObject(pointOnSurface, spawnPrefab);
+			var projectileComponent = healingField.GetComponent<HealingFieldProjectile>();
+
+			projectileComponent.SetParentWeapon(this);
+			projectileComponent.SetStats(weaponStats);
 		}
 	}
 }
