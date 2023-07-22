@@ -27,12 +27,16 @@ namespace Objects.Players.Scripts
 		[SerializeField] private HealthComponent healthComponent;
 		[SerializeField] private ChronastaSkill chronastaSkill;
 		[SerializeField] private SpecialBar specialBar;
+		private AmeliaGlassShield _ameliaGlassShield;
 		private float _currentSkillCooldown = 0f;
 		private float _skillCooldown = 5f;
 
 		public void Start()
 		{
 			_skillCooldown = GameData.GetCharacterSkillCooldown();
+			
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Amelia)
+				_ameliaGlassShield = Instantiate(GameData.GetSkillPrefab(), abilityContainer).GetComponent<AmeliaGlassShield>();
 		}
 
 		public void Update()

@@ -1,4 +1,5 @@
 ﻿using System;
+using Events.Scripts;
 using Managers;
 using UI.Labels.InGame;
 using UnityEngine;
@@ -28,6 +29,7 @@ namespace Objects.Players.Scripts
 					amount = 0;
 				
 				onDamageTaken?.Invoke(amount);
+				DamageTakenStaticEvent.Invoke(amount);
 			}
 			else if (amount < 0)
 			{
