@@ -30,7 +30,7 @@ namespace Objects.Abilities.Laser_Gun
 
 		public override bool IsUnlocked(SaveFile saveFile)
 		{
-			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithAmelia);
+			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithAmelia_BoD);
 		}
 
 		protected override int GetAttackCount()

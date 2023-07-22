@@ -8,6 +8,7 @@ namespace Objects.Abilities.Healing_Field
 	{
 		[SerializeField] private float lifeTime;
 		private float _healAmount;
+		private bool _isEmpowering;
 
 		private void Update()
 		{
@@ -18,17 +19,20 @@ namespace Objects.Abilities.Healing_Field
 			}
 		}
 
-		public void SetHealAmount(float healAmount)
+		public void Setup(float healAmount, bool isEmpowering)
 		{
 			_healAmount = healAmount;
+			_isEmpowering = isEmpowering;
 		}
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.CompareTag("Player"))
-			{
-				other.GetComponent<Player>().TakeDamage(-_healAmount);
-			}
+			if (!other.CompareTag("Player")) return;
+			var playerComponent = other.GetComponent<Player>();
+			playerComponent.TakeDamage(-_healAmount);
+				
+			if (_isEmpowering)
+				playerComponent.DamageBoost(0.5f, 1.5f);
 		}
 	}
 }

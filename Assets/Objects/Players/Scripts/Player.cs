@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Objects.Players;
 using Objects.Players.Scripts;
 using Objects.Stage;
@@ -13,6 +14,8 @@ public class Player : MonoBehaviour
 	[HideInInspector] public HealthComponent healthComponent; 
 	[HideInInspector] public PlayerStatsComponent playerStatsComponent;
 	[SerializeField] public GameResultData gameResultData;
+	private Coroutine _damageBoostCoroutine;
+	private float _lastPercentageIncrease = 0;
 	
 	private void Start()
 	{
@@ -56,5 +59,24 @@ public class Player : MonoBehaviour
 	{
 		var gemsEarned = (int)Math.Ceiling(gemAmount * playerStatsComponent.GetItemRewardIncrease());
 		gameResultData.AddGems(gemsEarned);
+	}
+
+	public void DamageBoost(float percentageIncrease, float duration)
+	{
+		if (_damageBoostCoroutine != null)
+		{
+			StopCoroutine(_damageBoostCoroutine);
+			playerStatsComponent.IncreaseDamageIncreasePercentage(-_lastPercentageIncrease);
+		}
+		_lastPercentageIncrease = percentageIncrease;
+		_damageBoostCoroutine = StartCoroutine(DamageBoostProcess(percentageIncrease, duration));
+	}
+
+	private IEnumerator DamageBoostProcess(float amount, float duration)
+	{
+		playerStatsComponent.IncreaseDamageIncreasePercentage(amount);
+		yield return new WaitForSeconds(duration);
+		playerStatsComponent.IncreaseDamageIncreasePercentage(-amount);
+		_damageBoostCoroutine = null;
 	}
 }
