@@ -75,7 +75,7 @@ namespace Objects.Players.Scripts
 					StartCoroutine(MaidSkill());
 					break;
 				case CharactersEnum.Amelia_BoD:
-					AmeliaSkill();
+					AmeliaBoDSkill();
 					break;
 				case CharactersEnum.David_BoF:
 					StartCoroutine(DavidSkill());
@@ -86,10 +86,18 @@ namespace Objects.Players.Scripts
 				case CharactersEnum.Corina_BoB:
 					StartCoroutine(CorinaSkill());
 					break;
+				case CharactersEnum.Amelia:
+					AmeliaSkill();
+					break;
 				case CharactersEnum.Nishi:
 					NishiSkill();
 					break;
 			}
+		}
+
+		private void AmeliaSkill()
+		{
+			_ameliaGlassShield.SpawnShards(6);
 		}
 
 		private void NishiSkill()
@@ -140,7 +148,7 @@ namespace Objects.Players.Scripts
 			playerStatsComponent.IncreaseDamageIncreasePercentage(-damageIncreasePercentage);
 		}
 		
-		private void AmeliaSkill()
+		private void AmeliaBoDSkill()
 		{
 			SpawnManager.instance.SpawnObject(transform.position, GameData.GetSkillPrefab().gameObject, transform.rotation);
 		}

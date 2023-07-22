@@ -26,6 +26,11 @@ namespace Objects.Players.Scripts
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Arika_BoV && GameData.GetPlayerCharacterRank() == CharacterRank.E3)
 				_playerStats.SkillCooldownReductionPercentage += 0.25f;
 		}
+		
+		public void Add(PermUpgradeType permUpgradeType, float value)
+		{
+			_playerStats.Add(permUpgradeType, value);
+		}
 
 		public IEnumerable<StatsDisplayData> GetStats()
 		{

@@ -242,7 +242,7 @@ namespace Objects.Players
 					AttackCount += (int) value;
 					break;
 				case PermUpgradeType.HealthRegen:
-					HealthRegen += (int) value;
+					HealthRegen += value;
 					break;
 				case PermUpgradeType.DamageIncrease:
 					DamagePercentageIncrease += value;
@@ -254,7 +254,7 @@ namespace Objects.Players
 					CooldownReductionPercentage += value;
 					break;
 				case PermUpgradeType.Health:
-					HealthMax += (int) value;
+					HealthMax += value;
 					break;
 				case PermUpgradeType.Curse:
 					EnemySpeedIncreasePercentage += value;

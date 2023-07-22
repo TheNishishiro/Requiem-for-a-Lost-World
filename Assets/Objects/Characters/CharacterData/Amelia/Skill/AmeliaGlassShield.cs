@@ -56,7 +56,7 @@ public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler, ISpeci
             return;
         
         var shard = _activeShards.First();
-        Destroy(shard.gameObject);
+        shard.Shatter();
         _activeShards.Remove(shard);
         
         FindObjectOfType<HealthComponent>().Damage(-amount);
@@ -76,6 +76,8 @@ public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler, ISpeci
         var go = Instantiate(shardPrefab, transform);
         go.transform.localPosition += new Vector3(Random.Range(offsetMin, offsetMax),Random.Range(offsetMin, offsetMax),Random.Range(offsetMin, offsetMax));
         var component = go.GetComponent<AmeliaGlassShard>();
+        if (component == null)
+            Destroy(go);
         component.Initialize(transform);
         _activeShards.Add(component);
     }
@@ -83,5 +85,16 @@ public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler, ISpeci
     public void OnExpPickedUp(float amount)
     {
         SpecialBarManager.Increment();
+    }
+
+    public void SpawnShards(int i)
+    {
+        for (var j = 0; j < i; j++)
+        {
+            if (_activeShards.Count >= maxShardsCount)
+                return;
+            
+            SpawnShard();
+        }
     }
 }

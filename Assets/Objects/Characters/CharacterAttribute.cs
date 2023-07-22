@@ -12,7 +12,7 @@ namespace Objects.Characters
 		}
 	}
 	
-	public static class AchievementValueExtension
+	public static class CharacterValueExtension
 	{
 		public static string GetName(this CharactersEnum charactersEnum)
 		{
