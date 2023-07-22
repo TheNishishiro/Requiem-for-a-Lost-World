@@ -15,7 +15,7 @@ namespace Objects.Characters.Amelia.Skill
         {
             parentTransform = parent;
             rotationSpeed = Random.Range(60, 130);
-            radius = Random.Range(0.8f, 1f);
+            radius = Random.Range(0.1f, 0.3f);
             rotationAxis = Random.onUnitSphere;
             transform.position = (transform.position - parentTransform.position).normalized * radius + parentTransform.position;
         }
