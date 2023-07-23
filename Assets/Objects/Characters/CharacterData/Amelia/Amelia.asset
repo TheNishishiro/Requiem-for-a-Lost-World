@@ -19,7 +19,7 @@ MonoBehaviour:
   TransparentCard: {fileID: 0}
   Avatar: {fileID: 21300000, guid: 55c8df29eb0b106489a068c4a986b5bd, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 30c802ad28e83cc41965dfe6c388f4da, type: 3}
-  CharacterGachaArt: {fileID: 0}
+  CharacterGachaArt: {fileID: 21300000, guid: 3dbfb3b2610c8aa43bb540cc1335fdac, type: 3}
   PassiveDescription: 'After obtaining <color=#00B1FF>exp gem</color> increase special
     by <color=yellow>1</color>. When special bar is filled summon wish shard to protect
     Amelia. Every time Amelia takes damage the shard is consumed negating damage
@@ -43,12 +43,12 @@ MonoBehaviour:
     type: 3}
   IsPullable: 1
   UseSpecialBar: 1
-  SpecialMaxValue: 100
-  SpecialIncrementValue: 1
   PickWeaponOnStart: 1
   Stats:
     Health: 60
     HealthMax: 60
+    SpecialMax: 100
+    SpecialIncrease: 1
     MagnetSize: 1.2
     CooldownReduction: 0
     CooldownReductionPercentage: 0
@@ -83,23 +83,34 @@ MonoBehaviour:
     Skips: 0
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: cf5be51b6c188904f95e50488f3e8cb3, type: 3}
-    EidolonName: 
-    EidolonDescription: 
+    EidolonName: When I first met you
+    EidolonDescription: Increase movement speed by <color=green>0.1</color> m/s
     EidolonQuote: 
   - EidolonTexture: {fileID: 21300000, guid: 53cfba73cb518114bb6c558689195c20, type: 3}
-    EidolonName: 
-    EidolonDescription: 
+    EidolonName: Heart Ache
+    EidolonDescription: 'Increase damage dealt and taken by <color=orange>20%</color>
+
+      Every
+      time shard shatters gain additional <color=green>30%</color> damage and <color=green>0.2</color>
+      m/s for 2 seconds'
     EidolonQuote: 
   - EidolonTexture: {fileID: 21300000, guid: b59df352cbaf86f4f8f15d650ab75954, type: 3}
-    EidolonName: 
-    EidolonDescription: 
+    EidolonName: Peaceful nights by your side
+    EidolonDescription: Every 30 levels gain <color=green>1</color> additional projectile
+      (up to 4)
     EidolonQuote: 
   - EidolonTexture: {fileID: 21300000, guid: 0e51bc28569f9f64a891c3ba15fd9287, type: 3}
-    EidolonName: 
-    EidolonDescription: 
+    EidolonName: Sweetest life
+    EidolonDescription: Each glass shard in possesion increases EXP gain by <color=green>2%</color>
     EidolonQuote: 
   - EidolonTexture: {fileID: 21300000, guid: f09cad04c9c87ba4c815ec07c03bc19e, type: 3}
-    EidolonName: 
-    EidolonDescription: 
+    EidolonName: Promises broken
+    EidolonDescription: 'Increase special increase with each <color=#00B1FF>exp gem</color>
+      by additional <color=yellow>1</color> point.
+
+      Increase max amount of
+      shards to <color=green>16</color>
+
+      Increase damage taken by <color=red>50%</color>'
     EidolonQuote: 
   loreEntries: []

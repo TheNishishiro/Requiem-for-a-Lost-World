@@ -2,9 +2,9 @@
 using Objects.Players;
 using Objects.Players.Scripts;
 
-namespace Objects.Characters.Amelia
+namespace Objects.Characters.Amelia_BoD
 {
-	public class AmeliaStrategy : ICharacterStrategy
+	public class AmeliaBoDStrategy : ICharacterStrategy
 	{
 		public void ApplyRank(PlayerStats stats, CharacterRank characterRank)
 		{

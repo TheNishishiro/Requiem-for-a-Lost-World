@@ -9,6 +9,8 @@ namespace Objects.Characters.Amelia.Skill
 {
     public class AmeliaGlassShard : MonoBehaviour
     {
+        [SerializeField] private GameObject shatterEffect;
+        [SerializeField] private GameObject glashShardModel;
         private float rotationSpeed;
         private float radius;
         private Vector3 desiredPosition;
@@ -17,6 +19,7 @@ namespace Objects.Characters.Amelia.Skill
         private PermUpgradeType statToUpgrade;
         private float statIncrease;
         private PlayerStatsComponent playerStatsComponent;
+        private float e4ExperienceIncreaseAmount = 0.02f;
         
         public void Initialize(Transform parent)
         {
@@ -30,18 +33,30 @@ namespace Objects.Characters.Amelia.Skill
             statToUpgrade = (PermUpgradeType) Random.Range(0, Enum.GetValues(typeof(PermUpgradeType)).Length);
             statIncrease = statToUpgrade.IsPercent() ? Random.Range(0.01f, 0.1f) : Random.Range(1, 3);
             playerStatsComponent.Add(statToUpgrade, statIncrease);
+            playerStatsComponent.IncreaseExperienceGain(e4ExperienceIncreaseAmount);
         }
 
         public void Shatter()
         {
             playerStatsComponent.Add(statToUpgrade, -statIncrease);
-            Destroy(gameObject);
+            playerStatsComponent.TemporaryMoveSpeedBoost(0.2f, 2);
+            playerStatsComponent.TemporaryAttackBoost(0.3f, 2);
+            playerStatsComponent.IncreaseExperienceGain(-e4ExperienceIncreaseAmount);
+            StartCoroutine(PlayShatterEffect());
         }
 	
         void Update () {
             transform.RotateAround (parentTransform.position, rotationAxis, rotationSpeed * Time.deltaTime);
             desiredPosition = (transform.position - parentTransform.position).normalized * radius + parentTransform.position;
             transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * rotationSpeed);
+        }
+
+        private IEnumerator PlayShatterEffect()
+        {
+            glashShardModel.SetActive(false);
+            shatterEffect.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            Destroy(gameObject);
         }
     }
 }

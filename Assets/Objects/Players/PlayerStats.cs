@@ -17,6 +17,8 @@ namespace Objects.Players
 	{
 		public float Health;
 		public float HealthMax;
+		public float SpecialMax;
+		public float SpecialIncrease;
 		public float MagnetSize;
 		public float CooldownReduction;
 		public float CooldownReductionPercentage;
@@ -185,6 +187,8 @@ namespace Objects.Players
             DamageOverTime = playerStats.DamageOverTime;
             Rerolls = playerStats.Rerolls;
             Skips = playerStats.Skips;
+            SpecialIncrease = playerStats.SpecialIncrease;
+            SpecialMax = playerStats.SpecialMax;
         }
 
 		public IEnumerable<StatsDisplayData> GetStatsList()

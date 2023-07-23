@@ -14,12 +14,11 @@ using Random = UnityEngine.Random;
 
 public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler, ISpecialBarFilledHandler, IExpPickedUpHandler
 {
-    [SerializeField] private int maxShardsCount;
     [SerializeField] private GameObject shardPrefab;
-    [SerializeField] private float offsetMin;
-    [SerializeField] private float offsetMax;
+    private const float SpawnOffset = 0.2f;
     private List<AmeliaGlassShard> _activeShards = new ();
     private SpecialBarManager _specialBarManager;
+    private static int MaxShardsCount => GameData.GetPlayerCharacterRank() == CharacterRank.E5 ? 16 : 12;
 
     public SpecialBarManager SpecialBarManager
     {
@@ -33,7 +32,7 @@ public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler, ISpeci
     
     private void Awake()
     {
-        _activeShards = new List<AmeliaGlassShard>(maxShardsCount);
+        _activeShards = new List<AmeliaGlassShard>();
     }
 
     private void OnEnable()
@@ -64,7 +63,7 @@ public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler, ISpeci
 
     public void OnSpecialBarFilled()
     {
-        if (_activeShards.Count >= maxShardsCount)
+        if (_activeShards.Count >= MaxShardsCount)
             return;
         
         SpawnShard();
@@ -74,7 +73,7 @@ public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler, ISpeci
     private void SpawnShard()
     {
         var go = Instantiate(shardPrefab, transform);
-        go.transform.localPosition += new Vector3(Random.Range(offsetMin, offsetMax),Random.Range(offsetMin, offsetMax),Random.Range(offsetMin, offsetMax));
+        go.transform.localPosition += new Vector3(Random.Range(-SpawnOffset, SpawnOffset),Random.Range(-SpawnOffset, SpawnOffset),Random.Range(-SpawnOffset, SpawnOffset));
         var component = go.GetComponent<AmeliaGlassShard>();
         if (component == null)
             Destroy(go);
@@ -91,7 +90,7 @@ public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler, ISpeci
     {
         for (var j = 0; j < i; j++)
         {
-            if (_activeShards.Count >= maxShardsCount)
+            if (_activeShards.Count >= MaxShardsCount)
                 return;
             
             SpawnShard();

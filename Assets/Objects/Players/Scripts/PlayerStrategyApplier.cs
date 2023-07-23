@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Interfaces;
 using Objects.Characters;
 using Objects.Characters.Amelia;
+using Objects.Characters.Amelia_BoD;
 using Objects.Characters.Arika;
 using Objects.Characters.Chitose;
 using Objects.Characters.Corina_Alter;
@@ -16,7 +17,8 @@ namespace Objects.Players.Scripts
 		private readonly Dictionary<CharactersEnum, ICharacterStrategy> _characterStrategies = new()
 		{
 			{ CharactersEnum.Chitose, new ChitoseStrategy() },
-			{ CharactersEnum.Amelia_BoD, new AmeliaStrategy() },
+			{ CharactersEnum.Amelia, new AmeliaStrategy() },
+			{ CharactersEnum.Amelia_BoD, new AmeliaBoDStrategy() },
 			{ CharactersEnum.Arika_BoV, new ArikaStrategy() },
 			{ CharactersEnum.Corina_BoB, new CorinaStrategy() },
 			{ CharactersEnum.David_BoF, new DavidStrategy() },

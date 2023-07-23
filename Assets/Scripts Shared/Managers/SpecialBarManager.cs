@@ -2,6 +2,7 @@
 using Events.Scripts;
 using Objects.Characters;
 using Objects.Enemies;
+using Objects.Players.Scripts;
 using Objects.Stage;
 using UI.Labels.InGame;
 using UnityEngine;
@@ -12,11 +13,12 @@ namespace Managers
 	public class SpecialBarManager : MonoBehaviour
 	{
 		[SerializeField] private SpecialBar specialBar;
+		[SerializeField] private PlayerStatsComponent playerStatsComponent;
 
 		private void Awake()
 		{
 			ResetBar();
-			SetMaxValue(GameData.GetPlayerCharacterData().SpecialMaxValue);
+			SetMaxValue(playerStatsComponent.GetSpecialMaxValue());
 		}
 		public void SetMaxValue(float maxValue)
 		{
@@ -35,7 +37,7 @@ namespace Managers
 
 		public void Increment()
 		{
-			specialBar.Increment(GameData.GetPlayerCharacterData().SpecialIncrementValue);
+			specialBar.Increment(playerStatsComponent.GetSpecialIncrementAmount());
 		}
 
 		public void Increment(float amount)

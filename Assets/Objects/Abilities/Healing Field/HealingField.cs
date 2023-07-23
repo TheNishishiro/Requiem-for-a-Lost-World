@@ -1,4 +1,5 @@
 ﻿using System;
+using Objects.Players.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -32,7 +33,7 @@ namespace Objects.Abilities.Healing_Field
 			playerComponent.TakeDamage(-_healAmount);
 				
 			if (_isEmpowering)
-				playerComponent.DamageBoost(0.5f, 1.5f);
+				other.GetComponent<PlayerStatsComponent>().TemporaryAttackBoost(0.5f, 1.5f);
 		}
 	}
 }

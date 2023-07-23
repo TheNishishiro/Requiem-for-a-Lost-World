@@ -34,8 +34,6 @@ namespace Objects.Characters
 		public WeaponBase StartingWeapon;
 		public bool IsPullable;
 		public bool UseSpecialBar;
-		public float SpecialMaxValue;
-		public float SpecialIncrementValue;
 		public bool PickWeaponOnStart;
 		public PlayerStats Stats;
 		public List<EidolonData> Eidolons;

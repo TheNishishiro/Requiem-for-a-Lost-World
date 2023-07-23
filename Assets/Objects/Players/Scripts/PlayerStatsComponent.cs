@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Objects.Abilities;
@@ -16,7 +17,11 @@ namespace Objects.Players.Scripts
 	{
 		private PlayerStats _playerStats;
 		public bool IsInvincible;
-		
+		private Coroutine _moveSpeedBoostCoroutine;
+		private float _lastMoveSpeedIncrease;
+		private Coroutine _attackBoostCoroutine;
+		private float _lastAttackIncrease;
+
 		public void Set(PlayerStats playerStats)
 		{
 			_playerStats ??= new PlayerStats();
@@ -145,6 +150,11 @@ namespace Objects.Players.Scripts
 		public void IncreaseReroll(int amount)
 		{
 			_playerStats.Rerolls += amount;
+		}
+
+		public void IncreaseMovementSpeed(float amount)
+		{
+			_playerStats.MovementSpeed += amount;
 		}
 
 		public int GetTotalDamage(int baseDamage)
@@ -338,6 +348,54 @@ namespace Objects.Players.Scripts
 		public int GetRerolls()
 		{
 			return _playerStats?.Rerolls ?? 0;
+		}
+
+		public float GetSpecialMaxValue()
+		{
+			return _playerStats?.SpecialMax ?? 0;
+		}
+
+		public float GetSpecialIncrementAmount()
+		{
+			return _playerStats?.SpecialIncrease ?? 0;
+		}
+
+		public void TemporaryMoveSpeedBoost(float increase, float duration)
+		{
+			if (_moveSpeedBoostCoroutine != null)
+			{
+				StopCoroutine(_moveSpeedBoostCoroutine);
+				IncreaseMovementSpeed(-_lastMoveSpeedIncrease);
+			}
+			_lastMoveSpeedIncrease = increase;
+			_moveSpeedBoostCoroutine = StartCoroutine(MoveSpeedBoostProcess(increase, duration));
+		}
+
+		private IEnumerator MoveSpeedBoostProcess(float amount, float duration)
+		{
+			IncreaseMovementSpeed(amount);
+			yield return new WaitForSeconds(duration);
+			IncreaseMovementSpeed(-amount);
+			_moveSpeedBoostCoroutine = null;
+		}
+
+		public void TemporaryAttackBoost(float increase, float duration)
+		{
+			if (_attackBoostCoroutine != null)
+			{
+				StopCoroutine(_attackBoostCoroutine);
+				IncreaseDamageIncreasePercentage(-_lastAttackIncrease);
+			}
+			_lastAttackIncrease = increase;
+			_attackBoostCoroutine = StartCoroutine(AttackBoostProcess(increase, duration));
+		}
+
+		private IEnumerator AttackBoostProcess(float amount, float duration)
+		{
+			IncreaseDamageIncreasePercentage(amount);
+			yield return new WaitForSeconds(duration);
+			IncreaseDamageIncreasePercentage(-amount);
+			_attackBoostCoroutine = null;
 		}
 	}
 }
