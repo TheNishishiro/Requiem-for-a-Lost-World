@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using Objects.Players.PermUpgrades;
 using Objects.Players.Scripts;
 using UnityEngine;
@@ -30,8 +31,11 @@ namespace Objects.Characters.Amelia.Skill
             rotationAxis = Random.onUnitSphere;
             transform.position = (transform.position - parentTransform.position).normalized * radius + parentTransform.position;
 
-            statToUpgrade = (PermUpgradeType) Random.Range(0, Enum.GetValues(typeof(PermUpgradeType)).Length);
-            statIncrease = statToUpgrade.IsPercent() ? Random.Range(0.01f, 0.1f) : Random.Range(1, 3);
+            statToUpgrade = Enum.GetValues(typeof(PermUpgradeType)).Cast<PermUpgradeType>().Except(new[]
+            {
+                PermUpgradeType.AttackCount
+            }).ToList().OrderBy(_ => Random.value).FirstOrDefault();
+            statIncrease = statToUpgrade.IsPercent() ? 0.01f : 1;
             playerStatsComponent.Add(statToUpgrade, statIncrease);
             playerStatsComponent.IncreaseExperienceGain(e4ExperienceIncreaseAmount);
         }
