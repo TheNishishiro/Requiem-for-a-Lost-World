@@ -31,6 +31,7 @@ namespace UI.Main_Menu.Character_List_Menu
 		[SerializeField] private Image separationLine3;
 		[SerializeField] private Image separationLine4;
 		[SerializeField] private Image separationLine5;
+		[SerializeField] private Image separationLine6;
 		[SerializeField] private GameObject statsPanel;
 		private RankDisplayPanel _rankDisplayPanel;
 		private LorePanelManager _lorePanelManager;
@@ -47,7 +48,7 @@ namespace UI.Main_Menu.Character_List_Menu
 			expTextField.text = $"EXP ► {(characterSaveData.Experience / (float) characterSaveData.ExperienceNeeded):P}";
 			expSlider.SetValue(characterSaveData.Experience, characterSaveData.ExperienceNeeded);
 			characterImage.sprite = characterData.TransparentCard;
-			separationLine1.color = separationLine2.color = separationLine3.color = separationLine4.color = separationLine5.color = characterData.ColorTheme;
+			separationLine1.color = separationLine2.color = separationLine3.color = separationLine4.color = separationLine5.color = separationLine6.color = characterData.ColorTheme;
 			killCountTextField.text = Utilities.GetShortNumberFormatted(characterSaveData.KillCount);
 			highestLevelTextField.text = characterSaveData.HighestInGameLevel.ToString();
 			startingWeapon.Set(characterData.StartingWeapon.Icon, characterData.StartingWeapon.Name, characterData.StartingWeapon.Description);

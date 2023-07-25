@@ -34,7 +34,7 @@ RectTransform:
   m_Children:
   - {fileID: 6285208860078194196}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -107,6 +107,9 @@ MonoBehaviour:
   TargetImage: {fileID: 8859237451925531473}
   GlassImage: {fileID: 4694759088706506026}
   maxTiltAngle: 15
+  idleMoveMagnitude: 10
+  idleMoveSpeed: 1
+  idleRotateSpeed: 30
 --- !u!1 &4213709307848470391
 GameObject:
   m_ObjectHideFlags: 0
