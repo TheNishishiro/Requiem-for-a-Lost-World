@@ -7,7 +7,6 @@ namespace Managers
 	{
 		[SerializeField] private GameObject gameOverScreen;
 		[SerializeField] private PauseManager pauseManager;
-		[SerializeField] private CursorManager cursorManager;
 		[SerializeField] private TextMeshProUGUI gameOverText;
 		[SerializeField] private GameObject victoryButton;
 		[SerializeField] private GameObject defeatButton;
@@ -18,7 +17,6 @@ namespace Managers
 			victoryButton.SetActive(isWin);
 			defeatButton.SetActive(!isWin);
 			
-			cursorManager.ShowCursor();
 			pauseManager.PauseGame();
 			gameOverScreen.SetActive(true);
 		}

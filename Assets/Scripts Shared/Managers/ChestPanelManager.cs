@@ -12,7 +12,6 @@ namespace Managers
 		[SerializeField] private WeaponManager weaponManager;
 		[SerializeField] private GameObject panel;
 		[SerializeField] private PauseManager pauseManager;
-		[SerializeField] private CursorManager cursorManager;
 		
 		public void OpenPanel()
 		{
@@ -36,9 +35,7 @@ namespace Managers
 				player.AddGems(Random.Range(1, 10));
 				return;
 			}
-				
-			
-			cursorManager.ShowCursor();
+            
 			pauseManager.PauseGame();
 			Clean();
 			panel.SetActive(true);
@@ -56,7 +53,6 @@ namespace Managers
 			HideButtons();
 			pauseManager.UnPauseGame();
 			panel.SetActive(false);
-			cursorManager.HideCursor();
 		}
 		
 		public void HideButtons()

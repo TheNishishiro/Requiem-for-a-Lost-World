@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Objects.Characters;
 using TMPro;
+using UI.Main_Menu.Story_Layout_Panel;
 using UnityEngine;
 
 namespace UI.Main_Menu.Lore_library
@@ -13,48 +14,18 @@ namespace UI.Main_Menu.Lore_library
 		[SerializeField] private GameObject textBubblePrefab;
 		private List<GameObject> _entries;
 
-		public void Setup(CharacterLoreEntry loreEntry)
+		public void Setup(LoreEntry loreEntry)
 		{
 			_entries ??= new List<GameObject>();
-			switch (loreEntry.Type)
-			{
-				case CharacterLoreEntry.LoreEntryType.Dialog:
-					SetupDialog(loreEntry);
-					break;
-				case CharacterLoreEntry.LoreEntryType.Text:
-					SetupText(loreEntry);
-					break;
-				default:
-					throw new ArgumentOutOfRangeException();
-			}
+			SetupText(loreEntry);
 		}
 
-		private void SetupText(CharacterLoreEntry loreEntry)
+		private void SetupText(LoreEntry loreEntry)
 		{
 			var textBubbleGameObject = Instantiate(textBubblePrefab, transform);
 			var textBubble = textBubbleGameObject.GetComponentInChildren<TextMeshProUGUI>();
 			textBubble.text = loreEntry.TextFile.text;
 			_entries.Add(textBubbleGameObject);
-		}
-
-		private void SetupDialog(CharacterLoreEntry loreEntry)
-		{
-			var dialogEntries = loreEntry.TextFile.text.Split('\n');
-			foreach (var dialogEntry in dialogEntries)
-			{
-				if (dialogEntry.StartsWith("<character>"))
-				{
-					var authorGameObject = Instantiate(authorPrefab, transform);
-					authorGameObject.GetComponent<TextMeshProUGUI>().text = dialogEntry.Substring(11);
-					_entries.Add(authorGameObject);
-					continue;
-				}
-				
-				var textBubbleGameObject = Instantiate(textBubblePrefab, transform);
-				var textBubble = textBubbleGameObject.GetComponentInChildren<TextMeshProUGUI>();
-				textBubble.text = dialogEntry;
-				_entries.Add(textBubbleGameObject);
-			}
 		}
 
 		public void Clear()

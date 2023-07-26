@@ -18,7 +18,6 @@ namespace Managers
 		[SerializeField] private List<UpgradePanel> upgradeButtons;
 		[SerializeField] private PauseManager pauseManager;
 		[SerializeField] private WeaponManager weaponManager;
-		[SerializeField] private CursorManager cursorManager;
 		[SerializeField] private Button skipButton;
 		[SerializeField] private Button rerollButton;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
@@ -42,7 +41,6 @@ namespace Managers
 
 		public void ClosePanel()
 		{
-			cursorManager.HideCursor();
 			HideButtons();
 			pauseManager.UnPauseGame();
 			panel.SetActive(false);
@@ -86,7 +84,6 @@ namespace Managers
 			if (upgradeEntries.Count == 0)
 				return;
             
-			cursorManager.ShowCursor();
 			pauseManager.PauseGame();
 			Clean();
 			panel.SetActive(true);

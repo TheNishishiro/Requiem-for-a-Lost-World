@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0032712384, g: 0.28854826, b: 0.30656487, a: 1}
+  m_IndirectSpecularColor: {r: 0.15896621, g: 0.51753515, b: 1.0392404, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1905,7 +1905,7 @@ PrefabInstance:
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
@@ -1915,7 +1915,7 @@ PrefabInstance:
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
@@ -3069,7 +3069,7 @@ PrefabInstance:
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
@@ -3079,7 +3079,7 @@ PrefabInstance:
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
@@ -4173,7 +4173,7 @@ PrefabInstance:
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
@@ -4183,7 +4183,7 @@ PrefabInstance:
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
@@ -7499,7 +7499,7 @@ PrefabInstance:
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
@@ -7509,7 +7509,7 @@ PrefabInstance:
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
@@ -7620,6 +7620,7 @@ GameObject:
   - component: {fileID: 1557294560}
   - component: {fileID: 1557294562}
   - component: {fileID: 1557294563}
+  - component: {fileID: 1557294570}
   - component: {fileID: 1557294561}
   - component: {fileID: 1557294564}
   - component: {fileID: 1557294565}
@@ -7687,6 +7688,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2a3f1408a347969b1c76ab0c41ef43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursorManager: {fileID: 1557294563}
+  blurManager: {fileID: 1557294570}
 --- !u!114 &1557294563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7801,6 +7804,18 @@ MonoBehaviour:
   mergingThreshold: 5
   distanceFromPlayer: 12
   mainCamera: {fileID: 330585545}
+--- !u!114 &1557294570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557294559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f58de478cddc344a4aa65c399cf551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1564405034
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,6 @@ namespace UI.Labels.InGame.PauseMenu
 		[SerializeField] private GameObject levelUpPanel;
 		[SerializeField] private GameObject chestPanel;
 		[SerializeField] private GameObject gameOverPanel;
-		[SerializeField] private CursorManager cursorManager;
 		[SerializeField] private PauseManager pauseManager;
 		[SerializeField] private UnlockedUpgradesPanel unlockedWeaponsPanel;
 		[SerializeField] private UnlockedUpgradesPanel unlockedItemsPanel;
@@ -33,7 +32,6 @@ namespace UI.Labels.InGame.PauseMenu
 
 		public void CloseMenu()
 		{
-			cursorManager.HideCursor();
 			pauseManager.UnPauseGame();
 			
 			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();
@@ -43,7 +41,6 @@ namespace UI.Labels.InGame.PauseMenu
 		
 		public void OpenMenu()
 		{
-			cursorManager.ShowCursor();
 			pauseManager.PauseGame();
 			panel.SetActive(true);
 			

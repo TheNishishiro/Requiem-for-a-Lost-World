@@ -1,4 +1,5 @@
 ﻿using Objects.Characters;
+using UI.Main_Menu.Story_Layout_Panel;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ namespace UI.Main_Menu.Lore_library
 		[SerializeField] private LoreEntryContainer container;
 		[SerializeField] private Image background;
 		
-		public void Open(CharacterLoreEntry loreEntry)
+		public void Open(LoreEntry loreEntry)
 		{
 			gameObject.SetActive(true);
 			background.sprite = loreEntry.Background;
