@@ -8,6 +8,7 @@ using Objects.Abilities;
 using Objects.Abilities.Laser_Gun;
 using Objects.Characters;
 using Objects.Characters.Chronastra.Skill;
+using Objects.Characters.Nishi.Skill;
 using Objects.Enemies;
 using Objects.Stage;
 using UI.Labels.InGame;
@@ -28,6 +29,7 @@ namespace Objects.Players.Scripts
 		[SerializeField] private ChronastaSkill chronastaSkill;
 		[SerializeField] private SpecialBar specialBar;
 		private AmeliaGlassShield _ameliaGlassShield;
+		private NishiBloodLust _nishiBloodLust;
 		private float _currentSkillCooldown = 0f;
 		private float _skillCooldown = 5f;
 
@@ -37,6 +39,8 @@ namespace Objects.Players.Scripts
 			
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Amelia)
 				_ameliaGlassShield = Instantiate(GameData.GetSkillPrefab(), abilityContainer).GetComponent<AmeliaGlassShield>();
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Nishi)
+				_nishiBloodLust = Instantiate(GameData.GetSkillPrefab(), abilityContainer).GetComponent<NishiBloodLust>();
 		}
 
 		public void Update()

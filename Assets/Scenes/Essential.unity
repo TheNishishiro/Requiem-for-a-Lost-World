@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.15896621, g: 0.51753515, b: 1.0392404, a: 1}
+  m_IndirectSpecularColor: {r: 0.0032712384, g: 0.28854826, b: 0.30656487, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4137,6 +4137,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13cf4fa29e4f3504c85ba874595dd8a1, type: 3}
+--- !u!114 &744949130 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3624547272211910889, guid: 2aaeec1ac260d724f8c4faf09fc3e544,
+    type: 3}
+  m_PrefabInstance: {fileID: 876213787745947910}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47591353d9d85fe468dfc2f809ab0284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &772111512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7443,7 +7455,6 @@ MonoBehaviour:
   levelUpPanel: {fileID: 1339740055}
   chestPanel: {fileID: 215713706}
   gameOverPanel: {fileID: 397340985}
-  cursorManager: {fileID: 1557294563}
   pauseManager: {fileID: 1557294562}
   unlockedWeaponsPanel: {fileID: 502279569}
   unlockedItemsPanel: {fileID: 174787220}
@@ -7672,7 +7683,6 @@ MonoBehaviour:
   - {fileID: 1641790422}
   pauseManager: {fileID: 1557294562}
   weaponManager: {fileID: 51860986}
-  cursorManager: {fileID: 1557294563}
   skipButton: {fileID: 1707866732}
   rerollButton: {fileID: 972877891}
   playerStatsComponent: {fileID: 8997996947100127260}
@@ -7738,7 +7748,6 @@ MonoBehaviour:
   weaponManager: {fileID: 51860986}
   panel: {fileID: 215713706}
   pauseManager: {fileID: 1557294562}
-  cursorManager: {fileID: 1557294563}
 --- !u!114 &1557294566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7753,7 +7762,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 397340985}
   pauseManager: {fileID: 1557294562}
-  cursorManager: {fileID: 1557294563}
   gameOverText: {fileID: 436773379}
   victoryButton: {fileID: 1456279652}
   defeatButton: {fileID: 2029596845}
@@ -10508,4 +10516,4 @@ MonoBehaviour:
   abilityContainer: {fileID: 1124659725}
   healthComponent: {fileID: 8997996947100127259}
   chronastaSkill: {fileID: 1203521242}
-  specialBar: {fileID: 0}
+  specialBar: {fileID: 744949130}

@@ -43,16 +43,6 @@ namespace Objects.Drops.ExpDrop
 		private Color GetColorBasedOnExpHeld()
 		{
 			return Color.Lerp(Color.white, Color.red, expAmount / 5000f);
-			return expAmount switch
-			{
-				< 200 => Color.white,
-				< 500 => Color.green,
-				< 1000 => Color.cyan,
-				< 2000 => Color.blue,
-				< 5000 => Color.yellow,
-				< 10000 => Color.red,
-				_ => Color.magenta
-			};
 		}
 	}
 }

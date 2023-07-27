@@ -20,7 +20,7 @@ public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler, ISpeci
     private SpecialBarManager _specialBarManager;
     private static int MaxShardsCount => GameData.GetPlayerCharacterRank() == CharacterRank.E5 ? 16 : 12;
 
-    public SpecialBarManager SpecialBarManager
+    private SpecialBarManager SpecialBarManager
     {
         get
         {

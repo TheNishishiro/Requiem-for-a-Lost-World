@@ -24,7 +24,8 @@ MonoBehaviour:
   AbilityName: 
   AbilityDescription: 
   AbilityCooldown: 0
-  AbilityPrefab: {fileID: 0}
+  AbilityPrefab: {fileID: 5448692154543773265, guid: 4f507ce62314093408059043a60b4ad6,
+    type: 3}
   AbilityIcon: {fileID: 0}
   IsActive: 1
   ColorTheme: {r: 0, g: 0.38660192, b: 1, a: 1}
@@ -32,12 +33,16 @@ MonoBehaviour:
   StartingWeapon: {fileID: -6109885102338104604, guid: f51cf3d74604ea54e8ff7eeccb5d465c,
     type: 3}
   IsPullable: 1
+  UseSpecialBar: 1
+  PickWeaponOnStart: 0
   Stats:
-    Health: 100
-    HealthMax: 100
+    Health: 60
+    HealthMax: 60
+    SpecialMax: 275
+    SpecialIncrease: 1
     MagnetSize: 1
     CooldownReduction: 0
-    CooldownReductionPercentage: 0
+    CooldownReductionPercentage: 0.1
     AttackCount: 0
     Damage: 0
     Scale: 0
@@ -46,11 +51,11 @@ MonoBehaviour:
     DetectionRange: 0
     DamagePercentageIncrease: 0
     ExperienceIncreasePercentage: 0
-    MovementSpeed: 1
+    MovementSpeed: 1.6
     SkillCooldownReductionPercentage: 0
     HealthRegen: 0
-    CritRate: 0
-    CritDamage: 0
+    CritRate: 0.1
+    CritDamage: 0.2
     PassThroughCount: 0
     Armor: 0
     EnemySpeedIncreasePercentage: 0
@@ -60,10 +65,10 @@ MonoBehaviour:
     ItemRewardIncrease: 0
     Revives: 0
     ProjectileLifeTimeIncreasePercentage: 0
-    DodgeChance: 0
+    DodgeChance: 0.15
     DamageTakenIncreasePercentage: 0
     HealingIncreasePercentage: 0
-    Luck: 0
+    Luck: -0.12
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
@@ -89,6 +94,3 @@ MonoBehaviour:
     EidolonDescription: 
     EidolonQuote: 
   loreEntries: []
-  UseSpecialBar: 1
-  SpecialMaxValue: 200
-  SpecialIncrementValue: 1

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DefaultNamespace;
+using Events.Scripts;
 using Interfaces;
 using Objects.Drops;
 using Objects.Drops.ChestDrop;
@@ -135,6 +136,7 @@ namespace Objects.Enemies
 		private void Die()
 		{
 			gameResultData.MonstersKilled++;
+			EnemyDiedEvent.Invoke();
 			GetComponentInChildren<DropOnDestroy>()?.CheckDrop();
 			_enemyManager.EnemyDespawn();
 			OnEnemyDeath?.Invoke(this);
