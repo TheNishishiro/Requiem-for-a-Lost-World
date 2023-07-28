@@ -10,6 +10,7 @@ namespace UI.Labels.InGame.PauseMenu
 	{
 		[SerializeField] private WeaponManager weaponManager;
 		[SerializeField] private GameObject upgradeEntryPrefab;
+		[SerializeField] private Transform upgradeEntryContainer;
 		[SerializeField] private bool isWeaponPanel;
 		private List<UnlockedItemPanel> _unlockedItemPanels;
 
@@ -25,7 +26,7 @@ namespace UI.Labels.InGame.PauseMenu
 			var playerItems = isWeaponPanel ? weaponManager.GetUnlockedWeaponsAsInterface() : weaponManager.GetUnlockedItemsAsInterface();
 			foreach (var item in playerItems)
 			{
-				var upgradeEntryGameObject = Instantiate(upgradeEntryPrefab, transform);
+				var upgradeEntryGameObject = Instantiate(upgradeEntryPrefab, upgradeEntryContainer);
 				var unlockedItemPanel = upgradeEntryGameObject.GetComponent<UnlockedItemPanel>();
 				unlockedItemPanel.SetUpgradeEntry(item, statsScrollMenuPanel);
 				_unlockedItemPanels.Add(unlockedItemPanel);

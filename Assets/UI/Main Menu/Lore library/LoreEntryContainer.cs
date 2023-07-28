@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Objects.Characters;
@@ -24,8 +25,23 @@ namespace UI.Main_Menu.Lore_library
 		{
 			var textBubbleGameObject = Instantiate(textBubblePrefab, transform);
 			var textBubble = textBubbleGameObject.GetComponentInChildren<TextMeshProUGUI>();
-			textBubble.text = loreEntry.TextFile.text;
+			StartCoroutine(PrintTextOverTime(textBubble, loreEntry.TextFile.text, 0.04f));
 			_entries.Add(textBubbleGameObject);
+		}
+		
+		private IEnumerator PrintTextOverTime(TMP_Text textField, string fullText, float delay)
+		{
+			textField.text = string.Empty;
+			foreach (var letter in fullText)
+			{
+				textField.text += letter;
+				yield return new WaitForSeconds(delay);
+
+				if (!Input.GetMouseButtonUp(0)) continue;
+				
+				textField.text = fullText;
+				break;
+			}
 		}
 
 		public void Clear()

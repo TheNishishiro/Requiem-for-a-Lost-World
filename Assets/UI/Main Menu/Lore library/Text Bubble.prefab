@@ -26,14 +26,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4932023496109464801}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1601075468509239297}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -170,22 +170,27 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: But I must explain to you how all this mistaken idea of denouncing pleasure
-    and praising pain was born and I will give you a complete account of the system,
-    and expound the actual teachings of the great explorer of the truth, the master-builder
-    of human happiness. No one rejects, dislikes, or avoids pleasure itself, because
-    it is pleasure, but because those who do not know how to pursue pleasure rationally
-    encounter consequences that are extremely painful. Nor again is there anyone
-    who loves or pursues or desires to obtain pain of itself, because it is pain,
-    but because occasionally circumstances occur in which toil and pain can procure
-    him some great pleasure. To take a trivial example, which of us ever undertakes
-    laborious physical exercise, except to obtain some advantage from it? But who
-    has any right to find fault with a man who chooses to enjoy a pleasure that has
-    no annoying consequences, or one who avoids a pain that produces no resultant
-    pleasure?
+  m_text: "A gentle breeze caresses the young man's face as he finds himself seated
+    in a dimly lit chamber, his back pressed against the chilling embrace of a metal
+    wall. Flickering lights cast intermittent shadows, and through his weary, blurred
+    vision, he struggles to stay conscious, his eyelids growing increasingly heavy.\r\n\r\nA
+    bittersweet smile graces his countenance, a poignant reminder of life's capricious
+    nature and the tricks it plays on unsuspecting souls. \"Huh...\" he murmurs softly
+    to himself, his gaze shifting to the row of blinking red lights nearby. The hurried
+    footsteps of his companions echo down the deserted corridors, their distant echoes
+    growing fainter with each passing second.\r\n\r\nDespite the gravity of the situation,
+    a bitter chuckle escapes him, the irony of meeting his end in such a forsaken
+    place not lost on him. Only moments ago, a gaping wound had painted everything
+    crimson, yet now, miraculously, it appears to mend itself.\r\n\r\nSwallowing
+    a dry lump in his throat, he clutches a piece of metal tightly in his hand, his
+    consciousness waning against his own will. Outside, there's a commotion\u2014a
+    cacophony of growls and frenzied scratching at the door. Dim light illuminates
+    the object he holds, and with a heavy sigh, he closes his eyes, raising his trembling
+    hand.\r\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 69fdfc1caf6b21546b5a1e8fda9ae337, type: 2}
+  m_sharedMaterial: {fileID: -8780649893750338007, guid: 69fdfc1caf6b21546b5a1e8fda9ae337,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -219,9 +224,9 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 2
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 30
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -245,7 +250,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 100, y: 0, z: 100, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
