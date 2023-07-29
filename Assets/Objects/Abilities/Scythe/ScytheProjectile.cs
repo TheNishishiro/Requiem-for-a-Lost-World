@@ -31,8 +31,8 @@ namespace Objects.Abilities.Scythe
 				DamageOverTime(damageable, other);
 			if (ScytheWeapon.IsCursedStrikes && Random.value <= 0.1 && enemyComponent != null)
 				enemyComponent.AddDamageReduction(0.2f);
-			if (ScytheWeapon.IsSoulHarvest && Random.value <= 0.25)
-				_healthComponent.IncreaseMaxHealth(0.01f);
+			if (ScytheWeapon.IsSoulHarvest && Random.value <= 0.1)
+				_healthComponent.IncreaseMaxHealth(0.001f);
 		}
 		
 		void Update()

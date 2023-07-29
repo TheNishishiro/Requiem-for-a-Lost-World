@@ -223,7 +223,7 @@ namespace Objects.Players
 				new("Reward increase", ItemRewardIncrease, "Increases the amount of gold or gems rewarded per pickup", true),
 				new("Revives", Revives, "The amount of times the player can be revived after dying. Revival brings player back to life with 50% health"),
 				new("Dodge chance%", DodgeChance, "The chance to avoid taking damage after colliding with an enemy", true),
-				new("Damage taken%", DamageTakenIncreasePercentage, "The increase of damage taken by the player from any source", true),
+				new("Damage taken%", DamageTakenIncreasePercentage, "The increase of damage taken by the player from any source", true, true),
 				new("Heal increase%", HealingIncreasePercentage, "The increase of healing received by the player from any source", true),
 				new("Luck%", Luck, "Increase the chance of high rarity items appearing in chests of after leveling up. Also increases the chance of enemies dropping gold coins and gems upon death", true),
 				new("Rerolls", Rerolls, "The amount of times each set of upgrades to pick from level ups can be rerolled"),

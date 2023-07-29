@@ -36,7 +36,7 @@ MonoBehaviour:
   AbilityPrefab: {fileID: -6921108768330712674, guid: f7af180deda0945458dd03fec4661837,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: df00311272b9b9f45ab2be3209175f72, type: 3}
-  IsActive: 1
+  IsActive: 0
   ColorTheme: {r: 1, g: 0.9111887, b: 0, a: 1}
   StarRating: 4
   StartingWeapon: {fileID: 4342425474514187230, guid: c24275b5471901b4baa533e2360c9b70,
@@ -45,9 +45,9 @@ MonoBehaviour:
   UseSpecialBar: 1
   PickWeaponOnStart: 1
   Stats:
-    Health: 60
+    Health: 50
     HealthMax: 60
-    SpecialMax: 100
+    SpecialMax: 250
     SpecialIncrease: 1
     MagnetSize: 1.2
     CooldownReduction: 0
@@ -58,9 +58,9 @@ MonoBehaviour:
     Speed: 0
     TimeToLive: 0
     DetectionRange: 0
-    DamagePercentageIncrease: 0
+    DamagePercentageIncrease: -0.35
     ExperienceIncreasePercentage: 0
-    MovementSpeed: 1.45
+    MovementSpeed: 1.4
     SkillCooldownReductionPercentage: 0
     HealthRegen: 0
     CritRate: 0
