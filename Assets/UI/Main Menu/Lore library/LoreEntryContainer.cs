@@ -14,6 +14,9 @@ namespace UI.Main_Menu.Lore_library
 		[SerializeField] private GameObject authorPrefab;
 		[SerializeField] private GameObject textBubblePrefab;
 		private List<GameObject> _entries;
+		private Coroutine _printTextCoroutine;
+		private TextMeshProUGUI _textField;
+		private string _fullText;
 
 		public void Setup(LoreEntry loreEntry)
 		{
@@ -24,11 +27,21 @@ namespace UI.Main_Menu.Lore_library
 		private void SetupText(LoreEntry loreEntry)
 		{
 			var textBubbleGameObject = Instantiate(textBubblePrefab, transform);
-			var textBubble = textBubbleGameObject.GetComponentInChildren<TextMeshProUGUI>();
-			StartCoroutine(PrintTextOverTime(textBubble, loreEntry.TextFile.text, 0.04f));
+			_textField = textBubbleGameObject.GetComponentInChildren<TextMeshProUGUI>();
+			_fullText = loreEntry.TextFile.text;
+			_printTextCoroutine = StartCoroutine(PrintTextOverTime(_textField, _fullText, 0.04f));
 			_entries.Add(textBubbleGameObject);
 		}
-		
+
+		private void Update()
+		{
+			if (Input.GetMouseButtonUp(0) && _printTextCoroutine != null)
+			{
+				StopCoroutine(_printTextCoroutine);
+				_textField.text = _fullText;
+			}
+		}
+
 		private IEnumerator PrintTextOverTime(TMP_Text textField, string fullText, float delay)
 		{
 			textField.text = string.Empty;
@@ -36,11 +49,6 @@ namespace UI.Main_Menu.Lore_library
 			{
 				textField.text += letter;
 				yield return new WaitForSeconds(delay);
-
-				if (!Input.GetMouseButtonUp(0)) continue;
-				
-				textField.text = fullText;
-				break;
 			}
 		}
 
