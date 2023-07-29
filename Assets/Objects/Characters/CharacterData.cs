@@ -26,6 +26,7 @@ namespace Objects.Characters
 		[TextArea]
 		public string AbilityDescription;
 		public float AbilityCooldown;
+		public CharacterSkillBase SpecialPrefab;
 		public CharacterSkillBase AbilityPrefab;
 		public Sprite AbilityIcon;
 		public bool IsActive;

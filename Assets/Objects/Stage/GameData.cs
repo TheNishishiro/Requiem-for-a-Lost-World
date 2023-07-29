@@ -56,6 +56,11 @@ namespace Objects.Stage
 		{
 			return CharacterListManager.instance?.GetActiveCharacter()?.AbilityPrefab;
 		}
+		
+		public static CharacterSkillBase GetSpecialPrefab()
+		{
+			return CharacterListManager.instance?.GetActiveCharacter()?.SpecialPrefab;
+		}
 
 		public static Sprite GetPlayerSprite()
 		{

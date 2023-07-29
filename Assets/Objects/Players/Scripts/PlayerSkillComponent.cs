@@ -29,18 +29,13 @@ namespace Objects.Players.Scripts
 		[SerializeField] private ChronastaSkill chronastaSkill;
 		[SerializeField] private SpecialBar specialBar;
 		private AmeliaGlassShield _ameliaGlassShield;
-		private NishiBloodLust _nishiBloodLust;
 		private float _currentSkillCooldown = 0f;
 		private float _skillCooldown = 5f;
 
 		public void Start()
 		{
 			_skillCooldown = GameData.GetCharacterSkillCooldown();
-			
-			if (GameData.GetPlayerCharacterId() == CharactersEnum.Amelia)
-				_ameliaGlassShield = Instantiate(GameData.GetSkillPrefab(), abilityContainer).GetComponent<AmeliaGlassShield>();
-			if (GameData.GetPlayerCharacterId() == CharactersEnum.Nishi)
-				_nishiBloodLust = Instantiate(GameData.GetSkillPrefab(), abilityContainer).GetComponent<NishiBloodLust>();
+			ApplySpecial();
 		}
 
 		public void Update()
@@ -62,6 +57,14 @@ namespace Objects.Players.Scripts
 			Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerLayer"), LayerMask.NameToLayer("EnemyLayer"), true);
 			yield return new WaitForSeconds(iframeDuration);
 			Physics.IgnoreLayerCollision(LayerMask.NameToLayer("PlayerLayer"), LayerMask.NameToLayer("EnemyLayer"), false);
+		}
+
+		private void ApplySpecial()
+		{
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Amelia)
+				_ameliaGlassShield = Instantiate(GameData.GetSpecialPrefab(), abilityContainer).GetComponent<AmeliaGlassShield>();
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Nishi)
+				Instantiate(GameData.GetSpecialPrefab(), abilityContainer);
 		}
 
 		private void UseSkill(CharactersEnum activeCharacterId)
@@ -106,10 +109,8 @@ namespace Objects.Players.Scripts
 
 		private void NishiSkill()
 		{
-			var forward = transform.forward;
-			forward.y = 0f;
-			StartCoroutine(IFrames(0.5f));
-			controller.Move(forward * 0.2f);
+			var result = Utilities.GetPointOnColliderSurface(transform.position + transform.forward * 1.5f, gameObject.transform);
+			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, transform.rotation);
 		}
 
 		private IEnumerator CorinaSkill()
