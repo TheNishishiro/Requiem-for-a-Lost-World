@@ -8,6 +8,13 @@ namespace Objects.Characters.Nishi.Skill
 {
 	public class NishiSkill : CharacterSkillBase
 	{
+		private float _damage;
+		
+		private void Start()
+		{
+			_damage = 100 * (1 + GameData.GetPlayerCharacterData().Stats.DamagePercentageIncrease);
+		}
+
 		private void Update()
 		{
 			TickLifeTime();
@@ -17,7 +24,7 @@ namespace Objects.Characters.Nishi.Skill
 		{
 			if (!other.CompareTag("Enemy")) return;
             
-			other.GetComponent<Damageable>().TakeDamage(100 * (1 + GameData.GetPlayerCharacterData().Stats.DamagePercentageIncrease));
+			other.GetComponent<Damageable>().TakeDamage(_damage);
 		}
 	}
 }
