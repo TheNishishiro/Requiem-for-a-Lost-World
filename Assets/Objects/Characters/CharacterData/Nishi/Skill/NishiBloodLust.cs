@@ -4,6 +4,7 @@ using Events.Scripts;
 using Managers;
 using Objects.Enemies;
 using Objects.Players.Scripts;
+using Objects.Stage;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -60,9 +61,11 @@ namespace Objects.Characters.Nishi.Skill
 				SpawnManager.instance.SpawnObject(enemies[i].transform.position, blackFlamePrefab.gameObject);
 			}
 			
-			if (PlayerStatsComponent.GetHealth() - 20 >= PlayerStatsComponent.GetMaxHealth() * 0.15)
+			var damage = GameData.GetPlayerCharacterRank() >= CharacterRank.E5 ? 45 : 20;
+			
+			if (PlayerStatsComponent.GetHealth() - damage >= PlayerStatsComponent.GetMaxHealth() * 0.15)
 			{
-				PlayerStatsComponent.TakeDamage(20);
+				PlayerStatsComponent.TakeDamage(damage);
 			}
 
 			SpecialBarManager.ResetBar();

@@ -12,7 +12,8 @@ namespace Objects.Characters.Nishi.Skill
 		
 		private void Start()
 		{
-			_damage = 100 * (1 + GameData.GetPlayerCharacterData().Stats.DamagePercentageIncrease);
+			var baseDamage = GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 150 : 50;
+			_damage = baseDamage * (1 + GameData.GetPlayerCharacterData().Stats.DamagePercentageIncrease);
 		}
 
 		private void Update()

@@ -9,6 +9,7 @@ using Objects.Characters.Chitose;
 using Objects.Characters.Corina_Alter;
 using Objects.Characters.David;
 using Objects.Characters.Maid;
+using Objects.Characters.Nishi;
 
 namespace Objects.Players.Scripts
 {
@@ -23,6 +24,7 @@ namespace Objects.Players.Scripts
 			{ CharactersEnum.Corina_BoB, new CorinaStrategy() },
 			{ CharactersEnum.David_BoF, new DavidStrategy() },
 			{ CharactersEnum.Maid, new ElizaStrategy() },
+			{ CharactersEnum.Nishi, new NishiStrategy() },
 		};
 
 		public void ApplyRankStrategy(CharactersEnum characterId, CharacterRank characterRank, PlayerStats playerStats)

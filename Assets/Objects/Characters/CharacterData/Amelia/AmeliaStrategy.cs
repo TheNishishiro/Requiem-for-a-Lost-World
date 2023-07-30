@@ -16,14 +16,14 @@ namespace Objects.Characters.Amelia
 
 		public void ApplyRank(PlayerStats stats, CharacterRank characterRank)
 		{
-			if (characterRank == CharacterRank.E1)
+			if (characterRank >= CharacterRank.E1)
 				stats.MovementSpeed += 0.1f;
-			if (characterRank == CharacterRank.E2)
+			if (characterRank >= CharacterRank.E2)
 			{
 				stats.DamagePercentageIncrease += 0.2f;
 				stats.DamageTakenIncreasePercentage += 0.2f;
 			}
-			if (characterRank == CharacterRank.E5)
+			if (characterRank >= CharacterRank.E5)
 			{
 				stats.SpecialIncrease += 1;
 				stats.DamageTakenIncreasePercentage += 0.5f;

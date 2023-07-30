@@ -19,7 +19,7 @@ MonoBehaviour:
   TransparentCard: {fileID: 0}
   Avatar: {fileID: 21300000, guid: 8f49d35216dbf874ca224480855b63a4, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 63199ad1f76c53042a363dc64f49ab83, type: 3}
-  CharacterGachaArt: {fileID: 0}
+  CharacterGachaArt: {fileID: 21300000, guid: 0ce2b7f99c94bb54090320d4a672696a, type: 3}
   PassiveDescription: "Charge special by <color=yellow>1</color> with each <color=#00B1FF>killed
     enemy</color>. After killing enough enemies summon dark flames on surrounding
     enemies, dealing instance of damage and consuming part of Nishi's health. \n\nUnleashing
@@ -31,7 +31,7 @@ MonoBehaviour:
     type: 3}
   AbilityPrefab: {fileID: 7089003118366457812, guid: 2c651463a691f834d945ccdaf4b95bca,
     type: 3}
-  AbilityIcon: {fileID: 0}
+  AbilityIcon: {fileID: 21300000, guid: 9f3d47405a2a1ad4e8e9446d237b600c, type: 3}
   IsActive: 1
   ColorTheme: {r: 0, g: 0.38660192, b: 1, a: 1}
   StarRating: 5
@@ -70,7 +70,7 @@ MonoBehaviour:
     ItemRewardIncrease: 0
     Revives: 0
     ProjectileLifeTimeIncreasePercentage: 0
-    DodgeChance: 0.15
+    DodgeChance: 0
     DamageTakenIncreasePercentage: 0
     HealingIncreasePercentage: 0
     Luck: -0.12
@@ -79,23 +79,32 @@ MonoBehaviour:
     Skips: 0
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 9129604a9abd7e647ada4345e1f1194e, type: 3}
-    EidolonName: 
-    EidolonDescription: 
-    EidolonQuote: 
+    EidolonName: From Beyond
+    EidolonDescription: Increase dodge chance by <color=green>15%</color>
+    EidolonQuote: ...
   - EidolonTexture: {fileID: 21300000, guid: 7ed8c2b3bc30cc147b6a76aca2598961, type: 3}
-    EidolonName: 
-    EidolonDescription: 
-    EidolonQuote: 
+    EidolonName: Hope of Bright Future
+    EidolonDescription: 'Increase luck by <color=green>6%</color>
+
+      Reduce skill
+      cooldown by <color=green>15%</color>'
+    EidolonQuote: ...
   - EidolonTexture: {fileID: 21300000, guid: 7db54a9b736b73a48b1a2a4bfad5c148, type: 3}
-    EidolonName: 
-    EidolonDescription: 
-    EidolonQuote: 
+    EidolonName: Weakness Rejected
+    EidolonDescription: Increase max health by <color=green>20</color>
+    EidolonQuote: ...
   - EidolonTexture: {fileID: 21300000, guid: 71a05cbebdd1c5b448f1b353e271c0ab, type: 3}
-    EidolonName: 
-    EidolonDescription: 
-    EidolonQuote: 
+    EidolonName: Lightning's Blessing
+    EidolonDescription: 'Increase lightning damage by <color=green>50</color>
+
+      Increase
+      health regeneration by <color=green>0.1</color> per second'
+    EidolonQuote: ...
   - EidolonTexture: {fileID: 21300000, guid: c975dbcde7cadd045a1fc68ecd696814, type: 3}
-    EidolonName: 
-    EidolonDescription: 
-    EidolonQuote: 
+    EidolonName: Void Descent
+    EidolonDescription: 'Increase black explosion damage by <color=green>25</color>
+
+      Reduce
+      amount of enemies needed to kill by <color=green>25</color>'
+    EidolonQuote: ...
   loreEntries: []
