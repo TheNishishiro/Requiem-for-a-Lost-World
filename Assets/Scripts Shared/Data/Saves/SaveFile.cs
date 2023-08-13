@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DefaultNamespace.Data.Achievements;
+using DefaultNamespace.Extensions;
 using Newtonsoft.Json;
 using Objects.Characters;
 using Objects.Players.PermUpgrades;
@@ -26,6 +27,7 @@ namespace DefaultNamespace.Data
 		public ulong PickupsCollected;
 		public ulong PullsPerformed;
 		public ulong Deaths;
+		public ulong StoryPoints;
 		public UnityEvent<AchievementEnum> AchievementUnlocked;
 		public UnityEvent<CharactersEnum, CharacterRank> OnCharacterUnlocked;
 		
@@ -72,6 +74,7 @@ namespace DefaultNamespace.Data
 			Gold = saveData.Gold;
 			Gems = saveData.Gems;
 			Deaths = saveData.Deaths;
+			StoryPoints = saveData.StoryPoints;
 			EnemiesKilled = saveData.EnemiesKilled;
 			PickupsCollected = saveData.PickupsCollected;
 			PullsPerformed = saveData.PullsPerformed;
@@ -84,6 +87,7 @@ namespace DefaultNamespace.Data
 		{
 			Gold += (ulong)gameResultData.Gold;
 			Gems += (ulong)gameResultData.Gems;
+			StoryPoints += (ulong)gameResultData.Time.ToMinutes();
 		}
 
 		public void AddUpgradeLevel(PermUpgradeType permUpgradeType)
@@ -172,6 +176,7 @@ namespace DefaultNamespace.Data
 		public ulong PickupsCollected;
 		public ulong PullsPerformed;
 		public ulong Deaths;
+		public ulong StoryPoints;
 
 		public SaveData(){}
 		
@@ -186,6 +191,8 @@ namespace DefaultNamespace.Data
 			PickupsCollected = saveFile.PickupsCollected;
 			PullsPerformed = saveFile.PullsPerformed;
 			Deaths = saveFile.Deaths;
+			StoryPoints = saveFile.StoryPoints;
 		}
+
 	}
 }

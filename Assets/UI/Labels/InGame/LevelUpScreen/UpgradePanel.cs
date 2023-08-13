@@ -12,9 +12,9 @@ namespace UI.Labels.InGame.LevelUpScreen
 		private WeaponManager _weaponManager;
 		private UpgradeEntry _upgradeEntry;
 		[SerializeField] private Image icon;
+		[SerializeField] private Image border;
 		[SerializeField] private TextMeshProUGUI upgradeName;
 		[SerializeField] private TextMeshProUGUI upgradeDescription;
-		[SerializeField] private Image panelBackground;
 		
 		private void Awake()
 		{
@@ -29,9 +29,8 @@ namespace UI.Labels.InGame.LevelUpScreen
 			icon.color = Color.white;
 			icon.sprite = _upgradeEntry.GetUnlockIcon();
 
-			panelBackground.color = _upgradeEntry.GetUpgradeColor();
-
-			upgradeName.text = $"{_upgradeEntry.GetUnlockName()} +{_upgradeEntry.Rarity - 1}";
+			upgradeName.text = _upgradeEntry.GetUnlockName();
+			upgradeName.color = border.color = _upgradeEntry.GetUpgradeColor();
 			upgradeDescription.text = _upgradeEntry.GetUnlockDescription();
 		}
 
@@ -39,6 +38,7 @@ namespace UI.Labels.InGame.LevelUpScreen
 		{
 			
 		}
+			
 
 		public void SelectUpgrade()
 		{

@@ -92,8 +92,8 @@ namespace UI.Labels.InGame.LevelUpScreen
 			var color = Rarity switch
 			{
 				1 => Color.white,
-				2 => Color.blue,
-				3 => Color.green,
+				2 => Color.green,
+				3 => Color.cyan,
 				4 => Color.yellow,
 				5 => Color.red,
 				_ => Color.gray

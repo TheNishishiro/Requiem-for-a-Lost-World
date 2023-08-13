@@ -1,4 +1,5 @@
 ﻿using System;
+using DefaultNamespace.Data;
 using TMPro;
 using UI.Main_Menu.Lore_library;
 using UnityEngine;
@@ -10,21 +11,46 @@ namespace UI.Main_Menu.Story_Layout_Panel
 	{
 		public int chapterNumber;
 		public int entryNumber;
+		public ulong requiredStoryPoints;
 		[SerializeField] private LoreEntry loreEntry;
 		[SerializeField] private Sprite imageSprite;
+		[SerializeField] private Sprite lockedSprite;
 		[SerializeField] private Image uiImage;
 		[SerializeField] private TextMeshProUGUI chapterNumberText;
+		private SaveFile _saveFile;
 
-		private void Start()
+		private SaveFile saveFile
 		{
-			if (imageSprite != null)
-				uiImage.sprite = imageSprite;
+			get
+			{
+				if (_saveFile == null)
+					_saveFile = FindObjectOfType<SaveFile>();
+				return _saveFile;
+			}
+		}
 
+		private bool isUnlocked => saveFile.StoryPoints >= requiredStoryPoints;
+
+		private void Awake()
+		{
+			Refresh();
 			chapterNumberText.text = $"CH {chapterNumber}\n{entryNumber}";
 		}
-		
+
+		public void Refresh()
+		{
+			if (imageSprite != null && isUnlocked)
+				uiImage.sprite = imageSprite;
+			else if (!isUnlocked)
+				uiImage.sprite = lockedSprite;
+		}
+	
+
 		public void OpenStoryEntry()
 		{
+			if (!isUnlocked)
+				return;
+			
 			var storyLayoutPanel = FindObjectOfType<LoreEntryPanel>(true);
 			storyLayoutPanel.gameObject.SetActive(true);
 			storyLayoutPanel.Open(loreEntry);
