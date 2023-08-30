@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DefaultNamespace.Data;
 using Interfaces;
+using TMPro;
 using UnityEngine;
 
 namespace UI.Main_Menu.Unlockables_Menu
@@ -12,6 +13,7 @@ namespace UI.Main_Menu.Unlockables_Menu
 		[SerializeField] private Transform container;
 		[SerializeField] private WeaponContainer weaponContainer;
 		[SerializeField] private ItemContainer itemContainer;
+		[SerializeField] private TextMeshProUGUI displayText;
 		private List<UnlockableEntry> unlockableEntries = new List<UnlockableEntry>();
 
 		private void Start()
@@ -39,6 +41,7 @@ namespace UI.Main_Menu.Unlockables_Menu
 		{
 			var go = Instantiate(unlockableEntryPrefab, container);
 			var unlockableEntry = go.GetComponent<UnlockableEntry>();
+			unlockableEntry.SetDisplayText(displayText);
 			unlockableEntry.SetItem(item, saveFile);
 			unlockableEntries.Add(unlockableEntry);
 		}
