@@ -17,9 +17,11 @@ using Weapons;
 
 public class WeaponManager : MonoBehaviour
 {
-    [SerializeField] private List<WeaponToggleableEntry> availableWeapons;
-    [SerializeField] private List<ItemToggleableEntry> availableItems;
+    [SerializeField] private WeaponContainer weapons;
+    [SerializeField] private ItemContainer items;
     [SerializeField] private Transform weaponContainer;
+    private List<WeaponToggleableEntry> availableWeapons;
+    private List<ItemToggleableEntry> availableItems;
     private List<WeaponBase> _unlockedWeapons;
     private List<ItemBase> _unlockedItems;
     private PlayerStatsComponent _playerStatsComponent;
@@ -40,6 +42,9 @@ public class WeaponManager : MonoBehaviour
         _unlockedWeapons = new List<WeaponBase>();
         _unlockedItems = new List<ItemBase>();
 
+        availableWeapons = weapons.GetWeapons();
+        availableItems = items.GetItems();
+        
         var characterStartingWeapon = GameData.GetPlayerCharacterStartingWeapon() ?? availableWeapons.FirstOrDefault()?.weaponBase;
         AddWeapon(characterStartingWeapon, 1);
     }
