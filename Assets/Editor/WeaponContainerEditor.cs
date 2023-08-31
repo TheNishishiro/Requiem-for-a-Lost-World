@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Data.ToggleableEntries;
 using DefaultNamespace.Data;
-using DefaultNamespace.Editors;
 using Objects.Items;
 using UnityEditor;
 using UnityEngine;
@@ -28,7 +27,7 @@ public class WeaponContainerEditor : Editor
 			enterChildren = false;
 			if (property.name == "availableWeapons")
 			{
-				ContainerUtility.CustomizeAvailableItemList(availableWeapons, "Available Weapons");
+				CustomizeAvailableItemList(availableWeapons, "Available Weapons");
 				continue;
 			}
 
@@ -37,5 +36,34 @@ public class WeaponContainerEditor : Editor
 
 		
 		serializedObject.ApplyModifiedProperties();
+	}
+	
+	private void CustomizeAvailableItemList(SerializedProperty serializedProperty, string title)
+	{
+		EditorGUILayout.PropertyField(serializedProperty, new GUIContent(title), true);
+
+		if (!serializedProperty.isExpanded)
+			return;
+	
+		// Add Enable/Disable buttons.
+		if (GUILayout.Button("Enable All"))
+		{
+			for (var i = 0; i < serializedProperty.arraySize; i++)
+			{
+				var item = serializedProperty.GetArrayElementAtIndex(i);
+				var isEnabled = item.FindPropertyRelative("isEnabled");
+				isEnabled.boolValue = true;
+			}
+		}
+
+		if (GUILayout.Button("Disable All"))
+		{
+			for (var i = 0; i < serializedProperty.arraySize; i++)
+			{
+				var item = serializedProperty.GetArrayElementAtIndex(i);
+				var isEnabled = item.FindPropertyRelative("isEnabled");
+				isEnabled.boolValue = false;
+			}
+		}
 	}
 }

@@ -1,6 +1,6 @@
 ﻿using DefaultNamespace.Data;
-using DefaultNamespace.Editors;
 using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(ItemContainer))]
 public class ItemContainerEditor : Editor
@@ -23,7 +23,7 @@ public class ItemContainerEditor : Editor
 			enterChildren = false;
 			if (property.name == "availableItems")
 			{
-				ContainerUtility.CustomizeAvailableItemList(availableItems, "Available Items");
+				CustomizeAvailableItemList(availableItems, "Available Items");
 				continue;
 			}
 
@@ -32,5 +32,34 @@ public class ItemContainerEditor : Editor
 
 		
 		serializedObject.ApplyModifiedProperties();
+	}
+	
+	private void CustomizeAvailableItemList(SerializedProperty serializedProperty, string title)
+	{
+		EditorGUILayout.PropertyField(serializedProperty, new GUIContent(title), true);
+
+		if (!serializedProperty.isExpanded)
+			return;
+	
+		// Add Enable/Disable buttons.
+		if (GUILayout.Button("Enable All"))
+		{
+			for (var i = 0; i < serializedProperty.arraySize; i++)
+			{
+				var item = serializedProperty.GetArrayElementAtIndex(i);
+				var isEnabled = item.FindPropertyRelative("isEnabled");
+				isEnabled.boolValue = true;
+			}
+		}
+
+		if (GUILayout.Button("Disable All"))
+		{
+			for (var i = 0; i < serializedProperty.arraySize; i++)
+			{
+				var item = serializedProperty.GetArrayElementAtIndex(i);
+				var isEnabled = item.FindPropertyRelative("isEnabled");
+				isEnabled.boolValue = false;
+			}
+		}
 	}
 }
