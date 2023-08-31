@@ -17,7 +17,6 @@ namespace UI.Main_Menu.Recollection_Menu
 		[SerializeField] private CharacterDisplayPanel sideDisplayPanel;
 		[SerializeField] private CharacterDisplayPanel frontDisplayPanel;
 		[SerializeField] private TextMeshProUGUI gemText;
-		[SerializeField] private TextMeshProUGUI pityCounterText;
 		[SerializeField] private LootPanel lootPanel;
 		private SaveFile _saveFile;
 

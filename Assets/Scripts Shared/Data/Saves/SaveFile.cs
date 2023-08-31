@@ -155,7 +155,7 @@ namespace DefaultNamespace.Data
 			else
 				AchievementSaveData[achievementEnum] = true;
 			
-			FindObjectOfType<AchievementGetDisplay>().Display(achievementEnum);
+			FindObjectOfType<AchievementGetDisplay>(true).Display(achievementEnum);
 		}
 
 		public bool IsAchievementUnlocked(AchievementEnum achievementEnum)

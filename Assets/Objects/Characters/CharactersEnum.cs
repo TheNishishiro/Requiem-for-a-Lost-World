@@ -6,7 +6,7 @@
 		Corina_BoB = 1,
 		[Character("Lucy")]
 		Lucy_BoC = 2,
-		[Character("Amelia")]
+		[Character("Amelia_BoD")]
 		Amelia_BoD = 3,
 		[Character("David")]
 		David_BoF = 4,
@@ -34,7 +34,7 @@
 		Amelia = 15,
 		[Character("Nishi")]
 		Nishi = 16,
-		[Character("Nishi")]
+		[Character("Nishi_BoR")]
 		Nishi_BoR = 17,
 		[Character("Summer")]
 		Summer = 18,

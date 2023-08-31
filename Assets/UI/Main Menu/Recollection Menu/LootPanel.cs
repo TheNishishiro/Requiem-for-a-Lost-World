@@ -15,7 +15,7 @@ namespace UI.Main_Menu.Recollection_Menu
 	public class LootPanel : MonoBehaviour
 	{
 		[SerializeField] private CharacterListMenu characterListMenu;
-		[SerializeField] private GachaDisplayPanel characterDisplayPanel;
+		[SerializeField] private CardComponent cardComponent;
 		[SerializeField] private int PullCost = 200;
 		[SerializeField] private SaveManager saveManager;
 		[SerializeField] private UnityEvent<CharacterData> OnPull;
@@ -43,8 +43,10 @@ namespace UI.Main_Menu.Recollection_Menu
 			_saveFile.UnlockCharacter(pullResult);
 			OnPull?.Invoke(pullResult);
 			saveManager.SaveGame();
-			characterDisplayPanel.Clear();
-			characterDisplayPanel.Setup(pullResult);
+			
+			cardComponent.SetCharacter(pullResult);
+			cardComponent.gameObject.SetActive(true);
+			
 			OpenLootPanel();
 		}
 
@@ -56,7 +58,7 @@ namespace UI.Main_Menu.Recollection_Menu
 		
 		public void CloseLootPanel()
 		{
-			characterDisplayPanel.Clear();
+			cardComponent.gameObject.SetActive(false);
 			gameObject.SetActive(false);
 		}
 		

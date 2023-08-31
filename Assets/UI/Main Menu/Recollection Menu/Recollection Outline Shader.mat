@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Banner Outline Shader
+  m_Name: Recollection Outline Shader
   m_Shader: {fileID: -6465566751694194690, guid: ab29239d681c46e42b65124c5756381d,
     type: 3}
   m_Parent: {fileID: 0}
@@ -30,7 +30,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -38,7 +38,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 81359642d9c6c3d4689fef7756c2feb2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -55,11 +55,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DisabledNoiseSpeed: 0
+    - _DisabledNoiseSpeed: -0.1
     - _Inner_Edge: 1
     - _Inner_Falloff: 1
-    - _Noise_Speed: 0.05
-    - _Noise_Strength: 60
+    - _Noise_Speed: 0.4
+    - _Noise_Strength: 15
     - _Outer_Edge: 1
     - _Outer_Falloff: 1
     - _QueueControl: 0
@@ -67,7 +67,7 @@ Material:
     - _Sprite_Edge_Alpha: 0.5
     - _Thickness: 0.003
     m_Colors:
-    - _Color: {r: 5.278032, g: 5.278032, b: 5.278032, a: 0}
+    - _Color: {r: 22.627417, g: 0, b: 0, a: 1}
     - _Inner_Glow_Color: {r: 51.98414, g: 21.496872, b: 0, a: 0}
     - _MainColor: {r: 1, g: 1, b: 1, a: 0}
     - _Outer_Glow_Color: {r: 51.98414, g: 21.496872, b: 0, a: 0}

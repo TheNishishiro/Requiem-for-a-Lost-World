@@ -98,6 +98,14 @@ namespace DefaultNamespace.Data.Achievements
 		Survive15MinutesWithAmelia_BoD,
 		[AchievementValue("Survive 30 minutes with Bearer of Dream")]
 		Survive30MinutesWithAmelia_BoD,
+		[AchievementValue("Survive 15 minutes with Nishi")]
+		Survive15MinutesWithNishi,
+		[AchievementValue("Survive 30 minutes with Nishi")]
+		Survive30MinutesWithNishi,
+		[AchievementValue("Survive 15 minutes with Summer")]
+		Survive15MinutesWithSummer,
+		[AchievementValue("Survive 30 minutes with Summer")]
+		Survive30MinutesWithSummer,
 
 		#endregion
 		
@@ -159,6 +167,18 @@ namespace DefaultNamespace.Data.Achievements
         ObtainArthur_E0,
         [AchievementValue("Unlock final shard of Arthur")]
         ObtainArthur_E5,
+        [AchievementValue("Obtain Nishi")]
+        ObtainNishi_E0,
+        [AchievementValue("Unlock final shard of Nishi")]
+        ObtainNishi_E5,
+        [AchievementValue("Obtain Bearer of Dream")]
+        ObtainAmelia_BoD_E0,
+        [AchievementValue("Unlock final shard of the Bearer of Dream")]
+        ObtainAmelia_BoD_E5,
+        [AchievementValue("Obtain Summer")]
+        ObtainSummer_E0,
+        [AchievementValue("Unlock final shard of Summer")]
+        ObtainSummer_E5,
 		
 		#endregion
 
