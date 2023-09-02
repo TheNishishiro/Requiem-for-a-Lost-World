@@ -261,7 +261,6 @@ namespace Objects.Players
 					HealthMax += value;
 					break;
 				case PermUpgradeType.Curse:
-					EnemySpeedIncreasePercentage += value;
 					EnemySpawnRateIncreasePercentage += value;
 					EnemyMaxCountIncreasePercentage += value;
 					EnemyHealthIncreasePercentage += value;
