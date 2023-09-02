@@ -45,6 +45,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Glow_Mask:
+        m_Texture: {fileID: 2800000, guid: 8a4b8eb5da581224f93c2306fb3189ea, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -65,5 +69,7 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    m_Colors: []
+    m_Colors:
+    - _FresnelColor: {r: 8.47419, g: 7.4295235, b: 0, a: 1}
+    - _RarityColor: {r: 0, g: 4.880423, b: 8.429822, a: 1}
   m_BuildTextureStacks: []

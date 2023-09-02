@@ -112,5 +112,17 @@ namespace UI.Main_Menu.Recollection_Menu
 				StartCoroutine(AnimateStars(_characterData.StarRating));
 			}
 		}
+
+		public void SetColor(Color pullColor)
+		{
+			var image = GetComponent<Image>();
+			if (image == null) return;
+			
+			var currentMaterial = image.material;
+			var factor = Mathf.Pow(2,3.5f);
+			Color hdrColor = new (pullColor.r*factor,pullColor.g*factor,pullColor.b*factor);
+			currentMaterial.SetColor("_RarityColor", hdrColor);
+			image.material = currentMaterial;
+		}
 	}  
 }

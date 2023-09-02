@@ -40,10 +40,13 @@ namespace UI.Main_Menu.Recollection_Menu
 			
 			gameObject.SetActive(true);
 			var pullResult = DoPull();
+			var characterSaveData = _saveFile.GetCharacterSaveData(pullResult.Id);
+			var pullColor = GetPullColor(characterSaveData);
 			_saveFile.UnlockCharacter(pullResult);
 			OnPull?.Invoke(pullResult);
 			saveManager.SaveGame();
-			
+
+			cardComponent.SetColor(pullColor);
 			cardComponent.SetCharacter(pullResult);
 			cardComponent.gameObject.SetActive(true);
 			
@@ -66,6 +69,15 @@ namespace UI.Main_Menu.Recollection_Menu
 		{
 			_saveFile.Gems -= (ulong)PullCost;
 			return CharacterListManager.instance.GetCharacters().Where(x => x.IsPullable).OrderBy(x => Random.value).FirstOrDefault();
+		}
+
+		public Color GetPullColor(CharacterSaveData characterSaveData)
+		{
+			if (!characterSaveData.IsUnlocked)
+				return new Color(190/255.0f, 140/255.0f, 0);
+			if (characterSaveData.GetRankEnum() < CharacterRank.E5)
+				return new Color(190/255.0f, 0, 190/255.0f);
+			return new Color(0, 110/255.0f, 190/255.0f);
 		}
 	}
 }
