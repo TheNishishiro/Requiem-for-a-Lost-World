@@ -64,7 +64,7 @@ public class ChaseComponent : MonoBehaviour
             transform.position =
                 Utilities.GetPointOnColliderSurface(destination - Utilities.GenerateRandomPositionOnEdge(new Vector2(8, 8)), transform, GetComponentInChildren<BoxCollider>().size.y/2);
         }
-
+        
         transform.LookAt(destination);
         transform.position = Vector3.MoveTowards(transform.position, destination, (isTempTarget ? tempSpeed : movementSpeed) * Time.deltaTime);
     }
