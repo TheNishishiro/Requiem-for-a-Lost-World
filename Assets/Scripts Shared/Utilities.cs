@@ -130,8 +130,6 @@ namespace DefaultNamespace
 
 			return closest;
 		}
-		
-		
 
 		public static Vector3 GenerateRandomPositionOnEdge(Vector2 spawnArea)
 		{
