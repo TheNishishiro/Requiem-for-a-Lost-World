@@ -49,9 +49,11 @@ MonoBehaviour:
   Name: Tornado
   Description: Summon a tornado at random location that travels around the field
   Icon: {fileID: 21300000, guid: f672b49b2c80bd7448d44cbde605960c, type: 3}
+  element: 5
   weaponStats:
     Damage: 3
     Cooldown: 15
+    CooldownReduction: 0
     Scale: 0.5
     Speed: 0.2
     TimeToLive: 5
@@ -63,6 +65,11 @@ MonoBehaviour:
     CritRate: 0
     CritDamage: 0
     Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 315f6da1fc2b92b4886fd77b60ad0011, type: 2}
   - {fileID: 11400000, guid: e08b79527e76f6d4aab7550b211928ca, type: 2}

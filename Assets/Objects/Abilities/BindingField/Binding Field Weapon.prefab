@@ -50,9 +50,11 @@ MonoBehaviour:
   Description: Create a binding field that has a 50% chance to stops enemy movement
     in an area
   Icon: {fileID: 21300000, guid: 3da93ae089550ac4f8bbe06ed9eefdc1, type: 3}
+  element: 6
   weaponStats:
     Damage: 2
     Cooldown: 13
+    CooldownReduction: 0
     Scale: 1
     Speed: 0
     TimeToLive: 3
@@ -64,6 +66,11 @@ MonoBehaviour:
     CritRate: 0
     CritDamage: 0
     Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
   availableUpgrades:
   - {fileID: 11400000, guid: b0d225d33da216443bb31fe6e9ed1917, type: 2}
   - {fileID: 11400000, guid: abe2a617876e9ee4ab708eec141baf22, type: 2}

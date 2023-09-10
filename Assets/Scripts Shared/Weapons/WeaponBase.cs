@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Data.Elements;
 using DefaultNamespace.Data;
 using Interfaces;
 using Objects.Abilities;
@@ -17,6 +18,7 @@ namespace Weapons
 		[SerializeField] public string Name;
 		[SerializeField][TextArea] public string Description;
 		[SerializeField] public Sprite Icon;
+		[SerializeField] public Element element;
 		[SerializeField] protected WeaponStats weaponStats;
 		[SerializeField] List<UpgradeData> availableUpgrades;
 		private PlayerStatsComponent _playerStatsComponent;

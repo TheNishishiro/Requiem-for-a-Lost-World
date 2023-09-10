@@ -49,9 +49,11 @@ MonoBehaviour:
   Name: Lightning strike
   Description: Summon lightning down on your enemies
   Icon: {fileID: 21300000, guid: fe1afa3df66cc3246b64f986bcb77adf, type: 3}
+  element: 2
   weaponStats:
     Damage: 5
     Cooldown: 3
+    CooldownReduction: 0
     Scale: 1
     Speed: 0
     TimeToLive: 0.25
@@ -63,6 +65,11 @@ MonoBehaviour:
     CritRate: 0
     CritDamage: 0
     Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
   availableUpgrades:
   - {fileID: 11400000, guid: bc2676d731cc6ef459323a4bcd2c6648, type: 2}
   - {fileID: 11400000, guid: 5a42629ff7ad7504a9ad6fe39e9289a7, type: 2}

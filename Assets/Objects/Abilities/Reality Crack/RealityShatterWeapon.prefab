@@ -50,9 +50,11 @@ MonoBehaviour:
   Description: Destroy the fabric of reality itself in a few slashes, briefly enemy
     movement and dealing damage in an area
   Icon: {fileID: 21300000, guid: 0cbe78bc581b96c4daef51dfc7e1e50d, type: 3}
+  element: 7
   weaponStats:
     Damage: 10
     Cooldown: 6
+    CooldownReduction: 0
     Scale: 1
     Speed: 0
     TimeToLive: 0
@@ -65,6 +67,10 @@ MonoBehaviour:
     CritDamage: 0
     Weakness: 0
     DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
   availableUpgrades:
   - {fileID: 11400000, guid: c9dd771c35449be4193210d982d60cfa, type: 2}
   - {fileID: 11400000, guid: c7463f7163f4ab9448397bad1cc7248b, type: 2}
@@ -76,3 +82,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 98e21bfcdb7967d46ac730bb417c3c6c, type: 2}
   - {fileID: 11400000, guid: 8ee288920c208514f93a1ca708f37d7c, type: 2}
   - {fileID: 11400000, guid: 97c92a59d6d3fb24cac2f04aa2112227, type: 2}
+  IsGlobalDamage: 0
+  IsSelfBuff: 0

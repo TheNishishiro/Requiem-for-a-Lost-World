@@ -49,9 +49,11 @@ MonoBehaviour:
   Name: Gem of Dream
   Description: Create a hovering weapon that shoot and tracks nearby targets
   Icon: {fileID: 21300000, guid: 843bbe2c3c1380a4196ffc79cc5dc3e6, type: 3}
+  element: 6
   weaponStats:
     Damage: 1
     Cooldown: 4
+    CooldownReduction: 0
     Scale: 1
     Speed: 0
     TimeToLive: 2
@@ -60,6 +62,14 @@ MonoBehaviour:
     DamageCooldown: 0.25
     DuplicateSpawnDelay: 0.2
     DetectionRange: 5
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 420a7b69e1b0d0840b826ded5d20e49b, type: 2}
   - {fileID: 11400000, guid: ddc5e220ca31e4548bdc535100e5bf8a, type: 2}

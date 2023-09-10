@@ -50,9 +50,11 @@ MonoBehaviour:
   Description: Spawn bubble universe traveling in a random direction that expands
     after traveling a certain distance
   Icon: {fileID: 21300000, guid: 929005b6272430c4f92e6e479e935d33, type: 3}
+  element: 7
   weaponStats:
     Damage: 10
     Cooldown: 7
+    CooldownReduction: 0
     Scale: 1
     Speed: 1
     TimeToLive: 5
@@ -64,6 +66,11 @@ MonoBehaviour:
     CritRate: 0
     CritDamage: 0
     Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 88f5f7e47025a7b42bc0f561b13692d4, type: 2}
   - {fileID: 11400000, guid: 39b8157c3bd30214d8726146c3cc8165, type: 2}

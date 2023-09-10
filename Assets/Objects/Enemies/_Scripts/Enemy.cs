@@ -35,7 +35,7 @@ namespace Objects.Enemies
 		private float _removeCollisionsTimer;
 		private bool _isRemoveCollisions;
 		private float _damageReduction;
-		private List<Collision> _ignoredEnemyColliders = new List<Collision>();
+		private List<Collision> _ignoredEnemyColliders = new ();
 
 
 		public void Setup(EnemyData newStats, Player target, EnemyManager enemyManager, PlayerStatsComponent playerStats)
@@ -101,8 +101,11 @@ namespace Objects.Enemies
 			if (damageable == null)
 				Debug.LogWarning($"Enemy {gameObject.name} could not find a damagable component");
 
-			if (damageable != null) 
+			if (damageable != null)
+			{
 				damageable.SetHealth(stats.hp);
+				damageable.SetResistances(stats.elementStats);
+			}
 		}
 
 		private void Update()

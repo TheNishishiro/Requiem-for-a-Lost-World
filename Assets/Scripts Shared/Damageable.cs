@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Data.Elements;
 using Interfaces;
 using Managers;
 using Objects.Stage;
@@ -19,6 +20,7 @@ namespace DefaultNamespace
 		public Dictionary<GameObject, float> sourceDamageCooldown = new ();
 		public float vulnerabilityTimer;
 		public float vulnerabilityPercentage;
+		private List<ElementStats> resistances = new ();
 
 		private void Update()
 		{
@@ -42,18 +44,32 @@ namespace DefaultNamespace
 		{
 			Health = health;
 		}
-		
-		public void TakeDamage(float damage, WeaponBase weaponBase)
+
+		public void SetResistances(List<ElementStats> statsElementStats)
 		{
-			gameResultData.AddDamage(damage, weaponBase);
-			TakeDamage(damage);
+			resistances = statsElementStats;
+		}
+
+		private float GetResistance(Element element)
+		{
+			return resistances.FirstOrDefault(x => x.element == element)?.damageReduction ?? 0;
 		}
 		
-		public void TakeDamage(float damage)
+		public void TakeDamage(float damage, WeaponBase weaponBase = null)
 		{
-			var damageTaken = vulnerabilityTimer > 0 ? damage * (1 + vulnerabilityPercentage) : damage;
-			MessageManager.instance.PostMessage(damageTaken.ToString("0"), transform.position, transform.localRotation);
-			Health -= damageTaken;
+			var calculatedDamage = damage;
+			if (weaponBase != null)
+			{
+				calculatedDamage = damage * (1 - GetResistance(weaponBase.element));
+			}
+
+			calculatedDamage = vulnerabilityTimer > 0 ? calculatedDamage * (1 + vulnerabilityPercentage) : calculatedDamage;
+			if (calculatedDamage < 0)
+				calculatedDamage = 0;
+			
+			gameResultData.AddDamage(calculatedDamage, weaponBase);
+			MessageManager.instance.PostMessage(damage.ToString("0"), transform.position, transform.localRotation);
+			Health -= damage;
 		}
 		
 		public void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase)

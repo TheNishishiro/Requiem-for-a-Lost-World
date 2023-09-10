@@ -49,9 +49,11 @@ MonoBehaviour:
   Name: Meteor
   Description: Summon meteors on your enemies
   Icon: {fileID: 21300000, guid: 459b8f7754ce6454da749d5dec4065b1, type: 3}
+  element: 1
   weaponStats:
     Damage: 15
     Cooldown: 5
+    CooldownReduction: 0
     Scale: 1
     Speed: 6
     TimeToLive: 5
@@ -62,6 +64,12 @@ MonoBehaviour:
     DetectionRange: 0
     CritRate: 0
     CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 65b13b62bbfc2fb4f940409c3bf13ee8, type: 2}
   - {fileID: 11400000, guid: 2fc0c1795d030f941ae8df6e2cce0fa1, type: 2}

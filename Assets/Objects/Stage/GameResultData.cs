@@ -20,6 +20,9 @@ namespace Objects.Stage
 
 		public void AddDamage(float damage, WeaponBase weaponBase)
 		{
+			if (weaponBase == null)
+				return;
+			
 			ItemDamage ??= new Dictionary<WeaponBase, ulong>();
 			if (!ItemDamage.ContainsKey(weaponBase))
 			{

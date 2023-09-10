@@ -49,9 +49,11 @@ MonoBehaviour:
   Name: Katana
   Description: Quickly slash enemies in front of you
   Icon: {fileID: 21300000, guid: 490fbd0f780c3214a81629c73474b7f0, type: 3}
+  element: 4
   weaponStats:
     Damage: 8
     Cooldown: 2
+    CooldownReduction: 0
     Scale: 1
     Speed: 0
     TimeToLive: 5
@@ -62,6 +64,12 @@ MonoBehaviour:
     DetectionRange: 0
     CritRate: 0
     CritDamage: 2.5
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
   availableUpgrades:
   - {fileID: 11400000, guid: b752044a7f1f64248947f970f9f7e99f, type: 2}
   - {fileID: 11400000, guid: 08f008bd3f5dd19428b58794f1ef5c53, type: 2}
