@@ -22,6 +22,7 @@ namespace Objects.Enemies
 			hp = enemyStats.hp;
 			damage = enemyStats.damage;
 			speed = enemyStats.speed;
+			elementStats = new List<ElementStats>();
 			enemyStats.elementStats.ForEach(x =>
 			{
 				elementStats?.Add(new ElementStats(x));

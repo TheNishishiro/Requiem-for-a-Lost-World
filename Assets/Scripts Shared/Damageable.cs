@@ -52,7 +52,7 @@ namespace DefaultNamespace
 
 		private float GetResistance(Element element)
 		{
-			return resistances.FirstOrDefault(x => x.element == element)?.damageReduction ?? 0;
+			return resistances?.FirstOrDefault(x => x.element == element)?.damageReduction ?? 0;
 		}
 		
 		public void TakeDamage(float damage, WeaponBase weaponBase = null)
@@ -60,7 +60,7 @@ namespace DefaultNamespace
 			var calculatedDamage = damage;
 			if (weaponBase != null)
 			{
-				calculatedDamage = damage * (1 - GetResistance(weaponBase.element));
+				calculatedDamage *= 1 - GetResistance(weaponBase.element);
 			}
 
 			calculatedDamage = vulnerabilityTimer > 0 ? calculatedDamage * (1 + vulnerabilityPercentage) : calculatedDamage;
@@ -68,8 +68,8 @@ namespace DefaultNamespace
 				calculatedDamage = 0;
 			
 			gameResultData.AddDamage(calculatedDamage, weaponBase);
-			MessageManager.instance.PostMessage(damage.ToString("0"), transform.position, transform.localRotation);
-			Health -= damage;
+			MessageManager.instance.PostMessage(calculatedDamage.ToString("0"), transform.position, transform.localRotation);
+			Health -= calculatedDamage;
 		}
 		
 		public void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase)
