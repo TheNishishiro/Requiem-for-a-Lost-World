@@ -21,6 +21,7 @@ namespace DefaultNamespace
 		public float vulnerabilityTimer;
 		public float vulnerabilityPercentage;
 		private List<ElementStats> resistances = new ();
+		private List<Element> inflictedElements = new ();
 
 		private void Update()
 		{
@@ -52,7 +53,7 @@ namespace DefaultNamespace
 
 		private float GetResistance(Element element)
 		{
-			return resistances?.FirstOrDefault(x => x.element == element)?.damageReduction ?? 0;
+			return resistances.FirstOrDefault(x => x.element == element)?.damageReduction ?? 0;
 		}
 		
 		public void TakeDamage(float damage, WeaponBase weaponBase = null)
@@ -61,6 +62,7 @@ namespace DefaultNamespace
 			if (weaponBase != null)
 			{
 				calculatedDamage *= 1 - GetResistance(weaponBase.element);
+				OnElementInflict(weaponBase.element, damage);
 			}
 
 			calculatedDamage = vulnerabilityTimer > 0 ? calculatedDamage * (1 + vulnerabilityPercentage) : calculatedDamage;
@@ -115,6 +117,49 @@ namespace DefaultNamespace
 		{
 			vulnerabilityTimer = time;
 			vulnerabilityPercentage = percentage;
+		}
+		
+		private void OnElementInflict(Element element, float damage)
+		{
+			if (element == Element.None || element == Element.Physical || inflictedElements.Contains(element))
+				return;
+			
+			inflictedElements.Add(element);
+
+			var reaction = ElementalReactor.GetReaction(inflictedElements);
+			inflictedElements.Clear();
+			if (reaction == ElementalReaction.None)
+				return;
+			
+			if (reaction == ElementalReaction.Melt)
+			{
+				SetVulnerable(2, 0.5f);
+			}
+			
+			if (reaction == ElementalReaction.Explosion)
+			{
+				TakeDamage(damage * 0.35f);
+			}
+			
+			if (reaction == ElementalReaction.Swirl)
+			{
+				if (resistances.FirstOrDefault(x => x.element == element)?.damageReduction != null)
+					resistances.First(x => x.element == element).damageReduction -= 0.1f;
+			}
+			
+			if (reaction == ElementalReaction.Collapse)
+			{
+				foreach (var resistance in resistances)
+				{
+					resistance.damageReduction *= 0.1f;
+				}
+			}
+
+			if (reaction == ElementalReaction.Erode)
+			{
+				SetVulnerable(1, 0.1f);
+				TakeDamage(Health * 0.05f);
+			}
 		}
 	}
 }
