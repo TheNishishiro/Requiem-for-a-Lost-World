@@ -12,6 +12,7 @@ namespace Objects.Abilities.Arrow_Rain
 	public class ArrowRainWeapon : WeaponBase
 	{
 		private Damageable _target;
+		public bool HailOfArrows;
 		
 		public override void Attack()
 		{
@@ -28,6 +29,12 @@ namespace Objects.Abilities.Arrow_Rain
 		protected override void OnAttackStart()
 		{
 			_target = FindObjectsOfType<Damageable>().OrderByDescending(x => x.Health).ThenBy(_ => Random.value).FirstOrDefault();
+		}
+
+		protected override void OnLevelUp()
+		{
+			if (LevelField == 9)
+				HailOfArrows = true;
 		}
 	}
 }

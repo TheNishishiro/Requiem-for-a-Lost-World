@@ -49,6 +49,7 @@ MonoBehaviour:
   Name: Make it rain!
   Description: Rain arrows on a random target within view, priorites high hp targets
   Icon: {fileID: 21300000, guid: 605b697d1cc4c97408ccccb6e2928ae0, type: 3}
+  element: 4
   weaponStats:
     Damage: 2
     Cooldown: 3
@@ -56,18 +57,27 @@ MonoBehaviour:
     Scale: 1
     Speed: 0
     TimeToLive: 1
-    AttackCount: 4
+    AttackCount: 3
     PassThroughCount: 0
     DamageCooldown: 0
     DuplicateSpawnDelay: 0.1
     DetectionRange: 0
-    CritRate: 0.25
+    CritRate: 0.1
     CritDamage: 0
-    Weakness: 0.1
+    Weakness: 0
     DamageIncreasePercentage: 0
     HealPerHit: 0
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
-  availableUpgrades: []
-  element: 4
+  availableUpgrades:
+  - {fileID: 11400000, guid: 94d620dd1014d664d994c21520908f95, type: 2}
+  - {fileID: 11400000, guid: 5edcf7918733ea246829238b085b0c4d, type: 2}
+  - {fileID: 11400000, guid: 65179a7903a97dc4983eceee28c6e0ae, type: 2}
+  - {fileID: 11400000, guid: aa7e80da8f7fcb94eab4cd53802d351a, type: 2}
+  - {fileID: 11400000, guid: 0f52fad584b000d46acce19f912bbfdc, type: 2}
+  - {fileID: 11400000, guid: 42a6f9e9db8837a47a9eebf0610c019e, type: 2}
+  - {fileID: 11400000, guid: 2306d7c32945cfc47821308103ec6e1c, type: 2}
+  - {fileID: 11400000, guid: e5b26a98e800ced49acd67e79cb24f1d, type: 2}
+  - {fileID: 11400000, guid: 46d6a892d69af3a4e93b2f72eb4bcffa, type: 2}
+  - {fileID: 11400000, guid: 54872acb2f32110489cdd48a5ce37bbd, type: 2}
