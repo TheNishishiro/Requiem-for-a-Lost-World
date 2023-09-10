@@ -73,7 +73,22 @@ namespace DefaultNamespace
 			MessageManager.instance.PostMessage(calculatedDamage.ToString("0"), transform.position, transform.localRotation);
 			Health -= calculatedDamage;
 		}
-		
+
+		public void ReduceElementalDefence(Element element, float amount)
+		{
+			var elementStat = resistances.FirstOrDefault(x => x.element == element);
+			if (elementStat == null)
+			{
+				elementStat = new ElementStats()
+				{
+					element = element,
+				};
+				resistances.Add(elementStat);
+			}
+
+			elementStat.damageReduction -= amount;
+		}
+
 		public void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase)
 		{
 			if (!sourceDamageCooldown.ContainsKey(damageSource))

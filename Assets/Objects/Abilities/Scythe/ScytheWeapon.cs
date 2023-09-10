@@ -41,12 +41,18 @@ namespace Objects.Abilities.Scythe
 
 		protected override void OnLevelUp()
 		{
-			if (LevelField == 5)
-				IsBloodEmbrace = true;
-			if (LevelField == 7)
-				IsCursedStrikes = true;
-			if (LevelField == 10)
-				IsSoulHarvest = true;
+			switch (LevelField)
+			{
+				case 5:
+					IsBloodEmbrace = true;
+					break;
+				case 7:
+					IsCursedStrikes = true;
+					break;
+				case 10:
+					IsSoulHarvest = true;
+					break;
+			}
 		}
 	}
 }

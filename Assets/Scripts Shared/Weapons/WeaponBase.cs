@@ -14,7 +14,7 @@ namespace Weapons
 {
 	public abstract class WeaponBase : MonoBehaviour, IPlayerItem
 	{
-		[SerializeField] protected GameObject spawnPrefab;
+		[SerializeField] public GameObject spawnPrefab;
 		[SerializeField] public string Name;
 		[SerializeField][TextArea] public string Description;
 		[SerializeField] public Sprite Icon;
