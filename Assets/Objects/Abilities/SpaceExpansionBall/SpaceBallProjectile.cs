@@ -71,11 +71,11 @@ namespace Objects.Abilities.SpaceExpansionBall
 			var scale = transform.localScale;
 			while (scale.x > 0)
 			{
-				scale.x -= 0.1f;
-				scale.y -= 0.1f;
-				scale.z -= 0.1f;
+				scale.x -= 0.2f;
+				scale.y -= 0.2f;
+				scale.z -= 0.2f;
 				transform.localScale = scale;
-				yield return new WaitForSeconds(0.02f);
+				yield return new WaitForSeconds(0.01f);
 			}
 			
 			// Spawn explosion
