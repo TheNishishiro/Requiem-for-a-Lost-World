@@ -49,6 +49,9 @@ namespace UI.Main_Menu.Upgrades_Menu
 
 			_saveFile.Gold -= (ulong)(_permUpgrade.costPerLevel * (_currentLevel+1));
 			_saveFile.AddUpgradeLevel(_permUpgrade.type);
+			if (_permUpgrade.type == PermUpgradeType.BuyGems)
+				_saveFile.Gems += (ulong)_permUpgrade.increasePerLevel;
+			
 			_currentLevel++;
 			_saveFile.Save();
 		}

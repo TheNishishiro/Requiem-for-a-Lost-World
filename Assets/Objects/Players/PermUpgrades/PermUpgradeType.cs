@@ -35,6 +35,7 @@
 		[StatType(true)]
 		Luck = 18,
 		Reroll = 19,
-		Skip = 20
+		Skip = 20,
+		BuyGems = 21,
 	}
 }
