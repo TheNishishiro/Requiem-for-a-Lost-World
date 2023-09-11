@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using DefaultNamespace;
+using DefaultNamespace.Data;
+using DefaultNamespace.Data.Achievements;
 using Managers;
 using Objects.Abilities.SpaceExpansionBall;
 using UnityEngine;
@@ -35,6 +37,11 @@ namespace Objects.Abilities.Arrow_Rain
 		{
 			if (LevelField == 9)
 				HailOfArrows = true;
+		}
+
+		public override bool IsUnlocked(SaveFile saveFile)
+		{
+			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithSummer);
 		}
 	}
 }
