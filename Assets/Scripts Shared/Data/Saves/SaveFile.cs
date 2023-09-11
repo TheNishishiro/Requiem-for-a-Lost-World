@@ -28,6 +28,7 @@ namespace DefaultNamespace.Data
 		public ulong PullsPerformed;
 		public ulong Deaths;
 		public ulong StoryPoints;
+		public bool IsFirstTutorialCompleted;
 		public UnityEvent<AchievementEnum> AchievementUnlocked;
 		public UnityEvent<CharactersEnum, CharacterRank> OnCharacterUnlocked;
 		
@@ -78,6 +79,7 @@ namespace DefaultNamespace.Data
 			EnemiesKilled = saveData.EnemiesKilled;
 			PickupsCollected = saveData.PickupsCollected;
 			PullsPerformed = saveData.PullsPerformed;
+			IsFirstTutorialCompleted = saveData.IsFirstTutorialCompleted;
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
 			AchievementSaveData = saveData.AchievementSaveData ?? new Dictionary<AchievementEnum, bool>();
@@ -177,7 +179,8 @@ namespace DefaultNamespace.Data
 		public ulong PullsPerformed;
 		public ulong Deaths;
 		public ulong StoryPoints;
-
+		public bool IsFirstTutorialCompleted;
+		
 		public SaveData(){}
 		
 		public SaveData(SaveFile saveFile)
@@ -192,6 +195,7 @@ namespace DefaultNamespace.Data
 			PullsPerformed = saveFile.PullsPerformed;
 			Deaths = saveFile.Deaths;
 			StoryPoints = saveFile.StoryPoints;
+			IsFirstTutorialCompleted = saveFile.IsFirstTutorialCompleted;
 		}
 
 	}
