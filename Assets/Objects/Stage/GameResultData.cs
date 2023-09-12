@@ -71,8 +71,8 @@ namespace Objects.Stage
 
 		public void FinalizeGameResult()
 		{
-			Gold += (int)(Gold * (1 + Time/(30.0f*60.0f)));
-			Gems += Gems;
+			Gold += (int)((Gold + MonstersKilled / 19.0f) * (1 + Time/(30.0f*60.0f)));
+			Gems += MonstersKilled / 300;
 			if (IsWin)
 			{
 				Gold += 500;

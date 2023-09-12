@@ -22,7 +22,7 @@ namespace Objects.Abilities.Throwing_Knife
 
 		private void OnTriggerEnter(Collider other)
 		{
-			SimpleDamage(other, false);
+			SimpleDamage(other, true);
 		}
 	}
 }

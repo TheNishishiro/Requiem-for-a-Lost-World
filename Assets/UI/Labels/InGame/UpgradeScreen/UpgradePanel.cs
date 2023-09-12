@@ -14,7 +14,7 @@ namespace UI.Labels.InGame.UpgradeScreen
 		
 		public void SetUpgradeData(UpgradeEntry upgradeEntry)
 		{
-			upgradeName.text = $"{upgradeEntry.GetUnlockName()} +{upgradeEntry.Rarity - 1}";
+			upgradeName.text = upgradeEntry.GetUnlockName();
 			upgradeDescription.text = upgradeEntry.GetUnlockDescription();
 			upgradeIcon.sprite = upgradeEntry.GetUnlockIcon();
 			panelBackground.color = upgradeEntry.GetUpgradeColor();

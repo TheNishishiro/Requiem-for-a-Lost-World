@@ -31,9 +31,10 @@ namespace Managers
 			go.SetActive(false);
 		}
 
-		public void PostMessage(string text, Vector3 worldPosition, Quaternion rotation)
+		public void PostMessage(string text, Vector3 worldPosition, Quaternion rotation, Color color)
 		{
 			_messagePool[_count].gameObject.SetActive(true);
+			_messagePool[_count].color = color;
 			_messagePool[_count].transform.position = worldPosition;
 			_messagePool[_count].transform.localRotation = rotation;
 			_messagePool[_count].text = text;

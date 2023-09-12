@@ -70,7 +70,7 @@ namespace DefaultNamespace
 				calculatedDamage = 0;
 			
 			gameResultData.AddDamage(calculatedDamage, weaponBase);
-			MessageManager.instance.PostMessage(calculatedDamage.ToString("0"), transform.position, transform.localRotation);
+			MessageManager.instance.PostMessage(calculatedDamage.ToString("0"), transform.position, transform.localRotation, ElementService.ElementToColor(weaponBase?.element));
 			Health -= calculatedDamage;
 		}
 

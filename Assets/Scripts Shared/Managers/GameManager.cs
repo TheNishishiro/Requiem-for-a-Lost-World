@@ -19,7 +19,6 @@ namespace Managers
 
 		private void Start()
 		{
-			AudioListener.volume = 0;
 			var saveFile = FindObjectOfType<SaveFile>();
 			playerStatsComponent.Set(GameData.GetPlayerStartingStats());
             if (GameData.GetPlayerCharacterData()?.UseSpecialBar == true)

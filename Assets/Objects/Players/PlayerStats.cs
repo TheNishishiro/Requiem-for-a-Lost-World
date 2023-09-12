@@ -153,8 +153,7 @@ namespace Objects.Players
         
         private void CopyPlayerStats(PlayerStats playerStats)
         {
-            Health = playerStats.Health;
-            HealthMax = playerStats.HealthMax;
+            Health = HealthMax = playerStats.HealthMax;
             MagnetSize = playerStats.MagnetSize;
             CooldownReduction = playerStats.CooldownReduction;
             CooldownReductionPercentage = playerStats.CooldownReductionPercentage;
@@ -259,6 +258,7 @@ namespace Objects.Players
 					break;
 				case PermUpgradeType.Health:
 					HealthMax += value;
+					Health = HealthMax;
 					break;
 				case PermUpgradeType.Curse:
 					EnemySpawnRateIncreasePercentage += value;

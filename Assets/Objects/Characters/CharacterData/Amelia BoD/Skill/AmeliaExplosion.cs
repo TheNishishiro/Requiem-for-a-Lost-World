@@ -13,7 +13,7 @@ namespace Objects.Characters.Amelia.Skill
 		public float scaleSpeed = 0.1f;
 
 		private Vector3 initialScale = new Vector3(0.2f,0.2f,3);
-		private float remainingTime = 2f;
+		private float elapsedTime = 0f;
 		
 		private void Start()
 		{
@@ -22,17 +22,17 @@ namespace Objects.Characters.Amelia.Skill
 
 		private void Update()
 		{
-			if (remainingTime > 0f)
+			elapsedTime += Time.deltaTime * scaleSpeed;
+
+			if (elapsedTime < lifetime)
 			{
-				float t = 1f - (remainingTime / lifetime); // Calculate the interpolation factor
-				Vector3 newScale = Vector3.Lerp(initialScale, maxScale, t); // Interpolate the scale
-
-				transform.localScale = newScale; // Apply the new scale
-
-				remainingTime -= Time.deltaTime;
+				float t = Mathf.Clamp01(elapsedTime / lifetime); // Clamp t to be between 0 and 1
+				transform.localScale = Vector3.Lerp(initialScale, maxScale, t); // Interpolate the scale based on elapsed time
 			}
 			else
-				transform.localScale = maxScale;
+			{
+				transform.localScale = maxScale; // Set to maxScale at the end of the lifetime
+			}    
 		}
 
 		public void OnTriggerStay(Collider other)

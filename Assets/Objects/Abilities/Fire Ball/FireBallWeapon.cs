@@ -27,7 +27,7 @@ public class FireBallWeapon : WeaponBase
         var position = transform1.position;
         projectileComponent.SetParentWeapon(this);
         projectileComponent.SetDirection(position.x, position.y, position.z);
-        AudioSource.PlayClipAtPoint(fireballSpawnSound, currentPosition, 0.2f);
+        //AudioSource.PlayClipAtPoint(fireballSpawnSound, currentPosition, 0.2f);
     }
 
     public override bool IsUnlocked(SaveFile saveFile)
