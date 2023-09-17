@@ -18,7 +18,7 @@ MonoBehaviour:
   CharacterCard: {fileID: 21300000, guid: 893e9caf0c25bad40932d3acec26abf9, type: 3}
   TransparentCard: {fileID: 21300000, guid: 70872be93ba07604c8c73549df322060, type: 3}
   Avatar: {fileID: 21300000, guid: 9410322f27c9b924386a9d25f5b28976, type: 3}
-  CharacterSprite: {fileID: 21300000, guid: 59d5b419fb163ff4d93b66a5dab59bef, type: 3}
+  CharacterSprite: {fileID: 21300000, guid: 135530b080ac34444b39f8df18be6ac3, type: 3}
   CharacterGachaArt: {fileID: 21300000, guid: f03d55e3d9e41a64380b50cba929ad74, type: 3}
   PassiveDescription: Radius and cooldown of black hole spawns is reduced for the
     first 5 minutes in combat, also gain projectile size every 20 levels
@@ -26,18 +26,23 @@ MonoBehaviour:
   AbilityDescription: Create a temporary black hole in front of her that sucks enemies
     in and deals damage after short delay
   AbilityCooldown: 45
+  SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 8699453097623444231, guid: dd8a0e0db35b86d4aae6ac40a2b03893,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 89aed4a773ec0294fb9d1c14880b782c, type: 3}
-  IsActive: 0
+  IsActive: 1
   ColorTheme: {r: 0.13333334, g: 0.41176474, b: 0.63529414, a: 1}
   StarRating: 5
   StartingWeapon: {fileID: 4937499201459452257, guid: e5b694096ad9bf54cbcc9ac2b3a2ba7a,
     type: 3}
   IsPullable: 1
+  UseSpecialBar: 0
+  PickWeaponOnStart: 0
   Stats:
     Health: 50
     HealthMax: 50
+    SpecialMax: 0
+    SpecialIncrease: 0
     MagnetSize: 1
     CooldownReduction: 0
     CooldownReductionPercentage: 0.1

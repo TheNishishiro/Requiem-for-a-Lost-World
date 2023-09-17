@@ -28,6 +28,8 @@ namespace Weapons
 		public string DescriptionField => Description;
 		public Sprite IconField => Icon;
 		public int LevelField { get; private set; } = 1;
+		public Element ElementField => element;
+
 		public ICollection<StatsDisplayData> GetStatsData()
 		{
 			return weaponStats.GetDescription();

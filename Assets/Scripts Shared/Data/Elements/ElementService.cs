@@ -13,6 +13,9 @@ namespace Data.Elements
 			
 			switch (element)
 			{
+				case Element.Disabled:
+					// remaining white
+					break;
 				case Element.None:
 					// remaining white
 					break;

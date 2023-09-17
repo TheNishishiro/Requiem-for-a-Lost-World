@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Data.Elements;
 using DefaultNamespace.Data;
 using Interfaces;
 using UnityEngine;
@@ -19,6 +20,8 @@ namespace Objects.Items
 		public string DescriptionField => Description;
 		public Sprite IconField => Icon;
 		public int LevelField { get; private set; } = 1;
+		public Element ElementField => Element.Disabled;
+
 		public ICollection<StatsDisplayData> GetStatsData()
 		{
 			return ItemStats.GetDescription();

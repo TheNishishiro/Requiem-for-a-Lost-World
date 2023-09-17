@@ -19,9 +19,7 @@ namespace Managers
 		public void PlayHitAudio()
 		{
 			var audioClip = hitClips[UnityEngine.Random.Range(0, hitClips.Count)];
-			//var ac = hitClips.FirstOrDefault();
 			audioSource.PlayOneShot(audioClip);
-			//AudioSource.PlayClipAtPoint(audioClip, transform.position, 0.2f);
 		}
 	}
 }

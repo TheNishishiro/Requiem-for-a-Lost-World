@@ -2,6 +2,7 @@
 {
 	public enum Element
 	{
+		Disabled,
 		None,
 		Fire,
 		Lightning,

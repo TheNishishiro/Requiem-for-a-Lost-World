@@ -18,13 +18,14 @@ MonoBehaviour:
   CharacterCard: {fileID: 21300000, guid: 795dfa94c0fc9454b88cfa7856c32baa, type: 3}
   TransparentCard: {fileID: 21300000, guid: 5eaafa993aa42b244ac18d7329e175ce, type: 3}
   Avatar: {fileID: 21300000, guid: f54b64a7431ae3547b2adb40173a9110, type: 3}
-  CharacterSprite: {fileID: 21300000, guid: a15c292a0738966488d741bcc168bbb7, type: 3}
+  CharacterSprite: {fileID: 21300000, guid: 143867b7746af4743814b98ccbb018f3, type: 3}
   CharacterGachaArt: {fileID: 21300000, guid: fdf17d35a4f0523429c18d6cf34444ad, type: 3}
   PassiveDescription: Every 10 levels increases her movement speed by <color=green>0.05
     m/s</color>.
   AbilityName: Quick step
   AbilityDescription: Dash a short distance forward, passing through enemies
   AbilityCooldown: 15
+  SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 0}
   AbilityIcon: {fileID: 21300000, guid: 9b4db2f65cfe3ab45a57c65dcef3d5af, type: 3}
   IsActive: 0
@@ -33,9 +34,13 @@ MonoBehaviour:
   StartingWeapon: {fileID: 8639696691735580533, guid: c4ce03c63c596e6488c51640328921da,
     type: 3}
   IsPullable: 1
+  UseSpecialBar: 0
+  PickWeaponOnStart: 0
   Stats:
     Health: 80
     HealthMax: 80
+    SpecialMax: 0
+    SpecialIncrease: 0
     MagnetSize: 0.5
     CooldownReduction: 0
     CooldownReductionPercentage: 0
@@ -119,15 +124,13 @@ MonoBehaviour:
       all the way to the skies! Then they all crumble down and I wake up with face
       covered in sweat... It is pretty rare tho!
   loreEntries:
-  - Chapter: 0
-    LevelRequirement: 1
-    Type: 0
-    Title: About me
+  - Title: About me
     TextFile: {fileID: 4900000, guid: ff8916b78e743c345b4bf56b548e5111, type: 3}
     Background: {fileID: 21300000, guid: 7b101da36cebbdd418a064b47e3a439b, type: 3}
-  - Chapter: 1
-    LevelRequirement: 2
-    Type: 0
-    Title: Unusual encounter
+    Chapter: 0
+    LevelRequirement: 1
+  - Title: Unusual encounter
     TextFile: {fileID: 4900000, guid: b640ccee95e0198469aa0955ca339213, type: 3}
     Background: {fileID: 0}
+    Chapter: 1
+    LevelRequirement: 2

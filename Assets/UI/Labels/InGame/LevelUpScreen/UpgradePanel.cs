@@ -1,6 +1,8 @@
 ﻿using System;
+using Data.Elements;
 using Managers;
 using TMPro;
+using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +17,8 @@ namespace UI.Labels.InGame.LevelUpScreen
 		[SerializeField] private Image border;
 		[SerializeField] private TextMeshProUGUI upgradeName;
 		[SerializeField] private TextMeshProUGUI upgradeDescription;
+		[SerializeField] private SVGImage elementIcon;
+		[SerializeField] private ElementIconData elementIconData;
 		
 		private void Awake()
 		{
@@ -32,6 +36,16 @@ namespace UI.Labels.InGame.LevelUpScreen
 			upgradeName.text = _upgradeEntry.GetUnlockName();
 			upgradeName.color = border.color = _upgradeEntry.GetUpgradeColor();
 			upgradeDescription.text = _upgradeEntry.GetUnlockDescription();
+
+			var element = _upgradeEntry.GetElement();
+			if (element != Element.Disabled)
+			{
+				elementIcon.gameObject.SetActive(true);
+				elementIcon.sprite = elementIconData.GetIcon(element);
+				elementIcon.color = ElementService.ElementToColor(element);
+			}
+			else
+				elementIcon.gameObject.SetActive(false);
 		}
 
 		public void Clean()

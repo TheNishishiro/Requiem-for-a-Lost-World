@@ -1,4 +1,5 @@
 ﻿using System;
+using Data.Elements;
 using Objects.Abilities;
 using Objects.Items;
 using Objects.Stage;
@@ -85,6 +86,13 @@ namespace UI.Labels.InGame.LevelUpScreen
 			if (IsItemUnlock || IsItemUpgrade)
 				return Item.Icon;
 			return null;
+		}
+		
+		public Element GetElement()
+		{
+			if (IsWeaponUpgrade || IsWeaponUnlock)
+				return Weapon.element;
+			return Element.Disabled;
 		}
 
 		public Color GetUpgradeColor()
