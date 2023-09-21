@@ -29,7 +29,8 @@ namespace Weapons
 		public Sprite IconField => Icon;
 		public int LevelField { get; private set; } = 1;
 		public Element ElementField => element;
-
+		[HideInInspector] public bool isSkill;
+		
 		public ICollection<StatsDisplayData> GetStatsData()
 		{
 			return weaponStats.GetDescription();

@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using DefaultNamespace;
 using Managers;
 using Objects.Abilities.Lightning_Chain;
+using Objects.Characters;
+using Objects.Enemies;
+using Objects.Stage;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -14,14 +18,12 @@ namespace Objects.Abilities.Tornado
 	public class TornadoProjectile : ProjectileBase
 	{
 		[SerializeField] public GameObject lightningChainPrefab;
-		public iTween.EaseType movementEaseType = iTween.EaseType.easeInOutSine;
-		public float movementRadius = 4;
-		private Vector3 _initialPosition;
+		private Rigidbody _rb;
 		private TornadoWeapon TornadoWeapon => ParentWeapon as TornadoWeapon;
 
 		private void Start()
 		{
-			_initialPosition = transform.position;
+			_rb = GetComponent<Rigidbody>();
 			StartCoroutine(Movement());
 		}
 
@@ -30,29 +32,32 @@ namespace Objects.Abilities.Tornado
 			TickLifeTime();
 		}
 
-		private void OnTriggerStay(Collider other)
+		private void OnCollisionStay(Collision other)
 		{
-			DamageArea(other, out _);
+			DamageArea(other.collider, out _);
 			if (TornadoWeapon.IsStaticDischarge && Random.value < 0.15f && Time.frameCount % 60 == 0)
-				SpawnChainLightning(other);
+				SpawnChainLightning(other.collider);
 		}
 
 		private IEnumerator Movement()
 		{
-			if (_isDead)
-				yield break;
+			var speed = WeaponStats.GetSpeed() * (GameData.GetPlayerCharacterId() == CharactersEnum.Natalie_BoW ? 1.5f : 1f);
 
-			var newPosition = Utilities.GetRandomInAreaFreezeParameter(_initialPosition, movementRadius, isFreezeY: true);
-			var distance = newPosition - _initialPosition;
-			var time = distance.magnitude / WeaponStats.GetSpeed();
-			
-			iTween.MoveTo(gameObject, iTween.Hash(
-				"position", newPosition,
-				"time", time,
-				"easetype", movementEaseType
-			));
-			yield return new WaitForSeconds(time + 0.1f);
-			StartCoroutine(Movement());
+			while (!_isDead)
+			{
+				var enemy = FindObjectsOfType<Enemy>().OrderBy(_ => Random.value).FirstOrDefault();
+				if (enemy == null)
+					yield break;
+				
+				var targetPosition = enemy.transform.position;
+        
+				while(Vector3.Distance(_rb.position, targetPosition) > 0.3f)
+				{
+					var newPosition = Vector3.MoveTowards(_rb.position, targetPosition, speed * Time.deltaTime);
+					_rb.MovePosition(new Vector3(newPosition.x, _rb.position.y, newPosition.z));
+					yield return null;
+				}
+			}
 		}
 		
 		private void SpawnChainLightning(Component other)

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Data.Elements;
+using Events.Scripts;
 using Interfaces;
 using Managers;
 using Objects.Stage;
@@ -117,10 +118,12 @@ namespace DefaultNamespace
 			var timer = damageDuration;
 			while (timer > 0)
 			{
-				timer -= Time.deltaTime;
+				timer -= damageFrequency;
 				TakeDamage(damage, weaponBase);
 				yield return new WaitForSeconds(damageFrequency);
 			}
+			
+			DamageOverTimeExpiredHandler.Invoke(this);
 		}
 
 		public bool IsDestroyed()

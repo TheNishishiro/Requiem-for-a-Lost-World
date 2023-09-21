@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Data.Elements;
 using DefaultNamespace;
 using Objects.Players.Scripts;
 using UnityEngine;
@@ -11,11 +12,13 @@ namespace Objects.Characters.Corina_Alter.Skill
 		private PlayerStatsComponent _playerStatsComponent;
 		private HealthComponent _healthComponent;
 		private BoxCollider _collider;
+		private ElementalWeapon _elementalWeapon;
 
 		private void Start()
 		{
 			_playerStatsComponent = FindObjectOfType<PlayerStatsComponent>();
 			_healthComponent = FindObjectOfType<HealthComponent>();
+			_elementalWeapon = new ElementalWeapon(Element.Physical);
 			_collider = GetComponent<BoxCollider>();
 			StartCoroutine(ColliderKeepAlive());
 			StartCoroutine(RiseAnimation());
@@ -57,7 +60,7 @@ namespace Objects.Characters.Corina_Alter.Skill
 		{
 			if (other.CompareTag("Enemy"))
 			{
-				other.GetComponent<Damageable>().TakeDamage(25 + _playerStatsComponent.GetDamage());
+				other.GetComponent<Damageable>().TakeDamage(25 + _playerStatsComponent.GetDamage(), _elementalWeapon);
 				_healthComponent.Damage(-3);
 			}
 		}

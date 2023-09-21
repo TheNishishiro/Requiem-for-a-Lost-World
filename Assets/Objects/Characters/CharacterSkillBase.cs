@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using Weapons;
 
 namespace Objects.Characters
 {
-	public class CharacterSkillBase : MonoBehaviour
+	public class CharacterSkillBase : ProjectileBase
 	{
 		[SerializeField] public float LifeTime;
 

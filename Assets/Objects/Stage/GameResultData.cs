@@ -22,6 +22,9 @@ namespace Objects.Stage
 		{
 			if (weaponBase == null)
 				return;
+
+			if (weaponBase.isSkill)
+				return;
 			
 			ItemDamage ??= new Dictionary<WeaponBase, ulong>();
 			if (!ItemDamage.ContainsKey(weaponBase))

@@ -14,33 +14,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 11
   Name: Natalie
-  Title: 
-  Level: 1
-  Experience: 0
-  CharacterCard: {fileID: 21300000, guid: ff5646c55da03c6498b20eaecb59d88c, type: 3}
+  Title: Breath of Nature
+  CharacterCard: {fileID: 21300000, guid: e798ef21ffe445645b8111484e52b042, type: 3}
   TransparentCard: {fileID: 21300000, guid: 105c520db8845744189b1c3f14657c93, type: 3}
-  Avatar: {fileID: 0}
-  CharacterSprite: {fileID: 0}
+  Avatar: {fileID: 21300000, guid: 2f0f2258f33bf5d418058d37095e8934, type: 3}
+  CharacterSprite: {fileID: 21300000, guid: 44ac0eb5cbbfdc94696f73474ef610d3, type: 3}
   CharacterGachaArt: {fileID: 0}
-  PassiveDescription: 
-  AbilityName: 
-  AbilityDescription: 
-  AbilityCooldown: 0
-  AbilityIcon: {fileID: 0}
-  IsUnlocked: 0
-  IsActive: 0
+  PassiveDescription: 'Begin with low Tornado spawning radius and increase it''s
+    speed by <color=green>50%</color>
+
+
+    Increases all damage over time by <color=green>5</color>
+    per second'
+  AbilityName: Monsoon
+  AbilityDescription: Send wave of wind outwards pushing enemies away reducing thier
+    wind defence by 50% and applying wind damage over time equal to Natalie's DoT
+  AbilityCooldown: 18
+  SpecialPrefab: {fileID: 589977681743759464, guid: ea412cda1b7018849a508861fb6607f7,
+    type: 3}
+  AbilityPrefab: {fileID: -6151377061064853923, guid: 328e447a0e02aa649adea30cc671114e,
+    type: 3}
+  AbilityIcon: {fileID: 21300000, guid: 2a39b6f7df5bcdc48bc80df011300e09, type: 3}
+  IsActive: 1
   ColorTheme: {r: 0.19607845, g: 0.5294118, b: 0.58431375, a: 1}
   StarRating: 5
-  RankUpLevel: 0
-  KillCount: 0
-  HighestInGameLevel: 0
   StartingWeapon: {fileID: -1210981128314417668, guid: d40c8cdd411557a45963d2005107c041,
     type: 3}
-  IsPullable: 0
+  IsPullable: 1
+  UseSpecialBar: 0
+  PickWeaponOnStart: 0
   Stats:
-    Health: 0
-    HealthMax: 0
-    MagnetSize: 0
+    Health: 50
+    HealthMax: 50
+    SpecialMax: 0
+    SpecialIncrease: 0
+    MagnetSize: 0.6
     CooldownReduction: 0
     CooldownReductionPercentage: 0
     AttackCount: 0
@@ -51,11 +59,55 @@ MonoBehaviour:
     DetectionRange: 0
     DamagePercentageIncrease: 0
     ExperienceIncreasePercentage: 0
-    MovementSpeed: 0
+    MovementSpeed: 1.75
     SkillCooldownReductionPercentage: 0
-    HealthRegen: 0
+    HealthRegen: 0.1
     CritRate: 0
     CritDamage: 0
     PassThroughCount: 0
     Armor: 0
+    EnemySpeedIncreasePercentage: 0
+    EnemySpawnRateIncreasePercentage: 0
+    EnemyHealthIncreasePercentage: 0
+    EnemyMaxCountIncreasePercentage: 0
+    ItemRewardIncrease: 0
+    Revives: 0
+    ProjectileLifeTimeIncreasePercentage: 0
+    DodgeChance: 0
+    DamageTakenIncreasePercentage: 0
+    HealingIncreasePercentage: 0
+    Luck: 0
+    DamageOverTime: 5
+    Rerolls: 0
+    Skips: 0
+  Eidolons:
+  - EidolonTexture: {fileID: 21300000, guid: 48fb10afa8cbd9543b0fd28e643e4794, type: 3}
+    EidolonName: Very special day
+    EidolonDescription: Increase weapon attack count by <color=green>1</color>
+    EidolonQuote: 
+  - EidolonTexture: {fileID: 21300000, guid: 5dd8e94ccaf8bee4b9a7e5c0b6baa345, type: 3}
+    EidolonName: Young one's struggle
+    EidolonDescription: Increase projectile speed by <color=green>1.5</color> m/s
+    EidolonQuote: 
+  - EidolonTexture: {fileID: 21300000, guid: 29cb35f973636754e9096210ef2c39c0, type: 3}
+    EidolonName: Embraced by the wind
+    EidolonDescription: Increase all damage over time by <color=green>5</color> points
+      and all damage by <color=green>10%</color>
+    EidolonQuote: 
+  - EidolonTexture: {fileID: 21300000, guid: 9df8e10289d27744497cb0c9905de06d, type: 3}
+    EidolonName: Quiet place
+    EidolonDescription: 'Further increase damage over time by <color=green>1</color>
+      for each 5 levels
+
+      Increase movement speed by <color=green>5%</color>
+      of her DoT every 10 levels (up to 4 m/s total)'
+    EidolonQuote: 
+  - EidolonTexture: {fileID: 21300000, guid: 05636debec7af5c4280e18182b4ba2d3, type: 3}
+    EidolonName: In the name of Love
+    EidolonDescription: 'Increase damage by <color=green>30%</color>
+
+      Every
+      time DoT effect on enemy is about to end, deal 250% of current DoT as instant
+      damage'
+    EidolonQuote: 
   loreEntries: []

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Data.Elements;
 using DefaultNamespace;
 using Objects.Abilities.Laser_Gun;
 using Objects.Players.Scripts;
@@ -21,9 +22,11 @@ namespace Objects.Characters.Amelia.Skill
 		[SerializeField] private float timeUntilExplosion = 0.8f;
 		[SerializeField] private float explosionTime = 3f;
 		[SerializeField] private Renderer renderer;
+		private ElementalWeapon _elementalWeapon;
 
 		private void Start()
 		{
+			_elementalWeapon = new ElementalWeapon(Element.Light);
 			_playerStatsComponent = FindObjectOfType<PlayerStatsComponent>();
 			StartCoroutine(Glitch());
 		}
@@ -84,7 +87,7 @@ namespace Objects.Characters.Amelia.Skill
 		{
 			if (other.CompareTag("Enemy"))
 			{
-				other.GetComponent<Damageable>().TakeDamage(_playerStatsComponent.GetTotalDamage(10));
+				other.GetComponent<Damageable>().TakeDamage(_playerStatsComponent.GetTotalDamage(10), _elementalWeapon);
 			}
 		}
 	}

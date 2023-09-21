@@ -157,6 +157,11 @@ namespace Objects.Players.Scripts
 			_playerStats.MovementSpeed += amount;
 		}
 
+		public void IncreaseDamageOverTime(float amount)
+		{
+			_playerStats.DamageOverTime += amount;
+		}
+
 		public int GetTotalDamage(int baseDamage)
 		{
 			var damage = (baseDamage + GetDamage());

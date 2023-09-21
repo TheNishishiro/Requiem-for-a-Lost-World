@@ -65,6 +65,8 @@ namespace Objects.Players.Scripts
 				_ameliaGlassShield = Instantiate(GameData.GetSpecialPrefab(), abilityContainer).GetComponent<AmeliaGlassShield>();
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Nishi)
 				Instantiate(GameData.GetSpecialPrefab(), abilityContainer);
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Natalie_BoW && GameData.GetPlayerCharacterRank() >= CharacterRank.E5)
+				Instantiate(GameData.GetSpecialPrefab(), abilityContainer);
 		}
 
 		private void UseSkill(CharactersEnum activeCharacterId)
@@ -99,6 +101,9 @@ namespace Objects.Players.Scripts
 				case CharactersEnum.Nishi:
 					NishiSkill();
 					break;
+				case CharactersEnum.Natalie_BoW:
+					NatalieSkill();
+					break;
 			}
 		}
 
@@ -111,6 +116,11 @@ namespace Objects.Players.Scripts
 		{
 			var result = Utilities.GetPointOnColliderSurface(transform.position + transform.forward * 1.5f, gameObject.transform);
 			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, transform.rotation);
+		}
+
+		private void NatalieSkill()
+		{
+			SpawnManager.instance.SpawnObject(transform.position, GameData.GetSkillPrefab().gameObject, transform.rotation);
 		}
 
 		private IEnumerator CorinaSkill()
