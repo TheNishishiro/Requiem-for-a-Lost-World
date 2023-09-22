@@ -22,15 +22,14 @@ namespace Objects.Abilities.Scythe
 		{
 			if (!other.CompareTag("Enemy") && !other.CompareTag("Destructible"))
 				return;
-			var enemyComponent = other.GetComponent<Enemy>();
 			
 			SimpleDamage(other, false, out var damageable);
 			_healthComponent.Damage(-WeaponStats.HealPerHit);
 
 			if (ScytheWeapon.IsBloodEmbrace && Random.value <= 0.2)
 				DamageOverTime(damageable, other);
-			if (ScytheWeapon.IsCursedStrikes && Random.value <= 0.1 && enemyComponent != null)
-				enemyComponent.AddDamageReduction(0.2f);
+			if (ScytheWeapon.IsCursedStrikes && Random.value <= 0.1 && damageable != null)
+				damageable.SetVulnerable(2, 1);
 			if (ScytheWeapon.IsSoulHarvest && Random.value <= 0.1)
 				_healthComponent.IncreaseMaxHealth(0.001f);
 		}

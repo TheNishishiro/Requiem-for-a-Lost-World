@@ -23,8 +23,9 @@ namespace UI.Labels.InGame.PauseMenu
 		private void Update()
 		{
 			if (!Input.GetKeyDown(KeyCode.Escape)) return;
+			if (levelUpPanel.activeInHierarchy || chestPanel.activeInHierarchy || gameOverPanel.activeInHierarchy) return;
 			
-			if (!panel.activeInHierarchy && !levelUpPanel.activeInHierarchy && !chestPanel.activeInHierarchy && !gameOverPanel.activeInHierarchy)
+			if (!panel.activeInHierarchy)
 				OpenMenu();
 			else
 				CloseMenu();

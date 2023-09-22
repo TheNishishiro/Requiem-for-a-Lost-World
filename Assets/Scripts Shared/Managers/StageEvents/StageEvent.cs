@@ -13,6 +13,7 @@ public class StageEvent
 	public float triggerTime;
 	public float spawnRate;
 	public float minCount;
+	public float healthMultiplier;
 	public int burstSpawnCount;
 	public bool EraseEnemies;
 }

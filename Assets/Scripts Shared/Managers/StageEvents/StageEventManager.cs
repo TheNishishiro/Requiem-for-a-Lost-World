@@ -25,7 +25,7 @@ namespace Managers.StageEvents
 
 			var stageEvent = stageData.stageEvents[_eventIndexer];
 			if (_stageTime.time < stageEvent.triggerTime) return;
-			
+
 			if (stageEvent.EraseEnemies)
 			{
 				_enemyManager.EraseAllEnemies();
@@ -49,6 +49,11 @@ namespace Managers.StageEvents
 			if (stageEvent.minCount > 0)
 			{
 				_enemyManager.ChangeMinimumEnemyCount(stageEvent.minCount);
+			}
+
+			if (stageEvent.healthMultiplier > 0)
+			{
+				_enemyManager.ChangeHealthMultiplier(stageEvent.healthMultiplier);
 			}
 			
 			if (stageEvent.burstSpawnCount > 0)

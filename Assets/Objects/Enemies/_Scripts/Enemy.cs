@@ -38,7 +38,7 @@ namespace Objects.Enemies
 		private List<Collision> _ignoredEnemyColliders = new ();
 
 
-		public void Setup(EnemyData newStats, Player target, EnemyManager enemyManager, PlayerStatsComponent playerStats)
+		public void Setup(EnemyData newStats, Player target, EnemyManager enemyManager, PlayerStatsComponent playerStats, float healthMultiplier = 1.0f)
 		{
 			_enemyManager = enemyManager;
 			playerTarget = target;
@@ -86,7 +86,7 @@ namespace Objects.Enemies
 				gameObject = gemDrop,
 			});
 			
-			stats.hp = (int)(stats.hp * playerStats.GetEnemyHealthIncrease());
+			stats.hp = (int)(stats.hp * healthMultiplier * playerStats.GetEnemyHealthIncrease());
 			stats.speed *= playerStats.GetEnemySpeedIncrease();
 			chaseComponent.FollowYAxis = newStats.allowFlying;
 			SetChaseTarget(target.gameObject);

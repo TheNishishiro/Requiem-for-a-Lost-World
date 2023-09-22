@@ -21,6 +21,7 @@ public class EnemyManager : MonoBehaviour
 	private int enemyMaxCount = 300;
 	private float _timer;
 	private bool _isTimeStop;
+	private float _healthMultiplier = 1.0f;
 
 	private void Start()
 	{
@@ -69,7 +70,7 @@ public class EnemyManager : MonoBehaviour
 		enemySprite.transform.parent = newEnemy.transform;
 		enemySprite.transform.localPosition = Vector3.zero;
 		
-		enemy.Setup(enemyToSpawn, player, this, _playerStatsComponent);
+		enemy.Setup(enemyToSpawn, player, this, _playerStatsComponent, _healthMultiplier);
 		currentEnemyCount++;
 	}
 
@@ -81,6 +82,11 @@ public class EnemyManager : MonoBehaviour
 	public void ChangeSpawnRate(float timer)
 	{
 		spawnTimer = timer;
+	}
+	
+	public void ChangeHealthMultiplier(float healthMultiplier)
+	{
+		_healthMultiplier = healthMultiplier;
 	}
 
 	public void BurstSpawn(List<EnemyData> stageEventEnemies, float stageEventCount)
