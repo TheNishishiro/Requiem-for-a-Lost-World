@@ -19,7 +19,7 @@ namespace Objects.Abilities.Arrow_Rain
 		public override void Attack()
 		{
 			if (_target == null)
-				return;
+				OnAttackStart();
 
 			var position = _target.transform.position;
 			var arrowRain = SpawnManager.instance.SpawnObject(new Vector3(position.x, position.y + 2.5f, position.z), spawnPrefab);
@@ -30,7 +30,9 @@ namespace Objects.Abilities.Arrow_Rain
 
 		protected override void OnAttackStart()
 		{
-			_target = FindObjectsOfType<Damageable>().OrderByDescending(x => x.Health).ThenBy(_ => Random.value).FirstOrDefault();
+			_target = FindObjectsOfType<Damageable>()
+				.OrderByDescending(x => x.Health)
+				.ThenBy(x =>Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
 		}
 
 		protected override void OnLevelUp()
