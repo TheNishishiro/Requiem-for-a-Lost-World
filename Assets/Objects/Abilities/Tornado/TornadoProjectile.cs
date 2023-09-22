@@ -32,11 +32,11 @@ namespace Objects.Abilities.Tornado
 			TickLifeTime();
 		}
 
-		private void OnCollisionStay(Collision other)
+		private void OnTriggerStay(Collider other)
 		{
-			DamageArea(other.collider, out _);
+			DamageArea(other, out _);
 			if (TornadoWeapon.IsStaticDischarge && Random.value < 0.15f && Time.frameCount % 60 == 0)
-				SpawnChainLightning(other.collider);
+				SpawnChainLightning(other);
 		}
 
 		private IEnumerator Movement()

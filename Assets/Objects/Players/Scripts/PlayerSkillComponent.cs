@@ -28,6 +28,7 @@ namespace Objects.Players.Scripts
 		[SerializeField] private HealthComponent healthComponent;
 		[SerializeField] private ChronastaSkill chronastaSkill;
 		[SerializeField] private SpecialBar specialBar;
+		[SerializeField] private AbilityDurationBar abilityDurationBar;
 		private AmeliaGlassShield _ameliaGlassShield;
 		private float _currentSkillCooldown = 0f;
 		private float _skillCooldown = 5f;
@@ -157,8 +158,8 @@ namespace Objects.Players.Scripts
 			
 			var obj = Instantiate(GameData.GetSkillPrefab(), abilityContainer);
 			obj.LifeTime = skillDuration;
-			
 			playerStatsComponent.IncreaseDamageIncreasePercentage(damageIncreasePercentage);
+			abilityDurationBar.StartTick(skillDuration);
 			yield return new WaitForSeconds(skillDuration);
 			playerStatsComponent.IncreaseDamageIncreasePercentage(-damageIncreasePercentage);
 		}
@@ -191,6 +192,7 @@ namespace Objects.Players.Scripts
 			
 			var damageIncrease = Math.Abs(playerStatsComponent.GetHealth() - playerStatsComponent.GetMaxHealth()) / damageFactor;
 			playerStatsComponent.IncreaseDamageIncreasePercentage(damageIncrease);
+			abilityDurationBar.StartTick(skillDuration);
 			yield return new WaitForSeconds(skillDuration);
 			playerStatsComponent.IncreaseDamageIncreasePercentage(-damageIncrease);
 			playerStatsComponent.SetInvincible(false);
