@@ -26,16 +26,6 @@ namespace Managers.StageEvents
 			var stageEvent = stageData.stageEvents[_eventIndexer];
 			if (_stageTime.time < stageEvent.triggerTime) return;
 
-			if (stageEvent.EraseEnemies)
-			{
-				_enemyManager.EraseAllEnemies();
-			}
-
-			if (stageEvent.bossEnemy != null)
-			{
-				_enemyManager.SpawnEnemy(stageEvent.bossEnemy);
-			}
-
 			if (stageEvent.enemies?.Any() == true)
 			{
 				_enemyManager.ChangeDefaultSpawn(stageEvent.enemies);
@@ -59,6 +49,16 @@ namespace Managers.StageEvents
 			if (stageEvent.burstSpawnCount > 0)
 			{
 				_enemyManager.BurstSpawn(stageEvent.enemies, stageEvent.burstSpawnCount);
+			}
+
+			if (stageEvent.EraseEnemies)
+			{
+				_enemyManager.EraseAllEnemies();
+			}
+
+			if (stageEvent.bossEnemy != null)
+			{
+				_enemyManager.SpawnEnemy(stageEvent.bossEnemy);
 			}
 			
 			_eventIndexer++;

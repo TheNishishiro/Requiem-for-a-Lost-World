@@ -105,6 +105,9 @@ namespace Objects.Players.Scripts
 				case CharactersEnum.Natalie_BoW:
 					NatalieSkill();
 					break;
+				case CharactersEnum.Summer:
+					SummerSkill();
+					break;
 			}
 		}
 
@@ -122,6 +125,14 @@ namespace Objects.Players.Scripts
 		private void NatalieSkill()
 		{
 			SpawnManager.instance.SpawnObject(transform.position, GameData.GetSkillPrefab().gameObject, transform.rotation);
+		}
+
+		private void SummerSkill()
+		{
+			var throwingKnife = SpawnManager.instance.SpawnObject(transform.position, GameData.GetSkillPrefab().gameObject);
+			var projectileComponent = throwingKnife.GetComponent<SummerSkill>();
+
+			projectileComponent.SetDirection(transform.forward);
 		}
 
 		private IEnumerator CorinaSkill()

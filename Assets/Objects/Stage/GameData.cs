@@ -32,6 +32,11 @@ namespace Objects.Stage
 			return CharacterListManager.instance?.GetActiveCharacter();
 		}
 		
+		public static CharacterSaveData GetPlayerCharacterSaveData()
+		{
+			return CharacterListManager.instance?.GetActiveCharacterData();
+		}
+		
 		public static WeaponBase GetPlayerCharacterStartingWeapon()
 		{
 			return CharacterListManager.instance?.GetActiveCharacter()?.StartingWeapon;
