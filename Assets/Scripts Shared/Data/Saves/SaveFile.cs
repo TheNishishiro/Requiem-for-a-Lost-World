@@ -66,7 +66,15 @@ namespace DefaultNamespace.Data
 			if (!File.Exists(SavePath)) return;
 			
 			var json = File.ReadAllText(SavePath);
-			var loadedData = JsonConvert.DeserializeObject<SaveData>(json);
+			var settings = new JsonSerializerSettings
+			{
+				MissingMemberHandling = MissingMemberHandling.Ignore,
+				Error = delegate(object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
+				{
+					args.ErrorContext.Handled = true;
+				}
+			};
+			var loadedData = JsonConvert.DeserializeObject<SaveData>(json, settings);
 			Apply(loadedData);
 		}
 		

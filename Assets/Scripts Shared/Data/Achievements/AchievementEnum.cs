@@ -90,10 +90,10 @@ namespace DefaultNamespace.Data.Achievements
 		Survive15MinutesWithEliza,
 		[AchievementValue("Survive 30 minutes with Eliza")]
 		Survive30MinutesWithEliza,
-		[AchievementValue("Survive 15 minutes with Arthur")]
-		Survive15MinutesWithArthur,
-		[AchievementValue("Survive 30 minutes with Arthur")]
-		Survive30MinutesWithArthur,
+		[AchievementValue("Survive 15 minutes with Adam")]
+		Survive15MinutesWithAdam,
+		[AchievementValue("Survive 30 minutes with Adam")]
+		Survive30MinutesWithAdam,
 		[AchievementValue("Survive 15 minutes with Bearer of Dream")]
 		Survive15MinutesWithAmelia_BoD,
 		[AchievementValue("Survive 30 minutes with Bearer of Dream")]

@@ -13,7 +13,6 @@ namespace UI.Main_Menu.Achievement_Menu
 		[SerializeField] private SaveFile SaveFile;
 		[SerializeField] private GameObject achievementEntryPrefab;
 		[SerializeField] private GameObject achievementEntryContainer;
-		[SerializeField] private SlideAnimator slideAnimator;
 		private List<AchievementEntry> _achievementEntries;
 		
 		public void Open()
@@ -41,13 +40,13 @@ namespace UI.Main_Menu.Achievement_Menu
 					}
 				}
 			}
-
-			slideAnimator.ShowPanel();
+			
+			gameObject.SetActive(true);
 		}
 		
 		public void Close()
 		{
-			slideAnimator.HidePanel();
+			gameObject.SetActive(false);
 		}
 
 		public void Toggle()

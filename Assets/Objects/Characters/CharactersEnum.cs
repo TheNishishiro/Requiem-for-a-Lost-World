@@ -28,8 +28,8 @@
 		Chitose = 12,
 		[Character("Eliza")]
 		Maid = 13,
-		[Character("Arthur")]
-		Arthur_OBoV = 14,
+		[Character("Adam")]
+		Adam_OBoV = 14,
 		[Character("Amelia")]
 		Amelia = 15,
 		[Character("Nishi")]
