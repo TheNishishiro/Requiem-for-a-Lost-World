@@ -23,10 +23,8 @@ namespace Objects.Abilities.SpaceExpansionBall
 			direction.y = 0;
 		}
 
-		void Update()
+		private void LateUpdate()
 		{
-			TickLifeTime();
-			
 			if (state == State.Traveling)
 				transform.position += direction * (WeaponStats.GetSpeed() * Time.deltaTime);
 			
@@ -37,6 +35,7 @@ namespace Objects.Abilities.SpaceExpansionBall
 				ProjectileDamageIncreasePercentage = 0.1f;
 				StartCoroutine(Enlarge());
 			}
+			TickLifeTime();
 		}
 		
 		protected override void OnLifeTimeEnd()

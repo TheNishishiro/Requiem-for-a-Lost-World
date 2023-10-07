@@ -13,7 +13,6 @@ namespace UI.Main_Menu.Lore_library
 		public void Setup(CharacterLoreEntry loreEntry)
 		{
 			_loreEntry = loreEntry;
-			title.text = loreEntry.Title;
 		}
 
 		public void OnPointerClick(PointerEventData eventData)

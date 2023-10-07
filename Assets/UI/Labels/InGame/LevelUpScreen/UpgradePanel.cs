@@ -19,6 +19,7 @@ namespace UI.Labels.InGame.LevelUpScreen
 		[SerializeField] private TextMeshProUGUI upgradeDescription;
 		[SerializeField] private SVGImage elementIcon;
 		[SerializeField] private ElementIconData elementIconData;
+		[SerializeField] private Image upgradeBorder;
 		
 		private void Awake()
 		{
@@ -34,7 +35,7 @@ namespace UI.Labels.InGame.LevelUpScreen
 			icon.sprite = _upgradeEntry.GetUnlockIcon();
 
 			upgradeName.text = _upgradeEntry.GetUnlockName();
-			upgradeName.color = border.color = _upgradeEntry.GetUpgradeColor();
+			upgradeName.color = border.color = upgradeBorder.color = _upgradeEntry.GetUpgradeColor();
 			upgradeDescription.text = _upgradeEntry.GetUnlockDescription();
 
 			var element = _upgradeEntry.GetElement();

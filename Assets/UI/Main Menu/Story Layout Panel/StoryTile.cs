@@ -9,10 +9,8 @@ namespace UI.Main_Menu.Story_Layout_Panel
 {
 	public class StoryTile : MonoBehaviour
 	{
-		public int chapterNumber;
-		public int entryNumber;
 		public ulong requiredStoryPoints;
-		[SerializeField] private LoreEntry loreEntry;
+		[SerializeField] public LoreEntry loreEntry;
 		[SerializeField] private Sprite imageSprite;
 		[SerializeField] private Sprite lockedSprite;
 		[SerializeField] private Image uiImage;
@@ -34,7 +32,7 @@ namespace UI.Main_Menu.Story_Layout_Panel
 		private void Awake()
 		{
 			Refresh();
-			chapterNumberText.text = $"CH {chapterNumber}\n{entryNumber}";
+			chapterNumberText.text = $"Entry {loreEntry.EntryNumber}";
 		}
 
 		public void Refresh()

@@ -14,8 +14,7 @@ public class StoryConnectorLineDrawer : MonoBehaviour
     void Start()
     {
         var tiles = FindObjectsOfType<StoryTile>()
-            .OrderBy(x => x.chapterNumber)
-            .ThenBy(x => x.entryNumber)
+            .OrderBy(x => x.loreEntry?.EntryNumber)
             .Select(x => new
             {
                 rect = x.GetComponent<RectTransform>(),

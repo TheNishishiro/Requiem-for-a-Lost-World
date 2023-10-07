@@ -9,7 +9,7 @@ namespace Managers
 		public static MessageManager instance;
 		[SerializeField] private GameObject damageMessage;
 		private List<TextMeshPro> _messagePool;
-		private int _objectCount = 30;
+		private int _objectCount = 1000;
 		private int _count;
 		
 		private void Start()

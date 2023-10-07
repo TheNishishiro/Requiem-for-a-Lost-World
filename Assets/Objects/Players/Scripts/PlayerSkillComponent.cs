@@ -108,6 +108,9 @@ namespace Objects.Players.Scripts
 				case CharactersEnum.Summer:
 					SummerSkill();
 					break;
+				case CharactersEnum.Adam_OBoV:
+					AdamSkill();
+					break;
 			}
 		}
 
@@ -119,6 +122,12 @@ namespace Objects.Players.Scripts
 		private void NishiSkill()
 		{
 			var result = Utilities.GetPointOnColliderSurface(transform.position + transform.forward * 1.5f, gameObject.transform);
+			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, transform.rotation);
+		}
+
+		private void AdamSkill()
+		{
+			var result = Utilities.GetPointOnColliderSurface(transform.position + transform.forward * 2f, gameObject.transform);
 			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, transform.rotation);
 		}
 
