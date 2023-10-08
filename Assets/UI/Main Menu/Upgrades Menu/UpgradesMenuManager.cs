@@ -13,8 +13,7 @@ namespace UI.Main_Menu.Upgrades_Menu
 		[SerializeField] private GameObject panel;
 		[SerializeField] private GameObject container;
 		[SerializeField] private UpgradeEntryPanel upgradeEntryPanelPrefab;
-		[SerializeField] private SlideAnimator slideAnimator;
-		private List<UpgradeEntryPanel> _upgradeEntryPanels = new ();
+		private readonly List<UpgradeEntryPanel> _upgradeEntryPanels = new ();
 		private SaveFile _saveFile;
 
 		private void Awake()
@@ -24,8 +23,7 @@ namespace UI.Main_Menu.Upgrades_Menu
 
 		public void Open()
 		{
-			slideAnimator.ShowPanel();
-		
+			panel.SetActive(true);
 			var permUpgrades = PermUpgradeListManager.instance.GetUpgrades();
 			foreach (var permUpgrade in permUpgrades)
 			{
@@ -45,27 +43,12 @@ namespace UI.Main_Menu.Upgrades_Menu
 
 		public void Close()
 		{
-			slideAnimator.HidePanel();
-		}
-
-		public void OnPanelClose()
-		{
 			foreach (var upgradeEntryPanel in _upgradeEntryPanels)
 			{
 				Destroy(upgradeEntryPanel.gameObject);
 			}
 			_upgradeEntryPanels.Clear();
 			panel.SetActive(false);
-		}
-		
-		public void Toggle()
-		{
-			if (panel.activeSelf)
-			{
-				Close();
-				return;
-			}
-			Open();
 		}
 
 		private void Update()

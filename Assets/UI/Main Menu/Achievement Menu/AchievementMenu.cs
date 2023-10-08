@@ -26,7 +26,7 @@ namespace UI.Main_Menu.Achievement_Menu
 					var isCompleted = SaveFile.AchievementSaveData.TryGetValue(achievementEnum, out var value) && value;
 					
 					var entry = Instantiate(achievementEntryPrefab, achievementEntryContainer.transform).GetComponent<AchievementEntry>();
-					entry.SetAchievement(achievementEnum, achievementEnum.GetDescription(), isCompleted);
+					entry.SetAchievement(achievementEnum, achievementEnum.GetTitle(), achievementEnum.GetDescription(), isCompleted);
 					_achievementEntries.Add(entry);
 				}
 			}
