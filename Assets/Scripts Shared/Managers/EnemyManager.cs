@@ -16,7 +16,7 @@ public class EnemyManager : MonoBehaviour
 	[SerializeField] private float spawnTimer;
 	[SerializeField] private Player player;
 	[SerializeField] private PlayerStatsComponent _playerStatsComponent;
-	private int currentEnemyCount;
+	public int currentEnemyCount;
 	private int enemyMinCount;
 	private int enemyMaxCount = 300;
 	private float _timer;

@@ -162,6 +162,16 @@ namespace Objects.Players.Scripts
 			_playerStats.DamageOverTime += amount;
 		}
 
+		public void IncreaseLuck(float amount)
+		{
+			_playerStats.Luck += amount;
+		}
+
+		public void IncreaseDamageTaken(float amount)
+		{
+			_playerStats.DamageTakenIncreasePercentage += amount;
+		}
+
 		public int GetTotalDamage(int baseDamage)
 		{
 			var damage = (baseDamage + GetDamage());

@@ -68,6 +68,8 @@ namespace Objects.Players.Scripts
 				Instantiate(GameData.GetSpecialPrefab(), abilityContainer);
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Natalie_BoW && GameData.GetPlayerCharacterRank() >= CharacterRank.E5)
 				Instantiate(GameData.GetSpecialPrefab(), abilityContainer);
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Adam_OBoV && GameData.GetPlayerCharacterRank() >= CharacterRank.E5)
+				Instantiate(GameData.GetSpecialPrefab(), abilityContainer);
 		}
 
 		private void UseSkill(CharactersEnum activeCharacterId)

@@ -14,8 +14,6 @@ public class Player : MonoBehaviour
 	[HideInInspector] public HealthComponent healthComponent; 
 	[HideInInspector] public PlayerStatsComponent playerStatsComponent;
 	[SerializeField] public GameResultData gameResultData;
-	private Coroutine _damageBoostCoroutine;
-	private float _lastPercentageIncrease = 0;
 	
 	private void Start()
 	{
@@ -23,12 +21,6 @@ public class Player : MonoBehaviour
 		levelComponent = GetComponent<LevelComponent>();
 		healthComponent = GetComponent<HealthComponent>();
 		playerStatsComponent = GetComponent<PlayerStatsComponent>();
-	}
-
-	private void Update()
-	{
-		if (transform.position.y < -25)
-			transform.position = new Vector3(0, 0, 0);
 	}
 
 	public int GetLevel()

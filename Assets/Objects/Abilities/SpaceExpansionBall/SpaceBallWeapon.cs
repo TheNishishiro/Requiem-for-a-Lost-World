@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using DefaultNamespace;
+using DefaultNamespace.Data;
+using DefaultNamespace.Data.Achievements;
 using Managers;
 using UnityEngine;
 using Weapons;
@@ -30,6 +32,11 @@ namespace Objects.Abilities.SpaceExpansionBall
 		{
 			if (LevelField == 9)
 				IsGallacticCollapse = true;
+		}
+
+		public override bool IsUnlocked(SaveFile saveFile)
+		{
+			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithAdam);
 		}
 	}
 }

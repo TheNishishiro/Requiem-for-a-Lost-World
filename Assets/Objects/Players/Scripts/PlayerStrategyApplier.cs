@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Interfaces;
 using Objects.Characters;
+using Objects.Characters.Adam;
 using Objects.Characters.Amelia;
 using Objects.Characters.Amelia_BoD;
 using Objects.Characters.Arika;
@@ -28,7 +29,8 @@ namespace Objects.Players.Scripts
 			{ CharactersEnum.Maid, new ElizaStrategy() },
 			{ CharactersEnum.Nishi, new NishiStrategy() },
 			{ CharactersEnum.Natalie_BoW, new NatalieStrategy() },
-			{ CharactersEnum.Summer, new SummerStrategy() }
+			{ CharactersEnum.Summer, new SummerStrategy() },
+			{ CharactersEnum.Adam_OBoV, new AdamStrategy() }
 		};
 
 		public void ApplyRankStrategy(CharactersEnum characterId, CharacterRank characterRank, PlayerStats playerStats)
