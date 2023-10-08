@@ -12,9 +12,10 @@ namespace UI.Main_Menu.Story_Layout_Panel
 		public ulong requiredStoryPoints;
 		[SerializeField] public LoreEntry loreEntry;
 		[SerializeField] private Sprite imageSprite;
-		[SerializeField] private Sprite lockedSprite;
 		[SerializeField] private Image uiImage;
 		[SerializeField] private TextMeshProUGUI chapterNumberText;
+		[SerializeField] private TextMeshProUGUI progressionText;
+		
 		private SaveFile _saveFile;
 
 		private SaveFile saveFile
@@ -33,14 +34,22 @@ namespace UI.Main_Menu.Story_Layout_Panel
 		{
 			Refresh();
 			chapterNumberText.text = $"Entry {loreEntry.EntryNumber}";
+			uiImage.sprite = imageSprite;
 		}
 
 		public void Refresh()
 		{
+			progressionText.gameObject.SetActive(!isUnlocked);
+
 			if (imageSprite != null && isUnlocked)
-				uiImage.sprite = imageSprite;
+			{
+				uiImage.color = Color.white;
+			}
 			else if (!isUnlocked)
-				uiImage.sprite = lockedSprite;
+			{
+				progressionText.text = $"{(saveFile.StoryPoints/(float)requiredStoryPoints) * 100.0f:0}%";
+				uiImage.color = Color.black;
+			}
 		}
 	
 

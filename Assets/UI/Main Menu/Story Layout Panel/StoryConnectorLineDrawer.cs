@@ -33,7 +33,7 @@ public class StoryConnectorLineDrawer : MonoBehaviour
 
     private void Update()
     {
-        var offset = new Vector3(0, 0, -10);
+        var offset = new Vector3(0, 0, -100);
         for (var i = 0; i < _storyEntryRects.Count; i++)
         {
             var rectTransform = _storyEntryRects[i];
