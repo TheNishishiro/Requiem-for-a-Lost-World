@@ -38,7 +38,7 @@ namespace UI.Main_Menu.Upgrades_Menu
 			
 			upgradeName.text = $"{_permUpgrade.name} {_currentLevel}/{_permUpgrade.maxLevel}";
 			upgradeDescription.text = _permUpgrade.description;
-			upgradeCost.text = _currentLevel == _permUpgrade.maxLevel ? "MAX" : $"{_permUpgrade.costPerLevel * (_currentLevel+1)}G";
+			upgradeCost.text = _currentLevel == _permUpgrade.maxLevel ? "<color=#404040>MAX</color>" : $"{_permUpgrade.costPerLevel * (_currentLevel+1)}<color=yellow>G</color>";
 			image.sprite = _permUpgrade.icon;
 		}
 

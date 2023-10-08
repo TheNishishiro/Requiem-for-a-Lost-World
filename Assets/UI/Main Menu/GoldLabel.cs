@@ -18,7 +18,7 @@ namespace UI.Main_Menu
 
 		public void Update()
 		{
-			_text.text = $"{_saveFile.Gold}";
+			_text.text = $"{_saveFile.Gold} <color=yellow>G</color>";
 		}
 	}
 }
