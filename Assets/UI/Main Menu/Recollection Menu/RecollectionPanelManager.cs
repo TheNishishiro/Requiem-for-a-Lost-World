@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace.Data;
 using Managers;
@@ -13,9 +14,7 @@ namespace UI.Main_Menu.Recollection_Menu
 	public class RecollectionPanelManager : MonoBehaviour
 	{
 		[SerializeField] private GameObject recollectionPanel;
-		[SerializeField] private CharacterDisplayPanel backDisplayPanel;
-		[SerializeField] private CharacterDisplayPanel sideDisplayPanel;
-		[SerializeField] private CharacterDisplayPanel frontDisplayPanel;
+		[SerializeField] private List<CharacterDisplayPanel> displayShards;
 		[SerializeField] private TextMeshProUGUI gemText;
 		[SerializeField] private LootPanel lootPanel;
 		private SaveFile _saveFile;
@@ -28,10 +27,12 @@ namespace UI.Main_Menu.Recollection_Menu
 		public void OpenRecollectionPanel()
 		{
 			var bannerCharacters = CharacterListManager.instance
-				.GetCharacters().Where(x => x.IsPullable).OrderBy(x => Random.value).Take(3).ToArray();
-			backDisplayPanel.Setup(bannerCharacters[0]);
-			sideDisplayPanel.Setup(bannerCharacters[1]);
-			frontDisplayPanel.Setup(bannerCharacters[2]);
+				.GetCharacters().Where(x => x.IsPullable).OrderBy(x => Random.value).Take(5).ToArray();
+			for (var i = 0; i < 5; i++)
+			{
+				displayShards[i].Setup(bannerCharacters[i]);
+			}
+			
 			lootPanel.Setup(_saveFile);
 			gemText.text = _saveFile.Gems.ToString();
 			recollectionPanel.SetActive(true);

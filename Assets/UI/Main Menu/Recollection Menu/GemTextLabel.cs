@@ -20,7 +20,7 @@ namespace UI.Main_Menu.Recollection_Menu
 			if (Time.frameCount % 10 != 0)
 				return;
 			
-			gemText.text = $"{_saveFile.Gems}";
+			gemText.text = $"{_saveFile.Gems} <color=#0094FF>S</color>";
 		}
 	}
 }
