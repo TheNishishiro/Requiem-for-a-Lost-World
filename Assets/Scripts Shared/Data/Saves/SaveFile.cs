@@ -9,6 +9,7 @@ using Objects.Characters;
 using Objects.Players.PermUpgrades;
 using Objects.Stage;
 using UI.Shared;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.TextCore.Text;
@@ -21,6 +22,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<CharactersEnum, CharacterSaveData> CharacterSaveData;
 		public Dictionary<PermUpgradeType, int> PermUpgradeSaveData;
 		public Dictionary<AchievementEnum, bool> AchievementSaveData;
+		public ConfigurationFile ConfigurationFile;
 		public ulong Gold;
 		public ulong Gems;
 		public ulong EnemiesKilled;
@@ -53,6 +55,7 @@ namespace DefaultNamespace.Data
 			CharacterSaveData ??= new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData ??= new Dictionary<PermUpgradeType, int>();
 			AchievementSaveData ??= new Dictionary<AchievementEnum, bool>();
+			ConfigurationFile ??= new ConfigurationFile().Default();
 		}
 
 		public void Save()
@@ -91,6 +94,7 @@ namespace DefaultNamespace.Data
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
 			AchievementSaveData = saveData.AchievementSaveData ?? new Dictionary<AchievementEnum, bool>();
+			ConfigurationFile = saveData.ConfigurationFile ?? new ConfigurationFile().Default();
 		}
 
 		public void AddGameResultData(GameResultData gameResultData)
@@ -180,6 +184,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<CharactersEnum, CharacterSaveData> CharacterSaveData;
 		public Dictionary<PermUpgradeType, int> PermUpgradeSaveData;
 		public Dictionary<AchievementEnum, bool> AchievementSaveData;
+		public ConfigurationFile ConfigurationFile;
 		public ulong Gold;
 		public ulong Gems;
 		public ulong EnemiesKilled;
@@ -196,6 +201,7 @@ namespace DefaultNamespace.Data
 			CharacterSaveData = saveFile.CharacterSaveData;
 			PermUpgradeSaveData = saveFile.PermUpgradeSaveData;
 			AchievementSaveData = saveFile.AchievementSaveData;
+			ConfigurationFile = saveFile.ConfigurationFile;
 			Gold = saveFile.Gold;
 			Gems = saveFile.Gems;
 			EnemiesKilled = saveFile.EnemiesKilled;

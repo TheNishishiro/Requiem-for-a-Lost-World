@@ -1,8 +1,10 @@
 ﻿using System;
+using DefaultNamespace.Data;
 using Discord;
 using Objects.Characters;
 using Objects.Stage;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Discord = Discord.Discord;
 
 namespace Managers
@@ -11,9 +13,20 @@ namespace Managers
 	{
 		[SerializeField] private bool isEnabled;
 		private global::Discord.Discord _discord;
-		private ActivityManager _activityManager;
-		private bool UseDiscord => isEnabled && !Application.isEditor;
-		
+		private ActivityManager _activityManager; 
+		private SaveFile _saveFile;
+		private bool UseDiscord => isEnabled && !Application.isEditor && SaveFile.ConfigurationFile?.IsDiscordEnabled == true;
+
+		private SaveFile SaveFile
+		{
+			get
+			{
+				if (_saveFile == null)
+					_saveFile = FindObjectOfType<SaveFile>();
+				return _saveFile;
+			}
+		}
+
 		public void Awake()
 		{
 			var instances = FindObjectsOfType<AchievementManager>();
