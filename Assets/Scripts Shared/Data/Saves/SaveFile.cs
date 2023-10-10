@@ -56,6 +56,7 @@ namespace DefaultNamespace.Data
 			PermUpgradeSaveData ??= new Dictionary<PermUpgradeType, int>();
 			AchievementSaveData ??= new Dictionary<AchievementEnum, bool>();
 			ConfigurationFile ??= new ConfigurationFile().Default();
+			ConfigurationFile.Update();
 		}
 
 		public void Save()
@@ -94,7 +95,7 @@ namespace DefaultNamespace.Data
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
 			AchievementSaveData = saveData.AchievementSaveData ?? new Dictionary<AchievementEnum, bool>();
-			ConfigurationFile = saveData.ConfigurationFile ?? new ConfigurationFile().Default();
+			ConfigurationFile = (saveData.ConfigurationFile ?? new ConfigurationFile().Default()).Update();
 		}
 
 		public void AddGameResultData(GameResultData gameResultData)

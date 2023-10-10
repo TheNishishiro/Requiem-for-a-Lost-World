@@ -57,41 +57,28 @@ namespace Managers
 			
 			QualitySettings.vSyncCount = settings.Vsync ? 1 : 0;
 
-			switch (settings.RenderScaling)
+			renderPipeline.renderScale = settings.RenderScaling switch
 			{
-				case 0:
-					renderPipeline.renderScale = 0.25f;
-					break;
-				case 1:
-					renderPipeline.renderScale = 0.5f;
-					break;
-				case 2:
-					renderPipeline.renderScale = 1f;
-					break;
-				case 3:
-					renderPipeline.renderScale = 1.25f;
-					break;
-				case 4:
-					renderPipeline.renderScale = 1.5f;
-					break;
-			}
+				0 => 0.25f,
+				1 => 0.5f,
+				2 => 0.75f,
+				3 => 0.88f,
+				4 => 1f,
+				5 => 1.25f,
+				6 => 1.5f,
+				7 => 2f,
+				_ => renderPipeline.renderScale
+			};
 
-			switch (settings.LodLevel)
+			QualitySettings.lodBias = settings.LodLevel switch
 			{
-				case 0:
-					QualitySettings.lodBias = 0.4f;
-					break;
-				case 1:
-					QualitySettings.lodBias = 1f;
-					break;
-				case 2:
-					QualitySettings.lodBias = 2f;
-					break;
-				case 3:
-					QualitySettings.lodBias = 4f;
-					break;
-			}
-			
+				0 => 0.4f,
+				1 => 1f,
+				2 => 2f,
+				3 => 4f,
+				_ => QualitySettings.lodBias
+			};
+
 			switch (settings.Quality)
 			{
 				case 0:
@@ -178,21 +165,32 @@ namespace Managers
 					break;
 			}
 
-			switch (settings.AntiAliasing)
+			QualitySettings.antiAliasing = settings.AntiAliasing switch
+			{
+				0 => 0,
+				1 => 2,
+				2 => 4,
+				3 => 8,
+				_ => QualitySettings.antiAliasing
+			};
+
+			switch (settings.WindowMode)
 			{
 				case 0:
-					QualitySettings.antiAliasing = 0;	
+					Screen.fullScreen = true;
+					Screen.SetResolution(settings.ResolutionWidth, settings.ResolutionHeight, true);
 					break;
 				case 1:
-					QualitySettings.antiAliasing = 2;	
+					Screen.fullScreen = false;
+					Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+					Screen.SetResolution(settings.ResolutionWidth, settings.ResolutionHeight, FullScreenMode.FullScreenWindow);
 					break;
 				case 2:
-					QualitySettings.antiAliasing = 4;	
-					break;
-				case 3:
-					QualitySettings.antiAliasing = 8;	
+					Screen.fullScreen = false;
+					Screen.SetResolution(settings.ResolutionWidth, settings.ResolutionHeight, false);
 					break;
 			}
+			
 		}
 	}
 }

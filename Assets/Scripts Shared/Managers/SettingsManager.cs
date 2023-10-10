@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using DefaultNamespace.Data;
 using TMPro;
 using UnityEngine;
@@ -19,6 +21,8 @@ namespace Managers
 		[SerializeField] private TMP_Dropdown antialiasingDropdown;
 		[SerializeField] private TMP_Dropdown lodDropdown;
 		[SerializeField] private TMP_Dropdown presetDropdown;
+		[SerializeField] private TMP_Dropdown windowModeDropdown;
+		[SerializeField] private TMP_Dropdown resolutionDropdown;
 		private bool _isLoading;
 		
 		public void Start()
@@ -109,6 +113,15 @@ namespace Managers
 			antialiasingDropdown.value = configuration.AntiAliasing;
 			lodDropdown.value = configuration.LodLevel;
 			discordToggle.isOn = configuration.IsDiscordEnabled;
+			windowModeDropdown.value = configuration.WindowMode;
+			
+			resolutionDropdown.options ??= new List<TMP_Dropdown.OptionData>();
+			resolutionDropdown.options.Clear();
+			foreach (var resolution in Screen.resolutions)
+			{
+				resolutionDropdown.options.Add(new TMP_Dropdown.OptionData($"{resolution.width}x{resolution.height} @{resolution.refreshRateRatio.value:0}hz"));
+			}
+			resolutionDropdown.value = GetResolutionIndex(configuration.ResolutionWidth, configuration.ResolutionHeight, configuration.RefreshRate);
 			
 			gameObject.SetActive(true);
 			_isLoading = false;
@@ -133,10 +146,27 @@ namespace Managers
 			configuration.AntiAliasing = antialiasingDropdown.value;
 			configuration.LodLevel = lodDropdown.value;
 			configuration.IsDiscordEnabled = discordToggle.isOn;
+			configuration.WindowMode = windowModeDropdown.value;
+			configuration.ResolutionWidth = Screen.resolutions[resolutionDropdown.value].width;
+			configuration.ResolutionHeight = Screen.resolutions[resolutionDropdown.value].height;
+			configuration.RefreshRate = Screen.resolutions[resolutionDropdown.value].refreshRateRatio.numerator;
 			
 			saveManager.SaveGame();
 			saveManager.ApplySettings();
 			Close();
+		}
+		
+		private int GetResolutionIndex(int width, int height, uint refreshRate)
+		{
+			for (var i = 0; i < Screen.resolutions.Length; i++)
+			{
+				if (Screen.resolutions[i].width == width && Screen.resolutions[i].height == height && Screen.resolutions[i].refreshRateRatio.numerator == refreshRate)
+				{
+					return i;
+				}
+			}
+
+			return -1;
 		}
 	}
 }
