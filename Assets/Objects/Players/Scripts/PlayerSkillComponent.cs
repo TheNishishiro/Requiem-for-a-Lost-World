@@ -113,12 +113,22 @@ namespace Objects.Players.Scripts
 				case CharactersEnum.Adam_OBoV:
 					AdamSkill();
 					break;
+				case CharactersEnum.Oana_BoI:
+					OanaSkill();
+					break;
 			}
 		}
 
 		private void AmeliaSkill()
 		{
 			_ameliaGlassShield.SpawnShards(6);
+		}
+
+		private void OanaSkill()
+		{
+			var obj = Instantiate(GameData.GetSkillPrefab(), abilityContainer);
+			var skillDuration = obj.LifeTime;
+			abilityDurationBar.StartTick(skillDuration);
 		}
 
 		private void NishiSkill()

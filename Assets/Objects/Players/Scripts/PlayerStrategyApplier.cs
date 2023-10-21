@@ -12,6 +12,7 @@ using Objects.Characters.David;
 using Objects.Characters.Maid;
 using Objects.Characters.Natalie;
 using Objects.Characters.Nishi;
+using Objects.Characters.Oana;
 using Objects.Characters.Summer;
 
 namespace Objects.Players.Scripts
@@ -30,7 +31,8 @@ namespace Objects.Players.Scripts
 			{ CharactersEnum.Nishi, new NishiStrategy() },
 			{ CharactersEnum.Natalie_BoW, new NatalieStrategy() },
 			{ CharactersEnum.Summer, new SummerStrategy() },
-			{ CharactersEnum.Adam_OBoV, new AdamStrategy() }
+			{ CharactersEnum.Adam_OBoV, new AdamStrategy() },
+			{ CharactersEnum.Oana_BoI, new OanaStrategy() },
 		};
 
 		public void ApplyRankStrategy(CharactersEnum characterId, CharacterRank characterRank, PlayerStats playerStats)

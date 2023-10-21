@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5318042843912152711}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-3280506597268986020
 MonoBehaviour:
@@ -52,8 +52,8 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 07b81c92237892b48bdbf50cf5aaa2c0, type: 3}
   element: 4
   weaponStats:
-    Damage: 5
-    Cooldown: 5
+    Damage: 10
+    Cooldown: 4
     CooldownReduction: 0
     Scale: 1
     Speed: 0
@@ -82,5 +82,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e52f6a3995129674c8587eb299b8da51, type: 2}
   - {fileID: 11400000, guid: 8aaedca613103bf40b87de19d86a5299, type: 2}
   - {fileID: 11400000, guid: 900e7def25276ec4981122576a95a472, type: 2}
+  isSkill: 0
   waveCount: 3
   scaleChangePerWave: 0.25

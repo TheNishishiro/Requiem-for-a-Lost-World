@@ -91,7 +91,7 @@ namespace Weapons
 		
 		protected float GetRotationByAttackCount()
 		{
-			return 360 / weaponStats.GetAttackCount();
+			return 360 / GetAttackCount();
 		}
 		
 		public abstract void Attack();

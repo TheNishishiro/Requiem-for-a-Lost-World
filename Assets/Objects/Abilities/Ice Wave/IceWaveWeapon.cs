@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using Managers;
+using Objects.Characters;
+using Objects.Stage;
 using UnityEngine;
 using Weapons;
 
@@ -16,15 +19,22 @@ namespace Objects.Abilities.Ice_Wave
 		private float currentWaveIndex = 0;
 		public bool IsBlockingEnemies { get; private set; }
 		private Vector3 startPosition;
-		
+
+		private void Start()
+		{
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Oana_BoI &&
+			    GameData.GetPlayerCharacterRank() == CharacterRank.E5)
+				waveCount += 3;
+		}
+
 		public override void Attack()
 		{
 			var currentScaleModifier = weaponStats.GetScale() * (scaleChangePerWave * currentWaveIndex);
-			var newPosition = new Vector3(startPosition.x + (currentWaveIndex/3) * currentScaleModifier, 0, startPosition.z);
+			var newPosition = new Vector3(startPosition.x + (currentWaveIndex/2) * currentScaleModifier, 0, startPosition.z);
 			
-			var pointOnSurface = Utilities.GetPointOnColliderSurface(newPosition, transform);
-			var iceCrystal = SpawnManager.instance.SpawnObject(pointOnSurface, spawnPrefab);
+			var iceCrystal = SpawnManager.instance.SpawnObject(newPosition, spawnPrefab);
 			iceCrystal.transform.RotateAround(startPosition, Vector3.up, rotateOffset);
+			iceCrystal.transform.position = Utilities.GetPointOnColliderSurface(iceCrystal.transform.position, transform);
 			
 			var projectileComponent = iceCrystal.GetComponent<IceWaveProjectile>();
 			projectileComponent.SetParentWeapon(this);
@@ -41,7 +51,7 @@ namespace Objects.Abilities.Ice_Wave
 
 			for (currentWaveIndex = 1; currentWaveIndex <= waveCount; currentWaveIndex++)
 			{
-				for (var i = 0; i < weaponStats.GetAttackCount(); i++)
+				for (var i = 0; i < GetAttackCount(); i++)
 				{
 					Attack();
 					rotateOffset += rotationStep;
@@ -49,6 +59,18 @@ namespace Objects.Abilities.Ice_Wave
 				
 				yield return new WaitForSeconds(0.25f);
 			}
+		}
+
+		protected override int GetAttackCount()
+		{
+			var attacks = base.GetAttackCount();
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Oana_BoI &&
+			    GameData.GetPlayerCharacterRank() >= CharacterRank.E1)
+			{
+				attacks += 2;
+			}
+
+			return attacks;
 		}
 
 		protected override void OnLevelUp()

@@ -15,6 +15,8 @@ public class ChaseComponent : MonoBehaviour
     private float tempSpeed;
     public bool FollowYAxis { get; set; }
     private float _immobileTimer;
+    private float _slowTimer;
+    private float _slowAmount;
     private bool _isMovementDisabled;
     
     private void Awake()
@@ -57,6 +59,10 @@ public class ChaseComponent : MonoBehaviour
         {
             _immobileTimer -= Time.deltaTime;
             return;
+        }        
+        if (_slowTimer > 0)
+        {
+            _slowTimer -= Time.deltaTime;
         }
 
         if (!isTempTarget && Vector3.Distance(transform.position, destination) > 12f)
@@ -66,13 +72,23 @@ public class ChaseComponent : MonoBehaviour
         }
         
         transform.LookAt(destination);
-        transform.position = Vector3.MoveTowards(transform.position, destination, (isTempTarget ? tempSpeed : movementSpeed) * Time.deltaTime);
+        var speed = (isTempTarget ? tempSpeed : movementSpeed) * (_slowTimer > 0 ? _slowAmount : 1.0f);
+        transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
     }
 
     public void SetImmobile(float time)
     {
         if (_immobileTimer < time)
             _immobileTimer = time;
+    }
+
+    public void SetSlow(float time, float amount)
+    {
+        if (_slowTimer < time)
+        {
+            _slowTimer = time;
+            _slowAmount = 1 - amount;
+        }
     }
 
     public void SetMovementState(bool isDisabled)

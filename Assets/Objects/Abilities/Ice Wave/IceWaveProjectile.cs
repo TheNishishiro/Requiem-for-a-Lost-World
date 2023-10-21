@@ -17,14 +17,14 @@ namespace Objects.Abilities.Ice_Wave
 		private void OnTriggerEnter(Collider other)
 		{
 			SimpleDamage(other, false);
-		}
-
-		protected override void OnColliderEnd()
-		{
-			if (IceWaveWeapon.IsBlockingEnemies)
-				collider.isTrigger = false;
-			else
-				base.OnColliderEnd();
+			if (!IceWaveWeapon.IsBlockingEnemies)
+				return;
+			
+			var chaseComponent = other.GetComponentInParent<ChaseComponent>();
+			if (chaseComponent != null)
+			{
+				chaseComponent.SetImmobile(0.2f);
+			}
 		}
 	}
 }

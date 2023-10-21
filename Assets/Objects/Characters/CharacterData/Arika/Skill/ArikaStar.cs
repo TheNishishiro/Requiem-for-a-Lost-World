@@ -15,7 +15,7 @@ namespace Objects.Characters.Arika.Skill
 		
 		private void Start()
 		{
-			_playerStatsComponent = FindObjectOfType<PlayerStatsComponent>();
+			_playerStatsComponent = FindAnyObjectByType<PlayerStatsComponent>();
 			_collider = GetComponent<BoxCollider>();
 			_elementalWeapon = new ElementalWeapon(Element.Cosmic);
 		}
