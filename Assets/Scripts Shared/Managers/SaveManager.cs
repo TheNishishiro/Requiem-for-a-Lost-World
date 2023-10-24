@@ -75,7 +75,8 @@ namespace Managers
 				0 => 0.4f,
 				1 => 1f,
 				2 => 2f,
-				3 => 4f,
+				3 => 3f,
+				4 => 4f,
 				_ => QualitySettings.lodBias
 			};
 

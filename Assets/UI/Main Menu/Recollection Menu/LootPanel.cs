@@ -68,7 +68,28 @@ namespace UI.Main_Menu.Recollection_Menu
 		public CharacterData DoPull()
 		{
 			_saveFile.Gems -= (ulong)PullCost;
-			return CharacterListManager.instance.GetCharacters().Where(x => x.IsPullable).OrderBy(x => Random.value).FirstOrDefault();
+			
+			var characters = CharacterListManager.instance.GetCharacters().Where(x => x.IsPullable).ToList();
+			if (_saveFile.Pity < 10)
+			{
+				_saveFile.Pity++;
+				var character = characters.OrderBy(x => Random.value).FirstOrDefault();
+				var characterSaveData = _saveFile.GetCharacterSaveData(character.Id);
+				if (characterSaveData.IsUnlocked)
+					_saveFile.Pity = 0;
+
+				return character;
+			}
+
+			var unlockedCharacters = _saveFile.CharacterSaveData.Where(x => x.Value?.IsUnlocked == true).Select(x => x.Key).ToList();
+			var lockedCharacters = characters.Where(x => !unlockedCharacters.Contains(x.Id)).ToList();
+			if (!lockedCharacters.Any())
+			{
+				return characters.OrderBy(x => Random.value).FirstOrDefault();
+			}
+
+			_saveFile.Pity = 0;
+			return lockedCharacters.OrderBy(x => Random.value).FirstOrDefault();
 		}
 
 		public Color GetPullColor(CharacterSaveData characterSaveData)

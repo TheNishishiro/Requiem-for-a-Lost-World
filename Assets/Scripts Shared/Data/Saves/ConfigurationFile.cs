@@ -58,6 +58,12 @@ namespace DefaultNamespace.Data
 				}
 				ConfigurationVersion = 2;
 			}
+			if (ConfigurationVersion == 2)
+			{
+				if (LodLevel == 3)
+					LodLevel = 4;
+				ConfigurationVersion = 3;
+			}
 
 			return this;
 		}

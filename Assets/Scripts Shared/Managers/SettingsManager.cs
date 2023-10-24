@@ -54,37 +54,37 @@ namespace Managers
 					renderScalingDropdown.value = 2;
 					shadowQualityDropdown.value = 0;
 					antialiasingDropdown.value = 0;
-					lodDropdown.value = 0;
+					lodDropdown.value = 1;
 					break;
 				case 2:
 					vsyncToggle.isOn = true;
 					grassRenderDistanceDropdown.value = 2;
 					grassDensityDropdown.value = 2;
 					qualityDropdown.value = 2;
-					renderScalingDropdown.value = 2;
+					renderScalingDropdown.value = 4;
 					shadowQualityDropdown.value = 1;
 					antialiasingDropdown.value = 1;
-					lodDropdown.value = 1;
+					lodDropdown.value = 2;
 					break;
 				case 3:
 					vsyncToggle.isOn = true;
 					grassRenderDistanceDropdown.value = 2;
 					grassDensityDropdown.value = 3;
 					qualityDropdown.value = 3;
-					renderScalingDropdown.value = 2;
+					renderScalingDropdown.value = 4;
 					shadowQualityDropdown.value = 3;
 					antialiasingDropdown.value = 2;
-					lodDropdown.value = 2;
+					lodDropdown.value = 3;
 					break;
 				case 4:
 					vsyncToggle.isOn = true;
 					grassRenderDistanceDropdown.value = 3;
 					grassDensityDropdown.value = 3;
 					qualityDropdown.value = 4;
-					renderScalingDropdown.value = 2;
+					renderScalingDropdown.value = 4;
 					shadowQualityDropdown.value = 4;
 					antialiasingDropdown.value = 3;
-					lodDropdown.value = 2;
+					lodDropdown.value = 3;
 					break;
 				case 5:
 					vsyncToggle.isOn = true;
@@ -94,7 +94,7 @@ namespace Managers
 					renderScalingDropdown.value = 4;
 					shadowQualityDropdown.value = 5;
 					antialiasingDropdown.value = 3;
-					lodDropdown.value = 3;
+					lodDropdown.value = 4;
 					break;
 			}
 		}
