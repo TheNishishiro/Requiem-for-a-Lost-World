@@ -13,7 +13,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Weapons;
 
-public class WeaponManager : Singleton<WeaponManager>
+public class WeaponManager : MonoBehaviour
 {
     [SerializeField] private WeaponContainer weapons;
     [SerializeField] private ItemContainer items;
@@ -33,9 +33,8 @@ public class WeaponManager : Singleton<WeaponManager>
     [SerializeField] private UnityEvent<ItemBase, int, int> onItemUpgraded;
     private SaveFile _saveFile;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         _saveFile = FindObjectOfType<SaveFile>();
         _playerStatsComponent = FindObjectOfType<PlayerStatsComponent>();
         _unlockedWeapons = new List<WeaponBase>();

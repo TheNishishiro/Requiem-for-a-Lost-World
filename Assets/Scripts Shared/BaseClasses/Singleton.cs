@@ -27,7 +27,6 @@ namespace DefaultNamespace.BaseClasses
             }
         
             instance = this as T;
-            DontDestroyOnLoad(gameObject);
         }
     }
 }

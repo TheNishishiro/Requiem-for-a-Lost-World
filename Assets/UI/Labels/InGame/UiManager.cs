@@ -23,7 +23,7 @@ namespace UI.Labels.InGame
 			characterAvatarImageBox.sprite = GameData.GetPlayerCharacterAvatar();
 			expBarFillImage.color = GameData.GetPlayerColorTheme() ?? Color.cyan;
 			pauseMenuCharacterImage.sprite = GameData.GetPlayerCharacterArt();
-			mapPanel.gameObject.SetActive(FindObjectOfType<SaveFile>().IsAchievementUnlocked(AchievementEnum.CollectMap));
+			mapPanel.gameObject.SetActive(false);
 		}
 	}
 }
