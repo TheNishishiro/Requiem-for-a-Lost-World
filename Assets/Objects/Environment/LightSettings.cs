@@ -10,8 +10,11 @@ namespace Objects.Environment
         {
             var saveFile = FindObjectOfType<SaveFile>();
             if (saveFile == null)
+            {
                 Debug.Log("Save file not found");
-            
+                return;
+            }
+
             var lightComponent = GetComponent<Light>();
             lightComponent.shadows = QualitySettings.shadows switch
             {

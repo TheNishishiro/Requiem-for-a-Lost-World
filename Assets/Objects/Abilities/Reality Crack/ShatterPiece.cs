@@ -9,7 +9,7 @@ namespace Objects.Abilities.Reality_Crack
 		
 		private const float FresnelStartValue = 10f;
 		private const float FresnelEndValue = 0f;
-		private const float ShardDuration = 1f;
+		public float ShardDuration = 1f;
 		private float _timer = 0f;
 
 		public void Start()

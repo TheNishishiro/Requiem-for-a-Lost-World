@@ -137,7 +137,7 @@ public class EnemyManager : MonoBehaviour
 
 	public void GlobalDamage(float damage, WeaponBase weapon)
 	{
-		var enemies = FindObjectsOfType<Damageable>();
+		var enemies = FindObjectsByType<Damageable>(FindObjectsSortMode.None);
 		foreach (var enemy in enemies)
 		{
 			enemy.TakeDamage(damage, weapon);

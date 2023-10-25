@@ -116,6 +116,9 @@ namespace Objects.Players.Scripts
 				case CharactersEnum.Oana_BoI:
 					OanaSkill();
 					break;
+				case CharactersEnum.Alice_BoL:
+					AliceSkill();
+					break;
 			}
 		}
 
@@ -140,6 +143,12 @@ namespace Objects.Players.Scripts
 		private void AdamSkill()
 		{
 			var result = Utilities.GetPointOnColliderSurface(transform.position + transform.forward * 2f, gameObject.transform);
+			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, transform.rotation);
+		}
+
+		private void AliceSkill()
+		{
+			var result = Utilities.GetPointOnColliderSurface(transform.position + transform.forward, gameObject.transform);
 			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, transform.rotation);
 		}
 

@@ -13,6 +13,7 @@ namespace Managers
 		[SerializeField] private SaveManager saveManager;
 		[SerializeField] private Toggle vsyncToggle;
 		[SerializeField] private Toggle discordToggle;
+		[SerializeField] private Toggle use3DGrassToggle;
 		[SerializeField] private TMP_Dropdown grassRenderDistanceDropdown;
 		[SerializeField] private TMP_Dropdown grassDensityDropdown;
 		[SerializeField] private TMP_Dropdown qualityDropdown;
@@ -20,6 +21,7 @@ namespace Managers
 		[SerializeField] private TMP_Dropdown shadowQualityDropdown;
 		[SerializeField] private TMP_Dropdown antialiasingDropdown;
 		[SerializeField] private TMP_Dropdown lodDropdown;
+		[SerializeField] private TMP_Dropdown renderDistanceDropdown;
 		[SerializeField] private TMP_Dropdown presetDropdown;
 		[SerializeField] private TMP_Dropdown windowModeDropdown;
 		[SerializeField] private TMP_Dropdown resolutionDropdown;
@@ -45,6 +47,8 @@ namespace Managers
 					shadowQualityDropdown.value = 0;
 					antialiasingDropdown.value = 0;
 					lodDropdown.value = 0;
+					renderDistanceDropdown.value = 0;
+					use3DGrassToggle.isOn = false;
 					break;
 				case 1:
 					vsyncToggle.isOn = false;
@@ -55,6 +59,8 @@ namespace Managers
 					shadowQualityDropdown.value = 0;
 					antialiasingDropdown.value = 0;
 					lodDropdown.value = 1;
+					renderDistanceDropdown.value = 0;
+					use3DGrassToggle.isOn = false;
 					break;
 				case 2:
 					vsyncToggle.isOn = true;
@@ -64,7 +70,8 @@ namespace Managers
 					renderScalingDropdown.value = 4;
 					shadowQualityDropdown.value = 1;
 					antialiasingDropdown.value = 1;
-					lodDropdown.value = 2;
+					lodDropdown.value = 1;
+					use3DGrassToggle.isOn = false;
 					break;
 				case 3:
 					vsyncToggle.isOn = true;
@@ -75,6 +82,8 @@ namespace Managers
 					shadowQualityDropdown.value = 3;
 					antialiasingDropdown.value = 2;
 					lodDropdown.value = 3;
+					renderDistanceDropdown.value = 1;
+					use3DGrassToggle.isOn = false;
 					break;
 				case 4:
 					vsyncToggle.isOn = true;
@@ -85,6 +94,8 @@ namespace Managers
 					shadowQualityDropdown.value = 4;
 					antialiasingDropdown.value = 3;
 					lodDropdown.value = 3;
+					renderDistanceDropdown.value = 2;
+					use3DGrassToggle.isOn = true;
 					break;
 				case 5:
 					vsyncToggle.isOn = true;
@@ -95,6 +106,8 @@ namespace Managers
 					shadowQualityDropdown.value = 5;
 					antialiasingDropdown.value = 3;
 					lodDropdown.value = 4;
+					renderDistanceDropdown.value = 3;
+					use3DGrassToggle.isOn = true;
 					break;
 			}
 		}
@@ -112,8 +125,10 @@ namespace Managers
 			shadowQualityDropdown.value = configuration.ShadowQuality;
 			antialiasingDropdown.value = configuration.AntiAliasing;
 			lodDropdown.value = configuration.LodLevel;
+			renderDistanceDropdown.value = configuration.RenderDistance;
 			discordToggle.isOn = configuration.IsDiscordEnabled;
 			windowModeDropdown.value = configuration.WindowMode;
+			use3DGrassToggle.isOn = configuration.Use3dGrass;
 			
 			resolutionDropdown.options ??= new List<TMP_Dropdown.OptionData>();
 			resolutionDropdown.options.Clear();
@@ -145,8 +160,10 @@ namespace Managers
 			configuration.ShadowQuality = shadowQualityDropdown.value;
 			configuration.AntiAliasing = antialiasingDropdown.value;
 			configuration.LodLevel = lodDropdown.value;
+			configuration.RenderDistance = renderDistanceDropdown.value;
 			configuration.IsDiscordEnabled = discordToggle.isOn;
 			configuration.WindowMode = windowModeDropdown.value;
+			configuration.Use3dGrass = use3DGrassToggle.isOn;
 			configuration.ResolutionWidth = Screen.resolutions[resolutionDropdown.value].width;
 			configuration.ResolutionHeight = Screen.resolutions[resolutionDropdown.value].height;
 			configuration.RefreshRate = Screen.resolutions[resolutionDropdown.value].refreshRateRatio.numerator;

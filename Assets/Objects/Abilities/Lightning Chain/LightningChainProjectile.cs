@@ -30,7 +30,7 @@ namespace Objects.Abilities.Lightning_Chain
 		public IEnumerator FindChainLightningTarget(int maxTargets)
 		{
 			var lastPosition = transform.position;
-			var targets = FindObjectsOfType<Damageable>();
+			var targets = FindObjectsByType<Damageable>(FindObjectsSortMode.None);
 			
 			for (var i = 0; i < maxTargets; i++)
 			{

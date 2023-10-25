@@ -21,6 +21,8 @@ namespace DefaultNamespace.Data
 		public int ResolutionWidth { get; set; }
 		public int ResolutionHeight { get; set; }
 		public uint RefreshRate { get; set; }
+		public int RenderDistance { get; set; }
+		public bool Use3dGrass { get; set; }
 
 		public ConfigurationFile Default()
 		{
@@ -35,6 +37,8 @@ namespace DefaultNamespace.Data
 			IsDiscordEnabled = true;
 			PresetIndex = 4;
 			ConfigurationVersion = 0;
+			RenderDistance = 1;
+			Use3dGrass = false;
 			return Update();
 		}
 
@@ -63,6 +67,11 @@ namespace DefaultNamespace.Data
 				if (LodLevel == 3)
 					LodLevel = 4;
 				ConfigurationVersion = 3;
+			}
+			if (ConfigurationVersion == 3)
+			{
+				RenderDistance = 1;
+				ConfigurationVersion = 4;
 			}
 
 			return this;

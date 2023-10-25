@@ -17,7 +17,7 @@ namespace Objects.Abilities.LightningStrike
 		
 		public override void Attack()
 		{
-			var enemy = FindObjectsOfType<Damageable>().OrderBy(x => Random.value).FirstOrDefault();
+			var enemy = FindObjectsByType<Damageable>(FindObjectsSortMode.None).OrderBy(x => Random.value).FirstOrDefault();
 			if (enemy == null) return;
 			
 			var lightningStrike = SpawnManager.instance.SpawnObject(enemy.transform.position, spawnPrefab);
