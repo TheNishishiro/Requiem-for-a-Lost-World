@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Interfaces;
 using Objects.Characters;
 using Objects.Characters.Adam;
+using Objects.Characters.Alice;
 using Objects.Characters.Amelia;
 using Objects.Characters.Amelia_BoD;
 using Objects.Characters.Arika;
@@ -33,6 +34,7 @@ namespace Objects.Players.Scripts
 			{ CharactersEnum.Summer, new SummerStrategy() },
 			{ CharactersEnum.Adam_OBoV, new AdamStrategy() },
 			{ CharactersEnum.Oana_BoI, new OanaStrategy() },
+			{ CharactersEnum.Alice_BoL, new AliceStrategy() },
 		};
 
 		public void ApplyRankStrategy(CharactersEnum characterId, CharacterRank characterRank, PlayerStats playerStats)

@@ -3,7 +3,9 @@ using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using Managers;
+using Objects.Characters;
 using Objects.Environment;
+using Objects.Stage;
 using UnityEngine;
 using Weapons;
 using Random = UnityEngine.Random;
@@ -25,6 +27,16 @@ namespace Objects.Abilities.LightningStrike
 
 			projectileComponent.SetParentWeapon(this);
 			projectileComponent.SetStats(weaponStats);
+		}
+
+		protected override int GetAttackCount()
+		{
+			var attackCount = base.GetAttackCount();
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Alice_BoL &&
+			    GameData.GetPlayerCharacterRank() >= CharacterRank.E1)
+				attackCount += 2;
+
+			return attackCount;
 		}
 
 		protected override void OnLevelUp()

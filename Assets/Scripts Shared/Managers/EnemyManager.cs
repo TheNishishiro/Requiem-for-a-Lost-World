@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
+using DefaultNamespace.BaseClasses;
 using Managers;
 using Objects.Enemies;
 using Objects.Players.Scripts;
 using UnityEngine;
 using Weapons;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : Singleton<EnemyManager>
 {
 	[SerializeField] private GameObject enemyGameObject;
 	[SerializeField] private List<EnemyData> defaultSpawns;
@@ -16,6 +17,7 @@ public class EnemyManager : MonoBehaviour
 	[SerializeField] private float spawnTimer;
 	[SerializeField] private Player player;
 	[SerializeField] private PlayerStatsComponent _playerStatsComponent;
+	private List<Enemy> _enemies;
 	public int currentEnemyCount;
 	private int enemyMinCount;
 	private int enemyMaxCount = 300;
@@ -23,10 +25,12 @@ public class EnemyManager : MonoBehaviour
 	private bool _isTimeStop;
 	private float _healthMultiplier = 1.0f;
 
-	private void Start()
+	protected override void Awake()
 	{
+		base.Awake();
 		currentEnemyCount = 0;
 		defaultSpawns = new List<EnemyData>();
+		_enemies = new List<Enemy>();
 	}
 
 	private void Update()
@@ -71,6 +75,7 @@ public class EnemyManager : MonoBehaviour
 		enemySprite.transform.localPosition = Vector3.zero;
 		
 		enemy.Setup(enemyToSpawn, player, this, _playerStatsComponent, _healthMultiplier);
+		_enemies.Add(enemy);
 		currentEnemyCount++;
 	}
 
@@ -110,9 +115,10 @@ public class EnemyManager : MonoBehaviour
 		enemyMinCount = (int)stageEventMinCount;
 	}
 
-	public void EnemyDespawn()
+	public void EnemyDespawn(Enemy enemy)
 	{
 		currentEnemyCount--;
+		_enemies.Remove(enemy);
 	}
 
 	public void EraseAllEnemies()
@@ -123,6 +129,7 @@ public class EnemyManager : MonoBehaviour
 			Destroy(enemy.gameObject);
 		}
 		currentEnemyCount = 0;
+		_enemies.Clear();
 	}
 
 	public void SetTimeStop(bool isTimeStop)
@@ -133,6 +140,11 @@ public class EnemyManager : MonoBehaviour
 	public bool IsTimeStop()
 	{
 		return _isTimeStop;
+	}
+
+	public List<Enemy> GetActiveEnemies()
+	{
+		return _enemies;
 	}
 
 	public void GlobalDamage(float damage, WeaponBase weapon)

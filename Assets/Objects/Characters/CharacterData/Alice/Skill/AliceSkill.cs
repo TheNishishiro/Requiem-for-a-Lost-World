@@ -23,7 +23,7 @@ namespace Objects.Characters.Alice.Skill
 		public void Update()
 		{
 			TickLifeTime();
-			if (LifeTime < 0.5f)
+			if (LifeTime < 0.75f)
 			{
 				Explode();
 			}

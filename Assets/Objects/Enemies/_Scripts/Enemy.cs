@@ -36,8 +36,7 @@ namespace Objects.Enemies
 		private bool _isRemoveCollisions;
 		private float _damageReduction;
 		private List<Collision> _ignoredEnemyColliders = new ();
-
-
+		
 		public void Setup(EnemyData newStats, Player target, EnemyManager enemyManager, PlayerStatsComponent playerStats, float healthMultiplier = 1.0f)
 		{
 			_enemyManager = enemyManager;
@@ -117,7 +116,7 @@ namespace Objects.Enemies
 				_currentDamageCooldown -= Time.deltaTime;
 			if (_timeAlive > 90 && !_isBossEnemy)
 			{
-				_enemyManager.EnemyDespawn();
+				_enemyManager.EnemyDespawn(this);
 				Destroy(gameObject);
 			}
 			
@@ -141,7 +140,7 @@ namespace Objects.Enemies
 			gameResultData.MonstersKilled++;
 			EnemyDiedEvent.Invoke();
 			GetComponentInChildren<DropOnDestroy>()?.CheckDrop();
-			_enemyManager.EnemyDespawn();
+			_enemyManager.EnemyDespawn(this);
 			OnEnemyDeath?.Invoke(this);
 			Destroy(gameObject);
 		}

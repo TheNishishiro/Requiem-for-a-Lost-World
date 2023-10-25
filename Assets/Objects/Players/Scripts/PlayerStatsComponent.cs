@@ -171,7 +171,12 @@ namespace Objects.Players.Scripts
 		{
 			_playerStats.DamageTakenIncreasePercentage += amount;
 		}
-
+		
+		public void IncreaseDodgeChance(float amount)
+		{
+			_playerStats.DodgeChance += amount;
+		}
+		
 		public int GetTotalDamage(int baseDamage)
 		{
 			var damage = (baseDamage + GetDamage());

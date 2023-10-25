@@ -1,8 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Data.ToggleableEntries;
+using DefaultNamespace.BaseClasses;
 using DefaultNamespace.Data;
 using Interfaces;
 using Objects.Abilities;
@@ -12,10 +11,9 @@ using Objects.Stage;
 using UI.Labels.InGame.LevelUpScreen;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem.UI;
 using Weapons;
 
-public class WeaponManager : MonoBehaviour
+public class WeaponManager : Singleton<WeaponManager>
 {
     [SerializeField] private WeaponContainer weapons;
     [SerializeField] private ItemContainer items;
@@ -34,9 +32,10 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private UnityEvent<ItemBase, int, int> onItemAdded;
     [SerializeField] private UnityEvent<ItemBase, int, int> onItemUpgraded;
     private SaveFile _saveFile;
-    
-    private void Start()
+
+    protected override void Awake()
     {
+        base.Awake();
         _saveFile = FindObjectOfType<SaveFile>();
         _playerStatsComponent = FindObjectOfType<PlayerStatsComponent>();
         _unlockedWeapons = new List<WeaponBase>();

@@ -29,6 +29,7 @@ namespace Objects.Players.Scripts
 		[SerializeField] private ChronastaSkill chronastaSkill;
 		[SerializeField] private SpecialBar specialBar;
 		[SerializeField] private AbilityDurationBar abilityDurationBar;
+		[SerializeField] private WeaponManager _weaponManager;
 		private AmeliaGlassShield _ameliaGlassShield;
 		private float _currentSkillCooldown = 0f;
 		private float _skillCooldown = 5f;
@@ -117,7 +118,7 @@ namespace Objects.Players.Scripts
 					OanaSkill();
 					break;
 				case CharactersEnum.Alice_BoL:
-					AliceSkill();
+					StartCoroutine(AliceSkill());
 					break;
 			}
 		}
@@ -146,10 +147,20 @@ namespace Objects.Players.Scripts
 			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, transform.rotation);
 		}
 
-		private void AliceSkill()
+		private IEnumerator AliceSkill()
 		{
 			var result = Utilities.GetPointOnColliderSurface(transform.position + transform.forward, gameObject.transform);
 			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, transform.rotation);
+			
+			var rank = GameData.GetPlayerCharacterRank();
+			var reductionMultiplier = (_weaponManager.maxWeaponCount - _weaponManager.GetUnlockedWeaponsAsInterface().Count) + 1;
+			var cooldownReduction =  reductionMultiplier * (rank >= CharacterRank.E3 ? 0.15f : 0.10f);
+			var skillDuration = rank >= CharacterRank.E2 ? 5f : 4f;
+
+			playerStatsComponent.IncreaseCooldownReductionPercentage(cooldownReduction);
+			abilityDurationBar.StartTick(skillDuration);
+			yield return new WaitForSeconds(skillDuration);
+			playerStatsComponent.IncreaseCooldownReductionPercentage(-cooldownReduction);
 		}
 
 		private void NatalieSkill()
