@@ -91,7 +91,8 @@ namespace Tayx.Graphy
             FPS_FULL_RAM_FULL_AUDIO_FULL = 9,
 
             FPS_FULL_RAM_FULL_AUDIO_FULL_ADVANCED_FULL = 10,
-            FPS_BASIC_ADVANCED_FULL = 11
+            FPS_BASIC_ADVANCED_FULL = 11,
+            FPS_FULL_RAM_FULL_ADVANCED_FULL = 12,
         }
 
         #endregion
@@ -428,14 +429,15 @@ namespace Tayx.Graphy
 
         public void ToggleModes()
         {
-            if ((int)m_modulePresetState >= Enum.GetNames(typeof(ModulePreset)).Length - 1)
+            m_modulePresetState = m_modulePresetState switch
             {
-                m_modulePresetState = 0;
-            }
-            else
-            {
-                m_modulePresetState++;
-            }
+                ModulePreset.FPS_BASIC_ADVANCED_FULL => ModulePreset.FPS_BASIC,
+                ModulePreset.FPS_BASIC => ModulePreset.FPS_FULL,
+                ModulePreset.FPS_FULL => ModulePreset.FPS_FULL_RAM_FULL,
+                ModulePreset.FPS_FULL_RAM_FULL => ModulePreset.FPS_FULL_RAM_FULL_ADVANCED_FULL,
+                ModulePreset.FPS_FULL_RAM_FULL_ADVANCED_FULL => ModulePreset.FPS_BASIC,
+                _ => ModulePreset.FPS_BASIC
+            };
 
             SetPreset(m_modulePresetState);
         }
@@ -526,6 +528,13 @@ namespace Tayx.Graphy
                 case ModulePreset.FPS_BASIC_ADVANCED_FULL:
                     m_fpsManager.SetState(ModuleState.BASIC);
                     m_ramManager.SetState(ModuleState.OFF);
+                    m_audioManager.SetState(ModuleState.OFF);
+                    m_advancedData.SetState(ModuleState.FULL);
+                    break;
+
+                case ModulePreset.FPS_FULL_RAM_FULL_ADVANCED_FULL:
+                    m_fpsManager.SetState(ModuleState.FULL);
+                    m_ramManager.SetState(ModuleState.FULL);
                     m_audioManager.SetState(ModuleState.OFF);
                     m_advancedData.SetState(ModuleState.FULL);
                     break;
