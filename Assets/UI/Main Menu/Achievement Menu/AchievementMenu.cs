@@ -49,14 +49,6 @@ namespace UI.Main_Menu.Achievement_Menu
 			gameObject.SetActive(false);
 		}
 
-		public void Toggle()
-		{
-			if (gameObject.activeSelf)
-				Close();
-			else
-				Open();
-		}
-
 		private void Update()
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))

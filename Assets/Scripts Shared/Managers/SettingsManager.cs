@@ -32,6 +32,12 @@ namespace Managers
 		{
 			QualitySettings.vSyncCount = vsyncToggle.isOn ? 1 : 0;
 		}
+		
+		private void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.Escape))
+				Close();
+		}
 
 		public void ApplyPreset()
 		{

@@ -10,20 +10,11 @@ namespace UI.Main_Menu.Tutorial_Gallery
     {
         [SerializeField] private List<GameObject> tutorialPages;
         [SerializeField] private ScrollRect scrollRect;
-        private SaveFile _saveFile;
-        
-        public void Start()
-        {
-            _saveFile = FindObjectOfType<SaveFile>();
-			
-            if (!_saveFile.IsFirstTutorialCompleted)
-                gameObject.SetActive(true);
-        }
 
-        public void OnDisable()
+        private void Update()
         {
-            _saveFile.IsFirstTutorialCompleted = true;
-            _saveFile.Save();
+            if (Input.GetKeyDown(KeyCode.Escape))
+                gameObject.SetActive(false);
         }
         
         public void Open(GameObject tutPanel)
