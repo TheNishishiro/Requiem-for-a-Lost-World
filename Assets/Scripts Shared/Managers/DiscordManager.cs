@@ -70,43 +70,51 @@ namespace Managers
 		
 		public void ClearActivity()
 		{
+			if (_activityManager == null) return;
 			_activityManager.ClearActivity((res) => { });
 		}
 
-		public void UpdateActivity(string details, string state, string image, string imageTitle)
+		private void UpdateActivity(string details, string state, string image, string imageTitle)
 		{
-			if (!UseDiscord)
-				return;
-			
-			var activity = new Activity()
+			try
 			{
-				State = state,
-				Details = details,
-				Assets =
-				{
-					LargeImage = "icon",
-					LargeText = "Requiem for a Lost World",
-					SmallImage = image?.ToLower(),
-					SmallText = imageTitle
-				},
-				Timestamps =
-				{
-					Start = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
-				},
-				Type = ActivityType.Playing
-			};
+				if (!UseDiscord || _activityManager == null)
+					return;
 			
-			_activityManager.UpdateActivity(activity, (res) =>
+				var activity = new Activity()
+				{
+					State = state,
+					Details = details,
+					Assets =
+					{
+						LargeImage = "icon",
+						LargeText = "Requiem for a Lost World",
+						SmallImage = image?.ToLower(),
+						SmallText = imageTitle
+					},
+					Timestamps =
+					{
+						Start = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+					},
+					Type = ActivityType.Playing
+				};
+			
+				_activityManager.UpdateActivity(activity, (res) =>
+				{
+					if (res == Result.Ok)
+					{
+						Debug.Log("Discord activity updated!");
+					}
+					else
+					{
+						Debug.LogError($"Discord activity failed to update: {res}");
+					}
+				});
+			}
+			catch (Exception e)
 			{
-				if (res == global::Discord.Result.Ok)
-				{
-					Debug.Log("Discord activity updated!");
-				}
-				else
-				{
-					Debug.LogError($"Discord activity failed to update: {res}");
-				}
-			});
+				Debug.LogError($"Discord UpdateActivity: {e?.Message}");
+			}
 		}
 	}
 }
