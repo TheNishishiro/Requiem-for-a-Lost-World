@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 namespace UI.Main_Menu.TitleScreen
 {
 	public class TitleScreen : MonoBehaviour
     {
+        public TutorialManager tutorialManager;
         public CanvasGroup titleScreen; // Assumes an Image component. If you're using a CanvasGroup, change this to CanvasGroup.
         public Animator titleScreenAnimator;
         public GameObject mainMenu; // The animator of your title screen.
@@ -21,6 +23,7 @@ namespace UI.Main_Menu.TitleScreen
                 mainMenu.SetActive(true);
                 versionText.SetActive(false);
                 StartCoroutine(FadeOutTitleScreen());
+                tutorialManager.DisplayFirst();
             }
         }
 

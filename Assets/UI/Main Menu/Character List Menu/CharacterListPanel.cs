@@ -18,6 +18,7 @@ namespace UI.Main_Menu.Character_List_Menu
 		[SerializeField] private Image experienceSliderImage;
 		[SerializeField] private GameObject lockPanel;
 		[SerializeField] private Image characterPanel;
+		[SerializeField] private Color wonWithCharacterColor;
 		[HideInInspector] public CharacterData characterData;
 		private SaveFile _saveFile;
 		private CharacterInfoPanel _characterInfoPanel;
@@ -38,6 +39,8 @@ namespace UI.Main_Menu.Character_List_Menu
 			
 			nameTextField.text = characterData.Name;
 			levelTextField.text = $"lv. {_characterSaveData.Level}";
+			if (_characterSaveData.FinishedGame)
+				nameTextField.color = levelTextField.color = wonWithCharacterColor;
 			experienceSlider.SetValue(_characterSaveData.Experience, _characterSaveData.ExperienceNeeded);
 			lockPanel.SetActive(!_characterSaveData.IsUnlocked);
 			characterPanel.sprite = characterData.CharacterCard;
