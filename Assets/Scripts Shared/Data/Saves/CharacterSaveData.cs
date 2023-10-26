@@ -14,6 +14,7 @@ namespace DefaultNamespace.Data
 		public int RankUpLevel;
 		public ulong KillCount;
 		public int HighestInGameLevel;
+		public bool FinishedGame;
 		public int ExperienceNeeded => (int)(Level * 75 * 1.5f);
 
 		public CharacterSaveData()
@@ -42,6 +43,9 @@ namespace DefaultNamespace.Data
 			KillCount += (ulong)gameResultData.MonstersKilled;
 			if (gameResultData.Level > HighestInGameLevel)
 				HighestInGameLevel = gameResultData.Level;
+
+			if (!FinishedGame && gameResultData.IsWin)
+				FinishedGame = true;
 		}
 		
 		public void AddExperience(int experience)
