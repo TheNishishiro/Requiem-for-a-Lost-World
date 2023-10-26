@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3105317862302066114}
   - component: {fileID: 8519347147829122157}
   m_Layer: 0
-  m_Name: Simple Tree 2 Yellow
+  m_Name: Simple Tree 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,6 +125,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7577739868436781572, guid: 9dad08af5f44a2e4c9f32c35c482b107,
         type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7577739868436781572, guid: 9dad08af5f44a2e4c9f32c35c482b107,
+        type: 3}
       propertyPath: m_StaticShadowCaster
       value: 0
       objectReference: {fileID: 0}
@@ -132,7 +137,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 030e31a38ff0595428712cce285a95fe, type: 2}
+      objectReference: {fileID: 2100000, guid: 594579e4517d3754abb0efaf5b271b52, type: 2}
     - target: {fileID: 919132149155446097, guid: 9dad08af5f44a2e4c9f32c35c482b107,
         type: 3}
       propertyPath: m_Name
@@ -170,16 +175,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7113232789235503381, guid: 9dad08af5f44a2e4c9f32c35c482b107,
         type: 3}
-      propertyPath: m_DynamicOccludee
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7113232789235503381, guid: 9dad08af5f44a2e4c9f32c35c482b107,
-        type: 3}
-      propertyPath: m_StaticShadowCaster
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7113232789235503381, guid: 9dad08af5f44a2e4c9f32c35c482b107,
-        type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: b4d00d940bd624647b2b4d9faae5288f, type: 2}
@@ -190,7 +185,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9dad08af5f44a2e4c9f32c35c482b107,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 235092967876828578}
+      addedObject: {fileID: 1447031732631373998}
   m_SourcePrefab: {fileID: 100100000, guid: 9dad08af5f44a2e4c9f32c35c482b107, type: 3}
 --- !u!1 &427816575490518872 stripped
 GameObject:
@@ -198,7 +193,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 661608278277476873}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &235092967876828578
+--- !u!136 &1447031732631373998
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -351,7 +346,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 8f27f6dd726ba9145b61f731a9307a2b, type: 2}
+      objectReference: {fileID: 2100000, guid: 594579e4517d3754abb0efaf5b271b52, type: 2}
     - target: {fileID: 8947754829193768737, guid: b0e1c42ccdc4d324c8e6ed6d54c81e74,
         type: 3}
       propertyPath: m_Layer
@@ -450,24 +445,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4138996735265624189, guid: 1e07cb08cb7ee6f4d8c0dd7555f9a485,
         type: 3}
-      propertyPath: m_ImportantGI
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4138996735265624189, guid: 1e07cb08cb7ee6f4d8c0dd7555f9a485,
-        type: 3}
       propertyPath: m_ScaleInLightmap
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -4138996735265624189, guid: 1e07cb08cb7ee6f4d8c0dd7555f9a485,
         type: 3}
-      propertyPath: m_StaticShadowCaster
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4138996735265624189, guid: 1e07cb08cb7ee6f4d8c0dd7555f9a485,
-        type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 030e31a38ff0595428712cce285a95fe, type: 2}
+      objectReference: {fileID: 2100000, guid: 594579e4517d3754abb0efaf5b271b52, type: 2}
     - target: {fileID: 919132149155446097, guid: 1e07cb08cb7ee6f4d8c0dd7555f9a485,
         type: 3}
       propertyPath: m_Name

@@ -23,6 +23,7 @@ namespace DefaultNamespace.Data
 		public uint RefreshRate { get; set; }
 		public int RenderDistance { get; set; }
 		public bool Use3dGrass { get; set; }
+		public int ObjectDensity { get; set; }
 
 		public ConfigurationFile Default()
 		{
@@ -39,6 +40,7 @@ namespace DefaultNamespace.Data
 			ConfigurationVersion = 0;
 			RenderDistance = 1;
 			Use3dGrass = false;
+			ObjectDensity = 1;
 			return Update();
 		}
 
@@ -72,6 +74,11 @@ namespace DefaultNamespace.Data
 			{
 				RenderDistance = 1;
 				ConfigurationVersion = 4;
+			}
+			if (ConfigurationVersion == 4)
+			{
+				ObjectDensity = 1;
+				ConfigurationVersion = 5;
 			}
 
 			return this;

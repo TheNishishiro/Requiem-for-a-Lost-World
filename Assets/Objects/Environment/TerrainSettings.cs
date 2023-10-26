@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DefaultNamespace.Data;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,95 +9,103 @@ namespace Objects.Environment
 	public class TerrainSettings : MonoBehaviour
 	{
 		[SerializeField] private Terrain terrain;
+		private int treePrototypeIndex = 0;
+
 		private int detailIndex2D = 0;
 		private int detailIndex3D = 1;
-		
+		private int detailIndex3D_Flowers = 2;
+
+		private float _treeDensity;
+
 		private void Start()
 		{
 			var saveFile = FindObjectOfType<SaveFile>();
 			if (saveFile == null)
 			{
-				Debug.Log("Save file not found");    
+				Debug.Log("Save file not found");
 				return;
 			}
+
+			_treeDensity = saveFile.ConfigurationFile.ObjectDensity switch
+			{
+				0 => 0.5f,
+				1 => 1,
+				2 => 1.3f,
+				3 => 1.7f,
+				_ => 1
+			};
+
+			terrain.detailObjectDistance = saveFile.ConfigurationFile.GrassRenderDistance switch
+			{
+				0 => 10,
+				1 => 20,
+				2 => 30,
+				3 => 60,
+				4 => 180,
+				_ => terrain.detailObjectDistance
+			};
+
+			terrain.detailObjectDensity = saveFile.ConfigurationFile.GrassDensity switch
+			{
+				0 => 0,
+				1 => 0.2f,
+				2 => 0.5f,
+				3 => saveFile.ConfigurationFile.Use3dGrass ? 0.65f : 0.8f,
+				4 => 1,
+				_ => terrain.detailObjectDensity
+			};
+
+			RemoveTrees(treePrototypeIndex);
+			PlaceTrees(treePrototypeIndex);
 
 			if (saveFile.ConfigurationFile.Use3dGrass)
 				SwitchTo3DGrass();
 			else
 				SwitchTo2DGrass();
-			
-			switch (saveFile.ConfigurationFile.GrassRenderDistance)
-			{
-				case 0:
-					terrain.detailObjectDistance = 10;
-					break;
-				case 1:
-					terrain.detailObjectDistance = 20;
-					break;
-				case 2:
-					terrain.detailObjectDistance = 30;
-					break;
-				case 3:
-					terrain.detailObjectDistance = 60;
-					break;
-				case 4:
-					terrain.detailObjectDistance = 180;
-					break;
-			}
-			switch (saveFile.ConfigurationFile.GrassDensity)
-			{
-				case 0:
-					terrain.detailObjectDensity = 0;
-					break;
-				case 1:
-					terrain.detailObjectDensity = 0.2f;
-					break;
-				case 2:
-					terrain.detailObjectDensity = 0.5f;
-					break;
-				case 3:
-					terrain.detailObjectDensity = 1;
-					break;
-			}
-		}
-		
-		public void SwitchTo2DGrass()
-		{
-			PopulateTerrainWithGrass(detailIndex2D, true);
 		}
 
-		public void SwitchTo3DGrass()
+		private void SwitchTo2DGrass()
 		{
-			PopulateTerrainWithGrass(detailIndex3D, false);
+			Clear();
+			PopulateTerrainWithGrass(detailIndex2D, 300, 500);
 		}
 
-		private void PopulateTerrainWithGrass(int detailIndex, bool is2DGrass)
+		private void SwitchTo3DGrass()
 		{
-			ClearTerrainGrass(detailIndex2D);
-			ClearTerrainGrass(detailIndex3D);
-			int[,] newDetailLayer = new int[terrain.terrainData.detailWidth, terrain.terrainData.detailHeight];
+			Clear();
+			PopulateTerrainWithGrass(detailIndex3D, 300, 500);
+			PopulateTerrainWithGrass(detailIndex3D_Flowers, 10, 20);
+		}
 
-			// Randomly set grass details density.
-			for (int y = 0; y < terrain.terrainData.detailHeight; y++)
+		private void PopulateTerrainWithGrass(int detailIndex, int minAmount, int maxAmount)
+		{
+
+			var newDetailLayer = new int[terrain.terrainData.detailWidth, terrain.terrainData.detailHeight];
+			for (var y = 0; y < terrain.terrainData.detailHeight; y++)
 			{
-				for (int x = 0; x < terrain.terrainData.detailWidth; x++)
+				for (var x = 0; x < terrain.terrainData.detailWidth; x++)
 				{
-					newDetailLayer[x, y] = Random.Range(300, 500);
+					newDetailLayer[x, y] = Random.Range(minAmount, maxAmount);
 				}
 			}
 
 			terrain.terrainData.SetDetailLayer(0, 0, detailIndex, newDetailLayer);
 			terrain.Flush();
 		}
-		
+
+		private void Clear()
+		{
+			ClearTerrainGrass(detailIndex2D);
+			ClearTerrainGrass(detailIndex3D);
+			ClearTerrainGrass(detailIndex3D_Flowers);
+		}
+
 		private void ClearTerrainGrass(int detailIndex)
 		{
-			int[,] emptyDetailLayer = new int[terrain.terrainData.detailWidth, terrain.terrainData.detailHeight];
-
-			// Fill the array with zeroes.
-			for (int y = 0; y < terrain.terrainData.detailHeight; y++)
+			var emptyDetailLayer = new int[terrain.terrainData.detailWidth, terrain.terrainData.detailHeight];
+			for (var y = 0; y < terrain.terrainData.detailHeight; y++)
 			{
-				for (int x = 0; x < terrain.terrainData.detailWidth; x++)
+				for (var x = 0; x < terrain.terrainData.detailWidth; x++)
 				{
 					emptyDetailLayer[x, y] = 0;
 				}
@@ -104,6 +113,31 @@ namespace Objects.Environment
 
 			terrain.terrainData.SetDetailLayer(0, 0, detailIndex, emptyDetailLayer);
 			terrain.Flush();
+		}
+
+		private void RemoveTrees(int prototypeIndex)
+		{
+			var trees = new List<TreeInstance>(terrain.terrainData.treeInstances);
+			trees.RemoveAll(tree => tree.prototypeIndex == prototypeIndex);
+			terrain.terrainData.treeInstances = trees.ToArray();
+			terrain.terrainData.RefreshPrototypes();
+		}
+
+		private void PlaceTrees(int prototypeIndex)
+		{
+			for (var i = 0; i < 6500 * _treeDensity; i++)
+			{
+				var tree = new TreeInstance
+				{
+					prototypeIndex = prototypeIndex,
+					widthScale = Random.Range(0.8f, 1.2f),
+					heightScale = Random.Range(0.6f, 1.4f),
+					color = Color.white,
+					lightmapColor = Color.white,
+					position = new Vector3(Random.Range(0f, 1f), 0, Random.Range(0f, 1f))
+				};
+				terrain.AddTreeInstance(tree);
+			}
 		}
 	}
 }

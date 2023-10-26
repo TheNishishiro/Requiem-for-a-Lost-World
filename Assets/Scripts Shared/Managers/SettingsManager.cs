@@ -16,6 +16,7 @@ namespace Managers
 		[SerializeField] private Toggle use3DGrassToggle;
 		[SerializeField] private TMP_Dropdown grassRenderDistanceDropdown;
 		[SerializeField] private TMP_Dropdown grassDensityDropdown;
+		[SerializeField] private TMP_Dropdown objectDensityDropdown;
 		[SerializeField] private TMP_Dropdown qualityDropdown;
 		[SerializeField] private TMP_Dropdown renderScalingDropdown;
 		[SerializeField] private TMP_Dropdown shadowQualityDropdown;
@@ -49,6 +50,7 @@ namespace Managers
 					lodDropdown.value = 0;
 					renderDistanceDropdown.value = 0;
 					use3DGrassToggle.isOn = false;
+					objectDensityDropdown.value = 0;
 					break;
 				case 1:
 					vsyncToggle.isOn = false;
@@ -61,6 +63,7 @@ namespace Managers
 					lodDropdown.value = 1;
 					renderDistanceDropdown.value = 0;
 					use3DGrassToggle.isOn = false;
+					objectDensityDropdown.value = 0;
 					break;
 				case 2:
 					vsyncToggle.isOn = true;
@@ -72,6 +75,7 @@ namespace Managers
 					antialiasingDropdown.value = 1;
 					lodDropdown.value = 1;
 					use3DGrassToggle.isOn = false;
+					objectDensityDropdown.value = 1;
 					break;
 				case 3:
 					vsyncToggle.isOn = true;
@@ -84,6 +88,7 @@ namespace Managers
 					lodDropdown.value = 3;
 					renderDistanceDropdown.value = 1;
 					use3DGrassToggle.isOn = false;
+					objectDensityDropdown.value = 1;
 					break;
 				case 4:
 					vsyncToggle.isOn = true;
@@ -96,6 +101,7 @@ namespace Managers
 					lodDropdown.value = 3;
 					renderDistanceDropdown.value = 2;
 					use3DGrassToggle.isOn = true;
+					objectDensityDropdown.value = 2;
 					break;
 				case 5:
 					vsyncToggle.isOn = true;
@@ -108,6 +114,7 @@ namespace Managers
 					lodDropdown.value = 4;
 					renderDistanceDropdown.value = 3;
 					use3DGrassToggle.isOn = true;
+					objectDensityDropdown.value = 3;
 					break;
 			}
 		}
@@ -120,6 +127,7 @@ namespace Managers
 			vsyncToggle.isOn = configuration.Vsync;
 			grassRenderDistanceDropdown.value = configuration.GrassRenderDistance;
 			grassDensityDropdown.value = configuration.GrassDensity;
+			objectDensityDropdown.value = configuration.ObjectDensity;
 			qualityDropdown.value = configuration.Quality;
 			renderScalingDropdown.value = configuration.RenderScaling;
 			shadowQualityDropdown.value = configuration.ShadowQuality;
@@ -155,6 +163,7 @@ namespace Managers
 			configuration.Vsync = vsyncToggle.isOn;
 			configuration.GrassRenderDistance = grassRenderDistanceDropdown.value;
 			configuration.GrassDensity = grassDensityDropdown.value;
+			configuration.ObjectDensity = objectDensityDropdown.value;
 			configuration.Quality = qualityDropdown.value;
 			configuration.RenderScaling = renderScalingDropdown.value;
 			configuration.ShadowQuality = shadowQualityDropdown.value;

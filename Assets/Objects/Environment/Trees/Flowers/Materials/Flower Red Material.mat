@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3790036698909084352
+--- !u!114 &-6159904647316685497
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Leaf_URP Green Material
-  m_Shader: {fileID: -6465566751694194690, guid: cbfcbe91bd754cd439aa151a507d06c3,
+  m_Name: Flower Red Material
+  m_Shader: {fileID: -6465566751694194690, guid: 2c3e7e7ad20a6254485c2867202973a6,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -37,12 +37,20 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ebf362d5481e4904d88f81af70f16bd8, type: 3}
+    - _SampleTexture2D_29311f758830419e9538d2fba5f7517f_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 3ddce1bf23aac8d41a5076e2add234fa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_d36824b053c94881af179d383e32be67_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 0325c8942851d454a94fe208963de520, type: 3}
+    - _SampleTexture2D_3ed9c2a02e114767baf085c3aaec51ca_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: cb8041865026ab34ab7da7912b751bdb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_82fa5ef17d424808a5bd3d13f5ea53a2_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 22ab519ce3bccaa47bd25b65230f981d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_9f4c556af94e42a29657a7b812195ae2_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 649652dfa3b834d4794c8c55254b36ca, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -59,12 +67,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha_Cutoff: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Smoothness: 0
+    - _Wind_Offset: 0
     - _Wind_Speed: 1.2
-    - _Wind_Strength: 0.2
+    - _Wind_Strength: 0.1
     m_Colors:
-    - _Leaf_Color: {r: 0.0744927, g: 0.5849056, b: 0.15431032, a: 0}
-    - _Wind_Direction: {r: 1, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.050980367, g: 0.62352943, b: 0.090196066, a: 1}
+    - _FloweMiddleColor: {r: 0.8584906, g: 0.7590864, b: 0, a: 1}
+    - _PetalColor: {r: 0.9150943, g: 0, b: 0.07117408, a: 1}
+    - _StemColor: {r: 0.050980367, g: 0.62352943, b: 0.090196066, a: 1}
+    - _Wind_Direction: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
