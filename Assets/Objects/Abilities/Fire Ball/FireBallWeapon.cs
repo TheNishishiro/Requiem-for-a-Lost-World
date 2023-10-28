@@ -16,7 +16,7 @@ public class FireBallWeapon : WeaponBase
     public override void Attack()
     {
         var currentPosition = transform.position;
-        var closestTarget = Utilities.FindClosestDamageable(currentPosition, FindObjectsOfType<Damageable>(), out var distanceToClosest);
+        var closestTarget = Utilities.FindClosestDamageable(currentPosition, FindObjectsByType<Damageable>(FindObjectsSortMode.None), out var distanceToClosest);
         if (closestTarget is null)
             return;
 

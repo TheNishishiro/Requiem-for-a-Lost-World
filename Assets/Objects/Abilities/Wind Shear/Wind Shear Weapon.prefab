@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7694653292377095879}
+  - component: {fileID: -6281015327444489480}
   m_Layer: 0
   m_Name: Wind Shear Weapon
   m_TagString: Untagged
@@ -23,11 +24,63 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 121491613198590038}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6281015327444489480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121491613198590038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc9e12094a946beb616e0c9312f8ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 294136379413056507, guid: 8b53c1d3e3b8ee342a77a3edac5f3534,
+    type: 3}
+  Name: Wind Shear
+  Description: Summon a ball of wind at random enemies location and apply DoT to
+    enemies hit
+  Icon: {fileID: 21300000, guid: 4f2c56641cee42343a5400681f93d427, type: 3}
+  element: 6
+  weaponStats:
+    Damage: 0
+    Cooldown: 5
+    CooldownReduction: 0
+    Scale: 1
+    Speed: 0
+    TimeToLive: 1.5
+    AttackCount: 1
+    PassThroughCount: 0
+    DamageCooldown: 0
+    DuplicateSpawnDelay: 0.05
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 4
+    DamageOverTimeDuration: 0.9
+    DamageOverTimeFrequency: 0.3
+  availableUpgrades:
+  - {fileID: 11400000, guid: b49b3b911dba95b43bf756660bef66c5, type: 2}
+  - {fileID: 11400000, guid: 73260711a08069146946bcd8dac82342, type: 2}
+  - {fileID: 11400000, guid: b57b7af5f5e7c3e45a393991b8107f34, type: 2}
+  - {fileID: 11400000, guid: 41cfbda181946c04c98224e9c976aba9, type: 2}
+  - {fileID: 11400000, guid: f8b7680c66138bc4fb224cd857a3efde, type: 2}
+  - {fileID: 11400000, guid: fe11c65125e55c84195a35df7ab583df, type: 2}
+  - {fileID: 11400000, guid: 62eeccb3704ca3a49a6c081ca4097ff5, type: 2}
+  - {fileID: 11400000, guid: 360c493449d3534438f61dcd9e342fa5, type: 2}
+  - {fileID: 11400000, guid: 0bf9f7b6fa155d14baabb10b96f29cca, type: 2}
+  - {fileID: 11400000, guid: 1a2b2dee99b69944580ee7a56e8db489, type: 2}
+  isSkill: 0
+  IsHurricaneWrath: 0

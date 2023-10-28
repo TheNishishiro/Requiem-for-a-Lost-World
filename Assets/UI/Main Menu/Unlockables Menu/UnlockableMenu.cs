@@ -20,6 +20,12 @@ namespace UI.Main_Menu.Unlockables_Menu
 		{
 			GenerateUnlockableEntries();
 		}
+		
+		private void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.Escape))
+				gameObject.SetActive(false);
+		}
 
 		private void GenerateUnlockableEntries()
 		{

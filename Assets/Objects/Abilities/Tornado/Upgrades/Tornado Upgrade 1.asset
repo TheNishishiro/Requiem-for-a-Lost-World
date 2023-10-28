@@ -15,11 +15,12 @@ MonoBehaviour:
   Name: Wind Gusts (I)
   Description: Increase the damage of the tornado by 1.
   WeaponStats:
-    Damage: 0
+    Damage: 1
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0
     Speed: 0
-    TimeToLive: 1
+    TimeToLive: 0
     AttackCount: 0
     PassThroughCount: 0
     DamageCooldown: 0
@@ -28,3 +29,8 @@ MonoBehaviour:
     CritRate: 0
     CritDamage: 0
     Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

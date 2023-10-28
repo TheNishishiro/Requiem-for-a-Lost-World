@@ -35,6 +35,8 @@ namespace DefaultNamespace.Data.Achievements
 		Take1000DamageInOneGame,
 		[AchievementValue("And he welcomed her as his old friend", "Have your expedition end prematurely 20 times")]
 		Die20Times,
+		[AchievementValue("Blessed by the wind", "Find a wind orb in the Capital Outskirts")]
+		UnlockWindShear,
 		
 		#region Survive with characters
 
