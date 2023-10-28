@@ -43,7 +43,7 @@ namespace Objects.Abilities.Tornado
 		{
 			var speed = WeaponStats.GetSpeed() * (GameData.GetPlayerCharacterId() == CharactersEnum.Natalie_BoW ? 1.5f : 1f);
 
-			while (!_isDead)
+			while (!IsDead)
 			{
 				var enemy = FindObjectsOfType<Enemy>().OrderBy(_ => Random.value).FirstOrDefault();
 				if (enemy == null)

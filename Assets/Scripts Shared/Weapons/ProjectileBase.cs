@@ -1,22 +1,33 @@
-﻿using DefaultNamespace;
+﻿using System;
+using DefaultNamespace;
 using Interfaces;
 using Objects.Abilities;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Weapons
 {
 	public class ProjectileBase : MonoBehaviour
 	{
+		private Vector3 baseScale;
 		protected WeaponStats WeaponStats;
 		protected WeaponBase ParentWeapon;
 		protected float TimeToLive;
 		protected float TimeAlive;
-		protected float DamageCooldown;
+		private float _damageCooldown;
 		protected float ProjectileDamageIncreasePercentage;
 		protected bool isDamageCooldownExpired;
-		protected int _currentPassedEnemies;
-		protected bool _isDead;
-		
+		private int _currentPassedEnemies;
+		protected bool IsDead;
+		[SerializeField] public bool UseParticles;
+		[SerializeField] public ParticleSystem ParticleSystem;
+
+		private void Start()
+		{
+			var localScale = transform.localScale;
+			baseScale = new Vector3(localScale.x,localScale.y,localScale.z);
+		}
+
 		public virtual void SetParentWeapon(WeaponBase parentWeapon)
 		{
 			ParentWeapon = parentWeapon;
@@ -25,10 +36,17 @@ namespace Weapons
 		public virtual void SetStats(WeaponStats weaponStats)
 		{
 			WeaponStats = weaponStats;
-			transform.localScale *= WeaponStats.GetScale();
+			transform.localScale = baseScale * WeaponStats.GetScale();
 			TimeToLive = GetTimeToLive();
-			DamageCooldown = weaponStats.DamageCooldown;
+			_damageCooldown = weaponStats.DamageCooldown;
 			_currentPassedEnemies = weaponStats.GetPassThroughCount();
+			IsDead = false;
+			TimeAlive = 0;
+			if (UseParticles)
+			{
+				ParticleSystem.Simulate( 0.0f, true, true );
+				ParticleSystem.Play();
+			}
 		}
 
 		protected virtual float GetTimeToLive()
@@ -47,22 +65,32 @@ namespace Weapons
 			TimeToLive -= Time.deltaTime;
 			TimeAlive += Time.deltaTime;
 
-			if (TimeToLive <= 0 && !_isDead)
+			if (TimeToLive <= 0 && !IsDead)
 				OnLifeTimeEnd();
 		}
 
 		protected virtual void OnLifeTimeEnd()
 		{
-			_isDead = true;
+			IsDead = true;
+			Destroy();
+		}
+
+		protected virtual void Destroy()
+		{
 			Destroy(gameObject);
+		}
+
+		protected void ReturnToPool<T>(ObjectPool<T> pool, T entity) where T : MonoBehaviour
+		{
+			pool.Release(entity);
 		}
 
 		public void TickDamageCooldown()
 		{
 			if (!isDamageCooldownExpired)
-				DamageCooldown -= Time.deltaTime;
+				_damageCooldown -= Time.deltaTime;
 			
-			if (DamageCooldown <= 0)
+			if (_damageCooldown <= 0)
 				isDamageCooldownExpired = true;
 		}
 
@@ -71,7 +99,7 @@ namespace Weapons
 			if (WeaponStats is null) return;
 			
 			isDamageCooldownExpired = false;
-			DamageCooldown = WeaponStats.DamageCooldown;
+			_damageCooldown = WeaponStats.DamageCooldown;
 		}
 
 		protected void SimpleDamage(Collider other, bool isLimitedUsage)
@@ -90,9 +118,9 @@ namespace Weapons
 				return;
 
 			damageable.TakeDamage(WeaponStats.GetDamage() * (1.0f + ProjectileDamageIncreasePercentage), ParentWeapon);
-			
+
 			if (isLimitedUsage && _currentPassedEnemies-- <= 0)
-				Destroy(gameObject);
+				OnLifeTimeEnd();
 		}
 
 		protected void SimpleDamage(Damageable damageable, bool isLimitedUsage)

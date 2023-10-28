@@ -8,6 +8,7 @@ using Objects.Abilities;
 using Objects.Items;
 using Objects.Players.Scripts;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.Serialization;
 
 namespace Weapons
@@ -42,7 +43,13 @@ namespace Weapons
 			weaponStats.AssignPlayerStatsComponent(_playerStatsComponent);
 			
 			_timer = weaponStats.GetCooldown();
+			InitPool();
 			StartCoroutine(AttackProcess());
+		}
+
+		protected virtual void InitPool()
+		{
+			return;
 		}
 
 		public List<UpgradeData> GetAvailableUpgrades()

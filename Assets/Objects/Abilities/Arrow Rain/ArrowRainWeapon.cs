@@ -14,7 +14,7 @@ using Random = UnityEngine.Random;
 
 namespace Objects.Abilities.Arrow_Rain
 {
-	public class ArrowRainWeapon : WeaponBase
+	public class ArrowRainWeapon : PoolableWeapon<ArrowRainProjectile>
 	{
 		private Damageable _target;
 		public bool HailOfArrows;
@@ -25,17 +25,19 @@ namespace Objects.Abilities.Arrow_Rain
 			_stageTime = FindObjectOfType<StageTime>();
 			base.Awake();
 		}
-		
-		public override void Attack()
+
+		protected override void ProjectileSpawn(ArrowRainProjectile projectile)
 		{
 			if (_target == null)
+			{
 				OnAttackStart();
-
+				if (_target == null)
+					return;
+			}
+			
 			var position = _target.transform.position;
-			var arrowRain = SpawnManager.instance.SpawnObject(new Vector3(position.x, position.y + 2.5f, position.z), spawnPrefab);
-			var projectileComponent = arrowRain.GetComponent<ArrowRainProjectile>();
-			projectileComponent.SetStats(weaponStats);
-			projectileComponent.SetParentWeapon(this);
+			projectile.transform.position = new Vector3(position.x, position.y + 2.5f, position.z);
+			projectile.SetStats(weaponStats);
 		}
 
 		protected override int GetAttackCount()

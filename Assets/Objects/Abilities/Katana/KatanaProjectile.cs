@@ -4,7 +4,7 @@ using Weapons;
 
 namespace Objects.Abilities.Katana
 {
-	public class KatanaProjectile : ProjectileWithLimitedHitBoxBase
+	public class KatanaProjectile : PoolableProjectileWithLimitedHitBox<KatanaProjectile>
 	{
 		private void Awake()
 		{

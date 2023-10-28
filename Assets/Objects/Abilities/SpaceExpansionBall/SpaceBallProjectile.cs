@@ -40,7 +40,7 @@ namespace Objects.Abilities.SpaceExpansionBall
 		
 		protected override void OnLifeTimeEnd()
 		{
-			_isDead = true;
+			IsDead = true;
 			if (!SpaceBallWeapon.IsGallacticCollapse)
 				Destroy(gameObject);
 			

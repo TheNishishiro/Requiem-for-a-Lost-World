@@ -7,27 +7,24 @@ using Managers;
 using Objects.Abilities.Magic_Ball;
 using Objects.Enemies;
 using UnityEngine;
+using UnityEngine.Pool;
 using Weapons;
 
-public class FireBallWeapon : WeaponBase
+public class FireBallWeapon : PoolableWeapon<FireBallProjectile>
 {
     [SerializeField] private AudioClip fireballSpawnSound;
-    
-    public override void Attack()
+
+    protected override void ProjectileSpawn(FireBallProjectile projectile)
     {
-        var currentPosition = transform.position;
-        var closestTarget = Utilities.FindClosestDamageable(currentPosition, FindObjectsByType<Damageable>(FindObjectsSortMode.None), out var distanceToClosest);
+        var closestTarget = Utilities.FindClosestDamageable(transform.position, FindObjectsByType<Damageable>(FindObjectsSortMode.None), out var distanceToClosest);
         if (closestTarget is null)
             return;
-
-        var fireBall = SpawnManager.instance.SpawnObject(currentPosition, spawnPrefab);
-        var projectileComponent = fireBall.GetComponent<FireBallProjectile>();
-        projectileComponent.SetStats(weaponStats);
+            
         var transform1 = closestTarget.transform;
         var position = transform1.position;
-        projectileComponent.SetParentWeapon(this);
-        projectileComponent.SetDirection(position.x, position.y, position.z);
-        //AudioSource.PlayClipAtPoint(fireballSpawnSound, currentPosition, 0.2f);
+        projectile.transform.position = transform.position;
+        projectile.SetStats(weaponStats);
+        projectile.SetDirection(position.x, position.y, position.z);
     }
 
     public override bool IsUnlocked(SaveFile saveFile)
