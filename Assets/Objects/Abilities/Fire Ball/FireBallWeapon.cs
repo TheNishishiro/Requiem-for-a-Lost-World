@@ -20,7 +20,7 @@ public class FireBallWeapon : PoolableWeapon<FireBallProjectile>
         if (closestTarget is null)
             return false;
             
-        var transform1 = closestTarget.transform;
+        var transform1 = closestTarget.targetPoint.transform;
         var position = transform1.position;
         projectile.transform.position = transform.position;
         projectile.SetStats(weaponStats);

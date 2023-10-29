@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Objects.Drops.MagnetDrop
 {
-	public class MagnetPickUpObject : MonoBehaviour, IPickUpObject
+	public class MagnetPickUpObject : PickupObject
 	{
-		public void OnPickUp(Player player)
+		public override void OnPickUp(Player player)
 		{
 			StartCoroutine(PullPickupsToPlayer());
 		}
 
-		public void SetAmount(int amount)
+		public override void SetAmount(int amount)
 		{
 		}
 

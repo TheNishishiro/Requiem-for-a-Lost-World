@@ -12,6 +12,7 @@ namespace DefaultNamespace
 	{
 		[SerializeField] private List<ChanceDrop> pickup;
 		private bool isQuitting;
+
 		
 		private void OnApplicationQuit()
 		{
@@ -32,8 +33,7 @@ namespace DefaultNamespace
 			{
 				var randomPoint = Utilities.GetRandomInAreaFreezeParameter(transform.position, 0.05f, isFreezeY: true);
 				var positionOnGround = Utilities.GetPointOnColliderSurface(randomPoint, transform, 0.25f);
-				var spawnedObject = SpawnManager.instance.SpawnObject(positionOnGround, item.gameObject);
-				spawnedObject.GetComponent<IPickUpObject>()?.SetAmount(item.amount);
+				PickupManager.instance.SpawnPickup(positionOnGround, item.pickupObject, item.amount);
 			}
 		}
 
@@ -41,6 +41,12 @@ namespace DefaultNamespace
 		{
 			pickup ??= new List<ChanceDrop>();
 			pickup.Add(chanceDrop);
+		}
+
+		public void ClearDrop()
+		{
+			pickup ??= new List<ChanceDrop>();
+			pickup.Clear();
 		}
 	}
 }

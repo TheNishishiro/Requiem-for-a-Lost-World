@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8064260009072169135}
   - component: {fileID: 7814660344872424984}
   - component: {fileID: 3561127621986706836}
-  - component: {fileID: 2810490054127953395}
+  - component: {fileID: -5662689963410785615}
   m_Layer: 11
   m_Name: Chest Prefab
   m_TagString: Untagged
@@ -27,6 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5023575353268103864}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.37, z: 0}
   m_LocalScale: {x: 1, y: 1.0000001, z: 1}
@@ -34,7 +35,6 @@ Transform:
   m_Children:
   - {fileID: 2290463720490303072}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8064260009072169135
 SpriteRenderer:
@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b0b78a4f72e1f9b42ad25cce90e5bf1c, type: 2}
+  - {fileID: 2100000, guid: d7c5ae10a7f3f274685ffec4f564b41a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbaa1a5dec3c4bcbb90afe1ad8de206b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2810490054127953395
+--- !u!114 &-5662689963410785615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,10 +130,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5023575353268103864}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6627522d9fad08446b3eec6c50393576, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a2841170fe94ad7a8b87b7f20551a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullBillboard: 0
+  OnPickupAction:
+    m_PersistentCalls:
+      m_Calls: []
+  PickupEnum: 5
+  isStationary: 1
+  pickUpObject: {fileID: 0}
+  canBeAttracted: 0
 --- !u!1 &8779675110605944975
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,13 +164,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8779675110605944975}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0.37, z: 1.876}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8857614189862792942}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!212 &788882119159937226
 SpriteRenderer:

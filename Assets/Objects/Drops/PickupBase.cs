@@ -11,11 +11,12 @@ namespace Objects.Drops
 	public class PickupBase : MonoBehaviour
 	{
 		[SerializeField] private UnityEvent<PickupEnum> OnPickupAction;
-		[SerializeField] private PickupEnum PickupEnum;
+		[SerializeField] protected PickupEnum PickupEnum;
 		private PlayerStatsComponent PlayerStatsComponent;
 		private Player Character;
 		protected bool IsFollowingPlayer;
 		private const float Speed = 10f;
+		[SerializeField] private bool isStationary;
 
 		protected void Init()
 		{
@@ -23,8 +24,16 @@ namespace Objects.Drops
 			PlayerStatsComponent = FindObjectOfType<PlayerStatsComponent>();
 		}
 
+		public void Reset()
+		{
+			IsFollowingPlayer = false;
+		}
+
 		protected void FollowPlayerWhenClose()
 		{
+			if (isStationary)
+				return;
+			
 			if (Time.frameCount % 2 != 0)
 				return;
 		
@@ -46,11 +55,17 @@ namespace Objects.Drops
 				var character = col.GetComponent<Player>();
 				if (character is null)
 					return;
-
-				GetComponent<IPickUpObject>()?.OnPickUp(character);
+						
+				var pickupObject = GetComponent<PickupObject>();
+				pickupObject?.OnPickUp(character);
 				OnPickupAction?.Invoke(PickupEnum);
-				Destroy(gameObject);
+				Destroy();
 			}
+		}
+
+		protected virtual void Destroy()
+		{
+			Destroy(gameObject);
 		}
 	}
 }

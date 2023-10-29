@@ -18,6 +18,7 @@ namespace DefaultNamespace
 	{
 		[HideInInspector] public float Health;
 		[SerializeField] private GameResultData gameResultData;
+		[SerializeField] public GameObject targetPoint;
 		public Dictionary<GameObject, float> sourceDamageCooldown = new ();
 		public float vulnerabilityTimer;
 		public float vulnerabilityPercentage;

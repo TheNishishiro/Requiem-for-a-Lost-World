@@ -79,7 +79,7 @@ public class ChaseComponent : MonoBehaviour
 
         if (!isTempTarget && Vector3.Distance(currentPosition, destination) > 12f)
         {
-            currentPosition = Utilities.GetPointOnColliderSurface(destination - Utilities.GenerateRandomPositionOnEdge(new Vector2(8, 8)), transformCache, GetComponentInChildren<BoxCollider>().size.y/2);
+            currentPosition = Utilities.GetPointOnColliderSurface(destination - Utilities.GenerateRandomPositionOnEdge(new Vector2(8, 8)), transformCache, GetComponent<CapsuleCollider>().height);
         }
 
         var speed = (isTempTarget ? tempSpeed : movementSpeed) * (_slowTimer > 0 ? _slowAmount : 1.0f);

@@ -7,6 +7,7 @@ using Managers;
 using Objects.Enemies;
 using Objects.Players.Scripts;
 using UnityEngine;
+using UnityEngine.Pool;
 using Weapons;
 
 public class EnemyManager : Singleton<EnemyManager>
@@ -17,6 +18,7 @@ public class EnemyManager : Singleton<EnemyManager>
 	[SerializeField] private float spawnTimer;
 	[SerializeField] private Player player;
 	[SerializeField] private PlayerStatsComponent _playerStatsComponent;
+	private ObjectPool<Enemy> enemyPool;
 	private List<Enemy> _enemies;
 	public int currentEnemyCount;
 	private int enemyMinCount;
@@ -24,6 +26,7 @@ public class EnemyManager : Singleton<EnemyManager>
 	private float _timer;
 	private bool _isTimeStop;
 	private float _healthMultiplier = 1.0f;
+	private EnemyData _currentEnemySpawning;
 
 	protected override void Awake()
 	{
@@ -31,8 +34,44 @@ public class EnemyManager : Singleton<EnemyManager>
 		currentEnemyCount = 0;
 		defaultSpawns = new List<EnemyData>();
 		_enemies = new List<Enemy>();
+		enemyPool = new ObjectPool<Enemy>(OnCreateEnemy, OnRequestEnemy, OnEnemyRelease, Destroy, true, 600, 1000);
 	}
 
+	#region Pooling methods
+
+	private Enemy OnCreateEnemy()
+	{
+		return Instantiate(enemyGameObject, transform).GetComponent<Enemy>();
+	}
+
+	private void OnRequestEnemy(Enemy enemy)
+	{
+		var position = player.transform.position - Utilities.GenerateRandomPositionOnEdge(spawnArea);
+		var pointFound = Utilities.GetPointOnColliderSurface(position, 100f, player.transform, out var pointOnSurface);
+		if (!pointFound)
+			return;
+		
+		position = pointOnSurface;
+
+		
+		enemy.transform.position = position;
+		enemy.Setup(_currentEnemySpawning, player, this, _playerStatsComponent, _healthMultiplier, _currentEnemySpawning.sprite);
+		if (_currentEnemySpawning.enemyName == "grand octi")
+			enemy.SetupBoss();
+		
+		currentEnemyCount++;
+		enemy.gameObject.SetActive(true);
+	}
+
+	private void OnEnemyRelease(Enemy enemy)
+	{
+		enemy.gameObject.SetActive(false);
+		currentEnemyCount--;
+		_enemies.Remove(enemy);
+	}
+
+	#endregion
+	
 	private void Update()
 	{
 		_timer -= Time.deltaTime;
@@ -57,26 +96,9 @@ public class EnemyManager : Singleton<EnemyManager>
 		var maxEnemyCount = enemyMaxCount * _playerStatsComponent.GetEnemyCountIncrease();
 		if (currentEnemyCount >= maxEnemyCount && !enemyToSpawn.isBossEnemy)
 			return;
-		
-		var position = player.transform.position - Utilities.GenerateRandomPositionOnEdge(spawnArea);
-		var pointFound = Utilities.GetPointOnColliderSurface(position, 100f, player.transform, out var pointOnSurface);
-		if (!pointFound)
-			return;
-		
-		position = pointOnSurface;
-		position.y += enemyToSpawn.animatedPrefab.GetComponent<BoxCollider>().size.y/2;
-		var newEnemy = Instantiate(enemyGameObject);
-		newEnemy.transform.position = position;
-		var enemy = newEnemy.GetComponent<Enemy>();
-		newEnemy.transform.parent = transform;
 
-		var enemySprite = Instantiate(enemyToSpawn.animatedPrefab);
-		enemySprite.transform.parent = newEnemy.transform;
-		enemySprite.transform.localPosition = Vector3.zero;
-		
-		enemy.Setup(enemyToSpawn, player, this, _playerStatsComponent, _healthMultiplier);
-		_enemies.Add(enemy);
-		currentEnemyCount++;
+		_currentEnemySpawning = enemyToSpawn;
+		enemyPool.Get();
 	}
 
 	public void ChangeDefaultSpawn(List<EnemyData> enemyData)
@@ -115,21 +137,16 @@ public class EnemyManager : Singleton<EnemyManager>
 		enemyMinCount = (int)stageEventMinCount;
 	}
 
-	public void EnemyDespawn(Enemy enemy)
-	{
-		currentEnemyCount--;
-		_enemies.Remove(enemy);
-	}
-
 	public void EraseAllEnemies()
 	{
-		var enemies = GetComponentsInChildren<Enemy>();
-		foreach (var enemy in enemies)
-		{
-			Destroy(enemy.gameObject);
-		}
+		enemyPool.Clear();
 		currentEnemyCount = 0;
 		_enemies.Clear();
+	}
+
+	public void Despawn(Enemy enemy)
+	{
+		enemyPool.Release(enemy);
 	}
 
 	public void SetTimeStop(bool isTimeStop)
@@ -140,11 +157,6 @@ public class EnemyManager : Singleton<EnemyManager>
 	public bool IsTimeStop()
 	{
 		return _isTimeStop;
-	}
-
-	public List<Enemy> GetActiveEnemies()
-	{
-		return _enemies;
 	}
 
 	public void GlobalDamage(float damage, WeaponBase weapon)
