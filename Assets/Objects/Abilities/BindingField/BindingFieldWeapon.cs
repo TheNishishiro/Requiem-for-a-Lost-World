@@ -10,23 +10,21 @@ using Weapons;
 
 namespace Objects.Abilities.BindingField
 {
-	public class BindingFieldWeapon : WeaponBase
+	public class BindingFieldWeapon : PoolableWeapon<BindingFieldProjectile>
 	{
 		public double ChanceToBind { get; private set; } = 0.5f;
 		public bool IsBurstDamage { get; private set; }
 
-		public override void Attack()
+		protected override bool ProjectileSpawn(BindingFieldProjectile projectile)
 		{
-			var randomEnemy = FindObjectsOfType<Enemy>().OrderBy(x => Random.value).FirstOrDefault();
+			var randomEnemy = FindObjectsByType<Enemy>(FindObjectsSortMode.None).OrderBy(x => Random.value).FirstOrDefault();
 			if (randomEnemy == null)
-				return;
+				return false;
 
 			var pointOnSurface = Utilities.GetPointOnColliderSurface(new Vector3(randomEnemy.transform.position.x, 0, randomEnemy.transform.position.z), transform);
-			var bindingField = SpawnManager.instance.SpawnObject(pointOnSurface, spawnPrefab);
-			var projectileComponent = bindingField.GetComponent<BindingFieldProjectile>();
-
-			projectileComponent.SetParentWeapon(this);
-			projectileComponent.SetStats(weaponStats);
+			projectile.transform.position = pointOnSurface;
+			projectile.SetStats(weaponStats);
+			return true;
 		}
 
 		protected override IEnumerator AttackProcess()

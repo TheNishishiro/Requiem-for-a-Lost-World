@@ -12,21 +12,20 @@ using Random = UnityEngine.Random;
 
 namespace Objects.Abilities.Meteor
 {
-	public class MeteorWeapon : WeaponBase
+	public class MeteorWeapon : PoolableWeapon<MeteorProjectile>
 	{
-		public override void Attack()
+		protected override bool ProjectileSpawn(MeteorProjectile projectile)
 		{
 			var spawnPosition = new Vector3(transform.position.x, transform.position.y + 5.0f, transform.position.z);
-			var enemy = FindObjectsOfType<Damageable>().OrderBy(x => Random.value).FirstOrDefault();
+			var enemy = FindObjectsByType<Damageable>(FindObjectsSortMode.None).OrderBy(x => Random.value).FirstOrDefault();
 			if (enemy == null)
-				return;
+				return false;
 			
 			var position = enemy.transform.position;
-			var meteor = SpawnManager.instance.SpawnObject(spawnPosition, spawnPrefab);
-            var projectileComponent = meteor.GetComponent<MeteorProjectile>();
-            projectileComponent.SetStats(weaponStats);
-            projectileComponent.SetParentWeapon(this);
-            projectileComponent.SetDirection(position.x, position.y, position.z);
+			projectile.transform.position = spawnPosition;
+			projectile.SetStats(weaponStats);
+			projectile.SetDirection(position.x, position.y, position.z);
+			return true;
 		}
 
 		protected override int GetAttackCount()

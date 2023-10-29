@@ -5,7 +5,7 @@ using Weapons;
 
 namespace Objects.Abilities.Magic_Ball
 {
-	public class MagicBallProjectile : ProjectileBase
+	public class MagicBallProjectile : PoolableProjectile<MagicBallProjectile>
 	{
 		private Vector3 direction;
 

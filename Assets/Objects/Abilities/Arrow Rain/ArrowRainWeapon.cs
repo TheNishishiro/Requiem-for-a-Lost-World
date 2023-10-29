@@ -26,18 +26,19 @@ namespace Objects.Abilities.Arrow_Rain
 			base.Awake();
 		}
 
-		protected override void ProjectileSpawn(ArrowRainProjectile projectile)
+		protected override bool ProjectileSpawn(ArrowRainProjectile projectile)
 		{
 			if (_target == null)
 			{
 				OnAttackStart();
 				if (_target == null)
-					return;
+					return false;
 			}
 			
 			var position = _target.transform.position;
 			projectile.transform.position = new Vector3(position.x, position.y + 2.5f, position.z);
 			projectile.SetStats(weaponStats);
+			return true;
 		}
 
 		protected override int GetAttackCount()

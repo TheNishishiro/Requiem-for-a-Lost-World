@@ -12,21 +12,19 @@ using Random = UnityEngine.Random;
 
 namespace Objects.Abilities.LightningStrike
 {
-	public class LightningStrikeWeapon : WeaponBase
+	public class LightningStrikeWeapon : PoolableWeapon<LightningStrikeProjectile>
 	{
 		[SerializeField] public GameObject chainLightningPrefab;
 		[HideInInspector] public bool IsChainLightning;
-		
-		public override void Attack()
+
+		protected override bool ProjectileSpawn(LightningStrikeProjectile projectile)
 		{
 			var enemy = FindObjectsByType<Damageable>(FindObjectsSortMode.None).OrderBy(x => Random.value).FirstOrDefault();
-			if (enemy == null) return;
-			
-			var lightningStrike = SpawnManager.instance.SpawnObject(enemy.transform.position, spawnPrefab);
-			var projectileComponent = lightningStrike.GetComponent<LightningStrikeProjectile>();
+			if (enemy == null) return false;
 
-			projectileComponent.SetParentWeapon(this);
-			projectileComponent.SetStats(weaponStats);
+			projectile.transform.position = enemy.transform.position;
+			projectile.SetStats(weaponStats);
+			return true;
 		}
 
 		protected override int GetAttackCount()

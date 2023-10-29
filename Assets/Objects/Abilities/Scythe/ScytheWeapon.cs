@@ -6,7 +6,7 @@ using Weapons;
 
 namespace Objects.Abilities.Scythe
 {
-	public class ScytheWeapon : WeaponBase
+	public class ScytheWeapon : PoolableWeapon<ScytheProjectile>
 	{
 		private HealthComponent _healthComponent;
 		public bool IsBloodEmbrace;
@@ -19,14 +19,19 @@ namespace Objects.Abilities.Scythe
 			base.Awake();
 		}
 
-		public override void Attack()
+		protected override ScytheProjectile ProjectileInit()
 		{
-			var katanaSlash = Instantiate(spawnPrefab, transform);
-			var projectileComponent = katanaSlash.GetComponent<ScytheProjectile>();
-			
-			projectileComponent.SetParentWeapon(this);
-			projectileComponent.SetPlayerHealthComponent(_healthComponent);
-			projectileComponent.SetStats(weaponStats);
+			var katanaSlash = Instantiate(spawnPrefab, transform).GetComponent<ScytheProjectile>();
+			katanaSlash.SetParentWeapon(this);
+			katanaSlash.SetPlayerHealthComponent(_healthComponent);
+			return katanaSlash;
+		}
+
+		protected override bool ProjectileSpawn(ScytheProjectile projectile)
+		{
+			projectile.transform.position = transform.position;
+			projectile.SetStats(weaponStats);
+			return true;
 		}
 
 		protected override int GetAttackCount()

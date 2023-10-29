@@ -18,6 +18,7 @@ public class ChaseComponent : MonoBehaviour
     private float _slowTimer;
     private float _slowAmount;
     private bool _isMovementDisabled;
+    private float _tempTargetTimer;
     
     private void Awake()
     {
@@ -31,9 +32,10 @@ public class ChaseComponent : MonoBehaviour
         targetDestination = target.transform;
     }
 
-    public void SetTemporaryTarget(GameObject target, float? tempSpeed = null)
+    public void SetTemporaryTarget(GameObject target, float? tempSpeed = null, float tempTargetCooldown = 0.2f)
     {
         tempTarget = target;
+        _tempTargetTimer = tempTargetCooldown;
         this.tempSpeed = tempSpeed ?? movementSpeed;
     }
 
@@ -47,7 +49,13 @@ public class ChaseComponent : MonoBehaviour
         if (targetDestination == null)
             return;
 
-        var isTempTarget = tempTarget != null;
+        var isTempTarget = false;
+        if (_tempTargetTimer > 0)
+        {
+            isTempTarget = tempTarget != null && tempTarget.gameObject.activeInHierarchy;
+            _tempTargetTimer-=Time.deltaTime;
+        }
+
         var destination = isTempTarget ? tempTarget.transform.position : targetDestination.position;
         if (!FollowYAxis)
             destination.y = transform.position.y;

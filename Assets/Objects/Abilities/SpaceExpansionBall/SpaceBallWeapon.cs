@@ -8,24 +8,23 @@ using Weapons;
 
 namespace Objects.Abilities.SpaceExpansionBall
 {
-	public class SpaceBallWeapon : WeaponBase
+	public class SpaceBallWeapon : PoolableWeapon<SpaceBallProjectile>
 	{
 		[HideInInspector] public bool IsGallacticCollapse;
 		[SerializeField] public GameObject ExplosionPrefab;
-		
-		public override void Attack()
-		{
-			var spaceBall = SpawnManager.instance.SpawnObject(transform.position, spawnPrefab);
-			var projectileComponent = spaceBall.GetComponent<SpaceBallProjectile>();
-			projectileComponent.SetStats(weaponStats);
-			projectileComponent.SetParentWeapon(this);
-        
-			var enemy = FindObjectsOfType<Damageable>().OrderBy(x => Random.value).FirstOrDefault();
-			if (enemy is null)
-				return;
 
+		protected override bool ProjectileSpawn(SpaceBallProjectile projectile)
+		{
+			var enemy = FindObjectsByType<Damageable>(FindObjectsSortMode.None).OrderBy(x => Random.value).FirstOrDefault();
+			if (enemy == null)
+				return false;
+			
 			var position = enemy.transform.position;
-			projectileComponent.SetDirection(position.x, position.y, position.z);
+
+			projectile.transform.position = transform.position;
+			projectile.SetStats(weaponStats);
+			projectile.SetDirection(position.x, position.y, position.z);
+			return true;
 		}
 
 		protected override void OnLevelUp()

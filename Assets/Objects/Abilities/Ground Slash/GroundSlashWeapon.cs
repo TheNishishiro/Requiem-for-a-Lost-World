@@ -7,30 +7,36 @@ using Weapons;
 
 namespace Objects.Abilities.Ground_Slash
 {
-	public class GroundSlashWeapon : WeaponBase
+	public class GroundSlashWeapon : PoolableWeapon<GroundSlashProjectile>
 	{
 		public bool isDualStrike = true;
 		public bool isShatteredEarth;
+		private float _actualOffset;
 		
 		public override void Attack()
 		{
-			var playerTransform = FindObjectsOfType<Player>().FirstOrDefault();
-
 			var offset = isDualStrike ? 0.5f : 0;
-			var playerPosition = transform.position;
 			var spawnCount = isDualStrike ? 2 : 1;
 			
 			for (var i = 0; i < spawnCount; i++)
 			{
-				var actualOffset = offset * (i % 2 == 0 ? 1 : -1);
-				var position = new Vector3(playerPosition.x + actualOffset, playerPosition.y, playerPosition.z);
-				var groundSlash = SpawnManager.instance.SpawnObject(Utilities.GetPointOnColliderSurface(position, playerTransform.transform), spawnPrefab);
-				var projectileComponent = groundSlash.GetComponent<GroundSlashProjectile>();
-			
-				projectileComponent.SetParentWeapon(this);
-				projectileComponent.SetStats(weaponStats);
-				projectileComponent.SetDirection(playerTransform.transform.forward);
+				_actualOffset = offset * (i % 2 == 0 ? 1 : -1);
+				pool.Get();
 			}
+		}
+
+		protected override bool ProjectileSpawn(GroundSlashProjectile projectile)
+		{
+			var playerTransform = FindObjectsByType<Player>(FindObjectsSortMode.None).FirstOrDefault();
+			var playerPosition = transform.position;
+			var position = new Vector3(playerPosition.x + _actualOffset, playerPosition.y, playerPosition.z);
+			projectile.transform.position = Utilities.GetPointOnColliderSurface(position, playerTransform.transform);
+			
+			projectile.gameObject.SetActive(true);
+			projectile.SetParentWeapon(this);
+			projectile.SetStats(weaponStats);
+			projectile.SetDirection(playerTransform.transform.forward);
+			return true;
 		}
 
 		protected override void OnLevelUp()

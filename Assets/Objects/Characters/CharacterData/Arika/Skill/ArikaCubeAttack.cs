@@ -26,7 +26,7 @@ namespace Objects.Characters.Arika.Skill
 					blackHoleCenter.SetActive(true);
 					var arikaRank = GameData.GetPlayerCharacterRank();
 					
-					foreach (var chaseComponent in FindObjectsOfType<ChaseComponent>())
+					foreach (var chaseComponent in FindObjectsByType<ChaseComponent>(FindObjectsSortMode.None))
 					{
 						if (arikaRank < CharacterRank.E5)
 						{
@@ -35,7 +35,7 @@ namespace Objects.Characters.Arika.Skill
 								continue;
 						}
 
-						chaseComponent?.SetTemporaryTarget(blackHoleCenter, 7f);
+						chaseComponent?.SetTemporaryTarget(blackHoleCenter, 7f, 2f);
 						chaseComponent?.GetComponentInParent<Enemy>()?.SetNoCollisions(2f);
 					}
 				}

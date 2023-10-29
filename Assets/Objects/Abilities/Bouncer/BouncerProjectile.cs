@@ -8,7 +8,7 @@ using Weapons;
 
 namespace Objects.Abilities.Bouncer
 {
-	public class BouncerProjectile : ProjectileBase
+	public class BouncerProjectile : PoolableProjectile<BouncerProjectile>
 	{
 		private Vector3 direction;
 		private BouncerWeapon BouncerWeapon => (BouncerWeapon) ParentWeapon;

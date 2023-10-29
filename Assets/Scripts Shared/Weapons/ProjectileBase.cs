@@ -1,6 +1,7 @@
 ﻿using System;
 using DefaultNamespace;
 using Interfaces;
+using NaughtyAttributes;
 using Objects.Abilities;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -20,9 +21,10 @@ namespace Weapons
 		private int _currentPassedEnemies;
 		protected bool IsDead;
 		[SerializeField] public bool UseParticles;
+		[ShowIf("UseParticles")]
 		[SerializeField] public ParticleSystem ParticleSystem;
 
-		private void Start()
+		protected virtual void Awake()
 		{
 			var localScale = transform.localScale;
 			baseScale = new Vector3(localScale.x,localScale.y,localScale.z);
@@ -40,8 +42,11 @@ namespace Weapons
 			TimeToLive = GetTimeToLive();
 			_damageCooldown = weaponStats.DamageCooldown;
 			_currentPassedEnemies = weaponStats.GetPassThroughCount();
+			
 			IsDead = false;
 			TimeAlive = 0;
+			isDamageCooldownExpired = false;
+			
 			if (UseParticles)
 			{
 				ParticleSystem.Simulate( 0.0f, true, true );

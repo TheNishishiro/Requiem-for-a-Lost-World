@@ -6,23 +6,22 @@ using Weapons;
 
 namespace Objects.Abilities.Bouncer
 {
-	public class BouncerWeapon : WeaponBase
+	public class BouncerWeapon : PoolableWeapon<BouncerProjectile>
 	{
 		public float ElectroDefenceShred;
 		public bool Thunderstorm;
-		
-		public override void Attack()
+
+		protected override bool ProjectileSpawn(BouncerProjectile projectile)
 		{
 			var currentPosition = transform.position;
-			var target = FindObjectsOfType<Damageable>().OrderBy(_ => Random.value).FirstOrDefault();
+			var target = FindObjectsByType<Damageable>(FindObjectsSortMode.None).OrderBy(_ => Random.value).FirstOrDefault();
 			if (target is null)
-				return;
+				return false;
 
-			var bouncer = SpawnManager.instance.SpawnObject(currentPosition, spawnPrefab);
-			var projectileComponent = bouncer.GetComponent<BouncerProjectile>();
-			projectileComponent.SetStats(weaponStats);
-			projectileComponent.SetParentWeapon(this);
-			projectileComponent.SetTarget(target);
+			projectile.transform.position = currentPosition;
+			projectile.SetStats(weaponStats);
+			projectile.SetTarget(target);
+			return true;
 		}
 
 		protected override void OnLevelUp()

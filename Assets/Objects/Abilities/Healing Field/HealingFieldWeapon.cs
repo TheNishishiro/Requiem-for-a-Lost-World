@@ -8,18 +8,16 @@ using Weapons;
 
 namespace Objects.Abilities.Healing_Field
 {
-	public class HealingFieldWeapon : WeaponBase
+	public class HealingFieldWeapon : PoolableWeapon<HealingFieldProjectile>
 	{
 		[HideInInspector] public bool IsEmpowering;
-		
-		public override void Attack()
+
+		protected override bool ProjectileSpawn(HealingFieldProjectile projectile)
 		{
 			var pointOnSurface = Utilities.GetPointOnColliderSurface(new Vector3(transform.position.x, 0, transform.position.z), transform);
-			var healingField = SpawnManager.instance.SpawnObject(pointOnSurface, spawnPrefab);
-			var projectileComponent = healingField.GetComponent<HealingFieldProjectile>();
-
-			projectileComponent.SetParentWeapon(this);
-			projectileComponent.SetStats(weaponStats);
+			projectile.transform.position = pointOnSurface;
+			projectile.SetStats(weaponStats);
+			return true;
 		}
 
 		protected override void OnLevelUp()

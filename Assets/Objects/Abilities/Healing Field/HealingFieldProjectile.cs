@@ -5,7 +5,7 @@ using Weapons;
 
 namespace Objects.Abilities.Healing_Field
 {
-	public class HealingFieldProjectile : ProjectileBase
+	public class HealingFieldProjectile : PoolableProjectile<HealingFieldProjectile>
 	{
         [SerializeField] private GameObject healingFieldPrefab;
         [SerializeField] private float healingFrequency;

@@ -5,7 +5,7 @@ using Weapons;
 
 namespace Objects.Abilities.LightningStrike
 {
-	public class LightningStrikeProjectile : ProjectileBase
+	public class LightningStrikeProjectile : PoolableProjectile<LightningStrikeProjectile>
 	{
 		private LightningStrikeWeapon _lightningStrikeWeapon => ParentWeapon as LightningStrikeWeapon;
 		

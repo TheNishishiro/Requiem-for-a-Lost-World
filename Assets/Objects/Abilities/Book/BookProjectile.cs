@@ -7,7 +7,7 @@ using Weapons;
 
 namespace Objects.Abilities.Book
 {
-	public class BookProjectile : ProjectileBase
+	public class BookProjectile : PoolableProjectile<BookProjectile>
 	{
 		private GameObject rotateTarget;
 		private BookWeapon BookWeapon => ParentWeapon as BookWeapon;

@@ -8,23 +8,29 @@ using Weapons;
 
 namespace Objects.Abilities.Laser_Gun
 {
-	public class LaserGunProjectile : ProjectileBase
+	public class LaserGunProjectile : PoolableProjectile<LaserGunProjectile>
 	{
 		[SerializeField] public LineRenderer lineRenderer;
 		[SerializeField] public Transform laserFirePoint;
-		[SerializeField] public Transform modelTransform;
 		private Damageable laserTarget;
-		private float damageCooldown;
 
-		private void Awake()
+		protected override void Awake()
 		{
+			base.Awake();
 			lineRenderer.positionCount = 2;
+			laserTarget = null;
 		}
-		
+
+		public override void SetStats(WeaponStats weaponStats)
+		{
+			base.SetStats(weaponStats);
+			SetTarget();
+		}
+
 		void Update()
 		{
 			TickProjectile();
-
+			
 			if (!isDamageCooldownExpired) return;
 			ResetDamageCooldown();
 
@@ -36,20 +42,17 @@ namespace Objects.Abilities.Laser_Gun
 			}
 			else
 			{
-				var closestTarget = Utilities.FindClosestDamageable(transform.position, FindObjectsOfType<Damageable>(), out var distanceToClosest);
-				if (closestTarget == null || distanceToClosest > WeaponStats.GetDetectionRange())
-					return;
-
-				SetTarget(closestTarget);
+				SetTarget();
 			}
 		}
 
-		private void SetTarget(Damageable target)
+		private void SetTarget()
 		{
-			if (target is null)
+			var closestTarget = Utilities.FindClosestDamageable(transform.position, FindObjectsByType<Damageable>(FindObjectsSortMode.None), out var distanceToClosest);
+			if (closestTarget == null || distanceToClosest > WeaponStats.GetDetectionRange())
 				return;
 
-			laserTarget = target;
+			laserTarget = closestTarget;
 			lineRenderer.SetPosition(0, laserFirePoint.position);
 			lineRenderer.SetPosition(1, laserTarget.transform.position);
 			transform.LookAt(laserTarget.transform);

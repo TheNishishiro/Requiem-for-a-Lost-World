@@ -20,7 +20,14 @@ namespace Weapons
         
         protected override void InitPool()
         {
-            pool = new ObjectPool<T>(ProjectileInit, ProjectileSpawnInternal, projectile => projectile.gameObject.SetActive(false), Destroy, false, capacity, maxCapacity);
+            pool = new ObjectPool<T>(ProjectileInitInternal, ProjectileSpawnInternal, projectile => projectile.gameObject.SetActive(false), Destroy, false, capacity, maxCapacity);
+        }
+        
+        private T ProjectileInitInternal()
+        {
+            var entity = ProjectileInit();
+            entity.Init(pool, entity);
+            return entity;
         }
 
         protected virtual T ProjectileInit()
@@ -33,10 +40,9 @@ namespace Weapons
 
         private void ProjectileSpawnInternal(T projectile)
         {
-            ProjectileSpawn(projectile);
-            projectile.gameObject.SetActive(true);
+            projectile.gameObject.SetActive(ProjectileSpawn(projectile));
         }
         
-        protected abstract void ProjectileSpawn(T projectile);
+        protected abstract bool ProjectileSpawn(T projectile);
     }
 }

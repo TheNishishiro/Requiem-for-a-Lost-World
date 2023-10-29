@@ -4,7 +4,7 @@ using Weapons;
 
 namespace Objects.Abilities.SpaceExpansionBall
 {
-	public class SpaceBallProjectile : ProjectileBase
+	public class SpaceBallProjectile : PoolableProjectile<SpaceBallProjectile>
 	{
 		private int enemiesHit = 0;
 		private Vector3 direction;
@@ -17,13 +17,20 @@ namespace Objects.Abilities.SpaceExpansionBall
 		private State state = State.Traveling;
 		private SpaceBallWeapon SpaceBallWeapon => ParentWeapon as SpaceBallWeapon;
 
+		public override void SetStats(WeaponStats weaponStats)
+		{
+			base.SetStats(weaponStats);
+			state = State.Traveling;
+			enemiesHit = 0;
+		}
+
 		public void SetDirection(float dirX, float dirY, float dirZ)
 		{
 			direction = (new Vector3(dirX, dirY, dirZ) - transform.position).normalized;
 			direction.y = 0;
 		}
 
-		private void LateUpdate()
+		private void Update()
 		{
 			if (state == State.Traveling)
 				transform.position += direction * (WeaponStats.GetSpeed() * Time.deltaTime);
@@ -42,8 +49,11 @@ namespace Objects.Abilities.SpaceExpansionBall
 		{
 			IsDead = true;
 			if (!SpaceBallWeapon.IsGallacticCollapse)
-				Destroy(gameObject);
-			
+			{
+				Destroy();
+				return;
+			}
+
 			StartCoroutine(Collapse());
 		}
 
@@ -91,7 +101,7 @@ namespace Objects.Abilities.SpaceExpansionBall
 			
 			
 			yield return new WaitForSeconds(1f);
-			Destroy(gameObject);
+			Destroy();
 		}
 
 		private void OnTriggerEnter(Collider other)

@@ -4,18 +4,15 @@ using Weapons;
 
 namespace Objects.Abilities.Katana
 {
-	public class KatanaWeapon : WeaponBase
+	public class KatanaWeapon : PoolableWeapon<KatanaProjectile>
 	{
-		public override void Attack()
+		protected override bool ProjectileSpawn(KatanaProjectile projectile)
 		{
 			var slashPosition = transform.position + transform.forward;
-			
-			var katanaSlash = SpawnManager.instance.SpawnObject(slashPosition, spawnPrefab);
-			katanaSlash.transform.rotation = transform.rotation;
-			var projectileComponent = katanaSlash.GetComponent<KatanaProjectile>();
+			projectile.transform.position = slashPosition;
+			projectile.SetStats(weaponStats);
 
-			projectileComponent.SetParentWeapon(this);
-			projectileComponent.SetStats(weaponStats);
+			return true;
 		}
 	}
 }

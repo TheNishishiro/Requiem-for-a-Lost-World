@@ -15,15 +15,21 @@ using Random = UnityEngine.Random;
 
 namespace Objects.Abilities.Tornado
 {
-	public class TornadoProjectile : ProjectileBase
+	public class TornadoProjectile : PoolableProjectile<TornadoProjectile>
 	{
 		[SerializeField] public GameObject lightningChainPrefab;
 		private Rigidbody _rb;
 		private TornadoWeapon TornadoWeapon => ParentWeapon as TornadoWeapon;
 
-		private void Start()
+		protected override void Awake()
 		{
+			base.Awake();
 			_rb = GetComponent<Rigidbody>();
+		}
+
+		public override void SetStats(WeaponStats weaponStats)
+		{
+			base.SetStats(weaponStats);
 			StartCoroutine(Movement());
 		}
 
@@ -45,7 +51,7 @@ namespace Objects.Abilities.Tornado
 
 			while (!IsDead)
 			{
-				var enemy = FindObjectsOfType<Enemy>().OrderBy(_ => Random.value).FirstOrDefault();
+				var enemy = FindObjectsByType<Enemy>(FindObjectsSortMode.None).OrderBy(_ => Random.value).FirstOrDefault();
 				if (enemy == null)
 					yield break;
 				

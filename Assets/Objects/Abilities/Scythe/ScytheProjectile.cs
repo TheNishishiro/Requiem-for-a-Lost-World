@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace Objects.Abilities.Scythe
 {
-	public class ScytheProjectile : ProjectileBase
+	public class ScytheProjectile : PoolableProjectile<ScytheProjectile>
 	{
 		private HealthComponent _healthComponent;
 		private ScytheWeapon ScytheWeapon => (ScytheWeapon) ParentWeapon;

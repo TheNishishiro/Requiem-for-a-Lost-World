@@ -6,7 +6,7 @@ using Weapons;
 
 namespace Objects.Abilities.Ground_Slash
 {
-	public class GroundSlashProjectile : ProjectileBase
+	public class GroundSlashProjectile : PoolableProjectile<GroundSlashProjectile>
 	{
 		private Vector3 direction;
 		private Rigidbody _rigidbody;

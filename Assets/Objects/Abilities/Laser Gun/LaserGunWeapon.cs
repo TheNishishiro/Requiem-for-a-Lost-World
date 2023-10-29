@@ -12,20 +12,19 @@ using Random = UnityEngine.Random;
 
 namespace Objects.Abilities.Laser_Gun
 {
-	public class LaserGunWeapon : WeaponBase
+	public class LaserGunWeapon : PoolableWeapon<LaserGunProjectile>
 	{
-		public override void Attack()
+		protected override bool ProjectileSpawn(LaserGunProjectile projectile)
 		{
 			var position = transform.position;
 			var worldPosition = new Vector3(
 				Random.Range(position.x - 2, position.x + 2),
 				Random.Range(position.y, position.y + 2),
 				Random.Range(position.z - 2, position.z - 0.5f));
-			
-			var laserGun = SpawnManager.instance.SpawnObject(worldPosition, spawnPrefab);
-			var projectileComponent = laserGun.GetComponent<LaserGunProjectile>();
-			projectileComponent.SetParentWeapon(this);
-			projectileComponent.SetStats(weaponStats);
+
+			projectile.transform.position = worldPosition;
+			projectile.SetStats(weaponStats);
+			return true;
 		}
 
 		public override bool IsUnlocked(SaveFile saveFile)

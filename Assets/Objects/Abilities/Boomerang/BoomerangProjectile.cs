@@ -4,7 +4,7 @@ using Weapons;
 
 namespace Objects.Abilities.Boomerang
 {
-	public class BoomerangProjectile : ProjectileBase
+	public class BoomerangProjectile : PoolableProjectile<BoomerangProjectile>
 	{
 		private Vector3 direction;
 

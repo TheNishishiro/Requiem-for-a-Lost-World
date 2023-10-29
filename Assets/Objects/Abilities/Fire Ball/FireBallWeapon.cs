@@ -14,17 +14,18 @@ public class FireBallWeapon : PoolableWeapon<FireBallProjectile>
 {
     [SerializeField] private AudioClip fireballSpawnSound;
 
-    protected override void ProjectileSpawn(FireBallProjectile projectile)
+    protected override bool ProjectileSpawn(FireBallProjectile projectile)
     {
         var closestTarget = Utilities.FindClosestDamageable(transform.position, FindObjectsByType<Damageable>(FindObjectsSortMode.None), out var distanceToClosest);
         if (closestTarget is null)
-            return;
+            return false;
             
         var transform1 = closestTarget.transform;
         var position = transform1.position;
         projectile.transform.position = transform.position;
         projectile.SetStats(weaponStats);
         projectile.SetDirection(position.x, position.y, position.z);
+        return true;
     }
 
     public override bool IsUnlocked(SaveFile saveFile)

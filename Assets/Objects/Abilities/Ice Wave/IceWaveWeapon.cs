@@ -11,7 +11,7 @@ using Weapons;
 
 namespace Objects.Abilities.Ice_Wave
 {
-	public class IceWaveWeapon : WeaponBase
+	public class IceWaveWeapon : PoolableWeapon<IceWaveProjectile>
 	{
 		[SerializeField] private int waveCount = 3;
 		[SerializeField] private float scaleChangePerWave = 0.5f;
@@ -27,22 +27,20 @@ namespace Objects.Abilities.Ice_Wave
 				waveCount += 3;
 		}
 
-		public override void Attack()
+		protected override bool ProjectileSpawn(IceWaveProjectile projectile)
 		{
 			var currentScaleModifier = weaponStats.GetScale() * (scaleChangePerWave * currentWaveIndex);
 			var newPosition = new Vector3(startPosition.x + (currentWaveIndex/2) * currentScaleModifier, 0, startPosition.z);
+
+			projectile.transform.position = newPosition;
+			projectile.transform.RotateAround(startPosition, Vector3.up, rotateOffset);
+			projectile.transform.position = Utilities.GetPointOnColliderSurface(projectile.transform.position, transform);
+			projectile.SetStats(weaponStats);
 			
-			var iceCrystal = SpawnManager.instance.SpawnObject(newPosition, spawnPrefab);
-			iceCrystal.transform.RotateAround(startPosition, Vector3.up, rotateOffset);
-			iceCrystal.transform.position = Utilities.GetPointOnColliderSurface(iceCrystal.transform.position, transform);
-			
-			var projectileComponent = iceCrystal.GetComponent<IceWaveProjectile>();
-			projectileComponent.SetParentWeapon(this);
-			projectileComponent.SetStats(weaponStats);
-			
-			iceCrystal.transform.localScale = new Vector3(currentScaleModifier,currentScaleModifier,currentScaleModifier);
+			projectile.transform.localScale = new Vector3(currentScaleModifier,currentScaleModifier,currentScaleModifier);
+			return true;
 		}
-		
+
 		protected override IEnumerator AttackProcess()
 		{
 			var rotationStep = GetRotationByAttackCount();

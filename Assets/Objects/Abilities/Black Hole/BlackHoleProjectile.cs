@@ -5,7 +5,7 @@ using Weapons;
 
 namespace Objects.Abilities.Back_Hole
 {
-	public class BlackHoleProjectile : ProjectileBase
+	public class BlackHoleProjectile : PoolableProjectile<BlackHoleProjectile>
 	{
 		[SerializeField] private BlackHoleCenterComponent blackHoleCenter;
 		[SerializeField] private BlackHoleGravitationWavesComponent blackHoleGravitation;

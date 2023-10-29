@@ -4,7 +4,7 @@ using Weapons;
 
 namespace Objects.Abilities.Meteor
 {
-	public class MeteorProjectile : ProjectileBase
+	public class MeteorProjectile : PoolableProjectile<MeteorProjectile>
 	{
 		private Vector3 direction;
 		private float destroyY;

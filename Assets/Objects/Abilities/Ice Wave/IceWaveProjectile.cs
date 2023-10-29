@@ -4,14 +4,14 @@ using Weapons;
 
 namespace Objects.Abilities.Ice_Wave
 {
-	public class IceWaveProjectile : ProjectileWithLimitedHitBoxBase
+	public class IceWaveProjectile : PoolableProjectileWithLimitedHitBox<IceWaveProjectile>
 	{
 		private IceWaveWeapon IceWaveWeapon => ParentWeapon as IceWaveWeapon;
 		
 		private void Update()
 		{
-			TickLifeTime();
 			UpdateCollider();
+			TickLifeTime();
 		}
 
 		private void OnTriggerEnter(Collider other)
