@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: -8337519027151689704}
   - component: {fileID: 6924029841127763946}
   - component: {fileID: 2698507043340459383}
-  - component: {fileID: 2971475803032776608}
   m_Layer: 6
   m_Name: Orc Boss
   m_TagString: Enemy
@@ -28,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3118892113006756060}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.355, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1568213699140523912
 SpriteRenderer:
@@ -56,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 03de8e2ef84168e4b8a373241c94b9b5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,9 +95,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3118892113006756060}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 0.5225, y: 0.71625, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6924029841127763946
@@ -115,6 +122,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 0
   gameResultData: {fileID: 11400000, guid: cb99eac292bd9d54aac189cbaa40dca7, type: 2}
+  vulnerabilityTimer: 0
+  vulnerabilityPercentage: 0
 --- !u!114 &2698507043340459383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,15 +137,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickup: []
---- !u!114 &2971475803032776608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3118892113006756060}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6627522d9fad08446b3eec6c50393576, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

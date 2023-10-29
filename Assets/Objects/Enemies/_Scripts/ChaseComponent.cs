@@ -19,9 +19,11 @@ public class ChaseComponent : MonoBehaviour
     private float _slowAmount;
     private bool _isMovementDisabled;
     private float _tempTargetTimer;
+    private Transform transformCache;
     
     private void Awake()
     {
+        transformCache = transform;
         _rigidbody = GetComponent<Rigidbody>();
         if (_rigidbody is null)
             Debug.LogWarning($"Chasing object does not contain RigidBody '{gameObject.name}'");
@@ -49,6 +51,8 @@ public class ChaseComponent : MonoBehaviour
         if (targetDestination == null)
             return;
 
+        var currentPosition = transformCache.position;
+
         var isTempTarget = false;
         if (_tempTargetTimer > 0)
         {
@@ -58,7 +62,7 @@ public class ChaseComponent : MonoBehaviour
 
         var destination = isTempTarget ? tempTarget.transform.position : targetDestination.position;
         if (!FollowYAxis)
-            destination.y = transform.position.y;
+            destination.y = currentPosition.y;
 
         if (_isMovementDisabled)
             return;
@@ -73,15 +77,13 @@ public class ChaseComponent : MonoBehaviour
             _slowTimer -= Time.deltaTime;
         }
 
-        if (!isTempTarget && Vector3.Distance(transform.position, destination) > 12f)
+        if (!isTempTarget && Vector3.Distance(currentPosition, destination) > 12f)
         {
-            transform.position =
-                Utilities.GetPointOnColliderSurface(destination - Utilities.GenerateRandomPositionOnEdge(new Vector2(8, 8)), transform, GetComponentInChildren<BoxCollider>().size.y/2);
+            currentPosition = Utilities.GetPointOnColliderSurface(destination - Utilities.GenerateRandomPositionOnEdge(new Vector2(8, 8)), transformCache, GetComponentInChildren<BoxCollider>().size.y/2);
         }
-        
-        transform.LookAt(destination);
+
         var speed = (isTempTarget ? tempSpeed : movementSpeed) * (_slowTimer > 0 ? _slowAmount : 1.0f);
-        transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+        transformCache.position = Vector3.MoveTowards(currentPosition, destination, speed * Time.deltaTime);
     }
 
     public void SetImmobile(float time)

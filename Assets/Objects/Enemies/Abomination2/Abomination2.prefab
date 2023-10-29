@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: -7260981712306832588}
   - component: {fileID: 1695971456646766511}
   - component: {fileID: -6295079873479213944}
-  - component: {fileID: 8275464316830638037}
   m_Layer: 6
   m_Name: Abomination2
   m_TagString: Enemy
@@ -28,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2875098751208357440}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.346, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4056037444918614695
 SpriteRenderer:
@@ -56,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 03de8e2ef84168e4b8a373241c94b9b5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,9 +108,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2875098751208357440}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 0.27666667, y: 0.5393101, z: 0.2}
   m_Center: {x: 0, y: -0.075655, z: 0}
 --- !u!114 &-6295079873479213944
@@ -128,15 +135,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 0
   gameResultData: {fileID: 11400000, guid: cb99eac292bd9d54aac189cbaa40dca7, type: 2}
---- !u!114 &8275464316830638037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2875098751208357440}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6627522d9fad08446b3eec6c50393576, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  vulnerabilityTimer: 0
+  vulnerabilityPercentage: 0
