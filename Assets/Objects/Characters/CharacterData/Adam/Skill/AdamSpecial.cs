@@ -19,26 +19,13 @@ namespace Objects.Characters.Adam.Skill
 				return _playerStatsComponent;
 			}
 		}
-		private EnemyManager _enemyManager;
-		private EnemyManager enemyManager
-		{
-			get
-			{
-				if (_enemyManager == null)
-				{
-					_enemyManager = FindObjectOfType<EnemyManager>();
-				}
-
-				return _enemyManager;
-			}
-		}
 
 		private void LateUpdate()
 		{
 			playerStatsComponent.IncreaseDamageTaken(-previousStatsChange);
 			playerStatsComponent.IncreaseDamageIncreasePercentage(-previousStatsChange);
 
-			previousStatsChange = enemyManager.currentEnemyCount * 0.005f;
+			previousStatsChange = EnemyManager.instance.currentEnemyCount * 0.005f;
 			playerStatsComponent.IncreaseDamageTaken(previousStatsChange);
 			playerStatsComponent.IncreaseDamageIncreasePercentage(previousStatsChange);
 		}

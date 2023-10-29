@@ -206,5 +206,15 @@ namespace Objects.Enemies
 		{
 			_damageReduction -= amount;
 		}
+
+		public Damageable GetDamagableComponent()
+		{
+			return damageableComponent;
+		}
+
+		public ChaseComponent GetChaseComponent()
+		{
+			return chaseComponent;
+		}
 	}
 }

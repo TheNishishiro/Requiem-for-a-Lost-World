@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DefaultNamespace;
+using Managers;
 using UnityEngine;
 using Weapons;
 using Random = UnityEngine.Random;
@@ -30,7 +32,7 @@ namespace Objects.Abilities.Lightning_Chain
 		public IEnumerator FindChainLightningTarget(int maxTargets)
 		{
 			var lastPosition = transform.position;
-			var targets = FindObjectsByType<Damageable>(FindObjectsSortMode.None);
+			var targets = EnemyManager.instance.GetActiveEnemies().Select(x => x.GetDamagableComponent()).ToArray();
 			
 			for (var i = 0; i < maxTargets; i++)
 			{

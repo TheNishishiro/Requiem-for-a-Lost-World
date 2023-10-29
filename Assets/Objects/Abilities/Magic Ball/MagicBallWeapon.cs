@@ -11,7 +11,7 @@ public class MagicBallWeapon : PoolableWeapon<MagicBallProjectile>
 {
     protected override bool ProjectileSpawn(MagicBallProjectile projectile)
     {
-        var closestTarget = Utilities.FindClosestDamageable(transform.position, FindObjectsByType<Damageable>(FindObjectsSortMode.None), out var distanceToClosest);
+        var closestTarget = Utilities.FindClosestDamageable(transform.position, EnemyManager.instance.GetActiveEnemies(), out var distanceToClosest);
         if (closestTarget == null)
             return false;
 

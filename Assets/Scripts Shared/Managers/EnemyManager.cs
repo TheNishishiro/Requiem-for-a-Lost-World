@@ -12,6 +12,7 @@ using Weapons;
 
 public class EnemyManager : Singleton<EnemyManager>
 {
+	public static EnemyManager instance;
 	[SerializeField] private GameObject enemyGameObject;
 	[SerializeField] private List<EnemyData> defaultSpawns;
 	[SerializeField] private Vector2 spawnArea;
@@ -19,8 +20,8 @@ public class EnemyManager : Singleton<EnemyManager>
 	[SerializeField] private Player player;
 	[SerializeField] private PlayerStatsComponent _playerStatsComponent;
 	private ObjectPool<Enemy> enemyPool;
-	private List<Enemy> _enemies;
-	public int currentEnemyCount;
+	private List<Enemy> _enemies = new ();
+	public int currentEnemyCount => _enemies.Count;
 	private int enemyMinCount;
 	private int enemyMaxCount = 300;
 	private float _timer;
@@ -30,10 +31,13 @@ public class EnemyManager : Singleton<EnemyManager>
 
 	protected override void Awake()
 	{
+		if (instance == null)
+		{
+			instance = this;
+		}
+		
 		base.Awake();
-		currentEnemyCount = 0;
 		defaultSpawns = new List<EnemyData>();
-		_enemies = new List<Enemy>();
 		enemyPool = new ObjectPool<Enemy>(OnCreateEnemy, OnRequestEnemy, OnEnemyRelease, Destroy, true, 600, 1000);
 	}
 
@@ -58,15 +62,14 @@ public class EnemyManager : Singleton<EnemyManager>
 		enemy.Setup(_currentEnemySpawning, player, this, _playerStatsComponent, _healthMultiplier, _currentEnemySpawning.sprite);
 		if (_currentEnemySpawning.enemyName == "grand octi")
 			enemy.SetupBoss();
-		
-		currentEnemyCount++;
+
 		enemy.gameObject.SetActive(true);
+		_enemies.Add(enemy);
 	}
 
 	private void OnEnemyRelease(Enemy enemy)
 	{
 		enemy.gameObject.SetActive(false);
-		currentEnemyCount--;
 		_enemies.Remove(enemy);
 	}
 
@@ -140,7 +143,6 @@ public class EnemyManager : Singleton<EnemyManager>
 	public void EraseAllEnemies()
 	{
 		enemyPool.Clear();
-		currentEnemyCount = 0;
 		_enemies.Clear();
 	}
 
@@ -166,5 +168,15 @@ public class EnemyManager : Singleton<EnemyManager>
 		{
 			enemy.TakeDamage(damage, weapon);
 		}
+	}
+
+	public IEnumerable<Enemy> GetActiveEnemies()
+	{
+		return _enemies;
+	}
+
+	public Enemy GetRandomEnemy()
+	{
+		return _enemies.OrderBy(_ => Random.value).FirstOrDefault();
 	}
 }

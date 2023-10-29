@@ -46,7 +46,7 @@ namespace Objects.Abilities.Bouncer
 
 		public void FindNextTarget()
 		{
-			var target = FindObjectsOfType<Damageable>().OrderBy(_ => Random.value).FirstOrDefault();
+			var target = EnemyManager.instance.GetRandomEnemy().GetDamagableComponent();
 			SetTarget(target);
 		}
 		

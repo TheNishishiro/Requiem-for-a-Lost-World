@@ -19,7 +19,7 @@ namespace Objects.Abilities.LightningStrike
 
 		protected override bool ProjectileSpawn(LightningStrikeProjectile projectile)
 		{
-			var enemy = FindObjectsByType<Damageable>(FindObjectsSortMode.None).OrderBy(x => Random.value).FirstOrDefault();
+			var enemy = EnemyManager.instance.GetRandomEnemy();
 			if (enemy == null) return false;
 
 			projectile.transform.position = enemy.transform.position;

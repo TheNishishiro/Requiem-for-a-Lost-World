@@ -15,7 +15,7 @@ namespace Objects.Abilities.SpaceExpansionBall
 
 		protected override bool ProjectileSpawn(SpaceBallProjectile projectile)
 		{
-			var enemy = FindObjectsByType<Damageable>(FindObjectsSortMode.None).OrderBy(x => Random.value).FirstOrDefault();
+			var enemy = EnemyManager.instance.GetRandomEnemy();
 			if (enemy == null)
 				return false;
 			

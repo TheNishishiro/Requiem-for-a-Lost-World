@@ -80,7 +80,7 @@ namespace DefaultNamespace
 			return pointFound;
 		}
 
-		public static Damageable FindClosestDamageable(Vector3 position, IEnumerable<Damageable> enemies, out float distanceToClosest)
+		public static Damageable FindClosestDamageable(Vector3 position, IEnumerable<Enemy> enemies, out float distanceToClosest)
 		{
 			distanceToClosest = Mathf.Infinity;
 			Damageable closest = null;
@@ -91,7 +91,7 @@ namespace DefaultNamespace
 				if (distance < distanceToClosest)
 				{
 					distanceToClosest = distance;
-					closest = enemy;
+					closest = enemy.GetDamagableComponent();
 				}
 			}
 

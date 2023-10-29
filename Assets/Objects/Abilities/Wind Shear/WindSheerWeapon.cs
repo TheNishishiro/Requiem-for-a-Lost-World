@@ -16,7 +16,7 @@ namespace Objects.Abilities.Wind_Shear
 
         protected override bool ProjectileSpawn(WindShearProjectile projectile)
         {
-            var enemy = FindObjectsByType<Enemy>(FindObjectsSortMode.None).OrderBy(_ => Random.value).FirstOrDefault();
+            var enemy = EnemyManager.instance.GetRandomEnemy();
             if (enemy == null)
                 return false;
 

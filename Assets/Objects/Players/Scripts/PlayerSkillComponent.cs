@@ -182,12 +182,12 @@ namespace Objects.Players.Scripts
 			healthComponent.UpdateHealthBar();
 			var rank = GameData.GetPlayerCharacterRank();
 			var attackCount = rank > CharacterRank.E4 ? 20 : 10;
-			var enemies = FindObjectsOfType<Enemy>().OrderBy(x => Random.value).Take(attackCount);
+			var enemies = EnemyManager.instance.GetActiveEnemies().OrderBy(_ => Random.value).Take(attackCount);
 
 			foreach (var enemy in enemies)
 			{
 				var result = Utilities.GetPointOnColliderSurface(enemy.transform.position, transform);
-				enemy.GetComponent<ChaseComponent>().SetImmobile(rank == CharacterRank.E5 ? 2f : 1.5f);
+				enemy.GetChaseComponent().SetImmobile(rank == CharacterRank.E5 ? 2f : 1.5f);
 				SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject);
 			}
 

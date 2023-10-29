@@ -16,7 +16,7 @@ public class FireBallWeapon : PoolableWeapon<FireBallProjectile>
 
     protected override bool ProjectileSpawn(FireBallProjectile projectile)
     {
-        var closestTarget = Utilities.FindClosestDamageable(transform.position, FindObjectsByType<Damageable>(FindObjectsSortMode.None), out var distanceToClosest);
+        var closestTarget = Utilities.FindClosestDamageable(transform.position, EnemyManager.instance.GetActiveEnemies(), out var distanceToClosest);
         if (closestTarget is null)
             return false;
             

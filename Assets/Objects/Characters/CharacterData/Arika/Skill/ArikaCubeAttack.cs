@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DefaultNamespace;
 using Objects.Enemies;
 using Objects.Stage;
@@ -26,17 +27,17 @@ namespace Objects.Characters.Arika.Skill
 					blackHoleCenter.SetActive(true);
 					var arikaRank = GameData.GetPlayerCharacterRank();
 					
-					foreach (var chaseComponent in FindObjectsByType<ChaseComponent>(FindObjectsSortMode.None))
+					foreach (var enemy in EnemyManager.instance.GetActiveEnemies())
 					{
 						if (arikaRank < CharacterRank.E5)
 						{
-							var distance = Vector3.Distance(transform.position, chaseComponent.transform.position);
+							var distance = Vector3.Distance(transform.position, enemy.transform.position);
 							if (distance > 5f)
 								continue;
 						}
 
-						chaseComponent?.SetTemporaryTarget(blackHoleCenter, 7f, 2f);
-						chaseComponent?.GetComponentInParent<Enemy>()?.SetNoCollisions(2f);
+						enemy?.GetChaseComponent()?.SetTemporaryTarget(blackHoleCenter, 7f, 2f);
+						enemy?.SetNoCollisions(2f);
 					}
 				}
 			}

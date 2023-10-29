@@ -22,7 +22,7 @@ namespace Objects.Abilities.Arrow_Rain
 		
 		public override void Awake()
 		{
-			_stageTime = FindObjectOfType<StageTime>();
+			_stageTime = FindFirstObjectByType<StageTime>();
 			base.Awake();
 		}
 
@@ -53,7 +53,8 @@ namespace Objects.Abilities.Arrow_Rain
 
 		protected override void OnAttackStart()
 		{
-			_target = FindObjectsOfType<Damageable>()
+			_target = EnemyManager.instance.GetActiveEnemies()
+				.Select(x => x.GetDamagableComponent())
 				.OrderByDescending(x => x.Health)
 				.ThenBy(x =>Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
 		}

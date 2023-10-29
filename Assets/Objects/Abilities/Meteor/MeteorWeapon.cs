@@ -17,7 +17,7 @@ namespace Objects.Abilities.Meteor
 		protected override bool ProjectileSpawn(MeteorProjectile projectile)
 		{
 			var spawnPosition = new Vector3(transform.position.x, transform.position.y + 5.0f, transform.position.z);
-			var enemy = FindObjectsByType<Damageable>(FindObjectsSortMode.None).OrderBy(x => Random.value).FirstOrDefault();
+			var enemy = EnemyManager.instance.GetRandomEnemy();
 			if (enemy == null)
 				return false;
 			

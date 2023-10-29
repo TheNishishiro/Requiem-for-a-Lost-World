@@ -51,7 +51,7 @@ namespace Objects.Abilities.Tornado
 
 			while (!IsDead)
 			{
-				var enemy = FindObjectsByType<Enemy>(FindObjectsSortMode.None).OrderBy(_ => Random.value).FirstOrDefault();
+				var enemy = EnemyManager.instance.GetRandomEnemy();
 				if (enemy == null)
 					yield break;
 				

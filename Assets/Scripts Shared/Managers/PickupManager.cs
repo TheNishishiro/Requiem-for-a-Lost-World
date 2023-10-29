@@ -61,7 +61,7 @@ namespace Managers
 			if (pickupObject.PickupType == PickupEnum.Experience)
 				_gemPool.Release(pickupObject);
 			else
-				Destroy(pickupObject);
+				Destroy(pickupObject.gameObject);
 		}
 
 		private IEnumerator MergeGemPickups()

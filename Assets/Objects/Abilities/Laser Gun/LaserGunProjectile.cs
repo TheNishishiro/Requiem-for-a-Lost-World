@@ -50,7 +50,7 @@ namespace Objects.Abilities.Laser_Gun
 
 		private void SetTarget()
 		{
-			var closestTarget = Utilities.FindClosestDamageable(transform.position, FindObjectsByType<Damageable>(FindObjectsSortMode.None), out var distanceToClosest);
+			var closestTarget = Utilities.FindClosestDamageable(transform.position, EnemyManager.instance.GetActiveEnemies(), out var distanceToClosest);
 			if (closestTarget == null || distanceToClosest > WeaponStats.GetDetectionRange())
 			{
 				lineRenderer.positionCount = 0;

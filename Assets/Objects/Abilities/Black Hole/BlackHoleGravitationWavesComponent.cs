@@ -10,11 +10,12 @@ namespace Objects.Abilities.Back_Hole
 		
 		private void OnTriggerStay(Collider other)
 		{
-			var chaseComponent = other.GetComponentInParent<ChaseComponent>();
-			if (chaseComponent != null)
-				chaseComponent.SetTemporaryTarget(blackHoleCenter, 5f);
-
-			other.GetComponentInParent<Enemy>()?.SetNoCollisions(1f);
+			var enemyComponent = other.GetComponent<Enemy>();
+			if (enemyComponent != null)
+			{
+				enemyComponent.GetChaseComponent().SetTemporaryTarget(blackHoleCenter, 5f);
+				enemyComponent.SetNoCollisions(1f);
+			}
 		}
 	}
 }

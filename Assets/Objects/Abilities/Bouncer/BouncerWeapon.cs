@@ -14,7 +14,7 @@ namespace Objects.Abilities.Bouncer
 		protected override bool ProjectileSpawn(BouncerProjectile projectile)
 		{
 			var currentPosition = transform.position;
-			var target = FindObjectsByType<Damageable>(FindObjectsSortMode.None).OrderBy(_ => Random.value).FirstOrDefault();
+			var target = EnemyManager.instance.GetRandomEnemy().GetDamagableComponent();
 			if (target is null)
 				return false;
 

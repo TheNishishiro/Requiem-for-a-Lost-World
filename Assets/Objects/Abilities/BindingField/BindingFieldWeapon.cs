@@ -17,7 +17,7 @@ namespace Objects.Abilities.BindingField
 
 		protected override bool ProjectileSpawn(BindingFieldProjectile projectile)
 		{
-			var randomEnemy = FindObjectsByType<Enemy>(FindObjectsSortMode.None).OrderBy(x => Random.value).FirstOrDefault();
+			var randomEnemy = EnemyManager.instance.GetRandomEnemy();
 			if (randomEnemy == null)
 				return false;
 
