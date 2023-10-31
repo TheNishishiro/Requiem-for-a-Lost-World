@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Interfaces;
 using Objects.Drops;
 using Objects.Drops.ExpDrop;
@@ -16,6 +17,7 @@ namespace Managers
 		[SerializeField] Camera mainCamera;
 		private Player player;
 		private ObjectPool<Pickup> _gemPool;
+		private List<Pickup> _expGem = new ();
 		[SerializeField] private GameObject expShardPrefab;
 		private int shardsAmount;
 		private Vector3 gemPosition;
@@ -28,15 +30,21 @@ namespace Managers
 			}
 
 			_gemPool = new ObjectPool<Pickup>(
-				() => SpawnManager.instance.SpawnObject(transform.position, expShardPrefab).GetComponent<Pickup>(), expGem =>
+				() => SpawnManager.instance.SpawnObject(transform.position, expShardPrefab).GetComponent<Pickup>(), 
+				expGem =>
 				{
 					expGem.Reset();
 					expGem.SetAmount(shardsAmount);
 					expGem.transform.position = gemPosition;
 					expGem.gameObject.SetActive(true);
+					_expGem.Add(expGem);
 				}, 
-				expGem => expGem.gameObject.SetActive(false), 
-				Destroy, true, 10000);
+				expGem =>
+				{
+					expGem.gameObject.SetActive(false);
+					_expGem.Remove(expGem);
+				}, 
+				expGem => Destroy(expGem.gameObject), true, 10000);
 			player = FindFirstObjectByType<Player>();
 			StartCoroutine(MergeGemPickups());
 		}
@@ -68,8 +76,7 @@ namespace Managers
 		{
 			while (true)
 			{
-				var gems = FindObjectsOfType<ExpPickUpObject>();
-				if (gems == null || gems.Length <= 200)
+				if (_expGem is not { Count: > 200 })
 				{
 					yield return new WaitForSeconds(5f);
 					continue;
@@ -77,30 +84,30 @@ namespace Managers
 
 				var planes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
 
-				for (var i = 0; i < gems.Length - 1; i++)
+				for (var i = 0; i < _expGem.Count - 1; i++)
 				{
-					if (gems[i] == null)
+					if (_expGem[i]?.gameObject.activeSelf != true)
 						continue;
 					
 					// Check if gem i is within the camera's view
-					if (GeometryUtility.TestPlanesAABB(planes, gems[i].GetComponent<Collider>().bounds))
+					if (GeometryUtility.TestPlanesAABB(planes, _expGem[i].boxCollider.bounds))
 					{
-						var distanceToPlayer = Vector3.Distance(gems[i].transform.position, player.transform.position);
+						var distanceToPlayer = Vector3.Distance(_expGem[i].transform.position, player.transform.position);
 						if (distanceToPlayer <= distanceFromPlayer)
 							continue;
 					}
 						
-					for (var j = i + 1; j < gems.Length; j++)
+					for (var j = i + 1; j < _expGem.Count; j++)
 					{
-						if (gems[j] == null)
+						if (_expGem[j]?.gameObject.activeSelf != true)
 							continue;
 
-						var distance = Vector3.Distance(gems[i].transform.position, gems[j].transform.position);
+						var distance = Vector3.Distance(_expGem[i].transform.position, _expGem[j].transform.position);
 						if (distance < mergingThreshold)
 						{
-							gems[i].AddExp(gems[j].expAmount);
-							Destroy(gems[j].gameObject);
-							gems[j] = null;
+							_expGem[i].GetExpObject().AddExp(_expGem[j].GetExpObject().expAmount);
+							_gemPool.Release(_expGem[j]);
+							j--;
 						}
 					}
 				}

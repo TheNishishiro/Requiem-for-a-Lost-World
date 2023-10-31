@@ -19,7 +19,7 @@ namespace Managers
 
 		public void Start()
 		{
-			_player = FindObjectOfType<Player>();
+			_player = FindFirstObjectByType<Player>();
 		}
 
 		public void Update()
@@ -29,10 +29,13 @@ namespace Managers
 				_currentSpawnCooldown -= Time.deltaTime;
 				return;
 			}
-			
+
 			if (FindObjectsOfType<Destructable>().Length >= maxObjectsCount)
+			{
+				_currentSpawnCooldown = spawnCooldown;
 				return;
-			
+			}
+
 			var position = _player.transform.position - Utilities.GenerateRandomPositionOnEdge(spawnArea);
 			var pointFound = Utilities.GetPointOnColliderSurface(position, 100f, _player.transform, out var pointOnSurface);
 			if (!pointFound)
@@ -42,7 +45,7 @@ namespace Managers
 			//var destructable = Instantiate(destructables.OrderBy(x => Random.value).First());
 			pointOnSurface.y += destructable.GetComponent<BoxCollider>().size.y/2;
 			destructable.gameObject.transform.position = pointOnSurface;
-			_currentSpawnCooldown = spawnCooldown;
+			
 		}
 	}
 }

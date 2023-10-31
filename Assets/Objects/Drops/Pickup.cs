@@ -9,7 +9,6 @@ using UnityEngine.TextCore.Text;
 
 public class Pickup : PickupBase
 {
-	[SerializeField] private PickupObject pickUpObject;
 	public PickupEnum PickupType => PickupEnum;
 	public bool canBeAttracted;
 	
@@ -31,6 +30,11 @@ public class Pickup : PickupBase
 	public void SetIsFollowingPlayer(bool isFollowingPlayer)
 	{
 		IsFollowingPlayer = canBeAttracted && isFollowingPlayer;
+	}
+
+	public ExpPickUpObject GetExpObject()
+	{
+		return (ExpPickUpObject)pickUpObject;
 	}
 
 	public void SetAmount(int amount)

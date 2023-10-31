@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class ChaseComponent : MonoBehaviour
 {
-    private Rigidbody _rigidbody;
+    [SerializeField] private Rigidbody _rigidbody;
     private Transform targetDestination;
     private GameObject tempTarget;
     private float movementSpeed;
@@ -24,9 +24,16 @@ public class ChaseComponent : MonoBehaviour
     private void Awake()
     {
         transformCache = transform;
-        _rigidbody = GetComponent<Rigidbody>();
-        if (_rigidbody is null)
-            Debug.LogWarning($"Chasing object does not contain RigidBody '{gameObject.name}'");
+    }
+
+    public void Clear()
+    {
+        tempTarget = null;
+        _immobileTimer = 0;
+        _slowTimer = 0;
+        _slowAmount = 0;
+        _isMovementDisabled = false;
+        _tempTargetTimer = 0;
     }
 
     public void SetTarget(GameObject target)
@@ -83,6 +90,7 @@ public class ChaseComponent : MonoBehaviour
         }
 
         var speed = (isTempTarget ? tempSpeed : movementSpeed) * (_slowTimer > 0 ? _slowAmount : 1.0f);
+        //_rigidbody.MovePosition(Vector3.MoveTowards(currentPosition, destination, speed * Time.deltaTime));
         transformCache.position = Vector3.MoveTowards(currentPosition, destination, speed * Time.deltaTime);
     }
 

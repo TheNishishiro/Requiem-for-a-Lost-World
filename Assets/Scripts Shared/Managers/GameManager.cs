@@ -14,11 +14,18 @@ namespace Managers
 {
 	public class GameManager : MonoBehaviour
 	{
-		[SerializeField] private PlayerStatsComponent playerStatsComponent;
+		public static GameManager instance;
+		[SerializeField] public PlayerStatsComponent playerStatsComponent;
+		[SerializeField] public Player playerComponent;
 		[SerializeField] private SpecialBarManager specialBarManager;
 
 		private void Start()
 		{
+			if (instance == null)
+			{
+				instance = this;
+			}
+			
 			var saveFile = FindObjectOfType<SaveFile>();
 			playerStatsComponent.Set(GameData.GetPlayerStartingStats());
             if (GameData.GetPlayerCharacterData()?.UseSpecialBar == true)

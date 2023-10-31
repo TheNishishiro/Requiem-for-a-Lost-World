@@ -11,6 +11,8 @@ namespace Managers.StageEvents
 		[SerializeField] private UnityEvent<float> onTimeTick;
 		public float time;
 		private LabelTime _labelTime;
+		private float _labelUpdateTimer;
+		private float _deltaTimeCache;
 
 		private void Start()
 		{
@@ -19,12 +21,18 @@ namespace Managers.StageEvents
 
 		private void Update()
 		{
-			time += Time.deltaTime;
-			gameResultData.Time = time;
-			_labelTime.UpdateTime(time);
+			_deltaTimeCache = Time.deltaTime;
 			
-			if (Time.frameCount % 60 == 0)
+			time += _deltaTimeCache;
+			_labelUpdateTimer -= _deltaTimeCache;
+			gameResultData.Time = time;
+
+			if (_labelUpdateTimer <= 0)
+			{
+				_labelTime.UpdateTime(time);
 				onTimeTick?.Invoke(time);
+				_labelUpdateTimer = 1;
+			}
 		}
 	}
 }

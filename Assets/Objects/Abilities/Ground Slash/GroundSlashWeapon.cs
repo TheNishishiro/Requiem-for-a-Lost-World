@@ -27,7 +27,7 @@ namespace Objects.Abilities.Ground_Slash
 
 		protected override bool ProjectileSpawn(GroundSlashProjectile projectile)
 		{
-			var playerTransform = FindObjectsByType<Player>(FindObjectsSortMode.None).FirstOrDefault();
+			var playerTransform = GameManager.instance.playerComponent.transform;
 			var playerPosition = transform.position;
 			var position = new Vector3(playerPosition.x + _actualOffset, playerPosition.y, playerPosition.z);
 			projectile.transform.position = Utilities.GetPointOnColliderSurface(position, playerTransform.transform);

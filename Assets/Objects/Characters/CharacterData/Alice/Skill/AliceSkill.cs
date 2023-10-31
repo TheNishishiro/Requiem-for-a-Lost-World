@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Data.Elements;
+using Managers;
 using Objects.Abilities.Reality_Crack;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Objects.Characters.Alice.Skill
 		
 		private void Start()
 		{
-			_weaponCenter = FindObjectsByType<Player>(FindObjectsSortMode.None).First().transform.position;
+			_weaponCenter = GameManager.instance.playerComponent.transform.position;
 			_elementalWeapon = new ElementalWeapon(Element.Lightning);
 		}
 		

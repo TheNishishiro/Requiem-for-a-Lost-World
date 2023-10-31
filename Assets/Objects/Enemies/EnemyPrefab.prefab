@@ -143,6 +143,7 @@ MonoBehaviour:
   damageableComponent: {fileID: 1412954185048979437}
   spriteRenderer: {fileID: 4270798925278745973}
   capsuleCollider: {fileID: 445137977363883629}
+  dropOnDestroyComponent: {fileID: 2075695049437756266}
   chestDrop: {fileID: -5662689963410785615, guid: fe977e56248c07446a7574ed737f311e,
     type: 3}
   expDrop: {fileID: 3634895298855100167, guid: d099174199599234c807f1eee918c770, type: 3}
@@ -208,6 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad484a6c00e7e2849a4da76765dbba82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 2022141020912838401}
 --- !u!136 &445137977363883629
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -257,7 +259,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!1 &7377515054398992340
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +364,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1302e316b9b01f044bc62b0ce714588c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da61a8acce61a984287390e2e5a1fdbe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

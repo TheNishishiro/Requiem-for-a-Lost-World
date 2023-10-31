@@ -16,7 +16,7 @@ namespace DefaultNamespace
 {
 	public class Damageable : MonoBehaviour, IDamageable
 	{
-		[HideInInspector] public float Health;
+		[SerializeField] public float Health;
 		[SerializeField] private GameResultData gameResultData;
 		[SerializeField] public GameObject targetPoint;
 		public Dictionary<GameObject, float> sourceDamageCooldown = new ();
@@ -24,6 +24,15 @@ namespace DefaultNamespace
 		public float vulnerabilityPercentage;
 		private List<ElementStats> resistances = new ();
 		private List<Element> inflictedElements = new ();
+
+		public void Clear()
+		{
+			sourceDamageCooldown.Clear();
+			vulnerabilityTimer = 0;
+			vulnerabilityPercentage = 0;
+			resistances.Clear();
+			inflictedElements.Clear();
+		}
 
 		private void Update()
 		{

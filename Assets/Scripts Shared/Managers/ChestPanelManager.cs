@@ -30,7 +30,7 @@ namespace Managers
 			upgradeEntries = upgradeEntries.OrderBy(x => Random.value).Take(amount).ToList();
 			if (upgradeEntries.Count == 0)
 			{
-				var player = FindObjectOfType<Player>();
+				var player = GameManager.instance.playerComponent;
 				player.AddGold(Random.Range(1, 50));
 				player.AddGems(Random.Range(1, 10));
 				return;

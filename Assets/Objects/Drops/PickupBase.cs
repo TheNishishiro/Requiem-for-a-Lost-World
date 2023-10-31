@@ -10,18 +10,20 @@ namespace Objects.Drops
 {
 	public class PickupBase : MonoBehaviour
 	{
+		[SerializeField] protected PickupObject pickUpObject;
 		[SerializeField] private UnityEvent<PickupEnum> OnPickupAction;
 		[SerializeField] protected PickupEnum PickupEnum;
-		private PlayerStatsComponent PlayerStatsComponent;
-		private Player Character;
+		[SerializeField] public BoxCollider boxCollider;
+		private PlayerStatsComponent _playerStatsComponent;
+		private Player _character;
 		protected bool IsFollowingPlayer;
 		private const float Speed = 10f;
 		[SerializeField] private bool isStationary;
 
 		protected void Init()
 		{
-			Character = FindObjectOfType<Player>();
-			PlayerStatsComponent = FindObjectOfType<PlayerStatsComponent>();
+			_character = GameManager.instance.playerComponent;
+			_playerStatsComponent = _character.playerStatsComponent;
 		}
 
 		public void Reset()
@@ -39,13 +41,13 @@ namespace Objects.Drops
 		
 			if (!IsFollowingPlayer)
 			{
-				var distance = Vector3.Distance(Character.transform.position, transform.position);
-				if (distance < PlayerStatsComponent.GetMagnetSize())
+				var distance = Vector3.Distance(_character.transform.position, transform.position);
+				if (distance < _playerStatsComponent.GetMagnetSize())
 					IsFollowingPlayer = true;
 				return;
 			}
 		
-			transform.position = Vector3.MoveTowards(transform.position, Character.transform.position, Speed * Time.deltaTime);
+			transform.position = Vector3.MoveTowards(transform.position, _character.transform.position, Speed * Time.deltaTime);
 		}
 		
 		protected void OnCollision(Collider col)
@@ -55,9 +57,8 @@ namespace Objects.Drops
 				var character = col.GetComponent<Player>();
 				if (character is null)
 					return;
-						
-				var pickupObject = GetComponent<PickupObject>();
-				pickupObject?.OnPickUp(character);
+				
+				pickUpObject?.OnPickUp(character);
 				OnPickupAction?.Invoke(PickupEnum);
 				Destroy();
 			}

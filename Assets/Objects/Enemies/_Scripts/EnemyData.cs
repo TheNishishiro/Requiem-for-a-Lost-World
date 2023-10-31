@@ -11,6 +11,7 @@ namespace Objects.Enemies
 		public GameObject animatedPrefab;
 		public EnemyStats stats;
 		public bool allowFlying;
+		public float groundOffset;
 		public bool isBossEnemy;
 		public int ExpDrop;
 	}

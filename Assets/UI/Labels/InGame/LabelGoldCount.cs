@@ -16,10 +16,8 @@ namespace UI.Labels.InGame
 
 		public void Update()
 		{
-			if (Time.frameCount % 10 != 0)
-				return;
-			
-			text.text = $"{gameResultData.Gold}";
+			if (Time.frameCount % 60 == 0)
+				text.text = $"{gameResultData.Gold}";
 		}
 	}
 }

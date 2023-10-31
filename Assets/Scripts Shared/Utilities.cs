@@ -21,7 +21,7 @@ namespace DefaultNamespace
 			}
 			return $"{damage:0.##} {suffixes[suffixIndex]}";
 		}
-		
+
 		public static string FloatToTimeString(float time)
 		{
 			var timeSpan = GetTimeSpan(time);
