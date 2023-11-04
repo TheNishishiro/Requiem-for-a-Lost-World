@@ -49,6 +49,7 @@ MonoBehaviour:
   Name: Blood's Embrace
   Description: Swing a bloody scythe dealing damage around the character and healing
     for every enemy hit
+  chanceToAppear: 0.7
   Icon: {fileID: 21300000, guid: 7114b987320ec9240a03a3d597f5ae52, type: 3}
   element: 5
   weaponStats:
@@ -82,7 +83,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e309530d565ed254e9fecc97f201b18e, type: 2}
   - {fileID: 11400000, guid: 461246b62476e3348be50cac09e875c0, type: 2}
   - {fileID: 11400000, guid: 6a08b1af68542754ba52b0e33f4cb264, type: 2}
-  chanceToAppear: 0.7
+  unlockOnAchievement: 1
+  requiredAchievement: 17
   isSkill: 0
   capacity: 50
   maxCapacity: 200

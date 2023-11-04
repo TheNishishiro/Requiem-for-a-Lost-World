@@ -26,9 +26,4 @@ public class FireBallWeapon : PoolableWeapon<FireBallProjectile>
         projectile.SetDirection(position.x, position.y, position.z);
         return true;
     }
-
-    public override bool IsUnlocked(SaveFile saveFile)
-    {
-        return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithChitose);
-    }
 }

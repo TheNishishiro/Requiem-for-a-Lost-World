@@ -84,10 +84,5 @@ namespace Objects.Abilities.LightningStrike
 			if (LevelField == 8)
 				IsChainLightning = true;
 		}
-
-		public override bool IsUnlocked(SaveFile saveFile)
-		{
-			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithAlice);
-		}
 	}
 }

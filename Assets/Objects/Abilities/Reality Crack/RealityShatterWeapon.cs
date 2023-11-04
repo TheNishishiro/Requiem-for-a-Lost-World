@@ -42,10 +42,5 @@ namespace Objects.Abilities.Reality_Crack
 		{
 			weaponStats.DamageIncreasePercentage += 0.003f;
 		}
-
-		public override bool IsUnlocked(SaveFile saveFile)
-		{
-			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive30MinutesWithChornastra);
-		}
 	}
 }

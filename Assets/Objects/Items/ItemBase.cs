@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Data.Elements;
 using DefaultNamespace.Data;
+using DefaultNamespace.Data.Achievements;
 using Interfaces;
+using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Objects.Items
 {
@@ -14,6 +17,9 @@ namespace Objects.Items
 		[SerializeField] public string Description;
 		[SerializeField] public float chanceToAppear;
 		[SerializeField] public Sprite Icon;
+		[SerializeField] public bool unlockOnAchievement;
+		[ShowIf("unlockOnAchievement")]
+		[SerializeField] public AchievementEnum requiredAchievement;
 		[SerializeField] public List<ItemUpgrade> ItemUpgrades;
 		[SerializeField] public ItemStats ItemStats;
 		
@@ -41,7 +47,12 @@ namespace Objects.Items
 		
 		public virtual bool IsUnlocked(SaveFile saveFile)
 		{
-			return true;
+			return !unlockOnAchievement || saveFile.IsAchievementUnlocked(requiredAchievement);
+		}
+
+		public bool ReliesOnAchievement(AchievementEnum achievement)
+		{
+			return unlockOnAchievement && achievement == requiredAchievement;
 		}
 
 		public void ApplyUpgrade(ItemUpgrade itemUpgrade, int rarity)

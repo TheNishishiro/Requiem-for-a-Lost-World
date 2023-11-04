@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7265575690765007492}
-  - component: {fileID: -4319694756786890401}
+  - component: {fileID: 4719436489105264528}
   m_Layer: 0
   m_Name: Luck
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4319694756786890401
+--- !u!114 &4719436489105264528
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,13 +41,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2518235789927939182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b9e6860bb3063a49ba940138b0a7456, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Lucky clover
   Description: Increase luck by {Luck}%
   chanceToAppear: 0.9
   Icon: {fileID: 21300000, guid: 160afce1088b70c41add0bf84c636f22, type: 3}
+  unlockOnAchievement: 1
+  requiredAchievement: 11
   ItemUpgrades:
   - {fileID: 11400000, guid: 6157030fad20d5b4392d93a9974b0ecb, type: 2}
   - {fileID: 11400000, guid: 265f590f717471c49bb59c00ad757efa, type: 2}

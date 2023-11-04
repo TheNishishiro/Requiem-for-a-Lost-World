@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Data.Elements;
 using DefaultNamespace.Data;
+using DefaultNamespace.Data.Achievements;
 using Interfaces;
+using NaughtyAttributes;
 using Objects.Abilities;
 using Objects.Items;
 using Objects.Players.Scripts;
@@ -20,6 +22,9 @@ namespace Weapons
 		[SerializeField][TextArea] public string Description;
 		[SerializeField] public float chanceToAppear;
 		[SerializeField] public Sprite Icon;
+		[SerializeField] public bool unlockOnAchievement;
+		[ShowIf("unlockOnAchievement")]
+		[SerializeField] public AchievementEnum requiredAchievement;
 		[SerializeField] public Element element;
 		[SerializeField] protected WeaponStats weaponStats;
 		[SerializeField] List<UpgradeData> availableUpgrades;
@@ -122,7 +127,12 @@ namespace Weapons
 		
 		public virtual bool IsUnlocked(SaveFile saveFile)
 		{
-			return true;
+			return !unlockOnAchievement || saveFile.IsAchievementUnlocked(requiredAchievement);
+		}
+
+		public bool ReliesOnAchievement(AchievementEnum achievement)
+		{
+			return unlockOnAchievement && achievement == requiredAchievement;
 		}
 	}
 }

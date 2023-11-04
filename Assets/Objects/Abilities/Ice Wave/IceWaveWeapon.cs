@@ -76,10 +76,5 @@ namespace Objects.Abilities.Ice_Wave
 			if (LevelField == 10)
 				IsBlockingEnemies = true;
 		}
-
-		public override bool IsUnlocked(SaveFile saveFile)
-		{
-			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithOana);
-		}
 	}
 }

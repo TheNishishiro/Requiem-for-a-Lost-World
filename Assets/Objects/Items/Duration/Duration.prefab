@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2908582193919337217}
-  - component: {fileID: 7100778922492729244}
+  - component: {fileID: 6864389219202314309}
   m_Layer: 0
   m_Name: Duration
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7100778922492729244
+--- !u!114 &6864389219202314309
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,19 +41,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 166827887368697008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51795391ac6c7f14091b96881a055ff0, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Projectile duration
   Description: Increase duration by {ProjectileLifeTimeIncreasePercentage}%
   chanceToAppear: 1
   Icon: {fileID: 21300000, guid: 7aee0ac81f84bb345ab3d60f1c090222, type: 3}
-  ItemUpgrades:
-  - {fileID: 11400000, guid: e1b9af314543d61408e29c9e0d3fe149, type: 2}
-  - {fileID: 11400000, guid: 58baed35669b9154dae6452a2309ca6b, type: 2}
-  - {fileID: 11400000, guid: e147d2f51e64efb4f93be1b023b4e04d, type: 2}
-  - {fileID: 11400000, guid: 34d715842384cc442bbd0792a19c4588, type: 2}
-  - {fileID: 11400000, guid: 537f4f38516e9dd46b91c76cca519df2, type: 2}
+  unlockOnAchievement: 0
+  requiredAchievement: 0
+  ItemUpgrades: []
   ItemStats:
     Health: 0
     HealthMax: 0

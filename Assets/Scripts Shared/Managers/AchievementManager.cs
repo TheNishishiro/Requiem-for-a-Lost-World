@@ -126,10 +126,16 @@ namespace Managers
 		
 		public void OnPickupCollected(PickupEnum pickup)
 		{
-			if (SaveFile.Instance.PickupsCollected >= 1000 && pickup != PickupEnum.Experience)
+			switch (SaveFile.Instance.PickupsCollected)
 			{
-				SaveFile.Instance.PickupsCollected++;
-				SaveFile.Instance.UnlockAchievement(AchievementEnum.Collect1000Pickups);
+				case >= 1000 when pickup != PickupEnum.Experience:
+					SaveFile.Instance.PickupsCollected++;
+					SaveFile.Instance.UnlockAchievement(AchievementEnum.Collect1000Pickups);
+					break;
+				case >= 100 when pickup != PickupEnum.Experience:
+					SaveFile.Instance.PickupsCollected++;
+					SaveFile.Instance.UnlockAchievement(AchievementEnum.Collect100Pickups);
+					break;
 			}
 
 			switch (pickup)

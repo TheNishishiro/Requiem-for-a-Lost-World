@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8361625019833694591}
-  - component: {fileID: -4836827936417267590}
+  - component: {fileID: 3099807815826716758}
   m_Layer: 0
   m_Name: Armor
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4836827936417267590
+--- !u!114 &3099807815826716758
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,13 +41,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5064242657095341949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14c1ccdbbd29d1c4ab53900ab134dcd0, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Armor
   Description: Decrease incomming damage by {Armor}
   chanceToAppear: 0.9
   Icon: {fileID: 21300000, guid: 1279e6533ef6a2d449c89132b57f6901, type: 3}
+  unlockOnAchievement: 1
+  requiredAchievement: 14
   ItemUpgrades:
   - {fileID: 11400000, guid: 1d18318c82f039f43aef91e8e26c57bd, type: 2}
   - {fileID: 11400000, guid: 5daae33e8fc44f8439f25c3037b6a4f8, type: 2}

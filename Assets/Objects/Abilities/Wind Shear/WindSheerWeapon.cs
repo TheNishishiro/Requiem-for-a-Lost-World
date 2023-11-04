@@ -30,10 +30,5 @@ namespace Objects.Abilities.Wind_Shear
             if (LevelField == 9)
                 IsHurricaneWrath = true;
         }
-
-        public override bool IsUnlocked(SaveFile saveFile)
-        {
-            return saveFile.IsAchievementUnlocked(AchievementEnum.UnlockWindShear);
-        }
     }
 }

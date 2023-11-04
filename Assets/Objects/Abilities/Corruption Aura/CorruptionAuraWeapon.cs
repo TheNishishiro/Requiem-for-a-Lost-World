@@ -25,10 +25,5 @@ namespace Objects.Abilities.Corruption_Aura
 			if (damageable != null)
 				damageable.TakeDamageWithCooldown(weaponStats.GetDamage(), gameObject, weaponStats.DamageCooldown, this);
 		}
-
-		public override bool IsUnlocked(SaveFile saveFile)
-		{
-			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithLucy);
-		}
 	}
 }

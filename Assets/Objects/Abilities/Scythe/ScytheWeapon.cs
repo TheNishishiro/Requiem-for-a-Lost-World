@@ -39,11 +39,6 @@ namespace Objects.Abilities.Scythe
 			return 1;
 		}
 
-		public override bool IsUnlocked(SaveFile saveFile)
-		{
-			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithCorina);
-		}
-
 		protected override void OnLevelUp()
 		{
 			switch (LevelField)

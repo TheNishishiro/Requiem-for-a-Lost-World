@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4097735147005755284}
-  - component: {fileID: 890768549074142792}
+  - component: {fileID: 7168807288144393370}
   m_Layer: 0
   m_Name: Regeneration
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &890768549074142792
+--- !u!114 &7168807288144393370
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,13 +41,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1024498798920258173}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feeedf958c3714c4f87a6323941b6c7c, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Core of Vitality
   Description: Increase health regen by {HealthRegen} per second
   chanceToAppear: 0.5
   Icon: {fileID: 21300000, guid: 936cf08ef0afac84c9f0918b7e431d20, type: 3}
+  unlockOnAchievement: 1
+  requiredAchievement: 13
   ItemUpgrades:
   - {fileID: 11400000, guid: 39c91570aed5c174680643ed95c7c274, type: 2}
   - {fileID: 11400000, guid: 5944c00fc9b54e146bd88706cb7e0aeb, type: 2}

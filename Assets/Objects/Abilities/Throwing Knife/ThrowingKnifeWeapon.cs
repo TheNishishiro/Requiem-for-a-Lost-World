@@ -18,10 +18,5 @@ namespace Objects.Abilities.Throwing_Knife
 			projectile.SetStats(weaponStats);
 			return true;
 		}
-
-		public override bool IsUnlocked(SaveFile saveFile)
-		{
-			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithEliza);
-		}
 	}
 }

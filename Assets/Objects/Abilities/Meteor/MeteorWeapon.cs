@@ -41,10 +41,5 @@ namespace Objects.Abilities.Meteor
 
 			return baseCount;
 		}
-
-		public override bool IsUnlocked(SaveFile saveFile)
-		{
-			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithDavid);
-		}
 	}
 }

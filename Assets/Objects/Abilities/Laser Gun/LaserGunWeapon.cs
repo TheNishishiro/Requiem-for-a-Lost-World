@@ -27,11 +27,6 @@ namespace Objects.Abilities.Laser_Gun
 			return true;
 		}
 
-		public override bool IsUnlocked(SaveFile saveFile)
-		{
-			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithAmelia_BoD);
-		}
-
 		protected override int GetAttackCount()
 		{
 			var count = weaponStats.GetAttackCount();

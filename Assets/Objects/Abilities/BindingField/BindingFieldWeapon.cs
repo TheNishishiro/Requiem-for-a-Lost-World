@@ -45,10 +45,5 @@ namespace Objects.Abilities.BindingField
 					break;
 			}
 		}
-
-		public override bool IsUnlocked(SaveFile saveFile)
-		{
-			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithAmelisana);
-		}
 	}
 }

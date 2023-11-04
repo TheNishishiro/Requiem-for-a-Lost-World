@@ -78,10 +78,5 @@ namespace Objects.Abilities.Tornado
 			if (LevelField == 10)
 				IsStaticDischarge = true;
 		}
-
-		public override bool IsUnlocked(SaveFile saveFile)
-		{
-			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithNatalie);
-		}
 	}
 }

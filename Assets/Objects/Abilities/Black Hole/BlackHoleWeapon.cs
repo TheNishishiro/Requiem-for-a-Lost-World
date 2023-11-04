@@ -45,10 +45,5 @@ namespace Objects.Abilities.Back_Hole
 				_timer /= 3;
 			base.OnAttackEnd();
 		}
-
-		public override bool IsUnlocked(SaveFile saveFile)
-		{
-			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithArika);
-		}
 	}
 }

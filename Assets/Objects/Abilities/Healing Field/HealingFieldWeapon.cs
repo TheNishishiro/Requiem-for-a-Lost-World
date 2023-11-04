@@ -64,11 +64,6 @@ namespace Objects.Abilities.Healing_Field
 				IsEmpowering = true;
 		}
 
-		public override bool IsUnlocked(SaveFile saveFile)
-		{
-			return saveFile.IsAchievementUnlocked(AchievementEnum.Survive15MinutesWithAmelia);
-		}
-
 		protected override int GetAttackCount()
 		{
 			return 1;

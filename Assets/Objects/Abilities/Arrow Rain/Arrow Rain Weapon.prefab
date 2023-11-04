@@ -48,6 +48,7 @@ MonoBehaviour:
     type: 3}
   Name: Make it rain!
   Description: Rain arrows on a closest target, prioritizes high hp targets
+  chanceToAppear: 0.9
   Icon: {fileID: 21300000, guid: 605b697d1cc4c97408ccccb6e2928ae0, type: 3}
   element: 5
   weaponStats:
@@ -81,7 +82,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e5b26a98e800ced49acd67e79cb24f1d, type: 2}
   - {fileID: 11400000, guid: 46d6a892d69af3a4e93b2f72eb4bcffa, type: 2}
   - {fileID: 11400000, guid: 54872acb2f32110489cdd48a5ce37bbd, type: 2}
-  chanceToAppear: 0.9
+  unlockOnAchievement: 1
+  requiredAchievement: 49
   isSkill: 0
   capacity: 50
   maxCapacity: 50

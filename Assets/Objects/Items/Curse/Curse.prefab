@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1601610120296713520}
-  - component: {fileID: 6129760405626194525}
+  - component: {fileID: 7592951542291767915}
   m_Layer: 0
   m_Name: Curse
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6129760405626194525
+--- !u!114 &7592951542291767915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,13 +41,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 133336205035326675}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 194cc7a85b349ac4295346e431704f5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Curse of the Past
   Description: Increase enemy health by {EnemyHealthIncreasePercentage}%
   chanceToAppear: 0.9
   Icon: {fileID: 21300000, guid: 6b0e1f740ea0fb349a468f8774c86995, type: 3}
+  unlockOnAchievement: 1
+  requiredAchievement: 2
   ItemUpgrades:
   - {fileID: 11400000, guid: 92b4b30b2d509cc4f894cd9b63f410f9, type: 2}
   - {fileID: 11400000, guid: 5fa00d263915dd94e8b1a29a69184544, type: 2}

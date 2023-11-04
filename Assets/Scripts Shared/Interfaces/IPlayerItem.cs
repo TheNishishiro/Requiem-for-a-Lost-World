@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using Data.Elements;
 using DefaultNamespace.Data;
+using DefaultNamespace.Data.Achievements;
 using Objects.Items;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ namespace Interfaces
 		int LevelField { get; }
 		Element ElementField { get; }
 		ICollection<StatsDisplayData> GetStatsData();
-		public bool IsUnlocked(SaveFile saveFile);
+		bool IsUnlocked(SaveFile saveFile);
+		bool ReliesOnAchievement(AchievementEnum achievement);
 	}
 }

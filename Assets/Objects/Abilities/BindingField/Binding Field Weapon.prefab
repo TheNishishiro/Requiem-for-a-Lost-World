@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5557180905945181185}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &752530096814743840
 MonoBehaviour:
@@ -49,6 +49,7 @@ MonoBehaviour:
   Name: Binding Field
   Description: Create a binding field that has a 50% chance to stops enemy movement
     in an area
+  chanceToAppear: 0
   Icon: {fileID: 21300000, guid: 3da93ae089550ac4f8bbe06ed9eefdc1, type: 3}
   element: 7
   weaponStats:
@@ -82,3 +83,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 78a98fd9a25c18246b4f237132ca7df7, type: 2}
   - {fileID: 11400000, guid: d94ef7e0a7a050d428656f1c73f7d4a8, type: 2}
   - {fileID: 11400000, guid: cd007c4a4fb3e7b428b65abd0c458677, type: 2}
+  unlockOnAchievement: 1
+  requiredAchievement: 29
+  isSkill: 0
+  capacity: 50
+  maxCapacity: 50

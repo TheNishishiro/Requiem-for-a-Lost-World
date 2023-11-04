@@ -49,6 +49,7 @@ MonoBehaviour:
   Name: Bubble Universe
   Description: Spawn bubble universe traveling in a random direction that expands
     after traveling a certain distance
+  chanceToAppear: 0.85
   Icon: {fileID: 21300000, guid: 929005b6272430c4f92e6e479e935d33, type: 3}
   element: 8
   weaponStats:
@@ -81,7 +82,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a0001b3c098d0c14db6ec97c0f08d9a6, type: 2}
   - {fileID: 11400000, guid: 427aee3cb9b1cc440835e34841c8057c, type: 2}
   - {fileID: 11400000, guid: 29457e482eb3f6f41b1f786bf4d6888d, type: 2}
-  chanceToAppear: 0.85
+  unlockOnAchievement: 1
+  requiredAchievement: 43
   isSkill: 0
   capacity: 50
   maxCapacity: 50

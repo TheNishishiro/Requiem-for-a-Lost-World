@@ -13,6 +13,8 @@ namespace DefaultNamespace.Data.Achievements
 		CollectMap,
 		[AchievementValue("Master of shards", "Summon shards of fallen enemies")]
 		CollectMagnet,
+		[AchievementValue("What's in the crate?", "Collect 100 pickups throughout your adventures")]
+		Collect100Pickups,
 		[AchievementValue("Can't resist the shiny, can you?", "Collect 1000 pickups throughout your adventures")]
 		Collect1000Pickups,
 		[AchievementValue("Summon a character from the past", "Obtain a character shard")]

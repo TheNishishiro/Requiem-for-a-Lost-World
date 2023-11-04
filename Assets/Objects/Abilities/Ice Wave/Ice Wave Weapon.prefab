@@ -49,6 +49,7 @@ MonoBehaviour:
   Name: Ice age
   Description: Send waves of ice spikes from the ground, sprading outwards from the
     character
+  chanceToAppear: 0.7
   Icon: {fileID: 21300000, guid: 07b81c92237892b48bdbf50cf5aaa2c0, type: 3}
   element: 4
   weaponStats:
@@ -82,7 +83,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e52f6a3995129674c8587eb299b8da51, type: 2}
   - {fileID: 11400000, guid: 8aaedca613103bf40b87de19d86a5299, type: 2}
   - {fileID: 11400000, guid: 900e7def25276ec4981122576a95a472, type: 2}
-  chanceToAppear: 0.7
+  unlockOnAchievement: 1
+  requiredAchievement: 25
   isSkill: 0
   capacity: 50
   maxCapacity: 200
