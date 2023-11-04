@@ -9,20 +9,14 @@ using Weapons;
 
 namespace Objects.Abilities.Throwing_Knife
 {
-	public class ThrowingKnifeWeapon : WeaponBase
+	public class ThrowingKnifeWeapon : PoolableWeapon<ThrowingKnifeProjectile>
 	{
-		public override void Attack()
+		protected override bool ProjectileSpawn(ThrowingKnifeProjectile projectile)
 		{
-			var playerTransform = FindObjectsOfType<Player>().FirstOrDefault();
-			
-			var throwingKnife = SpawnManager.instance.SpawnObject(
-				Utilities.GetRandomInAreaFreezeParameter(transform.position, 0.2f, isFreezeZ: true)
-				, spawnPrefab);
-			var projectileComponent = throwingKnife.GetComponent<ThrowingKnifeProjectile>();
-			
-			projectileComponent.SetParentWeapon(this);
-			projectileComponent.SetDirection(playerTransform.transform.forward);
-			projectileComponent.SetStats(weaponStats);
+			projectile.transform.position = Utilities.GetRandomInAreaFreezeParameter(transform.position, 0.2f, isFreezeZ: true);
+			projectile.SetDirection(transform.forward);
+			projectile.SetStats(weaponStats);
+			return true;
 		}
 
 		public override bool IsUnlocked(SaveFile saveFile)

@@ -4,6 +4,7 @@ using Data.ToggleableEntries;
 using DefaultNamespace.BaseClasses;
 using DefaultNamespace.Data;
 using Interfaces;
+using Managers;
 using Objects.Abilities;
 using Objects.Items;
 using Objects.Players.Scripts;
@@ -27,10 +28,6 @@ public class WeaponManager : MonoBehaviour
     public int maxItemCount = 6;
     private int _weaponsUpgraded;
     private int _itemsUpgraded;
-    [SerializeField] private UnityEvent<WeaponBase, int, int> onWeaponAdded;
-    [SerializeField] private UnityEvent<WeaponBase, int, int> onWeaponUpgraded;
-    [SerializeField] private UnityEvent<ItemBase, int, int> onItemAdded;
-    [SerializeField] private UnityEvent<ItemBase, int, int> onItemUpgraded;
     private SaveFile _saveFile;
 
     private void Awake()
@@ -53,7 +50,7 @@ public class WeaponManager : MonoBehaviour
         weaponGameObject.ApplyRarity(rarity);
         availableWeapons.RemoveAll(x => x.weaponBase == weapon);
         _unlockedWeapons.Add(weaponGameObject);
-        onWeaponAdded?.Invoke(weapon, _unlockedWeapons.Count, rarity);
+        AchievementManager.instance.OnWeaponUnlocked(weapon, _unlockedWeapons.Count, rarity);
     }
 
     public void AddItem(ItemBase item, int rarity)
@@ -63,13 +60,12 @@ public class WeaponManager : MonoBehaviour
         itemGameObject.ApplyRarity(rarity);
         _playerStatsComponent.Apply(itemGameObject.ItemStats, 1);
         _unlockedItems.Add(itemGameObject);
-        onItemAdded?.Invoke(item, _unlockedItems.Count, rarity);
+        AchievementManager.instance.OnItemUnlocked(item, _unlockedItems.Count, rarity);
     }
 
     public void UpgradeWeapon(WeaponBase weapon, UpgradeData upgradeData, int rarity)
     {
         weapon.Upgrade(upgradeData, rarity);
-        onWeaponUpgraded?.Invoke(weapon, ++_weaponsUpgraded, rarity);
     }
 
     public void UpgradeItem(ItemBase itemBase, ItemUpgrade itemUpgrade, int rarity)
@@ -77,7 +73,6 @@ public class WeaponManager : MonoBehaviour
         itemBase.RemoveUpgrade(itemUpgrade);
         itemBase.ApplyUpgrade(itemUpgrade, rarity);
         _playerStatsComponent.Apply(itemUpgrade.ItemStats, rarity);
-        onItemUpgraded?.Invoke(itemBase, ++_itemsUpgraded, rarity);
     }
     
     public List<IPlayerItem> GetUnlockedWeaponsAsInterface()
@@ -105,7 +100,8 @@ public class WeaponManager : MonoBehaviour
         return _unlockedWeapons.Select(unlockedWeapon => new UpgradeEntry()
         {
             Weapon = unlockedWeapon,
-            Upgrade = unlockedWeapon.GetAvailableUpgrades().FirstOrDefault()
+            Upgrade = unlockedWeapon.GetAvailableUpgrades().FirstOrDefault(),
+            ChanceOfAppearance = unlockedWeapon.chanceToAppear
         }).Where(x => x.Upgrade != null);
     }
     
@@ -120,7 +116,8 @@ public class WeaponManager : MonoBehaviour
             return new UpgradeEntry()
             {
                 ItemUpgrade = nextUpgrade,
-                Item = unlockedItem
+                Item = unlockedItem,
+                ChanceOfAppearance = unlockedItem.chanceToAppear
             };
         }).Where(x => x != null);
     }
@@ -132,7 +129,8 @@ public class WeaponManager : MonoBehaviour
         
         return availableWeapons.Where(x => x.isEnabled && x.weaponBase.IsUnlocked(_saveFile)).Select(availableWeapon => new UpgradeEntry()
         {
-            Weapon = availableWeapon.weaponBase
+            Weapon = availableWeapon.weaponBase,
+            ChanceOfAppearance = availableWeapon.weaponBase.chanceToAppear
         });
     }
     
@@ -143,7 +141,8 @@ public class WeaponManager : MonoBehaviour
         
         return availableItems.Where(x => x.isEnabled && x.itemBase.IsUnlocked(_saveFile)).Select(availableItem => new UpgradeEntry()
         {
-            Item = availableItem.itemBase
+            Item = availableItem.itemBase,
+            ChanceOfAppearance = availableItem.itemBase.chanceToAppear
         });
     }
     

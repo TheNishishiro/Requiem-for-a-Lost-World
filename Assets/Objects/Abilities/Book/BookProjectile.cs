@@ -7,10 +7,11 @@ using Weapons;
 
 namespace Objects.Abilities.Book
 {
-	public class BookProjectile : ProjectileBase
+	public class BookProjectile : PoolableProjectile<BookProjectile>
 	{
 		private GameObject rotateTarget;
 		private BookWeapon BookWeapon => ParentWeapon as BookWeapon;
+		private float _explosionCooldown;
 
 		public void SetTarget(GameObject rotateTarget)
 		{
@@ -23,21 +24,19 @@ namespace Objects.Abilities.Book
 			{
 				transform.RotateAround(rotateTarget.transform.position, Vector3.up, Time.deltaTime * WeaponStats.GetSpeed());
 			}
-			
+
+			if (_explosionCooldown > 0)
+				_explosionCooldown -= Time.deltaTime;
 			TickLifeTime();
 		}
 
 		private void SpawnExplosion()
 		{
-			var explosion = SpawnManager.instance.SpawnObject(transform.position, BookWeapon.ExplosionPrefab);
-			var simpleDamageProjectile = explosion.GetComponent<SimpleDamageProjectile>();
-			simpleDamageProjectile.SetParentWeapon(ParentWeapon);
-			simpleDamageProjectile.SetStats(new WeaponStats()
-			{
-				TimeToLive = 0.5f,
-				Damage = WeaponStats.GetDamage() * 0.25f,
-				Scale = WeaponStats.GetScale()
-			});
+			if (_explosionCooldown > 0)
+				return;
+			
+			BookWeapon.SpawnSubProjectile(transformCache.position);
+			_explosionCooldown = 0.5f;
 		}
 
 		private void OnTriggerEnter(Collider other)

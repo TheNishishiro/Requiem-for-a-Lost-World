@@ -12,10 +12,11 @@ namespace Objects.Items
 	{
 		[SerializeField] public string Name;
 		[SerializeField] public string Description;
+		[SerializeField] public float chanceToAppear;
 		[SerializeField] public Sprite Icon;
 		[SerializeField] public List<ItemUpgrade> ItemUpgrades;
 		[SerializeField] public ItemStats ItemStats;
-
+		
 		public string NameField => Name;
 		public string DescriptionField => Description;
 		public Sprite IconField => Icon;
@@ -24,7 +25,7 @@ namespace Objects.Items
 
 		public ICollection<StatsDisplayData> GetStatsData()
 		{
-			return ItemStats.GetDescription();
+			return ItemStats.GetStatsDisplayData();
 		}
 
 		public IEnumerable<ItemUpgrade> GetAvailableUpgrades()
@@ -51,6 +52,11 @@ namespace Objects.Items
 		public void ApplyRarity(int rarity)
 		{
 			ItemStats.ApplyRarity(rarity);
+		}
+
+		public string GetDescription(int rarity)
+		{
+			return ItemStats.GetDescription(Description, rarity);
 		}
 	}
 }

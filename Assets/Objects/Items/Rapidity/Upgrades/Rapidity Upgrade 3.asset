@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Rapidity Upgrade 3
   m_EditorClassIdentifier: 
   Name: Rapidity (III)
-  Description: Decrease weapon cooldown by 5%
+  Description: Decrease skill cooldown by {SkillCooldownReductionPercentage}%
   ItemStats:
     Health: 0
     HealthMax: 0
     MagnetSize: 0
     CooldownReduction: 0
-    CooldownReductionPercentage: 0.05
+    CooldownReductionPercentage: 0
     AttackCount: 0
     Damage: 0
     Scale: 0
@@ -29,7 +29,7 @@ MonoBehaviour:
     DamagePercentageIncrease: 0
     ExperienceIncreasePercentage: 0
     MovementSpeed: 0
-    SkillCooldownReductionPercentage: 0
+    SkillCooldownReductionPercentage: 0.1
     HealthRegen: 0
     CritRate: 0
     CritDamage: 0

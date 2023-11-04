@@ -15,9 +15,6 @@ namespace Objects.Players.Scripts
 		[SerializeField] private GameOverScreenManager gameOverScreenManager;
 		private const float HealthRegenCooldown = 1;
 		private float _healthRegenCurrentCooldown = 1;
-		[SerializeField] private UnityEvent onDeath;
-		[SerializeField] private UnityEvent<float> onHealing;
-		[SerializeField] private UnityEvent<float> onDamageTaken;
 		
 		public void Damage(float amount)
 		{
@@ -28,13 +25,14 @@ namespace Objects.Players.Scripts
 				if (amount < 0)
 					amount = 0;
 				
-				onDamageTaken?.Invoke(amount);
+				AudioManager.instance.PlayPlayerHitAudio();
+				AchievementManager.instance.OnDamageTaken(amount);
 				DamageTakenEvent.Invoke(amount);
 			}
 			else if (amount < 0)
 			{
 				amount *= playerStatsComponent.GetHealingIncrease();
-				onHealing?.Invoke(amount);
+				AchievementManager.instance.OnHealing(amount);
 			}
 			
 			playerStatsComponent.TakeDamage(amount);
@@ -76,7 +74,7 @@ namespace Objects.Players.Scripts
 				return;
 			}
 			
-			onDeath?.Invoke();
+			AchievementManager.instance.OnDeath();
 			gameOverScreenManager.OpenPanel(false);
 		}
 

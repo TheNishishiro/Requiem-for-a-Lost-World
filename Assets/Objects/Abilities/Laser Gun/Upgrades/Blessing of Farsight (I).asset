@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Blessing of Farsight (I)
   m_EditorClassIdentifier: 
   Name: Blessing of Farsight (I)
-  Description: Increase detection range by 2m
+  Description: Increase detection range by {DetectionRange}m
   WeaponStats:
     Damage: 0
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0
     Speed: 0
     TimeToLive: 0
@@ -27,3 +28,9 @@ MonoBehaviour:
     DetectionRange: 2
     CritRate: 0
     CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

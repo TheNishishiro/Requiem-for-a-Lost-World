@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace Objects.Abilities.BindingField
 {
-	public class BindingFieldProjectile : ProjectileBase
+	public class BindingFieldProjectile : PoolableProjectile<BindingFieldProjectile>
 	{
 		private BindingFieldWeapon BindingFieldWeapon => ParentWeapon as BindingFieldWeapon;
 		

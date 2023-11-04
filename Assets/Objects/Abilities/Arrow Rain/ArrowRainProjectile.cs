@@ -1,18 +1,20 @@
 ﻿using System;
 using Data.Elements;
+using Interfaces;
 using UnityEngine;
+using UnityEngine.Pool;
 using Weapons;
 
 namespace Objects.Abilities.Arrow_Rain
 {
-	public class ArrowRainProjectile : ProjectileWithLimitedHitBoxBase
+	public class ArrowRainProjectile : PoolableProjectileWithLimitedHitBox<ArrowRainProjectile>
 	{
 		private ArrowRainWeapon ArrowRainWeapon => (ArrowRainWeapon) ParentWeapon;
 		
 		public void Update()
 		{
-			TickLifeTime();
 			UpdateCollider();
+			TickLifeTime();
 		}
 		
 		private void OnTriggerEnter(Collider other)

@@ -4,17 +4,19 @@ using Weapons;
 
 namespace Objects.Abilities.Boomerang
 {
-	public class BoomerangWeapon : WeaponBase
+	public class BoomerangWeapon : PoolableWeapon<BoomerangProjectile>
 	{
-		public override void Attack()
+		protected override bool ProjectileSpawn(BoomerangProjectile projectile)
 		{
-			var magicBall = SpawnManager.instance.SpawnObject(transform.position, spawnPrefab);
-			var projectileComponent = magicBall.GetComponent<BoomerangProjectile>();
-        
-			var targetPoint = Utilities.GetRandomInAreaFreezeParameter(transform.position, 3, isFreezeY: true);
-			projectileComponent.SetParentWeapon(this);
-			projectileComponent.SetStats(weaponStats);
-			projectileComponent.SetDirection(targetPoint);
+			var transform1 = transform;
+			var position = transform1.position;
+			
+			projectile.transform.position = position;
+			var targetPoint = Utilities.GetRandomInAreaFreezeParameter(position, 3, isFreezeY: true);
+			projectile.SetStats(weaponStats);
+			projectile.gameObject.SetActive(true);
+			projectile.SetDirection(targetPoint);
+			return true;
 		}
 	}
 }

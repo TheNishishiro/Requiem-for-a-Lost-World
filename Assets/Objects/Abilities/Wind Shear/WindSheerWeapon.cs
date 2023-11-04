@@ -10,20 +10,19 @@ using Weapons;
 
 namespace Objects.Abilities.Wind_Shear
 {
-    public class WindSheerWeapon : WeaponBase
+    public class WindSheerWeapon : PoolableWeapon<WindShearProjectile>
     {
         public bool IsHurricaneWrath;
-        
-        public override void Attack()
-        {
-            var enemy = FindObjectsByType<Enemy>(FindObjectsSortMode.None).OrderBy(_ => Random.value).FirstOrDefault();
-            if (enemy == null)
-                return;
 
-            var windShear = SpawnManager.instance.SpawnObject(enemy.transform.position, spawnPrefab);
-            var projectileComponent = windShear.GetComponent<WindShearProjectile>();
-            projectileComponent.SetStats(weaponStats);
-            projectileComponent.SetParentWeapon(this);
+        protected override bool ProjectileSpawn(WindShearProjectile projectile)
+        {
+            var enemy = EnemyManager.instance.GetRandomEnemy();
+            if (enemy == null)
+                return false;
+
+            projectile.transform.position = enemy.TargetPoint.position;
+            projectile.SetStats(weaponStats);
+            return true;
         }
 
         protected override void OnLevelUp()

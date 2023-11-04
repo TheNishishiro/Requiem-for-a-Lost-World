@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class ChaseComponent : MonoBehaviour
 {
-    private Rigidbody _rigidbody;
+    [SerializeField] private Rigidbody _rigidbody;
     private Transform targetDestination;
     private GameObject tempTarget;
     private float movementSpeed;
@@ -18,12 +18,22 @@ public class ChaseComponent : MonoBehaviour
     private float _slowTimer;
     private float _slowAmount;
     private bool _isMovementDisabled;
+    private float _tempTargetTimer;
+    private Transform transformCache;
     
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-        if (_rigidbody is null)
-            Debug.LogWarning($"Chasing object does not contain RigidBody '{gameObject.name}'");
+        transformCache = transform;
+    }
+
+    public void Clear()
+    {
+        tempTarget = null;
+        _immobileTimer = 0;
+        _slowTimer = 0;
+        _slowAmount = 0;
+        _isMovementDisabled = false;
+        _tempTargetTimer = 0;
     }
 
     public void SetTarget(GameObject target)
@@ -31,9 +41,10 @@ public class ChaseComponent : MonoBehaviour
         targetDestination = target.transform;
     }
 
-    public void SetTemporaryTarget(GameObject target, float? tempSpeed = null)
+    public void SetTemporaryTarget(GameObject target, float? tempSpeed = null, float tempTargetCooldown = 0.2f)
     {
         tempTarget = target;
+        _tempTargetTimer = tempTargetCooldown;
         this.tempSpeed = tempSpeed ?? movementSpeed;
     }
 
@@ -47,10 +58,18 @@ public class ChaseComponent : MonoBehaviour
         if (targetDestination == null)
             return;
 
-        var isTempTarget = tempTarget != null;
+        var currentPosition = transformCache.position;
+
+        var isTempTarget = false;
+        if (_tempTargetTimer > 0)
+        {
+            isTempTarget = tempTarget != null && tempTarget.gameObject.activeInHierarchy;
+            _tempTargetTimer-=Time.deltaTime;
+        }
+
         var destination = isTempTarget ? tempTarget.transform.position : targetDestination.position;
         if (!FollowYAxis)
-            destination.y = transform.position.y;
+            destination.y = currentPosition.y;
 
         if (_isMovementDisabled)
             return;
@@ -65,15 +84,13 @@ public class ChaseComponent : MonoBehaviour
             _slowTimer -= Time.deltaTime;
         }
 
-        if (!isTempTarget && Vector3.Distance(transform.position, destination) > 12f)
+        if (!isTempTarget && Vector3.Distance(currentPosition, destination) > 12f)
         {
-            transform.position =
-                Utilities.GetPointOnColliderSurface(destination - Utilities.GenerateRandomPositionOnEdge(new Vector2(8, 8)), transform, GetComponentInChildren<BoxCollider>().size.y/2);
+            currentPosition = Utilities.GetPointOnColliderSurface(destination - Utilities.GenerateRandomPositionOnEdge(new Vector2(8, 8)), transformCache, GetComponent<CapsuleCollider>().height);
         }
-        
-        transform.LookAt(destination);
+
         var speed = (isTempTarget ? tempSpeed : movementSpeed) * (_slowTimer > 0 ? _slowAmount : 1.0f);
-        transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+        transformCache.position = Vector3.MoveTowards(currentPosition, destination, speed * Time.deltaTime);
     }
 
     public void SetImmobile(float time)

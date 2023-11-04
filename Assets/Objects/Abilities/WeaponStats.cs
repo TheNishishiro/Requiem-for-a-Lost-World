@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Text;
+using DefaultNamespace;
 using DefaultNamespace.Extensions;
 using Objects.Players.Scripts;
 using Unity.Mathematics;
@@ -42,7 +44,7 @@ namespace Objects.Abilities
 
 		public void ApplyRarity(int rarity)
          {
-	         var rarityFactor = 1.0f + ((rarity - 1.0f) * 0.1f);// This will result in an increase from no increase (rarity 1) to 50% (rarity 5)
+	         var rarityFactor = GetRarityFactor(rarity);
          
              Damage *= rarityFactor;
              Cooldown *= 2 - rarityFactor;
@@ -52,6 +54,7 @@ namespace Objects.Abilities
              TimeToLive *= rarityFactor;
              DamageCooldown *= rarityFactor;
              DuplicateSpawnDelay *= rarityFactor;
+             DetectionRange *= rarityFactor;
              CritRate *= rarityFactor;
              CritDamage *= rarityFactor;
              Weakness *= rarityFactor;
@@ -64,7 +67,7 @@ namespace Objects.Abilities
 		
 		public void Sum(WeaponStats weaponStats, int rarity)
         {
-            var rarityFactor = 1.0f + ((rarity - 1.0f) * 0.1f);
+	        var rarityFactor = GetRarityFactor(rarity);
               
             AttackCount += weaponStats.AttackCount;
             Damage += weaponStats.Damage * rarityFactor;
@@ -76,6 +79,7 @@ namespace Objects.Abilities
             PassThroughCount += weaponStats.PassThroughCount; 
             DamageCooldown += weaponStats.DamageCooldown * rarityFactor;
             DuplicateSpawnDelay += weaponStats.DuplicateSpawnDelay * rarityFactor;
+            DetectionRange += weaponStats.DetectionRange * rarityFactor;
             CritRate += weaponStats.CritRate * rarityFactor;
             CritDamage += weaponStats.CritDamage * rarityFactor;
             Weakness += weaponStats.Weakness * rarityFactor;
@@ -83,10 +87,37 @@ namespace Objects.Abilities
             HealPerHit += weaponStats.HealPerHit * rarityFactor;      
             DamageOverTime += weaponStats.DamageOverTime * rarityFactor;      
             DamageOverTimeDuration += weaponStats.DamageOverTimeDuration * rarityFactor;      
-            DamageOverTimeFrequency += weaponStats.DamageOverTimeFrequency * rarityFactor;      
+            DamageOverTimeFrequency += weaponStats.DamageOverTimeFrequency * (2 - rarityFactor);      
         }
 
-		public ICollection<StatsDisplayData> GetDescription()
+		public string GetDescription(string description, int rarity)
+		{
+			var rarityFactor = GetRarityFactor(rarity);
+
+			return description
+				.Replace("{AttackCount}", Utilities.StatToString(AttackCount))
+				.Replace("{Damage}", Utilities.StatToString(Damage, rarityFactor))
+				.Replace("{Cooldown}", Utilities.StatToString(Cooldown, rarityFactor))
+				.Replace("{CooldownReduction}", Utilities.StatToString(CooldownReduction, rarityFactor, true))
+				.Replace("{Scale}", Utilities.StatToString(Scale, rarityFactor, true))
+				.Replace("{Speed}", Utilities.StatToString(Speed, rarityFactor))
+				.Replace("{TimeToLive}", Utilities.StatToString(TimeToLive, rarityFactor))
+				.Replace("{PassThroughCount}", Utilities.StatToString(PassThroughCount))
+				.Replace("{DamageCooldown}", Utilities.StatToString(Damage, rarityFactor, true))
+				.Replace("{DuplicateSpawnDelay}", Utilities.StatToString(DuplicateSpawnDelay, rarityFactor))
+				.Replace("{DetectionRange}", Utilities.StatToString(DetectionRange, rarityFactor))
+				.Replace("{CritRate}", Utilities.StatToString(CritRate, rarityFactor, true))
+				.Replace("{CritDamage}", Utilities.StatToString(CritDamage, rarityFactor, true))
+				.Replace("{Weakness}", Utilities.StatToString(Weakness, rarityFactor, true))
+				.Replace("{DamageIncreasePercentage}", Utilities.StatToString(DamageIncreasePercentage, rarityFactor, true))
+				.Replace("{HealPerHit}", Utilities.StatToString(HealPerHit, rarityFactor))
+				.Replace("{DamageOverTime}", Utilities.StatToString(DamageOverTime, rarityFactor))
+				.Replace("{DamageOverTimeDuration}", Utilities.StatToString(DamageOverTimeDuration, rarityFactor))
+				.Replace("{DamageOverTimeFrequency}", Utilities.StatToString(DamageOverTimeFrequency, rarityFactor, false, true))
+				;
+		}
+
+		public ICollection<StatsDisplayData> GetStatsDisplayData()
         {
             var stats = new List<StatsDisplayData>
             {
@@ -107,7 +138,7 @@ namespace Objects.Abilities
 	            new("Regen per hit", HealPerHit),
 	            new("Damage over time", DamageOverTime),
 	            new("DoT duration", DamageOverTimeDuration),
-	            new("DoT frequency", DamageOverTimeFrequency),
+	            new("DoT frequency", DamageOverTimeFrequency)
             };
         
             return stats;
@@ -184,6 +215,12 @@ namespace Objects.Abilities
 		public float GetWeakness()
 		{
 			return Weakness;
+		}
+
+		private float GetRarityFactor(float rarity)
+		{
+			const float percentIncreasePerRarity = 0.025f;
+			return 1.0f + ((rarity - 1.0f) * percentIncreasePerRarity);
 		}
 	}
 }

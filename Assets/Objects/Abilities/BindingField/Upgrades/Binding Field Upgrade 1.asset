@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Binding Field Upgrade 1
   m_EditorClassIdentifier: 
   Name: Enhanced Field (I)
-  Description: Increases the radius of the binding field by 10%
+  Description: Increases the radius of the binding field by {Scale}%
   WeaponStats:
     Damage: 0
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0.1
     Speed: 0
     TimeToLive: 0
@@ -28,3 +29,8 @@ MonoBehaviour:
     CritRate: 0
     CritDamage: 0
     Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

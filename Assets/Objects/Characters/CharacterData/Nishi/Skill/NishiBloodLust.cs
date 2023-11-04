@@ -55,10 +55,10 @@ namespace Objects.Characters.Nishi.Skill
 
 		public void OnSpecialBarFilled()
 		{
-			var enemies = FindObjectsOfType<Enemy>();
-			for (var i = 0; i < enemies.Length; i++)
+			var enemies = EnemyManager.instance.GetActiveEnemies();
+			foreach (var enemy in enemies)
 			{
-				SpawnManager.instance.SpawnObject(enemies[i].transform.position, blackFlamePrefab.gameObject);
+				SpawnManager.instance.SpawnObject(enemy.transform.position, blackFlamePrefab.gameObject);
 			}
 			
 			var damage = GameData.GetPlayerCharacterRank() >= CharacterRank.E5 ? 45 : 20;

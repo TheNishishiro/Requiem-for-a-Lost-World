@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Cosmic Bubble Upgrade 7
   m_EditorClassIdentifier: 
   Name: Spatial Distortion (II)
-  Description: Increase the movement speed of the bubble towards enemies by 1 m/s
+  Description: Increase the movement speed of the bubble towards enemies by {Speed}
+    m/s
   WeaponStats:
     Damage: 0
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0
     Speed: 1
     TimeToLive: 0
@@ -27,3 +29,9 @@ MonoBehaviour:
     DetectionRange: 0
     CritRate: 0
     CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

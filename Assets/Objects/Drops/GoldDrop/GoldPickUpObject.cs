@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using Interfaces;
+using Objects.Drops;
 using UnityEngine;
 
-public class GoldPickUpObject : MonoBehaviour, IPickUpObject
+public class GoldPickUpObject : PickupObject
 {
     [SerializeField] private int goldAmount;
 		
-    public void OnPickUp(Player player)
+    public override void OnPickUp(Player player)
     {
         player.AddGold(goldAmount);
     }
 
-    public void SetAmount(int amount)
+    public override void SetAmount(int amount)
     {
         if (amount != 0)
             goldAmount = amount;

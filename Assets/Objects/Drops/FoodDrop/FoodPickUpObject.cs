@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using Interfaces;
+using Objects.Drops;
 using UnityEngine;
 
-public class FoodPickUpObject : MonoBehaviour, IPickUpObject
+public class FoodPickUpObject : PickupObject
 {
     [SerializeField] private int healAmount;
 		
-    public void OnPickUp(Player player)
+    public override void OnPickUp(Player player)
     {
         player.TakeDamage(-healAmount);
     }
 
-    public void SetAmount(int amount)
+    public override void SetAmount(int amount)
     {
         if (amount != 0)
             healAmount = amount;

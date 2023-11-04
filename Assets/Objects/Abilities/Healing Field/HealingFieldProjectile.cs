@@ -5,9 +5,8 @@ using Weapons;
 
 namespace Objects.Abilities.Healing_Field
 {
-	public class HealingFieldProjectile : ProjectileBase
+	public class HealingFieldProjectile : PoolableProjectile<HealingFieldProjectile>
 	{
-        [SerializeField] private GameObject healingFieldPrefab;
         [SerializeField] private float healingFrequency;
         private HealingFieldWeapon HealingFieldWeapon => (HealingFieldWeapon)ParentWeapon;
         private float _currentHealingFrequency;
@@ -31,9 +30,7 @@ namespace Objects.Abilities.Healing_Field
         
         private void SpawnHealingField()
 		{
-	        var healingField = SpawnManager.instance.SpawnObject(transform.position, healingFieldPrefab);
-	        healingField.transform.localScale *= WeaponStats.GetScale();
-	        healingField.GetComponent<HealingField>().Setup(WeaponStats.HealPerHit, HealingFieldWeapon.IsEmpowering);
+			HealingFieldWeapon.SpawnSubProjectile(transformCache.position);
 		}
 	}
 }

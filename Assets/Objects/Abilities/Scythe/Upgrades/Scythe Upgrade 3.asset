@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scythe Upgrade 3
   m_EditorClassIdentifier: 
   Name: Life Siphon (II)
-  Description: Increase the healing received for each enemy hit by 0.02
+  Description: Increase the healing received for each enemy hit by {HealPerHit}
   WeaponStats:
     Damage: 0
     Cooldown: 0
@@ -31,3 +31,6 @@ MonoBehaviour:
     Weakness: 0
     DamageIncreasePercentage: 0
     HealPerHit: 0.02
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

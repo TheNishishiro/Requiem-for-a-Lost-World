@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5308287247732994346}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4342425474514187230
 MonoBehaviour:
@@ -49,6 +49,7 @@ MonoBehaviour:
   Name: Blessing of Light
   Description: Create a healing emitter at current position that heals in an area
     around it for a set time
+  chanceToAppear: 0.6
   Icon: {fileID: 21300000, guid: 094230a82717225479bc9bd9a3693e23, type: 3}
   element: 7
   weaponStats:
@@ -82,4 +83,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e93175a3bcc96fc4bb969f6785beb6bf, type: 2}
   - {fileID: 11400000, guid: af4707ece8b8688408e7852175ca4d27, type: 2}
   - {fileID: 11400000, guid: 658da438d65aed74fb4deb13910c4cc0, type: 2}
+  isSkill: 0
+  capacity: 50
+  maxCapacity: 50
+  healingFieldPrefab: {fileID: 7752757187805214172, guid: f1366df1039657c429775f2903ae5573,
+    type: 3}
   IsEmpowering: 1

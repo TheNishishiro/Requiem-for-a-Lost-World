@@ -5,10 +5,11 @@ using Weapons;
 
 namespace Objects.Abilities.Magic_Ball
 {
-	public class MagicBallProjectile : ProjectileBase
+	public class MagicBallProjectile : PoolableProjectile<MagicBallProjectile>
 	{
 		private Vector3 direction;
-
+		[SerializeField] private TrailRenderer trail;
+		
 		public void SetDirection(float dirX, float dirY, float dirZ)
 		{
 			direction = (new Vector3(dirX, dirY, dirZ) - transform.position).normalized;
@@ -23,6 +24,17 @@ namespace Objects.Abilities.Magic_Ball
 		private void OnTriggerEnter(Collider other)
 		{
 			SimpleDamage(other, true);
+		}
+		
+		private void OnEnable()
+		{
+			trail.Clear();
+			trail.emitting = true;
+		}
+
+		private void OnDisable()
+		{
+			trail.emitting = false;
 		}
 	}
 }

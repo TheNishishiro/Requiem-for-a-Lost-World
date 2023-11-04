@@ -1,4 +1,5 @@
 ﻿using System;
+using Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,6 +25,7 @@ namespace UI.Main_Menu.Level_Selection
 
 		private void StartLevel()
 		{
+			AudioManager.instance.PlayButtonConfirmClick();
 			SceneManager.LoadScene($"Scenes/{sceneName}", LoadSceneMode.Single);
 			SceneManager.LoadScene("Scenes/Essential", LoadSceneMode.Additive);
 		}

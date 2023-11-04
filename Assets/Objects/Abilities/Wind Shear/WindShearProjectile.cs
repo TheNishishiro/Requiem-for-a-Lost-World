@@ -4,7 +4,7 @@ using Weapons;
 
 namespace Objects.Abilities.Wind_Shear
 {
-    public class WindShearProjectile : ProjectileBase
+    public class WindShearProjectile : PoolableProjectile<WindShearProjectile>
     {
         public WindSheerWeapon WindShearWeapon => (WindSheerWeapon)ParentWeapon;
         

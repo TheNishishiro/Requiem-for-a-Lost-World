@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DefaultNamespace;
+using Managers;
 using UnityEngine;
 using Weapons;
 using Random = UnityEngine.Random;
 
 namespace Objects.Abilities.Lightning_Chain
 {
-	public class LightningChainProjectile : ProjectileBase
+	public class LightningChainProjectile : PoolableProjectile<LightningChainProjectile>
 	{
 		[SerializeField] public LineRenderer lineRenderer;
 
-		private void Awake()
+		public override void SetStats(WeaponStats weaponStats)
 		{
+			base.SetStats(weaponStats);
 			lineRenderer.positionCount = 0;
+			
 		}
 
 		public void Update()
@@ -30,7 +34,7 @@ namespace Objects.Abilities.Lightning_Chain
 		public IEnumerator FindChainLightningTarget(int maxTargets)
 		{
 			var lastPosition = transform.position;
-			var targets = FindObjectsByType<Damageable>(FindObjectsSortMode.None);
+			var targets = EnemyManager.instance.GetActiveEnemies().Select(x => x.GetDamagableComponent()).ToArray();
 			
 			for (var i = 0; i < maxTargets; i++)
 			{
@@ -40,7 +44,7 @@ namespace Objects.Abilities.Lightning_Chain
 				
 				AddTarget(lastPosition);
 				target.TakeDamage(WeaponStats.GetDamage(), ParentWeapon);
-				lastPosition = target.transform.position;
+				lastPosition = target.targetPoint.transform.position;
 				yield return new WaitForSeconds(0.1f);
 			}
 		}

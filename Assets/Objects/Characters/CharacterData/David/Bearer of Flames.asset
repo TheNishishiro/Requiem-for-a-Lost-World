@@ -27,6 +27,7 @@ MonoBehaviour:
   AbilityDescription: Decrease current HP by 40 and turn invincible for 10 seconds
     and increase damage dealt by percentage of missing health
   AbilityCooldown: 40
+  SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: -4520040666531008762, guid: de45e94a07fd2fa4caecb2582d5798cd,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 6a8a5f1221052844b8fc637483fa1ed9, type: 3}
@@ -36,9 +37,13 @@ MonoBehaviour:
   StartingWeapon: {fileID: -7012863991258313292, guid: 39b308255d4d5944dacab3f263dc78c4,
     type: 3}
   IsPullable: 1
+  UseSpecialBar: 0
+  PickWeaponOnStart: 0
   Stats:
     Health: 150
     HealthMax: 150
+    SpecialMax: 0
+    SpecialIncrease: 0
     MagnetSize: 1
     CooldownReduction: 0
     CooldownReductionPercentage: 0
@@ -69,6 +74,8 @@ MonoBehaviour:
     HealingIncreasePercentage: 0
     Luck: 0
     DamageOverTime: 0
+    Rerolls: 0
+    Skips: 0
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 56ed3ffff00db3c46a57bd57e5277aab, type: 3}
     EidolonName: For victory I stand

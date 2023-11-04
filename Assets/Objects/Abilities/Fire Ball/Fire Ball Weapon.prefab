@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6312933886831378203}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8639696691735580533
 MonoBehaviour:
@@ -56,7 +56,7 @@ MonoBehaviour:
     CooldownReduction: 0
     Scale: 1
     Speed: 3
-    TimeToLive: 5
+    TimeToLive: 2
     AttackCount: 1
     PassThroughCount: 0
     DamageCooldown: 0
@@ -82,4 +82,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aded2257282bf8f43a889bd546b31cf6, type: 2}
   - {fileID: 11400000, guid: f36395fbdc2f4e749a72a4cee85d2ba8, type: 2}
   isSkill: 0
+  capacity: 50
+  maxCapacity: 100
   fireballSpawnSound: {fileID: 8300000, guid: de5ee96aa65ef0d468c9b1cc448a4f97, type: 3}

@@ -16,6 +16,7 @@ namespace UI.Labels.InGame.LevelUpScreen
 		public UpgradeData Upgrade { get; set; }
 		public ItemBase Item { get; set; }
 		public ItemUpgrade ItemUpgrade { get; set; }
+		public float ChanceOfAppearance { get; set; }
 		public int Rarity { get; private set; } = (Random.value + GameData.GetPlayerCharacterData().Stats.Luck) switch
 		{
 			<= 0.75f =>  1,
@@ -69,13 +70,13 @@ namespace UI.Labels.InGame.LevelUpScreen
 		public string GetUnlockDescription()
 		{
 			if (IsWeaponUpgrade)
-				return Upgrade.Description;
+				return Upgrade.GetDescription(Rarity);
 			if (IsWeaponUnlock)
-				return Weapon.Description;
+				return Weapon.GetDescription(Rarity);
 			if (IsItemUnlock)
-				return Item.Description;
+				return Item.GetDescription(Rarity);
 			if (IsItemUpgrade)
-				return ItemUpgrade.Description;
+				return ItemUpgrade.GetDescription(Rarity);
 			return null;
 		}
 

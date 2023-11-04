@@ -14,7 +14,7 @@ using Random = UnityEngine.Random;
 
 namespace Objects.Abilities.Arrow_Rain
 {
-	public class ArrowRainWeapon : WeaponBase
+	public class ArrowRainWeapon : PoolableWeapon<ArrowRainProjectile>
 	{
 		private Damageable _target;
 		public bool HailOfArrows;
@@ -22,20 +22,23 @@ namespace Objects.Abilities.Arrow_Rain
 		
 		public override void Awake()
 		{
-			_stageTime = FindObjectOfType<StageTime>();
+			_stageTime = FindFirstObjectByType<StageTime>();
 			base.Awake();
 		}
-		
-		public override void Attack()
+
+		protected override bool ProjectileSpawn(ArrowRainProjectile projectile)
 		{
 			if (_target == null)
+			{
 				OnAttackStart();
-
+				if (_target == null)
+					return false;
+			}
+			
 			var position = _target.transform.position;
-			var arrowRain = SpawnManager.instance.SpawnObject(new Vector3(position.x, position.y + 2.5f, position.z), spawnPrefab);
-			var projectileComponent = arrowRain.GetComponent<ArrowRainProjectile>();
-			projectileComponent.SetStats(weaponStats);
-			projectileComponent.SetParentWeapon(this);
+			projectile.transform.position = new Vector3(position.x, position.y + 2.5f, position.z);
+			projectile.SetStats(weaponStats);
+			return true;
 		}
 
 		protected override int GetAttackCount()
@@ -50,7 +53,8 @@ namespace Objects.Abilities.Arrow_Rain
 
 		protected override void OnAttackStart()
 		{
-			_target = FindObjectsOfType<Damageable>()
+			_target = EnemyManager.instance.GetActiveEnemies()
+				.Select(x => x.GetDamagableComponent())
 				.OrderByDescending(x => x.Health)
 				.ThenBy(x =>Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
 		}

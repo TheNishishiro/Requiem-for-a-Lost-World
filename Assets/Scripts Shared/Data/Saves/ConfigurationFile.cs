@@ -24,6 +24,7 @@ namespace DefaultNamespace.Data
 		public int RenderDistance { get; set; }
 		public bool Use3dGrass { get; set; }
 		public int ObjectDensity { get; set; }
+		public float Volume { get; set; }
 
 		public ConfigurationFile Default()
 		{
@@ -41,6 +42,7 @@ namespace DefaultNamespace.Data
 			RenderDistance = 1;
 			Use3dGrass = false;
 			ObjectDensity = 1;
+			Volume = 1;
 			return Update();
 		}
 
@@ -79,6 +81,11 @@ namespace DefaultNamespace.Data
 			{
 				ObjectDensity = 1;
 				ConfigurationVersion = 5;
+			}
+			if (ConfigurationVersion == 5)
+			{
+				Volume = 1;
+				ConfigurationVersion = 6;
 			}
 
 			return this;

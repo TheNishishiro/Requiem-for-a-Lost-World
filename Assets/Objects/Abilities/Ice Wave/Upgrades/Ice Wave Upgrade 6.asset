@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Ice Wave Upgrade 6
   m_EditorClassIdentifier: 
   Name: Glacial Surge (I)
-  Description: Increase damage by 50% and reduce cooldown by 0.2 seconds
+  Description: Increase damage by {DamageIncreasePercentage}% and reduce cooldown
+    by {Cooldown} seconds
   WeaponStats:
     Damage: 0
     Cooldown: 0.2
+    CooldownReduction: 0
     Scale: 0
     Speed: 0
     TimeToLive: 0
@@ -29,3 +31,7 @@ MonoBehaviour:
     CritDamage: 0
     Weakness: 0
     DamageIncreasePercentage: 0.5
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

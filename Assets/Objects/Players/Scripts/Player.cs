@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 	[HideInInspector] public LevelComponent levelComponent;
 	[HideInInspector] public HealthComponent healthComponent; 
 	[HideInInspector] public PlayerStatsComponent playerStatsComponent;
+	[HideInInspector] public Transform playerTransform;
 	[SerializeField] public GameResultData gameResultData;
 	
 	private void Start()
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
 		levelComponent = GetComponent<LevelComponent>();
 		healthComponent = GetComponent<HealthComponent>();
 		playerStatsComponent = GetComponent<PlayerStatsComponent>();
+		playerTransform = transform;
 	}
 
 	public int GetLevel()

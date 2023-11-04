@@ -8,51 +8,62 @@ using Weapons;
 
 namespace Objects.Abilities.Laser_Gun
 {
-	public class LaserGunProjectile : ProjectileBase
+	public class LaserGunProjectile : PoolableProjectile<LaserGunProjectile>
 	{
 		[SerializeField] public LineRenderer lineRenderer;
 		[SerializeField] public Transform laserFirePoint;
-		[SerializeField] public Transform modelTransform;
-		private Damageable laserTarget;
-		private float damageCooldown;
+		private Damageable _laserTarget;
+		private Transform _transform;
+		private Transform _targetTransform;
 
-		private void Awake()
+		protected override void Awake()
 		{
-			lineRenderer.positionCount = 2;
+			base.Awake();
+			_laserTarget = null;
+			_transform = transform;
 		}
-		
+
+		public override void SetStats(WeaponStats weaponStats)
+		{
+			base.SetStats(weaponStats);
+			SetTarget();
+		}
+
 		void Update()
 		{
 			TickProjectile();
-
+			
 			if (!isDamageCooldownExpired) return;
 			ResetDamageCooldown();
 
-			if (laserTarget != null)
+			if (_laserTarget != null && _laserTarget.gameObject.activeSelf && lineRenderer.positionCount != 0 && Vector3.Distance(_targetTransform.position, _transform.position) < WeaponStats.GetDetectionRange())
 			{
-				lineRenderer.SetPosition(1, laserTarget.transform.position);
-				transform.LookAt(laserTarget.transform);
-				SimpleDamage(laserTarget, false);
+				Debug.Log("dealing damage");
+				lineRenderer.SetPosition(1, _targetTransform.position);
+				_transform.LookAt(_targetTransform);
+				SimpleDamage(_laserTarget, false);
 			}
 			else
 			{
-				var closestTarget = Utilities.FindClosestDamageable(transform.position, FindObjectsOfType<Damageable>(), out var distanceToClosest);
-				if (closestTarget == null || distanceToClosest > WeaponStats.GetDetectionRange())
-					return;
-
-				SetTarget(closestTarget);
+				SetTarget();
 			}
 		}
 
-		private void SetTarget(Damageable target)
+		private void SetTarget()
 		{
-			if (target is null)
+			var closestTarget = Utilities.FindClosestEnemy(transform.position, EnemyManager.instance.GetActiveEnemies(), out var distanceToClosest);
+			if (closestTarget == null || distanceToClosest > WeaponStats.GetDetectionRange())
+			{
+				lineRenderer.positionCount = 0;
 				return;
+			}
+			lineRenderer.positionCount = 2;
 
-			laserTarget = target;
+			_laserTarget = closestTarget.GetDamagableComponent();
+			_targetTransform = closestTarget.TargetPoint;
 			lineRenderer.SetPosition(0, laserFirePoint.position);
-			lineRenderer.SetPosition(1, laserTarget.transform.position);
-			transform.LookAt(laserTarget.transform);
+			lineRenderer.SetPosition(1, _targetTransform.position);
+			_transform.LookAt(_targetTransform);
 		}
 	}
 }

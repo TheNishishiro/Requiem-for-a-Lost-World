@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2666470977727701774}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.059, y: -0.000000022352, z: 0.367}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3634895298855100170}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!212 &2706402273898009707
 SpriteRenderer:
@@ -94,7 +94,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3634895298855100170}
   - component: {fileID: 3634895298855100165}
-  - component: {fileID: 3634895298855100164}
   - component: {fileID: 3634895298855100161}
   - component: {fileID: 3634895298855100166}
   - component: {fileID: 3634895298855100167}
@@ -113,6 +112,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3634895298855100171}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.9840102, y: 0.076000005, z: -7.985376}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -120,7 +120,6 @@ Transform:
   m_Children:
   - {fileID: 8858140104201035369}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3634895298855100165
 SpriteRenderer:
@@ -174,19 +173,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3634895298855100164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3634895298855100171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6627522d9fad08446b3eec6c50393576, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fullBillboard: 0
 --- !u!65 &3634895298855100161
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -252,9 +238,14 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   PickupEnum: 0
+  boxCollider: {fileID: 3634895298855100161}
+  isStationary: 0
+  pickUpObject: {fileID: 3634895298855100166}
+  expObject: {fileID: 3634895298855100166}
+  canBeAttracted: 1
 --- !u!95 &5213355489588195026
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -268,6 +259,7 @@ Animator:
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1

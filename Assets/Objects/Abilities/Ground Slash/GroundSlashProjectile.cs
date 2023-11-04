@@ -6,7 +6,7 @@ using Weapons;
 
 namespace Objects.Abilities.Ground_Slash
 {
-	public class GroundSlashProjectile : ProjectileBase
+	public class GroundSlashProjectile : PoolableProjectile<GroundSlashProjectile>
 	{
 		private Vector3 direction;
 		private Rigidbody _rigidbody;
@@ -36,7 +36,7 @@ namespace Objects.Abilities.Ground_Slash
 			var startScale = transform.localScale;
 			var endScale = startScale*0.2f;
 
-			while (!_isDead && elapsedLifetime < GetTimeToLive())
+			while (!IsDead && elapsedLifetime < GetTimeToLive())
 			{
 				var speed = Mathf.Lerp(startSpeed, 0, elapsedLifetime / GetTimeToLive());
 				_rigidbody.velocity = direction.normalized * speed;

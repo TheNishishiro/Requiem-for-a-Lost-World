@@ -7,9 +7,11 @@ namespace Objects.Enemies
 	public class EnemyData : ScriptableObject
 	{
 		public string enemyName;
+		public Sprite sprite;
 		public GameObject animatedPrefab;
 		public EnemyStats stats;
 		public bool allowFlying;
+		public float groundOffset;
 		public bool isBossEnemy;
 		public int ExpDrop;
 	}

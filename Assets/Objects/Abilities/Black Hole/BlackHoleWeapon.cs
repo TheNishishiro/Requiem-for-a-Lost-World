@@ -14,7 +14,7 @@ using Weapons;
 
 namespace Objects.Abilities.Back_Hole
 {
-	public class BlackHoleWeapon : WeaponBase
+	public class BlackHoleWeapon : PoolableWeapon<BlackHoleProjectile>
 	{
 		private StageTime _stageTime;
 		private bool _isBelow5Minutes => Utilities.GetTimeSpan(_stageTime.time).Minutes <= 5;
@@ -25,7 +25,7 @@ namespace Objects.Abilities.Back_Hole
 			base.Awake();
 		}
 
-		public override void Attack()
+		protected override bool ProjectileSpawn(BlackHoleProjectile projectile)
 		{
 			var spawnArea = 10.0f;
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Arika_BoV)
@@ -34,11 +34,9 @@ namespace Objects.Abilities.Back_Hole
 			}
 
 			var blackHolePosition = Utilities.GetRandomInAreaFreezeParameter(transform.position, spawnArea, isFreezeY:true);
-			var blackHole = SpawnManager.instance.SpawnObject(Utilities.GetPointOnColliderSurface(blackHolePosition, transform), spawnPrefab);
-			
-			var projectileComponent = blackHole.GetComponent<BlackHoleProjectile>();
-			projectileComponent.SetParentWeapon(this);
-			projectileComponent.SetStats(weaponStats);
+			projectile.transform.position = Utilities.GetPointOnColliderSurface(blackHolePosition, transform);
+			projectile.SetStats(weaponStats);
+			return true;
 		}
 
 		protected override void OnAttackEnd()

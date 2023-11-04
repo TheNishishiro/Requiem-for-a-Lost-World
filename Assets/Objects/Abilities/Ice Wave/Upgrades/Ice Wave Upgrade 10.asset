@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Ice Wave Upgrade 10
   m_EditorClassIdentifier: 
   Name: Arctic Mastery (I)
-  Description: Increase damage by 20%, Size by 30%, number of ice spikes created
-    by 2, and reduce cooldown by 0.1 seconds
+  Description: Increase damage by {DamageIncreasePercentage}%, Size by {Scale}%,
+    number of ice spikes created by {AttackCount}, and reduce cooldown by {Cooldown}
+    seconds
   WeaponStats:
     Damage: 0
     Cooldown: 0.1
+    CooldownReduction: 0
     Scale: 0.3
     Speed: 0
     TimeToLive: 0
@@ -30,3 +32,7 @@ MonoBehaviour:
     CritDamage: 0
     Weakness: 0
     DamageIncreasePercentage: 0.2
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

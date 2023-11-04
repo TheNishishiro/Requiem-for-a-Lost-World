@@ -7,20 +7,18 @@ using Objects.Enemies;
 using UnityEngine;
 using Weapons;
 
-public class MagicBallWeapon : WeaponBase
+public class MagicBallWeapon : PoolableWeapon<MagicBallProjectile>
 {
-    public override void Attack()
+    protected override bool ProjectileSpawn(MagicBallProjectile projectile)
     {
-        var closestTarget = Utilities.FindClosestDamageable(transform.position, FindObjectsOfType<Damageable>(), out var distanceToClosest);
-        if (closestTarget is null)
-            return;
-        
-        var magicBall = SpawnManager.instance.SpawnObject(transform.position, spawnPrefab);
-        var projectileComponent = magicBall.GetComponent<MagicBallProjectile>();
-        projectileComponent.SetStats(weaponStats);
-        var transform1 = closestTarget.transform;
-        var position = transform1.position;
-        projectileComponent.SetParentWeapon(this);
-        projectileComponent.SetDirection(position.x, position.y, position.z);
+        var closestTarget = Utilities.FindClosestEnemy(transform.position, EnemyManager.instance.GetActiveEnemies(), out var distanceToClosest);
+        if (closestTarget == null)
+            return false;
+
+        projectile.transform.position = transform.position;
+        projectile.SetStats(weaponStats);
+        var position = closestTarget.TargetPoint.position;
+        projectile.SetDirection(position.x, position.y, position.z);
+        return true;
     }
 }

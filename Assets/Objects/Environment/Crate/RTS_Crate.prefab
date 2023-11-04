@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3460355128955765078}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0.216, z: 0.006}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7516864441319109199}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!212 &1184874560239251659
 SpriteRenderer:
@@ -114,6 +114,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6262703081192922951}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.216, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -121,7 +122,6 @@ Transform:
   m_Children:
   - {fileID: 7681100333214087856}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4278096970193547020
 SpriteRenderer:
@@ -214,6 +214,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 0
   gameResultData: {fileID: 11400000, guid: cb99eac292bd9d54aac189cbaa40dca7, type: 2}
+  targetPoint: {fileID: 0}
+  takeDamageSound: {fileID: 8300000, guid: 477e022444f09cb4eb750e9354d2b6c0, type: 3}
   vulnerabilityTimer: 0
   vulnerabilityPercentage: 0
 --- !u!114 &8864211574758387995
@@ -229,21 +231,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickup:
-  - gameObject: {fileID: 3634895298855100171, guid: 05020269b5b385048b9f6957428fae35,
+  - pickupObject: {fileID: 3634895298855100167, guid: 05020269b5b385048b9f6957428fae35,
       type: 3}
     chance: 0.7
-    amount: 30
-  - gameObject: {fileID: 3634895298855100171, guid: 275792940c647844196d33239fe7d5cf,
+    amount: 50
+  - pickupObject: {fileID: 3634895298855100167, guid: 275792940c647844196d33239fe7d5cf,
       type: 3}
-    chance: 0.3
-    amount: 20
-  - gameObject: {fileID: 3634895298855100171, guid: a146265883438a44cad22daed1bd3bd9,
+    chance: 0.35
+    amount: 40
+  - pickupObject: {fileID: 3634895298855100167, guid: a146265883438a44cad22daed1bd3bd9,
       type: 3}
     chance: 0.5
     amount: 50
-  - gameObject: {fileID: 6692653517978902422, guid: 4b2f42db8889dc043b045b791f2467b9,
+  - pickupObject: {fileID: -6043924431006343057, guid: 4b2f42db8889dc043b045b791f2467b9,
       type: 3}
-    chance: 0.1
+    chance: 0.15
     amount: 0
 --- !u!65 &1608978063
 BoxCollider:
@@ -253,9 +255,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6262703081192922951}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 0.42666668, y: 0.42666668, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-7715229062712591831
@@ -265,10 +275,21 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6262703081192922951}
-  serializedVersion: 2
+  serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0

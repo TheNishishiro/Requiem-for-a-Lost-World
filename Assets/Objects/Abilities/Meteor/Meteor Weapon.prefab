@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4267231853459298443}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-7012863991258313292
 MonoBehaviour:
@@ -52,11 +52,11 @@ MonoBehaviour:
   element: 2
   weaponStats:
     Damage: 15
-    Cooldown: 5
+    Cooldown: 4
     CooldownReduction: 0
     Scale: 1
     Speed: 6
-    TimeToLive: 5
+    TimeToLive: 4
     AttackCount: 1
     PassThroughCount: 0
     DamageCooldown: 0
@@ -80,3 +80,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a37088da674786b41961d17e23a892e4, type: 2}
   - {fileID: 11400000, guid: 3e48fd71f3969fa47a47690621141f82, type: 2}
   - {fileID: 11400000, guid: fee71fbeed023514f89790fb5d8a3d44, type: 2}
+  chanceToAppear: 0.8
+  isSkill: 0
+  capacity: 50
+  maxCapacity: 200

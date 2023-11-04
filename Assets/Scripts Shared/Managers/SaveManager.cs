@@ -52,7 +52,8 @@ namespace Managers
 		public void ApplySettings()
 		{
 			var settings = _saveData.ConfigurationFile;
-			
+
+			AudioListener.volume = settings.Volume;
 			var renderPipeline = (UniversalRenderPipelineAsset)QualitySettings.renderPipeline;
 			
 			QualitySettings.vSyncCount = settings.Vsync ? 1 : 0;

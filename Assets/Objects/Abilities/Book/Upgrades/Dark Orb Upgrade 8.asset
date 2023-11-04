@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Dark Orb Upgrade 8
   m_EditorClassIdentifier: 
   Name: Cosmic Collision (II)
-  Description: Increase the size of the orb by 50% and count by 1
+  Description: Increase the size of the orb by {Scale}% and count by {AttackCount}
   WeaponStats:
     Damage: 0
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0.5
     Speed: 0
     TimeToLive: 0
@@ -27,3 +28,9 @@ MonoBehaviour:
     DetectionRange: 0
     CritRate: 0
     CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

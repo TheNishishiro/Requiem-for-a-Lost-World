@@ -8,6 +8,7 @@ using Objects.Abilities;
 using Objects.Items;
 using Objects.Players.Scripts;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.Serialization;
 
 namespace Weapons
@@ -17,6 +18,7 @@ namespace Weapons
 		[SerializeField] public GameObject spawnPrefab;
 		[SerializeField] public string Name;
 		[SerializeField][TextArea] public string Description;
+		[SerializeField] public float chanceToAppear;
 		[SerializeField] public Sprite Icon;
 		[SerializeField] public Element element;
 		[SerializeField] protected WeaponStats weaponStats;
@@ -33,7 +35,12 @@ namespace Weapons
 		
 		public ICollection<StatsDisplayData> GetStatsData()
 		{
-			return weaponStats.GetDescription();
+			return weaponStats.GetStatsDisplayData();
+		}
+
+		public string GetDescription(int rarity)
+		{
+			return weaponStats.GetDescription(Description, rarity);
 		}
 
 		public virtual void Awake()
@@ -42,7 +49,13 @@ namespace Weapons
 			weaponStats.AssignPlayerStatsComponent(_playerStatsComponent);
 			
 			_timer = weaponStats.GetCooldown();
+			InitPool();
 			StartCoroutine(AttackProcess());
+		}
+
+		protected virtual void InitPool()
+		{
+			return;
 		}
 
 		public List<UpgradeData> GetAvailableUpgrades()
@@ -91,7 +104,7 @@ namespace Weapons
 		
 		protected float GetRotationByAttackCount()
 		{
-			return 360 / GetAttackCount();
+			return 360.0f / GetAttackCount();
 		}
 		
 		public abstract void Attack();

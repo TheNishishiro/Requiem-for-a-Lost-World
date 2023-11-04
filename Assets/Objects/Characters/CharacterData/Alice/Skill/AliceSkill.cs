@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Data.Elements;
+using Managers;
 using Objects.Abilities.Reality_Crack;
 using UnityEngine;
 
@@ -9,14 +10,12 @@ namespace Objects.Characters.Alice.Skill
 	public class AliceSkill : CharacterSkillBase
 	{
 		private Vector3 _weaponCenter;
-		private EnemyManager _enemyManager;
 		private ElementalWeapon _elementalWeapon;
 		private bool exploded;
 		
 		private void Start()
 		{
-			_enemyManager = FindObjectsByType<EnemyManager>(FindObjectsSortMode.None).FirstOrDefault();
-			_weaponCenter = FindObjectsByType<Player>(FindObjectsSortMode.None).First().transform.position;
+			_weaponCenter = GameManager.instance.playerComponent.transform.position;
 			_elementalWeapon = new ElementalWeapon(Element.Lightning);
 		}
 		
@@ -44,7 +43,7 @@ namespace Objects.Characters.Alice.Skill
 				}
 			}
 
-			_enemyManager.GlobalDamage(25, _elementalWeapon);
+			EnemyManager.instance.GlobalDamage(25, _elementalWeapon);
 		}
 	}
 }

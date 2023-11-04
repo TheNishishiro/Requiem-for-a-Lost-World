@@ -4,7 +4,7 @@ using Weapons;
 
 namespace Objects.Abilities.Throwing_Knife
 {
-	public class ThrowingKnifeProjectile : ProjectileBase
+	public class ThrowingKnifeProjectile : PoolableProjectile<ThrowingKnifeProjectile>
 	{
 		private Vector3 direction;
 		

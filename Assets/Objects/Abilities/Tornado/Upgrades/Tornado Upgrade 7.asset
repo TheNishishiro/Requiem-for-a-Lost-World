@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Tornado Upgrade 7
   m_EditorClassIdentifier: 
   Name: Whirlwind (II)
-  Description: Increase the duration of the tornado by 3 seconds
+  Description: Increase the duration of the tornado by {TimeToLive} seconds
   WeaponStats:
     Damage: 0
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0
     Speed: 0
     TimeToLive: 3
@@ -28,3 +29,8 @@ MonoBehaviour:
     CritRate: 0
     CritDamage: 0
     Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

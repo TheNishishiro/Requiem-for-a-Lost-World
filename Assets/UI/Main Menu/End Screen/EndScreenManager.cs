@@ -29,7 +29,6 @@ namespace UI.Main_Menu.End_Screen
 			_saveFile = FindObjectOfType<SaveFile>();
 			if (gameResultData.IsGameEnd)
 			{
-				AudioListener.volume = 1;
 				titleScreen.gameObject.SetActive(false);
 				winLoseText.text = gameResultData.IsWin ? "Victory" : "Defeat";
 				panel.SetActive(true);

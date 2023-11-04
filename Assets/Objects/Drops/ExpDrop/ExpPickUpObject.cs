@@ -1,24 +1,26 @@
 ﻿using Events.Scripts;
 using Interfaces;
+using Managers;
 using UnityEngine;
 using UnityEngine.UI;
 using Image = UnityEngine.UIElements.Image;
 
 namespace Objects.Drops.ExpDrop
 {
-	public class ExpPickUpObject : MonoBehaviour, IPickUpObject
+	public class ExpPickUpObject : PickupObject
 	{
 		[SerializeField] public int expAmount;
 		[SerializeField] private SpriteRenderer gemImage;
 		[SerializeField] private SpriteRenderer gemMinimapIcon;
 		
-		public void OnPickUp(Player player)
+		public override void OnPickUp(Player player)
 		{
+			AudioManager.instance.PlayExperiencePickup();
 			player.AddExperience(expAmount);
 			ExpPickedUpEvent.Invoke(expAmount);
 		}
 
-		public void SetAmount(int amount)
+		public override void SetAmount(int amount)
 		{
 			if (amount != 0)
 			{

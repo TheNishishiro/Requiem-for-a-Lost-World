@@ -15,27 +15,35 @@ using Random = UnityEngine.Random;
 
 namespace Objects.Abilities.Tornado
 {
-	public class TornadoProjectile : ProjectileBase
+	public class TornadoProjectile : PoolableProjectile<TornadoProjectile>
 	{
-		[SerializeField] public GameObject lightningChainPrefab;
 		private Rigidbody _rb;
 		private TornadoWeapon TornadoWeapon => ParentWeapon as TornadoWeapon;
+		private float _dischargeCooldown;
 
-		private void Start()
+		protected override void Awake()
 		{
+			base.Awake();
 			_rb = GetComponent<Rigidbody>();
+		}
+
+		public override void SetStats(WeaponStats weaponStats)
+		{
+			base.SetStats(weaponStats);
 			StartCoroutine(Movement());
 		}
 
 		private void Update()
 		{
 			TickLifeTime();
+			if (_dischargeCooldown > 0)
+				_dischargeCooldown -= Time.deltaTime;
 		}
 
 		private void OnTriggerStay(Collider other)
 		{
 			DamageArea(other, out _);
-			if (TornadoWeapon.IsStaticDischarge && Random.value < 0.15f && Time.frameCount % 60 == 0)
+			if (TornadoWeapon.IsStaticDischarge && Random.value < 0.15f && _dischargeCooldown <= 0)
 				SpawnChainLightning(other);
 		}
 
@@ -43,9 +51,9 @@ namespace Objects.Abilities.Tornado
 		{
 			var speed = WeaponStats.GetSpeed() * (GameData.GetPlayerCharacterId() == CharactersEnum.Natalie_BoW ? 1.5f : 1f);
 
-			while (!_isDead)
+			while (!IsDead)
 			{
-				var enemy = FindObjectsOfType<Enemy>().OrderBy(_ => Random.value).FirstOrDefault();
+				var enemy = EnemyManager.instance.GetRandomEnemy();
 				if (enemy == null)
 					yield break;
 				
@@ -62,17 +70,8 @@ namespace Objects.Abilities.Tornado
 		
 		private void SpawnChainLightning(Component other)
 		{
-			var chainLighting = SpawnManager.instance.SpawnObject(other.gameObject.transform.position, lightningChainPrefab);
-			var lightingChainProjectile = chainLighting.GetComponent<LightningChainProjectile>();
-			lightingChainProjectile.SetParentWeapon(ParentWeapon);
-			lightingChainProjectile.SetStats(new WeaponStats()
-			{
-				TimeToLive = 0.3f,
-				Damage = WeaponStats.GetDamage() * 2.5f,
-				Scale = 1f,
-				DetectionRange = 2f
-			});
-			lightingChainProjectile.SeekTargets(2);
+			TornadoWeapon.SpawnSubProjectile(other.gameObject.transform.position);
+			_dischargeCooldown = 0.5f;
 		}
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DefaultNamespace;
 using Events.Scripts;
 using Interfaces;
+using Managers;
 using Objects.Drops;
 using Objects.Drops.ChestDrop;
 using Objects.Players.Scripts;
@@ -18,13 +19,17 @@ namespace Objects.Enemies
 	{
 		[SerializeField] private ChaseComponent chaseComponent;
 		[SerializeField] private GameResultData gameResultData;
-		[SerializeField] private GameObject chestDrop;
-		[SerializeField] private GameObject expDrop;
-		[SerializeField] private GameObject goldDrop;
-		[SerializeField] private GameObject gemDrop;
-		[SerializeField] private UnityEvent<Enemy> OnEnemyDeath;
+		[SerializeField] private Damageable damageableComponent;
+		[SerializeField] private SpriteRenderer spriteRenderer;
+		[SerializeField] private CapsuleCollider capsuleCollider;
+		[SerializeField] private DropOnDestroy dropOnDestroyComponent;
+		[SerializeField] private Pickup chestDrop;
+		[SerializeField] private Pickup expDrop;
+		[SerializeField] private Pickup goldDrop;
+		[SerializeField] private Pickup gemDrop;
+		[SerializeField] private GameObject grandOctiBoss;
+		public Transform TargetPoint => damageableComponent.targetPoint.transform;
 		private EnemyManager _enemyManager;
-		private Damageable damageable;
 		private EnemyStats stats;
 		private GameObject targetGameObject;
 		private Player playerTarget;
@@ -36,54 +41,74 @@ namespace Objects.Enemies
 		private bool _isRemoveCollisions;
 		private float _damageReduction;
 		private List<Collision> _ignoredEnemyColliders = new ();
+
+		private ChanceDrop chestDropChance;
+		private ChanceDrop expDropChance;
+		private ChanceDrop goldDropChance;
+		private ChanceDrop gemDropChance;
 		
-		public void Setup(EnemyData newStats, Player target, EnemyManager enemyManager, PlayerStatsComponent playerStats, float healthMultiplier = 1.0f)
+		public void Setup(EnemyData newStats, Player target, EnemyManager enemyManager, PlayerStatsComponent playerStats, float healthMultiplier, Sprite sprite)
 		{
 			_enemyManager = enemyManager;
+			damageableComponent.Clear();
+			chaseComponent.Clear();
+			
+			_timeAlive = 0;
+			_currentDamageCooldown = 0;
+			_damageCooldown = 0.5f;
+			_removeCollisionsTimer = 0;
+			_damageReduction = 0;
+			_isRemoveCollisions = false;
+			RevertIgnoredCollisions();
+			_ignoredEnemyColliders.Clear();
+			
 			playerTarget = target;
-			stats = new EnemyStats(newStats.stats);
-			var dropOnDestroyComponent = GetComponentInChildren<DropOnDestroy>();
+			spriteRenderer.transform.localPosition = new Vector3(0, newStats.groundOffset, 0);
+			spriteRenderer.sprite = sprite;
+			grandOctiBoss.SetActive(false);
+			stats ??= new EnemyStats();
+			stats.Copy(newStats.stats);
+			dropOnDestroyComponent.ClearDrop();
+
+			if (newStats.ExpDrop > 0)
+			{
+				expDropChance ??= new ChanceDrop()
+				{
+					pickupObject = expDrop,
+				};
+				expDropChance.amount = newStats.ExpDrop;
+				expDropChance.chance = 0.75f;
+				dropOnDestroyComponent.AddDrop(expDropChance);
+			}
+
 			if (newStats.isBossEnemy)
 			{
 				_isBossEnemy = true;
 				stats.hp *= playerTarget?.GetLevel() ?? 1;
-				dropOnDestroyComponent.AddDrop(new ChanceDrop()
+				
+				dropOnDestroyComponent.AddDrop(chestDropChance ??= new ChanceDrop()
 				{
 					chance = 1,
-					gameObject = chestDrop,
+					pickupObject = chestDrop,
 				});
-				dropOnDestroyComponent.AddDrop(new ChanceDrop()
-				{
-					chance = 0.75f,
-					amount = newStats.ExpDrop,
-					gameObject = expDrop,
-				});
-			}
-			else
-			{
-				if (newStats.ExpDrop > 0)
-				{
-					dropOnDestroyComponent.AddDrop(new ChanceDrop()
-					{
-						chance = 1f,
-						amount = newStats.ExpDrop,
-						gameObject = expDrop,
-					});
-				}
+				dropOnDestroyComponent.AddDrop(expDropChance);
 			}
 
-			dropOnDestroyComponent.AddDrop(new ChanceDrop()
+			goldDropChance ??= new ChanceDrop()
 			{
-				chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 16,
-				amount = Random.Range(1, 25),
-				gameObject = goldDrop,
-			});
-			dropOnDestroyComponent.AddDrop(new ChanceDrop()
+				pickupObject = goldDrop,
+			};
+			goldDropChance.chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 16;
+			goldDropChance.amount = Random.Range(1, 25);
+			dropOnDestroyComponent.AddDrop(goldDropChance);
+			
+			gemDropChance ??= new ChanceDrop()
 			{
-				chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 100,
-				amount = Random.Range(1, 50),
-				gameObject = gemDrop,
-			});
+				pickupObject = gemDrop,
+			};
+			gemDropChance.chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 100;
+			gemDropChance.amount = Random.Range(1, 50);
+			dropOnDestroyComponent.AddDrop(gemDropChance);
 			
 			stats.hp = (int)(stats.hp * healthMultiplier * playerStats.GetEnemyHealthIncrease());
 			stats.speed *= playerStats.GetEnemySpeedIncrease();
@@ -91,20 +116,18 @@ namespace Objects.Enemies
 			SetChaseTarget(target.gameObject);
 		}
 
+		public void SetupBoss()
+		{
+			grandOctiBoss.SetActive(true);
+		}
+
 		private void SetChaseTarget(GameObject target)
 		{
 			targetGameObject = target;
 			chaseComponent.SetTarget(target);
 			chaseComponent.SetSpeed(stats.speed);
-			damageable = GetComponentInChildren<Damageable>();
-			if (damageable == null)
-				Debug.LogWarning($"Enemy {gameObject.name} could not find a damagable component");
-
-			if (damageable != null)
-			{
-				damageable.SetHealth(stats.hp);
-				damageable.SetResistances(stats.elementStats);
-			}
+			damageableComponent.SetHealth(stats.hp);
+			damageableComponent.SetResistances(stats.elementStats);
 		}
 
 		private void Update()
@@ -116,11 +139,10 @@ namespace Objects.Enemies
 				_currentDamageCooldown -= Time.deltaTime;
 			if (_timeAlive > 90 && !_isBossEnemy)
 			{
-				_enemyManager.EnemyDespawn(this);
-				Destroy(gameObject);
+				_enemyManager.Despawn(this);
 			}
 			
-			if (damageable.IsDestroyed())
+			if (damageableComponent.IsDestroyed())
 				Die();
 
 			if (_removeCollisionsTimer > 0)
@@ -139,29 +161,28 @@ namespace Objects.Enemies
 		{
 			gameResultData.MonstersKilled++;
 			EnemyDiedEvent.Invoke();
-			GetComponentInChildren<DropOnDestroy>()?.CheckDrop();
-			_enemyManager.EnemyDespawn(this);
-			OnEnemyDeath?.Invoke(this);
-			Destroy(gameObject);
+			dropOnDestroyComponent.CheckDrop();
+			_enemyManager.Despawn(this);
+			AchievementManager.instance.OnEnemyKilled(this);
 		}
 
 		private void OnCollisionStay(Collision collisionInfo)
 		{
 			if (collisionInfo.gameObject.CompareTag("Player"))
 			{
-				var playerComponent = collisionInfo.gameObject.GetComponent<Player>();
+				var playerComponent = GameManager.instance.playerComponent;
 				Attack(playerComponent);
 			}
 			else if (collisionInfo.gameObject.CompareTag("Enemy") && _isRemoveCollisions)
 			{
 				_ignoredEnemyColliders.Add(collisionInfo);
-				Physics.IgnoreCollision(collisionInfo.collider, GetComponentInChildren<Collider>(), true);
+				Physics.IgnoreCollision(collisionInfo.collider, GetComponent<CapsuleCollider>(), true);
 			}
 		}
 		
 		private void RevertIgnoredCollisions()
 		{
-			var collider = GetComponentInChildren<Collider>();
+			var collider = capsuleCollider;
 			for (var index = 0; index < _ignoredEnemyColliders.Count; index++)
 			{
 				var ignoredEnemyCollider = _ignoredEnemyColliders[index];
@@ -171,7 +192,7 @@ namespace Objects.Enemies
 				_ignoredEnemyColliders.RemoveAt(index--);
 			}
 
-			_ignoredEnemyColliders = new List<Collision>();
+			_ignoredEnemyColliders.Clear();
 		}
 
 		private void Attack(Player player)
@@ -192,6 +213,16 @@ namespace Objects.Enemies
 		public void AddDamageReduction(float amount)
 		{
 			_damageReduction -= amount;
+		}
+
+		public Damageable GetDamagableComponent()
+		{
+			return damageableComponent;
+		}
+
+		public ChaseComponent GetChaseComponent()
+		{
+			return chaseComponent;
 		}
 	}
 }

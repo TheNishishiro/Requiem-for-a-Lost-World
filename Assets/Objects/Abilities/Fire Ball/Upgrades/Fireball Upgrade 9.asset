@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Fireball Upgrade 9
   m_EditorClassIdentifier: 
   Name: 'Fireball: Perish (III)'
-  Description: Increase crit damage by 20%
+  Description: Increase crit damage by {CritDamage}%
   WeaponStats:
     Damage: 0
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0
     Speed: 0
     TimeToLive: 0
@@ -29,3 +30,7 @@ MonoBehaviour:
     CritDamage: 0.2
     Weakness: 0
     DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
