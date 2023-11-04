@@ -182,6 +182,7 @@ MonoBehaviour:
   Health: 0
   gameResultData: {fileID: 11400000, guid: cb99eac292bd9d54aac189cbaa40dca7, type: 2}
   targetPoint: {fileID: 7377515054398992340}
+  takeDamageSound: {fileID: 8300000, guid: 477e022444f09cb4eb750e9354d2b6c0, type: 3}
   vulnerabilityTimer: 0
   vulnerabilityPercentage: 0
 --- !u!114 &2075695049437756266
@@ -241,7 +242,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5541245172042377187}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.1
   m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}

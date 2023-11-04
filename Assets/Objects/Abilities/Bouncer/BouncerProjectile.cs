@@ -19,13 +19,13 @@ namespace Objects.Abilities.Bouncer
 			if (target == null)
 				OnLifeTimeEnd();
 				
-			direction = (target.transform.position - transform.position).normalized;
+			direction = (target.targetPoint.transform.position - transformCache.position).normalized;
 		}
 
 		void Update()
 		{
 			TickLifeTime();
-			transform.position += direction * ((WeaponStats?.GetSpeed() ?? 0) * Time.deltaTime);
+			transformCache.position += direction * ((WeaponStats?.GetSpeed() ?? 0) * Time.deltaTime);
 		}
 
 		private void OnTriggerEnter(Collider other)
@@ -53,21 +53,7 @@ namespace Objects.Abilities.Bouncer
 		private IEnumerator SpawnThunderstorm()
 		{
 			for (var i = 0; i < 3; i++)
-			{
-				var bouncer = SpawnManager.instance.SpawnObject(transform.position, ParentWeapon.spawnPrefab);
-				var projectileComponent = bouncer.GetComponent<BouncerProjectile>();
-				projectileComponent.IsSubSpawned = true;
-				projectileComponent.SetStats(new WeaponStats()
-				{
-					Damage = WeaponStats.Damage * 0.5f,
-					TimeToLive = 0.5f,
-					Scale = 0.5f,
-					Speed = 1,
-					PassThroughCount = 1
-				});
-				projectileComponent.SetParentWeapon(ParentWeapon);
-				projectileComponent.FindNextTarget();
-			}
+				BouncerWeapon.SpawnSubProjectile(transformCache.position);
 
 			yield return null;
 		}

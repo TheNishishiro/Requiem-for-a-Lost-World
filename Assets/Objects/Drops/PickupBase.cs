@@ -11,19 +11,20 @@ namespace Objects.Drops
 	public class PickupBase : MonoBehaviour
 	{
 		[SerializeField] protected PickupObject pickUpObject;
-		[SerializeField] private UnityEvent<PickupEnum> OnPickupAction;
 		[SerializeField] protected PickupEnum PickupEnum;
 		[SerializeField] public BoxCollider boxCollider;
 		private PlayerStatsComponent _playerStatsComponent;
-		private Player _character;
+		private Player _player;
+		private Transform _cachedTransform;
 		protected bool IsFollowingPlayer;
 		private const float Speed = 10f;
 		[SerializeField] private bool isStationary;
 
 		protected void Init()
 		{
-			_character = GameManager.instance.playerComponent;
-			_playerStatsComponent = _character.playerStatsComponent;
+			_player = GameManager.instance.playerComponent;
+			_playerStatsComponent = _player.playerStatsComponent;
+			_cachedTransform = transform;
 		}
 
 		public void Reset()
@@ -41,13 +42,13 @@ namespace Objects.Drops
 		
 			if (!IsFollowingPlayer)
 			{
-				var distance = Vector3.Distance(_character.transform.position, transform.position);
+				var distance = Vector3.Distance(_player.playerTransform.position, _cachedTransform.position);
 				if (distance < _playerStatsComponent.GetMagnetSize())
 					IsFollowingPlayer = true;
 				return;
 			}
 		
-			transform.position = Vector3.MoveTowards(transform.position, _character.transform.position, Speed * Time.deltaTime);
+			_cachedTransform.position = Vector3.MoveTowards(_cachedTransform.position, _player.playerTransform.position, Speed * Time.deltaTime);
 		}
 		
 		protected void OnCollision(Collider col)
@@ -59,7 +60,7 @@ namespace Objects.Drops
 					return;
 				
 				pickUpObject?.OnPickUp(character);
-				OnPickupAction?.Invoke(PickupEnum);
+				AchievementManager.instance.OnPickupCollected(PickupEnum);
 				Destroy();
 			}
 		}

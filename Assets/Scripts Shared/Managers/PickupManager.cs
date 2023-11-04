@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using DefaultNamespace;
 using Interfaces;
 using Objects.Drops;
 using Objects.Drops.ExpDrop;
 using UnityEngine;
 using UnityEngine.Pool;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -41,10 +44,14 @@ namespace Managers
 				}, 
 				expGem =>
 				{
-					expGem.gameObject.SetActive(false);
 					_expGem.Remove(expGem);
+					expGem.gameObject.SetActive(false);
 				}, 
-				expGem => Destroy(expGem.gameObject), true, 10000);
+				expGem =>
+				{
+					_expGem.Remove(expGem);
+					Destroy(expGem.gameObject);
+				}, true, 600);
 			player = FindFirstObjectByType<Player>();
 			StartCoroutine(MergeGemPickups());
 		}
@@ -53,9 +60,17 @@ namespace Managers
 		{
 			if (pickupObject.PickupType == PickupEnum.Experience)
 			{
-				shardsAmount = amount;
-				gemPosition = position;
-				_gemPool.Get();
+				if (_expGem.Count < 400)
+				{
+					shardsAmount = amount;
+					gemPosition = position;
+					_gemPool.Get();
+				}
+				else
+				{
+					var expGem = _expGem.OrderBy(_ => Random.value).First().GetExpObject();
+					expGem.AddExp(amount);
+				}
 			}
 			else
 			{
@@ -76,46 +91,46 @@ namespace Managers
 		{
 			while (true)
 			{
-				if (_expGem is not { Count: > 200 })
+				if (_expGem is not { Count: > 380 })
 				{
 					yield return new WaitForSeconds(5f);
 					continue;
 				}
 
-				var planes = GeometryUtility.CalculateFrustumPlanes(mainCamera);
+				var testGems = _expGem
+					.Where(x => 
+						x.gameObject.activeSelf 
+						&& !Utilities.IsWithinCameraView(mainCamera, x.boxCollider.bounds, x.transform.position, player.transform.position, distanceFromPlayer)
+					)
+					.Select(x =>
+					new {
+						Pickup = x,
+						Position = x.transform.position
+					})
+					.ToList();
 
-				for (var i = 0; i < _expGem.Count - 1; i++)
+				for (var i = 0; i < testGems.Count - 1; i++)
 				{
-					if (_expGem[i]?.gameObject.activeSelf != true)
+					if (testGems[i].Pickup.gameObject.activeSelf != true)
 						continue;
-					
-					// Check if gem i is within the camera's view
-					if (GeometryUtility.TestPlanesAABB(planes, _expGem[i].boxCollider.bounds))
-					{
-						var distanceToPlayer = Vector3.Distance(_expGem[i].transform.position, player.transform.position);
-						if (distanceToPlayer <= distanceFromPlayer)
-							continue;
-					}
 						
-					for (var j = i + 1; j < _expGem.Count; j++)
+					for (var j = i + 1; j < testGems.Count; j++)
 					{
-						if (_expGem[j]?.gameObject.activeSelf != true)
+						if (testGems[j].Pickup.gameObject.activeSelf != true)
 							continue;
 
-						var distance = Vector3.Distance(_expGem[i].transform.position, _expGem[j].transform.position);
+						var distance = Vector3.Distance(testGems[i].Position, testGems[j].Position);
 						if (distance < mergingThreshold)
 						{
-							_expGem[i].GetExpObject().AddExp(_expGem[j].GetExpObject().expAmount);
-							_gemPool.Release(_expGem[j]);
+							testGems[i].Pickup.GetExpObject().AddExp(testGems[j].Pickup.GetExpObject().expAmount);
+							_gemPool.Release(testGems[j].Pickup);
 							j--;
 						}
 					}
 				}
 				
-
-				yield return new WaitForSeconds(15f);
+				yield return new WaitForSeconds(20f);
 			}
 		}
 	}
-
 }

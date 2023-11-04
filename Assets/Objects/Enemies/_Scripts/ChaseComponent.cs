@@ -90,7 +90,6 @@ public class ChaseComponent : MonoBehaviour
         }
 
         var speed = (isTempTarget ? tempSpeed : movementSpeed) * (_slowTimer > 0 ? _slowAmount : 1.0f);
-        //_rigidbody.MovePosition(Vector3.MoveTowards(currentPosition, destination, speed * Time.deltaTime));
         transformCache.position = Vector3.MoveTowards(currentPosition, destination, speed * Time.deltaTime);
     }
 

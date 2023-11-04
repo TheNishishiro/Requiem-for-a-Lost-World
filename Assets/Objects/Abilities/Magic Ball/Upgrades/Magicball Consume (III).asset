@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: Magicball Consume (III)
   m_EditorClassIdentifier: 
   Name: 'Magic ball: Focus(III)'
-  Description: Shoot 2 additional fireballs
+  Description: Shoot {AttackCount} additional fireball
   WeaponStats:
     Damage: 0
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0
     Speed: 0
     TimeToLive: 0
-    AttackCount: 2
+    AttackCount: 1
     PassThroughCount: 0
     DamageCooldown: 0
     DuplicateSpawnDelay: 0
@@ -29,3 +30,7 @@ MonoBehaviour:
     CritDamage: 0
     Weakness: 0
     DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

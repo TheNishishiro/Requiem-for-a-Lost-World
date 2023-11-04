@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Binding Field Upgrade 10
   m_EditorClassIdentifier: 
   Name: Extended Field (II)
-  Description: Increases the duration of the binding field by 2 seconds
+  Description: Increases the duration of the binding field by {TimeToLive} seconds
   WeaponStats:
     Damage: 0
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0
     Speed: 0
     TimeToLive: 2
@@ -28,3 +29,8 @@ MonoBehaviour:
     CritRate: 0
     CritDamage: 0
     Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

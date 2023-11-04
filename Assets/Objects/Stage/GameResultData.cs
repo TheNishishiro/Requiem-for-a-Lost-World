@@ -74,8 +74,13 @@ namespace Objects.Stage
 
 		public void FinalizeGameResult()
 		{
-			Gold += (int)((Gold + MonstersKilled / 20.0f) * (1 + Time/(30.0f*60.0f)));
-			Gems += (int)((MonstersKilled / 300.0f) * (1 + Time/(30.0f*60.0f)));
+			var maxGameLength = 30.0f;
+			var timeSpent = Time / 60.0f;
+			var goldIncreaseByTime = timeSpent * 0.03f;
+			var gemIncreaseByTime = timeSpent * 0.05f;
+							
+			Gold += (int)((Gold + MonstersKilled / 20.0f) * (1 + goldIncreaseByTime));
+			Gems += (int)((MonstersKilled / 100.0f) * (1 + gemIncreaseByTime));
 			if (IsWin)
 			{
 				Gold += 2000;

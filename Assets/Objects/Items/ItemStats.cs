@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine.Serialization;
 
 namespace Objects.Items
@@ -26,7 +27,7 @@ namespace Objects.Items
 		public float CritRate;
 		public float CritDamage;
 		public int PassThroughCount;
-		public int Armor;
+		public float Armor;
 		public float EnemySpeedIncreasePercentage;
 		public float EnemySpawnRateIncreasePercentage;
 		public float EnemyHealthIncreasePercentage;
@@ -44,7 +45,7 @@ namespace Objects.Items
 		
 		public void ApplyRarity(int rarity)
 		{
-			var rarityFactor = 1 + ((rarity - 1) * 0.1f); 
+			var rarityFactor = GetRarityFactor(rarity);
 
 			Health *= rarityFactor;
 			HealthMax *= rarityFactor;
@@ -82,7 +83,7 @@ namespace Objects.Items
 		
 		public void Apply(ItemStats itemUpgradeItemStats, int rarity)
         {
-	        var rarityFactor = 1 + ((rarity - 1) * 0.1f); 
+	        var rarityFactor = GetRarityFactor(rarity);
 	        
             Health += itemUpgradeItemStats.Health * rarityFactor;
             HealthMax += itemUpgradeItemStats.HealthMax * rarityFactor;
@@ -119,8 +120,50 @@ namespace Objects.Items
             Rerolls += itemUpgradeItemStats.Rerolls == 0 ? 0 : itemUpgradeItemStats.Rerolls + (rarity - 1);
             Skips += itemUpgradeItemStats.Skips == 0 ? 0 : itemUpgradeItemStats.Skips + (rarity - 1);
         }
+
+		public string GetDescription(string description, int rarity)
+		{
+			var rarityFactor = GetRarityFactor(rarity);
+
+			return description
+				.Replace("{Health}", Utilities.StatToString(Health, rarityFactor))
+				.Replace("{HealthMax}", Utilities.StatToString(HealthMax, rarityFactor))
+				.Replace("{MagnetSize}", Utilities.StatToString(MagnetSize, rarityFactor))
+				.Replace("{CooldownReduction}", Utilities.StatToString(CooldownReduction, rarityFactor))
+				.Replace("{CooldownReductionPercentage}", Utilities.StatToString(CooldownReductionPercentage, rarityFactor, true))
+				.Replace("{AttackCount}", Utilities.StatToString(AttackCount))
+				.Replace("{Damage}", Utilities.StatToString(Damage, rarityFactor))
+				.Replace("{Scale}", Utilities.StatToString(Scale, rarityFactor, true))
+				.Replace("{Speed}", Utilities.StatToString(Speed, rarityFactor))
+				.Replace("{TimeToLive}", Utilities.StatToString(TimeToLive, rarityFactor))
+				.Replace("{DetectionRange}", Utilities.StatToString(DetectionRange, rarityFactor))
+				.Replace("{DamagePercentageIncrease}", Utilities.StatToString(DamagePercentageIncrease, rarityFactor, true))
+				.Replace("{ExperienceIncreasePercentage}", Utilities.StatToString(ExperienceIncreasePercentage, rarityFactor, true))
+				.Replace("{MovementSpeed}", Utilities.StatToString(MovementSpeed, rarityFactor))
+				.Replace("{SkillCooldownReductionPercentage}", Utilities.StatToString(SkillCooldownReductionPercentage, rarityFactor, true))
+				.Replace("{HealthRegen}", Utilities.StatToString(HealthRegen, rarityFactor))
+				.Replace("{CritRate}", Utilities.StatToString(CritRate, rarityFactor, true))
+				.Replace("{CritDamage}", Utilities.StatToString(CritDamage, rarityFactor, true))
+				.Replace("{PassThroughCount}", (PassThroughCount == 0 ? 0 : PassThroughCount + (rarity - 1)).ToString())
+				.Replace("{Armor}", Utilities.StatToString(Armor, rarityFactor))
+				.Replace("{EnemySpeedIncreasePercentage}", Utilities.StatToString(EnemySpeedIncreasePercentage, rarityFactor, true))
+				.Replace("{EnemySpawnRateIncreasePercentage}", Utilities.StatToString(EnemySpawnRateIncreasePercentage, rarityFactor, true))
+				.Replace("{EnemyHealthIncreasePercentage}", Utilities.StatToString(EnemyHealthIncreasePercentage, rarityFactor, true))
+				.Replace("{EnemyMaxCountIncreasePercentage}", Utilities.StatToString(EnemyMaxCountIncreasePercentage, rarityFactor, true))
+				.Replace("{ItemRewardIncrease}", Utilities.StatToString(ItemRewardIncrease, rarityFactor, true))
+				.Replace("{Revives}", Revives.ToString())
+				.Replace("{ProjectileLifeTimeIncreasePercentage}", Utilities.StatToString(ProjectileLifeTimeIncreasePercentage, rarityFactor, true))
+				.Replace("{DodgeChance}", Utilities.StatToString(DodgeChance, rarityFactor, true))
+				.Replace("{DamageTakenIncreasePercentage}", Utilities.StatToString(DamageTakenIncreasePercentage, rarityFactor, true))
+				.Replace("{HealingReceivedIncreasePercentage}", Utilities.StatToString(HealingReceivedIncreasePercentage, rarityFactor, true))
+				.Replace("{Luck}", Utilities.StatToString(Luck, rarityFactor, true))
+				.Replace("{DamageOverTime}", Utilities.StatToString(DamageOverTime, rarityFactor))
+				.Replace("{Rerolls}", (Rerolls == 0 ? 0 : Rerolls + (rarity - 1)).ToString())
+				.Replace("{Skips}", (Skips == 0 ? 0 : Skips + (rarity - 1)).ToString())
+				;
+		}
 		
-		public ICollection<StatsDisplayData> GetDescription()
+		public ICollection<StatsDisplayData> GetStatsDisplayData()
 		{
 			var stats = new List<StatsDisplayData>
 			{
@@ -159,6 +202,12 @@ namespace Objects.Items
 				new("Skips", Skips),
 			};
 			return stats;
+		}
+		
+		private float GetRarityFactor(float rarity)
+		{
+			const float percentIncreasePerRarity = 0.04f;
+			return 1.0f + ((rarity - 1.0f) * percentIncreasePerRarity);
 		}
 	}
 }

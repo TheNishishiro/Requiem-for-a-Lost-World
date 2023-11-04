@@ -27,8 +27,8 @@ namespace Objects.Enemies
 		[SerializeField] private Pickup expDrop;
 		[SerializeField] private Pickup goldDrop;
 		[SerializeField] private Pickup gemDrop;
-		[SerializeField] private UnityEvent<Enemy> OnEnemyDeath;
 		[SerializeField] private GameObject grandOctiBoss;
+		public Transform TargetPoint => damageableComponent.targetPoint.transform;
 		private EnemyManager _enemyManager;
 		private EnemyStats stats;
 		private GameObject targetGameObject;
@@ -69,13 +69,18 @@ namespace Objects.Enemies
 			stats ??= new EnemyStats();
 			stats.Copy(newStats.stats);
 			dropOnDestroyComponent.ClearDrop();
-			
-			expDropChance ??= new ChanceDrop()
+
+			if (newStats.ExpDrop > 0)
 			{
-				pickupObject = expDrop,
-			};
-			expDropChance.amount = newStats.ExpDrop;
-			
+				expDropChance ??= new ChanceDrop()
+				{
+					pickupObject = expDrop,
+				};
+				expDropChance.amount = newStats.ExpDrop;
+				expDropChance.chance = 0.75f;
+				dropOnDestroyComponent.AddDrop(expDropChance);
+			}
+
 			if (newStats.isBossEnemy)
 			{
 				_isBossEnemy = true;
@@ -86,16 +91,7 @@ namespace Objects.Enemies
 					chance = 1,
 					pickupObject = chestDrop,
 				});
-				expDropChance.chance = 0.75f;
 				dropOnDestroyComponent.AddDrop(expDropChance);
-			}
-			else
-			{
-				if (newStats.ExpDrop > 0)
-				{
-					expDropChance.chance = 1f;
-					dropOnDestroyComponent.AddDrop(expDropChance);
-				}
 			}
 
 			goldDropChance ??= new ChanceDrop()
@@ -167,7 +163,7 @@ namespace Objects.Enemies
 			EnemyDiedEvent.Invoke();
 			dropOnDestroyComponent.CheckDrop();
 			_enemyManager.Despawn(this);
-			OnEnemyDeath?.Invoke(this);
+			AchievementManager.instance.OnEnemyKilled(this);
 		}
 
 		private void OnCollisionStay(Collision collisionInfo)

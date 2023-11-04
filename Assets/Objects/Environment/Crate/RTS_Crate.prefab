@@ -215,6 +215,7 @@ MonoBehaviour:
   Health: 0
   gameResultData: {fileID: 11400000, guid: cb99eac292bd9d54aac189cbaa40dca7, type: 2}
   targetPoint: {fileID: 0}
+  takeDamageSound: {fileID: 8300000, guid: 477e022444f09cb4eb750e9354d2b6c0, type: 3}
   vulnerabilityTimer: 0
   vulnerabilityPercentage: 0
 --- !u!114 &8864211574758387995
@@ -233,11 +234,11 @@ MonoBehaviour:
   - pickupObject: {fileID: 3634895298855100167, guid: 05020269b5b385048b9f6957428fae35,
       type: 3}
     chance: 0.7
-    amount: 30
+    amount: 50
   - pickupObject: {fileID: 3634895298855100167, guid: 275792940c647844196d33239fe7d5cf,
       type: 3}
     chance: 0.35
-    amount: 20
+    amount: 40
   - pickupObject: {fileID: 3634895298855100167, guid: a146265883438a44cad22daed1bd3bd9,
       type: 3}
     chance: 0.5

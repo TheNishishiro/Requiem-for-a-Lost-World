@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5064242657095341949}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-4836827936417267590
 MonoBehaviour:
@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Armor
-  Description: Decrease incomming damage by 1
+  Description: Decrease incomming damage by {Armor}
+  chanceToAppear: 0.9
   Icon: {fileID: 21300000, guid: 1279e6533ef6a2d449c89132b57f6901, type: 3}
   ItemUpgrades:
   - {fileID: 11400000, guid: 1d18318c82f039f43aef91e8e26c57bd, type: 2}
@@ -86,3 +87,5 @@ MonoBehaviour:
     HealingReceivedIncreasePercentage: 0
     Luck: 0
     DamageOverTime: 0
+    Rerolls: 0
+    Skips: 0

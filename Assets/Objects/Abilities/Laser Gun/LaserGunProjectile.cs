@@ -12,14 +12,14 @@ namespace Objects.Abilities.Laser_Gun
 	{
 		[SerializeField] public LineRenderer lineRenderer;
 		[SerializeField] public Transform laserFirePoint;
-		private Damageable laserTarget;
+		private Damageable _laserTarget;
 		private Transform _transform;
 		private Transform _targetTransform;
 
 		protected override void Awake()
 		{
 			base.Awake();
-			laserTarget = null;
+			_laserTarget = null;
 			_transform = transform;
 		}
 
@@ -36,11 +36,12 @@ namespace Objects.Abilities.Laser_Gun
 			if (!isDamageCooldownExpired) return;
 			ResetDamageCooldown();
 
-			if (laserTarget != null && laserTarget.isActiveAndEnabled && lineRenderer.positionCount != 0 && Vector3.Distance(_targetTransform.position, _transform.position) < WeaponStats.GetDetectionRange())
+			if (_laserTarget != null && _laserTarget.gameObject.activeSelf && lineRenderer.positionCount != 0 && Vector3.Distance(_targetTransform.position, _transform.position) < WeaponStats.GetDetectionRange())
 			{
+				Debug.Log("dealing damage");
 				lineRenderer.SetPosition(1, _targetTransform.position);
 				_transform.LookAt(_targetTransform);
-				SimpleDamage(laserTarget, false);
+				SimpleDamage(_laserTarget, false);
 			}
 			else
 			{
@@ -50,16 +51,16 @@ namespace Objects.Abilities.Laser_Gun
 
 		private void SetTarget()
 		{
-			var closestTarget = Utilities.FindClosestDamageable(transform.position, EnemyManager.instance.GetActiveEnemies(), out var distanceToClosest);
+			var closestTarget = Utilities.FindClosestEnemy(transform.position, EnemyManager.instance.GetActiveEnemies(), out var distanceToClosest);
 			if (closestTarget == null || distanceToClosest > WeaponStats.GetDetectionRange())
 			{
 				lineRenderer.positionCount = 0;
 				return;
 			}
 			lineRenderer.positionCount = 2;
-			
-			laserTarget = closestTarget;
-			_targetTransform = laserTarget.transform;
+
+			_laserTarget = closestTarget.GetDamagableComponent();
+			_targetTransform = closestTarget.TargetPoint;
 			lineRenderer.SetPosition(0, laserFirePoint.position);
 			lineRenderer.SetPosition(1, _targetTransform.position);
 			_transform.LookAt(_targetTransform);

@@ -8,7 +8,6 @@ namespace Managers.StageEvents
 	public class StageTime : MonoBehaviour
 	{
 		[SerializeField] private GameResultData gameResultData;
-		[SerializeField] private UnityEvent<float> onTimeTick;
 		public float time;
 		private LabelTime _labelTime;
 		private float _labelUpdateTimer;
@@ -30,7 +29,7 @@ namespace Managers.StageEvents
 			if (_labelUpdateTimer <= 0)
 			{
 				_labelTime.UpdateTime(time);
-				onTimeTick?.Invoke(time);
+				AchievementManager.instance.OnStageTimeUpdated(time);
 				_labelUpdateTimer = 1;
 			}
 		}

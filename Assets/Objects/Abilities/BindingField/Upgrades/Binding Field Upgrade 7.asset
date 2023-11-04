@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Binding Field Upgrade 7
   m_EditorClassIdentifier: 
   Name: Cooldown Reduction (I)
-  Description: Reduces the cooldown of the binding field by 10%
+  Description: Reduces the cooldown of the binding field by {CooldownReduction}%
   WeaponStats:
     Damage: 0
-    Cooldown: 1.3
+    Cooldown: 0
+    CooldownReduction: 0.1
     Scale: 0
     Speed: 0
     TimeToLive: 0
@@ -28,3 +29,8 @@ MonoBehaviour:
     CritRate: 0
     CritDamage: 0
     Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

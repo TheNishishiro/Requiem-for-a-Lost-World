@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Dark Orb Upgrade 7
   m_EditorClassIdentifier: 
   Name: Chaotic Orbit (II)
-  Description: Increase the speed of the orb by 40% and duration by 1s
+  Description: Increase the speed of the orb by {Speed} m/s and duration by {TimeToLive}s
   WeaponStats:
     Damage: 0
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0
-    Speed: 0.4
+    Speed: 0.8
     TimeToLive: 1
     AttackCount: 0
     PassThroughCount: 0
@@ -27,3 +28,9 @@ MonoBehaviour:
     DetectionRange: 0
     CritRate: 0
     CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

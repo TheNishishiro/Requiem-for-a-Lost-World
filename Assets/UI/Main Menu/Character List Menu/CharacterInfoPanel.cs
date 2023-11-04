@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using DefaultNamespace.Data;
+using Managers;
 using Objects.Characters;
 using Objects.Players;
 using TMPro;
@@ -75,6 +76,7 @@ namespace UI.Main_Menu.Character_List_Menu
 
 		public void OpenShardsMenu()
 		{
+			AudioManager.instance.PlayButtonSimpleClick();
 			_rankDisplayPanel.Open(_characterData, _characterSaveData.GetRankEnum());
 		}
 		

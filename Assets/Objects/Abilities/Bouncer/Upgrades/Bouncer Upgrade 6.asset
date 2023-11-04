@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bouncer Upgrade 6
   m_EditorClassIdentifier: 
   Name: Lightning Chain (II)
-  Description: Increase the number of bounces by 2
+  Description: Increase the number of bounces by {PassThroughCount}
   WeaponStats:
     Damage: 0
     Cooldown: 0
@@ -21,8 +21,8 @@ MonoBehaviour:
     Scale: 0
     Speed: 0
     TimeToLive: 0
-    AttackCount: 2
-    PassThroughCount: 0
+    AttackCount: 0
+    PassThroughCount: 2
     DamageCooldown: 0
     DuplicateSpawnDelay: 0
     DetectionRange: 0

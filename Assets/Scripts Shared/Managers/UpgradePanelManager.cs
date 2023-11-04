@@ -77,13 +77,17 @@ namespace Managers
 			HideButtons();
 			rerollButton.gameObject.SetActive(playerStatsComponent.HasRerolls());
 			skipButton.gameObject.SetActive(playerStatsComponent.HasSkips());
+			var chanceOfAppearance = Random.value;
+			var upgradesToPick = Random.Range(3, 5);
+			
 			var upgradeEntries = (isWeaponOnly ? weaponManager.GetWeaponUnlocks() : weaponManager.GetUpgrades())
-				.OrderBy(_ => Random.value)
-				.Take(Random.Range(3, 5))
+				.OrderByDescending(x => x.ChanceOfAppearance >= 1 - chanceOfAppearance)
+				.ThenBy(_ => Random.value)
+				.Take(upgradesToPick)
 				.ToList();
 			if (upgradeEntries.Count == 0)
 				return;
-            
+			
 			pauseManager.PauseGame();
 			Clean();
 			panel.SetActive(true);

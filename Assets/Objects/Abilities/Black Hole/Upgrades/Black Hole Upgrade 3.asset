@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Black Hole Upgrade 3
   m_EditorClassIdentifier: 
   Name: Event Horizon (I)
-  Description: Increase the duration of the black hole by 0.5 second
+  Description: Increase the duration of the black hole by {TimeToLive} second
   WeaponStats:
     Damage: 0
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0
     Speed: 0
     TimeToLive: 0.5
@@ -29,3 +30,7 @@ MonoBehaviour:
     CritDamage: 0
     Weakness: 0
     DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

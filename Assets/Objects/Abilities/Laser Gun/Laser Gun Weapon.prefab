@@ -48,6 +48,7 @@ MonoBehaviour:
     type: 3}
   Name: Gem of Dream
   Description: Create a hovering weapon that shoot and tracks nearby targets
+  chanceToAppear: 0.8
   Icon: {fileID: 21300000, guid: 843bbe2c3c1380a4196ffc79cc5dc3e6, type: 3}
   element: 7
   weaponStats:
@@ -57,11 +58,11 @@ MonoBehaviour:
     Scale: 1
     Speed: 0
     TimeToLive: 2
-    AttackCount: 5
+    AttackCount: 1
     PassThroughCount: 0
-    DamageCooldown: 0.25
+    DamageCooldown: 0.35
     DuplicateSpawnDelay: 0.2
-    DetectionRange: 5
+    DetectionRange: 2
     CritRate: 0
     CritDamage: 0
     Weakness: 0

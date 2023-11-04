@@ -14,6 +14,7 @@ namespace Managers
 {
 	public class AchievementManager : MonoBehaviour
 	{
+		public static AchievementManager instance;
 		private int _enemiesKilled;
 		private int _highRarityPickupsObtained;
 		private float _healAmountInOneGame;
@@ -21,13 +22,10 @@ namespace Managers
         
 		public void Awake()
 		{
-			var instances = FindObjectsOfType<AchievementManager>();
-			if (instances.Length > 1)
+			if (instance == null)
 			{
-				Destroy(gameObject);
-				return;
+				instance = this;
 			}
-			DontDestroyOnLoad(gameObject);
 		}
 		
 		public void ClearPerGameStats()
@@ -99,7 +97,7 @@ namespace Managers
 
 		public void OnHealing(float amount)
 		{
-			_healAmountInOneGame += amount;
+			_healAmountInOneGame += Math.Abs(amount);
 			if (_healAmountInOneGame >= 1000)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Heal1000HealthInOneGame);
 		}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using DefaultNamespace.Data;
+using Managers;
 using Objects.Players.PermUpgrades;
 using TMPro;
 using UnityEngine;
@@ -44,14 +45,18 @@ namespace UI.Main_Menu.Upgrades_Menu
 
 		public void Upgrade()
 		{
-			if (_currentLevel >= _permUpgrade.maxLevel || _saveFile.Gold < (ulong)(_permUpgrade.costPerLevel * (_currentLevel+1)))
+			if (_currentLevel >= _permUpgrade.maxLevel || _saveFile.Gold < (ulong)(_permUpgrade.costPerLevel * (_currentLevel + 1)))
+			{
+				AudioManager.instance.PlayButtonCymbalClick();
 				return;
+			}
 
 			_saveFile.Gold -= (ulong)(_permUpgrade.costPerLevel * (_currentLevel+1));
 			_saveFile.AddUpgradeLevel(_permUpgrade.type);
 			if (_permUpgrade.type == PermUpgradeType.BuyGems)
 				_saveFile.Gems += (ulong)_permUpgrade.increasePerLevel;
 			
+			AudioManager.instance.PlayButtonSimpleClick();
 			_currentLevel++;
 			_saveFile.Save();
 		}

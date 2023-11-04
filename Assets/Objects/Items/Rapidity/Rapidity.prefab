@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1024498798920258173}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3162085336551074921
 MonoBehaviour:
@@ -45,20 +45,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Rapidity
-  Description: Decrease weapon cooldown by 10%
+  Description: Decrease weapon cooldown by {CooldownReductionPercentage}%
+  chanceToAppear: 0.6
   Icon: {fileID: 21300000, guid: 8215152639047a04a876447ad07491c2, type: 3}
   ItemUpgrades:
   - {fileID: 11400000, guid: 31e3ac0522b235945822c28878b3369e, type: 2}
   - {fileID: 11400000, guid: ac5128f0466a7f54cb6c4315dedadf36, type: 2}
   - {fileID: 11400000, guid: f4ee6b8281a21494fb55b9dbd6e4bc43, type: 2}
   - {fileID: 11400000, guid: cee959061e9ad604c862603843059fd6, type: 2}
-  - {fileID: 11400000, guid: cee959061e9ad604c862603843059fd6, type: 2}
   ItemStats:
     Health: 0
     HealthMax: 0
     MagnetSize: 0
     CooldownReduction: 0
-    CooldownReductionPercentage: 0.1
+    CooldownReductionPercentage: 0.05
     AttackCount: 0
     Damage: 0
     Scale: 0

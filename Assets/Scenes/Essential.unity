@@ -306,44 +306,6 @@ MonoBehaviour:
   weaponContainer: {fileID: 51860985}
   maxWeaponCount: 6
   maxItemCount: 6
-  onWeaponAdded:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1279709384511189508, guid: 68a329e6ff192984283abbd09d0c154d,
-          type: 3}
-        m_TargetAssemblyTypeName: Managers.AchievementManager, Assembly-CSharp
-        m_MethodName: OnWeaponUnlocked
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onWeaponUpgraded:
-    m_PersistentCalls:
-      m_Calls: []
-  onItemAdded:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1279709384511189508, guid: 68a329e6ff192984283abbd09d0c154d,
-          type: 3}
-        m_TargetAssemblyTypeName: Managers.AchievementManager, Assembly-CSharp
-        m_MethodName: OnItemUnlocked
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onItemUpgraded:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &97469284
 GameObject:
   m_ObjectHideFlags: 0
@@ -2425,8 +2387,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.093580626, y: -0, z: -0, w: 0.9956117}
-  m_LocalPosition: {x: 249.65637, y: 5.4968586, z: 248.92624}
+  m_LocalRotation: {x: 0.08715578, y: -0, z: -0, w: 0.9961947}
+  m_LocalPosition: {x: 249.65637, y: 5.4888587, z: 248.41425}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5357,8 +5319,8 @@ GameObject:
   m_Component:
   - component: {fileID: 934326624}
   - component: {fileID: 934326626}
-  - component: {fileID: 934326627}
   - component: {fileID: 934326625}
+  - component: {fileID: 934326627}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -5379,7 +5341,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8997996947100127256}
+  m_Father: {fileID: 1868474619}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &934326625
 AudioSource:
@@ -5490,25 +5452,116 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 934326625}
+  bgmSource: {fileID: 934326627}
   buttonClick: {fileID: 8300000, guid: 6facb51e240a9224292f7440e823c3ad, type: 3}
+  buttonSimpleClick: {fileID: 8300000, guid: 5a73462f43dad27449cb812881178e35, type: 3}
+  buttonConfirmClick: {fileID: 8300000, guid: 57a9fb765415f864aba00eb912aacd2d, type: 3}
+  buttonSkipClick: {fileID: 8300000, guid: fc6934feea6b62e4ca22c2f3f4704ec0, type: 3}
+  buttonCymbalClick: {fileID: 8300000, guid: 403b7e0429d12f945a4973403b84266d, type: 3}
   hitClips:
   - {fileID: 8300000, guid: 6b9817a2c8190de4c9ac58e0f78ccab0, type: 3}
   - {fileID: 8300000, guid: b2a20b833d946a84f938b24cf8938f50, type: 3}
   - {fileID: 8300000, guid: bc7f5cb98ce641b408304c8d00529760, type: 3}
   - {fileID: 8300000, guid: 5bad5a4a4c771534c805f74c7a9c2463, type: 3}
   - {fileID: 8300000, guid: bb72adfe3ebf24d4ba6ab52b55889094, type: 3}
---- !u!114 &934326627
-MonoBehaviour:
+  shardPickupClips:
+  - {fileID: 8300000, guid: 839025f45c048dd44a5c4c0194e979c0, type: 3}
+--- !u!82 &934326627
+AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934326623}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aac132d5c411494083806412071c0e7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 41dcd1cc85be0e34b9629e8bb57f9bfd, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.8
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &937602111
 GameObject:
   m_ObjectHideFlags: 0
@@ -8166,6 +8219,7 @@ GameObject:
   - component: {fileID: 1557294567}
   - component: {fileID: 1557294568}
   - component: {fileID: 1557294569}
+  - component: {fileID: 1557294571}
   m_Layer: 0
   m_Name: -----SYSTEMS-----
   m_TagString: Untagged
@@ -8337,7 +8391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618a316574eb45f182bfbbd0e355be46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mergingThreshold: 1
+  mergingThreshold: 5
   distanceFromPlayer: 12
   mainCamera: {fileID: 330585545}
   expShardPrefab: {fileID: 3634895298855100171, guid: d099174199599234c807f1eee918c770,
@@ -8352,6 +8406,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37f58de478cddc344a4aa65c399cf551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1557294571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557294559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af040e3838334ae29953f2ebd02951aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1558121688
@@ -8513,12 +8579,12 @@ PrefabInstance:
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.4968586
+      value: 5.4888587
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 248.92624
+      value: 248.41425
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}
@@ -9623,6 +9689,7 @@ MonoBehaviour:
   levelComponent: {fileID: 0}
   healthComponent: {fileID: 0}
   playerStatsComponent: {fileID: 0}
+  playerTransform: {fileID: 0}
   gameResultData: {fileID: 11400000, guid: cb99eac292bd9d54aac189cbaa40dca7, type: 2}
 --- !u!4 &1824654773 stripped
 Transform:
@@ -9671,6 +9738,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 934326624}
   - {fileID: 51860985}
   - {fileID: 1641499483}
   - {fileID: 1124659725}
@@ -11125,13 +11193,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4135013735275590649}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.093580626, y: -0, z: -0, w: 0.9956117}
-  m_LocalPosition: {x: 0, y: 0.758, z: -1.488}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 0.75, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8997996947100127256}
-  m_LocalEulerAnglesHint: {x: 10.739, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!114 &5420857361345894110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11351,7 +11419,6 @@ Transform:
   - {fileID: 1868474619}
   - {fileID: 1176661790}
   - {fileID: 1964687440}
-  - {fileID: 934326624}
   m_Father: {fileID: 1024697142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8997996947100127257
@@ -11405,54 +11472,6 @@ MonoBehaviour:
   playerStatsComponent: {fileID: 8997996947100127260}
   healthBar: {fileID: 1783569565}
   gameOverScreenManager: {fileID: 1557294566}
-  onDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1279709384511189508, guid: 68a329e6ff192984283abbd09d0c154d,
-          type: 3}
-        m_TargetAssemblyTypeName: Managers.AchievementManager, Assembly-CSharp
-        m_MethodName: OnDeath
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onHealing:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1279709384511189508, guid: 68a329e6ff192984283abbd09d0c154d,
-          type: 3}
-        m_TargetAssemblyTypeName: Managers.AchievementManager, Assembly-CSharp
-        m_MethodName: OnHealing
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onDamageTaken:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1279709384511189508, guid: 68a329e6ff192984283abbd09d0c154d,
-          type: 3}
-        m_TargetAssemblyTypeName: Managers.AchievementManager, Assembly-CSharp
-        m_MethodName: OnDamageTaken
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &8997996947100127260
 MonoBehaviour:
   m_ObjectHideFlags: 0

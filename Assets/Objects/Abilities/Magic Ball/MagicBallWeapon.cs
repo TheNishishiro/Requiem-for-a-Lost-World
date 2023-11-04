@@ -11,14 +11,13 @@ public class MagicBallWeapon : PoolableWeapon<MagicBallProjectile>
 {
     protected override bool ProjectileSpawn(MagicBallProjectile projectile)
     {
-        var closestTarget = Utilities.FindClosestDamageable(transform.position, EnemyManager.instance.GetActiveEnemies(), out var distanceToClosest);
+        var closestTarget = Utilities.FindClosestEnemy(transform.position, EnemyManager.instance.GetActiveEnemies(), out var distanceToClosest);
         if (closestTarget == null)
             return false;
 
         projectile.transform.position = transform.position;
         projectile.SetStats(weaponStats);
-        var transform1 = closestTarget.transform;
-        var position = transform1.position;
+        var position = closestTarget.TargetPoint.position;
         projectile.SetDirection(position.x, position.y, position.z);
         return true;
     }

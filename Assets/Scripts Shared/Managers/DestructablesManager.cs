@@ -39,13 +39,15 @@ namespace Managers
 			var position = _player.transform.position - Utilities.GenerateRandomPositionOnEdge(spawnArea);
 			var pointFound = Utilities.GetPointOnColliderSurface(position, 100f, _player.transform, out var pointOnSurface);
 			if (!pointFound)
+			{
+				_currentSpawnCooldown = spawnCooldown;
 				return;
-			
+			}
+
 			var destructable = SpawnManager.instance.SpawnObject(pointOnSurface, destructables.OrderBy(x => Random.value).First().gameObject);
-			//var destructable = Instantiate(destructables.OrderBy(x => Random.value).First());
 			pointOnSurface.y += destructable.GetComponent<BoxCollider>().size.y/2;
 			destructable.gameObject.transform.position = pointOnSurface;
-			
+			_currentSpawnCooldown = spawnCooldown;
 		}
 	}
 }

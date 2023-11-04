@@ -52,7 +52,7 @@ public class EnemyManager : Singleton<EnemyManager>
 	{
 		var position = player.transform.position - Utilities.GenerateRandomPositionOnEdge(spawnArea);
 		var pointFound = Utilities.GetPointOnColliderSurface(position, 100f, player.transform, out var pointOnSurface);
-		if (!pointFound)
+		if (!pointFound || Utilities.IsPositionOccupied(pointOnSurface, 0.3f))
 			return;
 		
 		position = pointOnSurface;

@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Black Hole Upgrade 8
   m_EditorClassIdentifier: 
   Name: Event Horizon (II)
-  Description: Increase the duration of the black hole by 2 seconds
+  Description: Increase the duration of the black hole by {TimeToLive} seconds
   WeaponStats:
     Damage: 0
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0
     Speed: 0
     TimeToLive: 2
@@ -27,3 +28,9 @@ MonoBehaviour:
     DetectionRange: 0
     CritRate: 0
     CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

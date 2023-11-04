@@ -61,7 +61,7 @@ namespace UI.Main_Menu.Character_List_Menu
 			characterData.Activate();
 			_characterInfoPanel.gameObject.SetActive(!_characterInfoPanel.gameObject.activeSelf);
 			if (_characterInfoPanel.gameObject.activeSelf)
-				FindObjectOfType<AudioManager>().PlayButtonClick();
+				AudioManager.instance.PlayButtonClick();
 			_characterInfoPanel.SetCharacterData(characterData, _saveFile.GetCharacterSaveData(characterData.Id));
 
 			foreach (var characterInfoPanel in FindObjectsOfType<CharacterInfoPanel>())

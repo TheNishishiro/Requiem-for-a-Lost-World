@@ -23,17 +23,7 @@ namespace Objects.Abilities.LightningStrike
 
 		private void SpawnChainLightning(Component other)
 		{
-			var chainLighting = SpawnManager.instance.SpawnObject(other.gameObject.transform.position, _lightningStrikeWeapon.chainLightningPrefab);
-			var lightingChainProjectile = chainLighting.GetComponent<LightningChainProjectile>();
-			lightingChainProjectile.SetParentWeapon(ParentWeapon);
-			lightingChainProjectile.SetStats(new WeaponStats()
-			{
-				TimeToLive = 0.5f,
-				Damage = WeaponStats.GetDamage() * 0.25f,
-				Scale = WeaponStats.GetScale(),
-				DetectionRange = 1f
-			});
-			lightingChainProjectile.SeekTargets(5);
+			_lightningStrikeWeapon.SpawnSubProjectile(other.gameObject.transform.position);
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using DefaultNamespace.Data;
+using Managers;
 using TMPro;
 using UI.Main_Menu.Lore_library;
 using UnityEngine;
@@ -56,11 +57,15 @@ namespace UI.Main_Menu.Story_Layout_Panel
 		public void OpenStoryEntry()
 		{
 			if (!isUnlocked)
+			{
+				AudioManager.instance.PlayButtonCymbalClick();
 				return;
-			
+			}
+
 			var storyLayoutPanel = FindObjectOfType<LoreEntryPanel>(true);
 			storyLayoutPanel.gameObject.SetActive(true);
 			storyLayoutPanel.Open(loreEntry);
+			AudioManager.instance.PlayButtonSimpleClick();
 		}
 	}
 }

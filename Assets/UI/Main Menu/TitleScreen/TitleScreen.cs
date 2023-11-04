@@ -24,6 +24,7 @@ namespace UI.Main_Menu.TitleScreen
                 versionText.SetActive(false);
                 StartCoroutine(FadeOutTitleScreen());
                 tutorialManager.DisplayFirst();
+                AudioManager.instance.PlayButtonConfirmClick();
             }
         }
 
@@ -39,7 +40,7 @@ namespace UI.Main_Menu.TitleScreen
                 yield return null;
             }
 
-            titleScreen.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

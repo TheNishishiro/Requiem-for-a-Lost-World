@@ -39,7 +39,7 @@ namespace Objects.Abilities.SpaceExpansionBall
 			{
 				state = State.Exploding;
 				transform.localScale *= WeaponStats.GetScale();
-				ProjectileDamageIncreasePercentage = 0.1f;
+				ProjectileDamageIncreasePercentage = 0.7f;
 				StartCoroutine(Enlarge());
 			}
 			TickLifeTime();
@@ -88,17 +88,7 @@ namespace Objects.Abilities.SpaceExpansionBall
 			}
 			
 			// Spawn explosion
-			var explosion = Instantiate(SpaceBallWeapon.ExplosionPrefab, transform.position, Quaternion.identity);
-			var projectileComponent = explosion.GetComponent<SimpleDamageProjectile>();
-			
-			projectileComponent.SetParentWeapon(ParentWeapon);
-			projectileComponent.SetStats(new WeaponStats()
-			{
-				TimeToLive = 0.5f,
-				Damage = WeaponStats.GetDamage() * 2, 
-				Scale = WeaponStats.GetScale(),
-			});
-			
+			SpaceBallWeapon.SpawnSubProjectile(transformCache.position);
 			
 			yield return new WaitForSeconds(1f);
 			Destroy();

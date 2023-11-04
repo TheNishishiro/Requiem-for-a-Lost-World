@@ -20,13 +20,15 @@ namespace Weapons
 		protected bool isDamageCooldownExpired;
 		private int _currentPassedEnemies;
 		protected bool IsDead;
+		protected Transform transformCache;
 		[SerializeField] public bool UseParticles;
 		[ShowIf("UseParticles")]
 		[SerializeField] public ParticleSystem ParticleSystem;
 
 		protected virtual void Awake()
 		{
-			var localScale = transform.localScale;
+			transformCache = transform;
+			var localScale = transformCache.localScale;
 			baseScale = new Vector3(localScale.x,localScale.y,localScale.z);
 		}
 

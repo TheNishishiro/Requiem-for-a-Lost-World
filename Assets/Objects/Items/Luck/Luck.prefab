@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2518235789927939182}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-4319694756786890401
 MonoBehaviour:
@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Lucky clover
-  Description: Increase luck by 5%
+  Description: Increase luck by {Luck}%
+  chanceToAppear: 0.9
   Icon: {fileID: 21300000, guid: 160afce1088b70c41add0bf84c636f22, type: 3}
   ItemUpgrades:
   - {fileID: 11400000, guid: 6157030fad20d5b4392d93a9974b0ecb, type: 2}
@@ -85,3 +86,6 @@ MonoBehaviour:
     DamageTakenIncreasePercentage: 0
     HealingReceivedIncreasePercentage: 0
     Luck: 0.05
+    DamageOverTime: 0
+    Rerolls: 0
+    Skips: 0

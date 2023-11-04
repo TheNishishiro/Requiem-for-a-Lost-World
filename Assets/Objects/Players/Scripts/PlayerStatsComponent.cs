@@ -225,7 +225,7 @@ namespace Objects.Players.Scripts
 			return _playerStats?.MovementSpeed ?? 0;
 		}
 
-		public int GetArmor()
+		public float GetArmor()
 		{
 			return _playerStats?.Armor ?? 0;
 		}

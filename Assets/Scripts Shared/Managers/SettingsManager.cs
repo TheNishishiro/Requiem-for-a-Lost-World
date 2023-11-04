@@ -26,6 +26,7 @@ namespace Managers
 		[SerializeField] private TMP_Dropdown presetDropdown;
 		[SerializeField] private TMP_Dropdown windowModeDropdown;
 		[SerializeField] private TMP_Dropdown resolutionDropdown;
+		[SerializeField] private Slider volumeSlider;
 		private bool _isLoading;
 		
 		public void Start()
@@ -143,6 +144,7 @@ namespace Managers
 			discordToggle.isOn = configuration.IsDiscordEnabled;
 			windowModeDropdown.value = configuration.WindowMode;
 			use3DGrassToggle.isOn = configuration.Use3dGrass;
+			volumeSlider.value = configuration.Volume;
 			
 			resolutionDropdown.options ??= new List<TMP_Dropdown.OptionData>();
 			resolutionDropdown.options.Clear();
@@ -182,6 +184,7 @@ namespace Managers
 			configuration.ResolutionWidth = Screen.resolutions[resolutionDropdown.value].width;
 			configuration.ResolutionHeight = Screen.resolutions[resolutionDropdown.value].height;
 			configuration.RefreshRate = Screen.resolutions[resolutionDropdown.value].refreshRateRatio.numerator;
+			configuration.Volume = volumeSlider.value;
 			
 			saveManager.SaveGame();
 			saveManager.ApplySettings();
@@ -199,6 +202,11 @@ namespace Managers
 			}
 
 			return -1;
+		}
+
+		public void LiveAdjustVolume()
+		{
+			AudioListener.volume = volumeSlider.value;
 		}
 	}
 }

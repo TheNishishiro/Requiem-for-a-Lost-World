@@ -1,5 +1,6 @@
 ﻿using Events.Scripts;
 using Interfaces;
+using Managers;
 using UnityEngine;
 using UnityEngine.UI;
 using Image = UnityEngine.UIElements.Image;
@@ -14,6 +15,7 @@ namespace Objects.Drops.ExpDrop
 		
 		public override void OnPickUp(Player player)
 		{
+			AudioManager.instance.PlayExperiencePickup();
 			player.AddExperience(expAmount);
 			ExpPickedUpEvent.Invoke(expAmount);
 		}

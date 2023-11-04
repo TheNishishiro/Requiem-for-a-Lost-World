@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Lightning Strike Upgrade 8
   m_EditorClassIdentifier: 
   Name: Electrifying Strike (III)
-  Description: Increase the damage of each lightning strike by 30%
+  Description: Increase the damage of each lightning strike by {DamageIncreasePercentage}%
   WeaponStats:
     Damage: 0
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0
     Speed: 0
     TimeToLive: 0
@@ -29,3 +30,7 @@ MonoBehaviour:
     CritDamage: 0
     Weakness: 0
     DamageIncreasePercentage: 0.3
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

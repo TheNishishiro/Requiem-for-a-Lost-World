@@ -10,13 +10,15 @@ using Random = UnityEngine.Random;
 
 namespace Objects.Abilities.Lightning_Chain
 {
-	public class LightningChainProjectile : ProjectileBase
+	public class LightningChainProjectile : PoolableProjectile<LightningChainProjectile>
 	{
 		[SerializeField] public LineRenderer lineRenderer;
 
-		private void Awake()
+		public override void SetStats(WeaponStats weaponStats)
 		{
+			base.SetStats(weaponStats);
 			lineRenderer.positionCount = 0;
+			
 		}
 
 		public void Update()
@@ -42,7 +44,7 @@ namespace Objects.Abilities.Lightning_Chain
 				
 				AddTarget(lastPosition);
 				target.TakeDamage(WeaponStats.GetDamage(), ParentWeapon);
-				lastPosition = target.transform.position;
+				lastPosition = target.targetPoint.transform.position;
 				yield return new WaitForSeconds(0.1f);
 			}
 		}

@@ -20,7 +20,7 @@ namespace Objects.Abilities.Wind_Shear
             if (enemy == null)
                 return false;
 
-            projectile.transform.position = enemy.transform.position;
+            projectile.transform.position = enemy.TargetPoint.position;
             projectile.SetStats(weaponStats);
             return true;
         }

@@ -18,6 +18,7 @@ namespace Weapons
 		[SerializeField] public GameObject spawnPrefab;
 		[SerializeField] public string Name;
 		[SerializeField][TextArea] public string Description;
+		[SerializeField] public float chanceToAppear;
 		[SerializeField] public Sprite Icon;
 		[SerializeField] public Element element;
 		[SerializeField] protected WeaponStats weaponStats;
@@ -34,7 +35,12 @@ namespace Weapons
 		
 		public ICollection<StatsDisplayData> GetStatsData()
 		{
-			return weaponStats.GetDescription();
+			return weaponStats.GetStatsDisplayData();
+		}
+
+		public string GetDescription(int rarity)
+		{
+			return weaponStats.GetDescription(Description, rarity);
 		}
 
 		public virtual void Awake()

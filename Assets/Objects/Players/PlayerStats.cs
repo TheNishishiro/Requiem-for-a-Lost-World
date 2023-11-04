@@ -36,7 +36,7 @@ namespace Objects.Players
 		public float CritRate;
 		public float CritDamage;
 		public int PassThroughCount;
-		public int Armor;
+		public float Armor;
 		public float EnemySpeedIncreasePercentage;
 		public float EnemySpawnRateIncreasePercentage;
 		public float EnemyHealthIncreasePercentage;
@@ -124,7 +124,7 @@ namespace Objects.Players
             HealthRegen += item.HealthRegen * rarityFactor;
             CritRate += item.CritRate * rarityFactor;
             CritDamage += item.CritDamage * rarityFactor;
-            Armor += item.Armor != 0 ? item.Armor + (rarity - 1) : item.Armor;
+            Armor += item.Armor * rarityFactor;
             EnemySpeedIncreasePercentage += item.EnemySpeedIncreasePercentage * rarityFactor;
             EnemySpawnRateIncreasePercentage += item.EnemySpawnRateIncreasePercentage * rarityFactor;
             EnemyHealthIncreasePercentage += item.EnemyHealthIncreasePercentage * rarityFactor;

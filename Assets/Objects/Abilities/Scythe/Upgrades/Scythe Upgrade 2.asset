@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scythe Upgrade 2
   m_EditorClassIdentifier: 
   Name: Reaper's Embrace (I)
-  Description: Increase the damage dealt by the scythe swing by 15%
+  Description: Increase the damage dealt by the scythe swing by {DamageIncreasePercentage}%
   WeaponStats:
     Damage: 0
     Cooldown: 0
@@ -31,3 +31,6 @@ MonoBehaviour:
     Weakness: 0
     DamageIncreasePercentage: 0.15
     HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

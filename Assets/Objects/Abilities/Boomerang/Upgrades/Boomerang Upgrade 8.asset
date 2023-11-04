@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Boomerang Upgrade 8
   m_EditorClassIdentifier: 
   Name: Disc of Doom (I)
-  Description: Increase the size 50% and damage of the magic disc by 10
+  Description: Increase the size {Scale}% and damage of the magic disc by {Damage}
   WeaponStats:
     Damage: 10
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 1.5
     Speed: 0
     TimeToLive: 0
@@ -29,3 +30,7 @@ MonoBehaviour:
     CritDamage: 0
     Weakness: 0
     DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0

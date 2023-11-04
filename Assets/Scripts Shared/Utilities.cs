@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using Objects.Enemies;
 using UnityEngine;
@@ -20,6 +21,25 @@ namespace DefaultNamespace
 				suffixIndex++;
 			}
 			return $"{damage:0.##} {suffixes[suffixIndex]}";
+		}
+
+		public static string StatToString(float number, float rarityFactor = 0, bool isPercent = false, bool isInvertFactor = false)
+		{
+			string value;
+			if (rarityFactor == 0 || Math.Abs(rarityFactor - 1) < 0.0001)
+			{
+				value = (isPercent ? number * 100 : number).ToString("0.00");
+			}
+			else if (!isInvertFactor)
+			{
+				value = (isPercent ? (number * rarityFactor) * 100 : number * rarityFactor).ToString("0.00");
+			}
+			else
+			{
+				value = (isPercent ? (number * (2-rarityFactor)) * 100 : number * (2-rarityFactor)).ToString("0.00");
+			}
+			
+			return value.Replace(",", ".").TrimEnd('0').TrimEnd('.');
 		}
 
 		public static string FloatToTimeString(float time)
@@ -80,10 +100,10 @@ namespace DefaultNamespace
 			return pointFound;
 		}
 
-		public static Damageable FindClosestDamageable(Vector3 position, IEnumerable<Enemy> enemies, out float distanceToClosest)
+		public static Enemy FindClosestEnemy(Vector3 position, IEnumerable<Enemy> enemies, out float distanceToClosest)
 		{
 			distanceToClosest = Mathf.Infinity;
-			Damageable closest = null;
+			Enemy closest = null;
 
 			foreach (var enemy in enemies)
 			{
@@ -91,7 +111,7 @@ namespace DefaultNamespace
 				if (distance < distanceToClosest)
 				{
 					distanceToClosest = distance;
-					closest = enemy.GetDamagableComponent();
+					closest = enemy;
 				}
 			}
 
@@ -148,6 +168,27 @@ namespace DefaultNamespace
 			}
 
 			return position;
+		}
+
+		public static bool IsPositionOccupied(Vector3 position, float radius = 1f, string layer = "Default")
+		{
+			var positionOccupied = Physics.CheckSphere(position, radius, LayerMask.GetMask(layer));
+			return positionOccupied;
+		}
+		
+		public static bool IsWithinCameraView(Camera camera, Bounds bounds)
+		{
+			var planes = GeometryUtility.CalculateFrustumPlanes(camera);
+			return GeometryUtility.TestPlanesAABB(planes, bounds);
+		}
+		
+		public static bool IsWithinCameraView(Camera camera, Bounds bounds, Vector3 cameraPosition, Vector3 objectPosition, float maxDistance)
+		{
+			if (!IsWithinCameraView(camera, bounds)) 
+				return false;
+			
+			var distanceToPlayer = Vector3.Distance(cameraPosition, objectPosition);
+			return distanceToPlayer <= maxDistance;
 		}
 		
 	}

@@ -4,7 +4,7 @@ using Weapons;
 
 namespace Objects.Abilities.SpaceExpansionBall
 {
-	public class SimpleDamageProjectile : ProjectileWithLimitedHitBoxBase
+	public class SimpleDamageProjectile : PoolableProjectileWithLimitedHitBox<SimpleDamageProjectile>
 	{
 		[SerializeField] private bool limitedTimeCollider;
 		

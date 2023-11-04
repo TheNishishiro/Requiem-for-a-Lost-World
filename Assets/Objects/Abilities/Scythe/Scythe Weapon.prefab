@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3290538614869850728}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8385973842094059995
 MonoBehaviour:
@@ -53,7 +53,7 @@ MonoBehaviour:
   element: 5
   weaponStats:
     Damage: 2.5
-    Cooldown: 4
+    Cooldown: 3
     CooldownReduction: 0
     Scale: 1
     Speed: 0
@@ -82,6 +82,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e309530d565ed254e9fecc97f201b18e, type: 2}
   - {fileID: 11400000, guid: 461246b62476e3348be50cac09e875c0, type: 2}
   - {fileID: 11400000, guid: 6a08b1af68542754ba52b0e33f4cb264, type: 2}
+  chanceToAppear: 0.7
+  isSkill: 0
+  capacity: 50
+  maxCapacity: 200
   IsBloodEmbrace: 0
   IsCursedStrikes: 0
   IsSoulHarvest: 0

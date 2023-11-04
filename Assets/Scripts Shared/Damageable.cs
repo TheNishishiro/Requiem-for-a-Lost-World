@@ -19,11 +19,19 @@ namespace DefaultNamespace
 		[SerializeField] public float Health;
 		[SerializeField] private GameResultData gameResultData;
 		[SerializeField] public GameObject targetPoint;
+		[SerializeField] private AudioClip takeDamageSound;
 		public Dictionary<GameObject, float> sourceDamageCooldown = new ();
 		public float vulnerabilityTimer;
 		public float vulnerabilityPercentage;
 		private List<ElementStats> resistances = new ();
 		private List<Element> inflictedElements = new ();
+		private Transform _transformCache;
+		private static bool _hitSoundPlayedThisFrame;
+
+		private void Awake()
+		{
+			_transformCache = transform;
+		}
 
 		public void Clear()
 		{
@@ -79,10 +87,22 @@ namespace DefaultNamespace
 			calculatedDamage = vulnerabilityTimer > 0 ? calculatedDamage * (1 + vulnerabilityPercentage) : calculatedDamage;
 			if (calculatedDamage < 0)
 				calculatedDamage = 0;
-			
+
+			var position = _transformCache.position;
+			if (!_hitSoundPlayedThisFrame)
+			{
+				AudioSource.PlayClipAtPoint(takeDamageSound, position, 0.5f);
+				_hitSoundPlayedThisFrame = true;
+			}
+
 			gameResultData.AddDamage(calculatedDamage, weaponBase);
-			MessageManager.instance.PostMessage(calculatedDamage.ToString("0"), transform.position, transform.localRotation, ElementService.ElementToColor(weaponBase?.element));
+			MessageManager.instance.PostMessage(calculatedDamage.ToString("0"), position, _transformCache.localRotation, ElementService.ElementToColor(weaponBase?.element));
 			Health -= calculatedDamage;
+		}
+
+		private void LateUpdate()
+		{
+			_hitSoundPlayedThisFrame = false;
 		}
 
 		public void ReduceElementalDefence(Element element, float amount)
