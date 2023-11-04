@@ -14,6 +14,7 @@ namespace UI.Main_Menu.Story_Layout_Panel
 		[SerializeField] public LoreEntry loreEntry;
 		[SerializeField] private Sprite imageSprite;
 		[SerializeField] private Image uiImage;
+		[SerializeField] private Image notificationImage;
 		[SerializeField] private TextMeshProUGUI chapterNumberText;
 		[SerializeField] private TextMeshProUGUI progressionText;
 		
@@ -24,7 +25,7 @@ namespace UI.Main_Menu.Story_Layout_Panel
 			get
 			{
 				if (_saveFile == null)
-					_saveFile = FindObjectOfType<SaveFile>();
+					_saveFile = FindFirstObjectByType<SaveFile>();
 				return _saveFile;
 			}
 		}
@@ -45,6 +46,7 @@ namespace UI.Main_Menu.Story_Layout_Panel
 			if (imageSprite != null && isUnlocked)
 			{
 				uiImage.color = Color.white;
+				notificationImage.gameObject.SetActive(!_saveFile.IsStoryRead(loreEntry.ChapterNumber, loreEntry.EntryNumber));
 			}
 			else if (!isUnlocked)
 			{
@@ -62,10 +64,12 @@ namespace UI.Main_Menu.Story_Layout_Panel
 				return;
 			}
 
-			var storyLayoutPanel = FindObjectOfType<LoreEntryPanel>(true);
+			var storyLayoutPanel = FindFirstObjectByType<LoreEntryPanel>(FindObjectsInactive.Include);
 			storyLayoutPanel.gameObject.SetActive(true);
 			storyLayoutPanel.Open(loreEntry);
+			_saveFile.SaveReadStoryEntry(loreEntry.ChapterNumber, loreEntry.EntryNumber);
 			AudioManager.instance.PlayButtonSimpleClick();
+			Refresh();
 		}
 	}
 }

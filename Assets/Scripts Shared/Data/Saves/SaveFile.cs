@@ -9,6 +9,7 @@ using Objects.Characters;
 using Objects.Players.PermUpgrades;
 using Objects.Stage;
 using UI.Shared;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Events;
@@ -22,6 +23,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<CharactersEnum, CharacterSaveData> CharacterSaveData;
 		public Dictionary<PermUpgradeType, int> PermUpgradeSaveData;
 		public Dictionary<AchievementEnum, bool> AchievementSaveData;
+		public Dictionary<int, List<int>> ReadStoryEntries { get; set; }
 		public ConfigurationFile ConfigurationFile;
 		public ulong Gold;
 		public ulong Gems;
@@ -56,6 +58,7 @@ namespace DefaultNamespace.Data
 			CharacterSaveData ??= new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData ??= new Dictionary<PermUpgradeType, int>();
 			AchievementSaveData ??= new Dictionary<AchievementEnum, bool>();
+			ReadStoryEntries ??= new Dictionary<int, List<int>>();
 			ConfigurationFile ??= new ConfigurationFile().Default();
 			ConfigurationFile.Update();
 		}
@@ -98,13 +101,14 @@ namespace DefaultNamespace.Data
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
 			AchievementSaveData = saveData.AchievementSaveData ?? new Dictionary<AchievementEnum, bool>();
 			ConfigurationFile = (saveData.ConfigurationFile ?? new ConfigurationFile().Default()).Update();
+			ReadStoryEntries = saveData.ReadStoryEntries ?? new Dictionary<int, List<int>>();
 		}
 
 		public void AddGameResultData(GameResultData gameResultData)
 		{
 			Gold += (ulong)gameResultData.Gold;
 			Gems += (ulong)gameResultData.Gems;
-			StoryPoints += (ulong)gameResultData.Time.ToMinutes();
+			StoryPoints += (ulong)(gameResultData.Time.ToMinutes()*3);
 		}
 
 		public void AddUpgradeLevel(PermUpgradeType permUpgradeType)
@@ -179,6 +183,26 @@ namespace DefaultNamespace.Data
 		{
 			return AchievementSaveData.ContainsKey(achievementEnum) && AchievementSaveData[achievementEnum];
 		}
+
+		public bool IsStoryRead(int loreEntryChapterNumber, int loreEntryEntryNumber)
+		{
+			ReadStoryEntries ??= new Dictionary<int, List<int>>();
+			if (!ReadStoryEntries.ContainsKey(loreEntryChapterNumber))
+				return false;
+			return ReadStoryEntries[loreEntryChapterNumber]?.Exists(x => x == loreEntryEntryNumber) == true;
+		}
+
+		public void SaveReadStoryEntry(int loreEntryChapterNumber, int loreEntryEntryNumber)
+		{
+			ReadStoryEntries ??= new Dictionary<int, List<int>>();
+			if (!ReadStoryEntries.ContainsKey(loreEntryChapterNumber))
+			{
+				ReadStoryEntries.Add(loreEntryChapterNumber, new List<int>());
+			}
+
+			ReadStoryEntries[loreEntryChapterNumber] ??= new List<int>();
+			ReadStoryEntries[loreEntryChapterNumber].Add(loreEntryEntryNumber);
+		}
 	}
 	
 	[Serializable]
@@ -187,6 +211,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<CharactersEnum, CharacterSaveData> CharacterSaveData;
 		public Dictionary<PermUpgradeType, int> PermUpgradeSaveData;
 		public Dictionary<AchievementEnum, bool> AchievementSaveData;
+		public Dictionary<int, List<int>> ReadStoryEntries;
 		public ConfigurationFile ConfigurationFile;
 		public ulong Gold;
 		public ulong Gems;
@@ -215,6 +240,7 @@ namespace DefaultNamespace.Data
 			StoryPoints = saveFile.StoryPoints;
 			IsFirstTutorialCompleted = saveFile.IsFirstTutorialCompleted;
 			Pity = saveFile.Pity;
+			ReadStoryEntries = saveFile.ReadStoryEntries;
 		}
 
 	}

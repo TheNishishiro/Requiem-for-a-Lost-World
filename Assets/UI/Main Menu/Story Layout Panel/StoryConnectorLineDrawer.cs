@@ -13,7 +13,7 @@ public class StoryConnectorLineDrawer : MonoBehaviour
     
     void Start()
     {
-        var tiles = FindObjectsOfType<StoryTile>()
+        var tiles = FindObjectsByType<StoryTile>(FindObjectsSortMode.None)
             .OrderBy(x => x.loreEntry?.EntryNumber)
             .Select(x => new
             {
