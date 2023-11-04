@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
+using Interfaces;
 using Objects.Players.Scripts;
 using Objects.Stage;
 using StarterAssets;
@@ -12,16 +13,16 @@ using UnityEngine.UI;
 
 namespace Managers
 {
-	public class UpgradePanelManager : MonoBehaviour
+	public class UpgradePanelManager : MonoBehaviour, IQueueableWindow
 	{
 		[SerializeField] private GameObject panel;
 		[SerializeField] private List<UpgradePanel> upgradeButtons;
-		[SerializeField] private PauseManager pauseManager;
 		[SerializeField] private WeaponManager weaponManager;
 		[SerializeField] private Button skipButton;
 		[SerializeField] private Button rerollButton;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
-
+		private bool _isWeaponOnly;
+		
 		private void Start()
 		{
 			HideButtons();
@@ -31,28 +32,28 @@ namespace Managers
 
 		public void OpenPanel()
 		{
-			ReloadUpgrades();
-		}
-
-		public void OpenPickWeapon()
-		{
-			ReloadUpgrades(true);
+			_isWeaponOnly = false;
+			WindowManager.instance.QueueWindow(this);
 		}
 
 		public void ClosePanel()
 		{
-			HideButtons();
-			pauseManager.UnPauseGame();
-			panel.SetActive(false);
+			WindowManager.instance.DeQueueWindow();
 		}
 
-		public void Clean()
+		private void OpenPickWeapon()
+		{
+			_isWeaponOnly = true;
+			WindowManager.instance.QueueWindow(this);
+		}
+
+		private void Clean()
 		{
 			foreach (var upgradeButton in upgradeButtons)
 				upgradeButton.Clean();
 		}
 
-		public void HideButtons()
+		private void HideButtons()
 		{
 			foreach (var upgradeButton in upgradeButtons)
 				upgradeButton.gameObject.SetActive(false);
@@ -69,8 +70,19 @@ namespace Managers
 			playerStatsComponent.IncreaseSkip(-1);
 			ClosePanel();
 		}
+		
+		public void Open()
+		{
+			ReloadUpgrades();
+		}
 
-		private void ReloadUpgrades(bool isWeaponOnly = false)
+		public void Close()
+		{
+			HideButtons();
+			panel.SetActive(false);
+		}
+
+		private void ReloadUpgrades()
 		{
 			HideButtons();
 			rerollButton.gameObject.SetActive(playerStatsComponent.HasRerolls());
@@ -80,15 +92,14 @@ namespace Managers
 			var chanceOfAppearance = Random.value;
 			var upgradesToPick = Random.Range(3, 5);
 			
-			var upgradeEntries = (isWeaponOnly ? weaponManager.GetWeaponUnlocks() : weaponManager.GetUpgrades())
+			var upgradeEntries = (_isWeaponOnly ? weaponManager.GetWeaponUnlocks() : weaponManager.GetUpgrades())
 				.OrderByDescending(x => x.ChanceOfAppearance >= 1 - chanceOfAppearance)
 				.ThenBy(_ => Random.value)
 				.Take(upgradesToPick)
 				.ToList();
 			if (upgradeEntries.Count == 0)
 				return;
-			
-			pauseManager.PauseGame();
+
 			Clean();
 			panel.SetActive(true);
 			

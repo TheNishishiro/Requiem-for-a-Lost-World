@@ -1,19 +1,41 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Interfaces;
 using UI.Labels.InGame.LevelUpScreen;
 using UnityEngine;
 using UpgradePanel = UI.Labels.InGame.UpgradeScreen.UpgradePanel;
 
 namespace Managers
 {
-	public class ChestPanelManager : MonoBehaviour
+	public class ChestPanelManager : MonoBehaviour, IQueueableWindow
 	{
 		[SerializeField] private List<UpgradePanel> upgradePanels;
 		[SerializeField] private WeaponManager weaponManager;
 		[SerializeField] private GameObject panel;
-		[SerializeField] private PauseManager pauseManager;
 		
 		public void OpenPanel()
+		{
+			WindowManager.instance.QueueWindow(this);
+		}
+		
+		public void ClosePanel()
+		{
+			WindowManager.instance.DeQueueWindow();
+		}
+		
+		public void HideButtons()
+		{
+			foreach (var upgradePanel in upgradePanels)
+				upgradePanel.gameObject.SetActive(false);
+		}
+		
+		public void Clean()
+		{
+			foreach (var upgradePanel in upgradePanels)
+				upgradePanel.Clean();
+		}
+
+		public void Open()
 		{
 			var upgradeEntries = new List<UpgradeEntry>();
 			upgradeEntries.AddRange(weaponManager.GetWeaponUpgrades());
@@ -35,8 +57,7 @@ namespace Managers
 				player.AddGems(Random.Range(1, 10));
 				return;
 			}
-            
-			pauseManager.PauseGame();
+			
 			Clean();
 			panel.SetActive(true);
 			
@@ -47,24 +68,11 @@ namespace Managers
 				upgradeEntries[i].LevelUp(weaponManager);
 			}
 		}
-		
-		public void ClosePanel()
+
+		public void Close()
 		{
 			HideButtons();
-			pauseManager.UnPauseGame();
 			panel.SetActive(false);
-		}
-		
-		public void HideButtons()
-		{
-			foreach (var upgradePanel in upgradePanels)
-				upgradePanel.gameObject.SetActive(false);
-		}
-		
-		public void Clean()
-		{
-			foreach (var upgradePanel in upgradePanels)
-				upgradePanel.Clean();
 		}
 	}
 }

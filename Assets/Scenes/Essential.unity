@@ -1882,12 +1882,12 @@ PrefabInstance:
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 720.00006
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -277.52884
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
@@ -3203,12 +3203,12 @@ PrefabInstance:
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1200.0001
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -277.52884
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
@@ -4408,12 +4408,12 @@ PrefabInstance:
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 240.00002
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -277.52884
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
@@ -7180,7 +7180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1339740056
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7918,6 +7918,7 @@ GameObject:
   - component: {fileID: 1484257235}
   - component: {fileID: 1484257234}
   - component: {fileID: 1484257238}
+  - component: {fileID: 1484257239}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -8041,6 +8042,19 @@ MonoBehaviour:
   statsPanel: {fileID: 97469284}
   weaponStatsPanel: {fileID: 443668344}
   playerStatsComponent: {fileID: 8997996947100127260}
+--- !u!114 &1484257239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484257233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a723d752e6384e2a95bf761d90b2a5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseManager: {fileID: 1557294562}
 --- !u!114 &1492900710 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7377558770548084227, guid: 13cf4fa29e4f3504c85ba874595dd8a1,
@@ -8150,12 +8164,12 @@ PrefabInstance:
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1680.0001
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -277.52884
       objectReference: {fileID: 0}
     - target: {fileID: 5911388787546257466, guid: d0b7ccdf7a27c49498f2785545b5e1b5,
         type: 3}
@@ -8262,7 +8276,6 @@ MonoBehaviour:
   - {fileID: 1086061219}
   - {fileID: 1581083615}
   - {fileID: 1641790422}
-  pauseManager: {fileID: 1557294562}
   weaponManager: {fileID: 51860986}
   skipButton: {fileID: 1707866732}
   rerollButton: {fileID: 972877891}
@@ -8328,7 +8341,6 @@ MonoBehaviour:
   - {fileID: 210935631}
   weaponManager: {fileID: 51860986}
   panel: {fileID: 215713706}
-  pauseManager: {fileID: 1557294562}
 --- !u!114 &1557294566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8396,6 +8408,8 @@ MonoBehaviour:
   mainCamera: {fileID: 330585545}
   expShardPrefab: {fileID: 3634895298855100171, guid: d099174199599234c807f1eee918c770,
     type: 3}
+  goldCoinPrefab: {fileID: 0}
+  gemPrefab: {fileID: 0}
 --- !u!114 &1557294570
 MonoBehaviour:
   m_ObjectHideFlags: 0
