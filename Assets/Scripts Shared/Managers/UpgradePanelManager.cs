@@ -61,14 +61,12 @@ namespace Managers
 		public void Reroll()
 		{
 			playerStatsComponent.IncreaseReroll(-1);
-			rerollButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Reroll ({playerStatsComponent.GetRerolls()})";
 			ReloadUpgrades();
 		}
 
 		public void Skip()
 		{
 			playerStatsComponent.IncreaseSkip(-1);
-			skipButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Skip ({playerStatsComponent.GetSkips()})";
 			ClosePanel();
 		}
 
@@ -77,6 +75,8 @@ namespace Managers
 			HideButtons();
 			rerollButton.gameObject.SetActive(playerStatsComponent.HasRerolls());
 			skipButton.gameObject.SetActive(playerStatsComponent.HasSkips());
+			rerollButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Reroll ({playerStatsComponent.GetRerolls()})";
+			skipButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Skip ({playerStatsComponent.GetSkips()})";
 			var chanceOfAppearance = Random.value;
 			var upgradesToPick = Random.Range(3, 5);
 			
