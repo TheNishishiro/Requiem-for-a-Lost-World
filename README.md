@@ -17,6 +17,5 @@ VS's gameplay also looked like a perfect fit for my very first game, as it is si
 
 I took a big inspiration from the way Arcaea and Cytus 2 tell their stories, as I think it is a very interesting way to make players uncover the story by themselves without directly handing it to them.
 
-I don't want to commit to any screenshots or early descriptions of a story so that's all for now.
 
 
