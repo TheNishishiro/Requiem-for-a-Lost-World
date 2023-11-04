@@ -206,7 +206,7 @@ namespace Objects.Items
 		
 		private float GetRarityFactor(float rarity)
 		{
-			const float percentIncreasePerRarity = 0.04f;
+			const float percentIncreasePerRarity = 0.05f;
 			return 1.0f + ((rarity - 1.0f) * percentIncreasePerRarity);
 		}
 	}
