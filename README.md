@@ -2,7 +2,9 @@
 
 A Vampire Survivors like game in 3D with AI generated assets, focused on a story driven narrative through rouge like progression.
 
-The project is in a early stage of development, but if you are willing to try it out, you can download the latest version from my [itch.io](https://thenishishiro.itch.io/requiem-for-a-lost-world) page!
+The project is in an early stage of development, but if you are willing to try it out, you can download the latest version from my [itch.io](https://thenishishiro.itch.io/requiem-for-a-lost-world) page!
+
+If you want to report a bug or have an interesting idea then feel free to create an issue and I will get to it as soon as possible
 
 ## Motivation
 
