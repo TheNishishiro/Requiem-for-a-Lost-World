@@ -38,7 +38,7 @@ public class EnemyManager : Singleton<EnemyManager>
 		
 		base.Awake();
 		defaultSpawns = new List<EnemyData>();
-		enemyPool = new ObjectPool<Enemy>(OnCreateEnemy, OnRequestEnemy, OnEnemyRelease, Destroy, true, 600, 1000);
+		enemyPool = new ObjectPool<Enemy>(OnCreateEnemy, OnRequestEnemy, OnEnemyRelease, enemy => Destroy(enemy.gameObject), true, 600, 1000);
 	}
 
 	#region Pooling methods
@@ -56,8 +56,6 @@ public class EnemyManager : Singleton<EnemyManager>
 			return;
 		
 		position = pointOnSurface;
-
-		
 		enemy.transform.position = position;
 		enemy.Setup(_currentEnemySpawning, player, this, _playerStatsComponent, _healthMultiplier, _currentEnemySpawning.sprite);
 		if (_currentEnemySpawning.enemyName == "grand octi")

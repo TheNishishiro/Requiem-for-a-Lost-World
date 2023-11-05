@@ -38,7 +38,6 @@ namespace Objects.Abilities.Laser_Gun
 
 			if (_laserTarget != null && _laserTarget.gameObject.activeSelf && lineRenderer.positionCount != 0 && Vector3.Distance(_targetTransform.position, _transform.position) < WeaponStats.GetDetectionRange())
 			{
-				Debug.Log("dealing damage");
 				lineRenderer.SetPosition(1, _targetTransform.position);
 				_transform.LookAt(_targetTransform);
 				SimpleDamage(_laserTarget, false);

@@ -19,6 +19,7 @@ public class MagicBallWeapon : PoolableWeapon<MagicBallProjectile>
         projectile.SetStats(weaponStats);
         var position = closestTarget.TargetPoint.position;
         projectile.SetDirection(position.x, position.y, position.z);
+        projectile.ClearTrail();
         return true;
     }
 }

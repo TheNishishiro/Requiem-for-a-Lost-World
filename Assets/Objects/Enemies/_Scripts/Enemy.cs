@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using Events.Scripts;
@@ -23,6 +24,7 @@ namespace Objects.Enemies
 		[SerializeField] private SpriteRenderer spriteRenderer;
 		[SerializeField] private CapsuleCollider capsuleCollider;
 		[SerializeField] private DropOnDestroy dropOnDestroyComponent;
+		[SerializeField] private DissolveController dissolveController;
 		[SerializeField] private Pickup chestDrop;
 		[SerializeField] private Pickup expDrop;
 		[SerializeField] private Pickup goldDrop;
@@ -40,6 +42,7 @@ namespace Objects.Enemies
 		private float _removeCollisionsTimer;
 		private bool _isRemoveCollisions;
 		private float _damageReduction;
+		private bool _isDying;
 		private List<Collision> _ignoredEnemyColliders = new ();
 
 		private ChanceDrop chestDropChance;
@@ -52,6 +55,8 @@ namespace Objects.Enemies
 			_enemyManager = enemyManager;
 			damageableComponent.Clear();
 			chaseComponent.Clear();
+			dissolveController.Clear();
+			capsuleCollider.enabled = true;
 			
 			_timeAlive = 0;
 			_currentDamageCooldown = 0;
@@ -61,6 +66,7 @@ namespace Objects.Enemies
 			_isRemoveCollisions = false;
 			RevertIgnoredCollisions();
 			_ignoredEnemyColliders.Clear();
+			_isDying = false;
 			
 			playerTarget = target;
 			spriteRenderer.transform.localPosition = new Vector3(0, newStats.groundOffset, 0);
@@ -132,6 +138,8 @@ namespace Objects.Enemies
 
 		private void Update()
 		{
+			if (_isDying) return;
+			
 			chaseComponent.SetMovementState(_enemyManager.IsTimeStop());
 			_timeAlive += Time.deltaTime;
 			
@@ -159,15 +167,36 @@ namespace Objects.Enemies
 
 		private void Die()
 		{
+			if (_isDying) return;
+			
+			capsuleCollider.enabled = false;
+			chaseComponent.SetMovementState(true);
+			_isDying = true;
 			gameResultData.MonstersKilled++;
 			EnemyDiedEvent.Invoke();
 			dropOnDestroyComponent.CheckDrop();
-			_enemyManager.Despawn(this);
 			AchievementManager.instance.OnEnemyKilled(this);
+			StartCoroutine(DieAnimation());
 		}
 
+		private IEnumerator DieAnimation()
+		{
+			var dissolveTime = 0.25f;
+			dissolveController.Dissolve(dissolveTime);
+			yield return new WaitForSeconds(0.5f);
+			_enemyManager.Despawn(this);
+		}
+
+		public bool IsDead()
+		{
+			return _isDying;
+		}
+		
 		private void OnCollisionStay(Collision collisionInfo)
 		{
+			if (_isDying)
+				return;
+			
 			if (collisionInfo.gameObject.CompareTag("Player"))
 			{
 				var playerComponent = GameManager.instance.playerComponent;

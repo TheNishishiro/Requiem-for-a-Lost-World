@@ -144,28 +144,13 @@ MonoBehaviour:
   spriteRenderer: {fileID: 4270798925278745973}
   capsuleCollider: {fileID: 445137977363883629}
   dropOnDestroyComponent: {fileID: 2075695049437756266}
+  dissolveController: {fileID: 5319297187496111779}
   chestDrop: {fileID: -5662689963410785615, guid: fe977e56248c07446a7574ed737f311e,
     type: 3}
   expDrop: {fileID: 3634895298855100167, guid: d099174199599234c807f1eee918c770, type: 3}
   goldDrop: {fileID: 3634895298855100167, guid: 05020269b5b385048b9f6957428fae35,
     type: 3}
   gemDrop: {fileID: 3634895298855100167, guid: 275792940c647844196d33239fe7d5cf, type: 3}
-  OnEnemyDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1279709384511189508, guid: 68a329e6ff192984283abbd09d0c154d,
-          type: 3}
-        m_TargetAssemblyTypeName: Managers.AchievementManager, Assembly-CSharp
-        m_MethodName: OnEnemyKilled
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   grandOctiBoss: {fileID: 9215985800514479204}
 --- !u!114 &1412954185048979437
 MonoBehaviour:
@@ -302,6 +287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8239033656803137770}
   - component: {fileID: 4270798925278745973}
+  - component: {fileID: 5319297187496111779}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
@@ -344,7 +330,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 03de8e2ef84168e4b8a373241c94b9b5, type: 2}
+  - {fileID: 2100000, guid: 5838f8e31ad8ce3448a3442c96f02697, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -365,7 +351,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: da61a8acce61a984287390e2e5a1fdbe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: be324adc0789723468f061319a71dcc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -376,6 +362,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5319297187496111779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8503308318380339485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583e680e0cdf44708165956e3d7a4e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 4270798925278745973}
 --- !u!1 &9215985800514479204
 GameObject:
   m_ObjectHideFlags: 0

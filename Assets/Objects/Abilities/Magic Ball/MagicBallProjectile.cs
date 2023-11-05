@@ -26,15 +26,20 @@ namespace Objects.Abilities.Magic_Ball
 			SimpleDamage(other, true);
 		}
 		
-		private void OnEnable()
+		public void ClearTrail()
 		{
 			trail.Clear();
+		}
+		
+		private void OnEnable()
+		{
 			trail.emitting = true;
 		}
 
 		private void OnDisable()
 		{
 			trail.emitting = false;
+			ClearTrail();
 		}
 	}
 }

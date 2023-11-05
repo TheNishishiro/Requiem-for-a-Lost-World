@@ -57,6 +57,9 @@ public class ChaseComponent : MonoBehaviour
     {
         if (targetDestination == null)
             return;
+        
+        if (_isMovementDisabled)
+            return;
 
         var currentPosition = transformCache.position;
 
@@ -70,9 +73,6 @@ public class ChaseComponent : MonoBehaviour
         var destination = isTempTarget ? tempTarget.transform.position : targetDestination.position;
         if (!FollowYAxis)
             destination.y = currentPosition.y;
-
-        if (_isMovementDisabled)
-            return;
         
         if (_immobileTimer > 0)
         {

@@ -124,6 +124,9 @@ namespace Weapons
 			if (damageable == null)
 				return;
 
+			if (damageable.IsDestroyed())
+				return;
+
 			damageable.TakeDamage(WeaponStats.GetDamage() * (1.0f + ProjectileDamageIncreasePercentage), ParentWeapon);
 
 			if (isLimitedUsage && _currentPassedEnemies-- <= 0)
@@ -136,9 +139,11 @@ namespace Weapons
 				return;
 
 			damageable.TakeDamage(WeaponStats.GetDamage() * (1.0f + ProjectileDamageIncreasePercentage), ParentWeapon);
+			if (damageable.IsDestroyed())
+				return;
 			
 			if (isLimitedUsage && _currentPassedEnemies-- <= 0)
-				Destroy(gameObject);
+				OnLifeTimeEnd();
 		}
 
 		protected void DamageArea(Collider other, out IDamageable damageable)
@@ -157,7 +162,9 @@ namespace Weapons
 				return;
 			
 			var damageable = other.GetComponent<IDamageable>();
-			DamageOverTime(damageable, other);
+			
+			if (!damageable.IsDestroyed())
+				DamageOverTime(damageable, other);
 		}
 
 		protected void DamageOverTime(IDamageable damageable, Collider other)
@@ -165,7 +172,8 @@ namespace Weapons
 			if (!other.CompareTag("Enemy") && !other.CompareTag("Destructible"))
 				return;
 			
-			damageable.ApplyDamageOverTime(WeaponStats.GetDamageOverTime(), WeaponStats.DamageOverTimeFrequency, WeaponStats.DamageOverTimeDuration, ParentWeapon);
+			if (!damageable.IsDestroyed())
+				damageable.ApplyDamageOverTime(WeaponStats.GetDamageOverTime(), WeaponStats.DamageOverTimeFrequency, WeaponStats.DamageOverTimeDuration, ParentWeapon);
 		}
 	}
 }
