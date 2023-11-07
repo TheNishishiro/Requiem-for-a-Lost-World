@@ -7,6 +7,7 @@ using Managers;
 using Objects.Characters;
 using Objects.Players;
 using TMPro;
+using UI.Main_Menu.Skill_Tree_Menu;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,6 +34,8 @@ namespace UI.Main_Menu.Character_List_Menu
 		[SerializeField] private Image separationLine4;
 		[SerializeField] private Image separationLine5;
 		[SerializeField] private Image separationLine6;
+		[SerializeField] private Image separationLine7;
+		[SerializeField] private Image separationLine8;
 		[SerializeField] private GameObject statsPanel;
 		[SerializeField] private Image statsScrollbar;
 		private RankDisplayPanel _rankDisplayPanel;
@@ -50,7 +53,8 @@ namespace UI.Main_Menu.Character_List_Menu
 			expTextField.text = $"EXP ► {(characterSaveData.Experience / (float) characterSaveData.ExperienceNeeded):P}";
 			expSlider.SetValue(characterSaveData.Experience, characterSaveData.ExperienceNeeded);
 			characterImage.sprite = characterData.TransparentCard;
-			separationLine1.color = separationLine2.color = separationLine3.color = separationLine4.color = separationLine5.color = separationLine6.color = characterData.ColorTheme;
+			separationLine1.color = separationLine2.color = separationLine3.color = separationLine4.color = separationLine5.color = separationLine6.color = 
+				separationLine7.color = separationLine8.color = characterData.ColorTheme;
 			statsScrollbar.color = new Color(characterData.ColorTheme.r, characterData.ColorTheme.g, characterData.ColorTheme.b, 0.5f);
 			killCountTextField.text = Utilities.GetShortNumberFormatted(characterSaveData.KillCount);
 			highestLevelTextField.text = characterSaveData.HighestInGameLevel.ToString();
@@ -78,6 +82,12 @@ namespace UI.Main_Menu.Character_List_Menu
 		{
 			AudioManager.instance.PlayButtonSimpleClick();
 			_rankDisplayPanel.Open(_characterData, _characterSaveData.GetRankEnum());
+		}
+
+		public void OpenSkillTreeMenu()
+		{
+			AudioManager.instance.PlayButtonSimpleClick();
+			FindFirstObjectByType<SkillTreePanel>(FindObjectsInactive.Include).Open(_characterData);
 		}
 		
 		public void OpenStoryMenu()

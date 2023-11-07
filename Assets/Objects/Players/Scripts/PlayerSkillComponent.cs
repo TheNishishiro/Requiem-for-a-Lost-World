@@ -33,10 +33,15 @@ namespace Objects.Players.Scripts
 		private AmeliaGlassShield _ameliaGlassShield;
 		private float _currentSkillCooldown = 0f;
 		private float _skillCooldown = 5f;
+		private float _dashDuration = 0;
+		private float _dashDistance = 10;
+		private Transform _transform;
+		private Vector3 _dashPosition;
 
 		public void Start()
 		{
 			_skillCooldown = GameData.GetCharacterSkillCooldown();
+			_transform = transform;
 			ApplySpecial();
 		}
 
@@ -51,6 +56,18 @@ namespace Objects.Players.Scripts
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
 				UseSkill(GameData.GetPlayerCharacterId());
+			}
+		}
+
+		public void FixedUpdate()
+		{
+			if (_dashDuration > 0)
+			{
+				_dashPosition = _transform.position;
+
+				_dashPosition = Utilities.GetPointOnColliderSurface(_dashPosition += transform.forward * (_dashDistance * Time.deltaTime), _transform, 0.5f);
+				_transform.position = _dashPosition;
+				_dashDuration -= Time.deltaTime;
 			}
 		}
 
@@ -196,10 +213,9 @@ namespace Objects.Players.Scripts
 
 		private void ChitoseSkill()
 		{
-			var forward = transform.forward;
-			forward.y = 0f;
 			StartCoroutine(IFrames(0.5f));
-			controller.Move(forward * 0.2f);
+			_dashDuration = 0.2f;
+			_dashDistance = 10;
 		}
 
 		private IEnumerator MaidSkill()

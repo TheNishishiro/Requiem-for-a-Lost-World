@@ -10,7 +10,7 @@ namespace Objects.Characters.Chitose
 		{
 			if (characterRank >= CharacterRank.E1)
 			{
-				stats.MagnetSize += 0.1f;
+				stats.MagnetSize *= 1.1f;
 			}
 
 			if (characterRank >= CharacterRank.E2)
