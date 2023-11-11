@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DefaultNamespace.Data;
 using Managers;
+using NUnit.Framework;
 using Objects.Characters;
 using Objects.Players;
 using Objects.Players.PermUpgrades;
@@ -71,20 +72,25 @@ namespace Objects.Stage
 		{
 			return CharacterListManager.instance?.GetActiveCharacter()?.CharacterSprite;
 		}
-		
-		public static Sprite GetPlayerCharacterArt()
-		{
-			return CharacterListManager.instance?.GetActiveCharacter()?.TransparentCard;
-		}
 
 		public static PlayerStats GetPlayerStartingStats()
 		{
 			return CharacterListManager.instance?.GetActiveCharacter()?.Stats ?? new PlayerStats();
 		}
 
+		public static List<int> GetUnlockedSkillTreeNodeIds()
+		{
+			return GetPlayerCharacterSaveData()?.unlockedSkillPoints ?? new List<int>();
+		}
+
 		public static IEnumerable<PermUpgrade> GetPermUpgrades()
 		{
 			return PermUpgradeListManager.instance?.GetUpgrades() ?? new List<PermUpgrade>();
+		}
+
+		public static List<SkillNode> GetCharacterSkillNodes()
+		{
+			return CharacterListManager.instance?.GetActiveCharacter()?.skillNodes ?? new List<SkillNode>();
 		}
 	}
 }

@@ -38,7 +38,6 @@ namespace UI.Main_Menu.End_Screen
 				statsSummaryContainer.Setup(gameResultData);
 
 				var activeCharacter = CharacterListManager.instance.GetActiveCharacter();
-				characterImage.sprite = activeCharacter.TransparentCard;
 				
 				var characterSaveData = _saveFile.GetCharacterSaveData(activeCharacter.Id);
 				characterSaveData.AddGameResultStats(gameResultData);

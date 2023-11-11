@@ -53,12 +53,7 @@ namespace UI.Main_Menu.Character_List_Menu
 			if (!_characterSaveData.IsUnlocked)
 				return;
 
-			foreach (var character in CharacterListManager.instance.GetCharacters())
-			{
-				character.Deactivate();
-			}
-			
-			characterData.Activate();
+			_saveFile.SelectedCharacterId = characterData.Id;
 			_characterInfoPanel.gameObject.SetActive(!_characterInfoPanel.gameObject.activeSelf);
 			if (_characterInfoPanel.gameObject.activeSelf)
 				AudioManager.instance.PlayButtonClick();

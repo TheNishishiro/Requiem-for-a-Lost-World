@@ -57,7 +57,7 @@ public class EnemyManager : Singleton<EnemyManager>
 		
 		position = pointOnSurface;
 		enemy.transform.position = position;
-		enemy.Setup(_currentEnemySpawning, player, this, _playerStatsComponent, _healthMultiplier, _currentEnemySpawning.sprite);
+		enemy.Setup(_currentEnemySpawning, player, _playerStatsComponent, _healthMultiplier, _currentEnemySpawning.sprite);
 		if (_currentEnemySpawning.enemyName == "grand octi")
 			enemy.SetupBoss();
 

@@ -16,10 +16,9 @@ MonoBehaviour:
   Name: Amelia
   Title: Saviour of Hope
   CharacterCard: {fileID: 21300000, guid: 26918dfa626cdbf4a9f1ad8f54a1ba0a, type: 3}
-  TransparentCard: {fileID: 21300000, guid: aef692bfd6e7c3e4a8a49178f0eff002, type: 3}
   Avatar: {fileID: 21300000, guid: 702dbb71fd154a74582c6420a129a00b, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 53619c832865ba44da24695e80eb76ac, type: 3}
-  CharacterGachaArt: {fileID: 21300000, guid: 2b7df0d71d484364492082de27d0d9b1, type: 3}
+  signet: {fileID: 21300000, guid: b548677616a57714885068bff2d29c5c, type: 3}
   PassiveDescription: Starts with low HP but heals over time. Gains additional projectile
     every 15 levels (up to <color=green>+3</color>) and increase enemy spawn rate
     and health by <color=red>7%</color> every 15 levels
@@ -31,7 +30,6 @@ MonoBehaviour:
   AbilityPrefab: {fileID: 4238375383337323453, guid: 7197088e9865c2d498b163f4bd80c079,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: e817619ddba684d47883195bbaf53dd5, type: 3}
-  IsActive: 0
   ColorTheme: {r: 0.93725497, g: 0.8313726, b: 0.6862745, a: 1}
   StarRating: 5
   StartingWeapon: {fileID: 3707545571287273477, guid: 3fc78551d1d24334faecf12f2c66cc6b,
@@ -76,6 +74,7 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+  skillNodes: []
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 8e56390c0067b024d9aacd50340209dc, type: 3}
     EidolonName: Dreams united

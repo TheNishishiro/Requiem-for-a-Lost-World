@@ -1,4 +1,6 @@
-﻿using Interfaces;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Interfaces;
 using Objects.Players;
 using Objects.Players.Scripts;
 using Objects.Stage;
@@ -36,6 +38,14 @@ namespace Objects.Characters.Summer
 
 			stats.CritDamage += GameData.GetPlayerCharacterSaveData().Level * critDamageIncrease;
 			stats.Damage += (int)characterRank;
+		}
+
+		public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
+		{
+			foreach (var skillNode in GameData.GetCharacterSkillNodes().Where(x => unlockedTreeNodeIds.Contains(x.nodeId) ))
+			{
+				stats.Sum(skillNode.stats, 1);
+			}
 		}
 	}
 }

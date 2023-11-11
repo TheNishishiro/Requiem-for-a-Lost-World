@@ -143,12 +143,12 @@ namespace Objects.Players
 		public void Set(PlayerStats playerStats)
         {
             var characterId = GameData.GetPlayerCharacterId();
-            var characterRank = GameData.GetPlayerCharacterRank();
         
             CopyPlayerStats(playerStats);
         
             var playerStatsUpdater = new PlayerStrategyApplier();
-            playerStatsUpdater.ApplyRankStrategy(characterId, characterRank, this);
+            playerStatsUpdater.ApplyRankStrategy(characterId, GameData.GetPlayerCharacterRank(), this);
+            playerStatsUpdater.ApplySkillTreeStrategy(characterId, GameData.GetUnlockedSkillTreeNodeIds(), this);
         }
         
         private void CopyPlayerStats(PlayerStats playerStats)

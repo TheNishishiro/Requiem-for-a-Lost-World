@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using DefaultNamespace.Data.Achievements;
 using DefaultNamespace.Extensions;
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Objects.Characters;
 using Objects.Players.PermUpgrades;
@@ -25,6 +26,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<AchievementEnum, bool> AchievementSaveData;
 		public Dictionary<int, List<int>> ReadStoryEntries { get; set; }
 		public ConfigurationFile ConfigurationFile;
+		public CharactersEnum? SelectedCharacterId;
 		public ulong Gold;
 		public ulong Gems;
 		public ulong EnemiesKilled;
@@ -97,6 +99,7 @@ namespace DefaultNamespace.Data
 			PullsPerformed = saveData.PullsPerformed;
 			IsFirstTutorialCompleted = saveData.IsFirstTutorialCompleted;
 			Pity = saveData.Pity;
+			SelectedCharacterId = saveData.SelectedCharacterId;
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
 			AchievementSaveData = saveData.AchievementSaveData ?? new Dictionary<AchievementEnum, bool>();
@@ -222,6 +225,7 @@ namespace DefaultNamespace.Data
 		public ulong StoryPoints;
 		public bool IsFirstTutorialCompleted;
 		public int Pity;
+		public CharactersEnum? SelectedCharacterId;
 		
 		public SaveData(){}
 		
@@ -241,6 +245,7 @@ namespace DefaultNamespace.Data
 			IsFirstTutorialCompleted = saveFile.IsFirstTutorialCompleted;
 			Pity = saveFile.Pity;
 			ReadStoryEntries = saveFile.ReadStoryEntries;
+			SelectedCharacterId = saveFile.SelectedCharacterId;
 		}
 
 	}

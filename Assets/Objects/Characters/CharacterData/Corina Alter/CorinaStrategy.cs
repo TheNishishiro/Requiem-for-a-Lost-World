@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using System.Collections.Generic;
+using Interfaces;
 using Objects.Players;
 using Objects.Players.Scripts;
 
@@ -27,6 +28,10 @@ namespace Objects.Characters.Corina_Alter
 				stats.DamagePercentageIncrease += 0.5f;
 				stats.MagnetSize += 0.2f;
 			}
+		}
+
+		public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
+		{
 		}
 
 		public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)

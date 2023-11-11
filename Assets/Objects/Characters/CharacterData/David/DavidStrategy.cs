@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Interfaces;
 using Objects.Players;
 using Objects.Players.Scripts;
@@ -16,6 +17,10 @@ namespace Objects.Characters.David
 				stats.HealthRegen += 0.2f;
 			if (characterRank >= CharacterRank.E2)
 				stats.Armor += 1;
+		}
+
+		public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
+		{
 		}
 
 		public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)

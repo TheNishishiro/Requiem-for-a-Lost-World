@@ -75,7 +75,7 @@ namespace UI.Main_Menu.Recollection_Menu
 				_saveFile.Pity++;
 				var character = characters.OrderBy(x => Random.value).FirstOrDefault();
 				var characterSaveData = _saveFile.GetCharacterSaveData(character.Id);
-				if (characterSaveData.IsUnlocked)
+				if (!characterSaveData.IsUnlocked)
 					_saveFile.Pity = 0;
 
 				return character;

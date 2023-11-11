@@ -16,10 +16,9 @@ MonoBehaviour:
   Name: Eliza
   Title: The Royal Maid
   CharacterCard: {fileID: 21300000, guid: 08ed45bd92f1a4748bba34a707f7e605, type: 3}
-  TransparentCard: {fileID: 21300000, guid: fab570cc76f1a7247a2548f6d33db5b6, type: 3}
   Avatar: {fileID: 21300000, guid: fc95ef9c7d235eb47959f93bac8eb32e, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 10bbff2e72afa9c4bade4d0b811a689b, type: 3}
-  CharacterGachaArt: {fileID: 21300000, guid: b90bbb2ac7cd8a04798e56ad6842e86c, type: 3}
+  signet: {fileID: 21300000, guid: 6ac091ae041939c45848dc85c01083c5, type: 3}
   PassiveDescription: Every 10 levels increase crit rate by <color=green>5%</color>
     up to 20%
   AbilityName: Precision Strike
@@ -30,7 +29,6 @@ MonoBehaviour:
   AbilityPrefab: {fileID: -1432332605348777518, guid: 23f4a09b31a004d40ba84eadfd4a2546,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 5e6400d2d57dad34c8c628e364371df8, type: 3}
-  IsActive: 0
   ColorTheme: {r: 0.52156866, g: 0.38431376, b: 0.5764706, a: 1}
   StarRating: 4
   StartingWeapon: {fileID: -3886955019502428694, guid: ae1c2329b1daebc4aa1983817da70386,
@@ -75,6 +73,7 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+  skillNodes: []
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: aa57eb58854930840b967e820e155b25, type: 3}
     EidolonName: My first day!

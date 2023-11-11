@@ -16,10 +16,9 @@ MonoBehaviour:
   Name: Corina Alter
   Title: Shard of Pain
   CharacterCard: {fileID: 21300000, guid: d356bb561b363824facd9d1352df9311, type: 3}
-  TransparentCard: {fileID: 21300000, guid: 85a7ce7abee5951408aecb2901553149, type: 3}
   Avatar: {fileID: 21300000, guid: 57c7916c77b52ff45a5b3cff436361f6, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 35b71f024b9c2db45a8b9c01c73fb6e6, type: 3}
-  CharacterGachaArt: {fileID: 21300000, guid: 2e16cb243fb31da4b9728b62f7c602d2, type: 3}
+  signet: {fileID: 21300000, guid: 2dabbacf181ee9c4b94e6e7c6b5fa4fb, type: 3}
   PassiveDescription: "Increase all incoming healing by <color=green>50%</color>
     \nStarts with <color=green>30%</color> damage increase and <color=green>20%</color>
     crit rate.\nShard attraction is reduced by <color=red>50%</color>\nMovement speed
@@ -33,7 +32,6 @@ MonoBehaviour:
   AbilityPrefab: {fileID: 8835472784573972083, guid: bdf65f1ee5ca7404eaf4dffa8c3ac486,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 102251c1cecbdf84db96ccf400d14b59, type: 3}
-  IsActive: 1
   ColorTheme: {r: 0.27058825, g: 0.27058825, b: 0.32156864, a: 1}
   StarRating: 5
   StartingWeapon: {fileID: 8385973842094059995, guid: 98b1589fbfbea4b47a134ef36e0b9a6e,
@@ -78,6 +76,7 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+  skillNodes: []
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 1f2ad5314cbc689479873cdb2a75081f, type: 3}
     EidolonName: My Second Life

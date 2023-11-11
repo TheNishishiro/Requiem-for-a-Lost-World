@@ -16,10 +16,9 @@ namespace Objects.Characters
 		public string Name;
 		public string Title;
 		public Sprite CharacterCard;
-		public Sprite TransparentCard;
 		public Sprite Avatar;
 		public Sprite CharacterSprite;
-		public Sprite CharacterGachaArt;
+		public Sprite signet;
 		[TextArea]
 		public string PassiveDescription;
 		public string AbilityName;
@@ -29,7 +28,6 @@ namespace Objects.Characters
 		public CharacterSkillBase SpecialPrefab;
 		public CharacterSkillBase AbilityPrefab;
 		public Sprite AbilityIcon;
-		public bool IsActive;
 		public Color ColorTheme;
 		public int StarRating;
 		public WeaponBase StartingWeapon;
@@ -37,19 +35,10 @@ namespace Objects.Characters
 		public bool UseSpecialBar;
 		public bool PickWeaponOnStart;
 		public PlayerStats Stats;
+		public List<SkillNode> skillNodes;
 		public List<EidolonData> Eidolons;
 		public List<CharacterLoreEntry> loreEntries;
-
-		public void Activate()
-		{
-			IsActive = true;
-		}
-
-		public void Deactivate()
-		{
-			IsActive = false;
-		}
-
+		
 		public IEnumerable<StatsDisplayData> GetStatsList()
 		{
 			return Stats.GetStatsList();

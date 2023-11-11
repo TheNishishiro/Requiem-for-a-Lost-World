@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using System.Collections.Generic;
+using Interfaces;
 using Objects.Players;
 using Objects.Players.Scripts;
 
@@ -23,6 +24,10 @@ namespace Objects.Characters.Alice
                 stats.CritDamage += 0.2f;
                 stats.Armor -= 5;
             }
+        }
+
+        public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
+        {
         }
     }
 }

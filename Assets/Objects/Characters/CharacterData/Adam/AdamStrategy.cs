@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using System.Collections.Generic;
+using Interfaces;
 using Objects.Players;
 using Objects.Players.Scripts;
 
@@ -16,6 +17,10 @@ namespace Objects.Characters.Adam
 		{
 			if (characterRank >= CharacterRank.E4)
 				stats.HealthRegen += 1;
+		}
+
+		public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
+		{
 		}
 	}
 }

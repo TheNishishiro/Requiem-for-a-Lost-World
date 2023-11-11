@@ -44,6 +44,14 @@ namespace Objects.Players.Scripts
 				characterStrategy.ApplyRank(playerStats, characterRank);
 			}
 		}
+		
+		public void ApplySkillTreeStrategy(CharactersEnum characterId, List<int> unlockedSkillTreeNodeIds, PlayerStats playerStats)
+		{
+			if (_characterStrategies.TryGetValue(characterId, out var characterStrategy))
+			{
+				characterStrategy.ApplySkillTree(playerStats, unlockedSkillTreeNodeIds);
+			}
+		}
 
 		public void ApplyLevelUpStrategy(CharactersEnum characterId, CharacterRank characterRank, int currentLevel, PlayerStatsComponent playerStatsComponent)
 		{

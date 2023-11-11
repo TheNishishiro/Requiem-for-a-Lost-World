@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Interfaces;
 using Objects.Players;
 using Objects.Players.Scripts;
@@ -23,6 +24,10 @@ namespace Objects.Characters.Oana
                 stats.SkillCooldownReductionPercentage += 0.15f;
                 stats.HealthRegen += 0.5f;
             }
+        }
+
+        public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
+        {
         }
     }
 }

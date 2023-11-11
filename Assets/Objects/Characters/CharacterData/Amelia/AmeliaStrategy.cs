@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using System.Collections.Generic;
+using Interfaces;
 using Objects.Players;
 using Objects.Players.Scripts;
 
@@ -28,6 +29,10 @@ namespace Objects.Characters.Amelia
 				stats.SpecialIncrease += 1;
 				stats.DamageTakenIncreasePercentage += 0.5f;
 			}
+		}
+
+		public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
+		{
 		}
 	}
 }

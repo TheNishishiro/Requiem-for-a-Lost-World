@@ -22,7 +22,6 @@ namespace UI.Labels.InGame
 			abilityIconImageBox.sprite = abilityIconCooldownImageBox.sprite = GameData.GetPlayerAbilityIcon();
 			characterAvatarImageBox.sprite = GameData.GetPlayerCharacterAvatar();
 			expBarFillImage.color = GameData.GetPlayerColorTheme() ?? Color.cyan;
-			pauseMenuCharacterImage.sprite = GameData.GetPlayerCharacterArt();
 			mapPanel.gameObject.SetActive(false);
 		}
 	}

@@ -16,24 +16,27 @@ MonoBehaviour:
   Name: Chronastra
   Title: Celestial Construct of the Final Hour
   CharacterCard: {fileID: 21300000, guid: ff9acebd6f001294f9edfe3b4e25e50b, type: 3}
-  TransparentCard: {fileID: 21300000, guid: ba82a7a653e960d469250d837864a21b, type: 3}
   Avatar: {fileID: 0}
   CharacterSprite: {fileID: 21300000, guid: 643214c9e9c36aa49a5c2d046522ee84, type: 3}
-  CharacterGachaArt: {fileID: 0}
+  signet: {fileID: 21300000, guid: a065fec491803cb4db1aa9d92ba02682, type: 3}
   PassiveDescription: 
   AbilityName: 
   AbilityDescription: 
   AbilityCooldown: 0
+  SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 0}
   AbilityIcon: {fileID: 0}
-  IsActive: 0
   ColorTheme: {r: 0.9490197, g: 0.6509804, b: 0.30980393, a: 1}
   StarRating: 6
   StartingWeapon: {fileID: 0}
   IsPullable: 0
+  UseSpecialBar: 0
+  PickWeaponOnStart: 0
   Stats:
     Health: 100
     HealthMax: 100
+    SpecialMax: 0
+    SpecialIncrease: 0
     MagnetSize: 1
     CooldownReduction: 0
     CooldownReductionPercentage: 0
@@ -64,5 +67,8 @@ MonoBehaviour:
     HealingIncreasePercentage: 0
     Luck: 0
     DamageOverTime: 0
+    Rerolls: 0
+    Skips: 0
+  skillNodes: []
   Eidolons: []
   loreEntries: []

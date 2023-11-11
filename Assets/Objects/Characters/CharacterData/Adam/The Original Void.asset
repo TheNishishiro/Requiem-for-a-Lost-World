@@ -16,10 +16,9 @@ MonoBehaviour:
   Name: Adam
   Title: The Unforgiven
   CharacterCard: {fileID: 21300000, guid: a0837dbcd64c3fd4eb7abdde9a71d875, type: 3}
-  TransparentCard: {fileID: 21300000, guid: 31b212adc96dcdf48bf79aade4543969, type: 3}
   Avatar: {fileID: 21300000, guid: 34b7b3f5b7984584c9c56cafa6b9a03c, type: 3}
   CharacterSprite: {fileID: 21300000, guid: dcc8c0d245ab4ab488390b853f0a4d23, type: 3}
-  CharacterGachaArt: {fileID: 0}
+  signet: {fileID: 21300000, guid: 7c06493d9dc44c1489f9507a7e688c0f, type: 3}
   PassiveDescription: 'For each <color=#00B1FF>enemy</color> currently alive increase
     both damage dealt and damage taken by <color=#79861B>0.5%</color>
 
@@ -35,7 +34,6 @@ MonoBehaviour:
   AbilityPrefab: {fileID: 6364339625612323807, guid: 50308ae1a0aaef349a693f860df23abb,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 6728187d0e2c13049b61a331a18b51bf, type: 3}
-  IsActive: 1
   ColorTheme: {r: 0.7607844, g: 0.6745098, b: 0.67058825, a: 1}
   StarRating: 4
   StartingWeapon: {fileID: -7728612429544217329, guid: ad4c32bfb65fcdd48bcf9502c40f09e0,
@@ -80,6 +78,7 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+  skillNodes: []
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: c7e6f877e496a6445bb1c55045ee3ec8, type: 3}
     EidolonName: One and only

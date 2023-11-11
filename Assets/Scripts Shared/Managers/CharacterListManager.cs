@@ -28,7 +28,7 @@ namespace Managers
 
 		public CharacterData GetActiveCharacter()
 		{
-			return characters.FirstOrDefault(x => x.IsActive);
+			return characters.FirstOrDefault(x => x.Id == (_saveFile.SelectedCharacterId ?? CharactersEnum.Nishi));
 		}
 
 		public CharacterSaveData GetActiveCharacterData()

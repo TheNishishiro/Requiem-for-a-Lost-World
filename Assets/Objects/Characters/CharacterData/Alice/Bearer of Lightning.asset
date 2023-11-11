@@ -14,12 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 6
   Name: Alice
-  Title: 
+  Title: The First Sinner
   CharacterCard: {fileID: 21300000, guid: 50e798b2a27322749b3e77e9a4b949f6, type: 3}
-  TransparentCard: {fileID: 0}
   Avatar: {fileID: 21300000, guid: 3a60d6b44c8a8b74d8b8d5a43104760a, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 8e2fd4ba853941743974dfde1ce94c74, type: 3}
-  CharacterGachaArt: {fileID: 0}
+  signet: {fileID: 21300000, guid: 37c9d2a824073604283f0dbc216ff921, type: 3}
   PassiveDescription: Every 10 levels increase <color=#FFC300>cooldown reduction</color>
     by <color=green>1.5%</color>
   AbilityName: Kaminari Kiretsu
@@ -31,12 +30,11 @@ MonoBehaviour:
   AbilityPrefab: {fileID: 3587274077961109647, guid: d576beee47a482c40a305ed5a4005058,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: d19ad89914d292c4ea045a3ea6b1553c, type: 3}
-  IsActive: 1
   ColorTheme: {r: 0.21960786, g: 0.18039216, b: 0.29803923, a: 1}
   StarRating: 5
   StartingWeapon: {fileID: 8000290219869719478, guid: 939fd167da7dc944a99764b849f19669,
     type: 3}
-  IsPullable: 0
+  IsPullable: 1
   UseSpecialBar: 0
   PickWeaponOnStart: 0
   Stats:
@@ -76,6 +74,7 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+  skillNodes: []
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 0bb9275cc46816447bbff0b42bf8e579, type: 3}
     EidolonName: Thunder Awakens

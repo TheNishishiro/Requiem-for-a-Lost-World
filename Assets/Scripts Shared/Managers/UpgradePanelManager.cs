@@ -98,7 +98,10 @@ namespace Managers
 				.Take(upgradesToPick)
 				.ToList();
 			if (upgradeEntries.Count == 0)
+			{
+				ClosePanel();
 				return;
+			}
 
 			Clean();
 			panel.SetActive(true);

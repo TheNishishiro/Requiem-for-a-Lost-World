@@ -37,8 +37,10 @@ namespace Objects.Players.Scripts
 
 		private void CheckLevelUp()
 		{
-			if (experience < ToLevelUp) return;
-			LevelUp();
+			while (experience >= ToLevelUp)
+			{
+				LevelUp();
+			}
 		}
 
 		private void LevelUp()

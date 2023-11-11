@@ -103,7 +103,7 @@ namespace Objects.Abilities
 				.Replace("{Speed}", Utilities.StatToString(Speed, rarityFactor))
 				.Replace("{TimeToLive}", Utilities.StatToString(TimeToLive, rarityFactor))
 				.Replace("{PassThroughCount}", Utilities.StatToString(PassThroughCount))
-				.Replace("{DamageCooldown}", Utilities.StatToString(Damage, rarityFactor, true))
+				.Replace("{DamageCooldown}", Utilities.StatToString(DamageCooldown, rarityFactor))
 				.Replace("{DuplicateSpawnDelay}", Utilities.StatToString(DuplicateSpawnDelay, rarityFactor))
 				.Replace("{DetectionRange}", Utilities.StatToString(DetectionRange, rarityFactor))
 				.Replace("{CritRate}", Utilities.StatToString(CritRate, rarityFactor, true))

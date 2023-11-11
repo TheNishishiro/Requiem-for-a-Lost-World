@@ -31,7 +31,6 @@ namespace Objects.Enemies
 		[SerializeField] private Pickup gemDrop;
 		[SerializeField] private GameObject grandOctiBoss;
 		public Transform TargetPoint => damageableComponent.targetPoint.transform;
-		private EnemyManager _enemyManager;
 		private EnemyStats stats;
 		private GameObject targetGameObject;
 		private Player playerTarget;
@@ -50,9 +49,8 @@ namespace Objects.Enemies
 		private ChanceDrop goldDropChance;
 		private ChanceDrop gemDropChance;
 		
-		public void Setup(EnemyData newStats, Player target, EnemyManager enemyManager, PlayerStatsComponent playerStats, float healthMultiplier, Sprite sprite)
+		public void Setup(EnemyData newStats, Player target, PlayerStatsComponent playerStats, float healthMultiplier, Sprite sprite)
 		{
-			_enemyManager = enemyManager;
 			damageableComponent.Clear();
 			chaseComponent.Clear();
 			dissolveController.Clear();
@@ -140,14 +138,14 @@ namespace Objects.Enemies
 		{
 			if (_isDying) return;
 			
-			chaseComponent.SetMovementState(_enemyManager.IsTimeStop());
+			chaseComponent.SetMovementState(EnemyManager.instance.IsTimeStop());
 			_timeAlive += Time.deltaTime;
 			
 			if (_currentDamageCooldown > 0)
 				_currentDamageCooldown -= Time.deltaTime;
 			if (_timeAlive > 90 && !_isBossEnemy)
 			{
-				_enemyManager.Despawn(this);
+				EnemyManager.instance.Despawn(this);
 			}
 			
 			if (damageableComponent.IsDestroyed())
@@ -184,7 +182,7 @@ namespace Objects.Enemies
 			var dissolveTime = 0.25f;
 			dissolveController.Dissolve(dissolveTime);
 			yield return new WaitForSeconds(0.5f);
-			_enemyManager.Despawn(this);
+			EnemyManager.instance.Despawn(this);
 		}
 
 		public bool IsDead()

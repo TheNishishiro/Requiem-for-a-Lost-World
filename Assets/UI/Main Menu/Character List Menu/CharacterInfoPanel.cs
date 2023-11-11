@@ -52,7 +52,6 @@ namespace UI.Main_Menu.Character_List_Menu
 			levelTextField.text = characterSaveData.Level.ToString();
 			expTextField.text = $"EXP ► {(characterSaveData.Experience / (float) characterSaveData.ExperienceNeeded):P}";
 			expSlider.SetValue(characterSaveData.Experience, characterSaveData.ExperienceNeeded);
-			characterImage.sprite = characterData.TransparentCard;
 			separationLine1.color = separationLine2.color = separationLine3.color = separationLine4.color = separationLine5.color = separationLine6.color = 
 				separationLine7.color = separationLine8.color = characterData.ColorTheme;
 			statsScrollbar.color = new Color(characterData.ColorTheme.r, characterData.ColorTheme.g, characterData.ColorTheme.b, 0.5f);

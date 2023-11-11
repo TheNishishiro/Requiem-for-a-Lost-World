@@ -16,10 +16,9 @@ MonoBehaviour:
   Name: Summer
   Title: Arrow of Hope
   CharacterCard: {fileID: 21300000, guid: 81359642d9c6c3d4689fef7756c2feb2, type: 3}
-  TransparentCard: {fileID: 0}
   Avatar: {fileID: 21300000, guid: 1159b0899864723448b644fe7f38e721, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 422ea70c15495394b996d79b3b0392b3, type: 3}
-  CharacterGachaArt: {fileID: 0}
+  signet: {fileID: 21300000, guid: d0e8d9da323764a4583103962b2f4ea9, type: 3}
   PassiveDescription: 'Every 2 minutes gain <color=green>1</color> additional <color=orange>Make
     it rain!</color> projectile
 
@@ -35,7 +34,7 @@ MonoBehaviour:
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 25d5c8d68fb0aed49bffe952abff8c00, type: 3}
   IsActive: 1
-  ColorTheme: {r: 0.9058824, g: 0.47450984, b: 0.44705886, a: 1}
+  ColorTheme: {r: 0.94117653, g: 0.6, b: 0.5647059, a: 1}
   StarRating: 5
   StartingWeapon: {fileID: -5174018032676017786, guid: 65b517a3cb75c7a48bab13f0f10c1d39,
     type: 3}
@@ -79,6 +78,17 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 2
     Skips: 0
+  skillNodes:
+  - {fileID: 11400000, guid: 9e08047635e98f246b3060c64cb4a3d6, type: 2}
+  - {fileID: 11400000, guid: ef40ea8f98ac5584887bdd38f32645de, type: 2}
+  - {fileID: 11400000, guid: 361239a641844074ea72ecb1c12d3c42, type: 2}
+  - {fileID: 11400000, guid: d2431cd9a6ff5e246bd661ac9616830d, type: 2}
+  - {fileID: 11400000, guid: dfefd7b68f97a37409588946f8adc496, type: 2}
+  - {fileID: 11400000, guid: 04a9730e04fade34d9329dab2a85f145, type: 2}
+  - {fileID: 11400000, guid: fb9cbb4dd74a99145a7b1d4ed52cf53a, type: 2}
+  - {fileID: 11400000, guid: 1e9bbc29417f14f49ad5ea6a4d79b0a1, type: 2}
+  - {fileID: 11400000, guid: f0ff407e3db797b4391d7c697679400b, type: 2}
+  - {fileID: 11400000, guid: 5387bbfd4701dab4da895c9bf911dd57, type: 2}
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: cdc9accd75ebabf4aae243ef440c8a20, type: 3}
     EidolonName: The prettiest there is

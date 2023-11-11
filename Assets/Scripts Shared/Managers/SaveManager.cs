@@ -14,11 +14,17 @@ namespace Managers
 	public class SaveManager : MonoBehaviour
 	{
 		private static bool _isFirstLoad = true;
+		public static SaveManager instance;
 		[SerializeField] private CharacterListMenu characterListMenu;
 		private SaveFile _saveData;
 
 		private void Awake()
 		{
+			if (instance == null)
+			{
+				instance = this;
+			}
+			
 			_saveData = FindObjectOfType<SaveFile>();
 			Time.timeScale = 1f;
 			if (_isFirstLoad)

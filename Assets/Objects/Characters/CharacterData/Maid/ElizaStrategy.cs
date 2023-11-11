@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using System.Collections.Generic;
+using Interfaces;
 using Objects.Players;
 using Objects.Players.Scripts;
 
@@ -16,6 +17,10 @@ namespace Objects.Characters.Maid
 				stats.Speed += 0.15f;
 			if (characterRank >= CharacterRank.E5)
 				stats.HealthMax -= 10;
+		}
+
+		public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
+		{
 		}
 
 		public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)

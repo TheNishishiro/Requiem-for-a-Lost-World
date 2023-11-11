@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Objects.Characters;
 using Objects.Stage;
 using UnityEngine;
@@ -15,11 +16,19 @@ namespace DefaultNamespace.Data
 		public ulong KillCount;
 		public int HighestInGameLevel;
 		public bool FinishedGame;
+		public int skillPoints;
+		public List<int> unlockedSkillPoints;
 		public int ExperienceNeeded => (int)(Level * 75 * 1.5f);
 
 		public CharacterSaveData()
 		{
 			Level = 1;
+		}
+
+		public List<int> GetUnlockedSkillPoints()
+		{
+			unlockedSkillPoints ??= new List<int>();
+			return unlockedSkillPoints;
 		}
 
 		public CharacterRank GetRankEnum()
@@ -53,8 +62,9 @@ namespace DefaultNamespace.Data
 			Experience += experience;
 			while (Experience >= ExperienceNeeded)
 			{
-				Experience = 0;
+				Experience -= ExperienceNeeded;
 				Level++;
+				skillPoints++;
 			}
 		}
 	}

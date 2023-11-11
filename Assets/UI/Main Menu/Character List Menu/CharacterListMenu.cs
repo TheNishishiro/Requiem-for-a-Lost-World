@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DefaultNamespace.Data;
 using Managers;
 using Objects.Characters;
@@ -61,7 +62,7 @@ namespace UI.Main_Menu.Character_List_Menu
 		{
 			if (Input.GetKeyDown(KeyCode.LeftArrow))
 			{
-				var activeIndex = _characterListPanels.FindIndex(x => x.characterData.IsActive);
+				var activeIndex = _characterListPanels.FindIndex(x => x.characterData.Id == _saveFile.SelectedCharacterId);
 				while (activeIndex-- > 0)
 				{
 					var _characterSaveData = _saveFile.GetCharacterSaveData(_characterListPanels[activeIndex].characterData.Id);
@@ -74,7 +75,7 @@ namespace UI.Main_Menu.Character_List_Menu
 			}
 			if (Input.GetKeyDown(KeyCode.RightArrow))
 			{
-				var activeIndex = _characterListPanels.FindIndex(x => x.characterData.IsActive);
+				var activeIndex = _characterListPanels.FindIndex(x => x.characterData.Id == _saveFile.SelectedCharacterId);
 				while (activeIndex++ < _characterListPanels.Count-1)
 				{
 					var _characterSaveData = _saveFile.GetCharacterSaveData(_characterListPanels[activeIndex].characterData.Id);

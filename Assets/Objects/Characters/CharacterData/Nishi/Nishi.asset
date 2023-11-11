@@ -16,10 +16,9 @@ MonoBehaviour:
   Name: Nishi
   Title: Shadow of the Past
   CharacterCard: {fileID: 21300000, guid: 0ce2b7f99c94bb54090320d4a672696a, type: 3}
-  TransparentCard: {fileID: 0}
   Avatar: {fileID: 21300000, guid: 8f49d35216dbf874ca224480855b63a4, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 63199ad1f76c53042a363dc64f49ab83, type: 3}
-  CharacterGachaArt: {fileID: 21300000, guid: 0ce2b7f99c94bb54090320d4a672696a, type: 3}
+  signet: {fileID: 21300000, guid: edc40b7f0bfd31c498afd44aeaef7e98, type: 3}
   PassiveDescription: "Charge special by <color=yellow>1</color> with each <color=#00B1FF>killed
     enemy</color>. After killing enough enemies summon dark flames on surrounding
     enemies, dealing instance of damage and consuming part of Nishi's health. \n\nUnleashing
@@ -32,7 +31,6 @@ MonoBehaviour:
   AbilityPrefab: {fileID: 7089003118366457812, guid: 2c651463a691f834d945ccdaf4b95bca,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 9f3d47405a2a1ad4e8e9446d237b600c, type: 3}
-  IsActive: 1
   ColorTheme: {r: 0, g: 0.38660192, b: 1, a: 1}
   StarRating: 5
   StartingWeapon: {fileID: -6109885102338104604, guid: f51cf3d74604ea54e8ff7eeccb5d465c,
@@ -77,6 +75,16 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+  skillNodes:
+  - {fileID: 11400000, guid: 36cac3b8631fa27438eec42e01810255, type: 2}
+  - {fileID: 11400000, guid: 43615b0b574f1514e9ad4d1d7ca6e3a3, type: 2}
+  - {fileID: 11400000, guid: 8b2b44bd699aa424a8dc2fa8bbb2703b, type: 2}
+  - {fileID: 11400000, guid: af5028421f0b6eb4f9ec3c6f78f6a678, type: 2}
+  - {fileID: 11400000, guid: 5c29d94866fee784996242cd9b5c719c, type: 2}
+  - {fileID: 11400000, guid: 5b10d537ebddcd64b8dba816c824e9d2, type: 2}
+  - {fileID: 11400000, guid: aadd73843c04fed4ea4a32220c708340, type: 2}
+  - {fileID: 11400000, guid: 5b13059a0bedbbc4eae594a8bc575eb7, type: 2}
+  - {fileID: 11400000, guid: 260d4fb2563a6de41a7faa295b0fdac8, type: 2}
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 9129604a9abd7e647ada4345e1f1194e, type: 3}
     EidolonName: From Beyond

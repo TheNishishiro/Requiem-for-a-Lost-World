@@ -16,7 +16,6 @@ namespace UI.Main_Menu.Recollection_Menu
 		public void Setup(CharacterData characterData)
 		{
 			characterName.text = characterData.Name;
-			characterImage.sprite = characterData.CharacterGachaArt;
 			StartCoroutine(AnimateStars(characterData.StarRating));
 		}
 

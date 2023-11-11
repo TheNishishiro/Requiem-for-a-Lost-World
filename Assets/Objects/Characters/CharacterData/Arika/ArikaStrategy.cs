@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using System.Collections.Generic;
+using Interfaces;
 using Objects.Players;
 using Objects.Players.Scripts;
 
@@ -30,6 +31,10 @@ namespace Objects.Characters.Arika
 				stats.SkillCooldownReductionPercentage += 0.25f;
 				stats.EnemySpeedIncreasePercentage += 0.1f;
 			}
+		}
+
+		public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
+		{
 		}
 
 		public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)

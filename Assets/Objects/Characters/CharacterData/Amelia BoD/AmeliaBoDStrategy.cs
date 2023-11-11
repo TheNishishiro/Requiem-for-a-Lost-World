@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using System.Collections.Generic;
+using Interfaces;
 using Objects.Players;
 using Objects.Players.Scripts;
 
@@ -28,7 +29,11 @@ namespace Objects.Characters.Amelia_BoD
 				stats.EnemySpawnRateIncreasePercentage += 0.2f;
 			}
 		}
-		
+
+		public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
+		{
+		}
+
 		public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)
 		{
 			if (currentLevel <= 45 && currentLevel % 15 == 0)

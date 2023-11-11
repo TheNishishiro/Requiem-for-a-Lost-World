@@ -71,13 +71,13 @@ namespace Objects.Abilities.Bouncer
 		{
 			switch (LevelField)
 			{
-				case 2:
+				case 4:
 					ElectroDefenceShred += 0.2f;
 					break;
-				case 6:
+				case 8:
 					ElectroDefenceShred += 0.1f;
 					break;
-				case 9:
+				case 11:
 					Thunderstorm = true;
 					break;
 			}

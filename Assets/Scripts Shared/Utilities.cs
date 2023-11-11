@@ -191,5 +191,9 @@ namespace DefaultNamespace
 			return distanceToPlayer <= maxDistance;
 		}
 		
+		public static Vector3 GetWorldPositionFromUI(Vector3 uiPosition)
+		{
+			return Camera.current.ScreenToWorldPoint(uiPosition);
+		}
 	}
 }

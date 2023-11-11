@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using System.Collections.Generic;
+using Interfaces;
 using Objects.Players;
 using Objects.Players.Scripts;
 
@@ -32,6 +33,10 @@ namespace Objects.Characters.Natalie
 			}
 			if (characterRank >= CharacterRank.E5)
 				stats.DamagePercentageIncrease += 0.3f;
+		}
+
+		public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
+		{
 		}
 	}
 }
