@@ -36,6 +36,11 @@ namespace Managers.StageEvents
 				_enemyManager.ChangeSpawnRate(stageEvent.spawnRate);
 			}
 			
+			if (stageEvent.speedMultiplier > 0)
+			{
+				_enemyManager.ChangeSpeedMultiplier(stageEvent.speedMultiplier);
+			}
+			
 			if (stageEvent.minCount > 0)
 			{
 				_enemyManager.ChangeMinimumEnemyCount(stageEvent.minCount);

@@ -34,6 +34,7 @@ namespace Objects.Abilities.Healing_Field
 				projectile =>
 				{
 					subProjectileStats.Scale = weaponStats.GetScale();
+					projectile.transform.position = _subProjectilePosition;
 					projectile.SetStats(subProjectileStats);
 					projectile.Setup(weaponStats.HealPerHit, IsEmpowering);
 					projectile.gameObject.SetActive(true);

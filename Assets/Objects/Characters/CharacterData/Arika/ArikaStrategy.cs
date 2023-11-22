@@ -5,7 +5,7 @@ using Objects.Players.Scripts;
 
 namespace Objects.Characters.Arika
 {
-	public class ArikaStrategy : ICharacterStrategy
+	public class ArikaStrategy : CharacterStrategyBase, ICharacterStrategy
 	{
 		public void ApplyRank(PlayerStats stats, CharacterRank characterRank)
 		{
@@ -31,10 +31,6 @@ namespace Objects.Characters.Arika
 				stats.SkillCooldownReductionPercentage += 0.25f;
 				stats.EnemySpeedIncreasePercentage += 0.1f;
 			}
-		}
-
-		public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
-		{
 		}
 
 		public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)

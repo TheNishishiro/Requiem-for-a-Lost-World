@@ -1,5 +1,7 @@
 ﻿using DefaultNamespace;
 using Managers;
+using Objects.Characters;
+using Objects.Stage;
 using Weapons;
 
 namespace Objects.Abilities.Katana
@@ -15,6 +17,15 @@ namespace Objects.Abilities.Katana
 			projectile.SetStats(weaponStats);
 
 			return true;
+		}
+
+		protected override int GetAttackCount()
+		{
+			var attackCount = base.GetAttackCount();
+			if (GameData.IsCharacterWithRank(CharactersEnum.Nishi, CharacterRank.E4))
+				attackCount += 2;
+			
+			return attackCount;
 		}
 	}
 }

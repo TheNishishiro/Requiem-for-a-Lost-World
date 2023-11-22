@@ -29,7 +29,7 @@ namespace Objects.Characters.Adam.Skill
 			_damage = 50 * (1 + GameData.GetPlayerCharacterData().Stats.DamagePercentageIncrease);
 			_elementalWeapon = new ElementalWeapon(Element.Cosmic);
 			playerStatsComponent.IncreaseDamageTaken(0.01f);
-			FindObjectOfType<HealthComponent>().Damage(-(playerStatsComponent.GetMaxHealth() * 0.2f));
+			FindObjectOfType<HealthComponent>().Damage(-(playerStatsComponent.GetMaxHealth() * 0.8f));
 		}
 
 		private void Update()

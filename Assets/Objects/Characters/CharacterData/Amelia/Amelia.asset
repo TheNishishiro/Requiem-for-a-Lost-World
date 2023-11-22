@@ -26,7 +26,7 @@ MonoBehaviour:
 
 
     Only 12 shards can be present at the time. Each shard, while
-    present, increases her random stat.
+    present, increases her random stat by 1%.
 
     Can pick random weapon at start'
   AbilityName: Wishes United
@@ -80,20 +80,33 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
-  skillNodes: []
+  skillNodes:
+  - {fileID: 11400000, guid: 368c5c29134a095479abb5de4839293a, type: 2}
+  - {fileID: 11400000, guid: 31aeb5843d5bbae44a7fd996c676b0da, type: 2}
+  - {fileID: 11400000, guid: 2d64f8a0bdf0cd241ae356b9e686cefc, type: 2}
+  - {fileID: 11400000, guid: fbf217078beae2c48850ad1b47b3b8f2, type: 2}
+  - {fileID: 11400000, guid: a6e981c9c9081e246b427df581d6cb19, type: 2}
+  - {fileID: 11400000, guid: be567ffcfef8d8e44a2b4e2bad886bca, type: 2}
+  - {fileID: 11400000, guid: b6dde446a177d6547b34953ea51e99ed, type: 2}
+  - {fileID: 11400000, guid: 536fbe41665deec40bc046bcc3c3d9d0, type: 2}
+  - {fileID: 11400000, guid: 9e4ef46ebd9f5504b8665f43036e0605, type: 2}
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: cf5be51b6c188904f95e50488f3e8cb3, type: 3}
     EidolonName: When I first met you
-    EidolonDescription: Increase movement speed by <color=green>0.1</color> m/s
+    EidolonDescription: 'Increase healing recieved by <color=green>100%</color>
+
+      Each
+      time <color=#43847F>Wishes United</color> is used, summon all shards towards
+      Amelia'
     EidolonQuote: "Have you ever opened your eyes and thought you died!? But then
       I'm like... wait, that's no angel and I'm not dead! \nThat's about the clearest
       memory I have and probably the best thing that happend to me yet!"
   - EidolonTexture: {fileID: 21300000, guid: 53cfba73cb518114bb6c558689195c20, type: 3}
     EidolonName: Heart Ache
-    EidolonDescription: 'Increase damage dealt and taken by <color=orange>20%</color>
+    EidolonDescription: 'Increase damage dealt and taken by <color=orange>100%</color>
 
       Every
-      time shard shatters gain additional <color=green>30%</color> damage and <color=green>0.2</color>
+      time shard shatters gain additional <color=green>300%</color> damage and <color=green>0.5</color>
       m/s for 2 seconds'
     EidolonQuote: 'Sometimes it feels like I''m on a downwards spiral with everything
       being meaningless. People I try to help end up getting in trouble or hurt again...
@@ -103,7 +116,7 @@ MonoBehaviour:
       up getting angry over it!'
   - EidolonTexture: {fileID: 21300000, guid: b59df352cbaf86f4f8f15d650ab75954, type: 3}
     EidolonName: Peaceful nights by your side
-    EidolonDescription: Every 30 levels gain <color=green>1</color> additional projectile
+    EidolonDescription: Every 10 levels gain <color=green>1</color> additional projectile
       (up to 4)
     EidolonQuote: 'She used to lay down by herself, listening to her parents fighting
       over and over again... If she were to finish it all, could the pain end?
@@ -118,19 +131,18 @@ MonoBehaviour:
       by her lovers side. But good things never last, do they?'
   - EidolonTexture: {fileID: 21300000, guid: 0e51bc28569f9f64a891c3ba15fd9287, type: 3}
     EidolonName: Sweetest life
-    EidolonDescription: Each glass shard in possesion increases EXP gain by <color=green>2%</color>
+    EidolonDescription: Each glass shard in possesion increases random stat by 10%
+      or flat 2 points
     EidolonQuote: "\"Is this really okay?!\" - Turns out it is! I get all the sweets
       and pumpering a girl could ever need! \nI also started improving at my healing,
       altho slowly, I start to see effects. Can't wait to be more useful to him..."
   - EidolonTexture: {fileID: 21300000, guid: f09cad04c9c87ba4c815ec07c03bc19e, type: 3}
     EidolonName: Promises broken
-    EidolonDescription: 'Increase special increase with each <color=#00B1FF>exp gem</color>
-      by additional <color=yellow>1</color> point.
+    EidolonDescription: 'Charge special by additional <color=yellow>1</color> point
+      per <color=#00B1FF>exp gem</color>.
 
-      Increase max amount of
-      shards to <color=green>16</color>
-
-      Increase damage taken by <color=red>50%</color>'
+      Increase max amount of shards to
+      <color=green>24</color>'
     EidolonQuote: "I read a saying in a book: \"Where there is light there must be
       shadow\". \nPossibly... If I've never been shielded from it... It wouldn't
       sting so much.\nRegardless what future holds, I'm not a little girl anymore,

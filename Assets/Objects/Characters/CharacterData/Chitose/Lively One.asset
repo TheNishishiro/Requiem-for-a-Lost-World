@@ -27,7 +27,7 @@ MonoBehaviour:
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 0}
   AbilityIcon: {fileID: 21300000, guid: 9b4db2f65cfe3ab45a57c65dcef3d5af, type: 3}
-  ColorTheme: {r: 0.9333334, g: 0.09411766, b: 0.16470589, a: 1}
+  ColorTheme: {r: 0.93333334, g: 0.09411765, b: 0.16470589, a: 1}
   StarRating: 4
   StartingWeapon: {fileID: 8639696691735580533, guid: c4ce03c63c596e6488c51640328921da,
     type: 3}
@@ -71,11 +71,22 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
-  skillNodes: []
+  skillNodes:
+  - {fileID: 11400000, guid: 063540fd07dcc25468be2abc9868300e, type: 2}
+  - {fileID: 11400000, guid: 8f0327c457e693c4e9730eca0f6eb1c1, type: 2}
+  - {fileID: 11400000, guid: a4c8f965bc9992240b3ab43b9cfe16a7, type: 2}
+  - {fileID: 11400000, guid: bee8aeb6a89dead479f7dac95d8134e9, type: 2}
+  - {fileID: 11400000, guid: 33772ddf15db8f649bf585ec9d2eb410, type: 2}
+  - {fileID: 11400000, guid: 57c16e6b904b6dc4196eaa05613b77cc, type: 2}
+  - {fileID: 11400000, guid: 8bdc8b823a5ee214aad50c7bfd9dc340, type: 2}
+  - {fileID: 11400000, guid: 5bb248dbbbd3e6b47a003dc237b31ad8, type: 2}
+  - {fileID: 11400000, guid: 0affa23c384b4224797fe49ffec7273d, type: 2}
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 65d29c0d0987db94f9667fbb59154a3b, type: 3}
     EidolonName: Happy moments
-    EidolonDescription: Increase shards pull range by <color=green>0.1 m</color>
+    EidolonDescription: Whenever <color=#43847F>Quick step</color> is triggered,
+      increase <color=#FFC300>crit damage</color> by <color=green>250%</color> for
+      3 seconds
     EidolonQuote: 'Sometimes I miss those days when I had the time to help everyone
       in need, really!
 
@@ -85,7 +96,10 @@ MonoBehaviour:
 '
   - EidolonTexture: {fileID: 21300000, guid: 4e3b56afb8ef0d44c86ec920b349da19, type: 3}
     EidolonName: Solidified resolve
-    EidolonDescription: Increase dodge chance by <color=green>10%</color>
+    EidolonDescription: 'Increase dodge chance by <color=green>25%</color>
+
+      Extend
+      invulnerability after <color=#43847F>Quick step</color> to 1 second'
     EidolonQuote: 'Whenever something dangerous happens outside of the walls, I always
       repeat the same thing:
 
@@ -98,7 +112,8 @@ MonoBehaviour:
       to cope a little, hehe'
   - EidolonTexture: {fileID: 21300000, guid: 5f35102eee01562459702bfd22156a66, type: 3}
     EidolonName: Fight for your dreams
-    EidolonDescription: Every 20 levels increase EXP gain by <color=green>8%</color>
+    EidolonDescription: Every 20 ememies killed with <color=orange>Fireball</color>
+      increases it's damage by <color=green>1%</color>
     EidolonQuote: 'Ever since I was little I dreamed of joining the knights!
 
       Once
@@ -106,18 +121,16 @@ MonoBehaviour:
       armor there is!'
   - EidolonTexture: {fileID: 21300000, guid: 7ac29d9abfc00694e93c8853a51f0520, type: 3}
     EidolonName: Sweet dreams
-    EidolonDescription: 'Increase enemy spawn rate by <color=red>10%</color>
+    EidolonDescription: 'Increase enemy spawn rate by <color=red>20%</color>
 
       Increase
-      damage dealt by <color=green>20%</color>'
+      damage dealt by <color=green>100%</color>'
     EidolonQuote: In the safety of her home or a made up tent in the woods, she's
       sure to see only the sweetest of dreams. For that is what she deserves.
   - EidolonTexture: {fileID: 21300000, guid: 953b1ec9e862bb746ba0a881243d66d4, type: 3}
     EidolonName: Unforeseen end
-    EidolonDescription: 'Reduce stat increase level requirements by 5 levels
-
-      Increase
-      damage taken by <color=red>15%</color>'
+    EidolonDescription: Each time <color=#43847F>Quick step</color> is cast refresh
+      all weapon cooldowns as well as reduce it's cooldown by 25%
     EidolonQuote: I mostly try to stay positive and not worry but... I do get that
       one dream, of a world completely unknown to me! Buildings towering above me
       all the way to the skies! Then they all crumble down and I wake up with face

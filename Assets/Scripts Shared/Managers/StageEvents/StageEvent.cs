@@ -12,6 +12,7 @@ public class StageEvent
 	public EnemyData bossEnemy;
 	public float triggerTime;
 	public float spawnRate;
+	public float speedMultiplier;
 	public float minCount;
 	public float healthMultiplier;
 	public int burstSpawnCount;

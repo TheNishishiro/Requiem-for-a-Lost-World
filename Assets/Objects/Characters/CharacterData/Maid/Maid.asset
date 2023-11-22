@@ -73,18 +73,30 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
-  skillNodes: []
+  skillNodes:
+  - {fileID: 11400000, guid: 1ffd29d9f9359434b912408931226565, type: 2}
+  - {fileID: 11400000, guid: d6e8f77ef0cc1204c826065c4297c15d, type: 2}
+  - {fileID: 11400000, guid: f6850eddab47a04429740315362e6183, type: 2}
+  - {fileID: 11400000, guid: 658b5ef025e38644e9fc25d84fe1f6a6, type: 2}
+  - {fileID: 11400000, guid: 9cb101d49b083cc4ab1f7633589132b6, type: 2}
+  - {fileID: 11400000, guid: fa8d31777da7d094ab91519dcd0eb98a, type: 2}
+  - {fileID: 11400000, guid: 1928fa1882297f648b9edf8c35b4389d, type: 2}
+  - {fileID: 11400000, guid: 1053d68bf3499264682cbf08092b018b, type: 2}
+  - {fileID: 11400000, guid: c0370acf12caa974e9172844ed2dbdc7, type: 2}
+  - {fileID: 11400000, guid: 6fb5ea88c4bca9d42877cf2f3fbe7747, type: 2}
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: aa57eb58854930840b967e820e155b25, type: 3}
     EidolonName: My first day!
-    EidolonDescription: Increase movement speed by <color=green>0.1 m/s</color>
+    EidolonDescription: Increase duration of <color=#43847F>Precision Strike</color>
+      to 13 seconds
     EidolonQuote: Serving the royal family, hmpf, what a joke! I'm still young with
       great many things to achieve. Imagine thinking that they could lock me up in
       these empy hallways! Of course I would sneak out to do the great things I was
       always meant for. Those old farts can clean after themselves!
   - EidolonTexture: {fileID: 21300000, guid: 749e99d021fc81142953863e1545cce1, type: 3}
     EidolonName: Self reflection
-    EidolonDescription: Increase dodge chance by <color=green>8%</color>
+    EidolonDescription: While <color=#43847F>Precision Strike</color> is active,
+      increase <color=#FFC300>dodge chance</color> by <color=green>50%</color>
     EidolonQuote: 'Age changes your perspective of things, or so I believe, frankly,
       I wouldn''t know!
 
@@ -94,17 +106,18 @@ MonoBehaviour:
       human performance but I don''t need to work myself to death like they do.'
   - EidolonTexture: {fileID: 21300000, guid: b4b2a3b13dba8f546840fd78000368f8, type: 3}
     EidolonName: Smile that kills
-    EidolonDescription: 'Increase passive crit rate cap to <color=green>35%</color>
+    EidolonDescription: 'Increase passive <color=#FFC300>crit rate</color> cap to
+      <color=green>50%</color>
 
-      Skill
-      cast increases damage by <color=green>25%</color>'
+      <color=#43847F>Precision Strike</color>''s
+      damage boost increases to <color=green>200%</color>'
     EidolonQuote: "People move in and out, parties day after day like nothing ever
       happened! Those old farts have it too good let me tell you that much. Can't
       wait to sneak into their shoes once they pass away one. by. one. \nI wouldn't
       make for a bad queen would I?"
   - EidolonTexture: {fileID: 21300000, guid: eac8f3a3f55b9d4448b15b86be522ffc, type: 3}
     EidolonName: For thee will I fight
-    EidolonDescription: Increase projectile speed by <color=green>15%</color>
+    EidolonDescription: Increase <color=#FFC300>projectile speed</color> by <color=green>25%</color>
     EidolonQuote: 'A new duo appeared in a castle a couple days ago with some big
       news, unfortunately all I can go off of is a gossip of other maids, how irritating!
 
@@ -113,12 +126,11 @@ MonoBehaviour:
       Would I finally have somethin to fight for?'
   - EidolonTexture: {fileID: 21300000, guid: bd58faa285463d846895c418504294ab, type: 3}
     EidolonName: 'Promises unfulfilled '
-    EidolonDescription: 'Increase crit damage by <color=green>3%</color> per 5 levels
+    EidolonDescription: 'Increase <color=#FFC300>crit damage</color> by <color=green>10%</color>
+      every 5 levels
 
-      Increase
-      skill duration to 12 seconds
-
-      Lower max health by <color=red>10</color>'
+      During <color=#43847F>Precision Strike</color> all weapon
+      hits are guaranteed to crit'
     EidolonQuote: "The head maid used to say that getting a good night sleep is of
       utmost importance for every maid. \nI would and I tried but I always struggle
       to fall asleep... So I usually take a walk while everyone else is asleep, helps

@@ -38,7 +38,7 @@ namespace Objects.Abilities.Bouncer
 			
 			if (BouncerWeapon.ElectroDefenceShred > 0)
 				damageable.ReduceElementalDefence(Element.Lightning, BouncerWeapon.ElectroDefenceShred);
-			if (BouncerWeapon.Thunderstorm && !IsSubSpawned)
+			if (BouncerWeapon.Thunderstorm && !IsSubSpawned && isActiveAndEnabled)
 			{
 				StartCoroutine(SpawnThunderstorm());
 			}

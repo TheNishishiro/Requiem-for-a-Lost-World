@@ -222,5 +222,14 @@ namespace Objects.Abilities
 			const float percentIncreasePerRarity = 0.025f;
 			return 1.0f + ((rarity - 1.0f) * percentIncreasePerRarity);
 		}
+
+		public float GetHealPerHit(bool allowCrit)
+		{
+			if (!allowCrit) return HealPerHit;
+			
+			var critRate = CritRate + _playerStatsComponent.GetCritRate();
+			var critDamage = CritDamage + _playerStatsComponent.GetCritDamage();
+			return (float)(Random.value < critRate ? HealPerHit * critDamage : HealPerHit);
+		}
 	}
 }

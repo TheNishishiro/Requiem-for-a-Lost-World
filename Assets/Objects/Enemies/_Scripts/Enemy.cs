@@ -49,7 +49,7 @@ namespace Objects.Enemies
 		private ChanceDrop goldDropChance;
 		private ChanceDrop gemDropChance;
 		
-		public void Setup(EnemyData newStats, Player target, PlayerStatsComponent playerStats, float healthMultiplier, Sprite sprite)
+		public void Setup(EnemyData newStats, Player target, PlayerStatsComponent playerStats, float healthMultiplier, float speedMultiplier, Sprite sprite)
 		{
 			damageableComponent.Clear();
 			chaseComponent.Clear();
@@ -115,6 +115,7 @@ namespace Objects.Enemies
 			dropOnDestroyComponent.AddDrop(gemDropChance);
 			
 			stats.hp = (int)(stats.hp * healthMultiplier * playerStats.GetEnemyHealthIncrease());
+			stats.speed *= speedMultiplier;
 			stats.speed *= playerStats.GetEnemySpeedIncrease();
 			chaseComponent.FollowYAxis = newStats.allowFlying;
 			SetChaseTarget(target.gameObject);

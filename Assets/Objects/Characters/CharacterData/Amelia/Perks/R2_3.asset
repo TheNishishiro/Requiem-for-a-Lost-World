@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c942aac2e7e4730b6577d0ffcb1836b, type: 3}
   m_Name: R2_3
   m_EditorClassIdentifier: 
-  nodeId: 0
-  description: 
-  icon: {fileID: 0}
+  nodeId: 7
+  description: Increase healing received by {HealingReceivedIncreasePercentage}%
+  icon: {fileID: 21300000, guid: 4d04cecc3df49b8438894c0b93c24aed, type: 3}
   stats:
     Health: 0
     HealthMax: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
     ProjectileLifeTimeIncreasePercentage: 0
     DodgeChance: 0
     DamageTakenIncreasePercentage: 0
-    HealingReceivedIncreasePercentage: 0
+    HealingReceivedIncreasePercentage: 0.3
     Luck: 0
     DamageOverTime: 0
     Rerolls: 0

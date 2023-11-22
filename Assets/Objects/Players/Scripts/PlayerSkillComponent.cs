@@ -10,6 +10,7 @@ using Objects.Characters;
 using Objects.Characters.Chronastra.Skill;
 using Objects.Characters.Nishi.Skill;
 using Objects.Enemies;
+using Objects.Players.PermUpgrades;
 using Objects.Stage;
 using UI.Labels.InGame;
 using UnityEngine;
@@ -102,7 +103,7 @@ namespace Objects.Players.Scripts
 					ChitoseSkill();
 					break;
 				case CharactersEnum.Maid:
-					StartCoroutine(MaidSkill());
+					MaidSkill();
 					break;
 				case CharactersEnum.Amelia_BoD:
 					AmeliaBoDSkill();
@@ -143,6 +144,8 @@ namespace Objects.Players.Scripts
 		private void AmeliaSkill()
 		{
 			_ameliaGlassShield.SpawnShards(6);
+			if (GameData.GetPlayerCharacterRank() >= CharacterRank.E1)
+				PickupManager.instance.SummonToPlayer();
 		}
 
 		private void OanaSkill()
@@ -154,8 +157,18 @@ namespace Objects.Players.Scripts
 
 		private void NishiSkill()
 		{
-			var result = Utilities.GetPointOnColliderSurface(transform.position + transform.forward * 1.5f, gameObject.transform);
+			var result = Utilities.GetPointOnColliderSurface(_transform.position + _transform.forward * 1.5f, gameObject.transform);
 			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, transform.rotation);
+
+			if (GameData.GetPlayerCharacterRank() < CharacterRank.E2) return;
+			
+			for (var i = 0; i < 3; i++)
+			{
+				var randomPosition = Utilities.GetPointOnColliderSurface(
+					Utilities.GetRandomInArea(_transform.position, 5f), gameObject.transform);
+				SpawnManager.instance.SpawnObject(randomPosition, GameData.GetSkillPrefab().gameObject,
+					_transform.rotation);
+			}
 		}
 
 		private void AdamSkill()
@@ -187,16 +200,30 @@ namespace Objects.Players.Scripts
 
 		private void SummerSkill()
 		{
-			var throwingKnife = SpawnManager.instance.SpawnObject(transform.position, GameData.GetSkillPrefab().gameObject);
-			var projectileComponent = throwingKnife.GetComponent<SummerSkill>();
+			var arrow = SpawnManager.instance.SpawnObject(transform.position, GameData.GetSkillPrefab().gameObject);
+			var projectileComponent = arrow.GetComponent<SummerSkill>();
+			projectileComponent.SetDirection(transform.forward, 0);
 
-			projectileComponent.SetDirection(transform.forward);
+			if (GameData.IsCharacterRank(CharacterRank.E2))
+			{
+				arrow = SpawnManager.instance.SpawnObject(transform.position, GameData.GetSkillPrefab().gameObject);
+				projectileComponent = arrow.GetComponent<SummerSkill>();
+				projectileComponent.SetDirection(transform.forward, 30);
+				
+				arrow = SpawnManager.instance.SpawnObject(transform.position, GameData.GetSkillPrefab().gameObject);
+				projectileComponent = arrow.GetComponent<SummerSkill>();
+				projectileComponent.SetDirection(transform.forward, -30);
+			}
 		}
 
 		private IEnumerator CorinaSkill()
 		{
-			healthComponent.Damage(playerStatsComponent.GetHealth() * 0.9f);
-			healthComponent.UpdateHealthBar();
+			if (!GameData.IsCharacterRank(CharacterRank.E5))
+			{
+				healthComponent.Damage(playerStatsComponent.GetHealth() * 0.9f);
+				healthComponent.UpdateHealthBar();
+			}
+
 			var rank = GameData.GetPlayerCharacterRank();
 			var attackCount = rank > CharacterRank.E4 ? 20 : 10;
 			var enemies = EnemyManager.instance.GetActiveEnemies().OrderBy(_ => Random.value).Take(attackCount);
@@ -213,23 +240,29 @@ namespace Objects.Players.Scripts
 
 		private void ChitoseSkill()
 		{
-			StartCoroutine(IFrames(0.5f));
+			StartCoroutine(IFrames(GameData.IsCharacterRank(CharacterRank.E2) ? 1f : 0.5f));
 			_dashDuration = 0.2f;
 			_dashDistance = 10;
+			
+			if (GameData.IsCharacterRank(CharacterRank.E1))
+				playerStatsComponent.TemporaryStatBoost(StatEnum.CritDamage, 2.5f, 3);
+			if (GameData.IsCharacterRank(CharacterRank.E5))
+				WeaponManager.instance.ReduceWeaponCooldowns(1);
 		}
 
-		private IEnumerator MaidSkill()
+		private void MaidSkill()
 		{
-			var rank = GameData.GetPlayerCharacterRank();
-			var damageIncreasePercentage = rank >= CharacterRank.E3 ? 0.75f : 0.5f;
-			var skillDuration = rank >= CharacterRank.E5 ? 12f : 8f;
+			var skillDuration = GameData.IsCharacterRank(CharacterRank.E1) ? 13f : 8f;
+			var damageIncreasePercentage = GameData.IsCharacterRank(CharacterRank.E3) ? 2f : 0.5f;
 			
 			var obj = Instantiate(GameData.GetSkillPrefab(), abilityContainer);
 			obj.LifeTime = skillDuration;
-			playerStatsComponent.IncreaseDamageIncreasePercentage(damageIncreasePercentage);
+			if (GameData.IsCharacterRank(CharacterRank.E2))
+				playerStatsComponent.TemporaryStatBoost(StatEnum.DodgeChance, 0.5f, skillDuration);
+			if (GameData.IsCharacterRank(CharacterRank.E5))
+				playerStatsComponent.TemporaryStatBoost(StatEnum.CritRate, 1, skillDuration);
+			playerStatsComponent.TemporaryStatBoost(StatEnum.DamagePercentageIncrease, damageIncreasePercentage, skillDuration);
 			abilityDurationBar.StartTick(skillDuration);
-			yield return new WaitForSeconds(skillDuration);
-			playerStatsComponent.IncreaseDamageIncreasePercentage(-damageIncreasePercentage);
 		}
 		
 		private void AmeliaBoDSkill()

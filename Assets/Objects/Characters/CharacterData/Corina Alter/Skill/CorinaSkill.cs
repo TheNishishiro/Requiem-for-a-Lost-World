@@ -16,8 +16,8 @@ namespace Objects.Characters.Corina_Alter.Skill
 
 		private void Start()
 		{
-			_playerStatsComponent = FindObjectOfType<PlayerStatsComponent>();
-			_healthComponent = FindObjectOfType<HealthComponent>();
+			_playerStatsComponent = FindFirstObjectByType<PlayerStatsComponent>();
+			_healthComponent = FindFirstObjectByType<HealthComponent>();
 			_elementalWeapon = new ElementalWeapon(Element.Physical);
 			_collider = GetComponent<BoxCollider>();
 			StartCoroutine(ColliderKeepAlive());

@@ -1,0 +1,42 @@
+﻿namespace Objects.Players.PermUpgrades
+{
+    public enum StatEnum
+    {
+        Health,
+        HealthMax,
+        SpecialMax,
+        SpecialIncrease,
+        MagnetSize,
+        CooldownReduction,
+        CooldownReductionPercentage,
+        AttackCount,
+        Damage,
+        Scale,
+        Speed,
+        TimeToLive,
+        DetectionRange,
+        DamagePercentageIncrease,
+        ExperienceIncreasePercentage,
+        MovementSpeed,
+        SkillCooldownReductionPercentage,
+        HealthRegen,
+        CritRate,
+        CritDamage,
+        PassThroughCount,
+        Armor,
+        EnemySpeedIncreasePercentage,
+        EnemySpawnRateIncreasePercentage,
+        EnemyHealthIncreasePercentage,
+        EnemyMaxCountIncreasePercentage,
+        ItemRewardIncrease,
+        Revives,
+        ProjectileLifeTimeIncreasePercentage,
+        DodgeChance,
+        DamageTakenIncreasePercentage,
+        HealingIncreasePercentage,
+        Luck,
+        DamageOverTime,
+        Rerolls,
+        Skips
+    }
+}

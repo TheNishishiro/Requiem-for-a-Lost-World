@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using DefaultNamespace.Extensions;
 using Objects.Abilities;
 using Objects.Characters;
@@ -302,6 +303,123 @@ namespace Objects.Players
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(permUpgradeType), permUpgradeType, null);
+			}
+		}
+
+		public void Add(StatEnum stat, float value)
+		{
+			switch (stat)
+			{
+				case StatEnum.Health:
+					Health += value;
+					break;
+				case StatEnum.HealthMax:
+					HealthMax += value;
+					break;
+				case StatEnum.SpecialMax:
+					SpecialMax += value;
+					break;
+				case StatEnum.SpecialIncrease:
+					SpecialIncrease += value;
+					break;
+				case StatEnum.MagnetSize:
+					MagnetSize += value;
+					break;
+				case StatEnum.CooldownReduction:
+					CooldownReduction += value;
+					break;
+				case StatEnum.CooldownReductionPercentage:
+					CooldownReductionPercentage += value;
+					break;
+				case StatEnum.AttackCount:
+					AttackCount += (int)value;
+					break;
+				case StatEnum.Damage:
+					Damage += value;
+					break;
+				case StatEnum.Scale:
+					Scale += value;
+					break;
+				case StatEnum.Speed:
+					Speed += value;
+					break;
+				case StatEnum.TimeToLive:
+					TimeToLive += value;
+					break;
+				case StatEnum.DetectionRange:
+					DetectionRange += value;
+					break;
+				case StatEnum.DamagePercentageIncrease:
+					DamagePercentageIncrease += value;
+					break;
+				case StatEnum.ExperienceIncreasePercentage:
+					ExperienceIncreasePercentage += value;
+					break;
+				case StatEnum.MovementSpeed:
+					MovementSpeed += value;
+					break;
+				case StatEnum.SkillCooldownReductionPercentage:
+					SkillCooldownReductionPercentage += value;
+					break;
+				case StatEnum.HealthRegen:
+					HealthRegen += value;
+					break;
+				case StatEnum.CritRate:
+					CritRate += value;
+					break;
+				case StatEnum.CritDamage:
+					CritDamage += value;
+					break;
+				case StatEnum.PassThroughCount:
+					PassThroughCount += (int)value;
+					break;
+				case StatEnum.Armor:
+					Armor += value;
+					break;
+				case StatEnum.EnemySpeedIncreasePercentage:
+					EnemySpeedIncreasePercentage += value;
+					break;
+				case StatEnum.EnemySpawnRateIncreasePercentage:
+					EnemySpawnRateIncreasePercentage += value;
+					break;
+				case StatEnum.EnemyHealthIncreasePercentage:
+					EnemyHealthIncreasePercentage += value;
+					break;
+				case StatEnum.EnemyMaxCountIncreasePercentage:
+					EnemyMaxCountIncreasePercentage += value;
+					break;
+				case StatEnum.ItemRewardIncrease:
+					ItemRewardIncrease += value;
+					break;
+				case StatEnum.Revives:
+					Revives += (int)value;
+					break;
+				case StatEnum.ProjectileLifeTimeIncreasePercentage:
+					ProjectileLifeTimeIncreasePercentage += value;
+					break;
+				case StatEnum.DodgeChance:
+					DodgeChance += value;
+					break;
+				case StatEnum.DamageTakenIncreasePercentage:
+					DamageTakenIncreasePercentage += value;
+					break;
+				case StatEnum.HealingIncreasePercentage:
+					HealingIncreasePercentage += value;
+					break;
+				case StatEnum.Luck:
+					Luck += value;
+					break;
+				case StatEnum.DamageOverTime:
+					DamageOverTime += value;
+					break;
+				case StatEnum.Rerolls:
+					Rerolls += (int)value;
+					break;
+				case StatEnum.Skips:
+					Skips +=(int) value;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException(nameof(stat), stat, null);
 			}
 		}
 	}

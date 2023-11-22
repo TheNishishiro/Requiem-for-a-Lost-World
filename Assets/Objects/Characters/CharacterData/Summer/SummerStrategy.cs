@@ -7,7 +7,7 @@ using Objects.Stage;
 
 namespace Objects.Characters.Summer
 {
-	public class SummerStrategy : ICharacterStrategy
+	public class SummerStrategy : CharacterStrategyBase, ICharacterStrategy
 	{
 		public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)
 		{
@@ -38,14 +38,6 @@ namespace Objects.Characters.Summer
 
 			stats.CritDamage += GameData.GetPlayerCharacterSaveData().Level * critDamageIncrease;
 			stats.Damage += (int)characterRank;
-		}
-
-		public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
-		{
-			foreach (var skillNode in GameData.GetCharacterSkillNodes().Where(x => unlockedTreeNodeIds.Contains(x.nodeId) ))
-			{
-				stats.Sum(skillNode.stats, 1);
-			}
 		}
 	}
 }

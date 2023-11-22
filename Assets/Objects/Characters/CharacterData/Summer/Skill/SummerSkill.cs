@@ -19,16 +19,16 @@ public class SummerSkill : CharacterSkillBase
         _elementalWeapon = new ElementalWeapon(Element.None);
     }
 
-    public void SetDirection(Vector3 dir)
+    public void SetDirection(Vector3 dir, float rotationDegree)
     {
-        _direction = dir;
-        transform.rotation = Quaternion.LookRotation(_direction.normalized) * Quaternion.Euler(0,0,0);
+        //_direction = dir;
+        transform.rotation = Quaternion.LookRotation(dir.normalized) * Quaternion.Euler(0,rotationDegree,0);
     }
     
     private void Update()
     {
         TickLifeTime();
-        transform.position += _direction * (5 * Time.deltaTime);
+        transform.position += transform.forward * (5 * Time.deltaTime);
         transform.Rotate(0, 0, Time.deltaTime * 150);
     }
 

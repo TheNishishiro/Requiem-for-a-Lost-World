@@ -5,7 +5,7 @@ using Objects.Players.Scripts;
 
 namespace Objects.Characters.Natalie
 {
-	public class NatalieStrategy : ICharacterStrategy
+	public class NatalieStrategy : CharacterStrategyBase, ICharacterStrategy
 	{
 		public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)
 		{
@@ -17,7 +17,6 @@ namespace Objects.Characters.Natalie
 			{
 				playerStatsComponent.IncreaseMovementSpeed(playerStatsComponent.GetDamageOverTime() * 0.05f);
 			}
-
 		}
 
 		public void ApplyRank(PlayerStats stats, CharacterRank characterRank)
@@ -33,10 +32,6 @@ namespace Objects.Characters.Natalie
 			}
 			if (characterRank >= CharacterRank.E5)
 				stats.DamagePercentageIncrease += 0.3f;
-		}
-
-		public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
-		{
 		}
 	}
 }

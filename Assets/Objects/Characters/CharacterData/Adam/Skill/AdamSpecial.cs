@@ -1,5 +1,8 @@
 ﻿using System;
+using Events.Handlers;
+using Events.Scripts;
 using Objects.Players.Scripts;
+using Objects.Stage;
 
 namespace Objects.Characters.Adam.Skill
 {
@@ -7,13 +10,13 @@ namespace Objects.Characters.Adam.Skill
 	{
 		private float previousStatsChange;
 		private PlayerStatsComponent _playerStatsComponent;
-		private PlayerStatsComponent playerStatsComponent
+		private PlayerStatsComponent PlayerStatsComponent
 		{
 			get
 			{
 				if (_playerStatsComponent == null)
 				{
-					_playerStatsComponent = FindObjectOfType<PlayerStatsComponent>();
+					_playerStatsComponent = FindFirstObjectByType<PlayerStatsComponent>();
 				}
 
 				return _playerStatsComponent;
@@ -22,12 +25,12 @@ namespace Objects.Characters.Adam.Skill
 
 		private void LateUpdate()
 		{
-			playerStatsComponent.IncreaseDamageTaken(-previousStatsChange);
-			playerStatsComponent.IncreaseDamageIncreasePercentage(-previousStatsChange);
+			PlayerStatsComponent.IncreaseDamageTaken(-previousStatsChange);
+			PlayerStatsComponent.IncreaseDamageIncreasePercentage(-previousStatsChange);
 
-			previousStatsChange = EnemyManager.instance.currentEnemyCount * 0.005f;
-			playerStatsComponent.IncreaseDamageTaken(previousStatsChange);
-			playerStatsComponent.IncreaseDamageIncreasePercentage(previousStatsChange);
+			previousStatsChange = EnemyManager.instance.currentEnemyCount * (GameData.IsCharacterRank(CharacterRank.E4) ? 0.005f : 0.001f);
+			PlayerStatsComponent.IncreaseDamageTaken(previousStatsChange);
+			PlayerStatsComponent.IncreaseDamageIncreasePercentage(previousStatsChange);
 		}
 	}
 }

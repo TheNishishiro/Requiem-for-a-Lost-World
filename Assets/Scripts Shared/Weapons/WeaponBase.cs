@@ -122,7 +122,7 @@ namespace Weapons
 
 		public void ReduceCooldown(float reductionPercentage)
 		{
-			_timer -= _timer * (1 - reductionPercentage);
+			_timer *= 1 - reductionPercentage;
 		}
 		
 		public virtual bool IsUnlocked(SaveFile saveFile)
@@ -133,6 +133,10 @@ namespace Weapons
 		public bool ReliesOnAchievement(AchievementEnum achievement)
 		{
 			return unlockOnAchievement && achievement == requiredAchievement;
+		}
+
+		public virtual void OnEnemyKilled()
+		{
 		}
 	}
 }

@@ -14,7 +14,7 @@ namespace Objects.Characters.Nishi.Skill
 		
 		private void Start()
 		{
-			var baseDamage = GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 150 : 50;
+			var baseDamage = GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 300 : 50;
 			_damage = baseDamage * (1 + GameData.GetPlayerCharacterData().Stats.DamagePercentageIncrease);
 			_elementalWeapon = new ElementalWeapon(Element.Lightning);
 		}

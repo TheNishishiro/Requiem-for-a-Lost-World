@@ -92,5 +92,15 @@ namespace Objects.Stage
 		{
 			return CharacterListManager.instance?.GetActiveCharacter()?.skillNodes ?? new List<SkillNode>();
 		}
+
+		public static bool IsCharacterWithRank(CharactersEnum characterId, CharacterRank rank)
+		{
+			return GetPlayerCharacterId() == characterId && GetPlayerCharacterRank() >= rank;
+		}
+
+		public static bool IsCharacterRank(CharacterRank rank)
+		{
+			return GetPlayerCharacterRank() >= rank;
+		}
 	}
 }

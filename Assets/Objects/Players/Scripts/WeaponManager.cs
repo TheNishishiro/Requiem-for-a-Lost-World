@@ -16,6 +16,7 @@ using Weapons;
 
 public class WeaponManager : MonoBehaviour
 {
+    public static WeaponManager instance;
     [SerializeField] private WeaponContainer weapons;
     [SerializeField] private ItemContainer items;
     [SerializeField] private Transform weaponContainer;
@@ -32,6 +33,11 @@ public class WeaponManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
         _saveFile = FindObjectOfType<SaveFile>();
         _playerStatsComponent = FindObjectOfType<PlayerStatsComponent>();
         _unlockedWeapons = new List<WeaponBase>();

@@ -98,6 +98,8 @@ namespace DefaultNamespace
 			gameResultData.AddDamage(calculatedDamage, weaponBase);
 			MessageManager.instance.PostMessage(calculatedDamage.ToString("0"), position, _transformCache.localRotation, ElementService.ElementToColor(weaponBase?.element));
 			Health -= calculatedDamage;
+			if (IsDestroyed())
+				weaponBase?.OnEnemyKilled();
 		}
 
 		private void LateUpdate()

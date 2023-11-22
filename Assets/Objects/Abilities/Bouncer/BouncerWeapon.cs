@@ -37,10 +37,11 @@ namespace Objects.Abilities.Bouncer
 				projectile =>
 				{
 					subProjectileStats.Damage = weaponStats.GetDamage() * 0.5f;
+					projectile.transform.position = _subProjectilePosition;
+					projectile.gameObject.SetActive(true);
 					projectile.SetStats(subProjectileStats);
 					projectile.SetParentWeapon(this);
 					projectile.FindNextTarget();
-					projectile.gameObject.SetActive(true);
 				},
 				projectile => projectile.gameObject.SetActive(false),
 				projectile => Destroy(projectile.gameObject),

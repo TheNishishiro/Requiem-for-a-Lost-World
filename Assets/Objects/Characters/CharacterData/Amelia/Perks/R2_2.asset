@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c942aac2e7e4730b6577d0ffcb1836b, type: 3}
   m_Name: R2_2
   m_EditorClassIdentifier: 
-  nodeId: 0
-  description: 
-  icon: {fileID: 0}
+  nodeId: 6
+  description: Increase damage by {DamagePercentageIncrease}%
+  icon: {fileID: 21300000, guid: 281ca34d22fe9d14cbfc8150b591cd30, type: 3}
   stats:
     Health: 0
     HealthMax: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
     Speed: 0
     TimeToLive: 0
     DetectionRange: 0
-    DamagePercentageIncrease: 0
+    DamagePercentageIncrease: 0.2
     ExperienceIncreasePercentage: 0
     MovementSpeed: 0
     SkillCooldownReductionPercentage: 0

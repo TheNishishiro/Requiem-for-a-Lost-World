@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using Objects.Players.PermUpgrades;
 using Objects.Players.Scripts;
+using Objects.Stage;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,7 +21,6 @@ namespace Objects.Characters.Amelia.Skill
         private PermUpgradeType statToUpgrade;
         private float statIncrease;
         private PlayerStatsComponent playerStatsComponent;
-        private float e4ExperienceIncreaseAmount = 0.02f;
         
         public void Initialize(Transform parent)
         {
@@ -33,19 +33,22 @@ namespace Objects.Characters.Amelia.Skill
 
             statToUpgrade = Enum.GetValues(typeof(PermUpgradeType)).Cast<PermUpgradeType>().Except(new[]
             {
-                PermUpgradeType.AttackCount
+                PermUpgradeType.AttackCount,
+                PermUpgradeType.BuyGems
             }).ToList().OrderBy(_ => Random.value).FirstOrDefault();
-            statIncrease = statToUpgrade.IsPercent() ? 0.01f : 1;
+            statIncrease = statToUpgrade.IsPercent() ? (GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 0.1f : 0.02f) : (GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 2f : 1f);
             playerStatsComponent.Add(statToUpgrade, statIncrease);
-            playerStatsComponent.IncreaseExperienceGain(e4ExperienceIncreaseAmount);
         }
 
         public void Shatter()
         {
             playerStatsComponent.Add(statToUpgrade, -statIncrease);
-            playerStatsComponent.TemporaryMoveSpeedBoost(0.2f, 2);
-            playerStatsComponent.TemporaryAttackBoost(0.3f, 2);
-            playerStatsComponent.IncreaseExperienceGain(-e4ExperienceIncreaseAmount);
+            if (GameData.GetPlayerCharacterRank() >= CharacterRank.E2)
+            {
+                playerStatsComponent.TemporaryMoveSpeedBoost(0.5f, 2);
+                playerStatsComponent.TemporaryAttackBoost(3f, 2);
+            }
+            
             StartCoroutine(PlayShatterEffect());
         }
 	

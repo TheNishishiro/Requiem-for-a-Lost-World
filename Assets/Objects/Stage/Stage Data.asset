@@ -18,8 +18,9 @@ MonoBehaviour:
     bossEnemy: {fileID: 0}
     triggerTime: 0
     spawnRate: 1
+    speedMultiplier: 0.5
     minCount: 10
-    healthMultiplier: 0
+    healthMultiplier: 0.8
     burstSpawnCount: 0
     EraseEnemies: 0
   - enemies:
@@ -28,6 +29,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: 467a9594db5e1484b9563d1fd5772520, type: 2}
     triggerTime: 60
     spawnRate: 1
+    speedMultiplier: 0.6
     minCount: 30
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -37,6 +39,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 0}
     triggerTime: 120
     spawnRate: 0.5
+    speedMultiplier: 0.7
     minCount: 50
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -46,6 +49,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: 467a9594db5e1484b9563d1fd5772520, type: 2}
     triggerTime: 180
     spawnRate: 0.25
+    speedMultiplier: 0.8
     minCount: 40
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -56,6 +60,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 0}
     triggerTime: 240
     spawnRate: 1
+    speedMultiplier: 0
     minCount: 30
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -65,6 +70,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: c87296ca442af684c8a0b9204f02d565, type: 2}
     triggerTime: 300
     spawnRate: 1
+    speedMultiplier: 0
     minCount: 10
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -75,6 +81,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 0}
     triggerTime: 360
     spawnRate: 0.5
+    speedMultiplier: 0
     minCount: 20
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -85,6 +92,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: 7c41674072e870d4a9c8fc441ff01f7d, type: 2}
     triggerTime: 420
     spawnRate: 0.5
+    speedMultiplier: 0
     minCount: 80
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -94,6 +102,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: f14007e4b8ff7894b848fc73999a80da, type: 2}
     triggerTime: 480
     spawnRate: 1.5
+    speedMultiplier: 0
     minCount: 100
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -104,6 +113,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: c26b8117867a20847a69d64818423ea4, type: 2}
     triggerTime: 540
     spawnRate: 0.5
+    speedMultiplier: 0
     minCount: 30
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -114,6 +124,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: c87296ca442af684c8a0b9204f02d565, type: 2}
     triggerTime: 600
     spawnRate: 0.5
+    speedMultiplier: 0
     minCount: 10
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -123,6 +134,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: 467a9594db5e1484b9563d1fd5772520, type: 2}
     triggerTime: 660
     spawnRate: 0.1
+    speedMultiplier: 0
     minCount: 300
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -134,6 +146,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: 467a9594db5e1484b9563d1fd5772520, type: 2}
     triggerTime: 720
     spawnRate: 0.25
+    speedMultiplier: 0
     minCount: 20
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -144,6 +157,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: 467a9594db5e1484b9563d1fd5772520, type: 2}
     triggerTime: 780
     spawnRate: 0.5
+    speedMultiplier: 0
     minCount: 150
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -154,6 +168,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: c26b8117867a20847a69d64818423ea4, type: 2}
     triggerTime: 840
     spawnRate: 0.1
+    speedMultiplier: 0
     minCount: 20
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -165,6 +180,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: 96f95dba73e458042b9f28b898b830eb, type: 2}
     triggerTime: 900
     spawnRate: 0.1
+    speedMultiplier: 0
     minCount: 100
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -176,6 +192,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: 467a9594db5e1484b9563d1fd5772520, type: 2}
     triggerTime: 960
     spawnRate: 0.1
+    speedMultiplier: 0
     minCount: 100
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -185,6 +202,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 0}
     triggerTime: 1020
     spawnRate: 1
+    speedMultiplier: 0
     minCount: 20
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -195,6 +213,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: c26b8117867a20847a69d64818423ea4, type: 2}
     triggerTime: 1080
     spawnRate: 0.5
+    speedMultiplier: 0
     minCount: 60
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -205,6 +224,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 0}
     triggerTime: 1140
     spawnRate: 0.5
+    speedMultiplier: 0
     minCount: 100
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -216,6 +236,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: 077154d38733f9244aca5229911a3263, type: 2}
     triggerTime: 1200
     spawnRate: 0.1
+    speedMultiplier: 0.9
     minCount: 100
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -225,6 +246,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: 0b8276fda7556a54995b5acba469f475, type: 2}
     triggerTime: 1260
     spawnRate: 0.1
+    speedMultiplier: 0
     minCount: 300
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -235,6 +257,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: 467a9594db5e1484b9563d1fd5772520, type: 2}
     triggerTime: 1320
     spawnRate: 0.1
+    speedMultiplier: 0
     minCount: 200
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -245,8 +268,9 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: c26b8117867a20847a69d64818423ea4, type: 2}
     triggerTime: 1380
     spawnRate: 0.1
+    speedMultiplier: 0
     minCount: 300
-    healthMultiplier: 1.25
+    healthMultiplier: 0
     burstSpawnCount: 0
     EraseEnemies: 0
   - enemies:
@@ -255,8 +279,9 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: 0b8276fda7556a54995b5acba469f475, type: 2}
     triggerTime: 1440
     spawnRate: 0.1
+    speedMultiplier: 0
     minCount: 300
-    healthMultiplier: 1.35
+    healthMultiplier: 0
     burstSpawnCount: 0
     EraseEnemies: 0
   - enemies:
@@ -264,8 +289,9 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: 5f5f9fbd35790404f818b2b499d1300d, type: 2}
     triggerTime: 1500
     spawnRate: 0.1
+    speedMultiplier: 0
     minCount: 100
-    healthMultiplier: 1.5
+    healthMultiplier: 0
     burstSpawnCount: 0
     EraseEnemies: 0
   - enemies:
@@ -274,6 +300,7 @@ MonoBehaviour:
     bossEnemy: {fileID: 0}
     triggerTime: 1560
     spawnRate: 0.1
+    speedMultiplier: 0
     minCount: 300
     healthMultiplier: 1.75
     burstSpawnCount: 0
@@ -286,14 +313,16 @@ MonoBehaviour:
     bossEnemy: {fileID: 11400000, guid: c87296ca442af684c8a0b9204f02d565, type: 2}
     triggerTime: 1620
     spawnRate: 0.1
+    speedMultiplier: 0
     minCount: 300
-    healthMultiplier: 2
+    healthMultiplier: 0
     burstSpawnCount: 0
     EraseEnemies: 0
   - enemies: []
     bossEnemy: {fileID: 11400000, guid: c87296ca442af684c8a0b9204f02d565, type: 2}
     triggerTime: 1680
     spawnRate: 0.1
+    speedMultiplier: 0
     minCount: 300
     healthMultiplier: 0
     burstSpawnCount: 0
@@ -305,15 +334,17 @@ MonoBehaviour:
     bossEnemy: {fileID: 0}
     triggerTime: 1740
     spawnRate: 0.1
+    speedMultiplier: 0
     minCount: 300
-    healthMultiplier: 2.5
+    healthMultiplier: 0
     burstSpawnCount: 0
     EraseEnemies: 0
   - enemies: []
     bossEnemy: {fileID: 11400000, guid: d9cb7afb069220f4fa8e2d73948f9e5d, type: 2}
     triggerTime: 1800
     spawnRate: 999999
+    speedMultiplier: 1
     minCount: 0.1
-    healthMultiplier: 1
+    healthMultiplier: 0
     burstSpawnCount: 0
     EraseEnemies: 1

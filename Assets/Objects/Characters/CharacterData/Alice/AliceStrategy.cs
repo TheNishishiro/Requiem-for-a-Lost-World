@@ -5,7 +5,7 @@ using Objects.Players.Scripts;
 
 namespace Objects.Characters.Alice
 {
-    public class AliceStrategy : ICharacterStrategy
+    public class AliceStrategy : CharacterStrategyBase, ICharacterStrategy
     {
         public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)
         {
@@ -24,10 +24,6 @@ namespace Objects.Characters.Alice
                 stats.CritDamage += 0.2f;
                 stats.Armor -= 5;
             }
-        }
-
-        public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
-        {
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using Objects.Characters;
 using Objects.Stage;
 using UnityEngine;
 
@@ -28,7 +29,8 @@ public class BlackFlameComponent : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Enemy")) return;
-        
-        other.GetComponent<Damageable>().TakeDamage(50 * (1+GameData.GetPlayerCharacterData().Stats.DamagePercentageIncrease));
+
+        var damage = GameData.GetPlayerCharacterRank() >= CharacterRank.E5 ? 150 : 50; 
+        other.GetComponent<Damageable>().TakeDamage(damage * (1+GameData.GetPlayerCharacterData().Stats.DamagePercentageIncrease));
     }
 }

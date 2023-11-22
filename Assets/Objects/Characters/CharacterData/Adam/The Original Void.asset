@@ -20,7 +20,7 @@ MonoBehaviour:
   CharacterSprite: {fileID: 21300000, guid: dcc8c0d245ab4ab488390b853f0a4d23, type: 3}
   signet: {fileID: 21300000, guid: 7c06493d9dc44c1489f9507a7e688c0f, type: 3}
   PassiveDescription: 'For each <color=#00B1FF>enemy</color> currently alive increase
-    both damage dealt and damage taken by <color=#79861B>0.5%</color>
+    both damage dealt and damage taken by <color=#79861B>0.1%</color>
 
 
     Starts
@@ -78,7 +78,16 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
-  skillNodes: []
+  skillNodes:
+  - {fileID: 11400000, guid: 10ccfe9d8d31bbd4193a052a099d9b35, type: 2}
+  - {fileID: 11400000, guid: dfdbe79c7ca7d354f9db39659cf930f6, type: 2}
+  - {fileID: 11400000, guid: b012db45aee493447bf64fd50fd40ecf, type: 2}
+  - {fileID: 11400000, guid: 42f0863c5eeb1f14eacd35e3687ad466, type: 2}
+  - {fileID: 11400000, guid: 35fdaa37e23d2994187577e46d511e80, type: 2}
+  - {fileID: 11400000, guid: 8d31137316e5d1d4db34c0df6f5dfcac, type: 2}
+  - {fileID: 11400000, guid: c468068c65dd5d94aaf0c4de6c914389, type: 2}
+  - {fileID: 11400000, guid: 956bfd48ac29f1644b989379ba3cf209, type: 2}
+  - {fileID: 11400000, guid: 9a474ae776623f04da7b4179ea297d17, type: 2}
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: c7e6f877e496a6445bb1c55045ee3ec8, type: 3}
     EidolonName: One and only
@@ -110,7 +119,7 @@ MonoBehaviour:
       a choice to begin with!'
   - EidolonTexture: {fileID: 21300000, guid: 87894f8bde96bf94dba41db12e9a7997, type: 3}
     EidolonName: Before the cataclysm
-    EidolonDescription: Each level up increases luck by <color=green>0.1%</color>
+    EidolonDescription: Each level up increases luck by <color=green>0.5%</color>
     EidolonQuote: 'I used to envy people of Capital, after all thier lives weren''t
       nearly as fucked. But I suppose everywhere is as bad as ever.
 
@@ -128,12 +137,15 @@ MonoBehaviour:
       been there, couldn''t say.'
   - EidolonTexture: {fileID: 21300000, guid: 9cdc89ae391652a449189d1c3da04460, type: 3}
     EidolonName: When I see you again
-    EidolonDescription: Increase health regeneration by <color=green>1</color> hp/s
+    EidolonDescription: 'Increase health regeneration by <color=green>1</color> hp/s
+
+      Increase
+      his passive damage to <color=green>0.5%</color> per enemy alive'
     EidolonQuote: "Are you enjoying the spectacle? \n\nI don't feel much of an enjojyment,
       no.\n\nNot much of a talker recently, huh? No matter, who's the next target?"
   - EidolonTexture: {fileID: 21300000, guid: 8bfb8dda4b2ac464fb8329431b0946b3, type: 3}
     EidolonName: Price of mistakes
-    EidolonDescription: Heal <color=green>20%</color> of max HP upon using <color=#43847F>Kneel!</color>
+    EidolonDescription: Heal <color=green>80%</color> of max HP upon using <color=#43847F>Kneel!</color>
       but increase damage taken by <color=red>1%</color> for each use
     EidolonQuote: 'Your contribution have been acknowledged '
   loreEntries: []

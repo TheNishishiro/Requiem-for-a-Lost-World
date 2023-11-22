@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Objects.Characters.Oana
 {
-    public class OanaStrategy : ICharacterStrategy
+    public class OanaStrategy : CharacterStrategyBase, ICharacterStrategy
     {
         public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)
         {
@@ -24,10 +24,6 @@ namespace Objects.Characters.Oana
                 stats.SkillCooldownReductionPercentage += 0.15f;
                 stats.HealthRegen += 0.5f;
             }
-        }
-
-        public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
-        {
         }
     }
 }

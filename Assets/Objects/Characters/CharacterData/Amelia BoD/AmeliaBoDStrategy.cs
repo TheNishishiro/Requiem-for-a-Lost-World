@@ -5,7 +5,7 @@ using Objects.Players.Scripts;
 
 namespace Objects.Characters.Amelia_BoD
 {
-	public class AmeliaBoDStrategy : ICharacterStrategy
+	public class AmeliaBoDStrategy : CharacterStrategyBase, ICharacterStrategy
 	{
 		public void ApplyRank(PlayerStats stats, CharacterRank characterRank)
 		{
@@ -28,10 +28,6 @@ namespace Objects.Characters.Amelia_BoD
 			{
 				stats.EnemySpawnRateIncreasePercentage += 0.2f;
 			}
-		}
-
-		public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
-		{
 		}
 
 		public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)

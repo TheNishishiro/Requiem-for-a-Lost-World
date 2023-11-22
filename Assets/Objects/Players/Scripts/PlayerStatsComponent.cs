@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Events.Handlers;
+using Events.Scripts;
 using Objects.Abilities;
 using Objects.Characters;
 using Objects.Items;
@@ -18,8 +20,9 @@ namespace Objects.Players.Scripts
 		private PlayerStats _playerStats;
 		public bool IsInvincible;
 		private Coroutine _moveSpeedBoostCoroutine;
-		private float _lastMoveSpeedIncrease;
 		private Coroutine _attackBoostCoroutine;
+		private Coroutine _statBoostCoroutine;
+		private float _lastMoveSpeedIncrease;
 		private float _lastAttackIncrease;
 
 		public void Set(PlayerStats playerStats)
@@ -35,6 +38,12 @@ namespace Objects.Players.Scripts
 		public void Add(PermUpgradeType permUpgradeType, float value)
 		{
 			_playerStats.Add(permUpgradeType, value);
+		}
+		
+		public void Add(StatEnum stat, float value)
+		{
+			_playerStats.Add(stat, value);
+			StatChangedEvent.Invoke(stat, value);
 		}
 
 		public IEnumerable<StatsDisplayData> GetStats()
@@ -378,6 +387,18 @@ namespace Objects.Players.Scripts
 		public float GetSpecialIncrementAmount()
 		{
 			return _playerStats?.SpecialIncrease ?? 0;
+		}
+
+		public void TemporaryStatBoost(StatEnum statEnum, float amount, float duration)
+		{
+			StartCoroutine(TempStatProcess(statEnum, amount, duration));
+		}
+
+		private IEnumerator TempStatProcess(StatEnum statEnum, float amount, float duration)
+		{
+			Add(statEnum, amount);
+			yield return new WaitForSeconds(duration);
+			Add(statEnum, -amount);
 		}
 
 		public void TemporaryMoveSpeedBoost(float increase, float duration)

@@ -61,11 +61,13 @@ namespace Objects.Characters.Nishi.Skill
 				SpawnManager.instance.SpawnObject(enemy.transform.position, blackFlamePrefab.gameObject);
 			}
 			
-			var damage = GameData.GetPlayerCharacterRank() >= CharacterRank.E5 ? 45 : 20;
-			
-			if (PlayerStatsComponent.GetHealth() - damage >= PlayerStatsComponent.GetMaxHealth() * 0.15)
+			if (GameData.GetPlayerCharacterRank() < CharacterRank.E5)
 			{
-				PlayerStatsComponent.TakeDamage(damage);
+				var damage = GameData.GetPlayerCharacterRank() >= CharacterRank.E5 ? 45 : 20;
+				if (PlayerStatsComponent.GetHealth() - damage >= PlayerStatsComponent.GetMaxHealth() * 0.15)
+				{
+					PlayerStatsComponent.TakeDamage(damage);
+				}
 			}
 
 			SpecialBarManager.ResetBar();

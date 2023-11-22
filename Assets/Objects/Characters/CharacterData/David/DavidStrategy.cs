@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Objects.Characters.David
 {
-	public class DavidStrategy : ICharacterStrategy
+	public class DavidStrategy : CharacterStrategyBase, ICharacterStrategy
 	{
 		public void ApplyRank(PlayerStats stats, CharacterRank characterRank)
 		{
@@ -17,10 +17,6 @@ namespace Objects.Characters.David
 				stats.HealthRegen += 0.2f;
 			if (characterRank >= CharacterRank.E2)
 				stats.Armor += 1;
-		}
-
-		public void ApplySkillTree(PlayerStats stats, List<int> unlockedTreeNodeIds)
-		{
 		}
 
 		public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)

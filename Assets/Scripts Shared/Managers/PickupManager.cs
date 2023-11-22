@@ -147,6 +147,14 @@ namespace Managers
 			}
 		}
 
+		public void SummonToPlayer()
+		{
+			foreach (var expGem in _expGem)
+			{
+				expGem.SetIsFollowingPlayer(true);
+			}
+		}
+
 		private IEnumerator MergeGemPickups()
 		{
 			while (true)

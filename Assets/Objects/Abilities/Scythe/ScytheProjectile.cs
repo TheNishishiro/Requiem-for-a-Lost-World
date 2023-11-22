@@ -1,7 +1,9 @@
 ﻿using System;
 using Interfaces;
+using Objects.Characters;
 using Objects.Enemies;
 using Objects.Players.Scripts;
+using Objects.Stage;
 using UnityEngine;
 using Weapons;
 using Random = UnityEngine.Random;
@@ -24,7 +26,7 @@ namespace Objects.Abilities.Scythe
 				return;
 			
 			SimpleDamage(other, false, out var damageable);
-			_healthComponent.Damage(-WeaponStats.HealPerHit);
+			_healthComponent.Damage(-WeaponStats.GetHealPerHit(GameData.IsCharacterWithRank(CharactersEnum.Corina_BoB, CharacterRank.E1)));
 
 			if (ScytheWeapon.IsBloodEmbrace && Random.value <= 0.2)
 				DamageOverTime(damageable, other);

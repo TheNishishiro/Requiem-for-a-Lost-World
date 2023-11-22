@@ -33,7 +33,6 @@ MonoBehaviour:
   AbilityPrefab: {fileID: 7756303805229472153, guid: edb4c9865779c8140a83909e39695570,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 25d5c8d68fb0aed49bffe952abff8c00, type: 3}
-  IsActive: 1
   ColorTheme: {r: 0.94117653, g: 0.6, b: 0.5647059, a: 1}
   StarRating: 5
   StartingWeapon: {fileID: -5174018032676017786, guid: 65b517a3cb75c7a48bab13f0f10c1d39,
@@ -103,7 +102,8 @@ MonoBehaviour:
       with you yet!'
   - EidolonTexture: {fileID: 21300000, guid: 45caffb228b9d1f4ba54fd4702a49c1f, type: 3}
     EidolonName: Have you fallen for me yet?
-    EidolonDescription: Reduce skill cooldown by <color=green>20%</color>
+    EidolonDescription: <color=#43847F>Piercing Shot</color> will shoot two additional
+      arrows in a cone
     EidolonQuote: 'Honestly it''s difficult being so pretty, especially in the military,
       all the guys are pestering me left and right!
 
@@ -126,8 +126,7 @@ MonoBehaviour:
       Haha"
   - EidolonTexture: {fileID: 21300000, guid: 614f56a53729c2f40a09d612dfc54f1a, type: 3}
     EidolonName: So is my duty
-    EidolonDescription: "Increase enemy max count by <color=red>20%</color> \nIncrease
-      luck by <color=green>15%</color>"
+    EidolonDescription: "Increase enemy max count by <color=red>20%</color> \n"
     EidolonQuote: "I always put up that damn smile and act like nothing ever faze
       me... \nDo you even realize what being a squad leader really is? It used to
       be fun and games before these... things, appeared.\nNowadays every time we
@@ -136,13 +135,8 @@ MonoBehaviour:
       David"
   - EidolonTexture: {fileID: 21300000, guid: 43b991e3fc107914ab90e5413f31ce7d, type: 3}
     EidolonName: Other me
-    EidolonDescription: 'Increase dodge chance by <color=green>20%</color>
-
-      Increase
-      item reward by <color=green>15%</color>
-
-      Increase crit damage gain from
-      <color=#BAFFB2>character levels</color> by <color=green>2%</color>'
+    EidolonDescription: <color=orange>Make it rain!</color> will reduce enemy <color=#B200FF>physical
+      resistance</color> by 0.5% per hit from level one
     EidolonQuote: 'Whenever we are out in the field we set out little campfire or
       two, depending on how many members we got.
 

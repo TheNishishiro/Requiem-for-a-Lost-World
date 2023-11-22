@@ -1,7 +1,9 @@
 ﻿using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using Managers;
+using Objects.Characters;
 using Objects.Players.Scripts;
+using Objects.Stage;
 using Weapons;
 
 namespace Objects.Abilities.Scythe
@@ -15,8 +17,10 @@ namespace Objects.Abilities.Scythe
 
 		public override void Awake()
 		{
-			_healthComponent = FindObjectOfType<HealthComponent>();
+			_healthComponent = FindFirstObjectByType<HealthComponent>();
 			base.Awake();
+			if (GameData.IsCharacterWithRank(CharactersEnum.Corina_BoB, CharacterRank.E4))
+				weaponStats.Scale += 0.5f;
 		}
 
 		protected override ScytheProjectile ProjectileInit()

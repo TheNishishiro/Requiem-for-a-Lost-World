@@ -28,6 +28,7 @@ public class EnemyManager : Singleton<EnemyManager>
 	private bool _isTimeStop;
 	private float _healthMultiplier = 1.0f;
 	private EnemyData _currentEnemySpawning;
+	private float _enemySpeedMultiplier = 1;
 
 	protected override void Awake()
 	{
@@ -57,7 +58,7 @@ public class EnemyManager : Singleton<EnemyManager>
 		
 		position = pointOnSurface;
 		enemy.transform.position = position;
-		enemy.Setup(_currentEnemySpawning, player, _playerStatsComponent, _healthMultiplier, _currentEnemySpawning.sprite);
+		enemy.Setup(_currentEnemySpawning, player, _playerStatsComponent, _healthMultiplier, _enemySpeedMultiplier, _currentEnemySpawning.sprite);
 		if (_currentEnemySpawning.enemyName == "grand octi")
 			enemy.SetupBoss();
 
@@ -176,5 +177,10 @@ public class EnemyManager : Singleton<EnemyManager>
 	public Enemy GetRandomEnemy()
 	{
 		return _enemies.OrderBy(_ => Random.value).FirstOrDefault();
+	}
+
+	public void ChangeSpeedMultiplier(float speedMultiplier)
+	{
+		_enemySpeedMultiplier = speedMultiplier;
 	}
 }

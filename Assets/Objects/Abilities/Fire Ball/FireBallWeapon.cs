@@ -5,7 +5,9 @@ using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using Managers;
 using Objects.Abilities.Magic_Ball;
+using Objects.Characters;
 using Objects.Enemies;
+using Objects.Stage;
 using UnityEngine;
 using UnityEngine.Pool;
 using Weapons;
@@ -13,6 +15,7 @@ using Weapons;
 public class FireBallWeapon : PoolableWeapon<FireBallProjectile>
 {
     [SerializeField] private AudioClip fireballSpawnSound;
+    private int enemiesKilled = 0;
 
     protected override bool ProjectileSpawn(FireBallProjectile projectile)
     {
@@ -26,4 +29,15 @@ public class FireBallWeapon : PoolableWeapon<FireBallProjectile>
         projectile.SetDirection(position.x, position.y, position.z);
         return true;
     }
+
+    public override void OnEnemyKilled()
+    {
+        if (!GameData.IsCharacterWithRank(CharactersEnum.Chitose, CharacterRank.E2)) return;
+        if (enemiesKilled++ <= 20) return;
+        
+        weaponStats.DamageIncreasePercentage += 0.01f;
+        enemiesKilled = 0;
+    }
+    
+    
 }

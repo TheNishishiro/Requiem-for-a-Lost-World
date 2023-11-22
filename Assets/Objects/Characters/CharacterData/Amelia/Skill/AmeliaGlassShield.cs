@@ -18,7 +18,7 @@ public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler, ISpeci
     private const float SpawnOffset = 0.2f;
     private List<AmeliaGlassShard> _activeShards = new ();
     private SpecialBarManager _specialBarManager;
-    private static int MaxShardsCount => GameData.GetPlayerCharacterRank() == CharacterRank.E5 ? 16 : 12;
+    private static int MaxShardsCount => GameData.GetPlayerCharacterRank() == CharacterRank.E5 ? 24 : 12;
 
     private SpecialBarManager SpecialBarManager
     {
@@ -58,7 +58,7 @@ public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler, ISpeci
         shard.Shatter();
         _activeShards.Remove(shard);
         
-        FindObjectOfType<HealthComponent>().Damage(-amount);
+        FindFirstObjectByType<HealthComponent>().Damage(-amount);
     }
 
     public void OnSpecialBarFilled()

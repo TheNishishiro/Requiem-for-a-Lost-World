@@ -15,6 +15,7 @@ namespace Objects.Abilities.Healing_Field
         {
 	        base.SetStats(weaponStats);
 	        _currentHealingFrequency = 0;
+	        transformCache = transform;
         }
 
         private void Update()
