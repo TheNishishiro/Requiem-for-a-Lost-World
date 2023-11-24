@@ -21,6 +21,7 @@ namespace Objects.Abilities.LightningStrike
 		
 		private ObjectPool<LightningChainProjectile> _subProjectilePool;
 		private Vector3 _subProjectilePosition;
+		private int _chargeStacks;
 
 		public override void Awake()
 		{
@@ -41,7 +42,7 @@ namespace Objects.Abilities.LightningStrike
 				},
 				projectile =>
 				{
-					subProjectileStats.Damage = weaponStats.GetDamage() * 0.25f;
+					subProjectileStats.Damage = weaponStats.GetDamage() * (GameData.IsCharacterWithRank(CharactersEnum.Alice_BoL, CharacterRank.E4) ? 0.75f : 0.25f);
 					subProjectileStats.Scale = weaponStats.GetScale();
 					projectile.SetStats(subProjectileStats);
 					projectile.gameObject.SetActive(true);
@@ -72,10 +73,13 @@ namespace Objects.Abilities.LightningStrike
 		protected override int GetAttackCount()
 		{
 			var attackCount = base.GetAttackCount();
-			if (GameData.GetPlayerCharacterId() == CharactersEnum.Alice_BoL &&
-			    GameData.GetPlayerCharacterRank() >= CharacterRank.E1)
-				attackCount += 2;
+			if (GameData.IsCharacterWithRank(CharactersEnum.Alice_BoL, CharacterRank.E1))
+				attackCount += 4;
+			
+			if (GameData.IsCharacterWithRank(CharactersEnum.Alice_BoL, CharacterRank.E5))
+				attackCount += _chargeStacks/2;
 
+			_chargeStacks = 0;
 			return attackCount;
 		}
 
@@ -83,6 +87,12 @@ namespace Objects.Abilities.LightningStrike
 		{
 			if (LevelField == 8)
 				IsChainLightning = true;
+		}
+
+		public override void OnEnemyKilled()
+		{
+			base.OnEnemyKilled();
+			if (Random.value < 0.6f) _chargeStacks++;
 		}
 	}
 }

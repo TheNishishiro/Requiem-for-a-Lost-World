@@ -5,6 +5,7 @@ using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using Managers;
 using Objects.Characters;
+using Objects.Players.Scripts;
 using Objects.Stage;
 using UnityEngine;
 using Weapons;
@@ -14,6 +15,11 @@ namespace Objects.Abilities.Meteor
 {
 	public class MeteorWeapon : PoolableWeapon<MeteorProjectile>
 	{
+		public override void Awake()
+		{
+			base.Awake();
+		}
+
 		protected override bool ProjectileSpawn(MeteorProjectile projectile)
 		{
 			var position1 = transform.position;
@@ -26,6 +32,19 @@ namespace Objects.Abilities.Meteor
 			projectile.transform.position = spawnPosition;
 			projectile.SetStats(weaponStats);
 			projectile.SetDirection(position.x, position.y, position.z);
+
+			if (GameData.IsCharacterWithRank(CharactersEnum.David_BoF, CharacterRank.E2))
+			{
+				var hpReductionCeiling = GameData.IsCharacterRank(CharacterRank.E5) ? 0.4f : 0.6f;
+				var hpDiff = GameManager.instance.playerStatsComponent.GetHealth() /
+				             GameManager.instance.playerStatsComponent.GetMaxHealth();
+
+				if (hpDiff > hpReductionCeiling)
+				{
+					GameManager.instance.playerComponent.healthComponent.Damage(2);
+				}
+			}
+			
 			return true;
 		}
 
@@ -35,7 +54,7 @@ namespace Objects.Abilities.Meteor
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.David_BoF)
 			{
 				baseCount += 2;
-				if (GameData.GetPlayerCharacterRank() >= CharacterRank.E5)
+				if (GameData.GetPlayerCharacterRank() >= CharacterRank.E1)
 					baseCount += (int)Math.Ceiling(baseCount * 0.5f);
 			}
 

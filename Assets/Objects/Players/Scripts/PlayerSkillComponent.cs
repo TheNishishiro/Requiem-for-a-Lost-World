@@ -184,8 +184,18 @@ namespace Objects.Players.Scripts
 			
 			var rank = GameData.GetPlayerCharacterRank();
 			var reductionMultiplier = (_weaponManager.maxWeaponCount - _weaponManager.GetUnlockedWeaponsAsInterface().Count) + 1;
-			var cooldownReduction =  reductionMultiplier * (rank >= CharacterRank.E3 ? 0.15f : 0.10f);
-			var skillDuration = rank >= CharacterRank.E2 ? 5f : 4f;
+			switch (rank)
+			{
+				case >= CharacterRank.E5:
+					reductionMultiplier = 6;
+					break;
+				case >= CharacterRank.E3 when reductionMultiplier < 4:
+					reductionMultiplier = 4;
+					break;
+			}
+			
+			var cooldownReduction = reductionMultiplier * 0.10f;
+			var skillDuration = rank >= CharacterRank.E2 ? 10f : 5f;
 
 			playerStatsComponent.IncreaseCooldownReductionPercentage(cooldownReduction);
 			abilityDurationBar.StartTick(skillDuration);
@@ -274,28 +284,21 @@ namespace Objects.Players.Scripts
 		{
 			var rank = GameData.GetPlayerCharacterRank();
 			const float skillDuration = 10f;
-			var hpPenalty = 40;
-			if (rank >= CharacterRank.E3)
-				hpPenalty = 80;
+			var hpPenalty = 0.1f;
+			if (rank >= CharacterRank.E2)
+				hpPenalty = 0.6f;
 			if (rank >= CharacterRank.E5)
-				hpPenalty = 120;
+				hpPenalty = 0.4f;
 			
 			playerStatsComponent.SetInvincible(true);
-			playerStatsComponent.SetHealth(Math.Max(1, playerStatsComponent.GetHealth() - hpPenalty));
+			playerStatsComponent.SetHealth(playerStatsComponent.GetMaxHealth() * hpPenalty);
 			healthComponent.UpdateHealthBar();
 			
 			var obj = Instantiate(GameData.GetSkillPrefab(), abilityContainer);
 			obj.LifeTime = skillDuration;
-
-			var damageFactor = 150f;
-			if (rank >= CharacterRank.E4)
-				damageFactor = 105f;
 			
-			var damageIncrease = Math.Abs(playerStatsComponent.GetHealth() - playerStatsComponent.GetMaxHealth()) / damageFactor;
-			playerStatsComponent.IncreaseDamageIncreasePercentage(damageIncrease);
 			abilityDurationBar.StartTick(skillDuration);
 			yield return new WaitForSeconds(skillDuration);
-			playerStatsComponent.IncreaseDamageIncreasePercentage(-damageIncrease);
 			playerStatsComponent.SetInvincible(false);
 		}
 

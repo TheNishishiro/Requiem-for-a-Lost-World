@@ -102,5 +102,10 @@ namespace Objects.Stage
 		{
 			return GetPlayerCharacterRank() >= rank;
 		}
+
+		public static bool IsCharacter(CharactersEnum characterId)
+		{
+			return GetPlayerCharacterId() == characterId;
+		}
 	}
 }

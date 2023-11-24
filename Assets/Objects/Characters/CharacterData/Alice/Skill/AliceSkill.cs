@@ -3,6 +3,7 @@ using System.Linq;
 using Data.Elements;
 using Managers;
 using Objects.Abilities.Reality_Crack;
+using Objects.Stage;
 using UnityEngine;
 
 namespace Objects.Characters.Alice.Skill
@@ -43,7 +44,7 @@ namespace Objects.Characters.Alice.Skill
 				}
 			}
 
-			EnemyManager.instance.GlobalDamage(25, _elementalWeapon);
+			EnemyManager.instance.DamageInView(45 * (1 + GameData.GetPlayerCharacterData().Stats.DamagePercentageIncrease), _elementalWeapon);
 		}
 	}
 }

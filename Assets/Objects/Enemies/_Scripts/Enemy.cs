@@ -252,5 +252,10 @@ namespace Objects.Enemies
 		{
 			return chaseComponent;
 		}
+
+		public Collider GetCollider()
+		{
+			return capsuleCollider;
+		}
 	}
 }

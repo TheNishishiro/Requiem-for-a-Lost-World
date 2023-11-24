@@ -21,7 +21,7 @@ MonoBehaviour:
   signet: {fileID: 21300000, guid: b548677616a57714885068bff2d29c5c, type: 3}
   PassiveDescription: Starts with low HP but heals over time. Gains additional projectile
     every 15 levels (up to <color=green>+3</color>) and increase enemy spawn rate
-    and health by <color=red>7%</color> every 15 levels
+    and health by <color=red>5%</color> every 20 levels
   AbilityName: Final Wish
   AbilityDescription: Shoot a projectile ahead that travels a certain distance and
     explodes causing damage in a huge area
@@ -30,7 +30,7 @@ MonoBehaviour:
   AbilityPrefab: {fileID: 4238375383337323453, guid: 7197088e9865c2d498b163f4bd80c079,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: e817619ddba684d47883195bbaf53dd5, type: 3}
-  ColorTheme: {r: 0.93725497, g: 0.8313726, b: 0.6862745, a: 1}
+  ColorTheme: {r: 1, g: 0.9098039, b: 0, a: 1}
   StarRating: 5
   StartingWeapon: {fileID: 3707545571287273477, guid: 3fc78551d1d24334faecf12f2c66cc6b,
     type: 3}
@@ -68,7 +68,7 @@ MonoBehaviour:
     Revives: 0
     ProjectileLifeTimeIncreasePercentage: 0
     DodgeChance: 0
-    DamageTakenIncreasePercentage: 0
+    DamageTakenIncreasePercentage: 0.5
     HealingIncreasePercentage: 0
     Luck: 0
     DamageOverTime: 0
@@ -89,20 +89,16 @@ MonoBehaviour:
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 8e56390c0067b024d9aacd50340209dc, type: 3}
     EidolonName: Dreams united
-    EidolonDescription: 'Increase starting HP by <color=green>20</color>
-
-      Increase
-      projectile duration by <color=green>40%</color>'
+    EidolonDescription: Increase <color=orange>Gem of Dream</color> creations damage
+      tick rate by 0.15 second and extend their initial duration by <color=green>50%</color>
     EidolonQuote: "I don't have memories of my childhood altho ever since I remember,
       I always found reading people quite easy. \nHuh... He used to say that I'm
       going to get myself hurt with my carelessness... Even if that's the case...
       All I want is to keep everyone safe"
   - EidolonTexture: {fileID: 21300000, guid: 15bc20cca1e9e80489230c262e436f8d, type: 3}
     EidolonName: Smile to protect
-    EidolonDescription: 'Increase healing from all sources by <color=green>30%</color>
-
-      Increase
-      damage taken by <color=red>10%</color>'
+    EidolonDescription: Each time a new construct is created heal <color=green>1</color>
+      HP
     EidolonQuote: 'Materializing wishes is quite easy. Once they are out and about,
       they give off a beautiful glow before solidifying into small glass shards.
 
@@ -111,14 +107,17 @@ MonoBehaviour:
       align'
   - EidolonTexture: {fileID: 21300000, guid: 618dbd651f3810a4085ec6cea12b9302, type: 3}
     EidolonName: Guard and defend
-    EidolonDescription: No longer increases enemy health
+    EidolonDescription: 'Increase initial <color=orange>Gem of Dream</color> construct
+      range and count by <color=green>1</color> m '
     EidolonQuote: After that day I promised the people safe home that they can always
       come back to. I don't want it to turn into a lie... I'm not going to break
       another promise. They trust me with their life and their pure wishes will pave
       the way forward
   - EidolonTexture: {fileID: 21300000, guid: a851d5c505c33df429f5c8e944c712e5, type: 3}
     EidolonName: Silent sleep
-    EidolonDescription: Increase construct count by <color=green>2</color>
+    EidolonDescription: 'Enemies hit by <color=#43847F>Final Wish</color> will have
+      their <color=#B200FF>light</color> resitance reduced by <color=green>20%</color>
+      per damage tick '
     EidolonQuote: 'In the boundless ocean she floats. Her mind presenting worlds
       with no begining nor end. Pure white worlds made of glass, reflecting different
       colored suns.
@@ -127,8 +126,10 @@ MonoBehaviour:
       You can''t escape destiny, Amelia'
   - EidolonTexture: {fileID: 21300000, guid: 4c4a735ff114214409e2fe6dc5f77812, type: 3}
     EidolonName: When dream turns to nightmare
-    EidolonDescription: "Increase flat damage by <color=green>1</color> point every
-      13 levels\nIncrease enemy spawn rate by <color=red>20%</color> \n"
+    EidolonDescription: 'Increase <color=#FFC300>flat damage</color> by <color=green>1</color>
+      point every 5 levels
+
+'
     EidolonQuote: 'Whenever I touch these pure white pieces of glass I can''t shake
       off the feeling that there is something... Sinister about them...
 

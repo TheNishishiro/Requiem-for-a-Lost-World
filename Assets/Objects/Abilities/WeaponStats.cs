@@ -176,6 +176,18 @@ namespace Objects.Abilities
 			return (DamageOverTime + _playerStatsComponent.GetDamageOverTime()) * (_playerStatsComponent.GetDamageIncreasePercentage() + DamageIncreasePercentage);
 		}
 
+		public float GetDamageOverTimeFrequency()
+		{
+			if (!_isInitialized) return DamageOverTimeFrequency;
+			return DamageOverTimeFrequency * _playerStatsComponent.GetDamageOverTimeFrequencyReductionPercentage();
+		}
+
+		public float GetDamageOverTimeDuration()
+		{
+			if (!_isInitialized) return DamageOverTimeDuration;
+			return DamageOverTimeDuration * _playerStatsComponent.GetDamageOverTimeDurationIncreasePercentage();
+		}
+
 		public float GetDamageIncreasePercentage()
 		{
 			if (!_isInitialized) return DamageIncreasePercentage;

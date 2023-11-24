@@ -37,6 +37,8 @@
         Luck,
         DamageOverTime,
         Rerolls,
-        Skips
+        Skips,
+        DamageOverTimeFrequencyReduction,
+        DamageOverTimeDurationIncrease
     }
 }

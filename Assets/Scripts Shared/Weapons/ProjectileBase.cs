@@ -44,7 +44,7 @@ namespace Weapons
 			TimeToLive = GetTimeToLive();
 			_damageCooldown = weaponStats.DamageCooldown;
 			_currentPassedEnemies = weaponStats.GetPassThroughCount();
-			
+			StopAllCoroutines();
 			IsDead = false;
 			TimeAlive = 0;
 			isDamageCooldownExpired = false;
@@ -173,7 +173,7 @@ namespace Weapons
 				return;
 			
 			if (!damageable.IsDestroyed())
-				damageable.ApplyDamageOverTime(WeaponStats.GetDamageOverTime(), WeaponStats.DamageOverTimeFrequency, WeaponStats.DamageOverTimeDuration, ParentWeapon);
+				damageable.ApplyDamageOverTime(WeaponStats.GetDamageOverTime(), WeaponStats.GetDamageOverTimeFrequency(), WeaponStats.GetDamageOverTimeDuration(), ParentWeapon);
 		}
 	}
 }

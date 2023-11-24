@@ -22,15 +22,15 @@ MonoBehaviour:
   PassiveDescription: Every 10 levels increase <color=#FFC300>cooldown reduction</color>
     by <color=green>1.5%</color>
   AbilityName: Kaminari Kiretsu
-  AbilityDescription: Perform a quick slash dealing lightning damage in a wide area,
-    at the same time gain <color=green>10%</color> <color=#FFC300>cooldown reduction</color>
-    for 4 seconds for each empty weapon slot (at least 10%)
+  AbilityDescription: Perform a quick slash dealing lightning damage in a wide area
+    in front, at the same time gain <color=green>10%</color> <color=#FFC300>cooldown
+    reduction</color> for 5 seconds for each empty weapon slot (at least 10%)
   AbilityCooldown: 45
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 3587274077961109647, guid: d576beee47a482c40a305ed5a4005058,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: d19ad89914d292c4ea045a3ea6b1553c, type: 3}
-  ColorTheme: {r: 0.21960786, g: 0.18039216, b: 0.29803923, a: 1}
+  ColorTheme: {r: 0.21960784, g: 0.18039216, b: 0.29803923, a: 1}
   StarRating: 5
   StartingWeapon: {fileID: 8000290219869719478, guid: 939fd167da7dc944a99764b849f19669,
     type: 3}
@@ -51,7 +51,7 @@ MonoBehaviour:
     Speed: 0
     TimeToLive: 0
     DetectionRange: 0
-    DamagePercentageIncrease: 0
+    DamagePercentageIncrease: 0.5
     ExperienceIncreasePercentage: 0
     MovementSpeed: 1.65
     SkillCooldownReductionPercentage: 0
@@ -87,41 +87,45 @@ MonoBehaviour:
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 0bb9275cc46816447bbff0b42bf8e579, type: 3}
     EidolonName: Thunder Awakens
-    EidolonDescription: Increase amount of <color=orange>Lightning strike</color>
-      by <color=green>2</color>
+    EidolonDescription: Increase amount of thunder bolts called with <color=orange>Lightning
+      strike</color> by <color=green>4</color>
     EidolonQuote: In the dance of blades, remember that patience and precision often
       triumph over brute force - In that sense, I deem you lacking.
   - EidolonTexture: {fileID: 21300000, guid: e530a4f3da2afef4381f470c156d2fe4, type: 3}
     EidolonName: Endless Glow
     EidolonDescription: Increase duration of the buff from <color=#43847F>Kaminari
-      Kiretsu</color> to <color=green>5s</color>
+      Kiretsu</color> to <color=green>10s</color>
     EidolonQuote: Do not get used to my presence, I'm only helping you because Oana
       wouldn't stop pestering me about it. Really, I have no idea what she's thinking.
   - EidolonTexture: {fileID: 21300000, guid: dd32c9b7293ac6347955b793dd82bd64, type: 3}
     EidolonName: On my own
-    EidolonDescription: Increase <color=#FFC300>cooldown reduction</color> gained
-      from <color=#43847F>Kaminari Kiretsu</color> to <color=green>15%</color> per
-      empty weapon slot
+    EidolonDescription: Buff from <color=#43847F>Kaminari Kiretsu</color> will always
+      be considered to have at least 4 free slots
     EidolonQuote: "I do have a long history, but you already know that, don't you?
       \nDid that digusting thing you home in your body told you? - Very well, when
       the time comes, I will cut you down myself."
   - EidolonTexture: {fileID: 21300000, guid: e1278d4b316159e44b9cf300364f09cc, type: 3}
     EidolonName: Energy influx
     EidolonDescription: 'Increase <color=#FFC300>dodge chance</color> by <color=green>2%</color>
-      per 10 levels '
+      per 10 levels (up to 40%)
+
+      Lightning chaines caused by <color=orange>Lightning
+      strike</color>''s bolts will deal <color=green>75%</color> of bolt damage instead
+      of 25%
+
+'
     EidolonQuote: I used to be a researcher back in the day, unfortunately none of
       these smarts stuck around to this day. No matter, smarts are for no use in
       this world, at least not the kind I possesed. Better for that knowledge to
       rot in hell with the old world.
   - EidolonTexture: {fileID: 21300000, guid: 8124624c4332b1049b409d099fc90adb, type: 3}
     EidolonName: Memory of despair
-    EidolonDescription: 'Reduce <color=#FFC300>skill cooldown</color> by <color=green>30%</color>
-
-      Increase
-      starting <color=#FFC300>crit rate</color> and <color=#FFC300>crit damage</color>
-      by <color=green>20%</color>
-
-      Reduce <color=#FFC300>armor</color> by <color=red>5</color>'
+    EidolonDescription: "Reduce <color=#FFC300>skill cooldown</color> by <color=green>30%</color>\nBuff
+      from <color=#43847F>Kaminari Kiretsu</color> will always be considered to have
+      at least 6 free weapon slots. \nEvery kill caused by <color=orange>Lightning
+      strike</color> has a 60% chance to generate one stack of <color=yellow>Charge</color>.
+      For every 2 stacks of <color=yellow>Charge</color> next attack will generate
+      additional lightning strike "
     EidolonQuote: "I watched the world crumble in front of my very eyes once.\nI
       am not letting it happen again. \nThat is my only duty as the guardian of this
       new era. "

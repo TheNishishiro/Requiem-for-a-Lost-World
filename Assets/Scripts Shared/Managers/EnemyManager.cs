@@ -169,6 +169,17 @@ public class EnemyManager : Singleton<EnemyManager>
 		}
 	}
 
+	public void DamageInView(float damage, WeaponBase weapon)
+	{
+		var enemiesToDamage = _enemies.Where(x => Utilities.IsWithinCameraView(Camera.main, x.GetCollider().bounds,
+			x.transform.position, player.transform.position, 15f)).Select(x => x.GetDamagableComponent());
+		
+		foreach (var enemy in enemiesToDamage)
+		{
+			enemy.TakeDamage(damage, weapon);
+		}
+	}
+
 	public IEnumerable<Enemy> GetActiveEnemies()
 	{
 		return _enemies;

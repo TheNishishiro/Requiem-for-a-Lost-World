@@ -1,4 +1,5 @@
 ﻿using System;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Objects.Characters
@@ -8,9 +9,9 @@ namespace Objects.Characters
 	{
 		public Sprite EidolonTexture;
 		public string EidolonName;
-		[TextArea]
+		[ResizableTextArea]
 		public string EidolonDescription;
-		[TextArea]
+		[ResizableTextArea]
 		public string EidolonQuote;
 	}
 }

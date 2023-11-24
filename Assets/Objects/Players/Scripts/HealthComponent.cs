@@ -27,7 +27,6 @@ namespace Objects.Players.Scripts
 				
 				AudioManager.instance.PlayPlayerHitAudio();
 				AchievementManager.instance.OnDamageTaken(amount);
-				DamageTakenEvent.Invoke(amount);
 			}
 			else if (amount < 0)
 			{
@@ -35,6 +34,7 @@ namespace Objects.Players.Scripts
 				AchievementManager.instance.OnHealing(amount);
 			}
 			
+			DamageTakenEvent.Invoke(amount);
 			playerStatsComponent.TakeDamage(amount);
 			UpdateHealthBar();
 			

@@ -24,12 +24,12 @@ MonoBehaviour:
   AbilityName: Snow hail
   AbilityDescription: Create a snow hail surrounding Oana dealing continues damage
     to enemies inside the storm
-  AbilityCooldown: 30
+  AbilityCooldown: 40
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: -3946794187556888350, guid: 361cbcae307231f409ad753f8bfaa661,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 5c9f52f2b121a8a419aa4aa866778294, type: 3}
-  ColorTheme: {r: 0.18823531, g: 0.60784316, b: 0.72156864, a: 1}
+  ColorTheme: {r: 0.1882353, g: 0.60784316, b: 0.72156864, a: 1}
   StarRating: 5
   StartingWeapon: {fileID: -3280506597268986020, guid: 370b1024b90bdb3449ea1c8ca5619f62,
     type: 3}
@@ -86,7 +86,10 @@ MonoBehaviour:
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 253a837014925de418d6171824cd15d8, type: 3}
     EidolonName: After millenia passed
-    EidolonDescription: Start with additonal 2 attacks on <color=orange>Ice Age</color>
+    EidolonDescription: 'Start with additonal 2 attacks on <color=orange>Ice Age</color>
+
+      Increase
+      <color=#FFC300>damage dealt</color> by <color=green>75%</color>'
     EidolonQuote: You know these ghost stories my friends used to spread around?
       I never knew I might see one for myself! Guess a lot of weird things happen
       after you hang around for long enough. What say you? I bet you weren't any
@@ -94,13 +97,13 @@ MonoBehaviour:
   - EidolonTexture: {fileID: 21300000, guid: b97e8d1352eeff24e93ab99df5ff360d, type: 3}
     EidolonName: Reply
     EidolonDescription: Enemies within the <color=#43847F>Snow hail</color> additonally
-      get their movement speed reduced by <color=green>50%</color>
+      get their movement speed reduced by <color=green>80%</color>
     EidolonQuote: 'I want to know everything that happened! Crucial informations
       must not be withheld... ... ... Talkative as always... '
   - EidolonTexture: {fileID: 21300000, guid: 67dbd26247125be4b95432f78f8170eb, type: 3}
     EidolonName: Shard within me
-    EidolonDescription: Increase <color=#FFC300>experience gain</color> by <color=green>5%</color>
-      per every 10 levels
+    EidolonDescription: Enemies within the <color=#43847F>Snow hail</color> get thier
+      ice resistance lowered by 5% per damage tick
     EidolonQuote: So you have never seen anyone manipulate ice? That's interesting,
       I gained this power right after the cataclysm. I suppose everyone here has
       some "unique" abilities. Take Corina as an example, don't tell me you've seen
@@ -108,10 +111,11 @@ MonoBehaviour:
       to see THAT again
   - EidolonTexture: {fileID: 21300000, guid: 130eec0833e50b949b4c88ac5ad310fa, type: 3}
     EidolonName: I don't take no for an answer
-    EidolonDescription: 'Reduce <color=#43847F>Snow hail</color> cooldown by <color=green>15%</color>
+    EidolonDescription: 'Reduce <color=#43847F>Snow hail</color> cooldown by <color=green>25%</color>
 
       Increase
-      <color=#FFC300>health regeneration</color> by <color=green>0.5/s</color> '
+      <color=#FFC300>crit rate</color> by <color=green>30%</color> and <color=#FFC300>crit
+      damage</color> by <color=green>150%</color>'
     EidolonQuote: 'Who would have thought a civilization like this could exist here...
       Incredible! I want to explore, visit places, see things!
 
@@ -131,7 +135,11 @@ MonoBehaviour:
       argument enough.'
   - EidolonTexture: {fileID: 21300000, guid: 8cce5e83e50c3ca4bb5c0ede1daacae8, type: 3}
     EidolonName: Winter's end
-    EidolonDescription: Add dditional 3 ripples to <color=orange>Ice Age</color>
+    EidolonDescription: 'Add dditional 1 ripple to <color=orange>Ice Age</color>
+
+      Every
+      time <color=orange>Ice Age</color> kills an enemy, increase <color=#FFC300>damage
+      dealt</color> by 1% per level for 1 second'
     EidolonQuote: A snowflake flies peacefully over the night sky, struggling against
       the wind, pretending to be a star. One of many on the sky, yet it could always
       be nothing more than an impostor, a pretend. It could never shine it's own

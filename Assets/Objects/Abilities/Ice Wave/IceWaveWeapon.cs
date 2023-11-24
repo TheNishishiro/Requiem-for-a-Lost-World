@@ -5,6 +5,7 @@ using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using Managers;
 using Objects.Characters;
+using Objects.Players.PermUpgrades;
 using Objects.Stage;
 using UnityEngine;
 using Weapons;
@@ -24,7 +25,7 @@ namespace Objects.Abilities.Ice_Wave
 		{
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Oana_BoI &&
 			    GameData.GetPlayerCharacterRank() == CharacterRank.E5)
-				waveCount += 3;
+				waveCount += 1;
 		}
 
 		protected override bool ProjectileSpawn(IceWaveProjectile projectile)
@@ -75,6 +76,13 @@ namespace Objects.Abilities.Ice_Wave
 		{
 			if (LevelField == 10)
 				IsBlockingEnemies = true;
+		}
+
+		public override void OnEnemyKilled()
+		{
+			base.OnEnemyKilled();
+			var additional = GameManager.instance.playerComponent.GetLevel() * 0.01f;
+			GameManager.instance.playerComponent.playerStatsComponent.TemporaryStatBoost("oana_kill_buff", StatEnum.DamagePercentageIncrease, additional, 1);
 		}
 	}
 }

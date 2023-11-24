@@ -34,10 +34,20 @@ namespace Objects.Players.Scripts
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Arika_BoV && GameData.GetPlayerCharacterRank() == CharacterRank.E3)
 				_playerStats.SkillCooldownReductionPercentage += 0.25f;
 		}
+
+		public void Apply(ItemStats itemStats, int rarity)
+		{
+			_playerStats.Sum(itemStats, rarity);
+		}
 		
 		public void Add(PermUpgradeType permUpgradeType, float value)
 		{
 			_playerStats.Add(permUpgradeType, value);
+		}
+
+		public void ApplyPermanent(PermUpgrade permUpgrade, int upgradeLevel)
+		{
+			_playerStats.Add(permUpgrade.type, permUpgrade.increasePerLevel * upgradeLevel);
 		}
 		
 		public void Add(StatEnum stat, float value)
@@ -59,16 +69,6 @@ namespace Objects.Players.Scripts
 		public void UseRevive()
 		{
 			_playerStats.Revives--;
-		}
-
-		public void Apply(ItemStats itemStats, int rarity)
-		{
-			_playerStats.Sum(itemStats, rarity);
-		}
-
-		public void ApplyPermanent(PermUpgrade permUpgrade, int upgradeLevel)
-		{
-			_playerStats.Add(permUpgrade.type, permUpgrade.increasePerLevel * upgradeLevel);
 		}
 
 		public void SetHealth(float health)
@@ -276,6 +276,12 @@ namespace Objects.Players.Scripts
 
 		public float GetDamageIncreasePercentage()
 		{
+			if (GameData.IsCharacter(CharactersEnum.David_BoF))
+			{
+				var multiplier = GameData.IsCharacterRank(CharacterRank.E3) ? 0.01f : 0.02f;
+				return 1 + (_playerStats?.DamagePercentageIncrease ?? 0) + ((GetMaxHealth() - GetHealth())*multiplier);
+			}
+			
 			return 1 + (_playerStats?.DamagePercentageIncrease ?? 0);
 		}
 
@@ -389,6 +395,16 @@ namespace Objects.Players.Scripts
 			return _playerStats?.SpecialIncrease ?? 0;
 		}
 
+		public float GetDamageOverTimeFrequencyReductionPercentage()
+		{
+			return (1 - _playerStats?.DamageOverTimeFrequencyReductionPercentage ?? 0);
+		}
+
+		public float GetDamageOverTimeDurationIncreasePercentage()
+		{
+			return (1 + _playerStats?.DamageOverTimeDurationIncreasePercentage ?? 0);
+		}
+
 		public void TemporaryStatBoost(StatEnum statEnum, float amount, float duration)
 		{
 			StartCoroutine(TempStatProcess(statEnum, amount, duration));
@@ -398,6 +414,24 @@ namespace Objects.Players.Scripts
 		{
 			Add(statEnum, amount);
 			yield return new WaitForSeconds(duration);
+			Add(statEnum, -amount);
+		}
+
+		private readonly Dictionary<string, Coroutine> _tempUniqueBuffs = new ();
+		public void TemporaryStatBoost(string id, StatEnum statEnum, float amount, float duration)
+		{
+			if (_tempUniqueBuffs.ContainsKey(id)) return;
+			
+			var coroutine = StartCoroutine(TempStatProcess(id, statEnum, amount, duration));
+			_tempUniqueBuffs.Add(id, coroutine);
+		}
+
+		private IEnumerator TempStatProcess(string id, StatEnum statEnum, float amount, float duration)
+		{
+			Add(statEnum, amount);
+			yield return new WaitForSeconds(duration);
+			_tempUniqueBuffs[id] = null;
+			_tempUniqueBuffs.Remove(id);
 			Add(statEnum, -amount);
 		}
 

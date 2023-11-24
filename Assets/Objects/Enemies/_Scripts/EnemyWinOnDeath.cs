@@ -6,9 +6,9 @@ namespace Objects.Enemies
 {
 	public class EnemyWinOnDeath : MonoBehaviour
 	{
-		public void OnDestroy()
+		public void OnDisable()
 		{
-			FindObjectOfType<GameOverScreenManager>()?.OpenPanel(true);
+			FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(true);
 		}
 	}
 }

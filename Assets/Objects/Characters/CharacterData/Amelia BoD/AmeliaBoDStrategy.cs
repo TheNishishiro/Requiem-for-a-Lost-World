@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Interfaces;
 using Objects.Players;
+using Objects.Players.PermUpgrades;
 using Objects.Players.Scripts;
 
 namespace Objects.Characters.Amelia_BoD
@@ -9,42 +10,21 @@ namespace Objects.Characters.Amelia_BoD
 	{
 		public void ApplyRank(PlayerStats stats, CharacterRank characterRank)
 		{
-			if (characterRank >= CharacterRank.E1)
-			{
-				stats.HealthMax += 20;
-				stats.ProjectileLifeTimeIncreasePercentage += 0.4f;
-			}
-			if (characterRank >= CharacterRank.E2)
-			{
-				stats.HealingIncreasePercentage += 0.3f;
-				stats.DamageTakenIncreasePercentage += 0.1f;
-			}
-			if (characterRank >= CharacterRank.E2)
-			{
-				stats.HealingIncreasePercentage += 0.3f;
-				stats.DamageTakenIncreasePercentage += 0.1f;
-			}
-			if (characterRank >= CharacterRank.E5)
-			{
-				stats.EnemySpawnRateIncreasePercentage += 0.2f;
-			}
 		}
 
 		public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)
 		{
-			if (currentLevel <= 45 && currentLevel % 15 == 0)
+			if (currentLevel % 20 == 0)
 			{
-				playerStatsComponent.IncreaseAttackCount(1);
-			}
-
-			if (currentLevel % 15 == 0 && rank < CharacterRank.E3)
-			{
-				playerStatsComponent.IncreaseEnemyHealth(0.07f);
+				playerStatsComponent.Add(StatEnum.EnemyHealthIncreasePercentage, 0.05f);
+				playerStatsComponent.Add(StatEnum.EnemySpawnRateIncreasePercentage, 0.05f);
+				if (currentLevel <= 80)
+					playerStatsComponent.Add(StatEnum.AttackCount, 1);
 			}
 			
-			if (currentLevel % 13 == 0 && rank >= CharacterRank.E5)
+			if (currentLevel % 5 == 0 && rank >= CharacterRank.E5)
 			{
-				playerStatsComponent.IncreaseFlatDamage(1);
+				playerStatsComponent.Add(StatEnum.Damage, 1);
 			}
 		}
 	}

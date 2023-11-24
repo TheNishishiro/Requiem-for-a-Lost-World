@@ -55,6 +55,7 @@ namespace Managers
 				var player = GameManager.instance.playerComponent;
 				player.AddGold(Random.Range(1, 50));
 				player.AddGems(Random.Range(1, 10));
+				ClosePanel();
 				return;
 			}
 			

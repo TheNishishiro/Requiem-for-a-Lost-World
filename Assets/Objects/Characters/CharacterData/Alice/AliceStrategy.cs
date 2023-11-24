@@ -11,7 +11,7 @@ namespace Objects.Characters.Alice
         {
             if (currentLevel % 10 == 0)
                 playerStatsComponent.IncreaseCooldownReductionPercentage(0.015f);
-            if (currentLevel % 10 == 0 && rank >= CharacterRank.E4)
+            if (currentLevel % 10 == 0 && rank >= CharacterRank.E4 && playerStatsComponent.GetDodgeChance() < 0.4f)
                 playerStatsComponent.IncreaseDodgeChance(0.02f);
         }
 
@@ -20,9 +20,6 @@ namespace Objects.Characters.Alice
             if (characterRank >= CharacterRank.E5)
             {
                 stats.SkillCooldownReductionPercentage += 0.3f;
-                stats.CritRate += 0.2f;
-                stats.CritDamage += 0.2f;
-                stats.Armor -= 5;
             }
         }
     }

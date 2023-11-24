@@ -34,7 +34,7 @@ MonoBehaviour:
   AbilityPrefab: {fileID: -6151377061064853923, guid: 328e447a0e02aa649adea30cc671114e,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 2a39b6f7df5bcdc48bc80df011300e09, type: 3}
-  ColorTheme: {r: 0.19607845, g: 0.5294118, b: 0.58431375, a: 1}
+  ColorTheme: {r: 1, g: 0.7647059, b: 0, a: 1}
   StarRating: 5
   StartingWeapon: {fileID: -1210981128314417668, guid: d40c8cdd411557a45963d2005107c041,
     type: 3}
@@ -78,6 +78,8 @@ MonoBehaviour:
     DamageOverTime: 5
     Rerolls: 0
     Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0
   skillNodes:
   - {fileID: 11400000, guid: e222e7c0df65d244190ce3ad145a4084, type: 2}
   - {fileID: 11400000, guid: 55673078510933e44a8c31a86ba6a1d1, type: 2}
@@ -91,7 +93,9 @@ MonoBehaviour:
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 48fb10afa8cbd9543b0fd28e643e4794, type: 3}
     EidolonName: Very special day
-    EidolonDescription: Increase weapon attack count by <color=green>1</color>
+    EidolonDescription: <color=orange>Tornado</color> has a 70% chance of applying
+      a DoT effect equal to Natalie's <color=#FFC300>damage over time</color> on
+      enemies hit
     EidolonQuote: "Ahhh~ The outside is always so lovely, won't you agree? \nHehe,
       of course you will... I wish every day could be as slow and peacful as today.\nOh?
       No... It's just that... I'm not really cut out for the office work you know.\nUgh,
@@ -99,7 +103,11 @@ MonoBehaviour:
       longer, just the two of us..."
   - EidolonTexture: {fileID: 21300000, guid: 5dd8e94ccaf8bee4b9a7e5c0b6baa345, type: 3}
     EidolonName: Young one's struggle
-    EidolonDescription: Increase projectile speed by <color=green>1.5</color> m/s
+    EidolonDescription: 'Increase <color=#FFC300>damage over time</color> by <color=green>2</color>
+      every 5 levels.
+
+      Enemies hit by <color=orange>Tornado</color> will have
+      their movement speed reduced by 20% for 1 second'
     EidolonQuote: 'You know, I was actually a very problematic kid... Sure living
       in a bad neighbourhood didn''t help but my parent''s tried really hard to get
       me on the right path...
@@ -109,8 +117,8 @@ MonoBehaviour:
       of it! Or so I thought until I sprained my ankle a couple of times... '
   - EidolonTexture: {fileID: 21300000, guid: 29cb35f973636754e9096210ef2c39c0, type: 3}
     EidolonName: Embraced by the wind
-    EidolonDescription: Increase all damage over time by <color=green>5</color> points
-      and all damage by <color=green>10%</color>
+    EidolonDescription: Every time DoT effect on enemy is about to end, deal 400%
+      of that DoT's damage instantly
     EidolonQuote: 'There is no better feeling than sneaking out from the office into
       the wilderness, in that regard, I haven''t changed one bit
 
@@ -123,11 +131,8 @@ MonoBehaviour:
       whenever I''m out, brings me strange feeling of peace and happiness'
   - EidolonTexture: {fileID: 21300000, guid: 9df8e10289d27744497cb0c9905de06d, type: 3}
     EidolonName: Quiet place
-    EidolonDescription: 'Further increase damage over time by <color=green>1</color>
-      for each 5 levels
-
-      Increase movement speed by <color=green>5%</color>
-      of her DoT every 10 levels (up to 4 m/s total)'
+    EidolonDescription: Increase <color=#FFC300>frequency of DoT</color> effect application
+      and their <color=#FFC300>duration</color> by <color=green>50%</color>
     EidolonQuote: "Can't argue that living in the city walls had it's benefits but
       this is just... so nice, isn't it?\nHaha, you don't need to just nod away at
       everything I say you know!\nI'm so happy, spending time with you, every day
@@ -135,11 +140,11 @@ MonoBehaviour:
       worth it for you, I promise~"
   - EidolonTexture: {fileID: 21300000, guid: 05636debec7af5c4280e18182b4ba2d3, type: 3}
     EidolonName: In the name of Love
-    EidolonDescription: 'Increase damage by <color=green>30%</color>
+    EidolonDescription: 'Every time a DoT is applied, there is a 50% chance to additonally
+      apply 1 tick of damage of random element equal to 100% of that tick''s damage
+      and reduce enemy defence to that element by 25%
 
-      Every
-      time DoT effect on enemy is about to end, deal 250% of current DoT as instant
-      damage'
+'
     EidolonQuote: 'All good is destined to end.
 
       Happiness turns into grief.
@@ -150,8 +155,8 @@ MonoBehaviour:
       Love into hate.
 
       The blessing of freedom is nothing
-      more than a mirage, our heart always bounds to something, but how does it feel
-      to watch it be ripped away from you in front of your very eyes.
+      more than a mirage as the heart always bounds to something, but how does it
+      feel to watch it be ripped away from you in front of your very eyes.
 
       With
       your act at it''s end... freedom, shall cease to exist as well'

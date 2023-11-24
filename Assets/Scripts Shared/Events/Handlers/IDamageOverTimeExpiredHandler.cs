@@ -5,6 +5,6 @@ namespace Events.Handlers
 {
 	public interface IDamageOverTimeExpiredHandler
 	{
-		void OnDoTExpired(Damageable damageable);
+		void OnDoTExpired(Damageable damageable, float damage);
 	}
 }

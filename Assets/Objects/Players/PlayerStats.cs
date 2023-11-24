@@ -52,6 +52,8 @@ namespace Objects.Players
 		public float DamageOverTime;
 		public int Rerolls;
 		public int Skips;
+		public float DamageOverTimeFrequencyReductionPercentage;
+		public float DamageOverTimeDurationIncreasePercentage;
 
 		public PlayerStats()
 		{
@@ -62,7 +64,7 @@ namespace Objects.Players
 		{
 			Set(playerStats);
 		}
-
+		
 		public void ApplyDefaultStats()
 		{
 			Health = 100;
@@ -99,6 +101,8 @@ namespace Objects.Players
 			DamageOverTime = 0;
 			Rerolls = 0;
 			Skips = 0;
+			DamageOverTimeFrequencyReductionPercentage = 0;
+			DamageOverTimeDurationIncreasePercentage = 0;
 		}
 
 		public void Sum(ItemStats item, int rarity)
@@ -137,6 +141,8 @@ namespace Objects.Players
             HealingIncreasePercentage += item.HealingReceivedIncreasePercentage * rarityFactor;
             Luck += item.Luck * rarityFactor;
             DamageOverTime += item.DamageOverTime * rarityFactor;
+            DamageOverTimeFrequencyReductionPercentage += item.DamageOverTimeFrequencyReductionPercentage * rarityFactor;
+            DamageOverTimeDurationIncreasePercentage += item.DamageOverTimeDurationIncreasePercentage * rarityFactor;
             Rerolls += item.Rerolls != 0 ? item.Rerolls + (rarity - 1) : item.Rerolls;
             Skips += item.Skips != 0 ? item.Skips + (rarity - 1) : item.Skips;
         }
@@ -189,6 +195,8 @@ namespace Objects.Players
             Skips = playerStats.Skips;
             SpecialIncrease = playerStats.SpecialIncrease;
             SpecialMax = playerStats.SpecialMax;
+            DamageOverTimeFrequencyReductionPercentage = playerStats.DamageOverTimeFrequencyReductionPercentage;
+            DamageOverTimeDurationIncreasePercentage = playerStats.DamageOverTimeDurationIncreasePercentage;
         }
 
 		public IEnumerable<StatsDisplayData> GetStatsList()
@@ -196,13 +204,20 @@ namespace Objects.Players
 			var stats = new List<StatsDisplayData>
 			{
 				new("Health", HealthMax, "Max health the character can have. Defines the amount of damage the player can take.", baseValue: 80),
-				new("Magnet", MagnetSize, "Defines the distance from which pickups will automatically get pulled towards player", baseValue: 0.6f),
+				new("Health regen", HealthRegen, "Amount of health character regenerates per second"),
+				new("Heal increase%", HealingIncreasePercentage, "The increase of healing received by the player from any source", true),
 				new("CDR", CooldownReduction, "Flat reduction of weapon attack cooldown in seconds"),
 				new("CDR%", CooldownReductionPercentage, "Reduces weapon attack cooldown by given percentage", true),
+				new("Skill CDR%", SkillCooldownReductionPercentage, "Percentage of character skill cooldown reduction", true),
 				new("Projectiles", AttackCount, "The amount of times each weapon is allowed to attack"),
 				new("Damage", Damage, "Flat damage increase of a weapon attack"),
 				new("Damage%", DamagePercentageIncrease, "Increases weapon damage dealt by given percentage", true),
+				new("Crit rate", CritRate, "The chance of any weapon hit to critically strike, each hit deals additional damage based on crit damage", true),
+				new("Crit damage", CritDamage, "Percentage damage increase during critical strikes", true),
 				new("DamageOverTime", DamageOverTime, "Flat damage over time applied to enemies (with applicable weapons)"),
+				new("DoT frequency", DamageOverTimeFrequencyReductionPercentage, "Cooldown reduction between applying another DoT effect", true),
+				new("DoT duration", DamageOverTimeDurationIncreasePercentage, "Duration increase for every DoT effect", true),
+				new("Magnet", MagnetSize, "Defines the distance from which pickups will automatically get pulled towards player", baseValue: 0.6f),
 				new("Projectile size", Scale, "Percentage of weapon size increase. Dictates how big AoE effects can be", true),
 				new("Projectile speed", Speed, "Percentage of weapon speed increase. Dictates how fast projectiles travels", true),
 				new("Attack duration", TimeToLive, "How long the projectile will stay on the screen before disappearing"),
@@ -210,10 +225,6 @@ namespace Objects.Players
 				new("Weapon range", DetectionRange, "How far the weapon can detect enemies (with applicable weapons)"),
 				new("EXP%", ExperienceIncreasePercentage, "Character in game experience gain increase per EXP shard pickup", true),
 				new("Movement speed", MovementSpeed, "Flat character movement speed increase", baseValue: 1.6f),
-				new("Skill CDR%", SkillCooldownReductionPercentage, "Percentage of character skill cooldown reduction", true),
-				new("Health regen", HealthRegen, "Amount of health character regenerates per second"),
-				new("Crit rate", CritRate, "The chance of any weapon hit to critically strike, each hit deals additional damage based on crit damage", true),
-				new("Crit damage", CritDamage, "Percentage damage increase during critical strikes", true),
 				new("Pass through", PassThroughCount, "How many times a projectile can pass through enemies before disappearing (with applicable weapons)"),
 				new("Armor", Armor, "Flat damage reduction from enemy attacks"),
 				new("Enemy speed%", EnemySpeedIncreasePercentage, "Increases enemy speed by given percentage. The higher the faster enemies will move towards player", true, true),
@@ -224,7 +235,6 @@ namespace Objects.Players
 				new("Revives", Revives, "The amount of times the player can be revived after dying. Revival brings player back to life with 50% health"),
 				new("Dodge chance%", DodgeChance, "The chance to avoid taking damage after colliding with an enemy", true),
 				new("Damage taken%", DamageTakenIncreasePercentage, "The increase of damage taken by the player from any source", true, true),
-				new("Heal increase%", HealingIncreasePercentage, "The increase of healing received by the player from any source", true),
 				new("Luck%", Luck, "Increase the chance of high rarity items appearing in chests of after leveling up. Also increases the chance of enemies dropping gold coins and gems upon death", true),
 				new("Rerolls", Rerolls, "The amount of times each set of upgrades to pick from level ups can be rerolled"),
 				new("Skips", Skips, "The amount of times each level up choice can be skipped")
@@ -417,6 +427,12 @@ namespace Objects.Players
 					break;
 				case StatEnum.Skips:
 					Skips +=(int) value;
+					break;
+				case StatEnum.DamageOverTimeFrequencyReduction:
+					DamageOverTimeFrequencyReductionPercentage += value;
+					break;
+				case StatEnum.DamageOverTimeDurationIncrease:
+					DamageOverTimeDurationIncreasePercentage += value;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(stat), stat, null);

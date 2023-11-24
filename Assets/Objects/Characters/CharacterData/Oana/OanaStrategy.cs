@@ -11,18 +11,19 @@ namespace Objects.Characters.Oana
     {
         public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)
         {
-            if (rank >= CharacterRank.E3 && currentLevel % 10 == 0)
-            {
-                playerStatsComponent.IncreaseExperienceGain(0.05f);
-            }
         }
 
         public void ApplyRank(PlayerStats stats, CharacterRank characterRank)
         {
+            if (characterRank >= CharacterRank.E1)
+            {
+                stats.DamagePercentageIncrease += 0.75f;
+            }
             if (characterRank >= CharacterRank.E4)
             {
-                stats.SkillCooldownReductionPercentage += 0.15f;
-                stats.HealthRegen += 0.5f;
+                stats.SkillCooldownReductionPercentage += 0.25f;
+                stats.CritRate += 0.3f;
+                stats.CritDamage += 1.5f;
             }
         }
     }

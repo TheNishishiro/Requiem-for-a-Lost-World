@@ -42,7 +42,11 @@ namespace Objects.Abilities.Tornado
 
 		private void OnTriggerStay(Collider other)
 		{
-			DamageArea(other, out _);
+			DamageArea(other, out var damageable);
+			if (other.CompareTag("Enemy") && GameData.IsCharacterWithRank(CharactersEnum.Natalie_BoW, CharacterRank.E1) && Random.value < 0.7f)
+				DamageOverTime(damageable, other);
+			if (other.CompareTag("Enemy") && GameData.IsCharacterWithRank(CharactersEnum.Natalie_BoW, CharacterRank.E2))
+				other.GetComponent<ChaseComponent>()?.SetSlow(0.2f, 1);
 			if (TornadoWeapon.IsStaticDischarge && Random.value < 0.15f && _dischargeCooldown <= 0)
 				SpawnChainLightning(other);
 		}

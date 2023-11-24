@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: R2_2
   m_EditorClassIdentifier: 
   nodeId: 5
-  description: 
-  icon: {fileID: 0}
+  description: Increase damage over time by {DamageOverTime}
+  icon: {fileID: 21300000, guid: 1accff26ac2af9d4da5d64326a71fbd6, type: 3}
   stats:
     Health: 0
     HealthMax: 0
@@ -47,6 +47,8 @@ MonoBehaviour:
     DamageTakenIncreasePercentage: 0
     HealingReceivedIncreasePercentage: 0
     Luck: 0
-    DamageOverTime: 0
+    DamageOverTime: 2
     Rerolls: 0
     Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0

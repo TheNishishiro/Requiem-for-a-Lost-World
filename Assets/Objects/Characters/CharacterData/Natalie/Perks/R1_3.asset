@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: R1_3
   m_EditorClassIdentifier: 
   nodeId: 3
-  description: 
-  icon: {fileID: 0}
+  description: Increase projectile duration by {TimeToLive}s.
+  icon: {fileID: 21300000, guid: e245839aa740ba1438a9b328c119822f, type: 3}
   stats:
     Health: 0
     HealthMax: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
     Damage: 0
     Scale: 0
     Speed: 0
-    TimeToLive: 0
+    TimeToLive: 0.5
     DetectionRange: 0
     DamagePercentageIncrease: 0
     ExperienceIncreasePercentage: 0
@@ -50,3 +50,5 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0

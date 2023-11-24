@@ -6,11 +6,13 @@ using Data.Elements;
 using Events.Scripts;
 using Interfaces;
 using Managers;
+using Objects.Characters;
 using Objects.Stage;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Weapons;
+using Random = UnityEngine.Random;
 
 namespace DefaultNamespace
 {
@@ -21,6 +23,7 @@ namespace DefaultNamespace
 		[SerializeField] public GameObject targetPoint;
 		[SerializeField] private AudioClip takeDamageSound;
 		public Dictionary<GameObject, float> sourceDamageCooldown = new ();
+		private Dictionary<int, Coroutine> _activeDots = new();
 		public float vulnerabilityTimer;
 		public float vulnerabilityPercentage;
 		private List<ElementStats> resistances = new ();
@@ -40,6 +43,8 @@ namespace DefaultNamespace
 			vulnerabilityPercentage = 0;
 			resistances.Clear();
 			inflictedElements.Clear();
+			StopAllCoroutines();
+			_activeDots.Clear();
 		}
 
 		private void Update()
@@ -142,7 +147,8 @@ namespace DefaultNamespace
 
 		public void ApplyDamageOverTime(float damage, float damageFrequency, float damageDuration, WeaponBase weaponBase)
 		{
-			StartCoroutine(DamageOverTime(damage, damageFrequency, damageDuration, weaponBase));
+			if (_activeDots.ContainsKey(weaponBase.GetInstanceID())) return;
+			_activeDots.Add(weaponBase.GetInstanceID(), StartCoroutine(DamageOverTime(damage, damageFrequency, damageDuration, weaponBase)));
 		}
 
 		private IEnumerator DamageOverTime(float damage, float damageFrequency, float damageDuration, WeaponBase weaponBase)
@@ -152,10 +158,20 @@ namespace DefaultNamespace
 			{
 				timer -= damageFrequency;
 				TakeDamage(damage, weaponBase);
+
+				if (GameData.IsCharacterWithRank(CharactersEnum.Natalie_BoW, CharacterRank.E5) && Random.value < 0.5f)
+				{
+					var values = Enum.GetValues(typeof(Element));
+					var randomElement = (Element)values.GetValue(Random.Range(0, values.Length));
+					TakeDamage(damage, new ElementalWeapon(randomElement));
+					ReduceElementalDefence(randomElement, 0.25f);
+				}
+				
 				yield return new WaitForSeconds(damageFrequency);
 			}
 			
-			DamageOverTimeExpiredHandler.Invoke(this);
+			DamageOverTimeExpiredHandler.Invoke(this, damage);
+			_activeDots.Remove(weaponBase.GetInstanceID());
 		}
 
 		public bool IsDestroyed()

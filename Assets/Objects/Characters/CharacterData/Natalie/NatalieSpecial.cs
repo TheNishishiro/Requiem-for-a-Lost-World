@@ -30,10 +30,10 @@ namespace Objects.Characters.Natalie
 			DamageOverTimeExpiredHandler.Unregister(this);
 		}
 
-		public void OnDoTExpired(Damageable damageable)
+		public void OnDoTExpired(Damageable damageable, float damage)
 		{
 			if (damageable != null)
-				damageable.TakeDamage(_playerStatsComponent.GetDamageOverTime() * 2.5f, _elementalWeapon);
+				damageable.TakeDamage(damage * 4f, _elementalWeapon);
 		}
 	}
 }

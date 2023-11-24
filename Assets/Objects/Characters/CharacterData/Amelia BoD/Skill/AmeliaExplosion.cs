@@ -1,4 +1,5 @@
 ﻿using System;
+using Data.Elements;
 using DefaultNamespace;
 using Objects.Players.Scripts;
 using UnityEngine;
@@ -42,7 +43,9 @@ namespace Objects.Characters.Amelia.Skill
 			
 			if (other.CompareTag("Enemy"))
 			{
-				other.GetComponent<Damageable>().TakeDamage(_playerStatsComponent.GetTotalDamage(25));
+				var damageable = other.GetComponent<Damageable>();
+				damageable.TakeDamage(_playerStatsComponent.GetTotalDamage(25));
+				damageable.ReduceElementalDefence(Element.Light, 0.2f);
 			}
 		}
 	}

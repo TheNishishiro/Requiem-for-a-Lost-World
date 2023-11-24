@@ -27,7 +27,7 @@ namespace Objects.Abilities.Back_Hole
 
 		protected override bool ProjectileSpawn(BlackHoleProjectile projectile)
 		{
-			var spawnArea = 10.0f;
+			var spawnArea = 4.0f;
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Arika_BoV)
 			{
 				spawnArea = _isBelow5Minutes ? 1.5f : spawnArea;

@@ -27,7 +27,7 @@ namespace Objects.Characters.Amelia.Skill
 		private void Start()
 		{
 			_elementalWeapon = new ElementalWeapon(Element.Light);
-			_playerStatsComponent = FindObjectOfType<PlayerStatsComponent>();
+			_playerStatsComponent = FindFirstObjectByType<PlayerStatsComponent>();
 			StartCoroutine(Glitch());
 		}
 

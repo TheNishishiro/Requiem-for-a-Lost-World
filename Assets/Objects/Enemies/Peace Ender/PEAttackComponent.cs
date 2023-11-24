@@ -68,7 +68,7 @@ namespace Objects.Enemies.Peace_Ender
 
 		private void SpawnEnemies()
 		{
-			FindObjectOfType<EnemyManager>().BurstSpawn(spawnableEnemies, Random.Range(enemySpawnCountMin, enemySpawnCountMax));
+			EnemyManager.instance.BurstSpawn(spawnableEnemies, Random.Range(enemySpawnCountMin, enemySpawnCountMax));
 		}
 	}
 }

@@ -7,11 +7,11 @@ namespace Objects.Enemies.Peace_Ender.Attacks
 {
 	public class LightPillarAttack : MonoBehaviour
 	{
-		private BoxCollider _collider;
+		private CapsuleCollider _collider;
 		
 		private void Awake()
 		{
-			_collider = GetComponent<BoxCollider>();
+			_collider = GetComponent<CapsuleCollider>();
 			StartCoroutine(Attack());
 		}
 		

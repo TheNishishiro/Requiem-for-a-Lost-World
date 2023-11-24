@@ -26,7 +26,7 @@ namespace Managers
 				instance = this;
 			}
 			
-			var saveFile = FindObjectOfType<SaveFile>();
+			var saveFile = FindFirstObjectByType<SaveFile>();
 			playerStatsComponent.Set(GameData.GetPlayerStartingStats());
             if (GameData.GetPlayerCharacterData()?.UseSpecialBar == true)
 	            specialBarManager.gameObject.SetActive(true);
@@ -41,7 +41,7 @@ namespace Managers
 				}
 			}
 			
-			FindObjectOfType<DiscordManager>().SetInGame();
+			FindFirstObjectByType<DiscordManager>().SetInGame();
 		}
 	}
 }

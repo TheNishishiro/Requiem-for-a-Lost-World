@@ -42,7 +42,9 @@ namespace Objects.Items
 		public float DamageOverTime;
 		public int Rerolls;
 		public int Skips;
-		
+		public float DamageOverTimeFrequencyReductionPercentage;
+		public float DamageOverTimeDurationIncreasePercentage;
+
 		public void ApplyRarity(int rarity)
 		{
 			var rarityFactor = GetRarityFactor(rarity);
@@ -77,6 +79,8 @@ namespace Objects.Items
 			HealingReceivedIncreasePercentage *= rarityFactor;
 			Luck *= rarityFactor;
 			DamageOverTime *= rarityFactor;
+			DamageOverTimeFrequencyReductionPercentage *= rarityFactor;
+			DamageOverTimeDurationIncreasePercentage *= rarityFactor;
 			Rerolls = Rerolls != 0 ? Rerolls + (rarity - 1) : Rerolls;
 			Skips = Skips != 0 ? Skips + (rarity - 1) : Skips;
 		}
@@ -117,6 +121,8 @@ namespace Objects.Items
             HealingReceivedIncreasePercentage += itemUpgradeItemStats.HealingReceivedIncreasePercentage * rarityFactor;
             Luck += itemUpgradeItemStats.Luck * rarityFactor;
             DamageOverTime += itemUpgradeItemStats.DamageOverTime * rarityFactor;
+            DamageOverTimeFrequencyReductionPercentage += itemUpgradeItemStats.DamageOverTimeFrequencyReductionPercentage * rarityFactor;
+            DamageOverTimeDurationIncreasePercentage += itemUpgradeItemStats.DamageOverTimeFrequencyReductionPercentage * rarityFactor;
             Rerolls += itemUpgradeItemStats.Rerolls == 0 ? 0 : itemUpgradeItemStats.Rerolls + (rarity - 1);
             Skips += itemUpgradeItemStats.Skips == 0 ? 0 : itemUpgradeItemStats.Skips + (rarity - 1);
         }
@@ -158,6 +164,8 @@ namespace Objects.Items
 				.Replace("{HealingReceivedIncreasePercentage}", Utilities.StatToString(HealingReceivedIncreasePercentage, rarityFactor, true))
 				.Replace("{Luck}", Utilities.StatToString(Luck, rarityFactor, true))
 				.Replace("{DamageOverTime}", Utilities.StatToString(DamageOverTime, rarityFactor))
+				.Replace("{DamageOverTimeFrequencyReduction}", Utilities.StatToString(DamageOverTimeFrequencyReductionPercentage, rarityFactor, true))
+				.Replace("{DamageOverTimeDurationIncrease}", Utilities.StatToString(DamageOverTimeDurationIncreasePercentage, rarityFactor, true))
 				.Replace("{Rerolls}", (Rerolls == 0 ? 0 : Rerolls + (rarity - 1)).ToString())
 				.Replace("{Skips}", (Skips == 0 ? 0 : Skips + (rarity - 1)).ToString())
 				;
@@ -168,23 +176,25 @@ namespace Objects.Items
 			var stats = new List<StatsDisplayData>
 			{
 				new("Health", HealthMax),
-				new("Magnet", MagnetSize),
+				new("Health regen", HealthRegen),
+				new("Projectiles", AttackCount),
 				new("CDR", CooldownReduction),
 				new("CDR%", CooldownReductionPercentage, isPercentage: true),
-				new("Projectiles", AttackCount),
 				new("Damage", Damage),
+				new("Damage%", DamagePercentageIncrease, isPercentage: true),
 				new("DamageOverTime", DamageOverTime),
+				new("DoT frequency", DamageOverTimeFrequencyReductionPercentage, isPercentage: true),
+				new("DoT duration", DamageOverTimeDurationIncreasePercentage, isPercentage: true),
+				new("Crit rate", CritRate, isPercentage: true),
+				new("Crit damage", CritDamage, isPercentage: true),
+				new("Magnet", MagnetSize),
 				new("Projectile size", Scale, isPercentage: true),
 				new("Projectile speed", Speed),
 				new("Attack duration", TimeToLive),
 				new("Weapon range", DetectionRange),
-				new("Damage%", DamagePercentageIncrease, isPercentage: true),
 				new("EXP%", ExperienceIncreasePercentage, isPercentage: true),
 				new("Movement speed", MovementSpeed),
 				new("Skill CDR%", SkillCooldownReductionPercentage, isPercentage: true),
-				new("Health regen", HealthRegen),
-				new("Crit rate", CritRate, isPercentage: true),
-				new("Crit damage", CritDamage, isPercentage: true),
 				new("Pass through", PassThroughCount),
 				new("Armor", Armor),
 				new("Enemy speed%", EnemySpeedIncreasePercentage, isPercentage: true, isInvertedColor: true),

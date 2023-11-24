@@ -28,12 +28,14 @@ namespace Objects.Characters.Oana.Skill
 
             var damageable = other.GetComponent<Damageable>();
             damageable.TakeDamageWithCooldown(_damage, gameObject, 0.5f, _elementalWeapon);
-            if (GameData.GetPlayerCharacterRank() < CharacterRank.E2)
-                return;
+            if (!GameData.IsCharacterRank(CharacterRank.E2)) return;
             
             var chaseComponent = other.GetComponentInParent<ChaseComponent>();
             if (chaseComponent != null)
-                chaseComponent.SetSlow(1.0f, 0.5f);
+                chaseComponent.SetSlow(1.0f, 0.8f);
+            
+            if (GameData.IsCharacterRank(CharacterRank.E3))
+                damageable.ReduceElementalDefence(Element.Ice, 0.05f);
         }
     }
 }
