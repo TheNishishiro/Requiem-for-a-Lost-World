@@ -11,6 +11,7 @@ using Objects.Stage;
 using Unity.VisualScripting;
 using UnityEngine;
 using Weapons;
+using Random = UnityEngine.Random;
 
 namespace Objects.Abilities.Back_Hole
 {
@@ -21,7 +22,7 @@ namespace Objects.Abilities.Back_Hole
 		
 		public override void Awake()
 		{
-			_stageTime = FindObjectOfType<StageTime>();
+			_stageTime = FindFirstObjectByType<StageTime>();
 			base.Awake();
 		}
 
@@ -35,7 +36,19 @@ namespace Objects.Abilities.Back_Hole
 
 			var blackHolePosition = Utilities.GetRandomInAreaFreezeParameter(transform.position, spawnArea, isFreezeY:true);
 			projectile.transform.position = Utilities.GetPointOnColliderSurface(blackHolePosition, transform);
-			projectile.SetStats(weaponStats);
+			
+			if (GameData.IsCharacterWithRank(CharactersEnum.Arika_BoV, CharacterRank.E4) && Random.value < 0.05f)
+			{
+				var originalScale = weaponStats.Scale;
+				weaponStats.Scale *= 2f;
+				projectile.SetStats(weaponStats);
+				weaponStats.Scale = originalScale;
+			}
+			else
+			{
+				projectile.SetStats(weaponStats);
+			}
+			
 			return true;
 		}
 

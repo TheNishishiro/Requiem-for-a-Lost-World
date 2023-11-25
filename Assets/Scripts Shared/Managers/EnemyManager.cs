@@ -141,7 +141,10 @@ public class EnemyManager : Singleton<EnemyManager>
 
 	public void EraseAllEnemies()
 	{
-		enemyPool.Clear();
+		foreach (var enemy in _enemies)
+		{
+			Despawn(enemy);
+		}
 		_enemies.Clear();
 	}
 

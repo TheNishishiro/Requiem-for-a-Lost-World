@@ -26,6 +26,9 @@ namespace DefaultNamespace
 		private Dictionary<int, Coroutine> _activeDots = new();
 		public float vulnerabilityTimer;
 		public float vulnerabilityPercentage;
+		public float additionalDamageTimer;
+		public float additionalDamageModifier;
+		public ElementalWeapon additionalDamageType;
 		private List<ElementStats> resistances = new ();
 		private List<Element> inflictedElements = new ();
 		private Transform _transformCache;
@@ -41,6 +44,8 @@ namespace DefaultNamespace
 			sourceDamageCooldown.Clear();
 			vulnerabilityTimer = 0;
 			vulnerabilityPercentage = 0;
+			additionalDamageTimer = 0;
+			additionalDamageModifier = 0;
 			resistances.Clear();
 			inflictedElements.Clear();
 			StopAllCoroutines();
@@ -51,6 +56,9 @@ namespace DefaultNamespace
 		{
 			if (vulnerabilityTimer > 0)
 				vulnerabilityTimer -= Time.deltaTime;
+			
+			if (additionalDamageTimer > 0)
+				additionalDamageTimer -= Time.deltaTime;
 			
 			if (Time.frameCount % 60 != 0) return;
 			
@@ -80,7 +88,7 @@ namespace DefaultNamespace
 			return resistances.FirstOrDefault(x => x.element == element)?.damageReduction ?? 0;
 		}
 		
-		public void TakeDamage(float damage, WeaponBase weaponBase = null)
+		public void TakeDamage(float damage, WeaponBase weaponBase = null, bool isRecursion = false)
 		{
 			var calculatedDamage = damage;
 			if (weaponBase != null)
@@ -98,6 +106,11 @@ namespace DefaultNamespace
 			{
 				AudioSource.PlayClipAtPoint(takeDamageSound, position, 0.5f);
 				_hitSoundPlayedThisFrame = true;
+			}
+
+			if (!isRecursion && additionalDamageTimer > 0)
+			{
+				TakeDamage(damage * additionalDamageModifier, additionalDamageType, true);
 			}
 
 			gameResultData.AddDamage(calculatedDamage, weaponBase);
@@ -183,6 +196,13 @@ namespace DefaultNamespace
 		{
 			vulnerabilityTimer = time;
 			vulnerabilityPercentage = percentage;
+		}
+
+		public void SetTakeAdditionalDamageFromAllSources(ElementalWeapon weapon, float duration, float modifier)
+		{
+			additionalDamageType = weapon;
+			additionalDamageTimer = duration;
+			additionalDamageModifier = modifier;
 		}
 		
 		private void OnElementInflict(Element element, float damage)

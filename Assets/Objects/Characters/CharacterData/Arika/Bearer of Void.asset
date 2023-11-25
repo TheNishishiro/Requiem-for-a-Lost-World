@@ -21,15 +21,15 @@ MonoBehaviour:
   signet: {fileID: 21300000, guid: e96274df46be6224da0dcc0e7a1c5495, type: 3}
   PassiveDescription: Radius and cooldown of black hole spawns is reduced for the
     first 5 minutes in combat, also gain projectile size every 20 levels
-  AbilityName: Singularity
-  AbilityDescription: Create a temporary black hole in front of her that sucks enemies
-    in and deals damage after short delay
+  AbilityName: Void's Embrace
+  AbilityDescription: With an explosion create a field inside of which enemies will
+    take additional cosmic damage from every damage source
   AbilityCooldown: 45
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 8699453097623444231, guid: dd8a0e0db35b86d4aae6ac40a2b03893,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 89aed4a773ec0294fb9d1c14880b782c, type: 3}
-  ColorTheme: {r: 0.13333334, g: 0.41176474, b: 0.63529414, a: 1}
+  ColorTheme: {r: 0.13333334, g: 0.4117647, b: 0.63529414, a: 1}
   StarRating: 5
   StartingWeapon: {fileID: 4937499201459452257, guid: e5b694096ad9bf54cbcc9ac2b3a2ba7a,
     type: 3}
@@ -73,6 +73,8 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0
   skillNodes:
   - {fileID: 11400000, guid: d2d0714d6bd503b478562e62a98b5d22, type: 2}
   - {fileID: 11400000, guid: 6cd525698035cb44fa24f5d39800493d, type: 2}
@@ -87,7 +89,8 @@ MonoBehaviour:
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: d48a50f3615d21a4fbcf5b6c393261d5, type: 3}
     EidolonName: Emptiness
-    EidolonDescription: Increase projectile duration by <color=green>30%</color>
+    EidolonDescription: Increase duration of <color=#43847F>Void's Embrace</color>
+      to <color=green>25</color> seconds
     EidolonQuote: 'Endless emptiness is what I call home.
 
 
@@ -103,13 +106,8 @@ MonoBehaviour:
       stick around and be sure to see my mission through.'
   - EidolonTexture: {fileID: 21300000, guid: 2e4a987013d49124fb373c2ade67da21, type: 3}
     EidolonName: The past I long for
-    EidolonDescription: 'Increase enemy spawn rate by <color=red>7%</color>
-
-      Increase
-      projectile duration by <color=green>20%</color>
-
-      Increase EXP gain by
-      <color=green>20%</color>'
+    EidolonDescription: While enemies are inside the field created by <color=#43847F>Void's
+      Embrace</color> they will take 2 damage every second
     EidolonQuote: 'There was one person that peaked my curiosty ages ago and so I''ve
       chosen him.
 
@@ -120,8 +118,11 @@ MonoBehaviour:
       we still can!'
   - EidolonTexture: {fileID: 21300000, guid: f3e2273db888f824c8c49149642b5b92, type: 3}
     EidolonName: Her will, my body
-    EidolonDescription: Increase projectile size by additional <color=green>3%</color>
-      per 20 levels and lower ability cooldown by <color=green>25%</color>
+    EidolonDescription: 'Increase projectile size by additional <color=green>5%</color>
+      per 20 levels
+
+      Enemies inside the black hole created by the <color=orange>Gem
+      of Emptiness</color> will take additional 50% damage '
     EidolonQuote: "Uhhhhh, you are so persistent! \nAlright, alright, I'll let you
       in on a secret! \nThere were 12 of us and together we form a key!\n...\nA key
       to what? I'm not telling you! How about you let me free and I'll show you myself!\n...\nWe
@@ -129,13 +130,8 @@ MonoBehaviour:
       I tried."
   - EidolonTexture: {fileID: 21300000, guid: 33fea0b86a437ae4487219fcd1b1d69b, type: 3}
     EidolonName: Of me and ages long gone
-    EidolonDescription: 'Increase damage by <color=green>2</color> points
-
-      Increase
-      shard pull range by <color=green>1</color>
-
-      Increase enemy quantity by
-      <color=red>15%</color>'
+    EidolonDescription: Have a 5% chance for <color=orange>Gem of Emptiness</color>
+      to create a super-massive black hole with double the size of normal black hole
     EidolonQuote: 'Whenever I close my eyes and pass through that void in my mind
       I end up in a familiar looking place soon before it was all turned into dust...
 
@@ -150,13 +146,9 @@ MonoBehaviour:
       dwelling on the past won''t do any good either.'
   - EidolonTexture: {fileID: 21300000, guid: 828dc5811bde5864280b1e678cea2d8b, type: 3}
     EidolonName: Recharging the Void
-    EidolonDescription: 'Her ability will suck in all enemies currently present on
-      the field
-
-      Lower ability cooldown by another <color=green>25%</color>
-
-      Increase
-      enemy speed by <color=red>10%</color> '
+    EidolonDescription: Follow-up damage caused by <color=#43847F>Void's Embrace</color>
+      will be equal to <color=green>100%</color> of original damage, this effect
+      will also linger for additional 3 seconds after the field is expired
     EidolonQuote: "We were all created of basic emotions, except for me of course,
       I've been devoid of them as the kind of link, I'm prone to absorbing everything
       around me so I quickly regained concept of feelings but my basic function was

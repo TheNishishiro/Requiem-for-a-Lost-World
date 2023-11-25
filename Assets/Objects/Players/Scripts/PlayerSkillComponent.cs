@@ -27,7 +27,6 @@ namespace Objects.Players.Scripts
 		[SerializeField] private BoxCollider playerCollider;
 		[SerializeField] private Transform abilityContainer;
 		[SerializeField] private HealthComponent healthComponent;
-		[SerializeField] private ChronastaSkill chronastaSkill;
 		[SerializeField] private SpecialBar specialBar;
 		[SerializeField] private AbilityDurationBar abilityDurationBar;
 		[SerializeField] private WeaponManager _weaponManager;
@@ -304,8 +303,12 @@ namespace Objects.Players.Scripts
 
 		private void ArikaSkill()
 		{
-			var result = Utilities.GetPointOnColliderSurface(transform.position + transform.forward * 3, gameObject.transform);
-			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, transform.rotation);
+			var skill = FindFirstObjectByType<ArikaSkill>(FindObjectsInactive.Include);
+			var skillDuration = GameData.IsCharacterRank(CharacterRank.E1) ? 25 : 15;
+			skill.SetDuration(skillDuration);
+			skill.gameObject.SetActive(true);
+			
+			abilityDurationBar.StartTick(skillDuration);
 		}
 	}
 }

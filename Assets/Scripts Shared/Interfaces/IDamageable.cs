@@ -6,7 +6,7 @@ namespace Interfaces
 {
 	public interface IDamageable
 	{
-		void TakeDamage(float damage, WeaponBase damageSource);
+		void TakeDamage(float damage, WeaponBase damageSource, bool isRecursion = false);
 		void SetHealth(float health);
 		bool IsDestroyed();
 		void ReduceElementalDefence(Element element, float amount);
