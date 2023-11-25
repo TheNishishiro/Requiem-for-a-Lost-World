@@ -29,7 +29,7 @@ MonoBehaviour:
   ColorTheme: {r: 0.6431373, g: 0.83921576, b: 0.9176471, a: 1}
   StarRating: 4
   StartingWeapon: {fileID: 0}
-  IsPullable: 1
+  IsPullable: 0
   UseSpecialBar: 0
   PickWeaponOnStart: 0
   Stats:
@@ -69,6 +69,8 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0
   skillNodes: []
   Eidolons: []
   loreEntries: []

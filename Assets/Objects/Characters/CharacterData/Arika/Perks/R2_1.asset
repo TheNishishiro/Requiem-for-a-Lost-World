@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: R2_1
   m_EditorClassIdentifier: 
   nodeId: 4
-  description: 
-  icon: {fileID: 0}
+  description: Increase shard attraction range by {MagnetSize}m.
+  icon: {fileID: 21300000, guid: f2e7a78c6afaa6344928dce5c461569a, type: 3}
   stats:
     Health: 0
     HealthMax: 0
-    MagnetSize: 0
+    MagnetSize: 0.15
     CooldownReduction: 0
     CooldownReductionPercentage: 0
     AttackCount: 0
@@ -50,3 +50,5 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0
