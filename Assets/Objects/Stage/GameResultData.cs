@@ -16,7 +16,7 @@ namespace Objects.Stage
 		public bool IsGameEnd;
 		public bool IsWin;
 		public int Level;
-		public int CharacterExp => (int) (MonstersKilled / 1000.0f + Gold * 0.5f + Time * 0.1f);
+		public int CharacterExp => (int) (MonstersKilled / 1000.0f + Time * 0.25f);
 
 		public void AddDamage(float damage, WeaponBase weaponBase)
 		{
@@ -74,13 +74,12 @@ namespace Objects.Stage
 
 		public void FinalizeGameResult()
 		{
-			var maxGameLength = 30.0f;
 			var timeSpent = Time / 60.0f;
 			var goldIncreaseByTime = timeSpent * 0.03f;
 			var gemIncreaseByTime = timeSpent * 0.05f;
 							
-			Gold += (int)((Gold + MonstersKilled / 20.0f) * (1 + goldIncreaseByTime));
-			Gems += (int)((MonstersKilled / 100.0f) * (1 + gemIncreaseByTime));
+			Gold += (int)(Gold * (1 + goldIncreaseByTime) + MonstersKilled / 10.0f);
+			Gems += (int)(MonstersKilled / 100.0f * (1 + gemIncreaseByTime));
 			if (IsWin)
 			{
 				Gold += 2000;

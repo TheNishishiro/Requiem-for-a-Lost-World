@@ -24,7 +24,7 @@ namespace Objects.Players.Scripts
 		private Coroutine _statBoostCoroutine;
 		private float _lastMoveSpeedIncrease;
 		private float _lastAttackIncrease;
-
+		
 		public void Set(PlayerStats playerStats)
 		{
 			_playerStats ??= new PlayerStats();

@@ -1,18 +1,27 @@
 ﻿using System;
+using Data.Elements;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using Interfaces;
+using Objects.Characters;
+using Objects.Enemies;
+using Objects.Stage;
 using UnityEngine;
 using Weapons;
+using Random = UnityEngine.Random;
 
 namespace Objects.Abilities.Corruption_Aura
 {
 	public class CorruptionAuraWeapon : WeaponBase
 	{
+		[SerializeField] private GameObject particleSystem;
+		
+		
 		public override void Update()
 		{
-			transform.localScale = new Vector3(weaponStats.GetScale(), 0.01f, weaponStats.GetScale());
+			transform.localScale = Vector3.one * weaponStats.GetScale();
 			transform.rotation = Quaternion.Euler(0,0,0);
+			particleSystem.transform.localScale = transform.localScale;
 		}
 
 		public override void Attack()
@@ -21,9 +30,33 @@ namespace Objects.Abilities.Corruption_Aura
 
 		public void OnTriggerStay(Collider other)
 		{
-			var damageable = other.GetComponent<IDamageable>();
-			if (damageable != null)
-				damageable.TakeDamageWithCooldown(weaponStats.GetDamage(), gameObject, weaponStats.DamageCooldown, this);
+			if (other.CompareTag("Enemy"))
+			{
+				var enemy = other.GetComponent<Enemy>();
+				var damageCooldown = weaponStats.DamageCooldown;
+				if (GameData.IsCharacterWithRank(CharactersEnum.Lucy_BoC, CharacterRank.E3))
+					damageCooldown -= 0.2f;
+
+				if (Time.frameCount % 30 == 0)
+				{
+					_playerStatsComponent.TakeDamage(-weaponStats.GetHealPerHit(false));
+				}
+
+				enemy.GetDamagableComponent().TakeDamageWithCooldown(weaponStats.GetDamage(), gameObject, damageCooldown,this);
+				if (GameData.IsCharacterWithRank(CharactersEnum.Lucy_BoC, CharacterRank.E2))
+					enemy.GetChaseComponent().SetSlow(1f, 0.3f);
+				if (GameData.IsCharacterWithRank(CharactersEnum.Lucy_BoC, CharacterRank.E4) && Time.frameCount % 30 == 0)
+				{
+					var values = Enum.GetValues(typeof(Element));
+					var resistanceShredElement = (Element)values.GetValue(Random.Range(0, values.Length));
+					enemy.GetDamagableComponent().ReduceElementalDefence(resistanceShredElement, 0.1f);
+				}
+			}
+			else if (other.CompareTag("Destructible"))
+			{
+				var damageable = other.GetComponent<IDamageable>();
+				damageable.TakeDamageWithCooldown(weaponStats.GetDamage(), gameObject, weaponStats.DamageCooldown,this);
+			}
 		}
 	}
 }

@@ -34,6 +34,9 @@ namespace Objects.Abilities.Boomerang
 
 		private void OnTriggerEnter(Collider other)
 		{
+			if (ProjectileDamageIncreasePercentage > -0.5f)
+				ProjectileDamageIncreasePercentage -= 0.02f;
+				
 			SimpleDamage(other, false);
 		}
 	}

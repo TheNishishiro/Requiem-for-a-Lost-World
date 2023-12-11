@@ -37,6 +37,11 @@ public class Pickup : PickupBase
 		return (ExpPickUpObject)pickUpObject;
 	}
 
+	public GameObject GetPickUpObject()
+	{
+		return pickUpObject.gameObject;
+	}
+
 	public void SetAmount(int amount)
 	{
 		if (pickUpObject != null)

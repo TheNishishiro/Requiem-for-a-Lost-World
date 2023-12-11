@@ -211,41 +211,38 @@ namespace DefaultNamespace
 				return;
 			
 			inflictedElements.Add(element);
-
 			var reaction = ElementalReactor.GetReaction(inflictedElements);
-			inflictedElements.Clear();
-			if (reaction == ElementalReaction.None)
-				return;
-			
-			if (reaction == ElementalReaction.Melt)
+			switch (reaction)
 			{
-				SetVulnerable(2, 0.5f);
-			}
-			
-			if (reaction == ElementalReaction.Explosion)
-			{
-				TakeDamage(damage * 0.35f);
-			}
-			
-			if (reaction == ElementalReaction.Swirl)
-			{
-				if (resistances.FirstOrDefault(x => x.element == element)?.damageReduction != null)
-					resistances.First(x => x.element == element).damageReduction -= 0.1f;
-			}
-			
-			if (reaction == ElementalReaction.Collapse)
-			{
-				foreach (var resistance in resistances)
+				case ElementalReaction.None:
+					return;
+				case ElementalReaction.Melt:
+					SetVulnerable(2, 0.5f);
+					break;
+				case ElementalReaction.Explosion:
+					TakeDamage(damage * 0.35f);
+					break;
+				case ElementalReaction.Swirl:
 				{
-					resistance.damageReduction *= 0.1f;
+					ReduceElementalDefence(element, 0.1f);
+					break;
 				}
-			}
+				case ElementalReaction.Collapse:
+				{
+					foreach (var resistance in resistances)
+					{
+						resistance.damageReduction *= 0.1f;
+					}
 
-			if (reaction == ElementalReaction.Erode)
-			{
-				SetVulnerable(1, 0.1f);
-				TakeDamage(Health * 0.05f);
+					break;
+				}
+				case ElementalReaction.Erode:
+					SetVulnerable(1, 0.1f);
+					TakeDamage(Health * 0.05f);
+					break;
 			}
+			
+			MessageManager.instance.PostMessage(reaction.ToString(), _transformCache.position, _transformCache.localRotation, ElementService.ElementToColor(element));
 		}
 	}
 }

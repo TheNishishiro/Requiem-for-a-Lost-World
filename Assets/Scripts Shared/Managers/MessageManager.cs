@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using DefaultNamespace;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Managers
 {
@@ -8,39 +10,46 @@ namespace Managers
 	{
 		public static MessageManager instance;
 		[SerializeField] private GameObject damageMessage;
-		private List<TextMeshPro> _messagePool;
-		private int _objectCount = 1000;
-		private int _count;
-		
-		private void Start()
-		{
-			_messagePool = new List<TextMeshPro>();
-			for (var i = 0; i < _objectCount; i++)
-				Populate();
-		}
+		private ObjectPool<TextMeshPro> _objectPool;
+		private string _postText;
+		private Color _postColor;
+		private Vector3 _postPosition;
+		private Quaternion _postRotation;
 
 		private void Awake()
 		{
-			instance = this;
-		}
+			if (instance == null)
+			{
+				instance = this;
+			}
 
-		public void Populate()
-		{
-			var go = Instantiate(damageMessage, transform);
-			_messagePool.Add(go.GetComponent<TextMeshPro>());
-			go.SetActive(false);
+			_objectPool = new ObjectPool<TextMeshPro>(
+				() => Instantiate(damageMessage, transform).GetComponent<TextMeshPro>(), 
+				message =>
+				{
+					message.gameObject.SetActive(true);
+					message.color = _postColor;
+					message.transform.position = Utilities.GetRandomInArea(_postPosition, 0.15f);
+					message.transform.localRotation = _postRotation;
+					message.text = _postText;
+				}, 
+				message =>
+				{
+					message.gameObject.SetActive(false);
+				}, 
+				expGem =>
+				{
+					Destroy(expGem.gameObject);
+				}, false, 10000);
 		}
 
 		public void PostMessage(string text, Vector3 worldPosition, Quaternion rotation, Color color)
 		{
-			_messagePool[_count].gameObject.SetActive(true);
-			_messagePool[_count].color = color;
-			_messagePool[_count].transform.position = worldPosition;
-			_messagePool[_count].transform.localRotation = rotation;
-			_messagePool[_count].text = text;
-			_count += 1;
-			if (_count >= _objectCount)
-				_count = 0;
+			_postText = text;
+			_postColor = color;
+			_postPosition = worldPosition;
+			_postRotation = rotation;
+			_objectPool.Get();
 		}
 	}
 }

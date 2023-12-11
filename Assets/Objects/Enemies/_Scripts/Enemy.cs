@@ -5,6 +5,7 @@ using DefaultNamespace;
 using Events.Scripts;
 using Interfaces;
 using Managers;
+using Objects.Characters;
 using Objects.Drops;
 using Objects.Drops.ChestDrop;
 using Objects.Players.Scripts;
@@ -29,7 +30,9 @@ namespace Objects.Enemies
 		[SerializeField] private Pickup expDrop;
 		[SerializeField] private Pickup goldDrop;
 		[SerializeField] private Pickup gemDrop;
+		[SerializeField] private Pickup healingOrbDrop;
 		[SerializeField] private GameObject grandOctiBoss;
+		[SerializeField] private ParticleSystem curseParticleSystem;
 		public Transform TargetPoint => damageableComponent.targetPoint.transform;
 		private EnemyStats stats;
 		private GameObject targetGameObject;
@@ -42,20 +45,24 @@ namespace Objects.Enemies
 		private bool _isRemoveCollisions;
 		private float _damageReduction;
 		private bool _isDying;
-		private List<Collision> _ignoredEnemyColliders = new ();
+		private bool _isPlayerControlled;
+		private float? _playerControlDuration;
+		private List<Collision> _ignoredEnemyColliders = new();
 
 		private ChanceDrop chestDropChance;
 		private ChanceDrop expDropChance;
 		private ChanceDrop goldDropChance;
 		private ChanceDrop gemDropChance;
-		
-		public void Setup(EnemyData newStats, Player target, PlayerStatsComponent playerStats, float healthMultiplier, float speedMultiplier, Sprite sprite)
+		private ChanceDrop healingOrbDropChance;
+
+		public void Setup(EnemyData newStats, Player target, PlayerStatsComponent playerStats, float healthMultiplier,
+			float speedMultiplier, Sprite sprite)
 		{
 			damageableComponent.Clear();
 			chaseComponent.Clear();
 			dissolveController.Clear();
 			capsuleCollider.enabled = true;
-			
+
 			_timeAlive = 0;
 			_currentDamageCooldown = 0;
 			_damageCooldown = 0.5f;
@@ -65,7 +72,10 @@ namespace Objects.Enemies
 			RevertIgnoredCollisions();
 			_ignoredEnemyColliders.Clear();
 			_isDying = false;
-			
+			_isPlayerControlled = false;
+			_playerControlDuration = null;
+			curseParticleSystem.gameObject.SetActive(false);
+
 			playerTarget = target;
 			spriteRenderer.transform.localPosition = new Vector3(0, newStats.groundOffset, 0);
 			spriteRenderer.sprite = sprite;
@@ -89,7 +99,7 @@ namespace Objects.Enemies
 			{
 				_isBossEnemy = true;
 				stats.hp *= playerTarget?.GetLevel() ?? 1;
-				
+
 				dropOnDestroyComponent.AddDrop(chestDropChance ??= new ChanceDrop()
 				{
 					chance = 1,
@@ -105,7 +115,18 @@ namespace Objects.Enemies
 			goldDropChance.chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 16;
 			goldDropChance.amount = Random.Range(1, 25);
 			dropOnDestroyComponent.AddDrop(goldDropChance);
-			
+
+			if (GameData.IsCharacter(CharactersEnum.Lucy_BoC))
+			{
+				healingOrbDropChance ??= new ChanceDrop()
+				{
+					pickupObject = healingOrbDrop,
+				};
+				healingOrbDropChance.chance = 0.05f;
+				healingOrbDropChance.amount = 1;
+				dropOnDestroyComponent.AddDrop(healingOrbDropChance);
+			}
+
 			gemDropChance ??= new ChanceDrop()
 			{
 				pickupObject = gemDrop,
@@ -113,7 +134,7 @@ namespace Objects.Enemies
 			gemDropChance.chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 100;
 			gemDropChance.amount = Random.Range(1, 50);
 			dropOnDestroyComponent.AddDrop(gemDropChance);
-			
+
 			stats.hp = (int)(stats.hp * healthMultiplier * playerStats.GetEnemyHealthIncrease());
 			stats.speed *= speedMultiplier;
 			stats.speed *= playerStats.GetEnemySpeedIncrease();
@@ -124,6 +145,11 @@ namespace Objects.Enemies
 		public void SetupBoss()
 		{
 			grandOctiBoss.SetActive(true);
+		}
+
+		public bool IsBoss()
+		{
+			return _isBossEnemy;
 		}
 
 		private void SetChaseTarget(GameObject target)
@@ -138,20 +164,29 @@ namespace Objects.Enemies
 		private void Update()
 		{
 			if (_isDying) return;
-			
+
 			chaseComponent.SetMovementState(EnemyManager.instance.IsTimeStop());
 			_timeAlive += Time.deltaTime;
-			
+
 			if (_currentDamageCooldown > 0)
 				_currentDamageCooldown -= Time.deltaTime;
 			if (_timeAlive > 90 && !_isBossEnemy)
 			{
 				EnemyManager.instance.Despawn(this);
 			}
-			
+
 			if (damageableComponent.IsDestroyed())
 				Die();
 
+			if (_isPlayerControlled && _playerControlDuration.HasValue)
+			{
+				_playerControlDuration -= Time.deltaTime;
+				if (_playerControlDuration <= 0)
+				{
+					TogglePlayerControl(false);
+				}
+			}
+			
 			if (_removeCollisionsTimer > 0)
 			{
 				_isRemoveCollisions = true;
@@ -167,7 +202,7 @@ namespace Objects.Enemies
 		private void Die()
 		{
 			if (_isDying) return;
-			
+
 			capsuleCollider.enabled = false;
 			chaseComponent.SetMovementState(true);
 			_isDying = true;
@@ -190,12 +225,12 @@ namespace Objects.Enemies
 		{
 			return _isDying;
 		}
-		
+
 		private void OnCollisionStay(Collision collisionInfo)
 		{
 			if (_isDying)
 				return;
-			
+
 			if (collisionInfo.gameObject.CompareTag("Player"))
 			{
 				var playerComponent = GameManager.instance.playerComponent;
@@ -206,8 +241,20 @@ namespace Objects.Enemies
 				_ignoredEnemyColliders.Add(collisionInfo);
 				Physics.IgnoreCollision(collisionInfo.collider, GetComponent<CapsuleCollider>(), true);
 			}
+			else if (collisionInfo.gameObject.CompareTag("Enemy") && _isPlayerControlled)
+			{
+				var enemyComponent = collisionInfo.gameObject.GetComponent<Enemy>();
+				var isE5Lucy = GameData.IsCharacterWithRank(CharactersEnum.Lucy_BoC, CharacterRank.E5);
+				
+				var damageIncrease = isE5Lucy ? 2f : 1f;
+				enemyComponent.GetDamagableComponent().TakeDamageWithCooldown(stats.damage * damageIncrease * playerTarget.playerStatsComponent.GetDamageIncreasePercentage(), collisionInfo.gameObject, _damageCooldown, null);
+				
+				// Take damage from other enemies
+				var damageReduction = isE5Lucy ? 0.3f : 1f;
+				GetDamagableComponent().TakeDamageWithCooldown(enemyComponent.GetDamage() * damageReduction, collisionInfo.gameObject, _damageCooldown, null);
+			}
 		}
-		
+
 		private void RevertIgnoredCollisions()
 		{
 			var collider = capsuleCollider;
@@ -216,7 +263,7 @@ namespace Objects.Enemies
 				var ignoredEnemyCollider = _ignoredEnemyColliders[index];
 				if (ignoredEnemyCollider?.collider != null && collider != null)
 					Physics.IgnoreCollision(ignoredEnemyCollider.collider, collider, false);
-				
+
 				_ignoredEnemyColliders.RemoveAt(index--);
 			}
 
@@ -238,6 +285,26 @@ namespace Objects.Enemies
 				_removeCollisionsTimer = timer;
 		}
 
+		public void MarkAsPlayerControlled(float? duration)
+		{
+			if (grandOctiBoss.gameObject.activeSelf)
+				return;
+			
+			_playerControlDuration = duration;
+			TogglePlayerControl(true);
+		}
+
+		private void TogglePlayerControl(bool isActive)
+		{
+			_isPlayerControlled = true;
+			GetChaseComponent().MarkAsPlayerControlled(isActive);
+			curseParticleSystem.gameObject.SetActive(isActive);
+			if (isActive)
+				GetChaseComponent().SetTarget(EnemyManager.instance.GetUncontrolledClosestEnemy(transform.position)?.gameObject);
+			else
+				chaseComponent.SetTarget(playerTarget.gameObject);
+		}
+		
 		public void AddDamageReduction(float amount)
 		{
 			_damageReduction -= amount;
@@ -256,6 +323,16 @@ namespace Objects.Enemies
 		public Collider GetCollider()
 		{
 			return capsuleCollider;
+		}
+
+		public float GetDamage()
+		{
+			return stats.damage;
+		}
+
+		public bool IsPlayerControlled()
+		{
+			return _isPlayerControlled;
 		}
 	}
 }

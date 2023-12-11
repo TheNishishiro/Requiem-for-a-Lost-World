@@ -141,9 +141,13 @@ public class EnemyManager : Singleton<EnemyManager>
 
 	public void EraseAllEnemies()
 	{
-		foreach (var enemy in _enemies)
+		for (var i = 0; i < _enemies.Count; i++)
 		{
-			Despawn(enemy);
+			if (_enemies[i] != null)
+			{
+				Despawn(_enemies[i]);
+				i--;
+			}
 		}
 		_enemies.Clear();
 	}
@@ -191,6 +195,11 @@ public class EnemyManager : Singleton<EnemyManager>
 	public Enemy GetRandomEnemy()
 	{
 		return _enemies.OrderBy(_ => Random.value).FirstOrDefault();
+	}
+
+	public Enemy GetUncontrolledClosestEnemy(Vector3 position)
+	{
+		return _enemies.Where(x => !x.IsPlayerControlled()).OrderBy(enemy => Vector3.Distance(position, enemy.transform.position)).FirstOrDefault();
 	}
 
 	public void ChangeSpeedMultiplier(float speedMultiplier)

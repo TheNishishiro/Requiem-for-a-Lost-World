@@ -14,31 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 2
   Name: Lucy
-  Title: 
-  CharacterCard: {fileID: 21300000, guid: f3e23fb717336c24ab320e85901944bf, type: 3}
-  Avatar: {fileID: 0}
-  CharacterSprite: {fileID: 0}
+  Title: Bearer of Corruption
+  CharacterCard: {fileID: 21300000, guid: 5d9162cb974102447a74de7e584c2376, type: 3}
+  Avatar: {fileID: 21300000, guid: 88dfde6aec7eb9640925662224f7311f, type: 3}
+  CharacterSprite: {fileID: 21300000, guid: ba49fbf638fcf6f478b04d8ba9f1a37d, type: 3}
   signet: {fileID: 21300000, guid: 2d1826e6251112e4285781a2abff6b5e, type: 3}
-  PassiveDescription: 
-  AbilityName: 
-  AbilityDescription: 
-  AbilityCooldown: 0
+  PassiveDescription: Each kill has a 5% chance of dropping a healing particle that
+    heals <color=green>1</color> HP upon being picked up
+  AbilityName: Absolute Command
+  AbilityDescription: Pick random enemies from the field to fight for you for 10
+    seconds. Damage of enemies controlled in this way is affected by current <color=#FFC300>damage
+    increase %</color>
+  AbilityCooldown: 40
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 0}
-  AbilityIcon: {fileID: 0}
-  ColorTheme: {r: 0.5529412, g: 0.48235297, b: 0.4039216, a: 1}
+  AbilityIcon: {fileID: 21300000, guid: 7baa46a83cddaef48a2e6e4ab42ef901, type: 3}
+  ColorTheme: {r: 0.5529412, g: 0.48235294, b: 0.40392157, a: 1}
   StarRating: 5
   StartingWeapon: {fileID: 693573438688654377, guid: b2c971a91b4815d4e81ba1fd64a5ceeb,
     type: 3}
-  IsPullable: 0
+  IsPullable: 1
   UseSpecialBar: 0
   PickWeaponOnStart: 0
   Stats:
-    Health: 0
-    HealthMax: 0
+    Health: 50
+    HealthMax: 50
     SpecialMax: 0
     SpecialIncrease: 0
-    MagnetSize: 0
+    MagnetSize: 0.4
     CooldownReduction: 0
     CooldownReductionPercentage: 0
     AttackCount: 0
@@ -49,7 +52,7 @@ MonoBehaviour:
     DetectionRange: 0
     DamagePercentageIncrease: 0
     ExperienceIncreasePercentage: 0
-    MovementSpeed: 0
+    MovementSpeed: 1.4
     SkillCooldownReductionPercentage: 0
     HealthRegen: 0
     CritRate: 0
@@ -70,6 +73,8 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0
   skillNodes:
   - {fileID: 11400000, guid: 8260ce2dbfe02934bb44dccac611b20b, type: 2}
   - {fileID: 11400000, guid: aa884236ff11c314dbf4d24a44ab1b24, type: 2}
@@ -81,5 +86,53 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a202705ddce2282479d845febe29f0f4, type: 2}
   - {fileID: 11400000, guid: 678e144405ea0454db7f2005ffe62718, type: 2}
   - {fileID: 11400000, guid: 907f9dd79ea4dca4d89b877a5be64c85, type: 2}
-  Eidolons: []
+  Eidolons:
+  - EidolonTexture: {fileID: 21300000, guid: f735f8f9160de734b8a1cce1a6259bfb, type: 3}
+    EidolonName: Veil of Shadows
+    EidolonDescription: 'Enemies will be controlled for another 15 seconds after
+      casting <color=#43847F>Absolute Command</color>
+
+      Casting <color=#43847F>Absolute
+      Command</color> will now be able to affect boss enemies as well'
+    EidolonQuote: "Pain... The gnawing on my skin... \nWhere is everyone... I can't
+      see anything... \nMom... Dad..."
+  - EidolonTexture: {fileID: 21300000, guid: cf8f6be0537a4ae47b61a94143580c7a, type: 3}
+    EidolonName: Cursed Enchantment
+    EidolonDescription: <color=orange>Corruption Aura</color> will slow down enemies
+      within it's boundries by 30%
+    EidolonQuote: "The whispers... Never go away... \nI'm all alone... I wish to
+      be all alone...\nLEAVE ME ALONE!"
+  - EidolonTexture: {fileID: 21300000, guid: 6174617a2719019429c2bf8914e4c8f2, type: 3}
+    EidolonName: The Ebon Convergence
+    EidolonDescription: 'Increase max amount of enemies being controlled after using
+      <color=#43847F>Absolute Command</color> to 20
+
+      Increase damage tick rate
+      caused by <color=orange>Corruption Aura</color> by <color=green>0.2</color>
+      second'
+    EidolonQuote: "I'm sorry... I'm so very... sorry... \nForgive me... \nI never
+      meant... any of this...\nSomebody... Help me..."
+  - EidolonTexture: {fileID: 21300000, guid: 5f4f59cca63f19d49888c555b064b211, type: 3}
+    EidolonName: Whispers of the Abyss
+    EidolonDescription: Enemies inside of <color=orange>Corruption Aura</color> will
+      have their random elemental resistance lowered by 10% for each damage tick
+      taken
+    EidolonQuote: 'Grandma never stopped pampering me, whenever I happened to be
+      around her house she would always call me over to pack my bag full of sweets!
+
+      My
+      parents weren''t nearly as easy going but I respect them a whole lot too!
+
+      ...
+      I wish things would have gone differently... I did overhear your conversation
+      before you know...'
+  - EidolonTexture: {fileID: 21300000, guid: bfc628a2ab4fd1c4cb712f9fe2aac0b5, type: 3}
+    EidolonName: The Arcane Plague
+    EidolonDescription: Enemies controlled via <color=#43847F>Absolute Command</color>
+      will take <color=green>30%</color> damage from other enemies and deal a <color=green>100%</color>
+      more damage to them
+    EidolonQuote: "Alas, the tragedy spares nobody. Abandoned at birth, taken in
+      by people who barely care about her, then abandoned again just to be taken
+      by the sickness most deadly... \nSo is the nature of human life that the humanity
+      have constructed for themselves."
   loreEntries: []

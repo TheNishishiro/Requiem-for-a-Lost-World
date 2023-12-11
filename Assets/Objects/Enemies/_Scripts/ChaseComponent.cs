@@ -19,6 +19,7 @@ public class ChaseComponent : MonoBehaviour
     private float _slowAmount;
     private bool _isMovementDisabled;
     private float _tempTargetTimer;
+    private bool _isPlayerControlled;
     private Transform transformCache;
     
     private void Awake()
@@ -34,10 +35,12 @@ public class ChaseComponent : MonoBehaviour
         _slowAmount = 0;
         _isMovementDisabled = false;
         _tempTargetTimer = 0;
+        _isPlayerControlled = false;
     }
 
     public void SetTarget(GameObject target)
     {
+        if (target == null) return;
         targetDestination = target.transform;
     }
 
@@ -70,6 +73,13 @@ public class ChaseComponent : MonoBehaviour
             _tempTargetTimer-=Time.deltaTime;
         }
 
+        if (_isPlayerControlled && targetDestination?.gameObject?.activeInHierarchy != true)
+        {
+            targetDestination = EnemyManager.instance.GetUncontrolledClosestEnemy(transform.position).transform;
+            if (targetDestination == null)
+                return;
+        }
+        
         var destination = isTempTarget ? tempTarget.transform.position : targetDestination.position;
         if (!FollowYAxis)
             destination.y = currentPosition.y;
@@ -84,12 +94,12 @@ public class ChaseComponent : MonoBehaviour
             _slowTimer -= Time.deltaTime;
         }
 
-        if (!isTempTarget && Vector3.Distance(currentPosition, destination) > 12f)
+        if (!isTempTarget && !_isPlayerControlled && Vector3.Distance(currentPosition, destination) > 12f)
         {
             currentPosition = Utilities.GetPointOnColliderSurface(destination - Utilities.GenerateRandomPositionOnEdge(new Vector2(8, 8)), transformCache, GetComponent<CapsuleCollider>().height);
         }
 
-        var speed = (isTempTarget ? tempSpeed : movementSpeed) * (_slowTimer > 0 ? _slowAmount : 1.0f);
+        var speed = (isTempTarget ? tempSpeed : movementSpeed) * (_slowTimer > 0 ? _slowAmount : 1.0f) * (_isPlayerControlled ? 1.3f : 1.0f );
         transformCache.position = Vector3.MoveTowards(currentPosition, destination, speed * Time.deltaTime);
     }
 
@@ -111,5 +121,10 @@ public class ChaseComponent : MonoBehaviour
     public void SetMovementState(bool isDisabled)
     {
         _isMovementDisabled = isDisabled;
+    }
+
+    public void MarkAsPlayerControlled(bool isControlled)
+    {
+        _isPlayerControlled = isControlled;
     }
 }

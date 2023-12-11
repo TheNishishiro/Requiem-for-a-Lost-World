@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 8864211574758387995}
   - component: {fileID: 1608978063}
   - component: {fileID: -7715229062712591831}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: RTS_Crate
   m_TagString: Destructible
   m_Icon: {fileID: 0}
@@ -218,6 +218,9 @@ MonoBehaviour:
   takeDamageSound: {fileID: 8300000, guid: 477e022444f09cb4eb750e9354d2b6c0, type: 3}
   vulnerabilityTimer: 0
   vulnerabilityPercentage: 0
+  additionalDamageTimer: 0
+  additionalDamageModifier: 0
+  additionalDamageType: {fileID: 0}
 --- !u!114 &8864211574758387995
 MonoBehaviour:
   m_ObjectHideFlags: 0

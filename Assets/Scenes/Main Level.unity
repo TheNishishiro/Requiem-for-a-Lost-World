@@ -204,7 +204,8 @@ MonoBehaviour:
   - {fileID: -1919017562126110567, guid: 5828f8a0ca7c41342aa3d84efcb24464, type: 3}
   spawnArea: {x: 15, y: 15}
   spawnCooldown: 20
-  maxObjectsCount: 5
+  maxObjectsCountInArea: 5
+  maxObjectsCount: 100
 --- !u!1 &227826306
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,9 +274,9 @@ Terrain:
   m_TreeBillboardDistance: 5
   m_TreeCrossFadeLength: 1
   m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 95
+  m_DetailObjectDistance: 14
   m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 93
+  m_HeightmapPixelError: 1
   m_SplatMapDistance: 50
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0

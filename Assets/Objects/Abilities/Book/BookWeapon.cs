@@ -39,6 +39,7 @@ namespace Objects.Abilities.Book
 					subProjectileStats.Damage = weaponStats.GetDamage() * 0.25f;
 					subProjectileStats.Scale = weaponStats.GetScale();
 					projectile.SetStats(subProjectileStats);
+					projectile.transform.position = _subProjectilePosition;
 					projectile.gameObject.SetActive(true);
 				},
 				projectile => projectile.gameObject.SetActive(false),

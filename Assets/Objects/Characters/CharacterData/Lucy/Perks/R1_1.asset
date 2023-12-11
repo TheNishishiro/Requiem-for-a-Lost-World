@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: R1_1
   m_EditorClassIdentifier: 
   nodeId: 1
-  description: 
-  icon: {fileID: 0}
+  description: Increase health by {Health}
+  icon: {fileID: 21300000, guid: 103b3ed5f8aeee2479350d91590b8662, type: 3}
   stats:
-    Health: 0
+    Health: 10
     HealthMax: 0
     MagnetSize: 0
     CooldownReduction: 0
@@ -50,3 +50,5 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0

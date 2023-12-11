@@ -28,7 +28,7 @@ namespace Weapons
 		[SerializeField] public Element element;
 		[SerializeField] protected WeaponStats weaponStats;
 		[SerializeField] List<UpgradeData> availableUpgrades;
-		private PlayerStatsComponent _playerStatsComponent;
+		protected PlayerStatsComponent _playerStatsComponent;
 		protected float _timer;
 		
 		public string NameField => Name;

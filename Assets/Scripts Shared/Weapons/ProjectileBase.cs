@@ -48,7 +48,7 @@ namespace Weapons
 			IsDead = false;
 			TimeAlive = 0;
 			isDamageCooldownExpired = false;
-			
+			ProjectileDamageIncreasePercentage = 0;
 			if (UseParticles)
 			{
 				ParticleSystem.Simulate( 0.0f, true, true );

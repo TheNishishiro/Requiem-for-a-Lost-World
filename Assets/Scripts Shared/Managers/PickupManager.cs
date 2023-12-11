@@ -20,12 +20,11 @@ namespace Managers
 		[SerializeField] Camera mainCamera;
 		private Player player;
 		private ObjectPool<Pickup> _shardPool;
-		private ObjectPool<Pickup> _goldPool;
-		private ObjectPool<Pickup> _gemPool;
+		private ObjectPool<Pickup> _objectPool;
 		private List<Pickup> _expGem = new ();
 		[SerializeField] private GameObject expShardPrefab;
-		[SerializeField] private GameObject goldCoinPrefab;
-		[SerializeField] private GameObject gemPrefab;
+
+		private GameObject _objectPrefab;
 		private int pickupAmount;
 		private Vector3 pickupPosition;
 
@@ -57,41 +56,23 @@ namespace Managers
 					Destroy(expGem.gameObject);
 				}, true, 600);
 			
-			_goldPool = new ObjectPool<Pickup>(
-				() => SpawnManager.instance.SpawnObject(transform.position, goldCoinPrefab).GetComponent<Pickup>(), 
-				goldCoin =>
+			_objectPool = new ObjectPool<Pickup>(
+				() => SpawnManager.instance.SpawnObject(transform.position, _objectPrefab).GetComponent<Pickup>(), 
+				pickup =>
 				{
-					goldCoin.Reset();
-					goldCoin.SetAmount(pickupAmount);
-					goldCoin.transform.position = pickupPosition;
-					goldCoin.gameObject.SetActive(true);
+					pickup.Reset();
+					pickup.SetAmount(pickupAmount);
+					pickup.transform.position = pickupPosition;
+					pickup.gameObject.SetActive(true);
 				}, 
-				goldCoin =>
+				pickup =>
 				{
-					goldCoin.gameObject.SetActive(false);
+					pickup.gameObject.SetActive(false);
 				}, 
-				goldCoin =>
+				pickup =>
 				{
-					Destroy(goldCoin.gameObject);
-				}, true, 100);
-			
-			_gemPool = new ObjectPool<Pickup>(
-				() => SpawnManager.instance.SpawnObject(transform.position, gemPrefab).GetComponent<Pickup>(), 
-				gem =>
-				{
-					gem.Reset();
-					gem.SetAmount(pickupAmount);
-					gem.transform.position = pickupPosition;
-					gem.gameObject.SetActive(true);
-				}, 
-				gem =>
-				{
-					gem.gameObject.SetActive(false);
-				}, 
-				gem =>
-				{
-					Destroy(gem.gameObject);
-				}, true, 100);
+					Destroy(pickup.gameObject);
+				}, true, 1000);
 			
 			
 			player = FindFirstObjectByType<Player>();
@@ -114,10 +95,10 @@ namespace Managers
 					break;
 				}
 				case PickupEnum.Gold:
-					_goldPool.Get();
-					break;
 				case PickupEnum.Gem:
-					_gemPool.Get();
+				case PickupEnum.HealingOrb:
+					_objectPrefab = pickupObject.GetPickUpObject();
+					_objectPool.Get();
 					break;
 				default:
 				{
@@ -136,10 +117,9 @@ namespace Managers
 					_shardPool.Release(pickupObject);
 					break;
 				case PickupEnum.Gold:
-					_goldPool.Release(pickupObject);
-					break;
 				case PickupEnum.Gem:
-					_gemPool.Release(pickupObject);
+				case PickupEnum.HealingOrb:
+					_objectPool.Release(pickupObject);
 					break;
 				default:
 					Destroy(pickupObject.gameObject);

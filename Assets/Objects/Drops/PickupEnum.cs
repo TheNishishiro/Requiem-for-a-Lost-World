@@ -9,5 +9,6 @@
 		Magnet,
 		Chest,
 		Map,
+		HealingOrb,
 	}
 }
