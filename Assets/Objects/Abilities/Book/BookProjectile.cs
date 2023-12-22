@@ -18,7 +18,7 @@ namespace Objects.Abilities.Book
 			this.rotateTarget = rotateTarget;
 		}
 		
-		private void Update()
+		protected override void CustomUpdate()
 		{
 			if (rotateTarget != null)
 			{
@@ -27,7 +27,6 @@ namespace Objects.Abilities.Book
 
 			if (_explosionCooldown > 0)
 				_explosionCooldown -= Time.deltaTime;
-			TickLifeTime();
 		}
 
 		private void SpawnExplosion()

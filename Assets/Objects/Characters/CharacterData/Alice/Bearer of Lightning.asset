@@ -74,6 +74,8 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0
   skillNodes:
   - {fileID: 11400000, guid: 6b5653952d9ade942a7c0b21bea047ef, type: 2}
   - {fileID: 11400000, guid: 1eb8a78f365aa974f8d3e789bc07aec6, type: 2}
@@ -87,45 +89,58 @@ MonoBehaviour:
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 0bb9275cc46816447bbff0b42bf8e579, type: 3}
     EidolonName: Thunder Awakens
-    EidolonDescription: Increase amount of thunder bolts called with <color=orange>Lightning
+    EidolonDescription: 
+    WeaponUpgradeDescription: Increase amount of thunder bolts called with <color=orange>Lightning
       strike</color> by <color=green>4</color>
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: 
     EidolonQuote: In the dance of blades, remember that patience and precision often
       triumph over brute force - In that sense, I deem you lacking.
   - EidolonTexture: {fileID: 21300000, guid: e530a4f3da2afef4381f470c156d2fe4, type: 3}
     EidolonName: Endless Glow
-    EidolonDescription: Increase duration of the buff from <color=#43847F>Kaminari
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: Increase duration of the buff from <color=#43847F>Kaminari
       Kiretsu</color> to <color=green>10s</color>
+    PassiveUpgradeDescription: 
     EidolonQuote: Do not get used to my presence, I'm only helping you because Oana
       wouldn't stop pestering me about it. Really, I have no idea what she's thinking.
   - EidolonTexture: {fileID: 21300000, guid: dd32c9b7293ac6347955b793dd82bd64, type: 3}
     EidolonName: On my own
-    EidolonDescription: Buff from <color=#43847F>Kaminari Kiretsu</color> will always
-      be considered to have at least 4 free slots
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: Buff from <color=#43847F>Kaminari Kiretsu</color> will
+      always be considered to have at least 4 free slots
+    PassiveUpgradeDescription: 
     EidolonQuote: "I do have a long history, but you already know that, don't you?
       \nDid that digusting thing you home in your body told you? - Very well, when
       the time comes, I will cut you down myself."
   - EidolonTexture: {fileID: 21300000, guid: e1278d4b316159e44b9cf300364f09cc, type: 3}
     EidolonName: Energy influx
-    EidolonDescription: 'Increase <color=#FFC300>dodge chance</color> by <color=green>2%</color>
-      per 10 levels (up to 40%)
-
-      Lightning chaines caused by <color=orange>Lightning
-      strike</color>''s bolts will deal <color=green>75%</color> of bolt damage instead
+    EidolonDescription: 
+    WeaponUpgradeDescription: Lightning chaines caused by <color=orange>Lightning
+      strike</color>'s bolts will deal <color=green>75%</color> of bolt damage instead
       of 25%
-
-'
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: Increase <color=#FFC300>dodge chance</color> by <color=green>2%</color>
+      per 10 levels (up to 40%)
     EidolonQuote: I used to be a researcher back in the day, unfortunately none of
       these smarts stuck around to this day. No matter, smarts are for no use in
       this world, at least not the kind I possesed. Better for that knowledge to
       rot in hell with the old world.
   - EidolonTexture: {fileID: 21300000, guid: 8124624c4332b1049b409d099fc90adb, type: 3}
     EidolonName: Memory of despair
-    EidolonDescription: "Reduce <color=#FFC300>skill cooldown</color> by <color=green>30%</color>\nBuff
+    EidolonDescription: 
+    WeaponUpgradeDescription: 'Every kill caused by <color=orange>Lightning strike</color>
+      has a 60% chance to generate one stack of <color=yellow>Charge</color>. For
+      every 2 stacks of <color=yellow>Charge</color> next attack will generate additional
+      lightning strike '
+    SkillUpgradeDescription: 'Reduce <color=#FFC300>skill cooldown</color> by <color=green>30%</color>
+
+      Buff
       from <color=#43847F>Kaminari Kiretsu</color> will always be considered to have
-      at least 6 free weapon slots. \nEvery kill caused by <color=orange>Lightning
-      strike</color> has a 60% chance to generate one stack of <color=yellow>Charge</color>.
-      For every 2 stacks of <color=yellow>Charge</color> next attack will generate
-      additional lightning strike "
+      at least 6 free weapon slots. '
+    PassiveUpgradeDescription: 
     EidolonQuote: "I watched the world crumble in front of my very eyes once.\nI
       am not letting it happen again. \nThat is my only duty as the guardian of this
       new era. "

@@ -51,7 +51,7 @@ public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler, ISpeci
 
     public void OnDamageTaken(float amount)
     {
-        if (_activeShards.Count == 0 && amount <= 0)
+        if (_activeShards.Count == 0 || amount <= 0)
             return;
         
         var shard = _activeShards.First();

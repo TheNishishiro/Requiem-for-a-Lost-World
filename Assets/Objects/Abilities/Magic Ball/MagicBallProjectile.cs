@@ -15,9 +15,8 @@ namespace Objects.Abilities.Magic_Ball
 			direction = (new Vector3(dirX, dirY, dirZ) - transform.position).normalized;
 		}
 
-		void Update()
+		protected override void CustomUpdate()
 		{
-			TickLifeTime();
 			transform.position += direction * ((WeaponStats?.GetSpeed() ?? 0) * Time.deltaTime);
 		}
 

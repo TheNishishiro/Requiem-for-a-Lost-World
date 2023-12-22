@@ -4,13 +4,9 @@ using Weapons;
 
 namespace Objects.Abilities.Katana
 {
-	public class KatanaProjectile : PoolableProjectileWithLimitedHitBox<KatanaProjectile>
+	public class KatanaProjectile : PoolableProjectile<KatanaProjectile>
 	{
-		void Update()
-		{
-			UpdateCollider();
-			TickLifeTime();
-		}
+		// HBLT: 0.1
 		
 		private void OnTriggerEnter(Collider other)
 		{

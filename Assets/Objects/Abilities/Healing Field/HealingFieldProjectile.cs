@@ -18,9 +18,8 @@ namespace Objects.Abilities.Healing_Field
 	        transformCache = transform;
         }
 
-        private void Update()
+        protected override void CustomUpdate()
 		{
-			TickLifeTime();
 			_currentHealingFrequency -= Time.deltaTime;
 			if (_currentHealingFrequency <= 0)
 			{

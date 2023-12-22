@@ -9,11 +9,6 @@ namespace Objects.Abilities.BindingField
 	public class BindingFieldProjectile : PoolableProjectile<BindingFieldProjectile>
 	{
 		private BindingFieldWeapon BindingFieldWeapon => ParentWeapon as BindingFieldWeapon;
-		
-		void Update()
-		{
-			TickLifeTime();
-		}
 
 		private void OnTriggerEnter(Collider other)
 		{

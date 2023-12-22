@@ -9,15 +9,9 @@ using Weapons;
 
 namespace Objects.Abilities.Arrow_Rain
 {
-	public class ArrowRainProjectile : PoolableProjectileWithLimitedHitBox<ArrowRainProjectile>
+	public class ArrowRainProjectile : PoolableProjectile<ArrowRainProjectile>
 	{
 		private ArrowRainWeapon ArrowRainWeapon => (ArrowRainWeapon) ParentWeapon;
-		
-		public void Update()
-		{
-			UpdateCollider();
-			TickLifeTime();
-		}
 		
 		private void OnTriggerEnter(Collider other)
 		{

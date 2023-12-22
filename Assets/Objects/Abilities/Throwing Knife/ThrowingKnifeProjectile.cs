@@ -8,9 +8,8 @@ namespace Objects.Abilities.Throwing_Knife
 	{
 		private Vector3 direction;
 		
-		private void Update()
+		protected override void CustomUpdate()
 		{
-			TickLifeTime();
 			transform.position += direction * (WeaponStats.GetSpeed() * Time.deltaTime);
 		}
 		

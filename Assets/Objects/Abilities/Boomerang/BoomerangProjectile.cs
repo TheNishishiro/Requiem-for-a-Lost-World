@@ -25,9 +25,8 @@ namespace Objects.Abilities.Boomerang
 			SetDirectionInternal(ParentWeapon.transform.position);
 		}
 		
-		void Update()
+		protected override void CustomUpdate()
 		{
-			TickLifeTime();
 			transform.Rotate(0, Time.deltaTime * 250, 0);
 			transform.position += direction * (WeaponStats.GetSpeed() * Time.deltaTime);
 		}

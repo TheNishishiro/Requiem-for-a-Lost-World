@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Events.Handlers;
 using Events.Scripts;
 using Managers;
@@ -6,7 +7,9 @@ using Objects.Enemies;
 using Objects.Players.Scripts;
 using Objects.Stage;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace Objects.Characters.Nishi.Skill
 {
@@ -34,8 +37,26 @@ namespace Objects.Characters.Nishi.Skill
 				return _playerStatsComponent;
 			}
 		}
-		
-		
+
+		private ObjectPool<GameObject> _objectPool;
+		private Vector3 _flamePosition;
+
+		protected override void Awake()
+		{
+			_objectPool = new ObjectPool<GameObject>(
+				() => SpawnManager.instance.SpawnObject(_flamePosition, blackFlamePrefab.gameObject), 
+				o =>
+				{
+					o.transform.position = _flamePosition;
+					o.gameObject.SetActive(true);
+				}, 
+				o =>o.gameObject.SetActive(false), 
+				o => Destroy(o.gameObject), 
+				true, 75);
+			
+			base.Awake();
+		}
+
 		private void OnEnable()
 		{
 			EnemyDiedEvent.Register(this);
@@ -55,10 +76,11 @@ namespace Objects.Characters.Nishi.Skill
 
 		public void OnSpecialBarFilled()
 		{
-			var enemies = EnemyManager.instance.GetActiveEnemies();
+			var enemies = EnemyManager.instance.GetActiveEnemies().OrderBy(_ => Random.value).Take(50);
 			foreach (var enemy in enemies)
 			{
-				SpawnManager.instance.SpawnObject(enemy.transform.position, blackFlamePrefab.gameObject);
+				_flamePosition = enemy.transform.position;
+				_objectPool.Get();
 			}
 			
 			if (GameData.GetPlayerCharacterRank() < CharacterRank.E5)

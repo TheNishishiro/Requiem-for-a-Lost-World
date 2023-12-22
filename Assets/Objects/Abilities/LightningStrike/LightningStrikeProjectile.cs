@@ -9,11 +9,6 @@ namespace Objects.Abilities.LightningStrike
 	{
 		private LightningStrikeWeapon _lightningStrikeWeapon => ParentWeapon as LightningStrikeWeapon;
 		
-		void Update()
-		{
-			TickLifeTime();
-		}
-		
 		private void OnTriggerEnter(Collider other)
 		{
 			SimpleDamage(other, false, out var damageable);

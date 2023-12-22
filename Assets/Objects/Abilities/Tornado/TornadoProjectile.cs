@@ -33,9 +33,8 @@ namespace Objects.Abilities.Tornado
 			StartCoroutine(Movement());
 		}
 
-		private void Update()
+		protected override void CustomUpdate()
 		{
-			TickLifeTime();
 			if (_dischargeCooldown > 0)
 				_dischargeCooldown -= Time.deltaTime;
 		}

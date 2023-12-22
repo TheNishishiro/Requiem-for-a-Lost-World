@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using DefaultNamespace.Data;
+using NaughtyAttributes;
 using Objects.Players;
 using Objects.Stage;
 using UnityEngine;
@@ -19,10 +22,10 @@ namespace Objects.Characters
 		public Sprite Avatar;
 		public Sprite CharacterSprite;
 		public Sprite signet;
-		[TextArea]
+		[ResizableTextArea]
 		public string PassiveDescription;
 		public string AbilityName;
-		[TextArea]
+		[ResizableTextArea]
 		public string AbilityDescription;
 		public float AbilityCooldown;
 		public CharacterSkillBase SpecialPrefab;
@@ -38,10 +41,57 @@ namespace Objects.Characters
 		public List<SkillNode> skillNodes;
 		public List<EidolonData> Eidolons;
 		public List<CharacterLoreEntry> loreEntries;
+		private string BonusSeparator => "\n\n" + new string('\u2500', 9) + "» Bonus stats «" + new string('\u2500', 9);
+		
 		
 		public IEnumerable<StatsDisplayData> GetStatsList()
 		{
 			return Stats.GetStatsList();
+		}
+
+		public string GetWeaponDescription(int maxUnlockedEidolon)
+		{
+			var sb = new StringBuilder(StartingWeapon.GetDescription(1));
+			var unlockedShards = Eidolons.Take(maxUnlockedEidolon).Where(x => !string.IsNullOrWhiteSpace(x.WeaponUpgradeDescription)).ToList();
+			if (unlockedShards.Any())
+				sb.AppendLine(BonusSeparator);
+
+			foreach (var shard in unlockedShards)
+			{
+				sb.AppendLine("\nº " + shard.WeaponUpgradeDescription);
+			}
+			
+			return sb.ToString();
+		}
+
+		public string GetAbilityDescription(int maxUnlockedEidolon)
+		{
+			var sb = new StringBuilder(AbilityDescription);
+			var unlockedShards = Eidolons.Take(maxUnlockedEidolon).Where(x => !string.IsNullOrWhiteSpace(x.SkillUpgradeDescription)).ToList();
+			if (unlockedShards.Any())
+				sb.AppendLine(BonusSeparator);
+
+			foreach (var shard in unlockedShards)
+			{
+				sb.AppendLine("\nº " + shard.SkillUpgradeDescription);
+			}
+			
+			return sb.ToString();
+		}
+
+		public string GetPassiveDescription(int maxUnlockedEidolon)
+		{
+			var sb = new StringBuilder(PassiveDescription);
+			var unlockedShards = Eidolons.Take(maxUnlockedEidolon).Where(x => !string.IsNullOrWhiteSpace(x.PassiveUpgradeDescription)).ToList();
+			if (unlockedShards.Any())
+				sb.AppendLine(BonusSeparator);
+
+			foreach (var shard in unlockedShards)
+			{
+				sb.AppendLine("\nº " + shard.PassiveUpgradeDescription);
+			}
+			
+			return sb.ToString();
 		}
 	}
 }

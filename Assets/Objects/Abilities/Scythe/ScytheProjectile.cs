@@ -35,11 +35,6 @@ namespace Objects.Abilities.Scythe
 			if (ScytheWeapon.IsSoulHarvest && Random.value <= 0.1)
 				_healthComponent.IncreaseMaxHealth(0.001f);
 		}
-		
-		void Update()
-		{
-			TickLifeTime();
-		}
 
 		public void SetPlayerHealthComponent(HealthComponent healthComponent)
 		{

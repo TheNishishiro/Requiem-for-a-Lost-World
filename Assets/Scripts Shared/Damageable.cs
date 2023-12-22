@@ -32,11 +32,13 @@ namespace DefaultNamespace
 		private List<ElementStats> resistances = new ();
 		private List<Element> inflictedElements = new ();
 		private Transform _transformCache;
+		private Transform _targetTransformCache;
 		private static bool _hitSoundPlayedThisFrame;
 
 		private void Awake()
 		{
 			_transformCache = transform;
+			_targetTransformCache = targetPoint == null ? _transformCache : targetPoint.transform;
 		}
 
 		public void Clear()
@@ -114,7 +116,7 @@ namespace DefaultNamespace
 			}
 
 			gameResultData.AddDamage(calculatedDamage, weaponBase);
-			MessageManager.instance.PostMessage(calculatedDamage.ToString("0"), position, _transformCache.localRotation, ElementService.ElementToColor(weaponBase?.element));
+			MessageManager.instance.PostMessage(calculatedDamage.ToString("0"), _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(weaponBase?.element));
 			Health -= calculatedDamage;
 			if (IsDestroyed())
 				weaponBase?.OnEnemyKilled();
@@ -242,7 +244,7 @@ namespace DefaultNamespace
 					break;
 			}
 			
-			MessageManager.instance.PostMessage(reaction.ToString(), _transformCache.position, _transformCache.localRotation, ElementService.ElementToColor(element));
+			MessageManager.instance.PostMessage(reaction.ToString(), _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(element));
 		}
 	}
 }

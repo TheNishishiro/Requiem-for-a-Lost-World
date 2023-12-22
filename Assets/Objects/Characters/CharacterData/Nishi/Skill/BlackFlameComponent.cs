@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
@@ -10,19 +11,27 @@ public class BlackFlameComponent : MonoBehaviour
     [SerializeField] private float _lifeTime;
     [SerializeField] private BoxCollider _boxCollider;
     private float _totalLifeTime;
-    
+    private float _currentLifeTime;
+
+    private void OnEnable()
+    {
+        _currentLifeTime = _lifeTime;
+        _totalLifeTime = 0;
+        _boxCollider.enabled = true;
+    }
+
     void Update()
     {
-        _lifeTime -= Time.deltaTime;
+        _currentLifeTime -= Time.deltaTime;
         _totalLifeTime += Time.deltaTime;
         if (_totalLifeTime >= 0.1f)
         {
             _boxCollider.enabled = false;
         }
         
-        if (_lifeTime <= 0)
+        if (_currentLifeTime <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
     

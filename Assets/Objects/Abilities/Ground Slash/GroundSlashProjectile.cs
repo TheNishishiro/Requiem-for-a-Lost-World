@@ -10,11 +10,6 @@ namespace Objects.Abilities.Ground_Slash
 	{
 		private Vector3 direction;
 		private Rigidbody _rigidbody;
-
-		private void Update()
-		{
-			TickLifeTime();
-		}
 		
 		public void SetDirection(Vector3 dir)
 		{

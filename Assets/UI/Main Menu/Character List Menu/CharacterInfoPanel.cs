@@ -38,6 +38,7 @@ namespace UI.Main_Menu.Character_List_Menu
 		[SerializeField] private Image separationLine8;
 		[SerializeField] private GameObject statsPanel;
 		[SerializeField] private Image statsScrollbar;
+		[SerializeField] private Image passiveScrollbar;
 		private RankDisplayPanel _rankDisplayPanel;
 		private LorePanelManager _lorePanelManager;
 		private CharacterData _characterData;
@@ -54,12 +55,12 @@ namespace UI.Main_Menu.Character_List_Menu
 			expSlider.SetValue(characterSaveData.Experience, characterSaveData.ExperienceNeeded);
 			separationLine1.color = separationLine2.color = separationLine3.color = separationLine4.color = separationLine5.color = separationLine6.color = 
 				separationLine7.color = separationLine8.color = characterData.ColorTheme;
-			statsScrollbar.color = new Color(characterData.ColorTheme.r, characterData.ColorTheme.g, characterData.ColorTheme.b, 0.5f);
+			passiveScrollbar.color = statsScrollbar.color = new Color(characterData.ColorTheme.r, characterData.ColorTheme.g, characterData.ColorTheme.b, 0.5f);
 			killCountTextField.text = Utilities.GetShortNumberFormatted(characterSaveData.KillCount);
 			highestLevelTextField.text = characterSaveData.HighestInGameLevel.ToString();
-			startingWeapon.Set(characterData.StartingWeapon.Icon, characterData.StartingWeapon.Name, characterData.StartingWeapon.Description);
-			startingSkill.Set(characterData.AbilityIcon, characterData.AbilityName, characterData.AbilityDescription);
-			passiveDescription.text = characterData.PassiveDescription;
+			startingWeapon.Set(characterData.StartingWeapon.Icon, characterData.StartingWeapon.Name, characterData.GetWeaponDescription(_characterSaveData.RankUpLevel));
+			startingSkill.Set(characterData.AbilityIcon, characterData.AbilityName, characterData.GetAbilityDescription(_characterSaveData.RankUpLevel));
+			passiveDescription.text = characterData.GetPassiveDescription(_characterSaveData.RankUpLevel);
 			startingSkillInfoPanel.SetActive(false);
 			
 			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();

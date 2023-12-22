@@ -39,7 +39,7 @@ public class UnlockableEntry : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (_item.IsUnlocked(_saveFile))
-            _displayText.text = _item.NameField + "<size=-15>\n" + _item.DescriptionField + "</size>";
+            _displayText.text = _item.NameField + "<size=-15>\n" + _item.GetDescription(1) + "</size>";
         else
             _displayText.text = "???";
     }

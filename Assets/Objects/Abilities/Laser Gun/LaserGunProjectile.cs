@@ -29,10 +29,8 @@ namespace Objects.Abilities.Laser_Gun
 			SetTarget();
 		}
 
-		void Update()
+		protected override void CustomUpdate()
 		{
-			TickProjectile();
-			
 			if (!isDamageCooldownExpired) return;
 			ResetDamageCooldown();
 

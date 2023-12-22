@@ -41,7 +41,7 @@ MonoBehaviour:
   Stats:
     Health: 60
     HealthMax: 60
-    SpecialMax: 375
+    SpecialMax: 200
     SpecialIncrease: 1
     MagnetSize: 1
     CooldownReduction: 0
@@ -75,6 +75,8 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0
   skillNodes:
   - {fileID: 11400000, guid: 36cac3b8631fa27438eec42e01810255, type: 2}
   - {fileID: 11400000, guid: 43615b0b574f1514e9ad4d1d7ca6e3a3, type: 2}
@@ -88,27 +90,42 @@ MonoBehaviour:
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 9129604a9abd7e647ada4345e1f1194e, type: 3}
     EidolonName: From Beyond
-    EidolonDescription: 'Increase dodge chance by <color=green>20%</color> '
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: 'Increase dodge chance by <color=green>20%</color> '
     EidolonQuote: ...
   - EidolonTexture: {fileID: 21300000, guid: 7ed8c2b3bc30cc147b6a76aca2598961, type: 3}
     EidolonName: Hope of Bright Future
-    EidolonDescription: Every time <color=#43847F>Raiden's judgement</color> is cast
-      additionally summon 3 lightning bolts in a random spot around Nishi
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: Every time <color=#43847F>Raiden's judgement</color>
+      is cast additionally summon 3 lightning bolts in a random spot around Nishi
+    PassiveUpgradeDescription: 
     EidolonQuote: ...
   - EidolonTexture: {fileID: 21300000, guid: 7db54a9b736b73a48b1a2a4bfad5c148, type: 3}
     EidolonName: Weakness Rejected
-    EidolonDescription: Increase damage by <color=green>75%</color> and crit rate 
-      by <color=green>20%</color>
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: Increase damage by <color=green>75%</color> and crit
+      rate  by <color=green>20%</color>
     EidolonQuote: ...
   - EidolonTexture: {fileID: 21300000, guid: 71a05cbebdd1c5b448f1b353e271c0ab, type: 3}
     EidolonName: Lightning's Blessing
-    EidolonDescription: Increase <color=#43847F>Raiden's judgement</color> damage
-      by <color=green>250</color>. Additionally increase amount of <color=orange>Katana</color>
-      cuts by <color=green>2</color>
+    EidolonDescription: 
+    WeaponUpgradeDescription: Increase amount of <color=orange>Katana</color> cuts
+      by <color=green>2</color>
+    SkillUpgradeDescription: Increase <color=#43847F>Raiden's judgement</color> damage
+      by <color=green>250</color>
+    PassiveUpgradeDescription: 
     EidolonQuote: ...
   - EidolonTexture: {fileID: 21300000, guid: c975dbcde7cadd045a1fc68ecd696814, type: 3}
     EidolonName: Void Descent
-    EidolonDescription: No longer lose health upon casting <color=yellow>black flames</color>
-      and increase it's base damage by <color=green>100</color>
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: No longer lose health upon casting <color=yellow>black
+      flames</color> and increase it's base damage by <color=green>100</color>
     EidolonQuote: ...
   loreEntries: []

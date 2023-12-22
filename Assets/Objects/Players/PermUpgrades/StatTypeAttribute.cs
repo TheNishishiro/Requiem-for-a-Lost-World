@@ -21,5 +21,11 @@ namespace Objects.Players.PermUpgrades
 			var attributes = fieldInfo.GetCustomAttributes(typeof(StatTypeAttribute), false) as StatTypeAttribute[];
 			return attributes?.Length > 0 && attributes[0].IsPercent;
 		}
+		public static bool IsPercent(this StatEnum statTypeEnum)
+		{
+			var fieldInfo = statTypeEnum.GetType().GetField(statTypeEnum.ToString());
+			var attributes = fieldInfo.GetCustomAttributes(typeof(StatTypeAttribute), false) as StatTypeAttribute[];
+			return attributes?.Length > 0 && attributes[0].IsPercent;
+		}
 	}
 }

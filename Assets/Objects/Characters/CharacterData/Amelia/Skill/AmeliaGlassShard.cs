@@ -18,7 +18,7 @@ namespace Objects.Characters.Amelia.Skill
         private Vector3 desiredPosition;
         private Vector3 rotationAxis;   
         private Transform parentTransform;
-        private PermUpgradeType statToUpgrade;
+        private StatEnum statToUpgrade;
         private float statIncrease;
         private PlayerStatsComponent playerStatsComponent;
         
@@ -31,10 +31,9 @@ namespace Objects.Characters.Amelia.Skill
             rotationAxis = Random.onUnitSphere;
             transform.position = (transform.position - parentTransform.position).normalized * radius + parentTransform.position;
 
-            statToUpgrade = Enum.GetValues(typeof(PermUpgradeType)).Cast<PermUpgradeType>().Except(new[]
+            statToUpgrade = Enum.GetValues(typeof(StatEnum)).Cast<StatEnum>().Except(new[]
             {
-                PermUpgradeType.AttackCount,
-                PermUpgradeType.BuyGems
+                StatEnum.AttackCount, StatEnum.Revives, StatEnum.Rerolls, StatEnum.Skips
             }).ToList().OrderBy(_ => Random.value).FirstOrDefault();
             statIncrease = statToUpgrade.IsPercent() ? (GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 0.1f : 0.02f) : (GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 2f : 1f);
             playerStatsComponent.Add(statToUpgrade, statIncrease);

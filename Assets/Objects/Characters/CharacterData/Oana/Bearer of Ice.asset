@@ -73,6 +73,8 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0
   skillNodes:
   - {fileID: 11400000, guid: 2d5e7e65574bbfb41854cea69d13217c, type: 2}
   - {fileID: 11400000, guid: 1f32ca14ffd02a541b960ab5f4ab424f, type: 2}
@@ -86,24 +88,31 @@ MonoBehaviour:
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 253a837014925de418d6171824cd15d8, type: 3}
     EidolonName: After millenia passed
-    EidolonDescription: 'Start with additonal 2 attacks on <color=orange>Ice Age</color>
-
-      Increase
-      <color=#FFC300>damage dealt</color> by <color=green>75%</color>'
+    EidolonDescription: 
+    WeaponUpgradeDescription: Start with additonal 2 attacks on <color=orange>Ice
+      Age</color>
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: Increase <color=#FFC300>damage dealt</color> by <color=green>75%</color>
     EidolonQuote: You know these ghost stories my friends used to spread around?
       I never knew I might see one for myself! Guess a lot of weird things happen
       after you hang around for long enough. What say you? I bet you weren't any
       less surprised!
   - EidolonTexture: {fileID: 21300000, guid: b97e8d1352eeff24e93ab99df5ff360d, type: 3}
     EidolonName: Reply
-    EidolonDescription: Enemies within the <color=#43847F>Snow hail</color> additonally
-      get their movement speed reduced by <color=green>80%</color>
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: Enemies within the <color=#43847F>Snow hail</color>
+      additonally get their movement speed reduced by <color=green>80%</color>
+    PassiveUpgradeDescription: 
     EidolonQuote: 'I want to know everything that happened! Crucial informations
       must not be withheld... ... ... Talkative as always... '
   - EidolonTexture: {fileID: 21300000, guid: 67dbd26247125be4b95432f78f8170eb, type: 3}
     EidolonName: Shard within me
-    EidolonDescription: Enemies within the <color=#43847F>Snow hail</color> get thier
-      ice resistance lowered by 5% per damage tick
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: Enemies within the <color=#43847F>Snow hail</color>
+      get their ice resistance lowered by 5% per damage tick
+    PassiveUpgradeDescription: 
     EidolonQuote: So you have never seen anyone manipulate ice? That's interesting,
       I gained this power right after the cataclysm. I suppose everyone here has
       some "unique" abilities. Take Corina as an example, don't tell me you've seen
@@ -111,11 +120,12 @@ MonoBehaviour:
       to see THAT again
   - EidolonTexture: {fileID: 21300000, guid: 130eec0833e50b949b4c88ac5ad310fa, type: 3}
     EidolonName: I don't take no for an answer
-    EidolonDescription: 'Reduce <color=#43847F>Snow hail</color> cooldown by <color=green>25%</color>
-
-      Increase
-      <color=#FFC300>crit rate</color> by <color=green>30%</color> and <color=#FFC300>crit
-      damage</color> by <color=green>150%</color>'
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: Reduce <color=#43847F>Snow hail</color> cooldown by
+      <color=green>25%</color>
+    PassiveUpgradeDescription: Increase <color=#FFC300>crit rate</color> by <color=green>30%</color>
+      and <color=#FFC300>crit damage</color> by <color=green>150%</color>
     EidolonQuote: 'Who would have thought a civilization like this could exist here...
       Incredible! I want to explore, visit places, see things!
 
@@ -135,11 +145,14 @@ MonoBehaviour:
       argument enough.'
   - EidolonTexture: {fileID: 21300000, guid: 8cce5e83e50c3ca4bb5c0ede1daacae8, type: 3}
     EidolonName: Winter's end
-    EidolonDescription: 'Add dditional 1 ripple to <color=orange>Ice Age</color>
+    EidolonDescription: 
+    WeaponUpgradeDescription: 'Add dditional 1 ripple to <color=orange>Ice Age</color>
 
       Every
       time <color=orange>Ice Age</color> kills an enemy, increase <color=#FFC300>damage
       dealt</color> by 1% per level for 1 second'
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: 
     EidolonQuote: A snowflake flies peacefully over the night sky, struggling against
       the wind, pretending to be a star. One of many on the sky, yet it could always
       be nothing more than an impostor, a pretend. It could never shine it's own

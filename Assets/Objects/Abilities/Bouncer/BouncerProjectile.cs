@@ -22,9 +22,8 @@ namespace Objects.Abilities.Bouncer
 			direction = (target.targetPoint.transform.position - transformCache.position).normalized;
 		}
 
-		void Update()
+		protected override void CustomUpdate()
 		{
-			TickLifeTime();
 			transformCache.position += direction * ((WeaponStats?.GetSpeed() ?? 0) * Time.deltaTime);
 		}
 

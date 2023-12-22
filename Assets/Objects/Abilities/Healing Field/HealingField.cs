@@ -12,11 +12,6 @@ namespace Objects.Abilities.Healing_Field
 		private float _healAmount;
 		private bool _isEmpowering;
 
-		private void Update()
-		{
-			TickLifeTime();
-		}
-
 		public void Setup(float healAmount, bool isEmpowering)
 		{
 			_healAmount = healAmount;

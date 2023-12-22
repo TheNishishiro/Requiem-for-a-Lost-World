@@ -74,6 +74,8 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0
   skillNodes:
   - {fileID: 11400000, guid: 7362ee93671c0f741af3c3b925fbb41c, type: 2}
   - {fileID: 11400000, guid: 8cca5293e003f9e49819e9f959579c71, type: 2}
@@ -89,16 +91,22 @@ MonoBehaviour:
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 8e56390c0067b024d9aacd50340209dc, type: 3}
     EidolonName: Dreams united
-    EidolonDescription: Increase <color=orange>Gem of Dream</color> creations damage
-      tick rate by 0.15 second and extend their initial duration by <color=green>50%</color>
+    EidolonDescription: 
+    WeaponUpgradeDescription: Increase <color=orange>Gem of Dream</color> creations
+      damage tick rate by 0.15 second and extend their initial duration by <color=green>50%</color>
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: 
     EidolonQuote: "I don't have memories of my childhood altho ever since I remember,
       I always found reading people quite easy. \nHuh... He used to say that I'm
       going to get myself hurt with my carelessness... Even if that's the case...
       All I want is to keep everyone safe"
   - EidolonTexture: {fileID: 21300000, guid: 15bc20cca1e9e80489230c262e436f8d, type: 3}
     EidolonName: Smile to protect
-    EidolonDescription: Each time a new construct is created heal <color=green>1</color>
+    EidolonDescription: 
+    WeaponUpgradeDescription: Each time a new construct is created heal <color=green>1</color>
       HP
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: 
     EidolonQuote: 'Materializing wishes is quite easy. Once they are out and about,
       they give off a beautiful glow before solidifying into small glass shards.
 
@@ -107,17 +115,23 @@ MonoBehaviour:
       align'
   - EidolonTexture: {fileID: 21300000, guid: 618dbd651f3810a4085ec6cea12b9302, type: 3}
     EidolonName: Guard and defend
-    EidolonDescription: 'Increase initial <color=orange>Gem of Dream</color> construct
-      range and count by <color=green>1</color> m '
+    EidolonDescription: 
+    WeaponUpgradeDescription: 'Increase initial <color=orange>Gem of Dream</color>
+      construct range and count by <color=green>1</color> m '
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: 
     EidolonQuote: After that day I promised the people safe home that they can always
       come back to. I don't want it to turn into a lie... I'm not going to break
       another promise. They trust me with their life and their pure wishes will pave
       the way forward
   - EidolonTexture: {fileID: 21300000, guid: a851d5c505c33df429f5c8e944c712e5, type: 3}
     EidolonName: Silent sleep
-    EidolonDescription: 'Enemies hit by <color=#43847F>Final Wish</color> will have
-      their <color=#B200FF>light</color> resitance reduced by <color=green>20%</color>
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: 'Enemies hit by <color=#43847F>Final Wish</color> will
+      have their <color=#B200FF>light</color> resitance reduced by <color=green>20%</color>
       per damage tick '
+    PassiveUpgradeDescription: 
     EidolonQuote: 'In the boundless ocean she floats. Her mind presenting worlds
       with no begining nor end. Pure white worlds made of glass, reflecting different
       colored suns.
@@ -126,10 +140,11 @@ MonoBehaviour:
       You can''t escape destiny, Amelia'
   - EidolonTexture: {fileID: 21300000, guid: 4c4a735ff114214409e2fe6dc5f77812, type: 3}
     EidolonName: When dream turns to nightmare
-    EidolonDescription: 'Increase <color=#FFC300>flat damage</color> by <color=green>1</color>
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: Increase <color=#FFC300>flat damage</color> by <color=green>1</color>
       point every 5 levels
-
-'
     EidolonQuote: 'Whenever I touch these pure white pieces of glass I can''t shake
       off the feeling that there is something... Sinister about them...
 

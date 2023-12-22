@@ -4,7 +4,7 @@ using UnityEngine.Pool;
 
 namespace Weapons
 {
-    public class PoolableProjectile<T> : ProjectileBase where T : MonoBehaviour
+    public class PoolableProjectile<T> : StagableProjectile where T : MonoBehaviour
     {
         private ObjectPool<T> _objectPool;
         private T _object;

@@ -73,6 +73,8 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0
   skillNodes:
   - {fileID: 11400000, guid: b84d168975d63e14bb8f3f5ed325bd13, type: 2}
   - {fileID: 11400000, guid: f07d43f8f9f6c1b4ab66c778a69b4ac6, type: 2}
@@ -86,24 +88,33 @@ MonoBehaviour:
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: 56ed3ffff00db3c46a57bd57e5277aab, type: 3}
     EidolonName: For victory I stand
-    EidolonDescription: Increase amount of <color=orange>meteors</color> sent with
-      each attack by <color=green>50%</color>
+    EidolonDescription: 
+    WeaponUpgradeDescription: Increase amount of <color=orange>meteors</color> sent
+      with each attack by <color=green>50%</color>
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: 
     EidolonQuote: 'I grew up in a poor side of the city, not slams by any means but
       life didn''t treat me well there either. I persevered. Bullies or gangs would
       always pick a young boy as their target, too bad for them to misjudge. '
   - EidolonTexture: {fileID: 21300000, guid: ba29e2173e1fc9342b174250fff7d07f, type: 3}
     EidolonName: Anger surfaced
-    EidolonDescription: Whenever <color=orange>Meteor</color> is used, reduce current
-      <color=#FFC300>HP</color> until <color=red>60%</color> of <color=#FFC300>max
+    EidolonDescription: 
+    WeaponUpgradeDescription: Whenever <color=orange>Meteor</color> is used, reduce
+      current <color=#FFC300>HP</color> until <color=red>60%</color> of <color=#FFC300>max
       HP</color>
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: 
     EidolonQuote: People say that I'm talented... Huh, way to justify your own shortcomings
       which you where too lazy to fix before getting old. I personally hate that
       term. I got into this position with my own sweat and tears, I won't let the
       so called "talent" still away my hard work.
   - EidolonTexture: {fileID: 21300000, guid: 1d1014d831922be44a1662087b9fa4ee, type: 3}
     EidolonName: With pride I fight
-    EidolonDescription: Gain <color=green>2%</color> <color=#FFC300>damage increase</color>
-      for each lost <color=#FFC300>health point</color>
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: Gain <color=green>2%</color> <color=#FFC300>damage
+      increase</color> for each lost <color=#FFC300>health point</color>
     EidolonQuote: All the suckups aside, I do enjoy the feeling of superiority over
       others but... I think I got plenty more humble since the day I first placed
       foot into my barrack. Watching the new generation growing in strength, their
@@ -112,8 +123,11 @@ MonoBehaviour:
       tomorrow" thing.
   - EidolonTexture: {fileID: 21300000, guid: f2b1e1bdc570dee4791f79e64fdc91d0, type: 3}
     EidolonName: When I'm with Her
-    EidolonDescription: Using <color=#43847F>Firey Rage</color> will immediately
-      set David's <color=#FFC300>HP</color> to <color=red>60%</color>
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: Using <color=#43847F>Firey Rage</color> will immediately
+      set David's HP to <color=red>60%</color>
+    PassiveUpgradeDescription: 
     EidolonQuote: Clara has been around for the better part of my life and I would
       lie if I said I didn't crush on her ever since I was a little boy. She's probably
       the reason why I achieved all I did. She assured me many times I don't need
@@ -121,18 +135,20 @@ MonoBehaviour:
       I'm weak.
   - EidolonTexture: {fileID: 21300000, guid: e0ab369a6a2895640b27bd4080d19387, type: 3}
     EidolonName: Final Regret
-    EidolonDescription: 'Each <color=orange>Meteor</color> will drain David''s <color=#FFC300>HP</color>
-      until <color=red>40%</color> and using <color=#43847F>Firey Rage</color> will
-      immediately set David''s <color=#FFC300>HP</color> to that value. Whever he
-      loses loses <color=#FFC300>HP</color> gain <color=green>50%</color> <color=#FFC300>crit
-      rate</color> and <color=green>50%</color> <color=#FFC300>damage increase</color>
-      for 2 seconds. Additionally whenever he regenerates at least 1 <color=#FFC300>HP</color>
-      in a single action, gain <color=green>150%</color> <color=#FFC300>crit damage</color>
-      and <color=green>50%</color> <color=#FFC300>damage increase</color> for 2 seconds.
+    EidolonDescription: 
+    WeaponUpgradeDescription: 'Each <color=orange>Meteor</color> will drain David''s
+      HP until <color=red>40%</color> '
+    SkillUpgradeDescription: Using <color=#43847F>Firey Rage</color> will immediately
+      set David's HP to <color=red>40%.</color>
+    PassiveUpgradeDescription: 'Whever David loses HP gain <color=green>50%</color>
+      <color=#FFC300>crit rate</color> and <color=green>50%</color> <color=#FFC300>damage
+      increase</color> for 2 seconds. Additionally whenever he regenerates at least
+      1 HP in a single action, gain <color=green>150%</color> <color=#FFC300>crit
+      damage</color> and <color=green>50%</color> <color=#FFC300>damage increase</color>
+      for 2 seconds.
 
-      Neither
-      of these buffs can stack multiple times but both can be active at the same
-      time.'
+      Neither of these buffs can stack multiple times but
+      both can be active at the same time.'
     EidolonQuote: "A lot has happened ever since I started working under that new
       queen. Excuse my rudness but she is rather... incapable, if I have to be honest.\nOne
       thing peaks my curiosity though. Those glass shards of hers, I've never seen

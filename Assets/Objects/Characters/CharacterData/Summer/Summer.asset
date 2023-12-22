@@ -77,6 +77,8 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 2
     Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0
   skillNodes:
   - {fileID: 11400000, guid: 9e08047635e98f246b3060c64cb4a3d6, type: 2}
   - {fileID: 11400000, guid: ef40ea8f98ac5584887bdd38f32645de, type: 2}
@@ -91,7 +93,10 @@ MonoBehaviour:
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: cdc9accd75ebabf4aae243ef440c8a20, type: 3}
     EidolonName: The prettiest there is
-    EidolonDescription: Each unlocked shard increases her damage by <color=green>1</color>
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: Each unlocked shard increases her damage by <color=green>1</color>
     EidolonQuote: 'My name is Summer, I''m the prettiest around here and the best
       at everything as long as I put my heart to it. Let me be your guide!
 
@@ -102,8 +107,11 @@ MonoBehaviour:
       with you yet!'
   - EidolonTexture: {fileID: 21300000, guid: 45caffb228b9d1f4ba54fd4702a49c1f, type: 3}
     EidolonName: Have you fallen for me yet?
-    EidolonDescription: <color=#43847F>Piercing Shot</color> will shoot two additional
-      arrows in a cone
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: <color=#43847F>Piercing Shot</color> will shoot two
+      additional arrows in a cone
+    PassiveUpgradeDescription: 
     EidolonQuote: 'Honestly it''s difficult being so pretty, especially in the military,
       all the guys are pestering me left and right!
 
@@ -115,7 +123,10 @@ MonoBehaviour:
       to hang out with but... Ah, it would be unprofessional of me!'
   - EidolonTexture: {fileID: 21300000, guid: c7204fd436c41884298bca7222aa8a25, type: 3}
     EidolonName: Hold on!
-    EidolonDescription: 'Increase crit rate by <color=green>15%</color>
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: 'Increase crit rate by <color=green>15%</color>
 
       Increase
       movement speed by <color=green>0.05 m/s</color>'
@@ -126,7 +137,10 @@ MonoBehaviour:
       Haha"
   - EidolonTexture: {fileID: 21300000, guid: 614f56a53729c2f40a09d612dfc54f1a, type: 3}
     EidolonName: So is my duty
-    EidolonDescription: "Increase enemy max count by <color=red>20%</color> \n"
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: 'Increase enemy max count by <color=red>20%</color> '
     EidolonQuote: "I always put up that damn smile and act like nothing ever faze
       me... \nDo you even realize what being a squad leader really is? It used to
       be fun and games before these... things, appeared.\nNowadays every time we
@@ -135,8 +149,11 @@ MonoBehaviour:
       David"
   - EidolonTexture: {fileID: 21300000, guid: 43b991e3fc107914ab90e5413f31ce7d, type: 3}
     EidolonName: Other me
-    EidolonDescription: <color=orange>Make it rain!</color> will reduce enemy <color=#B200FF>physical
-      resistance</color> by 0.5% per hit from level one
+    EidolonDescription: 
+    WeaponUpgradeDescription: <color=orange>Make it rain!</color> will reduce enemy
+      <color=#B200FF>physical resistance</color> by 0.5% per hit from level one
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: 
     EidolonQuote: 'Whenever we are out in the field we set out little campfire or
       two, depending on how many members we got.
 

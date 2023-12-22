@@ -50,10 +50,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UseParticles: 1
   ParticleSystem: {fileID: 6985529281906599332}
+  hitbox: {fileID: 0}
+  spawningStage:
+    stageObject: {fileID: 0}
+    stageDuration: 0
+  flyingStage:
+    stageObject: {fileID: 0}
+    stageDuration: 0
+  dissipationStage:
+    stageObject: {fileID: 0}
+    stageDuration: 0
+  isLimitedHitBox: 1
+  hitBoxDuration: 0.1
+  hitBoxStart: 0
   collider: {fileID: 3855689315337631556}
   colliderLifeTime: 0.1
   colliderStartLifeTime: 0
-  limitedTimeCollider: 1
 --- !u!65 &3855689315337631556
 BoxCollider:
   m_ObjectHideFlags: 0

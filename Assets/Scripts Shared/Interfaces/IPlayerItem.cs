@@ -18,5 +18,6 @@ namespace Interfaces
 		ICollection<StatsDisplayData> GetStatsData();
 		bool IsUnlocked(SaveFile saveFile);
 		bool ReliesOnAchievement(AchievementEnum achievement);
+		string GetDescription(int rarity);
 	}
 }

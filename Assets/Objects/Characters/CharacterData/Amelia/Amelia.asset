@@ -80,6 +80,8 @@ MonoBehaviour:
     DamageOverTime: 0
     Rerolls: 0
     Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0
   skillNodes:
   - {fileID: 11400000, guid: 368c5c29134a095479abb5de4839293a, type: 2}
   - {fileID: 11400000, guid: 31aeb5843d5bbae44a7fd996c676b0da, type: 2}
@@ -93,17 +95,22 @@ MonoBehaviour:
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: cf5be51b6c188904f95e50488f3e8cb3, type: 3}
     EidolonName: When I first met you
-    EidolonDescription: 'Increase healing recieved by <color=green>100%</color>
-
-      Each
-      time <color=#43847F>Wishes United</color> is used, summon all shards towards
-      Amelia'
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: Each time <color=#43847F>Wishes United</color> is used,
+      summon all shards towards Amelia
+    PassiveUpgradeDescription: Increase healing recieved by <color=green>100%</color>
     EidolonQuote: "Have you ever opened your eyes and thought you died!? But then
       I'm like... wait, that's no angel and I'm not dead! \nThat's about the clearest
       memory I have and probably the best thing that happend to me yet!"
   - EidolonTexture: {fileID: 21300000, guid: 53cfba73cb518114bb6c558689195c20, type: 3}
     EidolonName: Heart Ache
-    EidolonDescription: 'Increase damage dealt and taken by <color=orange>100%</color>
+    EidolonDescription: '
+
+'
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: 'Increase damage dealt and taken by <color=orange>100%</color>
 
       Every
       time shard shatters gain additional <color=green>300%</color> damage and <color=green>0.5</color>
@@ -116,8 +123,11 @@ MonoBehaviour:
       up getting angry over it!'
   - EidolonTexture: {fileID: 21300000, guid: b59df352cbaf86f4f8f15d650ab75954, type: 3}
     EidolonName: Peaceful nights by your side
-    EidolonDescription: Every 10 levels gain <color=green>1</color> additional projectile
-      (up to 4)
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: Every 10 levels gain <color=green>1</color> additional
+      projectile (up to 4)
     EidolonQuote: 'She used to lay down by herself, listening to her parents fighting
       over and over again... If she were to finish it all, could the pain end?
 
@@ -131,18 +141,24 @@ MonoBehaviour:
       by her lovers side. But good things never last, do they?'
   - EidolonTexture: {fileID: 21300000, guid: 0e51bc28569f9f64a891c3ba15fd9287, type: 3}
     EidolonName: Sweetest life
-    EidolonDescription: Each glass shard in possesion increases random stat by 10%
-      or flat 2 points
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: Each glass shard in possesion increases random stat
+      by 10% or flat 2 points
     EidolonQuote: "\"Is this really okay?!\" - Turns out it is! I get all the sweets
       and pumpering a girl could ever need! \nI also started improving at my healing,
       altho slowly, I start to see effects. Can't wait to be more useful to him..."
   - EidolonTexture: {fileID: 21300000, guid: f09cad04c9c87ba4c815ec07c03bc19e, type: 3}
     EidolonName: Promises broken
-    EidolonDescription: 'Charge special by additional <color=yellow>1</color> point
-      per <color=#00B1FF>exp gem</color>.
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: 'Charge special by additional <color=yellow>1</color>
+      point per <color=#00B1FF>exp gem</color>.
 
-      Increase max amount of shards to
-      <color=green>24</color>'
+      Increase max amount of shards
+      to <color=green>24</color>'
     EidolonQuote: "I read a saying in a book: \"Where there is light there must be
       shadow\". \nPossibly... If I've never been shielded from it... It wouldn't
       sting so much.\nRegardless what future holds, I'm not a little girl anymore,

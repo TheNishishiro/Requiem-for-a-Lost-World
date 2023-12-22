@@ -7,11 +7,6 @@ namespace Objects.Abilities.Wind_Shear
     public class WindShearProjectile : PoolableProjectile<WindShearProjectile>
     {
         public WindSheerWeapon WindShearWeapon => (WindSheerWeapon)ParentWeapon;
-        
-        private void Update()
-        {
-            TickLifeTime();
-        }
 
         private void OnTriggerEnter(Collider other)
         {

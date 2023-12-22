@@ -180,10 +180,8 @@ namespace Objects.Players.Scripts
 			
 			for (var i = 0; i < 3; i++)
 			{
-				var randomPosition = Utilities.GetPointOnColliderSurface(
-					Utilities.GetRandomInArea(_transform.position, 5f), gameObject.transform);
-				SpawnManager.instance.SpawnObject(randomPosition, GameData.GetSkillPrefab().gameObject,
-					_transform.rotation);
+				var randomPosition = Utilities.GetPointOnColliderSurface(Utilities.GetRandomInArea(_transform.position, 5f), gameObject.transform);
+				SpawnManager.instance.SpawnObject(randomPosition, GameData.GetSkillPrefab().gameObject, _transform.rotation);
 			}
 		}
 

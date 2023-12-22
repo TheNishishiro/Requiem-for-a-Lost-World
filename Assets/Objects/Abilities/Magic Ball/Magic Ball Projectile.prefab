@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1264275267675872881}
   - component: {fileID: 1264275267675872880}
   - component: {fileID: 1264275267675872783}
-  - component: {fileID: 1264275267675872782}
   - component: {fileID: 923097488642023194}
   m_Layer: 0
   m_Name: Magic Ball Projectile
@@ -33,7 +32,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.121367514, y: 0.121367514, z: 0.121367514}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5925184871947437737}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1264275267675872881
@@ -107,14 +107,74 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!96 &1264275267675872782
+--- !u!114 &923097488642023194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264275267675872780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4346a5900a594f88b33ee03a0ed3ecda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseParticles: 0
+  ParticleSystem: {fileID: 0}
+  hitbox: {fileID: 1264275267675872783}
+  spawningStage:
+    stageObject: {fileID: 0}
+    stageDuration: 0
+  flyingStage:
+    stageObject: {fileID: 5901388024138236692}
+    stageDuration: 0
+  dissipationStage:
+    stageObject: {fileID: 0}
+    stageDuration: 0
+  isLimitedHitBox: 0
+  hitBoxDuration: 0
+  hitBoxStart: 0
+  trail: {fileID: 7962575290193281981}
+--- !u!1 &5901388024138236692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5925184871947437737}
+  - component: {fileID: 7962575290193281981}
+  m_Layer: 0
+  m_Name: Main
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5925184871947437737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5901388024138236692}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1264275267675872781}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!96 &7962575290193281981
 TrailRenderer:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1264275267675872780}
+  m_GameObject: {fileID: 5901388024138236692}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -211,18 +271,3 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 0
---- !u!114 &923097488642023194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1264275267675872780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4346a5900a594f88b33ee03a0ed3ecda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UseParticles: 0
-  ParticleSystem: {fileID: 0}
-  trail: {fileID: 1264275267675872782}

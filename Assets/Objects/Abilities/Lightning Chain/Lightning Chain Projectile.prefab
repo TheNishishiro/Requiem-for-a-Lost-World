@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6496525642434034257
+--- !u!1 &469331175773109920
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2919570490644908998}
-  - component: {fileID: 2303404192321264117}
-  - component: {fileID: 5996165467240705733}
+  - component: {fileID: 5262493808618134761}
+  - component: {fileID: 7856564117222183924}
   m_Layer: 0
-  m_Name: Lightning Chain Projectile
+  m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2919570490644908998
+--- !u!4 &5262493808618134761
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6496525642434034257}
-  m_LocalRotation: {x: -0.0016581292, y: 0, z: 0, w: 0.9999986}
-  m_LocalPosition: {x: -0.51603305, y: 0.36659905, z: 0.07688069}
+  m_GameObject: {fileID: 469331175773109920}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -0.19, y: 0, z: 0}
---- !u!120 &2303404192321264117
+  m_Father: {fileID: 2919570490644908998}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!120 &7856564117222183924
 LineRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6496525642434034257}
+  m_GameObject: {fileID: 469331175773109920}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
@@ -122,16 +122,54 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
+      m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
     textureMode: 2
+    textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
+  m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+  m_ApplyActiveColorSpace: 0
+--- !u!1 &6496525642434034257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2919570490644908998}
+  - component: {fileID: 5996165467240705733}
+  - component: {fileID: 19568055010760131}
+  m_Layer: 0
+  m_Name: Lightning Chain Projectile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2919570490644908998
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6496525642434034257}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0016581292, y: 0, z: 0, w: 0.9999986}
+  m_LocalPosition: {x: -0.51603305, y: 0.36659905, z: 0.07688069}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5262493808618134761}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: -0.19, y: 0, z: 0}
 --- !u!114 &5996165467240705733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,4 +182,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e87b3e3a5c6a4109baaf2bb043dd9261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineRenderer: {fileID: 2303404192321264117}
+  UseParticles: 0
+  ParticleSystem: {fileID: 0}
+  hitbox: {fileID: 19568055010760131}
+  spawningStage:
+    stageObject: {fileID: 0}
+    stageDuration: 0
+  flyingStage:
+    stageObject: {fileID: 469331175773109920}
+    stageDuration: 0
+  dissipationStage:
+    stageObject: {fileID: 0}
+    stageDuration: 0
+  isLimitedHitBox: 0
+  hitBoxDuration: 0
+  hitBoxStart: 0
+  lineRenderer: {fileID: 7856564117222183924}
+--- !u!65 &19568055010760131
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6496525642434034257}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}

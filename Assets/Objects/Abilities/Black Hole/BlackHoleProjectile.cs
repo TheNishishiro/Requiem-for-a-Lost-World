@@ -17,10 +17,5 @@ namespace Objects.Abilities.Back_Hole
 			blackHoleCenter.SetStats(weaponStats);
 			blackHoleGravitation.SetStats(weaponStats);
 		}
-
-		private void Update()
-		{
-			TickLifeTime();
-		}
 	}
 }

@@ -20,11 +20,6 @@ namespace Objects.Abilities.Lightning_Chain
 			lineRenderer.positionCount = 0;
 			
 		}
-
-		public void Update()
-		{
-			TickLifeTime();
-		}
 		
 		public void SeekTargets(int maxTargers)
 		{
