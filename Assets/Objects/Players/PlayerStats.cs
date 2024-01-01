@@ -54,6 +54,7 @@ namespace Objects.Players
 		public int Skips;
 		public float DamageOverTimeFrequencyReductionPercentage;
 		public float DamageOverTimeDurationIncreasePercentage;
+		public float LifeSteal;
 
 		public PlayerStats()
 		{
@@ -64,7 +65,8 @@ namespace Objects.Players
 		{
 			Set(playerStats);
 		}
-		
+
+
 		public void ApplyDefaultStats()
 		{
 			Health = 100;
@@ -103,6 +105,7 @@ namespace Objects.Players
 			Skips = 0;
 			DamageOverTimeFrequencyReductionPercentage = 0;
 			DamageOverTimeDurationIncreasePercentage = 0;
+			LifeSteal = 0;
 		}
 
 		public void Sum(ItemStats item, int rarity)
@@ -145,6 +148,7 @@ namespace Objects.Players
             DamageOverTimeDurationIncreasePercentage += item.DamageOverTimeDurationIncreasePercentage * rarityFactor;
             Rerolls += item.Rerolls != 0 ? item.Rerolls + (rarity - 1) : item.Rerolls;
             Skips += item.Skips != 0 ? item.Skips + (rarity - 1) : item.Skips;
+            LifeSteal += item.LifeSteal * rarityFactor;
         }
 
 		public void Set(PlayerStats playerStats)
@@ -197,6 +201,7 @@ namespace Objects.Players
             SpecialMax = playerStats.SpecialMax;
             DamageOverTimeFrequencyReductionPercentage = playerStats.DamageOverTimeFrequencyReductionPercentage;
             DamageOverTimeDurationIncreasePercentage = playerStats.DamageOverTimeDurationIncreasePercentage;
+            LifeSteal = playerStats.LifeSteal;
         }
 
 		public IEnumerable<StatsDisplayData> GetStatsList()
@@ -206,6 +211,7 @@ namespace Objects.Players
 				new("Health", HealthMax, "Max health the character can have. Defines the amount of damage the player can take.", baseValue: 80),
 				new("Health regen", HealthRegen, "Amount of health character regenerates per second"),
 				new("Heal increase%", HealingIncreasePercentage, "The increase of healing received by the player from any source", true),
+				new("Life steal%", LifeSteal, "Amount of damage converted into healing", true),
 				new("CDR", CooldownReduction, "Flat reduction of weapon attack cooldown in seconds"),
 				new("CDR%", CooldownReductionPercentage, "Reduces weapon attack cooldown by given percentage", true),
 				new("Skill CDR%", SkillCooldownReductionPercentage, "Percentage of character skill cooldown reduction", true),
@@ -433,6 +439,9 @@ namespace Objects.Players
 					break;
 				case StatEnum.DamageOverTimeDurationIncrease:
 					DamageOverTimeDurationIncreasePercentage += value;
+					break;
+				case StatEnum.LifeSteal:
+					LifeSteal += value;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(stat), stat, null);

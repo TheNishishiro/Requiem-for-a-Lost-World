@@ -41,6 +41,11 @@ namespace DefaultNamespace
 			_targetTransformCache = targetPoint == null ? _transformCache : targetPoint.transform;
 		}
 
+		private void OnDisable()
+		{
+			Clear();
+		}
+
 		public void Clear()
 		{
 			sourceDamageCooldown.Clear();
@@ -50,7 +55,10 @@ namespace DefaultNamespace
 			additionalDamageModifier = 0;
 			resistances.Clear();
 			inflictedElements.Clear();
-			StopAllCoroutines();
+			foreach (var activeDot in _activeDots.Values)
+			{
+				StopCoroutine(activeDot);
+			}
 			_activeDots.Clear();
 		}
 
@@ -93,7 +101,8 @@ namespace DefaultNamespace
 		public void TakeDamage(float damage, WeaponBase weaponBase = null, bool isRecursion = false)
 		{
 			var calculatedDamage = damage;
-			if (weaponBase != null)
+			var isWeaponSpecified = weaponBase != null;
+			if (isWeaponSpecified)
 			{
 				calculatedDamage *= 1 - GetResistance(weaponBase.element);
 				OnElementInflict(weaponBase.element, damage);
@@ -113,6 +122,13 @@ namespace DefaultNamespace
 			if (!isRecursion && additionalDamageTimer > 0)
 			{
 				TakeDamage(damage * additionalDamageModifier, additionalDamageType, true);
+			}
+
+			if (isWeaponSpecified && weaponBase.weaponStats != null)
+			{
+				var lifeSteal = weaponBase.weaponStats.GetLifeSteal();
+				if (lifeSteal > 0)
+					GameManager.instance.playerComponent.TakeDamage(-calculatedDamage * lifeSteal);		
 			}
 
 			gameResultData.AddDamage(calculatedDamage, weaponBase);
@@ -163,14 +179,20 @@ namespace DefaultNamespace
 		public void ApplyDamageOverTime(float damage, float damageFrequency, float damageDuration, WeaponBase weaponBase)
 		{
 			if (_activeDots.ContainsKey(weaponBase.GetInstanceID())) return;
-			_activeDots.Add(weaponBase.GetInstanceID(), StartCoroutine(DamageOverTime(damage, damageFrequency, damageDuration, weaponBase)));
+			
+			_activeDots.Add(weaponBase.GetInstanceID(), null);
+			_activeDots[weaponBase.GetInstanceID()] = StartCoroutine(DamageOverTime(damage, damageFrequency, damageDuration, weaponBase));
 		}
 
 		private IEnumerator DamageOverTime(float damage, float damageFrequency, float damageDuration, WeaponBase weaponBase)
 		{
 			var timer = damageDuration;
+			var waitTimer = new WaitForSeconds(damageFrequency);
+			var tempWeapon = new ElementalWeapon(Element.None);
 			while (timer > 0)
 			{
+				if (!_activeDots.ContainsKey(weaponBase.GetInstanceID())) yield break;
+				
 				timer -= damageFrequency;
 				TakeDamage(damage, weaponBase);
 
@@ -178,11 +200,12 @@ namespace DefaultNamespace
 				{
 					var values = Enum.GetValues(typeof(Element));
 					var randomElement = (Element)values.GetValue(Random.Range(0, values.Length));
-					TakeDamage(damage, new ElementalWeapon(randomElement));
+					tempWeapon.SetElement(randomElement);
+					TakeDamage(damage, tempWeapon);
 					ReduceElementalDefence(randomElement, 0.25f);
 				}
 				
-				yield return new WaitForSeconds(damageFrequency);
+				yield return waitTimer;
 			}
 			
 			DamageOverTimeExpiredHandler.Invoke(this, damage);

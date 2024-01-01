@@ -6,6 +6,7 @@ namespace Objects.Abilities.Time_Blade
 {
     public class TimeBladeWeapon : PoolableWeapon<TimeBladeProjectile>
     {
+        public bool IsTemporalMastery { get; set; }
         private bool _isMinuteTick;
         
         protected override TimeBladeProjectile ProjectileInit()
@@ -40,6 +41,12 @@ namespace Objects.Abilities.Time_Blade
                 }
                 yield return new WaitForSeconds(weaponStats.DuplicateSpawnDelay);
             }
+        }
+
+        protected override void OnLevelUp()
+        {
+            if (LevelField == 11)
+                IsTemporalMastery = true;
         }
     }
 }

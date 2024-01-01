@@ -51,6 +51,7 @@ namespace Weapons
             TimeAlive = 0;
             isDamageCooldownExpired = false;
             ProjectileDamageIncreasePercentage = 0;
+            transformCache = transform;
             if (UseParticles)
             {
                 ParticleSystem.Simulate( 0.0f, true, true );
@@ -76,6 +77,7 @@ namespace Weapons
         private void FlyUpdate()
         {
 	        TickLifeTime();
+	        TickDamageCooldown();
 	        CustomUpdate();
         }
 	

@@ -35,6 +35,7 @@ MonoBehaviour:
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 2a39b6f7df5bcdc48bc80df011300e09, type: 3}
   ColorTheme: {r: 1, g: 0.7647059, b: 0, a: 1}
+  Alignment: 1
   StarRating: 5
   StartingWeapon: {fileID: -1210981128314417668, guid: d40c8cdd411557a45963d2005107c041,
     type: 3}
@@ -80,6 +81,7 @@ MonoBehaviour:
     Skips: 0
     DamageOverTimeFrequencyReductionPercentage: 0
     DamageOverTimeDurationIncreasePercentage: 0
+    LifeSteal: 0
   skillNodes:
   - {fileID: 11400000, guid: e222e7c0df65d244190ce3ad145a4084, type: 2}
   - {fileID: 11400000, guid: 55673078510933e44a8c31a86ba6a1d1, type: 2}
@@ -142,7 +144,8 @@ MonoBehaviour:
     WeaponUpgradeDescription: 
     SkillUpgradeDescription: 
     PassiveUpgradeDescription: Increase <color=#FFC300>frequency of DoT</color> effect
-      application and their <color=#FFC300>duration</color> by <color=green>50%</color>
+      application by <color=green>10%</color> and their <color=#FFC300>duration</color>
+      by <color=green>50%</color>
     EidolonQuote: "Can't argue that living in the city walls had it's benefits but
       this is just... so nice, isn't it?\nHaha, you don't need to just nod away at
       everything I say you know!\nI'm so happy, spending time with you, every day

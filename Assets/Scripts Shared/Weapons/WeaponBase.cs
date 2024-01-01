@@ -26,7 +26,7 @@ namespace Weapons
 		[ShowIf("unlockOnAchievement")]
 		[SerializeField] public AchievementEnum requiredAchievement;
 		[SerializeField] public Element element;
-		[SerializeField] protected WeaponStats weaponStats;
+		[SerializeField] public WeaponStats weaponStats;
 		[SerializeField] List<UpgradeData> availableUpgrades;
 		protected PlayerStatsComponent _playerStatsComponent;
 		protected float _timer;

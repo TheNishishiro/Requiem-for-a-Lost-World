@@ -19,8 +19,8 @@ namespace Objects.Characters.Natalie
 		{
 			if (characterRank >= CharacterRank.E4)
 			{
-				stats.DamageOverTimeDurationIncreasePercentage += 0.5f;
-				stats.DamageOverTimeFrequencyReductionPercentage += 0.5f;
+				stats.DamageOverTimeDurationIncreasePercentage += 1f;
+				stats.DamageOverTimeFrequencyReductionPercentage += 0.1f;
 			}
 		}
 	}

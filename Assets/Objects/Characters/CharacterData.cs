@@ -32,6 +32,7 @@ namespace Objects.Characters
 		public CharacterSkillBase AbilityPrefab;
 		public Sprite AbilityIcon;
 		public Color ColorTheme;
+		public CharacterAlignment Alignment;
 		public int StarRating;
 		public WeaponBase StartingWeapon;
 		public bool IsPullable;

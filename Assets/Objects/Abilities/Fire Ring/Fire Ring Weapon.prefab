@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &831291145135684292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6691265604078535487}
+  - component: {fileID: 3462655842851109024}
+  m_Layer: 0
+  m_Name: Fire Ring Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6691265604078535487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831291145135684292}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3462655842851109024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831291145135684292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3044f0e8314c4e7b8f12eb8e02df3952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 5175148044090452481, guid: 6697cdcec8e1d2c4889f88affd1e0dfa,
+    type: 3}
+  Name: Ring of Flames
+  Description: Summon expanding ring of flames that applies burn to enemies hit,
+    causing them to take fire damage over time
+  chanceToAppear: 1
+  Icon: {fileID: 21300000, guid: 561ef25c105897443b4fe81fb0a85a2a, type: 3}
+  unlockOnAchievement: 0
+  requiredAchievement: 0
+  element: 2
+  weaponStats:
+    Damage: 0
+    Cooldown: 6
+    CooldownReduction: 0
+    Scale: 0.7
+    Speed: 0
+    TimeToLive: 2
+    AttackCount: 1
+    PassThroughCount: 0
+    DamageCooldown: 0
+    DuplicateSpawnDelay: 0.5
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 5
+    DamageOverTimeDuration: 3
+    DamageOverTimeFrequency: 0.75
+    LifeSteal: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: 076c728a4fc418e4695b58871ba3d016, type: 2}
+  - {fileID: 11400000, guid: 9c318fb7cedfc4540a9e28b15d8206f7, type: 2}
+  - {fileID: 11400000, guid: 6e371c5a346b1ec42a4aebdf72f04bd6, type: 2}
+  - {fileID: 11400000, guid: 8e3e12e329f12d045af989c9f670903b, type: 2}
+  - {fileID: 11400000, guid: f6ad6bd1e4ce2fe41bae81b7f7a9ccfc, type: 2}
+  - {fileID: 11400000, guid: 5739ea0821c1d6d44abf924bcab7d4a0, type: 2}
+  - {fileID: 11400000, guid: bf598d2713fc4804ca4d7a0cf7a45efc, type: 2}
+  - {fileID: 11400000, guid: 567c96cdcd6c9bc4ab00ba66e6364b0a, type: 2}
+  - {fileID: 11400000, guid: aa7f11a69b89b034cb084cabdcafbc27, type: 2}
+  - {fileID: 11400000, guid: 0a606986c726a354bb1de1c04a55376a, type: 2}
+  isSkill: 0
+  capacity: 10
+  maxCapacity: 10

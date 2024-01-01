@@ -44,6 +44,7 @@ namespace Objects.Items
 		public int Skips;
 		public float DamageOverTimeFrequencyReductionPercentage;
 		public float DamageOverTimeDurationIncreasePercentage;
+		public float LifeSteal;
 
 		public void ApplyRarity(int rarity)
 		{
@@ -81,6 +82,7 @@ namespace Objects.Items
 			DamageOverTime *= rarityFactor;
 			DamageOverTimeFrequencyReductionPercentage *= rarityFactor;
 			DamageOverTimeDurationIncreasePercentage *= rarityFactor;
+			LifeSteal *= rarityFactor;
 			Rerolls = Rerolls != 0 ? Rerolls + (rarity - 1) : Rerolls;
 			Skips = Skips != 0 ? Skips + (rarity - 1) : Skips;
 		}
@@ -123,6 +125,7 @@ namespace Objects.Items
             DamageOverTime += itemUpgradeItemStats.DamageOverTime * rarityFactor;
             DamageOverTimeFrequencyReductionPercentage += itemUpgradeItemStats.DamageOverTimeFrequencyReductionPercentage * rarityFactor;
             DamageOverTimeDurationIncreasePercentage += itemUpgradeItemStats.DamageOverTimeFrequencyReductionPercentage * rarityFactor;
+            LifeSteal += itemUpgradeItemStats.LifeSteal * rarityFactor;
             Rerolls += itemUpgradeItemStats.Rerolls == 0 ? 0 : itemUpgradeItemStats.Rerolls + (rarity - 1);
             Skips += itemUpgradeItemStats.Skips == 0 ? 0 : itemUpgradeItemStats.Skips + (rarity - 1);
         }
@@ -162,6 +165,7 @@ namespace Objects.Items
 				.Replace("{DodgeChance}", Utilities.StatToString(DodgeChance, rarityFactor, true))
 				.Replace("{DamageTakenIncreasePercentage}", Utilities.StatToString(DamageTakenIncreasePercentage, rarityFactor, true))
 				.Replace("{HealingReceivedIncreasePercentage}", Utilities.StatToString(HealingReceivedIncreasePercentage, rarityFactor, true))
+				.Replace("{LifeSteal}", Utilities.StatToString(LifeSteal, rarityFactor, true))
 				.Replace("{Luck}", Utilities.StatToString(Luck, rarityFactor, true))
 				.Replace("{DamageOverTime}", Utilities.StatToString(DamageOverTime, rarityFactor))
 				.Replace("{DamageOverTimeFrequencyReduction}", Utilities.StatToString(DamageOverTimeFrequencyReductionPercentage, rarityFactor, true))
@@ -206,6 +210,7 @@ namespace Objects.Items
 				new("Weapon duration%", ProjectileLifeTimeIncreasePercentage, isPercentage: true),
 				new("Dodge chance%", DodgeChance, isPercentage: true),
 				new("Damage increase%", DamageTakenIncreasePercentage, isPercentage: true),
+				new("Life steal%", LifeSteal, isPercentage: true),
 				new("Heal increase%", HealingReceivedIncreasePercentage, isPercentage: true),
 				new("Luck%", Luck, isPercentage: true),
 				new("Rerolls", Rerolls),

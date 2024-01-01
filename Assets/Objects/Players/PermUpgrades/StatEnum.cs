@@ -59,6 +59,8 @@
         [StatType(true)]
         DamageOverTimeFrequencyReduction,
         [StatType(true)]
-        DamageOverTimeDurationIncrease
+        DamageOverTimeDurationIncrease,
+        [StatType(true)]
+        LifeSteal
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace DefaultNamespace.Data.Achievements
 {
-	public enum AchievementEnum
+	public enum AchievementEnum // 85
 	{
 		[AchievementValue("Jack of all trades", "Obtain 6 weapons in a single game")]
 		Hold6Weapons = 0,
@@ -39,6 +39,11 @@ namespace DefaultNamespace.Data.Achievements
 		Die20Times = 16,
 		[AchievementValue("Blessed by the wind", "Find a wind orb in the Capital Outskirts")]
 		UnlockWindShear = 17,
+		[AchievementValue("Witness Octi's ugliness", "Survive 30 minutes with a light aligned character")]
+		Survive30MinutesWithLightCharacter = 84,
+		[AchievementValue("Witness Octi's brilliance", "Survive 30 minutes with a dark aligned character")]
+		Survive30MinutesWithDarkCharacter = 85,
+		
 		
 		#region Survive with characters
 

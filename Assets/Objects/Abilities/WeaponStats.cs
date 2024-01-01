@@ -35,6 +35,7 @@ namespace Objects.Abilities
 		public float DamageOverTime;
 		public float DamageOverTimeDuration;
 		public float DamageOverTimeFrequency;
+		public float LifeSteal;
 
 		public void AssignPlayerStatsComponent(PlayerStatsComponent playerStatsComponent)
 		{
@@ -63,6 +64,7 @@ namespace Objects.Abilities
              DamageOverTime *= rarityFactor;
              DamageOverTimeDuration *= rarityFactor;
              DamageOverTimeFrequency *= 2 - rarityFactor;
+             LifeSteal *= rarityFactor;
          }
 		
 		public void Sum(WeaponStats weaponStats, int rarity)
@@ -87,7 +89,8 @@ namespace Objects.Abilities
             HealPerHit += weaponStats.HealPerHit * rarityFactor;      
             DamageOverTime += weaponStats.DamageOverTime * rarityFactor;      
             DamageOverTimeDuration += weaponStats.DamageOverTimeDuration * rarityFactor;      
-            DamageOverTimeFrequency += weaponStats.DamageOverTimeFrequency * (2 - rarityFactor);      
+            DamageOverTimeFrequency += weaponStats.DamageOverTimeFrequency * (2 - rarityFactor);    
+            LifeSteal += weaponStats.LifeSteal * rarityFactor;        
         }
 
 		public string GetDescription(string description, int rarity)
@@ -111,6 +114,7 @@ namespace Objects.Abilities
 				.Replace("{Weakness}", Utilities.StatToString(Weakness, rarityFactor, true))
 				.Replace("{DamageIncreasePercentage}", Utilities.StatToString(DamageIncreasePercentage, rarityFactor, true))
 				.Replace("{HealPerHit}", Utilities.StatToString(HealPerHit, rarityFactor))
+				.Replace("{LifeSteal}", Utilities.StatToString(LifeSteal, rarityFactor, true))
 				.Replace("{DamageOverTime}", Utilities.StatToString(DamageOverTime, rarityFactor))
 				.Replace("{DamageOverTimeDuration}", Utilities.StatToString(DamageOverTimeDuration, rarityFactor))
 				.Replace("{DamageOverTimeFrequency}", Utilities.StatToString(DamageOverTimeFrequency, rarityFactor, false, true))
@@ -136,6 +140,7 @@ namespace Objects.Abilities
 	            new("Weakness", Weakness, isPercentage: true),
 	            new("Attack count", AttackCount),
 	            new("Regen per hit", HealPerHit),
+	            new("Life steal", LifeSteal),
 	            new("Damage over time", DamageOverTime),
 	            new("DoT duration", DamageOverTimeDuration),
 	            new("DoT frequency", DamageOverTimeFrequency)
@@ -172,8 +177,8 @@ namespace Objects.Abilities
 
 		public float GetDamageOverTime()
 		{
-			if (!_isInitialized) return DamageOverTime * DamageIncreasePercentage;
-			return (DamageOverTime + _playerStatsComponent.GetDamageOverTime()) * (_playerStatsComponent.GetDamageIncreasePercentage() + DamageIncreasePercentage);
+			if (!_isInitialized) return DamageOverTime * (1 + DamageIncreasePercentage);
+			return (DamageOverTime + _playerStatsComponent.GetDamageOverTime()) * (1 + DamageIncreasePercentage);
 		}
 
 		public float GetDamageOverTimeFrequency()
@@ -242,6 +247,12 @@ namespace Objects.Abilities
 			var critRate = CritRate + _playerStatsComponent.GetCritRate();
 			var critDamage = CritDamage + _playerStatsComponent.GetCritDamage();
 			return (float)(Random.value < critRate ? HealPerHit * critDamage : HealPerHit);
+		}
+
+		public float GetLifeSteal()
+		{
+			if (!_isInitialized) return LifeSteal;
+			return LifeSteal + _playerStatsComponent.GetLifeSteal();
 		}
 	}
 }

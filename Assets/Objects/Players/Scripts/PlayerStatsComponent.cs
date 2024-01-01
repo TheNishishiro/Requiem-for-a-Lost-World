@@ -365,6 +365,11 @@ namespace Objects.Players.Scripts
 			return _playerStats?.DamageOverTime ?? 0;
 		}
 
+		public float GetLifeSteal()
+		{
+			return _playerStats?.LifeSteal ?? 0;
+		}
+
 		public bool HasRerolls()
 		{
 			return _playerStats?.Rerolls > 0;

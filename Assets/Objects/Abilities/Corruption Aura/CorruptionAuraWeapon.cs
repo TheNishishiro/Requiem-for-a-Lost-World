@@ -37,11 +37,6 @@ namespace Objects.Abilities.Corruption_Aura
 				if (GameData.IsCharacterWithRank(CharactersEnum.Lucy_BoC, CharacterRank.E3))
 					damageCooldown -= 0.2f;
 
-				if (Time.frameCount % 30 == 0)
-				{
-					_playerStatsComponent.TakeDamage(-weaponStats.GetHealPerHit(false));
-				}
-
 				enemy.GetDamagableComponent().TakeDamageWithCooldown(weaponStats.GetDamage(), gameObject, damageCooldown,this);
 				if (GameData.IsCharacterWithRank(CharactersEnum.Lucy_BoC, CharacterRank.E2))
 					enemy.GetChaseComponent().SetSlow(1f, 0.3f);

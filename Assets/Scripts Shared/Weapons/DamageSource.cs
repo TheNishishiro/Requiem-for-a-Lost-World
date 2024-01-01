@@ -94,9 +94,11 @@ namespace Weapons
 		{
 			if (!other.CompareTag("Enemy") && !other.CompareTag("Destructible"))
 				return;
-			
+
 			if (!damageable.IsDestroyed())
+			{
 				damageable.ApplyDamageOverTime(WeaponStats.GetDamageOverTime(), WeaponStats.GetDamageOverTimeFrequency(), WeaponStats.GetDamageOverTimeDuration(), ParentWeapon);
+			}
 		}
 
 		protected virtual void OnLifeTimeEnd()

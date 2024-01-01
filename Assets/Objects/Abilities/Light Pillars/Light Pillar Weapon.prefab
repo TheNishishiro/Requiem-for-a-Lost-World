@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4229023508923908949
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 733538356321410829}
+  - component: {fileID: 1817861015538845496}
+  m_Layer: 0
+  m_Name: Light Pillar Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &733538356321410829
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229023508923908949}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1817861015538845496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229023508923908949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c8e07f1435f42f1bbe7569c2c757784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 5767322346442232996, guid: 659f3c42557793e46ba632a50faaf450,
+    type: 3}
+  Name: Pillar of Light
+  Description: Summon pillars of light at random location around the character and
+    deal damage to enemies passing throught it
+  chanceToAppear: 0.8
+  Icon: {fileID: 21300000, guid: f4da80daf0cac4c47b0a3afafeeb27eb, type: 3}
+  unlockOnAchievement: 1
+  requiredAchievement: 84
+  element: 7
+  weaponStats:
+    Damage: 8
+    Cooldown: 5
+    CooldownReduction: 0
+    Scale: 1
+    Speed: 0
+    TimeToLive: 3
+    AttackCount: 2
+    PassThroughCount: 0
+    DamageCooldown: 0.2
+    DuplicateSpawnDelay: 0.1
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
+    LifeSteal: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: d8365c292ff206845bbf3893dc38b0d7, type: 2}
+  - {fileID: 11400000, guid: 061c0e3251f9e584c90fed6f36c90f25, type: 2}
+  - {fileID: 11400000, guid: 29ed3f507cce1664cac9d1427e8bab2b, type: 2}
+  - {fileID: 11400000, guid: 1e17d2efbb159494399b25443b1af42b, type: 2}
+  - {fileID: 11400000, guid: 7a7a6ea40e6db5b499895aaa3e20d298, type: 2}
+  - {fileID: 11400000, guid: cfe26cb07a62c874ca075b56eb60e359, type: 2}
+  - {fileID: 11400000, guid: d8e47c480b665e8419e2023b4b855313, type: 2}
+  - {fileID: 11400000, guid: 877e840d8208a3f45a3d0aad25553745, type: 2}
+  - {fileID: 11400000, guid: fccf9d1981609344f8c0e3bce705b439, type: 2}
+  - {fileID: 11400000, guid: 62122c07bda4eaa49ac545acca549d53, type: 2}
+  isSkill: 0
+  capacity: 50
+  maxCapacity: 100

@@ -39,11 +39,16 @@ namespace Managers
 		public void OnStageTimeUpdated(float time)
 		{
 			var minutes = Mathf.FloorToInt(time / 60);
-			var activeCharacterName = GameData.GetPlayerCharacterId().GetName();
+			var activeCharacterName = GameData.GetPlayerCharacterData().Id.GetName();
+			var activeCharacterAlignment = GameData.GetPlayerCharacterData().Alignment;
 			switch (minutes)
 			{
 				case >= 30:
 					SaveFile.Instance.UnlockAchievement($"Survive30MinutesWith{activeCharacterName}");
+					if (activeCharacterAlignment == CharacterAlignment.Light)
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.Survive30MinutesWithLightCharacter);
+					else if (activeCharacterAlignment == CharacterAlignment.Dark)
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.Survive30MinutesWithDarkCharacter);
 					break;
 				case >= 15:
 					SaveFile.Instance.UnlockAchievement($"Survive15MinutesWith{activeCharacterName}");

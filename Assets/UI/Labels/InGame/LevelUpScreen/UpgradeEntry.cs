@@ -17,20 +17,37 @@ namespace UI.Labels.InGame.LevelUpScreen
 		public ItemBase Item { get; set; }
 		public ItemUpgrade ItemUpgrade { get; set; }
 		public float ChanceOfAppearance { get; set; }
-		public int Rarity { get; private set; } = (Random.value + GameData.GetPlayerCharacterData().Stats.Luck) switch
-		{
-			<= 0.75f =>  1,
-			<= 0.85f => 2,
-			<= 0.9f => 3,
-			<= 0.97f => 4,
-			_ => 5
-		};
+		public int Rarity { get; set; }
 
 		public bool IsWeaponUpgrade => Weapon != null && Upgrade != null;
 		public bool IsWeaponUnlock => Weapon != null && Upgrade == null;
 		public bool IsItemUnlock => Item != null && ItemUpgrade == null;
 		public bool IsItemUpgrade => Item != null && ItemUpgrade != null;
 
+		public UpgradeEntry()
+		{
+			Rarity = (Random.value + GameData.GetPlayerCharacterData().Stats.Luck) switch
+			{
+				<= 0.75f => 1,
+				<= 0.85f => 2,
+				<= 0.9f => 3,
+				<= 0.97f => 4,
+				_ => 5
+			};
+		}
+
+		public void BoostRarity()
+		{
+			Rarity = (Random.value + GameData.GetPlayerCharacterData().Stats.Luck) switch
+			{
+				<= 0.3f => 1,
+				<= 0.5f => 2,
+				<= 0.65f => 3,
+				<= 0.8f => 4,
+				_ => 5
+			};
+		}
+        
 		public void LevelUp(WeaponManager weaponManager)
 		{
 			if (IsWeaponUpgrade)

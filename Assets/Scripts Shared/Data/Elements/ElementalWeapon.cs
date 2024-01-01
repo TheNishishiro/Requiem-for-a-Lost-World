@@ -9,6 +9,11 @@ namespace Data.Elements
 			element = skillElement;
 			isSkill = true;
 		}
+
+		public void SetElement(Element skillElement)
+		{
+			element = skillElement;
+		}
 		
 		public override void Attack()
 		{

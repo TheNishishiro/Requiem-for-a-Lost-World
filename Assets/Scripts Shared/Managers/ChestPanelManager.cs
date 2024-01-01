@@ -64,6 +64,7 @@ namespace Managers
 			
 			for (var i = 0; i < upgradeEntries.Count; i++)
 			{
+				upgradeEntries[i].BoostRarity();
 				upgradePanels[i].gameObject.SetActive(true);
 				upgradePanels[i].SetUpgradeData(upgradeEntries[i]);
 				upgradeEntries[i].LevelUp(weaponManager);
