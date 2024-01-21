@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using DefaultNamespace;
+using Interfaces;
 using Managers;
 using Objects.Abilities.Lightning_Chain;
 using Objects.Characters;
@@ -27,9 +28,9 @@ namespace Objects.Abilities.Tornado
 			_rb = GetComponent<Rigidbody>();
 		}
 
-		public override void SetStats(WeaponStats weaponStats)
+		public override void SetStats(IWeaponStatsStrategy weaponStatsStrategy)
 		{
-			base.SetStats(weaponStats);
+			base.SetStats(weaponStatsStrategy);
 			StartCoroutine(Movement());
 		}
 
@@ -52,7 +53,7 @@ namespace Objects.Abilities.Tornado
 
 		private IEnumerator Movement()
 		{
-			var speed = WeaponStats.GetSpeed() * (GameData.GetPlayerCharacterId() == CharactersEnum.Natalie_BoW ? 1.5f : 1f);
+			var speed = WeaponStatsStrategy.GetSpeed() * (GameData.GetPlayerCharacterId() == CharactersEnum.Natalie_BoW ? 1.5f : 1f);
 
 			while (!IsDead)
 			{

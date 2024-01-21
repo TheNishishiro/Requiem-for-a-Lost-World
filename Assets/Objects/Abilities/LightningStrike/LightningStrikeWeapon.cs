@@ -42,9 +42,9 @@ namespace Objects.Abilities.LightningStrike
 				},
 				projectile =>
 				{
-					subProjectileStats.Damage = weaponStats.GetDamage() * (GameData.IsCharacterWithRank(CharactersEnum.Alice_BoL, CharacterRank.E4) ? 0.75f : 0.25f);
-					subProjectileStats.Scale = weaponStats.GetScale();
-					projectile.SetStats(subProjectileStats);
+					subProjectileStats.Damage = WeaponStatsStrategy.GetDamage() * (GameData.IsCharacterWithRank(CharactersEnum.Alice_BoL, CharacterRank.E4) ? 0.75f : 0.25f);
+					subProjectileStats.Scale = WeaponStatsStrategy.GetScale();
+					projectile.SetParentWeapon(this);
 					projectile.gameObject.SetActive(true);
 					projectile.SeekTargets(5);
 				},
@@ -66,7 +66,7 @@ namespace Objects.Abilities.LightningStrike
 			if (enemy == null) return false;
 
 			projectile.transform.position = enemy.transform.position;
-			projectile.SetStats(weaponStats);
+			projectile.SetParentWeapon(this);
 			return true;
 		}
 

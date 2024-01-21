@@ -26,7 +26,7 @@ namespace Objects.Abilities.Scythe
 				return;
 			
 			SimpleDamage(other, false, out var damageable);
-			_healthComponent.Damage(-WeaponStats.GetHealPerHit(GameData.IsCharacterWithRank(CharactersEnum.Corina_BoB, CharacterRank.E1)));
+			_healthComponent.Damage(-WeaponStatsStrategy.GetHealPerHit(GameData.IsCharacterWithRank(CharactersEnum.Corina_BoB, CharacterRank.E1)));
 
 			if (ScytheWeapon.IsBloodEmbrace && Random.value <= 0.2)
 				DamageOverTime(damageable, other);

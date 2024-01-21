@@ -16,15 +16,19 @@ namespace Objects.Abilities.Book
 		[SerializeField] public GameObject ExplosionPrefab;
 		private ObjectPool<SimpleDamageProjectile> _subProjectilePool;
 		private Vector3 _subProjectilePosition;
+		private WeaponStats _subProjectileStats;
+		private WeaponStatsStrategyBase _subProjectileStatsStrategy;
 
 		public override void Awake()
 		{
 			base.Awake();
 
-			var subProjectileStats = new WeaponStats()
+			_subProjectileStats = new WeaponStats()
 			{
 				TimeToLive = 0.5f
 			};
+			_subProjectileStatsStrategy = new WeaponStatsStrategyBase(_subProjectileStats);
+			
 			_subProjectilePool = new ObjectPool<SimpleDamageProjectile>(
 				() =>
 				{
@@ -35,10 +39,10 @@ namespace Objects.Abilities.Book
 				},
 				projectile =>
 				{
-					projectile.SetParentWeapon(this);
-					subProjectileStats.Damage = weaponStats.GetDamage() * 0.25f;
-					subProjectileStats.Scale = weaponStats.GetScale();
-					projectile.SetStats(subProjectileStats);
+					projectile.SetParentWeapon(this, false);
+					_subProjectileStats.Damage = WeaponStatsStrategy.GetDamage() * 0.25f;
+					_subProjectileStats.Scale = WeaponStatsStrategy.GetScale();
+					projectile.SetStats(_subProjectileStatsStrategy);
 					projectile.transform.position = _subProjectilePosition;
 					projectile.gameObject.SetActive(true);
 				},
@@ -64,9 +68,9 @@ namespace Objects.Abilities.Book
 
 		protected override bool ProjectileSpawn(BookProjectile projectile)
 		{
-			projectile.transform.position = transform.position + new Vector3(weaponStats.GetScale(),0,0);
+			projectile.transform.position = transform.position + new Vector3(WeaponStatsStrategy.GetScale(),0,0);
 			projectile.transform.RotateAround(transform.position, Vector3.up, rotateOffset);
-			projectile.SetStats(weaponStats);
+			projectile.SetParentWeapon(this);
 			return true;
 		}
 
@@ -75,7 +79,7 @@ namespace Objects.Abilities.Book
 			var rotationStep = GetRotationByAttackCount();
 			rotateOffset = 0;
 			
-			for (var i = 0; i < weaponStats.GetAttackCount(); i++)
+			for (var i = 0; i < WeaponStatsStrategy.GetAttackCount(); i++)
 			{
 				Attack();
 				rotateOffset += rotationStep;

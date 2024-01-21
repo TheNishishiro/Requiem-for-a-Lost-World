@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &245438376645271704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1141346753521220385}
+  - component: {fileID: -5280107294914995890}
+  m_Layer: 0
+  m_Name: PillarOfDespairWeapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1141346753521220385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245438376645271704}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5280107294914995890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245438376645271704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73eb87f2b0774681b1e2d561c6e650cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 589630514243871748, guid: 8683462ee7af6de46acee3c5c18d9a4e,
+    type: 3}
+  Name: Pillar of Despair
+  Description: Summon a dark beam dealing more damage the more injured you are
+  chanceToAppear: 0.5
+  Icon: {fileID: 21300000, guid: f4d439935010ef8458359e0fe29a57e6, type: 3}
+  unlockOnAchievement: 1
+  requiredAchievement: 85
+  element: 8
+  weaponStats:
+    Damage: 10
+    Cooldown: 10
+    CooldownReduction: 0
+    Scale: 1
+    Speed: 0
+    TimeToLive: 3
+    AttackCount: 1
+    PassThroughCount: 0
+    DamageCooldown: 0.2
+    DuplicateSpawnDelay: 1
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: -0.15
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
+    LifeSteal: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: 2cc5ba72429d157439540f7b13ef9ec5, type: 2}
+  - {fileID: 11400000, guid: f650e199c59ab3f4f8ed5812022aa2f0, type: 2}
+  - {fileID: 11400000, guid: 10196ed65e3d3104f916a51f21b59bfe, type: 2}
+  - {fileID: 11400000, guid: 7278dff5375c556469d46a303e43ff90, type: 2}
+  - {fileID: 11400000, guid: ff4970cc9ec26004cab30c945490b6eb, type: 2}
+  - {fileID: 11400000, guid: 4c760b3b6c477214ea5a68ded9991324, type: 2}
+  - {fileID: 11400000, guid: 9f4d45f59cffbaa44b0a4bf3bd287df8, type: 2}
+  - {fileID: 11400000, guid: 3102cf026bd8e4149aee429be6b2fed2, type: 2}
+  - {fileID: 11400000, guid: 3a6b18ce887f2f545810689241f1cfd8, type: 2}
+  - {fileID: 11400000, guid: bd314a39f968d804986610c906dc06cb, type: 2}
+  isSkill: 0
+  capacity: 50
+  maxCapacity: 50

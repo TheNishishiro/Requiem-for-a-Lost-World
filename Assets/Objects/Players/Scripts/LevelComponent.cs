@@ -30,7 +30,7 @@ namespace Objects.Players.Scripts
 
 		public void AddExperience(int amount)
 		{
-			experience += (int)(amount * playerStatsComponent.GetExperienceIncrease());
+			experience += (int)(amount * PlayerStatsScaler.GetScaler().GetExperienceIncrease());
 			CheckLevelUp();
 			experienceBar.UpdateSlider(experience, ToLevelUp);
 		}
@@ -56,6 +56,7 @@ namespace Objects.Players.Scripts
 		{
 			var levelUpStrategyManager = new PlayerStrategyApplier();
 			levelUpStrategyManager.ApplyLevelUpStrategy(GameData.GetPlayerCharacterId(), GameData.GetPlayerCharacterRank(), level, playerStatsComponent);
+			AchievementManager.instance.OnLevelUp(this);
 		}
 	}
 }

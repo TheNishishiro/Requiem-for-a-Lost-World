@@ -60,7 +60,7 @@ namespace Objects.Characters.Corina_Alter.Skill
 		{
 			if (other.CompareTag("Enemy"))
 			{
-				other.GetComponent<Damageable>().TakeDamage(25 + _playerStatsComponent.GetDamage(), _elementalWeapon);
+				other.GetComponent<Damageable>().TakeDamage(25 + PlayerStatsScaler.GetScaler().GetDamage(), _elementalWeapon);
 				_healthComponent.Damage(-3);
 			}
 		}

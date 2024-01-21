@@ -10,7 +10,7 @@ namespace Objects.Abilities.Throwing_Knife
 		
 		protected override void CustomUpdate()
 		{
-			transform.position += direction * (WeaponStats.GetSpeed() * Time.deltaTime);
+			transform.position += direction * (WeaponStatsStrategy.GetSpeed() * Time.deltaTime);
 		}
 		
 		public void SetDirection(Vector3 dir)

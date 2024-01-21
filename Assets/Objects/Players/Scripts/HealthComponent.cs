@@ -16,12 +16,13 @@ namespace Objects.Players.Scripts
 		private const float HealthRegenCooldown = 1;
 		private float _healthRegenCurrentCooldown = 1;
 		
-		public void Damage(float amount)
+		public void Damage(float amount, bool isIgnoreArmor = false, bool isPreventDeath = false)
 		{
 			if (amount > 0)
 			{
-				amount *= playerStatsComponent.GetDamageTakenIncrease();
-				amount -= playerStatsComponent.GetArmor();
+				amount *= PlayerStatsScaler.GetScaler().GetDamageTakenIncrease();
+				if (!isIgnoreArmor)
+					amount -= PlayerStatsScaler.GetScaler().GetArmor();
 				if (amount < 0)
 					amount = 0;
 				
@@ -30,12 +31,12 @@ namespace Objects.Players.Scripts
 			}
 			else if (amount < 0)
 			{
-				amount *= playerStatsComponent.GetHealingIncrease();
+				amount *= PlayerStatsScaler.GetScaler().GetHealingIncrease();
 				AchievementManager.instance.OnHealing(amount);
 			}
 			
 			DamageTakenEvent.Invoke(amount);
-			playerStatsComponent.TakeDamage(amount);
+			playerStatsComponent.TakeDamage(amount, isPreventDeath);
 			UpdateHealthBar();
 			
 			if (playerStatsComponent.IsDead())
@@ -54,22 +55,21 @@ namespace Objects.Players.Scripts
 		private void Regen()
 		{
 			if (playerStatsComponent.IsFullHealth()) return;
-			playerStatsComponent.ApplyRegeneration();
 
-			UpdateHealthBar();
+			Damage(-PlayerStatsScaler.GetScaler().GetHealthRegeneration());
 		}
 
 		public void UpdateHealthBar()
 		{
-			healthBar.UpdateSlider(playerStatsComponent.GetHealth(), playerStatsComponent.GetMaxHealth());
+			healthBar.UpdateSlider(PlayerStatsScaler.GetScaler().GetHealth(), PlayerStatsScaler.GetScaler().GetMaxHealth());
 		}
 		
 		private void Death()
 		{
-			if (playerStatsComponent.GetRevives() > 0)
+			if (PlayerStatsScaler.GetScaler().GetRevives() > 0)
 			{
 				playerStatsComponent.UseRevive();
-				playerStatsComponent.SetHealth(playerStatsComponent.GetMaxHealth() / 2);
+				playerStatsComponent.SetHealth(PlayerStatsScaler.GetScaler().GetMaxHealth() / 2);
 				UpdateHealthBar();
 				return;
 			}

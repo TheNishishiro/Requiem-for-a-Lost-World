@@ -148,111 +148,11 @@ namespace Objects.Abilities
         
             return stats;
         }
-
-		public float GetCooldown()
-		{
-			if (!_isInitialized) return Cooldown * (1 + CooldownReduction);
-
-			var calculatedCooldown = (Cooldown - _playerStatsComponent.GetCooldownReduction()) * (_playerStatsComponent.GetCooldownReductionPercentage() + CooldownReduction);
-			return calculatedCooldown <= 0 ? 0.01f : calculatedCooldown;
-		}
 		
-		public int GetAttackCount()
-		{
-			if (!_isInitialized) return AttackCount;
-			return AttackCount + _playerStatsComponent.GetAttackCount();
-		}
-		
-
-		public float GetDamage()
-		{
-			if (!_isInitialized) 
-				return (int) ((Random.value < CritRate ? Damage * CritDamage : Damage) * (1 + DamageIncreasePercentage));
-
-			var damage = (Damage + _playerStatsComponent.GetDamage());
-			var critRate = CritRate + _playerStatsComponent.GetCritRate();
-			var critDamage = CritDamage + _playerStatsComponent.GetCritDamage();
-			return (float)(Random.value < critRate ? damage * critDamage : damage) * (_playerStatsComponent.GetDamageIncreasePercentage() + DamageIncreasePercentage);
-		}
-
-		public float GetDamageOverTime()
-		{
-			if (!_isInitialized) return DamageOverTime * (1 + DamageIncreasePercentage);
-			return (DamageOverTime + _playerStatsComponent.GetDamageOverTime()) * (1 + DamageIncreasePercentage);
-		}
-
-		public float GetDamageOverTimeFrequency()
-		{
-			if (!_isInitialized) return DamageOverTimeFrequency;
-			return DamageOverTimeFrequency * _playerStatsComponent.GetDamageOverTimeFrequencyReductionPercentage();
-		}
-
-		public float GetDamageOverTimeDuration()
-		{
-			if (!_isInitialized) return DamageOverTimeDuration;
-			return DamageOverTimeDuration * _playerStatsComponent.GetDamageOverTimeDurationIncreasePercentage();
-		}
-
-		public float GetDamageIncreasePercentage()
-		{
-			if (!_isInitialized) return DamageIncreasePercentage;
-			return DamageIncreasePercentage + _playerStatsComponent.GetDamageIncreasePercentage();
-		}
-		
-		public float GetScale()
-		{
-			if (!_isInitialized) return Scale;
-			return Scale + _playerStatsComponent.GetScale();
-		}
-		
-		public float GetSpeed()
-		{
-			if (!_isInitialized) return Speed;
-			return Speed + _playerStatsComponent.GetProjectileSpeed();
-		}
-		
-		public float GetTimeToLive()
-		{
-			if (!_isInitialized) return TimeToLive;
-			return (TimeToLive + _playerStatsComponent.GetProjectileLifeTime()) * _playerStatsComponent.GetProjectileLifeTimeIncreasePercentage();
-		}
-		
-		public float GetDetectionRange()
-		{
-			if (!_isInitialized) return DetectionRange;
-			return DetectionRange + _playerStatsComponent.GetProjectileDetectionRange();
-		}
-
-		public int GetPassThroughCount()
-		{
-			if (!_isInitialized) return PassThroughCount;
-			return PassThroughCount + _playerStatsComponent.GetProjectilePassThroughCount();
-		}
-		
-		public float GetWeakness()
-		{
-			return Weakness;
-		}
-
 		private float GetRarityFactor(float rarity)
 		{
 			const float percentIncreasePerRarity = 0.025f;
 			return 1.0f + ((rarity - 1.0f) * percentIncreasePerRarity);
-		}
-
-		public float GetHealPerHit(bool allowCrit)
-		{
-			if (!allowCrit) return HealPerHit;
-			
-			var critRate = CritRate + _playerStatsComponent.GetCritRate();
-			var critDamage = CritDamage + _playerStatsComponent.GetCritDamage();
-			return (float)(Random.value < critRate ? HealPerHit * critDamage : HealPerHit);
-		}
-
-		public float GetLifeSteal()
-		{
-			if (!_isInitialized) return LifeSteal;
-			return LifeSteal + _playerStatsComponent.GetLifeSteal();
 		}
 	}
 }

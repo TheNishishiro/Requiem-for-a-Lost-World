@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e487028e64448f849be4a1c193b2c6, type: 3}
   m_Name: Ground Slash Upgrade 10
   m_EditorClassIdentifier: 
-  Name: Shattered Earth (I)
-  Description: When attacking create a shockwave around the character, dealing additional
-    earth damage
+  Name: Razor's Edge (III)
+  Description: Increase the damage of the ground slash by {DamageIncreasePercentage}%
   WeaponStats:
     Damage: 0
     Cooldown: 0
@@ -30,8 +29,9 @@ MonoBehaviour:
     CritRate: 0
     CritDamage: 0
     Weakness: 0
-    DamageIncreasePercentage: 0
+    DamageIncreasePercentage: 0.5
     HealPerHit: 0
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0

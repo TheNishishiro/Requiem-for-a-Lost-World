@@ -14,18 +14,22 @@ namespace Objects.Abilities.Bouncer
 
 		private ObjectPool<BouncerProjectile> _subProjectilePool;
 		private Vector3 _subProjectilePosition;
+		private WeaponStats _subProjectileStats;
+		private WeaponStatsStrategyBase _subProjectileStatsStrategy;
 
 		public override void Awake()
 		{
 			base.Awake();
 
-			var subProjectileStats = new WeaponStats()
+			_subProjectileStats = new WeaponStats()
 			{
 				TimeToLive = 0.5f,
 				Scale = 0.5f,
 				Speed = 1,
 				PassThroughCount = 1
 			};
+			_subProjectileStatsStrategy = new WeaponStatsStrategyBase(_subProjectileStats);
+			
 			_subProjectilePool = new ObjectPool<BouncerProjectile>(
 				() =>
 				{
@@ -36,11 +40,11 @@ namespace Objects.Abilities.Bouncer
 				},
 				projectile =>
 				{
-					subProjectileStats.Damage = weaponStats.GetDamage() * 0.5f;
+					_subProjectileStats.Damage = WeaponStatsStrategy.GetDamage() * 0.5f;
 					projectile.transform.position = _subProjectilePosition;
 					projectile.gameObject.SetActive(true);
-					projectile.SetStats(subProjectileStats);
-					projectile.SetParentWeapon(this);
+					projectile.SetParentWeapon(this, false);
+					projectile.SetStats(_subProjectileStatsStrategy);
 					projectile.FindNextTarget();
 				},
 				projectile => projectile.gameObject.SetActive(false),
@@ -63,7 +67,7 @@ namespace Objects.Abilities.Bouncer
 				return false;
 
 			projectile.transform.position = currentPosition;
-			projectile.SetStats(weaponStats);
+			projectile.SetParentWeapon(this);
 			projectile.SetTarget(target);
 			return true;
 		}

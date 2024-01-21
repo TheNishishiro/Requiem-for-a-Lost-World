@@ -17,7 +17,7 @@ namespace Objects.Abilities.Reality_Crack
 			var projectileComponent = shatterDome.GetComponent<RealityShatterProjectile>();
 
 			projectileComponent.SetParentWeapon(this);
-			projectileComponent.SetStats(weaponStats);
+			//projectileComponent.SetStats();
 		}
 		
 		protected override IEnumerator AttackProcess()

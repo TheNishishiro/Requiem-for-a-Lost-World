@@ -1,5 +1,4 @@
 ﻿using DefaultNamespace;
-using UnityEditor.Playables;
 using Weapons;
 
 namespace Objects.Abilities.Light_Pillars
@@ -13,7 +12,7 @@ namespace Objects.Abilities.Light_Pillars
             projectile.transform.position = Utilities.GetPointOnColliderSurface(
                 Utilities.GetRandomInArea(transform.position, 3f), transform
                 );
-            projectile.SetStats(weaponStats);
+            projectile.SetParentWeapon(this);
             return true;
         }
 

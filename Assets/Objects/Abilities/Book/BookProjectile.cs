@@ -22,7 +22,7 @@ namespace Objects.Abilities.Book
 		{
 			if (rotateTarget != null)
 			{
-				transform.RotateAround(rotateTarget.transform.position, Vector3.up, Time.deltaTime * WeaponStats.GetSpeed());
+				transform.RotateAround(rotateTarget.transform.position, Vector3.up, Time.deltaTime * WeaponStatsStrategy.GetSpeed());
 			}
 
 			if (_explosionCooldown > 0)

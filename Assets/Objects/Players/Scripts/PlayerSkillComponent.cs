@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
 using Interfaces;
@@ -37,6 +38,9 @@ namespace Objects.Players.Scripts
 		private float _dashDistance = 10;
 		private Transform _transform;
 		private Vector3 _dashPosition;
+		private Queue<Vector3> _previousPositions = new ();
+		private float _positionRecordTimer;
+		private bool _applyQueuedPosition;
 
 		public void Start()
 		{
@@ -53,6 +57,19 @@ namespace Objects.Players.Scripts
 				_currentSkillCooldown -= Time.deltaTime;
 			}
 
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Truzi_BoT)
+			{
+				_positionRecordTimer -= Time.deltaTime;
+				if (_positionRecordTimer <= 0)
+				{
+					_positionRecordTimer = 0.5f;
+					if (_previousPositions.Count >= 10)
+						_previousPositions.Dequeue();
+				
+					_previousPositions.Enqueue(_transform.position);
+				}
+			}
+			
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
 				UseSkill(GameData.GetPlayerCharacterId());
@@ -68,6 +85,13 @@ namespace Objects.Players.Scripts
 				_dashPosition = Utilities.GetPointOnColliderSurface(_dashPosition += transform.forward * (_dashDistance * Time.deltaTime), _transform, 0.5f);
 				_transform.position = _dashPosition;
 				_dashDuration -= Time.deltaTime;
+			}
+
+			if (_applyQueuedPosition)
+			{
+				_applyQueuedPosition = false;
+				_transform.position = _previousPositions.Peek();
+				SpawnManager.instance.SpawnObject(_transform.position, GameData.GetSkillPrefab().gameObject, _transform.rotation);
 			}
 		}
 
@@ -95,7 +119,7 @@ namespace Objects.Players.Scripts
 			if (_currentSkillCooldown > 0)
 				return;
 
-			_currentSkillCooldown = _skillCooldown * playerStatsComponent.GetSkillCooldownReductionPercentage();
+			_currentSkillCooldown = _skillCooldown * PlayerStatsScaler.GetScaler().GetSkillCooldownReductionPercentage();
 			switch (activeCharacterId)
 			{
 				case CharactersEnum.Chitose:
@@ -140,7 +164,25 @@ namespace Objects.Players.Scripts
 				case CharactersEnum.Lucy_BoC:
 					LucySkill();
 					break;
+				case CharactersEnum.Truzi_BoT:
+					TruziSkill();
+					break;
 			}
+		}
+
+		private void TruziSkill()
+		{
+			if (_previousPositions.Count <= 0) return;
+
+			_applyQueuedPosition = true;
+			SpawnManager.instance.SpawnObject(_transform.position, GameData.GetSkillPrefab().gameObject, _transform.rotation);
+
+			if (!GameData.IsCharacterRank(CharacterRank.E4)) return;
+			
+			var skillDuration = 5f;
+			var cdrIncrease = 0.5f;
+			playerStatsComponent.TemporaryStatBoost(StatEnum.CooldownReductionPercentage, cdrIncrease, skillDuration);
+			abilityDurationBar.StartTick(skillDuration);
 		}
 
 		private void LucySkill()
@@ -244,7 +286,7 @@ namespace Objects.Players.Scripts
 		{
 			if (!GameData.IsCharacterRank(CharacterRank.E5))
 			{
-				healthComponent.Damage(playerStatsComponent.GetHealth() * 0.9f);
+				healthComponent.Damage(PlayerStatsScaler.GetScaler().GetHealth() * 0.9f);
 				healthComponent.UpdateHealthBar();
 			}
 
@@ -305,8 +347,9 @@ namespace Objects.Players.Scripts
 				hpPenalty = 0.4f;
 			
 			playerStatsComponent.SetInvincible(true);
-			playerStatsComponent.SetHealth(playerStatsComponent.GetMaxHealth() * hpPenalty);
-			healthComponent.UpdateHealthBar();
+			var targetHp = PlayerStatsScaler.GetScaler().GetMaxHealth() * (1 - hpPenalty);
+			var hpDiff = targetHp - PlayerStatsScaler.GetScaler().GetHealth();
+			GameManager.instance.playerComponent.TakeDamage(hpDiff, true, true);
 			
 			var obj = Instantiate(GameData.GetSkillPrefab(), abilityContainer);
 			obj.LifeTime = skillDuration;

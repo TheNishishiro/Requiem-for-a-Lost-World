@@ -1,4 +1,5 @@
 ﻿using DefaultNamespace.Data.VFX_Stages;
+using Interfaces;
 using NaughtyAttributes;
 using Objects.Abilities;
 using UnityEngine;
@@ -34,18 +35,20 @@ namespace Weapons
             baseScale = new Vector3(localScale.x,localScale.y,localScale.z);
         }
         
-        public virtual void SetParentWeapon(WeaponBase parentWeapon)
+        public virtual void SetParentWeapon(WeaponBase parentWeapon, bool initStats = true)
         {
             ParentWeapon = parentWeapon;
+            if (initStats)
+				SetStats(parentWeapon.WeaponStatsStrategy);
         }
 		
-        public virtual void SetStats(WeaponStats weaponStats)
+        public virtual void SetStats(IWeaponStatsStrategy weaponStatsStrategy)
         {
-            WeaponStats = weaponStats;
-            transform.localScale = baseScale * WeaponStats.GetScale();
+	        WeaponStatsStrategy = weaponStatsStrategy;
+            transform.localScale = baseScale * WeaponStatsStrategy.GetScale();
             TimeToLive = GetTimeToLive();
-            damageCooldown = weaponStats.DamageCooldown;
-            currentPassedEnemies = weaponStats.GetPassThroughCount();
+            damageCooldown = WeaponStatsStrategy.GetDamageCooldown();
+            currentPassedEnemies = WeaponStatsStrategy.GetPassThroughCount();
             StopAllCoroutines();
             IsDead = false;
             TimeAlive = 0;
@@ -92,7 +95,7 @@ namespace Weapons
         
         protected virtual float GetTimeToLive()
         {
-            return WeaponStats.GetTimeToLive();
+            return WeaponStatsStrategy.GetTotalTimeToLive();
         }
         
         private void Update()

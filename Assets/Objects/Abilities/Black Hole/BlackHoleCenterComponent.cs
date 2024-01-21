@@ -19,7 +19,7 @@ namespace Objects.Abilities.Back_Hole
 		private void OnTriggerStay(Collider other)
 		{
 			DamageArea(other, out var damageable);
-			damageable?.SetVulnerable(1f, WeaponStats.GetWeakness() + _weaknessIncrease);
+			damageable?.SetVulnerable(1f, WeaponStatsStrategy.GetWeakness() + _weaknessIncrease);
 		}
 	}
 }

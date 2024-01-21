@@ -18,7 +18,7 @@ namespace Managers
 		private void Awake()
 		{
 			ResetBar();
-			SetMaxValue(playerStatsComponent.GetSpecialMaxValue());
+			SetMaxValue(PlayerStatsScaler.GetScaler().GetSpecialMaxValue());
 		}
 		public void SetMaxValue(float maxValue)
 		{
@@ -37,7 +37,7 @@ namespace Managers
 
 		public void Increment()
 		{
-			specialBar.Increment(playerStatsComponent.GetSpecialIncrementAmount());
+			specialBar.Increment(PlayerStatsScaler.GetScaler().GetSpecialIncrementAmount());
 		}
 
 		public void Increment(float amount)

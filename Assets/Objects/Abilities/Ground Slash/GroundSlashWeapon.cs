@@ -10,7 +10,6 @@ namespace Objects.Abilities.Ground_Slash
 	public class GroundSlashWeapon : PoolableWeapon<GroundSlashProjectile>
 	{
 		public bool isDualStrike = true;
-		public bool isShatteredEarth;
 		private float _actualOffset;
 		
 		public override void Attack()
@@ -29,27 +28,19 @@ namespace Objects.Abilities.Ground_Slash
 		{
 			var playerTransform = GameManager.instance.playerComponent.transform;
 			var playerPosition = transform.position;
-			var position = new Vector3(playerPosition.x + _actualOffset, playerPosition.y, playerPosition.z);
+			var position = new Vector3(playerPosition.x + _actualOffset, playerPosition.y, playerPosition.z) + playerTransform.transform.forward;
 			projectile.transform.position = Utilities.GetPointOnColliderSurface(position, playerTransform.transform);
 			
 			projectile.gameObject.SetActive(true);
 			projectile.SetParentWeapon(this);
-			projectile.SetStats(weaponStats);
 			projectile.SetDirection(playerTransform.transform.forward);
 			return true;
 		}
 
 		protected override void OnLevelUp()
 		{
-			switch (LevelField)
-			{
-				case 7:
-					isDualStrike = true;
-					break;
-				case 9:
-					isShatteredEarth = true;
-					break;
-			}
+			if (LevelField == 9) 
+				isDualStrike = true;
 		}
 	}
 }

@@ -18,7 +18,7 @@ namespace Objects.Abilities.Magic_Ball
 
 		protected override void CustomUpdate()
 		{
-			transform.position += _direction * ((WeaponStats?.GetSpeed() ?? 0) * Time.deltaTime);
+			transform.position += _direction * ((WeaponStatsStrategy?.GetSpeed() ?? 0) * Time.deltaTime);
 		}
 
 		private void OnTriggerEnter(Collider other)

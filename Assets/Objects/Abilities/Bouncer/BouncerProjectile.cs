@@ -24,7 +24,7 @@ namespace Objects.Abilities.Bouncer
 
 		protected override void CustomUpdate()
 		{
-			transformCache.position += direction * ((WeaponStats?.GetSpeed() ?? 0) * Time.deltaTime);
+			transformCache.position += direction * ((WeaponStatsStrategy?.GetSpeed() ?? 0) * Time.deltaTime);
 		}
 
 		private void OnTriggerEnter(Collider other)

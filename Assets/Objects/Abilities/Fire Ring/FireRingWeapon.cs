@@ -13,7 +13,7 @@ namespace Objects.Abilities.Fire_Ring
         protected override bool ProjectileSpawn(FireRingProjectile projectile)
         {
             projectile.transform.position = transform.position;
-            projectile.SetStats(weaponStats);
+            projectile.SetParentWeapon(this);
             return true;
         }
 

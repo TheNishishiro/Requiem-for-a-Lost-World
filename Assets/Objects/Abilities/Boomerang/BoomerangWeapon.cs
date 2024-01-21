@@ -13,7 +13,7 @@ namespace Objects.Abilities.Boomerang
 			
 			projectile.transform.position = position;
 			var targetPoint = Utilities.GetRandomInAreaFreezeParameter(position, 3, isFreezeY: true);
-			projectile.SetStats(weaponStats);
+			projectile.SetParentWeapon(this);
 			projectile.gameObject.SetActive(true);
 			projectile.SetDirection(targetPoint);
 			return true;

@@ -18,8 +18,8 @@ namespace Objects.Abilities.Time_Blade
         
         protected override bool ProjectileSpawn(TimeBladeProjectile projectile)
         {
-            var currentScaleModifier = weaponStats.GetScale() * (_isMinuteTick ? 0.5f : 1f);
-            projectile.SetStats(weaponStats);
+            var currentScaleModifier = WeaponStatsStrategy.GetScale() * (_isMinuteTick ? 0.5f : 1f);
+            projectile.SetParentWeapon(this);
 
             var projectileTransform = projectile.transform;
             projectileTransform.position = transform.position;
@@ -39,7 +39,7 @@ namespace Objects.Abilities.Time_Blade
                     Attack();
                     _isMinuteTick = !_isMinuteTick;
                 }
-                yield return new WaitForSeconds(weaponStats.DuplicateSpawnDelay);
+                yield return new WaitForSeconds(WeaponStatsStrategy.GetDuplicateSpawnDelay());
             }
         }
 

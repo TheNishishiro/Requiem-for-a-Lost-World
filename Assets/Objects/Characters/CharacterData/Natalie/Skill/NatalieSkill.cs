@@ -28,7 +28,7 @@ public class NatalieSkill : CharacterSkillBase
 				
 		var damageComponent = other.collider.GetComponent<Damageable>();
 		damageComponent.ReduceElementalDefence(Element.Wind, 0.5f);
-		damageComponent.ApplyDamageOverTime(_playerStatsComponent.GetDamageOverTime(), 1f, 5f, _elementalWeapon);
+		damageComponent.ApplyDamageOverTime(PlayerStatsScaler.GetScaler().GetDamageOverTime(), 1f, 5f, _elementalWeapon);
 	}
 	
 	private IEnumerator Expand()

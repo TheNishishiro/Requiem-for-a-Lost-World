@@ -14,7 +14,7 @@ namespace Objects.Abilities.Katana
 			
 			var slashPosition = transform1.position + transform1.forward/2;
 			projectile.transform.position = slashPosition;
-			projectile.SetStats(weaponStats);
+			projectile.SetParentWeapon(this);
 
 			return true;
 		}

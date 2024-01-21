@@ -29,7 +29,7 @@ namespace Objects.Characters.Adam.Skill
 			_damage = 50 * (1 + GameData.GetPlayerCharacterData().Stats.DamagePercentageIncrease);
 			_elementalWeapon = new ElementalWeapon(Element.Cosmic);
 			playerStatsComponent.IncreaseDamageTaken(0.01f);
-			FindObjectOfType<HealthComponent>().Damage(-(playerStatsComponent.GetMaxHealth() * 0.8f));
+			FindObjectOfType<HealthComponent>().Damage(-(PlayerStatsScaler.GetScaler().GetMaxHealth() * 0.8f));
 		}
 
 		private void Update()
@@ -46,7 +46,7 @@ namespace Objects.Characters.Adam.Skill
 			
 			if (characterRank >= CharacterRank.E1)
 			{
-				damage *= playerStatsComponent.GetCritRate() > Random.Range(0f, 1f) ? (float)playerStatsComponent.GetCritDamage() : 1.0f;
+				damage *= PlayerStatsScaler.GetScaler().GetCritRate() > Random.Range(0f, 1f) ? (float)PlayerStatsScaler.GetScaler().GetCritDamage() : 1.0f;
 			}
 			
 			other.GetComponent<Damageable>().TakeDamage(damage, _elementalWeapon);

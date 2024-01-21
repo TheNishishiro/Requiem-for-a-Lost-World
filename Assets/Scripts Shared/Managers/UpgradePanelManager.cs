@@ -85,10 +85,10 @@ namespace Managers
 		private void ReloadUpgrades()
 		{
 			HideButtons();
-			rerollButton.gameObject.SetActive(playerStatsComponent.HasRerolls());
-			skipButton.gameObject.SetActive(playerStatsComponent.HasSkips());
-			rerollButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Reroll ({playerStatsComponent.GetRerolls()})";
-			skipButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Skip ({playerStatsComponent.GetSkips()})";
+			rerollButton.gameObject.SetActive(PlayerStatsScaler.GetScaler().HasRerolls());
+			skipButton.gameObject.SetActive(PlayerStatsScaler.GetScaler().HasSkips());
+			rerollButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Reroll ({PlayerStatsScaler.GetScaler().GetRerolls()})";
+			skipButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Skip ({PlayerStatsScaler.GetScaler().GetSkips()})";
 			var chanceOfAppearance = Random.value;
 			var upgradesToPick = Random.Range(3, 5);
 			

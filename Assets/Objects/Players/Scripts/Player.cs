@@ -35,23 +35,23 @@ public class Player : MonoBehaviour
 		levelComponent.AddExperience(amount);
 	}
 
-	public void TakeDamage(float amount)
+	public void TakeDamage(float amount, bool isIgnoreArmor = false, bool isPreventDeath = false)
 	{
-		if (amount > 0 && playerStatsComponent.GetDodgeChance() > Random.value)
+		if (amount > 0 && PlayerStatsScaler.GetScaler().GetDodgeChance() > Random.value)
 			return;
         
-		healthComponent.Damage(amount);
+		healthComponent.Damage(amount, isIgnoreArmor, isPreventDeath);
 	}
 
 	public void AddGold(int goldAmount)
 	{
-		var goldEarned = (int)Math.Ceiling(goldAmount * playerStatsComponent.GetItemRewardIncrease());
+		var goldEarned = (int)Math.Ceiling(goldAmount * PlayerStatsScaler.GetScaler().GetItemRewardIncrease());
 		gameResultData.AddGold(goldEarned);
 	}
 
 	public void AddGems(int gemAmount)
 	{
-		var gemsEarned = (int)Math.Ceiling(gemAmount * playerStatsComponent.GetItemRewardIncrease());
+		var gemsEarned = (int)Math.Ceiling(gemAmount * PlayerStatsScaler.GetScaler().GetItemRewardIncrease());
 		gameResultData.AddGems(gemsEarned);
 	}
 }

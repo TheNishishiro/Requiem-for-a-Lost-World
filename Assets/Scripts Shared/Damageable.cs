@@ -124,11 +124,15 @@ namespace DefaultNamespace
 				TakeDamage(damage * additionalDamageModifier, additionalDamageType, true);
 			}
 
-			if (isWeaponSpecified && weaponBase.weaponStats != null)
+			if (isWeaponSpecified && weaponBase.WeaponStatsStrategy != null)
 			{
-				var lifeSteal = weaponBase.weaponStats.GetLifeSteal();
-				if (lifeSteal > 0)
-					GameManager.instance.playerComponent.TakeDamage(-calculatedDamage * lifeSteal);		
+				var lifeSteal = weaponBase.WeaponStatsStrategy.GetLifeSteal();
+				if (lifeSteal != 0)
+					GameManager.instance.playerComponent.TakeDamage(-calculatedDamage * lifeSteal, true, true);
+
+				var healPerHit = weaponBase.WeaponStatsStrategy.GetHealPerHit(false);
+				if (healPerHit != 0)
+					GameManager.instance.playerComponent.TakeDamage(-healPerHit, true, true);
 			}
 
 			gameResultData.AddDamage(calculatedDamage, weaponBase);

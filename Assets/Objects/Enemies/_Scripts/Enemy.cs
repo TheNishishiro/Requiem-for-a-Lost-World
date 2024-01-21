@@ -112,7 +112,8 @@ namespace Objects.Enemies
 			{
 				pickupObject = goldDrop,
 			};
-			goldDropChance.chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 16;
+			
+			goldDropChance.chance = PlayerStatsScaler.GetScaler().GetLuck() / 16;
 			goldDropChance.amount = Random.Range(1, 25);
 			dropOnDestroyComponent.AddDrop(goldDropChance);
 
@@ -131,13 +132,13 @@ namespace Objects.Enemies
 			{
 				pickupObject = gemDrop,
 			};
-			gemDropChance.chance = (playerTarget?.playerStatsComponent?.GetLuck() ?? 0) / 100;
+			gemDropChance.chance = PlayerStatsScaler.GetScaler().GetLuck() / 100;
 			gemDropChance.amount = Random.Range(1, 50);
 			dropOnDestroyComponent.AddDrop(gemDropChance);
 
-			stats.hp = (int)(stats.hp * healthMultiplier * playerStats.GetEnemyHealthIncrease());
+			stats.hp = (int)(stats.hp * healthMultiplier * PlayerStatsScaler.GetScaler().GetEnemyHealthIncrease());
 			stats.speed *= speedMultiplier;
-			stats.speed *= playerStats.GetEnemySpeedIncrease();
+			stats.speed *= PlayerStatsScaler.GetScaler().GetEnemySpeedIncrease();
 			chaseComponent.FollowYAxis = newStats.allowFlying;
 			SetChaseTarget(target.gameObject);
 		}
@@ -247,7 +248,7 @@ namespace Objects.Enemies
 				var isE5Lucy = GameData.IsCharacterWithRank(CharactersEnum.Lucy_BoC, CharacterRank.E5);
 				
 				var damageIncrease = isE5Lucy ? 2f : 1f;
-				enemyComponent.GetDamagableComponent().TakeDamageWithCooldown(stats.damage * damageIncrease * playerTarget.playerStatsComponent.GetDamageIncreasePercentage(), collisionInfo.gameObject, _damageCooldown, null);
+				enemyComponent.GetDamagableComponent().TakeDamageWithCooldown(stats.damage * damageIncrease * PlayerStatsScaler.GetScaler().GetDamageIncreasePercentage(), collisionInfo.gameObject, _damageCooldown, null);
 				
 				// Take damage from other enemies
 				var damageReduction = isE5Lucy ? 0.3f : 1f;

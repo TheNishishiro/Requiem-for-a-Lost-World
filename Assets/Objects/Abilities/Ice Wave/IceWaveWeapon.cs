@@ -30,13 +30,13 @@ namespace Objects.Abilities.Ice_Wave
 
 		protected override bool ProjectileSpawn(IceWaveProjectile projectile)
 		{
-			var currentScaleModifier = weaponStats.GetScale() * (scaleChangePerWave * currentWaveIndex);
+			var currentScaleModifier = WeaponStatsStrategy.GetScale() * (scaleChangePerWave * currentWaveIndex);
 			var newPosition = new Vector3(startPosition.x + (currentWaveIndex/2) * currentScaleModifier, 0, startPosition.z);
 
 			projectile.transform.position = newPosition;
 			projectile.transform.RotateAround(startPosition, Vector3.up, rotateOffset);
 			projectile.transform.position = Utilities.GetPointOnColliderSurface(projectile.transform.position, transform);
-			projectile.SetStats(weaponStats);
+			projectile.SetParentWeapon(this);
 			
 			projectile.transform.localScale = new Vector3(currentScaleModifier,currentScaleModifier,currentScaleModifier);
 			return true;

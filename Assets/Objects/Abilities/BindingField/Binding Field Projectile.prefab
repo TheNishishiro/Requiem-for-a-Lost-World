@@ -4982,7 +4982,7 @@ Transform:
   m_GameObject: {fileID: 3004608364582492364}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.896, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4996,7 +4996,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3004608364582492364}
   serializedVersion: 8
-  lengthInSec: 20
+  lengthInSec: 60
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -5401,8 +5401,8 @@ ParticleSystem:
     startRotationX:
       serializedVersion: 2
       minMaxState: 3
-      scalar: -0.5235988
-      minScalar: 0.5235988
+      scalar: 0
+      minScalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5454,8 +5454,8 @@ ParticleSystem:
     startRotationY:
       serializedVersion: 2
       minMaxState: 3
-      scalar: -0.5235988
-      minScalar: 0.5235988
+      scalar: 0
+      minScalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5507,8 +5507,8 @@ ParticleSystem:
     startRotation:
       serializedVersion: 2
       minMaxState: 3
-      scalar: -0.7853981
-      minScalar: 0.7853981
+      scalar: 0.5235988
+      minScalar: -0.5235988
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5935,7 +5935,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 6
+        scalar: 16
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -9823,7 +9823,7 @@ ParticleSystemRenderer:
   m_NormalDirection: 0
   m_ShadowBias: 0
   m_RenderAlignment: 0
-  m_Pivot: {x: 0, y: 0, z: 0}
+  m_Pivot: {x: 0, y: 0.45, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1

@@ -23,7 +23,7 @@ namespace Objects.Abilities.BindingField
 
 			var pointOnSurface = Utilities.GetPointOnColliderSurface(new Vector3(randomEnemy.transform.position.x, 0, randomEnemy.transform.position.z), transform);
 			projectile.transform.position = pointOnSurface;
-			projectile.SetStats(weaponStats);
+			projectile.SetParentWeapon(this);
 			return true;
 		}
 

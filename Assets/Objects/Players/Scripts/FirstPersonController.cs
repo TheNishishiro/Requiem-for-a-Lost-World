@@ -193,7 +193,7 @@ namespace StarterAssets
 		private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
-			float targetSpeed = PlayerStatsComponent.GetMovementSpeed();
+			float targetSpeed = PlayerStatsScaler.GetScaler().GetMovementSpeed();
 
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 

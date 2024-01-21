@@ -7,7 +7,7 @@ namespace Weapons
 {
     public class DamageSource : MonoBehaviour
     {
-	    protected WeaponStats WeaponStats;
+	    protected IWeaponStatsStrategy WeaponStatsStrategy;
 	    protected WeaponBase ParentWeapon;
 	    protected float damageCooldown;
 	    protected int currentPassedEnemies;
@@ -26,10 +26,8 @@ namespace Weapons
 
 		protected void ResetDamageCooldown()
 		{
-			if (WeaponStats is null) return;
-			
 			isDamageCooldownExpired = false;
-			damageCooldown = WeaponStats.DamageCooldown;
+			damageCooldown = WeaponStatsStrategy.GetDamageCooldown();
 		}
 
 		protected void SimpleDamage(Collider other, bool isLimitedUsage)
@@ -50,7 +48,8 @@ namespace Weapons
 			if (damageable.IsDestroyed())
 				return;
 
-			damageable.TakeDamage(WeaponStats.GetDamage() * (1.0f + ProjectileDamageIncreasePercentage), ParentWeapon);
+			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage);
+			damageable.TakeDamage(damage.Damage, ParentWeapon);
 
 			if (isLimitedUsage && currentPassedEnemies-- <= 0)
 				OnLifeTimeEnd();
@@ -61,7 +60,8 @@ namespace Weapons
 			if (damageable == null)
 				return;
 
-			damageable.TakeDamage(WeaponStats.GetDamage() * (1.0f + ProjectileDamageIncreasePercentage), ParentWeapon);
+			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage);
+			damageable.TakeDamage(damage.Damage, ParentWeapon);
 			if (damageable.IsDestroyed())
 				return;
 			
@@ -76,7 +76,8 @@ namespace Weapons
 				return;
 			
 			damageable = other.GetComponent<IDamageable>();
-			damageable?.TakeDamageWithCooldown(WeaponStats.GetDamage() * (1.0f + ProjectileDamageIncreasePercentage), gameObject, WeaponStats.DamageCooldown, ParentWeapon);
+			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage);
+			damageable?.TakeDamageWithCooldown(damage.Damage, gameObject, WeaponStatsStrategy.GetDamageCooldown(), ParentWeapon);
 		}
 
 		protected void DamageOverTime(Collider other)
@@ -97,7 +98,11 @@ namespace Weapons
 
 			if (!damageable.IsDestroyed())
 			{
-				damageable.ApplyDamageOverTime(WeaponStats.GetDamageOverTime(), WeaponStats.GetDamageOverTimeFrequency(), WeaponStats.GetDamageOverTimeDuration(), ParentWeapon);
+				var dot = WeaponStatsStrategy.GetDamageOverTime();
+				var dotFrequency = WeaponStatsStrategy.GetDamageOverTimeFrequency();
+				var dotDuration = WeaponStatsStrategy.GetDamageOverTimeDuration();
+				
+				damageable.ApplyDamageOverTime(dot, dotFrequency, dotDuration, ParentWeapon);
 			}
 		}
 

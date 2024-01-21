@@ -21,7 +21,7 @@ namespace Objects.Abilities.Wind_Shear
                 return false;
 
             projectile.transform.position = enemy.TargetPoint.position;
-            projectile.SetStats(weaponStats);
+            projectile.SetParentWeapon(this);
             return true;
         }
 

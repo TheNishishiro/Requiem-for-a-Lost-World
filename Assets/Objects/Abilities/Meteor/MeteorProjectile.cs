@@ -17,7 +17,7 @@ namespace Objects.Abilities.Meteor
 
 		void LateUpdate()
 		{
-			transformCache.position += direction * ((WeaponStats?.GetSpeed()).GetValueOrDefault() * Time.deltaTime);
+			transformCache.position += direction * ((WeaponStatsStrategy?.GetSpeed()).GetValueOrDefault() * Time.deltaTime);
 			
 			if (transformCache.localPosition.y < destroyY)
 				Destroy();

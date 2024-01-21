@@ -14,29 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 9
   Name: Truzi
-  Title: 
+  Title: Bearer of Time
   CharacterCard: {fileID: 21300000, guid: c5532063b8b6471438e19bc4a941127b, type: 3}
   Avatar: {fileID: 21300000, guid: adcef7cc9fe2b38409b25032be7543f5, type: 3}
   CharacterSprite: {fileID: 21300000, guid: d0eb6500af9d9bf48a81f3fd9957c2a0, type: 3}
   signet: {fileID: 21300000, guid: 31a97b3a2096a754bae665a9fa44cbf2, type: 3}
-  PassiveDescription: a
-  AbilityName: a
-  AbilityDescription: a
-  AbilityCooldown: 0
+  PassiveDescription: Increase damage dealt by <color=green>100%</color> of <color=#FFC300>Cooldown
+    reduction</color>
+  AbilityName: Chronoshift
+  AbilityDescription: Teleport back to your position 5 seconds ago and clear all
+    the debuffs currently on Truzi
+  AbilityCooldown: 20
   SpecialPrefab: {fileID: 0}
-  AbilityPrefab: {fileID: 0}
-  AbilityIcon: {fileID: 0}
-  ColorTheme: {r: 0.6431373, g: 0.83921576, b: 0.9176471, a: 1}
+  AbilityPrefab: {fileID: -3122666315348539954, guid: 1bda917795965f549b679b15292e8312,
+    type: 3}
+  AbilityIcon: {fileID: 21300000, guid: 0701d025807c94640b46bc79c15df73b, type: 3}
+  ColorTheme: {r: 0.6431373, g: 0.8392157, b: 0.91764706, a: 1}
   Alignment: 1
   StarRating: 4
   StartingWeapon: {fileID: 5413862794946036190, guid: d7982e2a04d8fda4096dc6f019cf15a7,
     type: 3}
-  IsPullable: 0
+  IsPullable: 1
   UseSpecialBar: 0
   PickWeaponOnStart: 0
   Stats:
-    Health: 100
-    HealthMax: 100
+    Health: 60
+    HealthMax: 60
     SpecialMax: 0
     SpecialIncrease: 0
     MagnetSize: 1
@@ -50,7 +53,7 @@ MonoBehaviour:
     DetectionRange: 0
     DamagePercentageIncrease: 0
     ExperienceIncreasePercentage: 0
-    MovementSpeed: 1
+    MovementSpeed: 1.6
     SkillCooldownReductionPercentage: 0
     HealthRegen: 0
     CritRate: 0
@@ -67,12 +70,68 @@ MonoBehaviour:
     DodgeChance: 0
     DamageTakenIncreasePercentage: 0
     HealingIncreasePercentage: 0
-    Luck: 0
+    Luck: 0.05
     DamageOverTime: 0
-    Rerolls: 0
+    Rerolls: 2
     Skips: 0
     DamageOverTimeFrequencyReductionPercentage: 0
     DamageOverTimeDurationIncreasePercentage: 0
-  skillNodes: []
-  Eidolons: []
+    LifeSteal: 0
+  skillNodes:
+  - {fileID: 11400000, guid: d69a099279b18b749a33b45ae1bd3cdd, type: 2}
+  - {fileID: 11400000, guid: eee4ae9ecc87c6848a7ff76a3d7feceb, type: 2}
+  - {fileID: 11400000, guid: aadb5dd95407d2e469e4fc775de9929c, type: 2}
+  - {fileID: 11400000, guid: 21cce2f7e0f8add4da4c5ee15d97da91, type: 2}
+  - {fileID: 11400000, guid: 29f68dbc6c3aedc41b202f802e3a2e9d, type: 2}
+  - {fileID: 11400000, guid: ca04e9e3765b22e46ba3ba322571f41c, type: 2}
+  - {fileID: 11400000, guid: ffa816b7aee49d04fb5a2837d63d45e7, type: 2}
+  - {fileID: 11400000, guid: 0e5183c8ad2972140a5ac18980312c25, type: 2}
+  Eidolons:
+  - EidolonTexture: {fileID: 21300000, guid: ba4bcf87fb51942479fcf1405df837c8, type: 3}
+    EidolonName: 
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: Casting <color=#43847F>Chronoshift</color> will deal
+      additional damage at the teleport start and end position equal to 100% of Truzi's
+      personal damage. This damage can crit.
+    PassiveUpgradeDescription: 
+    EidolonQuote: 
+  - EidolonTexture: {fileID: 21300000, guid: 8afc4b8d082bac24ea11d11f73c5bc5d, type: 3}
+    EidolonName: 
+    EidolonDescription: 
+    WeaponUpgradeDescription: Double the duration of the time freeze caused by <color=orange>Time
+      Blade</color>
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: 
+    EidolonQuote: 
+  - EidolonTexture: {fileID: 21300000, guid: df988be28c277aa4a8cba2cd4cc207a2, type: 3}
+    EidolonName: 
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: Increases damage dealt by another </color=green>200%</color>
+      of Truzi's <color=#FFC300>cooldown reduction</color>
+    EidolonQuote: 
+  - EidolonTexture: {fileID: 21300000, guid: aabb777d425bf1940a966fa0b973a3fd, type: 3}
+    EidolonName: 
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: Upon using <color=#43847F>Chronoshift</color> increase
+      <color=#FFC300>cooldown reduction</color> by <color=green>50%</color> for 5
+      seconds
+    PassiveUpgradeDescription: 
+    EidolonQuote: 
+  - EidolonTexture: {fileID: 21300000, guid: 08d801ca56eb8004481b75a2e4197a1d, type: 3}
+    EidolonName: 
+    EidolonDescription: 
+    WeaponUpgradeDescription: 
+    SkillUpgradeDescription: 
+    PassiveUpgradeDescription: 'Every time Truzi levels up have a chance of increasing
+      <color=#FFC300>cooldown reduction</color> by </color=green>5%</color> (chance
+      scales with <color=#FFC300>Luck</color>).
+
+      Cap effective cooldown reduction
+      at 75%. Every point above the cap will instead increase his <color=#FFC300>crit
+      damage</color>'
+    EidolonQuote: 
   loreEntries: []

@@ -15,15 +15,18 @@ namespace Objects.Abilities.Healing_Field
 		[HideInInspector] public bool IsEmpowering;
 		private ObjectPool<HealingField> _subProjectilePool;
 		private Vector3 _subProjectilePosition;
+		private WeaponStats _subProjectileStats;
+		private WeaponStatsStrategyBase _subProjectileStatsStrategy;
 		
 		public override void Awake()
 		{
 			base.Awake();
 
-			var subProjectileStats = new WeaponStats()
+			_subProjectileStats = new WeaponStats()
 			{
 				TimeToLive = 1f
 			};
+			_subProjectileStatsStrategy = new WeaponStatsStrategyBase(_subProjectileStats);
 			_subProjectilePool = new ObjectPool<HealingField>(
 				() =>
 				{
@@ -33,10 +36,11 @@ namespace Objects.Abilities.Healing_Field
 				},
 				projectile =>
 				{
-					subProjectileStats.Scale = weaponStats.GetScale();
+					_subProjectileStats.Scale = WeaponStatsStrategy.GetScale();
 					projectile.transform.position = _subProjectilePosition;
-					projectile.SetStats(subProjectileStats);
-					projectile.Setup(weaponStats.HealPerHit, IsEmpowering);
+					projectile.SetParentWeapon(this, false);
+					projectile.SetStats(_subProjectileStatsStrategy);
+					projectile.Setup(WeaponStatsStrategy.GetHealPerHit(true), IsEmpowering);
 					projectile.gameObject.SetActive(true);
 				},
 				projectile => projectile.gameObject.SetActive(false),
@@ -55,7 +59,7 @@ namespace Objects.Abilities.Healing_Field
 		{
 			var pointOnSurface = Utilities.GetPointOnColliderSurface(new Vector3(transform.position.x, 0, transform.position.z), transform);
 			projectile.transform.position = pointOnSurface;
-			projectile.SetStats(weaponStats);
+			projectile.SetParentWeapon(this);
 			return true;
 		}
 

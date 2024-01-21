@@ -11,7 +11,7 @@ namespace Objects.Characters.Alice
         {
             if (currentLevel % 10 == 0)
                 playerStatsComponent.IncreaseCooldownReductionPercentage(0.015f);
-            if (currentLevel % 10 == 0 && rank >= CharacterRank.E4 && playerStatsComponent.GetDodgeChance() < 0.4f)
+            if (currentLevel % 10 == 0 && rank >= CharacterRank.E4 && PlayerStatsScaler.GetScaler().GetDodgeChance() < 0.4f)
                 playerStatsComponent.IncreaseDodgeChance(0.02f);
         }
 

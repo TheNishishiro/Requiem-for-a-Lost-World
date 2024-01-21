@@ -16,15 +16,19 @@ namespace Objects.Abilities.SpaceExpansionBall
 
 		private ObjectPool<SimpleDamageProjectile> _subProjectilePool;
 		private Vector3 _subProjectilePosition;
+		private WeaponStats _subProjectileStats;
+		private WeaponStatsStrategyBase _subProjectileStatsStrategy;
 
 		public override void Awake()
 		{
 			base.Awake();
 
-			var subProjectileStats = new WeaponStats()
+			_subProjectileStats = new WeaponStats()
 			{
 				TimeToLive = 0.5f
 			};
+			_subProjectileStatsStrategy = new WeaponStatsStrategyBase(_subProjectileStats);
+			
 			_subProjectilePool = new ObjectPool<SimpleDamageProjectile>(
 				() =>
 				{
@@ -34,10 +38,10 @@ namespace Objects.Abilities.SpaceExpansionBall
 				},
 				projectile =>
 				{
-					subProjectileStats.Damage = weaponStats.GetDamage() * 2;
-					subProjectileStats.Scale = weaponStats.GetScale();
-					projectile.SetStats(subProjectileStats);
-					projectile.SetParentWeapon(this);
+					_subProjectileStats.Damage = WeaponStatsStrategy.GetDamage() * 2;
+					_subProjectileStats.Scale = WeaponStatsStrategy.GetScale();
+					projectile.SetParentWeapon(this, false);
+					projectile.SetStats(_subProjectileStatsStrategy);
 					projectile.gameObject.SetActive(true);
 				},
 				projectile => projectile.gameObject.SetActive(false),
@@ -61,7 +65,7 @@ namespace Objects.Abilities.SpaceExpansionBall
 			var position = enemy.TargetPoint.position;
 
 			projectile.transform.position = transform.position;
-			projectile.SetStats(weaponStats);
+			projectile.SetParentWeapon(this);
 			projectile.SetDirection(position.x, position.y, position.z);
 			return true;
 		}

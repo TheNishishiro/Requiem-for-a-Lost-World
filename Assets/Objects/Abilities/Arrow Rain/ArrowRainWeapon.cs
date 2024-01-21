@@ -37,7 +37,7 @@ namespace Objects.Abilities.Arrow_Rain
 			
 			var position = _target.transform.position;
 			projectile.transform.position = new Vector3(position.x, position.y + 2.5f, position.z);
-			projectile.SetStats(weaponStats);
+			projectile.SetParentWeapon(this);
 			return true;
 		}
 

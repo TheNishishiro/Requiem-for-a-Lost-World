@@ -5,6 +5,7 @@ using System.Linq;
 using DefaultNamespace.Data.Achievements;
 using DefaultNamespace.Extensions;
 using JetBrains.Annotations;
+using Managers;
 using Newtonsoft.Json;
 using Objects.Characters;
 using Objects.Players.PermUpgrades;
@@ -34,6 +35,8 @@ namespace DefaultNamespace.Data
 		public ulong PullsPerformed;
 		public ulong Deaths;
 		public ulong StoryPoints;
+		public ulong TimePlayed;
+		public ulong BossKills;
 		public bool IsFirstTutorialCompleted;
 		public int Pity;
 		public UnityEvent<AchievementEnum> AchievementUnlocked;
@@ -97,6 +100,8 @@ namespace DefaultNamespace.Data
 			EnemiesKilled = saveData.EnemiesKilled;
 			PickupsCollected = saveData.PickupsCollected;
 			PullsPerformed = saveData.PullsPerformed;
+			TimePlayed = saveData.TimePlayed;
+			BossKills = saveData.BossKills;
 			IsFirstTutorialCompleted = saveData.IsFirstTutorialCompleted;
 			Pity = saveData.Pity;
 			SelectedCharacterId = saveData.SelectedCharacterId;
@@ -112,6 +117,9 @@ namespace DefaultNamespace.Data
 			Gold += (ulong)gameResultData.Gold;
 			Gems += (ulong)gameResultData.Gems;
 			StoryPoints += (ulong)(gameResultData.Time.ToMinutes()*3);
+			TimePlayed += (ulong)gameResultData.Time.ToMinutes();
+			
+			AchievementManager.instance.OnGameEnd(this, gameResultData);
 		}
 
 		public void AddUpgradeLevel(PermUpgradeType permUpgradeType)
@@ -223,6 +231,8 @@ namespace DefaultNamespace.Data
 		public ulong PullsPerformed;
 		public ulong Deaths;
 		public ulong StoryPoints;
+		public ulong TimePlayed;
+		public ulong BossKills;
 		public bool IsFirstTutorialCompleted;
 		public int Pity;
 		public CharactersEnum? SelectedCharacterId;
@@ -246,7 +256,8 @@ namespace DefaultNamespace.Data
 			Pity = saveFile.Pity;
 			ReadStoryEntries = saveFile.ReadStoryEntries;
 			SelectedCharacterId = saveFile.SelectedCharacterId;
+			TimePlayed = saveFile.TimePlayed;
+			BossKills = saveFile.BossKills;
 		}
-
 	}
 }

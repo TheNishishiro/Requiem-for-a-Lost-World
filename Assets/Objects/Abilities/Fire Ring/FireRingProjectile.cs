@@ -2,6 +2,7 @@
 using System.Collections;
 using Data.Elements;
 using DefaultNamespace;
+using Interfaces;
 using UnityEngine;
 using Weapons;
 
@@ -16,9 +17,9 @@ namespace Objects.Abilities.Fire_Ring
         private Vector3 _baseSize;
         private FireRingWeapon FireRingWeapon => (FireRingWeapon)ParentWeapon;
 
-        public override void SetStats(WeaponStats weaponStats)
+        public override void SetStats(IWeaponStatsStrategy weaponStatsStrategy)
         {
-            base.SetStats(weaponStats);
+            base.SetStats(weaponStatsStrategy);
             _currentExpansionTime = 0;
             _baseSize = transformCache.localScale;
         }

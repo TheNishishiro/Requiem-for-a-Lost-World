@@ -41,12 +41,12 @@ namespace Objects.Abilities.Back_Hole
 			{
 				var originalScale = weaponStats.Scale;
 				weaponStats.Scale *= 2f;
-				projectile.SetStats(weaponStats);
+				projectile.SetParentWeapon(this);
 				weaponStats.Scale = originalScale;
 			}
 			else
 			{
-				projectile.SetStats(weaponStats);
+				projectile.SetParentWeapon(this);
 			}
 			
 			return true;

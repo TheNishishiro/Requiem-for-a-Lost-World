@@ -1,7 +1,7 @@
 ﻿
 namespace DefaultNamespace.Data.Achievements
 {
-	public enum AchievementEnum // 85
+	public enum AchievementEnum // 89
 	{
 		[AchievementValue("Jack of all trades", "Obtain 6 weapons in a single game")]
 		Hold6Weapons = 0,
@@ -43,7 +43,14 @@ namespace DefaultNamespace.Data.Achievements
 		Survive30MinutesWithLightCharacter = 84,
 		[AchievementValue("Witness Octi's brilliance", "Survive 30 minutes with a dark aligned character")]
 		Survive30MinutesWithDarkCharacter = 85,
-		
+		[AchievementValue("Long journey", "Play for a total of 5 hours")]
+		PlayFor5Hours = 86,		
+		[AchievementValue("David and Goliath", "Defeat 500 boss enemies")]
+		Kill500BossEnemies = 87,
+		[AchievementValue("The Path of Pain", "Take and heal 6000 damage in a single game")]
+		HealAndTake6000Damage = 88,
+		[AchievementValue("Haste", "Have over 55% cooldown reduction upon leveling up")]
+		Reach55PercentCdr = 89,
 		
 		#region Survive with characters
 

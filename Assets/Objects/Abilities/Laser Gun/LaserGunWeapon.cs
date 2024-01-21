@@ -42,7 +42,7 @@ namespace Objects.Abilities.Laser_Gun
 				Random.Range(position.z - 2, position.z - 0.5f));
 
 			projectile.transform.position = worldPosition;
-			projectile.SetStats(weaponStats);
+			projectile.SetParentWeapon(this);
 			if (GameData.IsCharacterWithRank(CharactersEnum.Amelia_BoD, CharacterRank.E2))
 				_healthComponent.Damage(-1f);
 			return true;
@@ -50,7 +50,7 @@ namespace Objects.Abilities.Laser_Gun
 
 		protected override int GetAttackCount()
 		{
-			var count = weaponStats.GetAttackCount();
+			var count = WeaponStatsStrategy.GetAttackCount();
 			
 			return count;
 		}

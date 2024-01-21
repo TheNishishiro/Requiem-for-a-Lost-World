@@ -20,30 +20,33 @@ namespace Objects.Abilities.Tornado
 		
 		private ObjectPool<LightningChainProjectile> _subProjectilePool;
 		private Vector3 _subProjectilePosition;
+		private WeaponStats _subProjectileStats;
+		private WeaponStatsStrategyBase _subProjectileStatsStrategy;
 		
 		public override void Awake()
 		{
 			_stageTime = FindFirstObjectByType<StageTime>();
 			base.Awake();
-			var subWeaponStats = new WeaponStats()
+			_subProjectileStats = new WeaponStats()
 			{
 				TimeToLive = 0.3f,
 				Scale = 1f,
 				DetectionRange = 2f
 			};
+			_subProjectileStatsStrategy = new WeaponStatsStrategyBase(_subProjectileStats);
 			
 			_subProjectilePool = new ObjectPool<LightningChainProjectile>(
 				() =>
 				{
 					var projectile = SpawnManager.instance.SpawnObject(_subProjectilePosition, lightningChainPrefab).GetComponent<LightningChainProjectile>();
 					projectile.Init(_subProjectilePool, projectile);
-					projectile.SetParentWeapon(this);
 					return projectile;
 				},
 				projectile =>
 				{
-					subWeaponStats.Damage = weaponStats.GetDamage() * 2.5f;
-					projectile.SetStats(subWeaponStats);
+					_subProjectileStats.Damage = WeaponStatsStrategy.GetDamage() * 2.5f;
+					projectile.SetParentWeapon(this, false);
+					projectile.SetStats(_subProjectileStatsStrategy);
 					projectile.gameObject.SetActive(true);
 					projectile.SeekTargets(2);
 				},
@@ -69,7 +72,7 @@ namespace Objects.Abilities.Tornado
 			var pointOnSurface = Utilities.GetPointOnColliderSurface(tornadoPosition, transform);
 			projectile.transform.position = pointOnSurface;
 			projectile.gameObject.SetActive(true);
-			projectile.SetStats(weaponStats);
+			projectile.SetParentWeapon(this);
 			return true;
 		}
 

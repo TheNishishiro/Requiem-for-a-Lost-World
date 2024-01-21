@@ -47,7 +47,7 @@ namespace UI.Labels.InGame.PauseMenu
 			
 			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();
 			statsPanelComponent.ClearEntries();
-			foreach (var statEntry in playerStatsComponent.GetStats())
+			foreach (var statEntry in playerStatsComponent.GetStatsDisplayData())
 			{
 				statsPanelComponent.AddEntry(statEntry.Name, statEntry.Value, statEntry.Description);
 			}

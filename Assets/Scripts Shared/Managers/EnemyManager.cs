@@ -87,7 +87,7 @@ public class EnemyManager : Singleton<EnemyManager>
 		if (!defaultSpawns.Any())
 			return;
 		
-		_timer = spawnTimer * _playerStatsComponent.GetEnemySpawnRateIncrease();
+		_timer = spawnTimer * PlayerStatsScaler.GetScaler().GetEnemySpawnRateIncrease();
 		
 		var randomSpawn = defaultSpawns[Random.Range(0, defaultSpawns.Count)];
 		SpawnEnemy(randomSpawn);
@@ -95,7 +95,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
 	public void SpawnEnemy(EnemyData enemyToSpawn)
 	{
-		var maxEnemyCount = enemyMaxCount * _playerStatsComponent.GetEnemyCountIncrease();
+		var maxEnemyCount = enemyMaxCount * PlayerStatsScaler.GetScaler().GetEnemyCountIncrease();
 		if (currentEnemyCount >= maxEnemyCount && !enemyToSpawn.isBossEnemy)
 			return;
 

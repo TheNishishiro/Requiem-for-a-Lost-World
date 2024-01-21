@@ -1,4 +1,5 @@
 ﻿using System;
+using Interfaces;
 using Managers;
 using UnityEngine;
 using Weapons;
@@ -11,9 +12,9 @@ namespace Objects.Abilities.Healing_Field
         private HealingFieldWeapon HealingFieldWeapon => (HealingFieldWeapon)ParentWeapon;
         private float _currentHealingFrequency;
 
-        public override void SetStats(WeaponStats weaponStats)
+        public override void SetStats(IWeaponStatsStrategy weaponStatsStrategy)
         {
-	        base.SetStats(weaponStats);
+	        base.SetStats(weaponStatsStrategy);
 	        _currentHealingFrequency = 0;
 	        transformCache = transform;
         }

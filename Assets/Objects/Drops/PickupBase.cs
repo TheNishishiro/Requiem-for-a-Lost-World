@@ -43,7 +43,7 @@ namespace Objects.Drops
 			if (!IsFollowingPlayer)
 			{
 				var distance = Vector3.Distance(_player.playerTransform.position, _cachedTransform.position);
-				if (distance < _playerStatsComponent.GetMagnetSize())
+				if (distance < PlayerStatsScaler.GetScaler().GetMagnetSize())
 					IsFollowingPlayer = true;
 				return;
 			}

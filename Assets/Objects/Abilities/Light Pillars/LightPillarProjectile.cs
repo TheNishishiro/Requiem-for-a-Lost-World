@@ -13,7 +13,7 @@ namespace Objects.Abilities.Light_Pillars
             DamageArea(other, out var damageable);
             if (LightPillarWeapon.IsDivineBarrage && damageable != null && !damageable.IsDestroyed())
             {
-                damageable.ApplyDamageOverTime(WeaponStats.GetDamage() * 0.5f, WeaponStats.GetDamageOverTimeFrequency(), WeaponStats.GetDamageOverTimeDuration(), ParentWeapon);
+                damageable.ApplyDamageOverTime(WeaponStatsStrategy.GetDamage() * 0.5f, WeaponStatsStrategy.GetDamageOverTimeFrequency(), WeaponStatsStrategy.GetDamageOverTimeDuration(), ParentWeapon);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Interfaces;
 using UnityEngine;
 using Weapons;
 
@@ -17,9 +18,9 @@ namespace Objects.Abilities.SpaceExpansionBall
 		private State state = State.Traveling;
 		private SpaceBallWeapon SpaceBallWeapon => ParentWeapon as SpaceBallWeapon;
 
-		public override void SetStats(WeaponStats weaponStats)
+		public override void SetStats(IWeaponStatsStrategy weaponStatsStrategy)
 		{
-			base.SetStats(weaponStats);
+			base.SetStats(weaponStatsStrategy);
 			state = State.Traveling;
 			enemiesHit = 0;
 		}
@@ -33,12 +34,12 @@ namespace Objects.Abilities.SpaceExpansionBall
 		protected override void CustomUpdate()
 		{
 			if (state == State.Traveling)
-				transform.position += direction * (WeaponStats.GetSpeed() * Time.deltaTime);
+				transform.position += direction * (WeaponStatsStrategy.GetSpeed() * Time.deltaTime);
 			
-			if ((TimeToLive <= WeaponStats.GetTimeToLive() / 2 || enemiesHit > WeaponStats.GetPassThroughCount()) && state == State.Traveling)
+			if ((TimeToLive <= WeaponStatsStrategy.GetTotalTimeToLive() / 2 || enemiesHit > WeaponStatsStrategy.GetPassThroughCount()) && state == State.Traveling)
 			{
 				state = State.Exploding;
-				transform.localScale *= WeaponStats.GetScale();
+				transform.localScale *= WeaponStatsStrategy.GetScale();
 				ProjectileDamageIncreasePercentage = 0.7f;
 				StartCoroutine(Enlarge());
 			}

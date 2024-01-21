@@ -36,6 +36,8 @@ namespace Weapons
 		public Sprite IconField => Icon;
 		public int LevelField { get; private set; } = 1;
 		public Element ElementField => element;
+		public IWeaponStatsStrategy WeaponStatsStrategy { get; set; }
+
 		[HideInInspector] public bool isSkill;
 		
 		public ICollection<StatsDisplayData> GetStatsData()
@@ -48,12 +50,18 @@ namespace Weapons
 			return weaponStats.GetDescription(Description, rarity);
 		}
 
+		protected virtual void SetWeaponStatsStrategy()
+		{
+			WeaponStatsStrategy = new WeaponStatsStrategyBase(weaponStats);
+		}
+
 		public virtual void Awake()
 		{
 			_playerStatsComponent = GetComponentInParent<PlayerStatsComponent>();
 			weaponStats.AssignPlayerStatsComponent(_playerStatsComponent);
+			SetWeaponStatsStrategy();
 			
-			_timer = weaponStats.GetCooldown();
+			_timer = WeaponStatsStrategy.GetTotalCooldown();
 			InitPool();
 			StartCoroutine(AttackProcess());
 		}
@@ -87,7 +95,7 @@ namespace Weapons
 			_timer -= Time.deltaTime;
 			if (_timer >= 0f) return;
 
-			_timer = weaponStats.GetCooldown();
+			_timer = WeaponStatsStrategy.GetTotalCooldown();
 			StartCoroutine(AttackProcess());
 		}
 
@@ -97,14 +105,14 @@ namespace Weapons
 			for (var i = 0; i < GetAttackCount(); i++)
 			{
 				Attack();
-				yield return new WaitForSeconds(weaponStats.DuplicateSpawnDelay);
+				yield return new WaitForSeconds(WeaponStatsStrategy.GetDuplicateSpawnDelay());
 			}
 			OnAttackEnd();
 		}
 
 		protected virtual int GetAttackCount()
 		{
-			return weaponStats.GetAttackCount();
+			return WeaponStatsStrategy.GetAttackCount();
 		}
 		
 		protected float GetRotationByAttackCount()

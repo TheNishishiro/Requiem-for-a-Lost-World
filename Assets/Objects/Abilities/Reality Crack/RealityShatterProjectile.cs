@@ -57,7 +57,7 @@ namespace Objects.Abilities.Reality_Crack
 			}
 			
 			if (RealityShatterWeapon.IsGlobalDamage)
-				enemyManager.GlobalDamage(WeaponStats.GetDamage() / 2, ParentWeapon);
+				enemyManager.GlobalDamage(WeaponStatsStrategy.GetDamage() / 2, ParentWeapon);
 			if (RealityShatterWeapon.IsSelfBuff)
 				RealityShatterWeapon.IncreaseDamage();
 		}
@@ -67,9 +67,9 @@ namespace Objects.Abilities.Reality_Crack
 			var damageable = other.GetComponent<IDamageable>();
 			if (damageable != null)
 			{
-				if (WeaponStats.Weakness > 0)
-					damageable.SetVulnerable(WeaponStats.Weakness, 5);
-				damageable.TakeDamageWithCooldown(WeaponStats.GetDamage(), gameObject, 0.25f, ParentWeapon);
+				if (WeaponStatsStrategy.GetWeakness() > 0)
+					damageable.SetVulnerable(WeaponStatsStrategy.GetWeakness(), 5);
+				damageable.TakeDamageWithCooldown(WeaponStatsStrategy.GetDamage(), gameObject, 0.25f, ParentWeapon);
 			}
 		}
 	}

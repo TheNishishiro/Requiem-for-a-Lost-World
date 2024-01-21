@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Light Pillar Upgrade 8
   m_EditorClassIdentifier: 
   Name: Shining Aegis
-  Description: Each tick of damage dealt by this weapon will heal character for {LifeSteal}%
-    of damage dealt
+  Description: Each tick of damage dealt by this weapon will heal character for {HealPerHit}
+    HP
   WeaponStats:
     Damage: 0
     Cooldown: 0
@@ -31,8 +31,8 @@ MonoBehaviour:
     CritDamage: 0
     Weakness: 0
     DamageIncreasePercentage: 0
-    HealPerHit: 0
+    HealPerHit: 0.1
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
-    LifeSteal: 0.01
+    LifeSteal: 0

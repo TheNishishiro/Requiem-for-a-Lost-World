@@ -5,6 +5,7 @@ using Objects.Characters;
 using Objects.Drops;
 using Objects.Enemies;
 using Objects.Items;
+using Objects.Players.Scripts;
 using Objects.Stage;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -16,6 +17,7 @@ namespace Managers
 	{
 		public static AchievementManager instance;
 		private int _enemiesKilled;
+		private int _bossKills;
 		private int _highRarityPickupsObtained;
 		private float _healAmountInOneGame;
 		private float _damageTakenInOneGame;
@@ -90,6 +92,10 @@ namespace Managers
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Kill100000Enemies);
 			if (_enemiesKilled >= 1000)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Kill1000EnemiesInOneGame);
+			if (enemy.IsBoss())
+				SaveFile.Instance.BossKills++;
+			if (SaveFile.Instance.BossKills > 50)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.Kill500BossEnemies);
 		}
 
 		public void OnDeath()
@@ -105,6 +111,9 @@ namespace Managers
 			_healAmountInOneGame += Math.Abs(amount);
 			if (_healAmountInOneGame >= 1000)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Heal1000HealthInOneGame);
+			
+			if (_healAmountInOneGame > 10000 && _damageTakenInOneGame > 10000)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.HealAndTake6000Damage);
 		}
 
 		public void OnDamageTaken(float amount)
@@ -152,6 +161,20 @@ namespace Managers
 					SaveFile.Instance.UnlockAchievement(AchievementEnum.CollectMagnet);
 					break;
 			}
+		}
+
+		public void OnGameEnd(SaveFile saveFile, GameResultData gameResultData)
+		{
+			if (saveFile.TimePlayed >= 60 * 5)
+			{
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.PlayFor5Hours);
+			}
+		}
+
+		public void OnLevelUp(LevelComponent levelComponent)
+		{
+			if (PlayerStatsScaler.GetScaler().GetCooldownReductionPercentage() <= 0.45f)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.Reach55PercentCdr);
 		}
 	}
 }

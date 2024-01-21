@@ -29,15 +29,16 @@ namespace Weapons
 		public virtual void SetParentWeapon(WeaponBase parentWeapon)
 		{
 			ParentWeapon = parentWeapon;
+			SetStats(ParentWeapon.WeaponStatsStrategy);
 		}
 		
-		public virtual void SetStats(WeaponStats weaponStats)
+		private void SetStats(IWeaponStatsStrategy weaponStatsStrategy)
 		{
-			WeaponStats = weaponStats;
-			transform.localScale = baseScale * WeaponStats.GetScale();
+			WeaponStatsStrategy = weaponStatsStrategy;
+			transform.localScale = baseScale * WeaponStatsStrategy.GetScale();
 			TimeToLive = GetTimeToLive();
-			damageCooldown = weaponStats.DamageCooldown;
-			currentPassedEnemies = weaponStats.GetPassThroughCount();
+			damageCooldown = WeaponStatsStrategy.GetDamageCooldown();
+			currentPassedEnemies = WeaponStatsStrategy.GetPassThroughCount();
 			StopAllCoroutines();
 			IsDead = false;
 			TimeAlive = 0;
@@ -52,7 +53,7 @@ namespace Weapons
 
 		protected virtual float GetTimeToLive()
 		{
-			return WeaponStats.GetTimeToLive();
+			return WeaponStatsStrategy.GetTotalTimeToLive();
 		}
 
 		public void TickProjectile()

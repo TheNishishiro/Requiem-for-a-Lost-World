@@ -21,14 +21,14 @@ namespace Objects.Abilities.Boomerang
 
 		private IEnumerator FlyCoroutine()
 		{
-			yield return new WaitForSeconds(WeaponStats.GetTimeToLive()*0.25f);
+			yield return new WaitForSeconds(WeaponStatsStrategy.GetTotalTimeToLive()*0.25f);
 			SetDirectionInternal(ParentWeapon.transform.position);
 		}
 		
 		protected override void CustomUpdate()
 		{
 			transform.Rotate(0, Time.deltaTime * 250, 0);
-			transform.position += direction * (WeaponStats.GetSpeed() * Time.deltaTime);
+			transform.position += direction * (WeaponStatsStrategy.GetSpeed() * Time.deltaTime);
 		}
 
 		private void OnTriggerEnter(Collider other)

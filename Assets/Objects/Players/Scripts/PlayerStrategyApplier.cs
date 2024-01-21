@@ -15,6 +15,7 @@ using Objects.Characters.Natalie;
 using Objects.Characters.Nishi;
 using Objects.Characters.Oana;
 using Objects.Characters.Summer;
+using Objects.Characters.Truzi;
 
 namespace Objects.Players.Scripts
 {
@@ -35,6 +36,7 @@ namespace Objects.Players.Scripts
 			{ CharactersEnum.Adam_OBoV, new AdamStrategy() },
 			{ CharactersEnum.Oana_BoI, new OanaStrategy() },
 			{ CharactersEnum.Alice_BoL, new AliceStrategy() },
+			{ CharactersEnum.Truzi_BoT, new TruziStrategy() },
 		};
 
 		public void ApplyRankStrategy(CharactersEnum characterId, CharacterRank characterRank, PlayerStats playerStats)

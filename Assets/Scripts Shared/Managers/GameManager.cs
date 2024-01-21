@@ -19,7 +19,7 @@ namespace Managers
 		[SerializeField] public Player playerComponent;
 		[SerializeField] private SpecialBarManager specialBarManager;
 
-		private void Start()
+		private void Awake()
 		{
 			if (instance == null)
 			{

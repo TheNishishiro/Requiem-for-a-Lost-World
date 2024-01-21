@@ -15,11 +15,6 @@ namespace Objects.Abilities.Meteor
 {
 	public class MeteorWeapon : PoolableWeapon<MeteorProjectile>
 	{
-		public override void Awake()
-		{
-			base.Awake();
-		}
-
 		protected override bool ProjectileSpawn(MeteorProjectile projectile)
 		{
 			var position1 = transform.position;
@@ -30,18 +25,17 @@ namespace Objects.Abilities.Meteor
 			
 			var position = enemy.transform.position;
 			projectile.transform.position = spawnPosition;
-			projectile.SetStats(weaponStats);
+			projectile.SetParentWeapon(this);
 			projectile.SetDirection(position.x, position.y, position.z);
 
 			if (GameData.IsCharacterWithRank(CharactersEnum.David_BoF, CharacterRank.E2))
 			{
 				var hpReductionCeiling = GameData.IsCharacterRank(CharacterRank.E5) ? 0.4f : 0.6f;
-				var hpDiff = GameManager.instance.playerStatsComponent.GetHealth() /
-				             GameManager.instance.playerStatsComponent.GetMaxHealth();
+				var hpDiff = PlayerStatsScaler.GetScaler().GetHealth() / PlayerStatsScaler.GetScaler().GetMaxHealth();
 
 				if (hpDiff > hpReductionCeiling)
 				{
-					GameManager.instance.playerComponent.healthComponent.Damage(2);
+					GameManager.instance.playerComponent.TakeDamage(2, true, true);
 				}
 			}
 			

@@ -4,6 +4,7 @@ using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using Managers;
+using Objects.Abilities;
 using Objects.Abilities.Magic_Ball;
 using Objects.Characters;
 using Objects.Enemies;
@@ -25,7 +26,7 @@ public class FireBallWeapon : PoolableWeapon<FireBallProjectile>
             
         var position = closestTarget.TargetPoint.position;
         projectile.transform.position = transform.position;
-        projectile.SetStats(weaponStats);
+        projectile.SetParentWeapon(this);
         projectile.SetDirection(position.x, position.y, position.z);
         return true;
     }

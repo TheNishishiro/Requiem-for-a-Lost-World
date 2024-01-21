@@ -23,9 +23,9 @@ namespace Objects.Abilities.Laser_Gun
 			_transform = transform;
 		}
 
-		public override void SetStats(WeaponStats weaponStats)
+		public override void SetStats(IWeaponStatsStrategy weaponStatsStrategy)
 		{
-			base.SetStats(weaponStats);
+			base.SetStats(weaponStatsStrategy);
 			SetTarget();
 		}
 
@@ -34,7 +34,7 @@ namespace Objects.Abilities.Laser_Gun
 			if (!isDamageCooldownExpired) return;
 			ResetDamageCooldown();
 
-			if (_laserTarget != null && _laserTarget.gameObject.activeSelf && lineRenderer.positionCount != 0 && Vector3.Distance(_targetTransform.position, _transform.position) < WeaponStats.GetDetectionRange())
+			if (_laserTarget != null && _laserTarget.gameObject.activeSelf && lineRenderer.positionCount != 0 && Vector3.Distance(_targetTransform.position, _transform.position) < WeaponStatsStrategy.GetDetectionRange())
 			{
 				lineRenderer.SetPosition(1, _targetTransform.position);
 				_transform.LookAt(_targetTransform);
@@ -49,7 +49,7 @@ namespace Objects.Abilities.Laser_Gun
 		private void SetTarget()
 		{
 			var closestTarget = Utilities.FindClosestEnemy(transform.position, EnemyManager.instance.GetActiveEnemies(), out var distanceToClosest);
-			if (closestTarget == null || distanceToClosest > WeaponStats.GetDetectionRange())
+			if (closestTarget == null || distanceToClosest > WeaponStatsStrategy.GetDetectionRange())
 			{
 				lineRenderer.positionCount = 0;
 				return;

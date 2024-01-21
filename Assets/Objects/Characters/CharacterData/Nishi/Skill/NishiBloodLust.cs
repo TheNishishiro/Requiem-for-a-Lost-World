@@ -86,7 +86,7 @@ namespace Objects.Characters.Nishi.Skill
 			if (GameData.GetPlayerCharacterRank() < CharacterRank.E5)
 			{
 				var damage = GameData.GetPlayerCharacterRank() >= CharacterRank.E5 ? 45 : 20;
-				if (PlayerStatsComponent.GetHealth() - damage >= PlayerStatsComponent.GetMaxHealth() * 0.15)
+				if (PlayerStatsScaler.GetScaler().GetHealth() - damage >= PlayerStatsScaler.GetScaler().GetMaxHealth() * 0.15)
 				{
 					PlayerStatsComponent.TakeDamage(damage);
 				}

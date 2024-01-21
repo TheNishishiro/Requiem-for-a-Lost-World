@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
+using Interfaces;
 using Managers;
 using UnityEngine;
 using Weapons;
@@ -14,16 +15,15 @@ namespace Objects.Abilities.Lightning_Chain
 	{
 		[SerializeField] public LineRenderer lineRenderer;
 
-		public override void SetStats(WeaponStats weaponStats)
+		public override void SetStats(IWeaponStatsStrategy weaponStatsStrategy)
 		{
-			base.SetStats(weaponStats);
+			base.SetStats(weaponStatsStrategy);
 			lineRenderer.positionCount = 0;
-			
 		}
 		
-		public void SeekTargets(int maxTargers)
+		public void SeekTargets(int maxTargets)
 		{
-			StartCoroutine(FindChainLightningTarget(maxTargers));
+			StartCoroutine(FindChainLightningTarget(maxTargets));
 		}
 
 		public IEnumerator FindChainLightningTarget(int maxTargets)
@@ -38,7 +38,7 @@ namespace Objects.Abilities.Lightning_Chain
 					continue;
 				
 				AddTarget(lastPosition);
-				target.TakeDamage(WeaponStats.GetDamage(), ParentWeapon);
+				target.TakeDamage(WeaponStatsStrategy.GetDamage(), ParentWeapon);
 				lastPosition = target.targetPoint.transform.position;
 				yield return new WaitForSeconds(0.1f);
 			}

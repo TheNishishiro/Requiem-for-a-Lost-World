@@ -34,7 +34,7 @@ namespace Objects.Abilities.Scythe
 		protected override bool ProjectileSpawn(ScytheProjectile projectile)
 		{
 			projectile.transform.position = transform.position;
-			projectile.SetStats(weaponStats);
+			projectile.SetParentWeapon(this);
 			return true;
 		}
 

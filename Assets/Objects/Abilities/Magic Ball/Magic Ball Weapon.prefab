@@ -48,7 +48,10 @@ MonoBehaviour:
     type: 3}
   Name: Magic Ball
   Description: Send a fast moving magic projectile towards nearest target
-  Icon: {fileID: 21300000, guid: 9d30738a3c126e34faf9b045219c041f, type: 3}
+  chanceToAppear: 1
+  Icon: {fileID: 21300000, guid: 2586aab1e1ffb49419c90fa9725a76d2, type: 3}
+  unlockOnAchievement: 0
+  requiredAchievement: 0
   element: 1
   weaponStats:
     Damage: 5
@@ -70,6 +73,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 2b8ffaf34ce43fc48ab806ee4cd0415b, type: 2}
   - {fileID: 11400000, guid: 8e1e644a8c210924991f509f2fbade9c, type: 2}
@@ -79,7 +83,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a54c32848435b414f8c0352515e59147, type: 2}
   - {fileID: 11400000, guid: 95420a14c19cd5442916d191c2ef3515, type: 2}
   - {fileID: 11400000, guid: 72c4c4cdb8f825e48a5ca2e47dd57c90, type: 2}
-  chanceToAppear: 1
   isSkill: 0
   capacity: 50
   maxCapacity: 200

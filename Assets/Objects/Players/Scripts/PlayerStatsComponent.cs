@@ -56,7 +56,12 @@ namespace Objects.Players.Scripts
 			StatChangedEvent.Invoke(stat, value);
 		}
 
-		public IEnumerable<StatsDisplayData> GetStats()
+		public PlayerStats GetStats()
+		{
+			return _playerStats;
+		}
+
+		public IEnumerable<StatsDisplayData> GetStatsDisplayData()
 		{
 			return _playerStats.GetStatsList();
 		}
@@ -188,226 +193,31 @@ namespace Objects.Players.Scripts
 		
 		public int GetTotalDamage(int baseDamage)
 		{
-			var damage = (baseDamage + GetDamage());
-			var critRate = GetCritRate();
-			var critDamage = GetCritDamage();
-			return  (int)Math.Ceiling((Random.value < critRate ? damage * critDamage : damage) * GetDamageIncreasePercentage());
-		}
-
-		public float GetHealth()
-		{
-			return _playerStats?.Health ?? 0;
-		}
-
-		public float GetMaxHealth()
-		{
-			return _playerStats?.HealthMax ?? 0;
+			var damage = (baseDamage + PlayerStatsScaler.GetScaler().GetDamage());
+			var critRate = PlayerStatsScaler.GetScaler().GetCritRate();
+			var critDamage = PlayerStatsScaler.GetScaler().GetCritDamage();
+			return  (int)Math.Ceiling((Random.value < critRate ? damage * critDamage : damage) * PlayerStatsScaler.GetScaler().GetDamageIncreasePercentage());
 		}
 		
-		public float GetEnemyHealthIncrease()
-		{
-			return 1 + _playerStats?.EnemyHealthIncreasePercentage ?? 0;
-		}
-		
-		public float GetEnemySpawnRateIncrease()
-		{
-			return 1 + _playerStats?.EnemySpawnRateIncreasePercentage ?? 0;
-		}
-		
-		public float GetEnemyCountIncrease()
-		{
-			return 1 + _playerStats?.EnemyMaxCountIncreasePercentage ?? 0;
-		}
-		
-		public float GetEnemySpeedIncrease()
-		{
-			return 1 + _playerStats?.EnemySpeedIncreasePercentage ?? 0;
-		}
-		
-		public float GetExperienceIncrease()
-		{
-			return 1 + _playerStats?.ExperienceIncreasePercentage ?? 0;
-		}
-
-		public float GetMovementSpeed()
-		{
-			return _playerStats?.MovementSpeed ?? 0;
-		}
-
-		public float GetArmor()
-		{
-			return _playerStats?.Armor ?? 0;
-		}
-
-		public float GetSkillCooldownReductionPercentage()
-		{
-			return 1 - _playerStats?.SkillCooldownReductionPercentage ?? 0;
-		}
-
-		public void TakeDamage(float amount)
+		public void TakeDamage(float amount, bool isPreventDeath = false)
 		{
 			_playerStats.Health -= amount;
-			
-			if (_playerStats.Health < 0)
-				_playerStats.Health = 0;
-			else if (_playerStats.Health > _playerStats.HealthMax)
-				_playerStats.Health = _playerStats.HealthMax;
-		}
 
-		public double GetMagnetSize()
-		{
-			return _playerStats?.MagnetSize ?? 0;
-		}
-
-		public float GetCooldownReductionPercentage()
-		{
-			return 1 - (_playerStats?.CooldownReductionPercentage ?? 0);
-		}
-
-		public float GetCooldownReduction()
-		{
-			return _playerStats?.CooldownReduction ?? 0;
-		}
-
-		public int GetAttackCount()
-		{
-			return _playerStats?.AttackCount ?? 0;
-		}
-
-		public float GetDamageIncreasePercentage()
-		{
-			if (GameData.IsCharacter(CharactersEnum.David_BoF))
+			switch (_playerStats.Health)
 			{
-				var multiplier = GameData.IsCharacterRank(CharacterRank.E3) ? 0.01f : 0.02f;
-				return 1 + (_playerStats?.DamagePercentageIncrease ?? 0) + ((GetMaxHealth() - GetHealth())*multiplier);
+				case < 0 when !isPreventDeath:
+					_playerStats.Health = 0;
+					break;
+				case < 0:
+					_playerStats.Health = 1;
+					break;
+				default:
+				{
+					if (_playerStats.Health > _playerStats.HealthMax)
+						_playerStats.Health = _playerStats.HealthMax;
+					break;
+				}
 			}
-			
-			return 1 + (_playerStats?.DamagePercentageIncrease ?? 0);
-		}
-
-		public float GetDamage()
-		{
-			return _playerStats?.Damage ?? 0;
-		}
-
-		public double GetCritRate()
-		{
-			return _playerStats?.CritRate ?? 0;
-		}
-
-		public double GetCritDamage()
-		{
-			return 1 + (_playerStats?.CritDamage ?? 0.5);
-		}
-
-		public float GetScale()
-		{
-			return _playerStats?.Scale ?? 0;
-		}
-
-		public float GetProjectileSpeed()
-		{
-			return _playerStats?.Speed ?? 0;
-		}
-
-		public float GetProjectileLifeTime()
-		{
-			return _playerStats?.TimeToLive ?? 0;
-		}
-
-		public float GetProjectileDetectionRange()
-		{
-			return _playerStats?.DetectionRange ?? 0;
-		}
-
-		public int GetProjectilePassThroughCount()
-		{
-			return _playerStats?.PassThroughCount ?? 0;
-		}
-
-		public float GetItemRewardIncrease()
-		{
-			return 1 + (_playerStats?.ItemRewardIncrease ?? 0);
-		}
-		
-		public int GetRevives()
-		{
-			return _playerStats?.Revives ?? 0;
-		}
-
-		public float GetProjectileLifeTimeIncreasePercentage()
-		{
-			return 1 + (_playerStats?.ProjectileLifeTimeIncreasePercentage ?? 0);
-		}
-
-		public float GetDodgeChance()
-		{
-			return _playerStats?.DodgeChance ?? 0;
-		}
-
-		public float GetDamageTakenIncrease()
-		{
-			return 1 + (_playerStats?.DamageTakenIncreasePercentage ?? 0);
-		}
-
-		public float GetHealingIncrease()
-		{
-			return 1 + (_playerStats?.HealingIncreasePercentage ?? 0);
-		}
-
-		public float GetLuck()
-		{
-			return _playerStats?.Luck ?? 0;
-		}
-
-		public float GetDamageOverTime()
-		{
-			return _playerStats?.DamageOverTime ?? 0;
-		}
-
-		public float GetLifeSteal()
-		{
-			return _playerStats?.LifeSteal ?? 0;
-		}
-
-		public bool HasRerolls()
-		{
-			return _playerStats?.Rerolls > 0;
-		}
-
-		public bool HasSkips()
-		{
-			return _playerStats?.Skips > 0;
-		}
-
-		public int GetSkips()
-		{
-			return _playerStats?.Skips ?? 0;
-		}
-
-		public int GetRerolls()
-		{
-			return _playerStats?.Rerolls ?? 0;
-		}
-
-		public float GetSpecialMaxValue()
-		{
-			return _playerStats?.SpecialMax ?? 0;
-		}
-
-		public float GetSpecialIncrementAmount()
-		{
-			return _playerStats?.SpecialIncrease ?? 0;
-		}
-
-		public float GetDamageOverTimeFrequencyReductionPercentage()
-		{
-			return (1 - _playerStats?.DamageOverTimeFrequencyReductionPercentage ?? 0);
-		}
-
-		public float GetDamageOverTimeDurationIncreasePercentage()
-		{
-			return (1 + _playerStats?.DamageOverTimeDurationIncreasePercentage ?? 0);
 		}
 
 		public void TemporaryStatBoost(StatEnum statEnum, float amount, float duration)

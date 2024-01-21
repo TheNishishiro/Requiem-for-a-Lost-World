@@ -26,7 +26,7 @@ namespace Objects.Abilities.Ground_Slash
 
 		private IEnumerator SlowDown()
 		{
-			var startSpeed = WeaponStats.GetSpeed();
+			var startSpeed = WeaponStatsStrategy.GetSpeed();
 			var elapsedLifetime = 0f;
 			var startScale = transform.localScale;
 			var endScale = startScale*0.2f;
