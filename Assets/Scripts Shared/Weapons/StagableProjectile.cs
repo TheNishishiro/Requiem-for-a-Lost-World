@@ -9,7 +9,7 @@ namespace Weapons
 {
     public class StagableProjectile : DamageSource
     {
-	    public ProjectileState State { get; private set; }
+	    public ProjectileState State;
 	    
         private Vector3 baseScale;
         protected float TimeToLive;
@@ -64,7 +64,8 @@ namespace Weapons
             spawningStage.Stop();
             flyingStage.Stop();
             dissipationStage.Stop();
-            
+
+            State = ProjectileState.Unspecified;
             SetState(ProjectileState.Spawning);
         }
 
@@ -123,10 +124,19 @@ namespace Weapons
 	    public void SetState(ProjectileState state)
 	    {
 		    ToggleHitBox(state);
-		    ToggleStage(state);
-		    
-    	    this.State = state;
+		    if (State != state)
+		    {
+			    ToggleStage(state);
+			    OnStateChanged(state);
+		    }
+
+		    State = state;
     	}
+
+	    protected virtual void OnStateChanged(ProjectileState state)
+	    {
+		    
+	    }
 
 	    private void ToggleHitBox(ProjectileState state)
 	    {

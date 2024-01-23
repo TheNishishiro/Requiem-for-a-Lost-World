@@ -9,12 +9,14 @@ namespace Objects.Abilities.Back_Hole
 	{
 		[SerializeField] private BlackHoleCenterComponent blackHoleCenter;
 		[SerializeField] private BlackHoleGravitationWavesComponent blackHoleGravitation;
-		
-		public override void SetStats(IWeaponStatsStrategy weaponStatsStrategy)
+
+		protected override void OnStateChanged(ProjectileState state)
 		{
-			base.SetStats(weaponStatsStrategy);
-			blackHoleCenter.SetParentWeapon(ParentWeapon);
-			blackHoleGravitation.SetParentWeapon(ParentWeapon);
+			if (state == ProjectileState.Flying)
+			{
+				blackHoleCenter.SetParentWeapon(ParentWeapon);
+				blackHoleGravitation.SetParentWeapon(ParentWeapon);
+			}
 		}
 	}
 }

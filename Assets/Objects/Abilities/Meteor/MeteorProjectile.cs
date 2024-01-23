@@ -1,4 +1,6 @@
 ﻿using System;
+using DefaultNamespace;
+using UnityEditor.Playables;
 using UnityEngine;
 using Weapons;
 
@@ -8,6 +10,7 @@ namespace Objects.Abilities.Meteor
 	{
 		private Vector3 direction;
 		private float destroyY;
+		[SerializeField] private ParticleSystem explosionParticleSystem;
 		
 		public void SetDirection(float dirX, float dirY, float dirZ)
 		{
@@ -15,14 +18,19 @@ namespace Objects.Abilities.Meteor
 			destroyY = dirY - 5.0f;
 		}
 
-		void LateUpdate()
+		protected override void CustomUpdate()
 		{
 			transformCache.position += direction * ((WeaponStatsStrategy?.GetSpeed()).GetValueOrDefault() * Time.deltaTime);
-			
-			if (transformCache.localPosition.y < destroyY)
-				Destroy();
+			var ray = new Ray(transformCache.position, Vector3.down);
+			var layer = LayerMask.GetMask("FloorLayer");
+			var raycastResult = Physics.Raycast(ray, out var hit, Mathf.Infinity, layer);
+				
+			if (raycastResult && hit.distance < 0.5f)
+			{
+				SetState(ProjectileState.Dissipating);
+			}
 		}
-		
+
 		private void OnTriggerEnter(Collider other)
 		{
 			SimpleDamage(other, false);
