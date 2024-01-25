@@ -3,11 +3,11 @@ using Weapons;
 
 namespace Objects.Characters
 {
-	public class CharacterSkillBase : ProjectileBase
+	public class CharacterSkillBase : StagableProjectile
 	{
 		[SerializeField] public float LifeTime;
-
-		protected void TickLifeTime()
+		
+		protected virtual void TickLifeTime()
 		{
 			LifeTime -= Time.deltaTime;
 			if (LifeTime <= 0)

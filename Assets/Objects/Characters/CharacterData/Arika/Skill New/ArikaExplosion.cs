@@ -26,7 +26,7 @@ namespace Objects.Characters.Chronastra.Skill
         {
             ParticleSystem.Stop();
             var main = ParticleSystem.main;
-            main.duration = LifeTime = TimeToLive = duration;
+            main.duration = LifeTime = CurrentTimeToLive = duration;
             _deBuffDuration = GameData.IsCharacterRank(CharacterRank.E5) ? 4 : 1;
             _deBuffModifier = GameData.IsCharacterRank(CharacterRank.E5) ? 1 : 0.5f;
             ParticleSystem.Play();

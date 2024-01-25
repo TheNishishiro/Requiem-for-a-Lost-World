@@ -5047,7 +5047,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.7
+      scalar: 0.5
       minScalar: 0.2
       maxCurve:
         serializedVersion: 2
@@ -14801,18 +14801,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881afda46e654a4b843d6877ce00fb9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  State: 0
   UseParticles: 1
   ParticleSystem: {fileID: 2049168304206892718}
   hitbox: {fileID: 2859058529051477477}
   spawningStage:
     stageObject: {fileID: 3876291118167897514}
     stageDuration: 0.5
+    particleSystems: []
   flyingStage:
     stageObject: {fileID: 1776208214442010707}
     stageDuration: 0
+    particleSystems: []
   dissipationStage:
     stageObject: {fileID: 8580080624981586771}
     stageDuration: 1
+    particleSystems: []
   isLimitedHitBox: 1
   hitBoxDuration: 0.5
   hitBoxStart: 0

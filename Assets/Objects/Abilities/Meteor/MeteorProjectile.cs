@@ -1,7 +1,4 @@
-﻿using System;
-using DefaultNamespace;
-using UnityEditor.Playables;
-using UnityEngine;
+﻿using UnityEngine;
 using Weapons;
 
 namespace Objects.Abilities.Meteor
@@ -9,13 +6,11 @@ namespace Objects.Abilities.Meteor
 	public class MeteorProjectile : PoolableProjectile<MeteorProjectile>
 	{
 		private Vector3 direction;
-		private float destroyY;
 		[SerializeField] private ParticleSystem explosionParticleSystem;
 		
 		public void SetDirection(float dirX, float dirY, float dirZ)
 		{
 			direction = (new Vector3(dirX, dirY, dirZ) - transformCache.position).normalized;
-			destroyY = dirY - 5.0f;
 		}
 
 		protected override void CustomUpdate()

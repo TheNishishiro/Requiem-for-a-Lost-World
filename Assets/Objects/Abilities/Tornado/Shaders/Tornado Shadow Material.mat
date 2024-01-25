@@ -24,6 +24,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _NoiseTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -39,7 +43,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Dissoble: 0.264
-    - _Dissolve: 0.02
+    - _Dissolve: 0.045
     - _NoisePower: 1
     - _NoiseScale: 50
     - _QueueControl: 0

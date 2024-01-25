@@ -36,7 +36,7 @@ namespace Objects.Abilities.SpaceExpansionBall
 			if (state == State.Traveling)
 				transform.position += direction * (WeaponStatsStrategy.GetSpeed() * Time.deltaTime);
 			
-			if ((TimeToLive <= WeaponStatsStrategy.GetTotalTimeToLive() / 2 || enemiesHit > WeaponStatsStrategy.GetPassThroughCount()) && state == State.Traveling)
+			if ((CurrentTimeToLive <= WeaponStatsStrategy.GetTotalTimeToLive() / 2 || enemiesHit > WeaponStatsStrategy.GetPassThroughCount()) && state == State.Traveling)
 			{
 				state = State.Exploding;
 				transform.localScale *= WeaponStatsStrategy.GetScale();

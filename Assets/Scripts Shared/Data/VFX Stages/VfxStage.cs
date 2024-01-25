@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace DefaultNamespace.Data.VFX_Stages
@@ -8,6 +10,7 @@ namespace DefaultNamespace.Data.VFX_Stages
     {
         public GameObject stageObject;
         public float stageDuration;
+        public List<ParticleSystem> particleSystems;
         private float _currentStageDuration;
 
         public void Update()
@@ -19,15 +22,26 @@ namespace DefaultNamespace.Data.VFX_Stages
         public void Play()
         {
             _currentStageDuration = stageDuration;
-            
+
             if (stageObject != null)
                 stageObject.SetActive(true);
+            
+            particleSystems?.ForEach(x =>
+            {
+                x.Simulate( 0.0f, true, true);
+                x.Play(true);
+            });
         }
 
         public void Stop()
         {
             if (stageObject != null)
                 stageObject.SetActive(false);
+
+            particleSystems?.ForEach(x =>
+            {
+                x.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            });
         }
 
         public bool IsFinished()

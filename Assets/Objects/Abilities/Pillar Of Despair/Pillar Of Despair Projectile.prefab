@@ -71,21 +71,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 880d000a8096449e97c582e1137babcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UseParticles: 1
-  ParticleSystem: {fileID: 7995770876657730481}
+  State: 0
+  UseParticles: 0
+  ParticleSystem: {fileID: 0}
   hitbox: {fileID: 8674809902983960704}
   spawningStage:
     stageObject: {fileID: 3937399297133201624}
     stageDuration: 3
+    particleSystems: []
   flyingStage:
     stageObject: {fileID: 1713706823839110463}
     stageDuration: 0
+    particleSystems: []
   dissipationStage:
-    stageObject: {fileID: 4216001591096374239}
-    stageDuration: 1
+    stageObject: {fileID: 0}
+    stageDuration: 0
+    particleSystems: []
   isLimitedHitBox: 0
   hitBoxDuration: 0
   hitBoxStart: 0
+  isChangeSizeOverLife: 1
+  increaseSizeUntilTime: 0.25
+  reduceSizeBeforeTime: 0.25
+  targetMinSize: {x: 0, y: 1, z: 0}
+  multiplyTargetByScale: 1
 --- !u!1 &1713706823839110463
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +124,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9155486090084357527}
   m_Father: {fileID: 1319293060367403969}
@@ -15797,7 +15806,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -15934,8 +15943,8 @@ ParticleSystem:
     m_TextureAlphaAffectsParticles: 1
     m_TextureBilinearFiltering: 0
     randomDirectionAmount: 1
-    sphericalDirectionAmount: 1
-    randomPositionAmount: 0.2
+    sphericalDirectionAmount: 0
+    randomPositionAmount: 0
     radius:
       value: 3
       mode: 0

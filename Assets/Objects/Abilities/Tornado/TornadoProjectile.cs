@@ -4,6 +4,7 @@ using System.Linq;
 using DefaultNamespace;
 using Interfaces;
 using Managers;
+using NaughtyAttributes;
 using Objects.Abilities.Lightning_Chain;
 using Objects.Characters;
 using Objects.Enemies;
@@ -18,15 +19,19 @@ namespace Objects.Abilities.Tornado
 {
 	public class TornadoProjectile : PoolableProjectile<TornadoProjectile>
 	{
-		private Rigidbody _rb;
+		[SerializeField] private Rigidbody rb;
+		[SerializeField] private MeshRenderer coreRenderer;
+		[SerializeField] private float coreMaxDissolve;
+		[SerializeField] private MeshRenderer windOuterRenderer;
+		[SerializeField] private float windOuterMaxDissolve;
+		[SerializeField] private MeshRenderer shadowRenderer;
+		[SerializeField] private float shadowMaxDissolve;
+		[SerializeField] private MeshRenderer windInnerRenderer;
+		[SerializeField] private float windInnerMaxDissolve;
+		[SerializeField] private ParticleSystem particles;
+		private static readonly int Dissolve = Shader.PropertyToID("_Dissolve");
 		private TornadoWeapon TornadoWeapon => ParentWeapon as TornadoWeapon;
 		private float _dischargeCooldown;
-
-		protected override void Awake()
-		{
-			base.Awake();
-			_rb = GetComponent<Rigidbody>();
-		}
 
 		public override void SetStats(IWeaponStatsStrategy weaponStatsStrategy)
 		{
@@ -38,6 +43,17 @@ namespace Objects.Abilities.Tornado
 		{
 			if (_dischargeCooldown > 0)
 				_dischargeCooldown -= Time.deltaTime;
+			
+			if (TimeAlive < 1f)
+			{
+				SetDissolveValues(true);
+			}
+			else if (CurrentTimeToLive < 1f)
+			{
+				if (particles.isEmitting)
+					particles.Stop(true);
+				SetDissolveValues(false);
+			}
 		}
 
 		private void OnTriggerStay(Collider other)
@@ -63,10 +79,10 @@ namespace Objects.Abilities.Tornado
 				
 				var targetPosition = enemy.transform.position;
         
-				while(Vector3.Distance(_rb.position, targetPosition) > 0.3f)
+				while(Vector3.Distance(rb.position, targetPosition) > 0.3f)
 				{
-					var newPosition = Vector3.MoveTowards(_rb.position, targetPosition, speed * Time.deltaTime);
-					_rb.MovePosition(new Vector3(newPosition.x, _rb.position.y, newPosition.z));
+					var newPosition = Vector3.MoveTowards(rb.position, targetPosition, speed * Time.deltaTime);
+					rb.MovePosition(new Vector3(newPosition.x, rb.position.y, newPosition.z));
 					yield return null;
 				}
 			}
@@ -76,6 +92,27 @@ namespace Objects.Abilities.Tornado
 		{
 			TornadoWeapon.SpawnSubProjectile(other.gameObject.transform.position);
 			_dischargeCooldown = 0.5f;
+		}
+		
+
+		private void SetDissolveValues(bool isAnticipation)
+		{
+			SetRendererDissolve(coreRenderer, coreMaxDissolve, GetDissolveValue(coreMaxDissolve, isAnticipation));
+			SetRendererDissolve(windOuterRenderer, windOuterMaxDissolve, GetDissolveValue(windOuterMaxDissolve, isAnticipation));
+			SetRendererDissolve(shadowRenderer, shadowMaxDissolve, GetDissolveValue(shadowMaxDissolve, isAnticipation));
+			SetRendererDissolve(windInnerRenderer, windInnerMaxDissolve, GetDissolveValue(windInnerMaxDissolve, isAnticipation));
+		}
+
+		private float GetDissolveValue(float max, bool isAnticipation)
+		{
+			return isAnticipation ? Mathf.Lerp(0f, max, TimeAlive) : Mathf.Lerp(0f, max, CurrentTimeToLive);
+		}
+
+		private void SetRendererDissolve(MeshRenderer renderer, float maxDissolve, float dissolveValue)
+		{
+			var material = renderer.materials[0];
+			var clampedDissolve = Mathf.Clamp(dissolveValue, 0f, maxDissolve);
+			material.SetFloat(Dissolve, clampedDissolve);
 		}
 	}
 }

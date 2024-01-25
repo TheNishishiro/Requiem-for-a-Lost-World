@@ -4,6 +4,7 @@ using DefaultNamespace;
 using Objects.Enemies;
 using Objects.Stage;
 using UnityEngine;
+using Weapons;
 
 namespace Objects.Characters.Nishi.Skill
 {
@@ -17,11 +18,16 @@ namespace Objects.Characters.Nishi.Skill
 			var baseDamage = GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 300 : 50;
 			_damage = baseDamage * (1 + GameData.GetPlayerCharacterData().Stats.DamagePercentageIncrease);
 			_elementalWeapon = new ElementalWeapon(Element.Lightning);
+			CurrentTimeToLive = LifeTime;
+			TimeAlive = 0;
+
+			StopAllStages();
+			State = ProjectileState.Unspecified;
+			SetState(ProjectileState.Spawning);
 		}
 
-		private void Update()
+		protected override void TickLifeTime()
 		{
-			TickLifeTime();
 		}
 
 		private void OnTriggerEnter(Collider other)

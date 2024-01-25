@@ -4876,6 +4876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b686c8ca8ab49d9a852476f93b0bc3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  State: 0
   UseParticles: 0
   ParticleSystem: {fileID: 0}
   hitbox: {fileID: 8967166705897569991}
@@ -4932,7 +4933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8240248664171166714
 Transform:
   m_ObjectHideFlags: 0
@@ -5361,7 +5362,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5414,7 +5415,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5467,9 +5468,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotation:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
-      minScalar: 0
+      minMaxState: 3
+      scalar: 0.7853981
+      minScalar: -0.7853981
       maxCurve:
         serializedVersion: 2
         m_Curve:

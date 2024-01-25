@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &436245941827060200
 Transform:
   m_ObjectHideFlags: 0
@@ -30,7 +30,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1527374891430734356}
-  - {fileID: 4820968479999787956}
   m_Father: {fileID: 4890507879910875728}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1830482525884650664
@@ -67,6 +66,7 @@ Transform:
   m_Children:
   - {fileID: 436245941827060200}
   - {fileID: 423577196699754814}
+  - {fileID: 4106675859691446439}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6440241186477000172
@@ -117,12 +117,16 @@ MonoBehaviour:
   spawningStage:
     stageObject: {fileID: 0}
     stageDuration: 0
+    particleSystems: []
   flyingStage:
     stageObject: {fileID: 681504185406494245}
     stageDuration: 0
+    particleSystems:
+    - {fileID: 6052134164164102851}
   dissipationStage:
     stageObject: {fileID: 9114394663761512380}
     stageDuration: 1
+    particleSystems: []
   isLimitedHitBox: 0
   hitBoxDuration: 0
   hitBoxStart: 0
@@ -1664,8 +1668,8 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     speedRange: {x: 0, y: 1}
-    tilesX: 4
-    tilesY: 4
+    tilesX: 8
+    tilesY: 8
     animationType: 0
     rowIndex: 0
     cycles: 1
@@ -5028,7 +5032,7 @@ GameObject:
   - component: {fileID: 6235659817835633356}
   - component: {fileID: 8626961057143874656}
   m_Layer: 0
-  m_Name: Smoke
+  m_Name: Meteor_FlySmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5047,7 +5051,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 436245941827060200}
+  m_Father: {fileID: 4106675859691446439}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &6052134164164102851
 ParticleSystem:
@@ -19664,6 +19668,38 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &7792369659662218288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4106675859691446439}
+  m_Layer: 0
+  m_Name: Particles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4106675859691446439
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7792369659662218288}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4820968479999787956}
+  m_Father: {fileID: 4890507879910875728}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9114394663761512380
 GameObject:
   m_ObjectHideFlags: 0
@@ -19681,7 +19717,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &423577196699754814
 Transform:
   m_ObjectHideFlags: 0

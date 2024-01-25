@@ -24,8 +24,8 @@ namespace Objects.Abilities.BindingField
 					ProjectileDamageIncreasePercentage = 0;
 				}
 
-				damageable?.SetVulnerable(TimeToLive, WeaponStatsStrategy.GetWeakness());
-				chaseComponent.SetImmobile(TimeToLive);
+				damageable?.SetVulnerable(CurrentTimeToLive, WeaponStatsStrategy.GetWeakness());
+				chaseComponent.SetImmobile(CurrentTimeToLive);
 			}
 		}
 

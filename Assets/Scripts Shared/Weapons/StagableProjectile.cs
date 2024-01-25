@@ -11,8 +11,9 @@ namespace Weapons
     {
 	    public ProjectileState State;
 	    
-        private Vector3 baseScale;
-        protected float TimeToLive;
+	    protected Vector3 baseScale { get; private set; }
+        protected Vector3 calculatedScale { get; private set; }
+        protected float CurrentTimeToLive;
         protected float TimeAlive;
         protected Transform transformCache;
         [SerializeField] public bool UseParticles;
@@ -27,6 +28,17 @@ namespace Weapons
         [SerializeField] public float hitBoxDuration;
         [ShowIf("isLimitedHitBox")]
         [SerializeField] public float hitBoxStart;
+        [SerializeField] public bool isChangeSizeOverLife;
+        [ShowIf("isChangeSizeOverLife")]
+        [SerializeField] public float increaseSizeUntilTime;
+        [ShowIf("isChangeSizeOverLife")]
+        [SerializeField] public float reduceSizeBeforeTime;
+        [ShowIf("isChangeSizeOverLife")]
+        [SerializeField] public Vector3 targetMinSize;
+        [ShowIf("isChangeSizeOverLife")]
+        [SerializeField] public bool multiplyTargetByScale;
+        private Vector3 calculatedAnimationTargetSize;
+        
         
         protected virtual void Awake()
         {
@@ -45,8 +57,13 @@ namespace Weapons
         public virtual void SetStats(IWeaponStatsStrategy weaponStatsStrategy)
         {
 	        WeaponStatsStrategy = weaponStatsStrategy;
-            transform.localScale = baseScale * WeaponStatsStrategy.GetScale();
-            TimeToLive = GetTimeToLive();
+	        calculatedScale = baseScale * WeaponStatsStrategy.GetScale();
+	        calculatedAnimationTargetSize = !multiplyTargetByScale
+		        ? targetMinSize
+		        : new Vector3(targetMinSize.x * calculatedScale.x, targetMinSize.y * calculatedScale.y,
+			        targetMinSize.z * calculatedScale.z);
+            transform.localScale = calculatedScale;
+            CurrentTimeToLive = GetTimeToLive();
             damageCooldown = WeaponStatsStrategy.GetDamageCooldown();
             currentPassedEnemies = WeaponStatsStrategy.GetPassThroughCount();
             StopAllCoroutines();
@@ -61,12 +78,17 @@ namespace Weapons
                 ParticleSystem.Play();
             }
 
-            spawningStage.Stop();
-            flyingStage.Stop();
-            dissipationStage.Stop();
+            StopAllStages();
 
             State = ProjectileState.Unspecified;
             SetState(ProjectileState.Spawning);
+        }
+
+        protected void StopAllStages()
+        {
+	        spawningStage.Stop();
+	        flyingStage.Stop();
+	        dissipationStage.Stop();
         }
 
         private void SpawnUpdate()
@@ -80,6 +102,7 @@ namespace Weapons
 	
         private void FlyUpdate()
         {
+	        ResizeUpdate();
 	        TickLifeTime();
 	        TickDamageCooldown();
 	        CustomUpdate();
@@ -119,6 +142,20 @@ namespace Weapons
 
 	    protected virtual void CustomUpdate()
 	    {
+	    }
+
+	    protected virtual void ResizeUpdate()
+	    {
+		    if (!isChangeSizeOverLife) return;
+		    
+		    if (TimeAlive < increaseSizeUntilTime)
+		    {
+			    transformCache.localScale = SetNewSize(calculatedAnimationTargetSize, true, increaseSizeUntilTime);
+		    }
+		    else if (CurrentTimeToLive < reduceSizeBeforeTime)
+		    {
+			    transformCache.localScale = SetNewSize(calculatedAnimationTargetSize, false, reduceSizeBeforeTime);
+		    }
 	    }
 
 	    public void SetState(ProjectileState state)
@@ -164,6 +201,7 @@ namespace Weapons
 				    spawningStage.Play();
 				    break;
 			    case ProjectileState.Flying:
+				    ResizeUpdate();
 				    flyingStage.Play();
 				    break;
 			    case ProjectileState.Dissipating:
@@ -174,12 +212,12 @@ namespace Weapons
 
 	    private void TickLifeTime()
 	    {
-		    TimeToLive -= Time.deltaTime;
+		    CurrentTimeToLive -= Time.deltaTime;
 		    TimeAlive += Time.deltaTime;
 		    if (isLimitedHitBox)
 				UpdateCollider();
 
-		    if (TimeToLive <= 0)
+		    if (CurrentTimeToLive <= 0)
 		    {
 			    SetState(ProjectileState.Dissipating);
 		    }
@@ -208,6 +246,11 @@ namespace Weapons
 	    {
 		    if (hitbox.enabled)
 			    hitbox.enabled = false;
+	    }
+        
+	    private Vector3 SetNewSize(Vector3 minTarget, bool isAnticipation, float expandTime)
+	    {
+		    return isAnticipation ? Vector3.Lerp(minTarget, calculatedScale, TimeAlive / expandTime) : Vector3.Lerp(minTarget, calculatedScale, CurrentTimeToLive / expandTime);
 	    }
     }
 }

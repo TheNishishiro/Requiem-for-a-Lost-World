@@ -73,6 +73,7 @@ namespace Objects.Enemies
 			_ignoredEnemyColliders.Clear();
 			_isDying = false;
 			_isPlayerControlled = false;
+			_isBossEnemy = false;
 			_playerControlDuration = null;
 			curseParticleSystem.gameObject.SetActive(false);
 
