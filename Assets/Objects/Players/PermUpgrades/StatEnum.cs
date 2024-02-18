@@ -22,6 +22,7 @@
         DamagePercentageIncrease,
         [StatType(true)]
         ExperienceIncreasePercentage,
+        [StatType(true)]
         MovementSpeed,
         [StatType(true)]
         SkillCooldownReductionPercentage,
@@ -61,6 +62,23 @@
         [StatType(true)]
         DamageOverTimeDurationIncrease,
         [StatType(true)]
-        LifeSteal
+        LifeSteal,
+        [StatType(true)]
+        FireDamageIncrease,
+        [StatType(true)]
+        LightningDamageIncrease,
+        [StatType(true)]
+        IceDamageIncrease,
+        [StatType(true)]
+        PhysicalDamageIncrease,
+        [StatType(true)]
+        WindDamageIncrease,
+        [StatType(true)]
+        LightDamageIncrease,
+        [StatType(true)]
+        CosmicDamageIncrease,
+        [StatType(true)]
+        EarthDamageIncrease
+
     }
 }

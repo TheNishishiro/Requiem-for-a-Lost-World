@@ -27,7 +27,7 @@ namespace Objects.Abilities.Book
 			{
 				TimeToLive = 0.5f
 			};
-			_subProjectileStatsStrategy = new WeaponStatsStrategyBase(_subProjectileStats);
+			_subProjectileStatsStrategy = new WeaponStatsStrategyBase(_subProjectileStats, ElementField);
 			
 			_subProjectilePool = new ObjectPool<SimpleDamageProjectile>(
 				() =>

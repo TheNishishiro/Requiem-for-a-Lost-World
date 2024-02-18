@@ -15,7 +15,7 @@ namespace Objects.Abilities.Arrow_Rain
 		
 		private void OnTriggerEnter(Collider other)
 		{
-			SimpleDamage(other, false, out var target);
+			SimpleDamage(other, false, false, out var target);
 
 			if (target == null)
 				return;

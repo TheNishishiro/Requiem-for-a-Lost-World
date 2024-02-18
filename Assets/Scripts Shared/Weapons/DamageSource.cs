@@ -32,10 +32,15 @@ namespace Weapons
 
 		protected void SimpleDamage(Collider other, bool isLimitedUsage)
 		{
-			SimpleDamage(other, isLimitedUsage, out _);
+			SimpleDamage(other, isLimitedUsage, false, out _);
 		}
 
-		protected void SimpleDamage(Collider other, bool isLimitedUsage, out IDamageable damageable)
+		protected void SimpleFollowUpDamage(Collider other)
+		{
+			SimpleDamage(other, false, true, out _);
+		}
+
+		protected void SimpleDamage(Collider other, bool isLimitedUsage, bool isFollowUp, out IDamageable damageable)
 		{
 			damageable = null;
 			if (!other.CompareTag("Enemy") && !other.CompareTag("Destructible"))
@@ -49,19 +54,19 @@ namespace Weapons
 				return;
 
 			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage);
-			damageable.TakeDamage(damage.Damage, ParentWeapon);
+			damageable.TakeDamage(damage, ParentWeapon, isFollowUp);
 
 			if (isLimitedUsage && currentPassedEnemies-- <= 0)
 				OnLifeTimeEnd();
 		}
 
-		protected void SimpleDamage(Damageable damageable, bool isLimitedUsage)
+		protected void SimpleDamage(Damageable damageable, bool isLimitedUsage, bool isFollowUp)
 		{
 			if (damageable == null)
 				return;
 
 			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage);
-			damageable.TakeDamage(damage.Damage, ParentWeapon);
+			damageable.TakeDamage(damage, ParentWeapon, isFollowUp);
 			if (damageable.IsDestroyed())
 				return;
 			
@@ -77,18 +82,21 @@ namespace Weapons
 			
 			damageable = other.GetComponent<IDamageable>();
 			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage);
-			damageable?.TakeDamageWithCooldown(damage.Damage, gameObject, WeaponStatsStrategy.GetDamageCooldown(), ParentWeapon);
+			damageable?.TakeDamageWithCooldown(damage, gameObject, WeaponStatsStrategy.GetDamageCooldown(), ParentWeapon);
 		}
 
-		protected void DamageOverTime(Collider other)
+		protected void DamageOverTime(Collider other, bool isLimitedUsage = false)
 		{
 			if (!other.CompareTag("Enemy") && !other.CompareTag("Destructible"))
 				return;
 			
 			var damageable = other.GetComponent<IDamageable>();
-			
+
 			if (!damageable.IsDestroyed())
 				DamageOverTime(damageable, other);
+			
+			if (isLimitedUsage && currentPassedEnemies-- <= 0)
+				OnLifeTimeEnd();
 		}
 
 		protected void DamageOverTime(IDamageable damageable, Collider other)

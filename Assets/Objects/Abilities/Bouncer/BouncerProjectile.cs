@@ -29,7 +29,7 @@ namespace Objects.Abilities.Bouncer
 
 		private void OnTriggerEnter(Collider other)
 		{
-			SimpleDamage(other, true, out var damageable);
+			SimpleDamage(other, true, false, out var damageable);
 			FindNextTarget();
 
 			if (damageable == null)

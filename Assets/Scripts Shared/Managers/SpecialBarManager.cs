@@ -14,9 +14,15 @@ namespace Managers
 	{
 		[SerializeField] private SpecialBar specialBar;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
+		public static SpecialBarManager instance;
 
 		private void Awake()
 		{
+			if (instance == null)
+			{
+				instance = this;
+			}
+            
 			ResetBar();
 			SetMaxValue(PlayerStatsScaler.GetScaler().GetSpecialMaxValue());
 		}

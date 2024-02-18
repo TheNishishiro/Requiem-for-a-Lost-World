@@ -19,6 +19,8 @@ namespace Weapons
         [SerializeField] public bool UseParticles;
         [ShowIf("UseParticles")]
         [SerializeField] public ParticleSystem ParticleSystem;
+        [SerializeField] private bool disableHitbox;
+        [HideIf("disableHitbox")]
         [SerializeField] private Collider hitbox;
         [SerializeField] private VfxStage spawningStage;
         [SerializeField] private VfxStage flyingStage;
@@ -177,6 +179,8 @@ namespace Weapons
 
 	    private void ToggleHitBox(ProjectileState state)
 	    {
+		    if (disableHitbox) return;
+		    
 		    switch (state)
 		    {
 			    case ProjectileState.Spawning:

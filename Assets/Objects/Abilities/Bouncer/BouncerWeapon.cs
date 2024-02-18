@@ -28,7 +28,7 @@ namespace Objects.Abilities.Bouncer
 				Speed = 1,
 				PassThroughCount = 1
 			};
-			_subProjectileStatsStrategy = new WeaponStatsStrategyBase(_subProjectileStats);
+			_subProjectileStatsStrategy = new WeaponStatsStrategyBase(_subProjectileStats, ElementField);
 			
 			_subProjectilePool = new ObjectPool<BouncerProjectile>(
 				() =>

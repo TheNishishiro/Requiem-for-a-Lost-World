@@ -3,14 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Data.Elements;
+using DefaultNamespace.Data.Weapons;
 using Events.Scripts;
 using Interfaces;
 using Managers;
+using NaughtyAttributes;
 using Objects.Characters;
 using Objects.Stage;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.VFX;
 using Weapons;
 using Random = UnityEngine.Random;
 
@@ -22,6 +25,31 @@ namespace DefaultNamespace
 		[SerializeField] private GameResultData gameResultData;
 		[SerializeField] public GameObject targetPoint;
 		[SerializeField] private AudioClip takeDamageSound;
+		[SerializeField] private bool canBeAfflictedWithElements;
+		[ShowIf("canBeAfflictedWithElements")]
+		[SerializeField] private ChaseComponent chaseComponent;
+		[ShowIf("canBeAfflictedWithElements")]
+		[SerializeField] private VisualEffect fireParticles;
+		[ShowIf("canBeAfflictedWithElements")]
+		[SerializeField] private VisualEffect lightningParticles;
+		[ShowIf("canBeAfflictedWithElements")]
+		[SerializeField] private VisualEffect iceParticles;
+		[ShowIf("canBeAfflictedWithElements")]
+		[SerializeField] private VisualEffect lightParticles;
+		[ShowIf("canBeAfflictedWithElements")]
+		[SerializeField] private VisualEffect cosmicParticles;
+		[ShowIf("canBeAfflictedWithElements")]
+		[SerializeField] private VisualEffect earthParticles;
+		[ShowIf("canBeAfflictedWithElements")]
+		[SerializeField] private VisualEffect meltParticles;
+		[ShowIf("canBeAfflictedWithElements")]
+		[SerializeField] private VisualEffect explosionParticles;
+		[ShowIf("canBeAfflictedWithElements")]
+		[SerializeField] private VisualEffect swirlParticles;
+		[ShowIf("canBeAfflictedWithElements")]
+		[SerializeField] private VisualEffect shockParticles;
+		[ShowIf("canBeAfflictedWithElements")]
+		[SerializeField] private VisualEffect erodeParticles;
 		public Dictionary<GameObject, float> sourceDamageCooldown = new ();
 		private Dictionary<int, Coroutine> _activeDots = new();
 		public float vulnerabilityTimer;
@@ -35,10 +63,20 @@ namespace DefaultNamespace
 		private Transform _targetTransformCache;
 		private static bool _hitSoundPlayedThisFrame;
 
+		private Dictionary<Element, VisualEffect> _elementVfxMap;
+		
 		private void Awake()
 		{
 			_transformCache = transform;
 			_targetTransformCache = targetPoint == null ? _transformCache : targetPoint.transform;
+			_elementVfxMap = new Dictionary<Element, VisualEffect>()
+			{
+				{ Element.Fire, fireParticles},
+				{ Element.Lightning, lightningParticles},
+				{ Element.Ice, iceParticles},
+				{ Element.Light, lightParticles},
+				{ Element.Cosmic, cosmicParticles},
+			};
 		}
 
 		private void OnDisable()
@@ -59,6 +97,15 @@ namespace DefaultNamespace
 			{
 				StopCoroutine(activeDot);
 			}
+
+			if (canBeAfflictedWithElements)
+			{
+				foreach (var elementVfx in _elementVfxMap)
+				{
+					elementVfx.Value.gameObject.SetActive(false);
+				}
+			}
+
 			_activeDots.Clear();
 		}
 
@@ -97,15 +144,20 @@ namespace DefaultNamespace
 		{
 			return resistances.FirstOrDefault(x => x.element == element)?.damageReduction ?? 0;
 		}
-		
+
 		public void TakeDamage(float damage, WeaponBase weaponBase = null, bool isRecursion = false)
 		{
-			var calculatedDamage = damage;
+			TakeDamage(new DamageResult() { Damage = damage }, weaponBase, isRecursion);
+		}
+        
+		public void TakeDamage(DamageResult damageResult, WeaponBase weaponBase = null, bool isRecursion = false)
+		{
+			var calculatedDamage = damageResult.Damage;
 			var isWeaponSpecified = weaponBase != null;
 			if (isWeaponSpecified)
 			{
 				calculatedDamage *= 1 - GetResistance(weaponBase.element);
-				OnElementInflict(weaponBase.element, damage);
+				OnElementInflict(weaponBase.element, damageResult.Damage);
 			}
 
 			calculatedDamage = vulnerabilityTimer > 0 ? calculatedDamage * (1 + vulnerabilityPercentage) : calculatedDamage;
@@ -121,7 +173,7 @@ namespace DefaultNamespace
 
 			if (!isRecursion && additionalDamageTimer > 0)
 			{
-				TakeDamage(damage * additionalDamageModifier, additionalDamageType, true);
+				TakeDamage(new DamageResult{Damage = damageResult.Damage * additionalDamageModifier, IsCriticalHit = damageResult.IsCriticalHit}, additionalDamageType, true);
 			}
 
 			if (isWeaponSpecified && weaponBase.WeaponStatsStrategy != null)
@@ -136,8 +188,12 @@ namespace DefaultNamespace
 			}
 
 			gameResultData.AddDamage(calculatedDamage, weaponBase);
-			MessageManager.instance.PostMessage(calculatedDamage.ToString("0"), _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(weaponBase?.element));
+			var damageMessage = calculatedDamage.ToString("0");
+			if (damageResult.IsCriticalHit)
+				damageMessage += "!";
+			MessageManager.instance.PostMessage(damageMessage, _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(weaponBase?.element));
 			Health -= calculatedDamage;
+			DamageDealtEvent.Invoke(this, calculatedDamage, isRecursion);
 			if (IsDestroyed())
 				weaponBase?.OnEnemyKilled();
 		}
@@ -164,10 +220,15 @@ namespace DefaultNamespace
 
 		public void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase)
 		{
+			TakeDamageWithCooldown(new DamageResult() { Damage = damage }, damageSource, damageCooldown, weaponBase);
+		}
+
+		public void TakeDamageWithCooldown(DamageResult damageResult, GameObject damageSource, float damageCooldown, WeaponBase weaponBase)
+		{
 			if (!sourceDamageCooldown.ContainsKey(damageSource))
 			{
 				sourceDamageCooldown.Add(damageSource, damageCooldown);
-				TakeDamage(damage, weaponBase);
+				TakeDamage(damageResult, weaponBase);
 				return;
 			}
 			
@@ -176,7 +237,7 @@ namespace DefaultNamespace
 			if (sourceDamageCooldown[damageSource] > 0) 
 				return;
 			
-			TakeDamage(damage, weaponBase);
+			TakeDamage(damageResult, weaponBase);
 			sourceDamageCooldown[damageSource] = damageCooldown;
 		}
 
@@ -198,14 +259,14 @@ namespace DefaultNamespace
 				if (!_activeDots.ContainsKey(weaponBase.GetInstanceID())) yield break;
 				
 				timer -= damageFrequency;
-				TakeDamage(damage, weaponBase);
+				TakeDamage(new DamageResult{Damage = damage}, weaponBase);
 
 				if (GameData.IsCharacterWithRank(CharactersEnum.Natalie_BoW, CharacterRank.E5) && Random.value < 0.5f)
 				{
 					var values = Enum.GetValues(typeof(Element));
 					var randomElement = (Element)values.GetValue(Random.Range(0, values.Length));
 					tempWeapon.SetElement(randomElement);
-					TakeDamage(damage, tempWeapon);
+					TakeDamage(new DamageResult{Damage = damage}, tempWeapon);
 					ReduceElementalDefence(randomElement, 0.25f);
 				}
 				
@@ -236,12 +297,20 @@ namespace DefaultNamespace
 		
 		private void OnElementInflict(Element element, float damage)
 		{
-			if (element == Element.None || element == Element.Physical || inflictedElements.Contains(element))
+			if (!canBeAfflictedWithElements || element == Element.None || element == Element.Physical || inflictedElements.Contains(element) || (element == Element.Wind && inflictedElements.Count == 0))
 				return;
 			
 			inflictedElements.Add(element);
-			var reaction = ElementalReactor.GetReaction(inflictedElements);
-			switch (reaction)
+
+			var reactionResult = ElementalReactor.GetReaction(inflictedElements);
+			if (_elementVfxMap.ContainsKey(element))
+				_elementVfxMap[element].gameObject.SetActive(true);
+			if (_elementVfxMap.ContainsKey(reactionResult.removedA))
+				_elementVfxMap[reactionResult.removedA].gameObject.SetActive(false);
+			if (_elementVfxMap.ContainsKey(reactionResult.removedB))
+				_elementVfxMap[reactionResult.removedB].gameObject.SetActive(false);
+			
+			switch (reactionResult.reaction)
 			{
 				case ElementalReaction.None:
 					return;
@@ -249,11 +318,11 @@ namespace DefaultNamespace
 					SetVulnerable(2, 0.5f);
 					break;
 				case ElementalReaction.Explosion:
-					TakeDamage(damage * 0.35f);
+					TakeDamage(new DamageResult{Damage = damage * 0.35f});
 					break;
 				case ElementalReaction.Swirl:
 				{
-					ReduceElementalDefence(element, 0.1f);
+					ReduceElementalDefence(reactionResult.removedA == Element.Wind ? reactionResult.removedB : reactionResult.removedA, 0.1f);
 					break;
 				}
 				case ElementalReaction.Collapse:
@@ -267,11 +336,16 @@ namespace DefaultNamespace
 				}
 				case ElementalReaction.Erode:
 					SetVulnerable(1, 0.1f);
-					TakeDamage(Health * 0.05f);
+					TakeDamage(new DamageResult{Damage = Health * 0.05f});
 					break;
+				case ElementalReaction.Shock:
+					chaseComponent.SetImmobile(0.5f);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
 			
-			MessageManager.instance.PostMessage(reaction.ToString(), _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(element));
+			MessageManager.instance.PostMessage(reactionResult.reaction.ToString(), _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(element));
 		}
 	}
 }

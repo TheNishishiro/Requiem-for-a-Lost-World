@@ -37,7 +37,7 @@ namespace Objects.Abilities.Corruption_Aura
 				if (GameData.IsCharacterWithRank(CharactersEnum.Lucy_BoC, CharacterRank.E3))
 					damageCooldown -= 0.2f;
 
-				enemy.GetDamagableComponent().TakeDamageWithCooldown(WeaponStatsStrategy.GetDamage(), gameObject, damageCooldown,this);
+				enemy.GetDamagableComponent().TakeDamageWithCooldown(WeaponStatsStrategy.GetDamageDealt(), gameObject, damageCooldown,this);
 				if (GameData.IsCharacterWithRank(CharactersEnum.Lucy_BoC, CharacterRank.E2))
 					enemy.GetChaseComponent().SetSlow(1f, 0.3f);
 				if (GameData.IsCharacterWithRank(CharactersEnum.Lucy_BoC, CharacterRank.E4) && Time.frameCount % 30 == 0)
@@ -50,7 +50,7 @@ namespace Objects.Abilities.Corruption_Aura
 			else if (other.CompareTag("Destructible"))
 			{
 				var damageable = other.GetComponent<IDamageable>();
-				damageable.TakeDamageWithCooldown(WeaponStatsStrategy.GetDamage(), gameObject, WeaponStatsStrategy.GetDamageCooldown(),this);
+				damageable.TakeDamageWithCooldown(WeaponStatsStrategy.GetDamageDealt(), gameObject, WeaponStatsStrategy.GetDamageCooldown(),this);
 			}
 		}
 	}

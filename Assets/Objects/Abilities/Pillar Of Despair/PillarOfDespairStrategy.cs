@@ -7,7 +7,7 @@ namespace Objects.Abilities.Pillar_Of_Despair
     {
         private PillarOfDespairWeapon _pillarOfDespairWeapon;
         
-        public PillarOfDespairStrategy(WeaponBase weapon) : base(weapon.weaponStats)
+        public PillarOfDespairStrategy(WeaponBase weapon) : base(weapon.weaponStats, weapon.ElementField)
         {
             _pillarOfDespairWeapon = (PillarOfDespairWeapon)weapon;
         }

@@ -108,6 +108,8 @@ namespace Objects.Players.Scripts
 				_ameliaGlassShield = Instantiate(GameData.GetSpecialPrefab(), abilityContainer).GetComponent<AmeliaGlassShield>();
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Nishi)
 				Instantiate(GameData.GetSpecialPrefab(), abilityContainer);
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Nishi_HoF)
+				Instantiate(GameData.GetSpecialPrefab(), abilityContainer);
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Natalie_BoW && GameData.GetPlayerCharacterRank() >= CharacterRank.E5)
 				Instantiate(GameData.GetSpecialPrefab(), abilityContainer);
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Adam_OBoV && GameData.GetPlayerCharacterRank() >= CharacterRank.E5)
@@ -145,6 +147,9 @@ namespace Objects.Players.Scripts
 					break;
 				case CharactersEnum.Nishi:
 					NishiSkill();
+					break;
+				case CharactersEnum.Nishi_HoF:
+					NishiHoFSkill();
 					break;
 				case CharactersEnum.Natalie_BoW:
 					NatalieSkill();
@@ -225,6 +230,15 @@ namespace Objects.Players.Scripts
 				var randomPosition = Utilities.GetPointOnColliderSurface(Utilities.GetRandomInArea(_transform.position, 5f), gameObject.transform);
 				SpawnManager.instance.SpawnObject(randomPosition, GameData.GetSkillPrefab().gameObject, _transform.rotation);
 			}
+		}
+
+		private void NishiHoFSkill()
+		{
+			if (GameData.IsCharacterRank(CharacterRank.E3))
+				SpecialBarManager.instance.Increment(50);
+			
+			var result = Utilities.GetPointOnColliderSurface(_transform.position + _transform.forward * 10f, gameObject.transform, 1.5f);
+			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, transform.rotation);
 		}
 
 		private void AdamSkill()

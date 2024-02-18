@@ -33,7 +33,7 @@ namespace Objects.Abilities.Tornado
 				Scale = 1f,
 				DetectionRange = 2f
 			};
-			_subProjectileStatsStrategy = new WeaponStatsStrategyBase(_subProjectileStats);
+			_subProjectileStatsStrategy = new WeaponStatsStrategyBase(_subProjectileStats, ElementField);
 			
 			_subProjectilePool = new ObjectPool<LightningChainProjectile>(
 				() =>

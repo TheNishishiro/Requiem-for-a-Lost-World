@@ -25,7 +25,7 @@ namespace Objects.Abilities.Scythe
 			if (!other.CompareTag("Enemy") && !other.CompareTag("Destructible"))
 				return;
 			
-			SimpleDamage(other, false, out var damageable);
+			SimpleDamage(other, false, false, out var damageable);
 			_healthComponent.Damage(-WeaponStatsStrategy.GetHealPerHit(GameData.IsCharacterWithRank(CharactersEnum.Corina_BoB, CharacterRank.E1)));
 
 			if (ScytheWeapon.IsBloodEmbrace && Random.value <= 0.2)

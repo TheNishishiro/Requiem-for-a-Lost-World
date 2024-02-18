@@ -38,5 +38,7 @@
 		Nishi_BoR = 17,
 		[Character("Summer")]
 		Summer = 18,
+		[Character("Nishi_HoF")]
+		Nishi_HoF = 19,
 	}
 }

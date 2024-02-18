@@ -2,6 +2,7 @@
 using Interfaces;
 using Objects.Characters;
 using Objects.Characters.David;
+using Objects.Characters.Nishi_HoF;
 using Objects.Characters.Truzi;
 using Objects.Stage;
 
@@ -12,7 +13,8 @@ namespace Objects.Players.Scripts
         private static readonly Dictionary<CharactersEnum, CharacterScalingStrategyBase> _characterScalingStrategies = new()
         {
             { CharactersEnum.David_BoF, new DavidScalingStrategy() },
-            { CharactersEnum.Truzi_BoT, new TruziScalingStrategy() }
+            { CharactersEnum.Truzi_BoT, new TruziScalingStrategy() },
+            { CharactersEnum.Nishi_HoF, new NishiHofScalingStrategy() },
         };
 
         private static CharacterScalingStrategyBase _defaultScaler = new ();

@@ -14,6 +14,8 @@ namespace Weapons
 		private Vector3 baseScale;
 		protected float TimeToLive;
 		protected float TimeAlive;
+		protected float TotalTimeToLive;
+		protected float TimeLeftToLive => TotalTimeToLive - TimeAlive;
 		protected Transform transformCache;
 		[SerializeField] public bool UseParticles;
 		[ShowIf("UseParticles")]
@@ -36,7 +38,7 @@ namespace Weapons
 		{
 			WeaponStatsStrategy = weaponStatsStrategy;
 			transform.localScale = baseScale * WeaponStatsStrategy.GetScale();
-			TimeToLive = GetTimeToLive();
+			TimeToLive = TotalTimeToLive = GetTimeToLive();
 			damageCooldown = WeaponStatsStrategy.GetDamageCooldown();
 			currentPassedEnemies = WeaponStatsStrategy.GetPassThroughCount();
 			StopAllCoroutines();

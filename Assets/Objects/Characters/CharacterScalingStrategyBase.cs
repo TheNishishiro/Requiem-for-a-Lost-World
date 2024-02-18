@@ -1,7 +1,9 @@
-﻿using DefaultNamespace.Data.Weapons;
+﻿using System;
+using Data.Elements;
+using DefaultNamespace.Data.Weapons;
 using Managers;
 using Objects.Players;
-using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Objects.Characters
 {
@@ -226,6 +228,80 @@ namespace Objects.Characters
 		public virtual float GetHealthRegeneration()
 		{
 			return PlayerStats?.HealthRegen ?? 0;
+		}
+
+		public float GetElementalDamageIncrease(Element weaponElement)
+		{
+			var damageIncrease = 1.0f;
+			switch (weaponElement)
+			{
+				case Element.Fire:
+					damageIncrease += GetFireDamageIncrease();
+					break;
+				case Element.Lightning:
+					damageIncrease += GetLightningDamageIncrease();
+					break;
+				case Element.Ice:
+					damageIncrease += GetIceDamageIncrease();
+					break;
+				case Element.Physical:
+					damageIncrease += GetPhysicalDamageIncrease();
+					break;
+				case Element.Wind:
+					damageIncrease += GetWindDamageIncrease();
+					break;
+				case Element.Light:
+					damageIncrease += GetLightDamageIncrease();
+					break;
+				case Element.Cosmic:
+					damageIncrease += GetCosmicDamageIncrease();
+					break;
+				case Element.Earth:
+					damageIncrease += GetEarthDamageIncrease();
+					break;
+			}
+
+			return damageIncrease;
+		}
+
+		public virtual float GetFireDamageIncrease()
+		{
+			return PlayerStats?.FireDamageIncrease ?? 0;
+		}
+
+		public virtual float GetLightningDamageIncrease()
+		{
+			return PlayerStats?.LightningDamageIncrease ?? 0;
+		}
+
+		public virtual float GetIceDamageIncrease()
+		{
+			return PlayerStats?.IceDamageIncrease ?? 0;
+		}
+
+		public virtual float GetPhysicalDamageIncrease()
+		{
+			return PlayerStats?.PhysicalDamageIncrease ?? 0;
+		}
+
+		public virtual float GetWindDamageIncrease()
+		{
+			return PlayerStats?.WindDamageIncrease ?? 0;
+		}
+
+		public virtual float GetLightDamageIncrease()
+		{
+			return PlayerStats?.LightDamageIncrease ?? 0;
+		}
+
+		public virtual float GetCosmicDamageIncrease()
+		{
+			return PlayerStats?.CosmicDamageIncrease ?? 0;
+		}
+
+		public virtual float GetEarthDamageIncrease()
+		{
+			return PlayerStats?.EarthDamageIncrease ?? 0;
 		}
 
 		public float GetMissingHealthPercentage()

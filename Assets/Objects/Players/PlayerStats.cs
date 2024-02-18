@@ -55,6 +55,14 @@ namespace Objects.Players
 		public float DamageOverTimeFrequencyReductionPercentage;
 		public float DamageOverTimeDurationIncreasePercentage;
 		public float LifeSteal;
+		public float FireDamageIncrease;
+		public float LightningDamageIncrease;
+		public float IceDamageIncrease;
+		public float PhysicalDamageIncrease;
+		public float WindDamageIncrease;
+		public float LightDamageIncrease;
+		public float CosmicDamageIncrease;
+		public float EarthDamageIncrease;
 
 		public PlayerStats()
 		{
@@ -106,6 +114,14 @@ namespace Objects.Players
 			DamageOverTimeFrequencyReductionPercentage = 0;
 			DamageOverTimeDurationIncreasePercentage = 0;
 			LifeSteal = 0;
+			FireDamageIncrease = 0;
+			LightningDamageIncrease = 0;
+			IceDamageIncrease = 0;
+			PhysicalDamageIncrease = 0;
+			WindDamageIncrease = 0;
+			LightDamageIncrease = 0;
+			CosmicDamageIncrease = 0;
+			EarthDamageIncrease = 0;
 		}
 
 		public void Sum(ItemStats item, int rarity)
@@ -149,6 +165,14 @@ namespace Objects.Players
             Rerolls += item.Rerolls != 0 ? item.Rerolls + (rarity - 1) : item.Rerolls;
             Skips += item.Skips != 0 ? item.Skips + (rarity - 1) : item.Skips;
             LifeSteal += item.LifeSteal * rarityFactor;
+            FireDamageIncrease = item.FireDamageIncrease * rarityFactor;
+			LightningDamageIncrease = item.LightningDamageIncrease * rarityFactor;
+			IceDamageIncrease = item.IceDamageIncrease * rarityFactor;
+			PhysicalDamageIncrease = item.PhysicalDamageIncrease * rarityFactor;
+			WindDamageIncrease = item.WindDamageIncrease * rarityFactor;
+			LightDamageIncrease = item.LightDamageIncrease * rarityFactor;
+			CosmicDamageIncrease = item.CosmicDamageIncrease * rarityFactor;
+			EarthDamageIncrease = item.EarthDamageIncrease * rarityFactor;
         }
 
 		public void Set(PlayerStats playerStats)
@@ -202,6 +226,14 @@ namespace Objects.Players
             DamageOverTimeFrequencyReductionPercentage = playerStats.DamageOverTimeFrequencyReductionPercentage;
             DamageOverTimeDurationIncreasePercentage = playerStats.DamageOverTimeDurationIncreasePercentage;
             LifeSteal = playerStats.LifeSteal;
+            FireDamageIncrease = playerStats.FireDamageIncrease;
+            LightningDamageIncrease =  playerStats.LightningDamageIncrease;
+            IceDamageIncrease = playerStats.IceDamageIncrease;
+            PhysicalDamageIncrease =  playerStats.PhysicalDamageIncrease;
+            WindDamageIncrease =  playerStats.WindDamageIncrease;
+            LightDamageIncrease =  playerStats.LightDamageIncrease;
+            CosmicDamageIncrease = playerStats.CosmicDamageIncrease;
+            EarthDamageIncrease =  playerStats.EarthDamageIncrease;
         }
 
 		public IEnumerable<StatsDisplayData> GetStatsList()
@@ -442,6 +474,30 @@ namespace Objects.Players
 					break;
 				case StatEnum.LifeSteal:
 					LifeSteal += value;
+					break;
+				case StatEnum.FireDamageIncrease:
+					FireDamageIncrease += value;
+					break;
+				case StatEnum.LightningDamageIncrease:
+					LightningDamageIncrease += value;
+					break;
+				case StatEnum.IceDamageIncrease:
+					IceDamageIncrease += value;
+					break;
+				case StatEnum.PhysicalDamageIncrease:
+					PhysicalDamageIncrease += value;
+					break;
+				case StatEnum.WindDamageIncrease:
+					WindDamageIncrease += value;
+					break;
+				case StatEnum.LightDamageIncrease:
+					LightDamageIncrease += value;
+					break;
+				case StatEnum.CosmicDamageIncrease:
+					CosmicDamageIncrease += value;
+					break;
+				case StatEnum.EarthDamageIncrease:
+					EarthDamageIncrease += value;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(stat), stat, null);

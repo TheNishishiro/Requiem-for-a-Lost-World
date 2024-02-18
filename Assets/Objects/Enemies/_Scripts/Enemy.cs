@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using DefaultNamespace.Data.Weapons;
 using Events.Scripts;
 using Interfaces;
 using Managers;
@@ -249,11 +250,12 @@ namespace Objects.Enemies
 				var isE5Lucy = GameData.IsCharacterWithRank(CharactersEnum.Lucy_BoC, CharacterRank.E5);
 				
 				var damageIncrease = isE5Lucy ? 2f : 1f;
-				enemyComponent.GetDamagableComponent().TakeDamageWithCooldown(stats.damage * damageIncrease * PlayerStatsScaler.GetScaler().GetDamageIncreasePercentage(), collisionInfo.gameObject, _damageCooldown, null);
+				enemyComponent.GetDamagableComponent().TakeDamageWithCooldown(new DamageResult{Damage = stats.damage * damageIncrease * PlayerStatsScaler.GetScaler().GetDamageIncreasePercentage() }, collisionInfo.gameObject, _damageCooldown, null);
 				
 				// Take damage from other enemies
 				var damageReduction = isE5Lucy ? 0.3f : 1f;
-				GetDamagableComponent().TakeDamageWithCooldown(enemyComponent.GetDamage() * damageReduction, collisionInfo.gameObject, _damageCooldown, null);
+				GetDamagableComponent().TakeDamageWithCooldown(new DamageResult{Damage = enemyComponent.GetDamage() * damageReduction}
+					, collisionInfo.gameObject, _damageCooldown, null);
 			}
 		}
 

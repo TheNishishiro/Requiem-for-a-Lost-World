@@ -43,5 +43,10 @@ namespace Managers
 			
 			FindFirstObjectByType<DiscordManager>().SetInGame();
 		}
+
+		public static bool IsCharacterState(PlayerCharacterState characterState)
+		{
+			return instance?.playerComponent?.CharacterState == characterState;
+		}
 	}
 }

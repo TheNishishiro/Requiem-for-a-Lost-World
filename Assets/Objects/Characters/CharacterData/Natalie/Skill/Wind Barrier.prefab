@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146235456981286275}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.0000000020696}
   m_LocalScale: {x: 1.05, y: 1.05, z: 1.05}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4508385910191947701}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5453755440926232318
 MeshFilter:
@@ -110,6 +110,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144167471434380608}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.525, y: 4.965, z: -0.04}
   m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
@@ -117,7 +118,6 @@ Transform:
   m_Children:
   - {fileID: 2743463634915330600}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-6151377061064853923
 MonoBehaviour:
@@ -131,6 +131,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a92ebcb2a0378624391b69e196278f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  State: 0
+  UseParticles: 0
+  ParticleSystem: {fileID: 0}
+  hitbox: {fileID: 0}
+  spawningStage:
+    stageObject: {fileID: 0}
+    stageDuration: 0
+    particleSystems: []
+  flyingStage:
+    stageObject: {fileID: 0}
+    stageDuration: 0
+    particleSystems: []
+  dissipationStage:
+    stageObject: {fileID: 0}
+    stageDuration: 0
+    particleSystems: []
+  isLimitedHitBox: 0
+  hitBoxDuration: 0
+  hitBoxStart: 0
+  isChangeSizeOverLife: 0
+  increaseSizeUntilTime: 0
+  reduceSizeBeforeTime: 0
+  targetMinSize: {x: 0, y: 0, z: 0}
+  multiplyTargetByScale: 0
   LifeTime: 1
 --- !u!33 &1378802357442504482
 MeshFilter:

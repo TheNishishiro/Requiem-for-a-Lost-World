@@ -28,18 +28,10 @@ namespace Data.Elements
 				{ (Element.Wind, Element.Earth), ElementalReaction.Erode },
 				{ (Element.Light, Element.Cosmic), ElementalReaction.Collapse },
 			};
-
-		/*public static ElementalReaction GetReaction(List<Element> activeElements)
-		{
-			if (activeElements == null || activeElements.Count < 2) return ElementalReaction.None;
-			
-			var validReactionExists = Reactions.TryGetValue((activeElements[0], activeElements[1]), out var reaction);
-			return validReactionExists ? reaction : ElementalReaction.None;
-		}*/
 		
-		public static ElementalReaction GetReaction(List<Element> activeElements)
+		public static (ElementalReaction reaction, Element removedA, Element removedB) GetReaction(List<Element> activeElements)
 		{
-			if (activeElements == null) return ElementalReaction.None;
+			if (activeElements == null) return (ElementalReaction.None, Element.None, Element.None);
 
 			foreach (var a in activeElements)
 			{
@@ -49,11 +41,11 @@ namespace Data.Elements
 					
 					activeElements.Remove(a);
 					activeElements.Remove(b);
-					return reaction;
+					return (reaction, a, b);
 				}
 			}
 
-			return ElementalReaction.None;
+			return (ElementalReaction.None, Element.None, Element.None);
 		}
 	}
 }

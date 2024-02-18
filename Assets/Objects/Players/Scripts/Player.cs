@@ -13,8 +13,10 @@ public class Player : MonoBehaviour
 	[HideInInspector] public LevelComponent levelComponent;
 	[HideInInspector] public HealthComponent healthComponent; 
 	[HideInInspector] public PlayerStatsComponent playerStatsComponent;
+	[HideInInspector] public PlayerVfxComponent playerVfxComponent;
 	[HideInInspector] public Transform playerTransform;
 	[SerializeField] public GameResultData gameResultData;
+	public PlayerCharacterState CharacterState { get; private set; }
 	
 	private void Start()
 	{
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
 		levelComponent = GetComponent<LevelComponent>();
 		healthComponent = GetComponent<HealthComponent>();
 		playerStatsComponent = GetComponent<PlayerStatsComponent>();
+		playerVfxComponent = GetComponent<PlayerVfxComponent>();
 		playerTransform = transform;
 	}
 
@@ -53,5 +56,10 @@ public class Player : MonoBehaviour
 	{
 		var gemsEarned = (int)Math.Ceiling(gemAmount * PlayerStatsScaler.GetScaler().GetItemRewardIncrease());
 		gameResultData.AddGems(gemsEarned);
+	}
+
+	public void SetCharacterState(PlayerCharacterState characterState)
+	{
+		CharacterState = characterState;
 	}
 }

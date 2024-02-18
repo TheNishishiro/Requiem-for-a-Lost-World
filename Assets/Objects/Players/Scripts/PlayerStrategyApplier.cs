@@ -10,6 +10,7 @@ using Objects.Characters.Arika;
 using Objects.Characters.Chitose;
 using Objects.Characters.Corina_Alter;
 using Objects.Characters.David;
+using Objects.Characters.ishi_HoF;
 using Objects.Characters.Maid;
 using Objects.Characters.Natalie;
 using Objects.Characters.Nishi;
@@ -37,6 +38,7 @@ namespace Objects.Players.Scripts
 			{ CharactersEnum.Oana_BoI, new OanaStrategy() },
 			{ CharactersEnum.Alice_BoL, new AliceStrategy() },
 			{ CharactersEnum.Truzi_BoT, new TruziStrategy() },
+			{ CharactersEnum.Nishi_HoF, new NishiHofStrategy() },
 		};
 
 		public void ApplyRankStrategy(CharactersEnum characterId, CharacterRank characterRank, PlayerStats playerStats)

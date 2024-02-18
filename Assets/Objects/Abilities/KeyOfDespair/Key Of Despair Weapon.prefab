@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1271137154976365209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3145681438860061514}
+  - component: {fileID: -5584616090485056525}
+  m_Layer: 0
+  m_Name: Key Of Despair Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &3145681438860061514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271137154976365209}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5584616090485056525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271137154976365209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09427375394440bd96a8ef59de66b01e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 0}
+  Name: Key of Despair
+  Description: 'Perform a combo of 3 slashes dealing fire damage in a wide area '
+  chanceToAppear: 0.8
+  Icon: {fileID: 21300000, guid: 81b201b4349a44d42a9f8752ba4facc4, type: 3}
+  unlockOnAchievement: 1
+  requiredAchievement: 90
+  element: 2
+  weaponStats:
+    Damage: 10
+    Cooldown: 3
+    CooldownReduction: 0
+    Scale: 1
+    Speed: 0
+    TimeToLive: 0.5
+    AttackCount: 0
+    PassThroughCount: 0
+    DamageCooldown: 0
+    DuplicateSpawnDelay: 0.3
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
+    LifeSteal: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: dc463a93416fc5443863ee321fe7067c, type: 2}
+  - {fileID: 11400000, guid: 6fab71f28e6c7944e966d43a75d0a5ec, type: 2}
+  - {fileID: 11400000, guid: 2fbdb283c3c1b5740bf836e99757eaab, type: 2}
+  - {fileID: 11400000, guid: 148ab892d38e32e46a134cfa1b3dafc9, type: 2}
+  - {fileID: 11400000, guid: 5a31143b217b3e7488b84972e977cf50, type: 2}
+  - {fileID: 11400000, guid: 3442e07f43c6617429a72a0bf489707d, type: 2}
+  - {fileID: 11400000, guid: 401c0f32e54f4f347b9e94383cdf8daa, type: 2}
+  - {fileID: 11400000, guid: 4ac58acd1ee307f4d9438fb4ec0d5e7f, type: 2}
+  - {fileID: 11400000, guid: a22e4447b78bfa348accb92a704e5d84, type: 2}
+  - {fileID: 11400000, guid: f6c9028d848feae4ba0aa80fa9ee2501, type: 2}
+  isSkill: 0
+  capacity: 50
+  maxCapacity: 50
+  slashProjectilePrefab: {fileID: 1752247071640283468, guid: b9a8d1becc756b747ad507873ef572bc,
+    type: 3}

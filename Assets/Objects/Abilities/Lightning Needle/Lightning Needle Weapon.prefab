@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7333012636029705903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4244532343032352422}
+  - component: {fileID: 1619891920962130951}
+  m_Layer: 0
+  m_Name: Lightning Needle Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4244532343032352422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7333012636029705903}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1619891920962130951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7333012636029705903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0244f95cf739448299e43c9e6d894c33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 6326457940503127781, guid: 8a220a63e16414e4a969d6da6833cba1,
+    type: 3}
+  Name: Lightning Needle
+  Description: Send lighnting needles in the arc ahead that apply lightning DoT on
+    hit
+  chanceToAppear: 1
+  Icon: {fileID: 21300000, guid: 70565b4c6aae63945aea274e6bcbe674, type: 3}
+  unlockOnAchievement: 0
+  requiredAchievement: 0
+  element: 3
+  weaponStats:
+    Damage: 0
+    Cooldown: 5
+    CooldownReduction: 0
+    Scale: 1
+    Speed: 4
+    TimeToLive: 1
+    AttackCount: 3
+    PassThroughCount: 1
+    DamageCooldown: 0
+    DuplicateSpawnDelay: 0.05
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 8
+    DamageOverTimeDuration: 3
+    DamageOverTimeFrequency: 0.7
+    LifeSteal: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: d65744b7b11ba834681d84b8ddeaea00, type: 2}
+  - {fileID: 11400000, guid: 2c11b03f2079f3345b1e29295e44abbd, type: 2}
+  - {fileID: 11400000, guid: 000fd8304a11c404eb985a6667ac2ad5, type: 2}
+  - {fileID: 11400000, guid: 9f6b8a618c38f0844992b713b2c61328, type: 2}
+  - {fileID: 11400000, guid: 6f2172395749a284ca2b9a4b12d45e71, type: 2}
+  - {fileID: 11400000, guid: e18f491dbc1521b438f83098ab910a4a, type: 2}
+  - {fileID: 11400000, guid: 65ec163b2e790ce409d6e37d21824c55, type: 2}
+  - {fileID: 11400000, guid: 82105616fb9b57a4e9c52c7c3bc63230, type: 2}
+  - {fileID: 11400000, guid: f6c1102e31500754d848dd75b2e3081a, type: 2}
+  - {fileID: 11400000, guid: e5f6d5c95b8d8724fba4b274929ed7f8, type: 2}
+  isSkill: 0
+  capacity: 50
+  maxCapacity: 50

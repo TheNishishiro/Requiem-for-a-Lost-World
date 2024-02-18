@@ -1,7 +1,7 @@
 ﻿
 namespace DefaultNamespace.Data.Achievements
 {
-	public enum AchievementEnum // 89
+	public enum AchievementEnum // 93
 	{
 		[AchievementValue("Jack of all trades", "Obtain 6 weapons in a single game")]
 		Hold6Weapons = 0,
@@ -122,6 +122,10 @@ namespace DefaultNamespace.Data.Achievements
 		Survive15MinutesWithSummer = 50,
 		[AchievementValue("I will protect you", "Survive 30 minutes with Summer")]
 		Survive30MinutesWithSummer = 51,
+		[AchievementValue("Embrace the evil", "Survive 15 minutes with Vanquisher of Faith")]
+		Survive15MinutesWithNishi_HoF = 90,
+		[AchievementValue("I will extinguish all light", "Survive 15 minutes with Vanquisher of Faith")]
+		Survive30MinutesWithNishi_HoF = 91,
 
 		#endregion
 		
@@ -191,6 +195,10 @@ namespace DefaultNamespace.Data.Achievements
 		ObtainSummer_E0 = 82,
 		[AchievementValue("The cutest of them all", "Unlock final shard of Summer")]
 		ObtainSummer_E5 = 83,
+		[AchievementValue("Time of Reckoning", "Obtain Nishi the Vanquisher of Faith")]
+		ObtainNishi_HoF_E0 = 92,
+		[AchievementValue("For you, I will reverse all creation", "Unlock final shard of Summer")]
+		ObtainNishi_HoF_E5 = 93,
 		
 		#endregion
 

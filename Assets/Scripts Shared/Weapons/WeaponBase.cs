@@ -52,7 +52,7 @@ namespace Weapons
 
 		protected virtual void SetWeaponStatsStrategy()
 		{
-			WeaponStatsStrategy = new WeaponStatsStrategyBase(weaponStats);
+			WeaponStatsStrategy = new WeaponStatsStrategyBase(weaponStats, ElementField);
 		}
 
 		public virtual void Awake()

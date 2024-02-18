@@ -11,9 +11,14 @@ namespace Objects.Abilities.Boomerang
 		public void SetDirection(Vector3 targetPoint)
 		{
 			SetDirectionInternal(targetPoint);
-			StartCoroutine(FlyCoroutine());
 		}
-		
+
+		protected override void OnStateChanged(ProjectileState state)
+		{
+			if (state == ProjectileState.Flying)
+				StartCoroutine(FlyCoroutine());
+		}
+
 		private void SetDirectionInternal(Vector3 targetPoint)
 		{
 			direction = (targetPoint - transform.position).normalized;

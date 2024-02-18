@@ -55,8 +55,8 @@ namespace Objects.Environment
 				_ => terrain.detailObjectDensity
 			};
 
-			RemoveTrees(treePrototypeIndex);
-			PlaceTrees(treePrototypeIndex);
+			//RemoveTrees(treePrototypeIndex);
+			//PlaceTrees(treePrototypeIndex);
 
 			if (saveFile.ConfigurationFile.Use3dGrass)
 				SwitchTo3DGrass();

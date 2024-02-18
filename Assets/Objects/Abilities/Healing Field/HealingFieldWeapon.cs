@@ -26,7 +26,7 @@ namespace Objects.Abilities.Healing_Field
 			{
 				TimeToLive = 1f
 			};
-			_subProjectileStatsStrategy = new WeaponStatsStrategyBase(_subProjectileStats);
+			_subProjectileStatsStrategy = new WeaponStatsStrategyBase(_subProjectileStats, ElementField);
 			_subProjectilePool = new ObjectPool<HealingField>(
 				() =>
 				{

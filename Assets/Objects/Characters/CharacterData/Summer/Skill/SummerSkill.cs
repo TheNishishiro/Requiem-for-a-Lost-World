@@ -21,7 +21,6 @@ public class SummerSkill : CharacterSkillBase
 
     public void SetDirection(Vector3 dir, float rotationDegree)
     {
-        //_direction = dir;
         transform.rotation = Quaternion.LookRotation(dir.normalized) * Quaternion.Euler(0,rotationDegree,0);
     }
     

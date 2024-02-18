@@ -38,7 +38,7 @@ namespace Objects.Abilities.Laser_Gun
 			{
 				lineRenderer.SetPosition(1, _targetTransform.position);
 				_transform.LookAt(_targetTransform);
-				SimpleDamage(_laserTarget, false);
+				SimpleDamage(_laserTarget, false, false);
 			}
 			else
 			{

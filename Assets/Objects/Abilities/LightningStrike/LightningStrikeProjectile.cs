@@ -11,7 +11,7 @@ namespace Objects.Abilities.LightningStrike
 		
 		private void OnTriggerEnter(Collider other)
 		{
-			SimpleDamage(other, false, out var damageable);
+			SimpleDamage(other, false, false, out var damageable);
 			if (damageable != null && _lightningStrikeWeapon.IsChainLightning)
 				SpawnChainLightning(other);
 		}

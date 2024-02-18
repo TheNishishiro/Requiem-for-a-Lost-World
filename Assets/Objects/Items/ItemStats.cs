@@ -45,6 +45,14 @@ namespace Objects.Items
 		public float DamageOverTimeFrequencyReductionPercentage;
 		public float DamageOverTimeDurationIncreasePercentage;
 		public float LifeSteal;
+		public float FireDamageIncrease;
+		public float LightningDamageIncrease;
+		public float IceDamageIncrease;
+		public float PhysicalDamageIncrease;
+		public float WindDamageIncrease;
+		public float LightDamageIncrease;
+		public float CosmicDamageIncrease;
+		public float EarthDamageIncrease;
 
 		public void ApplyRarity(int rarity)
 		{
@@ -83,6 +91,14 @@ namespace Objects.Items
 			DamageOverTimeFrequencyReductionPercentage *= rarityFactor;
 			DamageOverTimeDurationIncreasePercentage *= rarityFactor;
 			LifeSteal *= rarityFactor;
+			FireDamageIncrease *= rarityFactor;
+			LightningDamageIncrease *= rarityFactor;
+			IceDamageIncrease *= rarityFactor;
+			PhysicalDamageIncrease *= rarityFactor;
+			WindDamageIncrease *= rarityFactor;
+			LightDamageIncrease *= rarityFactor;
+			CosmicDamageIncrease *= rarityFactor;
+			EarthDamageIncrease *= rarityFactor;
 			Rerolls = Rerolls != 0 ? Rerolls + (rarity - 1) : Rerolls;
 			Skips = Skips != 0 ? Skips + (rarity - 1) : Skips;
 		}
@@ -126,6 +142,14 @@ namespace Objects.Items
             DamageOverTimeFrequencyReductionPercentage += itemUpgradeItemStats.DamageOverTimeFrequencyReductionPercentage * rarityFactor;
             DamageOverTimeDurationIncreasePercentage += itemUpgradeItemStats.DamageOverTimeFrequencyReductionPercentage * rarityFactor;
             LifeSteal += itemUpgradeItemStats.LifeSteal * rarityFactor;
+            FireDamageIncrease += itemUpgradeItemStats.FireDamageIncrease * rarityFactor;
+            LightningDamageIncrease += itemUpgradeItemStats.LightningDamageIncrease * rarityFactor;
+            IceDamageIncrease += itemUpgradeItemStats.IceDamageIncrease * rarityFactor;
+            PhysicalDamageIncrease += itemUpgradeItemStats.PhysicalDamageIncrease * rarityFactor;
+            WindDamageIncrease += itemUpgradeItemStats.WindDamageIncrease * rarityFactor;
+            LightDamageIncrease += itemUpgradeItemStats.LightDamageIncrease * rarityFactor;
+            CosmicDamageIncrease += itemUpgradeItemStats.CosmicDamageIncrease * rarityFactor;
+            EarthDamageIncrease += itemUpgradeItemStats.EarthDamageIncrease * rarityFactor;
             Rerolls += itemUpgradeItemStats.Rerolls == 0 ? 0 : itemUpgradeItemStats.Rerolls + (rarity - 1);
             Skips += itemUpgradeItemStats.Skips == 0 ? 0 : itemUpgradeItemStats.Skips + (rarity - 1);
         }
@@ -170,6 +194,14 @@ namespace Objects.Items
 				.Replace("{DamageOverTime}", Utilities.StatToString(DamageOverTime, rarityFactor))
 				.Replace("{DamageOverTimeFrequencyReduction}", Utilities.StatToString(DamageOverTimeFrequencyReductionPercentage, rarityFactor, true))
 				.Replace("{DamageOverTimeDurationIncrease}", Utilities.StatToString(DamageOverTimeDurationIncreasePercentage, rarityFactor, true))
+				.Replace("{FireDamageIncrease}", Utilities.StatToString(FireDamageIncrease, rarityFactor, true))
+				.Replace("{LightningDamageIncrease}", Utilities.StatToString(LightningDamageIncrease, rarityFactor, true))
+				.Replace("{IceDamageIncrease}", Utilities.StatToString(IceDamageIncrease, rarityFactor, true))
+				.Replace("{PhysicalDamageIncrease}", Utilities.StatToString(PhysicalDamageIncrease, rarityFactor, true))
+				.Replace("{WindDamageIncrease}", Utilities.StatToString(WindDamageIncrease, rarityFactor, true))
+				.Replace("{LightDamageIncrease}", Utilities.StatToString(LightDamageIncrease, rarityFactor, true))
+				.Replace("{CosmicDamageIncrease}", Utilities.StatToString(CosmicDamageIncrease, rarityFactor, true))
+				.Replace("{EarthDamageIncrease}", Utilities.StatToString(EarthDamageIncrease, rarityFactor, true))
 				.Replace("{Rerolls}", (Rerolls == 0 ? 0 : Rerolls + (rarity - 1)).ToString())
 				.Replace("{Skips}", (Skips == 0 ? 0 : Skips + (rarity - 1)).ToString())
 				;

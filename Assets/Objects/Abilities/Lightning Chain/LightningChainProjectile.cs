@@ -38,7 +38,7 @@ namespace Objects.Abilities.Lightning_Chain
 					continue;
 				
 				AddTarget(lastPosition);
-				target.TakeDamage(WeaponStatsStrategy.GetDamage(), ParentWeapon);
+				target.TakeDamage(WeaponStatsStrategy.GetDamageDealt(), ParentWeapon);
 				lastPosition = target.targetPoint.transform.position;
 				yield return new WaitForSeconds(0.1f);
 			}

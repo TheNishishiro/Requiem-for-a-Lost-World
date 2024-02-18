@@ -1,4 +1,5 @@
-﻿using DefaultNamespace.Data.Weapons;
+﻿using Data.Elements;
+using DefaultNamespace.Data.Weapons;
 using Interfaces;
 using Managers;
 using Objects.Players.Scripts;
@@ -9,10 +10,12 @@ namespace Objects.Abilities
     public class WeaponStatsStrategyBase : IWeaponStatsStrategy
     {
         private readonly WeaponStats _weaponStats;
+        private readonly Element _weaponElement;
         
-        public WeaponStatsStrategyBase(WeaponStats weaponStats)
+        public WeaponStatsStrategyBase(WeaponStats weaponStats, Element elementField)
         {
             _weaponStats = weaponStats;
+            _weaponElement = elementField;
         }
         
         public virtual DamageResult GetDamageDealt(float damageIncrease = 0)
@@ -22,16 +25,16 @@ namespace Objects.Abilities
                 IsCriticalHit = IsCrit()
             };
 
-            damageResult.Damage = damageResult.IsCriticalHit
-                ? GetDamage() * (GetDamageIncreasePercentage() + damageIncrease) * GetCritDamage()
-                : GetDamage() * (GetDamageIncreasePercentage() + damageIncrease);
+            var nonCritDamage = GetDamage() * GetElementalDamageIncrease() * (GetDamageIncreasePercentage() + damageIncrease);
+            damageResult.Damage = damageResult.IsCriticalHit ? nonCritDamage * GetCritDamage()  : nonCritDamage;
 
             return damageResult;
         }
 
         public virtual float GetTotalCooldown()
         {
-            return GetCooldown() * GetCooldownReductionPercentage();
+            var cooldownValue = GetCooldownReductionPercentage();
+            return GetCooldown() * (cooldownValue < 0.1f ? 0.1f : cooldownValue);
         }
 
         public virtual float GetDuplicateSpawnDelay()
@@ -54,10 +57,15 @@ namespace Objects.Abilities
 
         public virtual float GetDamageOverTime(float damageIncrease = 0)
         {
+            return GetDamageOverTime() * (damageIncrease + GetDamageIncreasePercentage());
+        }
+
+        protected virtual float GetDamageOverTime()
+        {
             var weaponDamage = _weaponStats.DamageOverTime;
             var playerDamage = PlayerStatsScaler.GetScaler().GetDamageOverTime();
 
-            return (weaponDamage + playerDamage) * (damageIncrease + GetDamageIncreasePercentage());
+            return weaponDamage + playerDamage;
         }
 
         public virtual float GetDamageOverTimeFrequency()
@@ -102,7 +110,7 @@ namespace Objects.Abilities
             var weaponCooldown = _weaponStats.CooldownReduction;
             var playerCooldown = PlayerStatsScaler.GetScaler().GetCooldownReductionPercentage();
 
-            return weaponCooldown + playerCooldown;
+            return playerCooldown - weaponCooldown;
         }
 
         public virtual float GetDamage()
@@ -143,6 +151,11 @@ namespace Objects.Abilities
             var weaponPassCount = _weaponStats.PassThroughCount;
             var playerProjectilePassThroughCount = PlayerStatsScaler.GetScaler().GetProjectilePassThroughCount();
             return weaponPassCount + playerProjectilePassThroughCount;
+        }
+
+        public virtual float GetElementalDamageIncrease()
+        {
+            return PlayerStatsScaler.GetScaler().GetElementalDamageIncrease(_weaponElement);
         }
 
         public virtual float GetLifeSteal()
