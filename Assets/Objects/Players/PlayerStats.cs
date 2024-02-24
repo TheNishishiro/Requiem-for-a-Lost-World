@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using DefaultNamespace.Data.Statuses;
 using DefaultNamespace.Extensions;
+using Managers;
 using Objects.Abilities;
 using Objects.Characters;
 using Objects.Items;
@@ -64,6 +66,18 @@ namespace Objects.Players
 		public float CosmicDamageIncrease;
 		public float EarthDamageIncrease;
 
+		public int RevivesField
+		{
+			get => Revives;
+			set
+			{
+				var valueChanged = Revives != value;
+				Revives = value;
+				if (valueChanged && StatusEffectManager.instance != null)
+					StatusEffectManager.instance.AddOrRemoveEffect(StatusEffectType.Revive, Revives);
+			}
+		}
+        
 		public PlayerStats()
 		{
 			ApplyDefaultStats();
@@ -130,7 +144,7 @@ namespace Objects.Players
         
             AttackCount += item.AttackCount;
             PassThroughCount += item.PassThroughCount;            
-            Revives += item.Revives;
+            RevivesField += item.Revives;
             Health += item.Health * rarityFactor;
             HealthMax += item.HealthMax * rarityFactor;
             MagnetSize += item.MagnetSize * rarityFactor;
@@ -440,7 +454,7 @@ namespace Objects.Players
 					ItemRewardIncrease += value;
 					break;
 				case StatEnum.Revives:
-					Revives += (int)value;
+					RevivesField += (int)value;
 					break;
 				case StatEnum.ProjectileLifeTimeIncreasePercentage:
 					ProjectileLifeTimeIncreasePercentage += value;

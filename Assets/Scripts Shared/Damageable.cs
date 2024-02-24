@@ -294,6 +294,13 @@ namespace DefaultNamespace
 			additionalDamageTimer = duration;
 			additionalDamageModifier = modifier;
 		}
+
+		private IEnumerator PlayVfx(VisualEffect vfx, float time)
+		{
+			vfx.gameObject.SetActive(true);
+			yield return new WaitForSeconds(time);
+			vfx.gameObject.SetActive(false);
+		}
 		
 		private void OnElementInflict(Element element, float damage)
 		{
@@ -319,6 +326,10 @@ namespace DefaultNamespace
 					break;
 				case ElementalReaction.Explosion:
 					TakeDamage(new DamageResult{Damage = damage * 0.35f});
+					break;
+				case ElementalReaction.Annihilation :
+					if (Random.value >= 0.5f)
+						TakeDamage(new DamageResult{Damage = damage});
 					break;
 				case ElementalReaction.Swirl:
 				{

@@ -11,13 +11,14 @@ using Objects.Players.PermUpgrades;
 using Objects.Stage;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Objects.Players.Scripts
 {
 	public class PlayerStatsComponent : MonoBehaviour
 	{
-		private PlayerStats _playerStats;
+		public PlayerStats playerStats;
 		public bool IsInvincible;
 		private Coroutine _moveSpeedBoostCoroutine;
 		private Coroutine _attackBoostCoroutine;
@@ -27,43 +28,43 @@ namespace Objects.Players.Scripts
 		
 		public void Set(PlayerStats playerStats)
 		{
-			_playerStats ??= new PlayerStats();
+			this.playerStats ??= new PlayerStats();
 			if (playerStats != null)
-				_playerStats.Set(playerStats);
+				this.playerStats.Set(playerStats);
 
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Arika_BoV && GameData.GetPlayerCharacterRank() == CharacterRank.E3)
-				_playerStats.SkillCooldownReductionPercentage += 0.25f;
+				this.playerStats.SkillCooldownReductionPercentage += 0.25f;
 		}
 
 		public void Apply(ItemStats itemStats, int rarity)
 		{
-			_playerStats.Sum(itemStats, rarity);
+			playerStats.Sum(itemStats, rarity);
 		}
 		
 		public void Add(PermUpgradeType permUpgradeType, float value)
 		{
-			_playerStats.Add(permUpgradeType, value);
+			playerStats.Add(permUpgradeType, value);
 		}
 
 		public void ApplyPermanent(PermUpgrade permUpgrade, int upgradeLevel)
 		{
-			_playerStats.Add(permUpgrade.type, permUpgrade.increasePerLevel * upgradeLevel);
+			playerStats.Add(permUpgrade.type, permUpgrade.increasePerLevel * upgradeLevel);
 		}
 		
 		public void Add(StatEnum stat, float value)
 		{
-			_playerStats.Add(stat, value);
+			playerStats.Add(stat, value);
 			StatChangedEvent.Invoke(stat, value);
 		}
 
 		public PlayerStats GetStats()
 		{
-			return _playerStats;
+			return playerStats;
 		}
 
 		public IEnumerable<StatsDisplayData> GetStatsDisplayData()
 		{
-			return _playerStats.GetStatsList();
+			return playerStats.GetStatsList();
 		}
 
 		public void SetInvincible(bool isInvincible)
@@ -73,122 +74,122 @@ namespace Objects.Players.Scripts
 
 		public void UseRevive()
 		{
-			_playerStats.Revives--;
+			playerStats.RevivesField--;
 		}
 
 		public void SetHealth(float health)
 		{
-			_playerStats.Health = health;
+			playerStats.Health = health;
 		}
 
 		public bool IsFullHealth()
 		{
-			return Math.Abs((_playerStats?.Health - _playerStats?.HealthMax).GetValueOrDefault()) < 0.01f;
+			return Math.Abs((playerStats?.Health - playerStats?.HealthMax).GetValueOrDefault()) < 0.01f;
 		}
 
 		public bool IsDead()
 		{
-			return _playerStats?.Health <= 0 && !IsInvincible;
+			return playerStats?.Health <= 0 && !IsInvincible;
 		}
 
 		public void ApplyRegeneration()
 		{
-			TakeDamage(-_playerStats.HealthRegen);
+			TakeDamage(-playerStats.HealthRegen);
 		}
 
 		public void IncreaseSpeed(float value)
 		{
-			_playerStats.Speed += value;
+			playerStats.Speed += value;
 		}
 
 		public void IncreaseCritRate(float critRateIncrease)
 		{
-			_playerStats.CritRate += critRateIncrease;
+			playerStats.CritRate += critRateIncrease;
 		}
 
 		public void IncreaseCooldownReductionPercentage(float value)
 		{
-			_playerStats.CooldownReductionPercentage += value;
+			playerStats.CooldownReductionPercentage += value;
 		}
 
 		public void IncreaseCritDamage(float critDamageIncrease)
 		{
-			_playerStats.CritDamage += critDamageIncrease;
+			playerStats.CritDamage += critDamageIncrease;
 		}
 
 		public void IncreaseAttackCount(int amount)
 		{
-			_playerStats.AttackCount += amount;
+			playerStats.AttackCount += amount;
 		}
 
 		public void IncreaseEnemyHealth(float percentage)
 		{
-			_playerStats.EnemyHealthIncreasePercentage += percentage;
+			playerStats.EnemyHealthIncreasePercentage += percentage;
 		}
 
 		public void IncreaseFlatDamage(int amount)
 		{
-			_playerStats.Damage += amount;
+			playerStats.Damage += amount;
 		}
 
 		public void IncreaseProjectileSize(float percentage)
 		{
-			_playerStats.Scale += percentage;
+			playerStats.Scale += percentage;
 		}
 
 		public void IncreaseDamageIncreasePercentage(float damageIncreasePercentage)
 		{
-			_playerStats.DamagePercentageIncrease += damageIncreasePercentage;
+			playerStats.DamagePercentageIncrease += damageIncreasePercentage;
 		}
 
 		public void IncreaseMaxHealth(float amount)
 		{
-			_playerStats.HealthMax += amount;
+			playerStats.HealthMax += amount;
 		}
 
 		public void IncreaseHealingReceived(float amount)
 		{
-			_playerStats.HealingIncreasePercentage += amount;
+			playerStats.HealingIncreasePercentage += amount;
 		}
 
 		public void IncreaseExperienceGain(float amount)
 		{
-			_playerStats.ExperienceIncreasePercentage += amount;
+			playerStats.ExperienceIncreasePercentage += amount;
 		}
 
 		public void IncreaseSkip(int amount)
 		{
-			_playerStats.Skips += amount;
+			playerStats.Skips += amount;
 		}
 
 		public void IncreaseReroll(int amount)
 		{
-			_playerStats.Rerolls += amount;
+			playerStats.Rerolls += amount;
 		}
 
 		public void IncreaseMovementSpeed(float amount)
 		{
-			_playerStats.MovementSpeed += amount;
+			playerStats.MovementSpeed += amount;
 		}
 
 		public void IncreaseDamageOverTime(float amount)
 		{
-			_playerStats.DamageOverTime += amount;
+			playerStats.DamageOverTime += amount;
 		}
 
 		public void IncreaseLuck(float amount)
 		{
-			_playerStats.Luck += amount;
+			playerStats.Luck += amount;
 		}
 
 		public void IncreaseDamageTaken(float amount)
 		{
-			_playerStats.DamageTakenIncreasePercentage += amount;
+			playerStats.DamageTakenIncreasePercentage += amount;
 		}
 		
 		public void IncreaseDodgeChance(float amount)
 		{
-			_playerStats.DodgeChance += amount;
+			playerStats.DodgeChance += amount;
 		}
 		
 		public int GetTotalDamage(int baseDamage)
@@ -201,20 +202,20 @@ namespace Objects.Players.Scripts
 		
 		public void TakeDamage(float amount, bool isPreventDeath = false)
 		{
-			_playerStats.Health -= amount;
+			playerStats.Health -= amount;
 
-			switch (_playerStats.Health)
+			switch (playerStats.Health)
 			{
 				case < 0 when !isPreventDeath:
-					_playerStats.Health = 0;
+					playerStats.Health = 0;
 					break;
 				case < 0:
-					_playerStats.Health = 1;
+					playerStats.Health = 1;
 					break;
 				default:
 				{
-					if (_playerStats.Health > _playerStats.HealthMax)
-						_playerStats.Health = _playerStats.HealthMax;
+					if (playerStats.Health > playerStats.HealthMax)
+						playerStats.Health = playerStats.HealthMax;
 					break;
 				}
 			}

@@ -8,6 +8,7 @@
 		Swirl, // Shred resistance to swirled element by 10%
 		Collapse, // Reduce all resistances by 10%
 		Shock, // Paralyze enemy for 0.5s
-		Erode // Increase damage taken by 10% for 1s and instantly deal 5% of current HP as damage
+		Erode, // Increase damage taken by 10% for 1s and instantly deal 5% of current HP as damage
+		Annihilation
 	}
 }

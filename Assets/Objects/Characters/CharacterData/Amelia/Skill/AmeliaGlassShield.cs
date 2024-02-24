@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DefaultNamespace.Data.Statuses;
 using Events.Handlers;
 using Events.Scripts;
 using Managers;
@@ -54,11 +55,8 @@ public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler, ISpeci
         if (_activeShards.Count == 0 || amount <= 0)
             return;
         
-        var shard = _activeShards.First();
-        shard.Shatter();
-        _activeShards.Remove(shard);
-        
         FindFirstObjectByType<HealthComponent>().Damage(-amount);
+        DestroyShard();
     }
 
     public void OnSpecialBarFilled()
@@ -79,6 +77,15 @@ public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler, ISpeci
             Destroy(go);
         component.Initialize(transform);
         _activeShards.Add(component);
+        StatusEffectManager.instance.AddOrRemoveEffect(StatusEffectType.AmeliaGlassShard, _activeShards.Count);
+    }
+
+    private void DestroyShard()
+    {
+        var shard = _activeShards.First();
+        shard.Shatter();
+        _activeShards.Remove(shard);
+        StatusEffectManager.instance.AddOrRemoveEffect(StatusEffectType.AmeliaGlassShard, _activeShards.Count);
     }
 
     public void OnExpPickedUp(float amount)

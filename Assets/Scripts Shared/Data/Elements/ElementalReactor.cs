@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Objects.Characters;
+using Objects.Stage;
 
 namespace Data.Elements
 {
@@ -27,6 +29,7 @@ namespace Data.Elements
 				{ (Element.Lightning, Element.Wind), ElementalReaction.Swirl },
 				{ (Element.Wind, Element.Earth), ElementalReaction.Erode },
 				{ (Element.Light, Element.Cosmic), ElementalReaction.Collapse },
+				{ (Element.Fire, Element.Cosmic), ElementalReaction.Annihilation },
 			};
 		
 		public static (ElementalReaction reaction, Element removedA, Element removedB) GetReaction(List<Element> activeElements)
@@ -38,6 +41,7 @@ namespace Data.Elements
 				foreach (var b in activeElements.Where(b => a != b))
 				{
 					if (!Reactions.TryGetValue((a, b), out var reaction)) continue;
+					if (reaction == ElementalReaction.Annihilation && !GameData.IsCharacter(CharactersEnum.Nishi_HoF)) continue;
 					
 					activeElements.Remove(a);
 					activeElements.Remove(b);

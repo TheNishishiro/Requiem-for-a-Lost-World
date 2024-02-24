@@ -38,7 +38,7 @@ namespace Managers
 		{
 			_messagePool[_count].gameObject.SetActive(true);
 			_messagePool[_count].color = color;
-			_messagePool[_count].transform.position = worldPosition;
+			_messagePool[_count].transform.position = Utilities.GetRandomInArea(worldPosition, 0.2f);
 			_messagePool[_count].transform.localRotation = rotation;
 			_messagePool[_count].text = text;
 			_count += 1;
