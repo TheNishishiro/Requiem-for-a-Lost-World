@@ -35,8 +35,8 @@ namespace Objects.Players.Scripts
 				AchievementManager.instance.OnHealing(amount);
 			}
 			
-			DamageTakenEvent.Invoke(amount);
 			playerStatsComponent.TakeDamage(amount, isPreventDeath);
+			DamageTakenEvent.Invoke(amount);
 			UpdateHealthBar();
 			
 			if (playerStatsComponent.IsDead())
