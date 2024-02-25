@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Data.Difficulty;
 using DefaultNamespace.Data;
 using Managers;
 using NUnit.Framework;
@@ -13,6 +14,13 @@ namespace Objects.Stage
 {
 	public class GameData
 	{
+		private static DifficultyData _currentDifficultyData;
+
+		public static void SetCurrentDifficultyData(DifficultyData difficultyData)
+		{
+			_currentDifficultyData = difficultyData;
+		}
+		
 		public static Sprite GetPlayerAbilityIcon()
 		{
 			return CharacterListManager.instance?.GetActiveCharacter()?.AbilityIcon;
@@ -91,6 +99,11 @@ namespace Objects.Stage
 		public static List<SkillNode> GetCharacterSkillNodes()
 		{
 			return CharacterListManager.instance?.GetActiveCharacter()?.skillNodes ?? new List<SkillNode>();
+		}
+
+		public static DifficultyData GetCurrentDifficulty()
+		{
+			return _currentDifficultyData;
 		}
 
 		public static bool IsCharacterWithRank(CharactersEnum characterId, CharacterRank rank)

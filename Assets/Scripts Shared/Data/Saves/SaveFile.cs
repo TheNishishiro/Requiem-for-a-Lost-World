@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Data.Difficulty;
 using DefaultNamespace.Data.Achievements;
 using DefaultNamespace.Extensions;
 using JetBrains.Annotations;
@@ -39,6 +40,7 @@ namespace DefaultNamespace.Data
 		public ulong BossKills;
 		public bool IsFirstTutorialCompleted;
 		public int Pity;
+		public DifficultyEnum SelectedDifficulty;
 		public UnityEvent<AchievementEnum> AchievementUnlocked;
 		public UnityEvent<CharactersEnum, CharacterRank> OnCharacterUnlocked;
 		
@@ -104,6 +106,7 @@ namespace DefaultNamespace.Data
 			BossKills = saveData.BossKills;
 			IsFirstTutorialCompleted = saveData.IsFirstTutorialCompleted;
 			Pity = saveData.Pity;
+			SelectedDifficulty = saveData.SelectedDifficulty;
 			SelectedCharacterId = saveData.SelectedCharacterId;
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
@@ -235,6 +238,7 @@ namespace DefaultNamespace.Data
 		public ulong BossKills;
 		public bool IsFirstTutorialCompleted;
 		public int Pity;
+		public DifficultyEnum SelectedDifficulty;
 		public CharactersEnum? SelectedCharacterId;
 		
 		public SaveData(){}
@@ -258,6 +262,8 @@ namespace DefaultNamespace.Data
 			SelectedCharacterId = saveFile.SelectedCharacterId;
 			TimePlayed = saveFile.TimePlayed;
 			BossKills = saveFile.BossKills;
+			SelectedDifficulty = saveFile.SelectedDifficulty;
 		}
+
 	}
 }

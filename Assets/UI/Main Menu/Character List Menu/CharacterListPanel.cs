@@ -13,12 +13,12 @@ namespace UI.Main_Menu.Character_List_Menu
 	public class CharacterListPanel : MonoBehaviour
 	{
 		[SerializeField] private TextMeshProUGUI nameTextField;
+		[SerializeField] private TextMeshProUGUI finsihedDifficultyTextField;
 		[SerializeField] private TextMeshProUGUI levelTextField;
 		[SerializeField] private CharacterExpBar experienceSlider;
 		[SerializeField] private Image experienceSliderImage;
 		[SerializeField] private GameObject lockPanel;
 		[SerializeField] private Image characterPanel;
-		[SerializeField] private Color wonWithCharacterColor;
 		[HideInInspector] public CharacterData characterData;
 		private SaveFile _saveFile;
 		private CharacterInfoPanel _characterInfoPanel;
@@ -39,8 +39,8 @@ namespace UI.Main_Menu.Character_List_Menu
 			
 			nameTextField.text = characterData.Name;
 			levelTextField.text = $"lv. {_characterSaveData.Level}";
-			if (_characterSaveData.FinishedGame)
-				nameTextField.color = levelTextField.color = wonWithCharacterColor;
+			finsihedDifficultyTextField.text = new string('\u2726', _characterSaveData.DifficultyFinished);
+			finsihedDifficultyTextField.color = characterData.ColorTheme;
 			experienceSlider.SetValue(_characterSaveData.Experience, _characterSaveData.ExperienceNeeded);
 			lockPanel.SetActive(!_characterSaveData.IsUnlocked);
 			characterPanel.sprite = characterData.CharacterCard;

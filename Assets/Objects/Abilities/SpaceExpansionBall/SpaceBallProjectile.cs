@@ -44,17 +44,14 @@ namespace Objects.Abilities.SpaceExpansionBall
 				StartCoroutine(Enlarge());
 			}
 		}
-		
-		protected override void OnLifeTimeEnd()
-		{
-			IsDead = true;
-			if (!SpaceBallWeapon.IsGallacticCollapse)
-			{
-				Destroy();
-				return;
-			}
 
-			StartCoroutine(Collapse());
+		protected override void OnStateChanged(ProjectileState state)
+		{
+			if (state == ProjectileState.Dissipating)
+			{
+				StartCoroutine(Collapse());
+			}
+			base.OnStateChanged(state);
 		}
 
 		private IEnumerator Enlarge()
@@ -88,10 +85,13 @@ namespace Objects.Abilities.SpaceExpansionBall
 			}
 			
 			// Spawn explosion
-			SpaceBallWeapon.SpawnSubProjectile(transformCache.position);
-			
-			yield return new WaitForSeconds(1f);
-			Destroy();
+			if (SpaceBallWeapon.IsGallacticCollapse)
+			{
+				SpaceBallWeapon.SpawnSubProjectile(transformCache.position);
+				yield return new WaitForSeconds(1f);
+			}
+
+			base.Destroy();
 		}
 
 		private void OnTriggerEnter(Collider other)

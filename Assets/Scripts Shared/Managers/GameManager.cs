@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Data.Difficulty;
 using DefaultNamespace;
 using DefaultNamespace.Data;
 using Managers.StageEvents;
@@ -9,6 +10,7 @@ using Objects.Players.PermUpgrades;
 using Objects.Players.Scripts;
 using Objects.Stage;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Managers
 {
@@ -18,6 +20,8 @@ namespace Managers
 		[SerializeField] public PlayerStatsComponent playerStatsComponent;
 		[SerializeField] public Player playerComponent;
 		[SerializeField] private SpecialBarManager specialBarManager;
+		[SerializeField] private DifficultyContainer difficultyContainer;
+		
 
 		private void Awake()
 		{
@@ -25,8 +29,9 @@ namespace Managers
 			{
 				instance = this;
 			}
-			
+
 			var saveFile = FindFirstObjectByType<SaveFile>();
+			GameData.SetCurrentDifficultyData(difficultyContainer.GetData(saveFile.SelectedDifficulty));
 			playerStatsComponent.Set(GameData.GetPlayerStartingStats());
             if (GameData.GetPlayerCharacterData()?.UseSpecialBar == true)
 	            specialBarManager.gameObject.SetActive(true);

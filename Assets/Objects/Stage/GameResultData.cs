@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Data.Difficulty;
+using DefaultNamespace.Data;
+using Managers;
 using UnityEngine;
 using Weapons;
 
@@ -8,6 +11,7 @@ namespace Objects.Stage
 	[CreateAssetMenu]
 	public class GameResultData : ScriptableObject
 	{
+		[SerializeField] private DifficultyContainer difficultyContainer;
 		public int Gold;
 		public int Gems;
 		public int MonstersKilled;
@@ -16,6 +20,7 @@ namespace Objects.Stage
 		public bool IsGameEnd;
 		public bool IsWin;
 		public int Level;
+		public DifficultyEnum Difficulty;
 		public int CharacterExp => (int) (MonstersKilled / 1000.0f + Time * 0.25f);
 
 		public void AddDamage(float damage, WeaponBase weaponBase)
@@ -74,12 +79,16 @@ namespace Objects.Stage
 
 		public void FinalizeGameResult()
 		{
+			var saveFile = SaveManager.instance.GetSaveFile();
+			Difficulty = saveFile.SelectedDifficulty;
+			var currentDifficulty = difficultyContainer.GetData(Difficulty);
+			
 			var timeSpent = Time / 60.0f;
-			var goldIncreaseByTime = timeSpent * 0.03f;
-			var gemIncreaseByTime = timeSpent * 0.05f;
+			var goldIncreaseByTime = timeSpent * 0.03f * currentDifficulty.RewardModifier;
+			var gemIncreaseByTime = timeSpent * 0.05f * currentDifficulty.RewardModifier;
 							
-			Gold += (int)(Gold * (1 + goldIncreaseByTime) + MonstersKilled / 10.0f);
-			Gems += (int)(MonstersKilled / 100.0f * (1 + gemIncreaseByTime));
+			Gold += (int)(Gold * (1 + goldIncreaseByTime) + MonstersKilled / 10.0f * currentDifficulty.RewardModifier);
+			Gems += (int)(MonstersKilled / 100.0f * currentDifficulty.RewardModifier * (1 + gemIncreaseByTime));
 			if (IsWin)
 			{
 				Gold += 2000;

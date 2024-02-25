@@ -10,7 +10,7 @@ namespace Objects.Players.Scripts
 {
 	public class LevelComponent : MonoBehaviour
 	{
-		private int experience = 0;
+		private float experience = 0;
 		private int level = 1;
 		[SerializeField] private UpgradePanelManager _upgradePanelManager;
 		[SerializeField] private ExperienceBar experienceBar;
@@ -28,9 +28,9 @@ namespace Objects.Players.Scripts
 			experienceBar.UpdateSlider(experience, ToLevelUp);
 		}
 
-		public void AddExperience(int amount)
+		public void AddExperience(float amount)
 		{
-			experience += (int)(amount * PlayerStatsScaler.GetScaler().GetExperienceIncrease());
+			experience += amount * PlayerStatsScaler.GetScaler().GetExperienceIncrease() * GameData.GetCurrentDifficulty().ExperienceGainModifier;
 			CheckLevelUp();
 			experienceBar.UpdateSlider(experience, ToLevelUp);
 		}

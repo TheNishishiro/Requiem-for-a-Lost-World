@@ -9,7 +9,7 @@ namespace Objects.Drops.ExpDrop
 {
 	public class ExpPickUpObject : PickupObject
 	{
-		[SerializeField] public int expAmount;
+		[SerializeField] public float expAmount;
 		[SerializeField] private SpriteRenderer gemImage;
 		[SerializeField] private SpriteRenderer gemMinimapIcon;
 		
@@ -29,7 +29,7 @@ namespace Objects.Drops.ExpDrop
 			}
 		}
 
-		public void AddExp(int exp)
+		public void AddExp(float exp)
 		{
 			expAmount += exp;
 			AdjustColor();

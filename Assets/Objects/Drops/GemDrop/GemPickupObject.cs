@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Interfaces;
 using Objects.Drops;
+using Objects.Stage;
 using UnityEngine;
 
 public class GemPickupObject : PickupObject
@@ -10,7 +11,7 @@ public class GemPickupObject : PickupObject
 		
     public override void OnPickUp(Player player)
     {
-        player.AddGems(gemAmount);
+        player.AddGems((int)(gemAmount * GameData.GetCurrentDifficulty().PickUpValueModifier));
     }
 
     public override void SetAmount(int amount)

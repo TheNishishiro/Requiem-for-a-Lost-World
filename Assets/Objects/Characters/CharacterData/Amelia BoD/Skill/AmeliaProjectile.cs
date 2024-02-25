@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Cinemachine;
 using Data.Elements;
 using DefaultNamespace;
 using Objects.Abilities.Laser_Gun;
@@ -76,11 +77,25 @@ namespace Objects.Characters.Amelia.Skill
 
 			_smh.active = true;
 			_ca.active = true;
+			
+			var cinemachineVirtualCamera = FindAnyObjectByType<CinemachineVirtualCamera>();
+			var perlinNoise = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+			perlinNoise.m_AmplitudeGain = 2;
 
 			yield return new WaitForSeconds(0.1f);
 			
 			_smh.active = false;
 			_ca.active = false;
+			
+			yield return new WaitForSeconds(0.3f);
+			perlinNoise.m_AmplitudeGain = 1.5f;
+			yield return new WaitForSeconds(0.5f);
+			perlinNoise.m_AmplitudeGain = 1;
+			yield return new WaitForSeconds(0.3f);
+			perlinNoise.m_AmplitudeGain = 0.5f;
+			yield return new WaitForSeconds(0.7f);
+			perlinNoise.m_AmplitudeGain = 0f;
+			
 		}
 		
 		private void OnTriggerEnter(Collider other)

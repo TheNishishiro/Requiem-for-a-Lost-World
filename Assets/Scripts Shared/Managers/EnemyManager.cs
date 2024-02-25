@@ -6,6 +6,7 @@ using DefaultNamespace.BaseClasses;
 using Managers;
 using Objects.Enemies;
 using Objects.Players.Scripts;
+using Objects.Stage;
 using UnityEngine;
 using UnityEngine.Pool;
 using Weapons;
@@ -87,7 +88,7 @@ public class EnemyManager : Singleton<EnemyManager>
 		if (!defaultSpawns.Any())
 			return;
 		
-		_timer = spawnTimer * PlayerStatsScaler.GetScaler().GetEnemySpawnRateIncrease();
+		_timer = spawnTimer * PlayerStatsScaler.GetScaler().GetEnemySpawnRateIncrease() * GameData.GetCurrentDifficulty().EnemySpawnRateModifier;
 		
 		var randomSpawn = defaultSpawns[Random.Range(0, defaultSpawns.Count)];
 		SpawnEnemy(randomSpawn);
@@ -95,7 +96,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
 	public void SpawnEnemy(EnemyData enemyToSpawn)
 	{
-		var maxEnemyCount = enemyMaxCount * PlayerStatsScaler.GetScaler().GetEnemyCountIncrease();
+		var maxEnemyCount = enemyMaxCount * PlayerStatsScaler.GetScaler().GetEnemyCountIncrease() * GameData.GetCurrentDifficulty().EnemyCapacityModifier;
 		if (currentEnemyCount >= maxEnemyCount && !enemyToSpawn.isBossEnemy)
 			return;
 

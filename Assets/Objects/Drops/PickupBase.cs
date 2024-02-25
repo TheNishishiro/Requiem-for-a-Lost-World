@@ -1,8 +1,10 @@
 ﻿using System;
 using Interfaces;
 using Managers;
+using NaughtyAttributes;
 using Objects.Drops.ExpDrop;
 using Objects.Players.Scripts;
+using Objects.Stage;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,6 +21,10 @@ namespace Objects.Drops
 		protected bool IsFollowingPlayer;
 		private const float Speed = 20f;
 		[SerializeField] private bool isStationary;
+		[SerializeField] protected bool canExpire;
+		[ShowIf("canExpire")]
+		[SerializeField] private float lifeTime;
+		protected float _currentLifeTime;
 
 		protected void Init()
 		{
@@ -30,6 +36,7 @@ namespace Objects.Drops
 		public void Reset()
 		{
 			IsFollowingPlayer = false;
+			_currentLifeTime = lifeTime;
 		}
 
 		protected void FollowPlayerWhenClose()
@@ -43,7 +50,7 @@ namespace Objects.Drops
 			if (!IsFollowingPlayer)
 			{
 				var distance = Vector3.Distance(_player.playerTransform.position, _cachedTransform.position);
-				if (distance < PlayerStatsScaler.GetScaler().GetMagnetSize())
+				if (distance < PlayerStatsScaler.GetScaler().GetMagnetSize() * GameData.GetCurrentDifficulty().ItemAttractionModifier)
 					IsFollowingPlayer = true;
 				return;
 			}

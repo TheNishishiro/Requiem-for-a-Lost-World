@@ -22,6 +22,7 @@ namespace UI.Main_Menu.Character_List_Menu
 		[SerializeField] private TextMeshProUGUI expTextField;
 		[SerializeField] private TextMeshProUGUI killCountTextField;
 		[SerializeField] private TextMeshProUGUI highestLevelTextField;
+		[SerializeField] private TextMeshProUGUI skillTreeTextField;
 		[SerializeField] private CharacterExpBar expSlider;
 		[SerializeField] private StarterEntry startingWeapon;
 		[SerializeField] private StarterEntry startingSkill;
@@ -51,6 +52,7 @@ namespace UI.Main_Menu.Character_List_Menu
 			nameTextField.text = characterData.Name;
 			titleTextField.text = characterData.Title;
 			levelTextField.text = characterSaveData.Level.ToString();
+			skillTreeTextField.text = $"Skill tree ({characterSaveData.skillPoints})";
 			expTextField.text = $"EXP ► {(characterSaveData.Experience / (float) characterSaveData.ExperienceNeeded):P}";
 			expSlider.SetValue(characterSaveData.Experience, characterSaveData.ExperienceNeeded);
 			separationLine1.color = separationLine2.color = separationLine3.color = separationLine4.color = separationLine5.color = separationLine6.color = 

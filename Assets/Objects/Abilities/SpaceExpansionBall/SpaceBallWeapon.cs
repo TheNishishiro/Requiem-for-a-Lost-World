@@ -22,7 +22,6 @@ namespace Objects.Abilities.SpaceExpansionBall
 		public override void Awake()
 		{
 			base.Awake();
-
 			_subProjectileStats = new WeaponStats()
 			{
 				TimeToLive = 0.5f
@@ -40,6 +39,7 @@ namespace Objects.Abilities.SpaceExpansionBall
 				{
 					_subProjectileStats.Damage = WeaponStatsStrategy.GetDamage() * 2;
 					_subProjectileStats.Scale = WeaponStatsStrategy.GetScale();
+					projectile.transform.position = _subProjectilePosition;
 					projectile.SetParentWeapon(this, false);
 					projectile.SetStats(_subProjectileStatsStrategy);
 					projectile.gameObject.SetActive(true);

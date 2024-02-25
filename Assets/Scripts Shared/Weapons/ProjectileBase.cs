@@ -57,22 +57,7 @@ namespace Weapons
 		{
 			return WeaponStatsStrategy.GetTotalTimeToLive();
 		}
-
-		public void TickProjectile()
-		{
-			TickLifeTime();
-			TickDamageCooldown();
-		}
-
-		public void TickLifeTime()
-		{
-			TimeToLive -= Time.deltaTime;
-			TimeAlive += Time.deltaTime;
-
-			if (TimeToLive <= 0 && !IsDead)
-				OnLifeTimeEnd();
-		}
-
+		
 		protected void ReturnToPool<T>(ObjectPool<T> pool, T entity) where T : MonoBehaviour
 		{
 			pool.Release(entity);

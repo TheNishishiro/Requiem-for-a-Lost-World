@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 		return levelComponent.GetLevel();
 	}
 	
-	public void AddExperience(int amount)
+	public void AddExperience(float amount)
 	{
 		levelComponent.AddExperience(amount);
 	}

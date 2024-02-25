@@ -1,6 +1,7 @@
 ﻿using DefaultNamespace;
 using Interfaces;
 using Managers;
+using NaughtyAttributes;
 using Objects.Drops;
 using Objects.Drops.ExpDrop;
 using Objects.Players.Scripts;
@@ -20,6 +21,12 @@ public class Pickup : PickupBase
 	private void Update()
 	{
 		FollowPlayerWhenClose();
+		if (canExpire)
+		{
+			_currentLifeTime -= Time.deltaTime;
+			if (_currentLifeTime <= 0)
+				Destroy();
+		}
 	}
 
 	private void OnTriggerEnter(Collider col)

@@ -12,6 +12,7 @@ namespace StarterAssets
 #endif
 	public class FirstPersonController : MonoBehaviour
 	{
+		public VirtualJoystick joystick;
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 4.0f;
@@ -121,38 +122,6 @@ namespace StarterAssets
 		{
 			JumpAndGravity();
 			GroundedCheck();
-
-			/*if (Touchscreen.current != null)
-			{
-				var touch = Touchscreen.current.primaryTouch;
-			
-				if (touch.press.isPressed)
-				{
-					Vector2 currentTouchPosition = touch.position.ReadValue();
-			
-					if (currentTouchPosition.x > Screen.width / 2)
-					{
-						// Right side of the screen -> camera control
-						if (!_touchHasBegun) _previousTouchPosition = currentTouchPosition;
-			
-						_input.look = (currentTouchPosition - _previousTouchPosition) * CameraSensitivity;
-					}
-					else
-					{
-						// Left side of the screen -> movement control
-						Vector2 movement = new Vector2(currentTouchPosition.x - Screen.width / 4, currentTouchPosition.y - Screen.height / 2);
-						_input.move = movement.normalized;
-					}
-			
-					_previousTouchPosition = currentTouchPosition;
-					_touchHasBegun = true;
-				}
-				else
-				{
-					_touchHasBegun = false;
-				}
-			}*/
-			
 			Move();
 		}
 

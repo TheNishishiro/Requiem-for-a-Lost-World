@@ -23,8 +23,13 @@ namespace UI.Labels.InGame.PauseMenu
 		private void Update()
 		{
 			if (!Input.GetKeyDown(KeyCode.Escape)) return;
+
+			ToggleMenu();
+		}
+
+		public void ToggleMenu()
+		{
 			if (levelUpPanel.activeInHierarchy || chestPanel.activeInHierarchy || gameOverPanel.activeInHierarchy) return;
-			
 			if (!panel.activeInHierarchy)
 				OpenMenu();
 			else

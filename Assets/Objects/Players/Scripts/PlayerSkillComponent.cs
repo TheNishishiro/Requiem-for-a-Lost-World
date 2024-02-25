@@ -72,8 +72,13 @@ namespace Objects.Players.Scripts
 			
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
-				UseSkill(GameData.GetPlayerCharacterId());
+				UseSkill();
 			}
+		}
+
+		public void UseSkill()
+		{
+			UseSkill(GameData.GetPlayerCharacterId());
 		}
 
 		public void FixedUpdate()
@@ -195,7 +200,7 @@ namespace Objects.Players.Scripts
 			var maxEnemies = GameData.IsCharacterRank(CharacterRank.E3) ? 20 : 10;
 			
 			var enemies = EnemyManager.instance.GetActiveEnemies()
-				.Where(x => GameData.IsCharacterRank(CharacterRank.E1) || x.IsBoss())
+				.Where(x => GameData.IsCharacterRank(CharacterRank.E1) || !x.IsBoss())
 				.OrderBy(_ => Random.value)
 				.Take(Random.Range(5, maxEnemies));
 			foreach (var enemy in enemies)

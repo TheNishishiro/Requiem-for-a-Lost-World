@@ -4,6 +4,7 @@ using DefaultNamespace.Data.Achievements;
 using Objects.Stage;
 using UI.Labels.InGame.Minimap;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace UI.Labels.InGame
@@ -16,6 +17,8 @@ namespace UI.Labels.InGame
 		[SerializeField] private Image expBarFillImage;
 		[SerializeField] private Image pauseMenuCharacterImage;
 		[SerializeField] private MinimapComponent mapPanel;
+		[SerializeField] private GameObject uiControlsCanvas;
+		
 		
 		public void Awake()
 		{
@@ -23,6 +26,7 @@ namespace UI.Labels.InGame
 			characterAvatarImageBox.sprite = GameData.GetPlayerCharacterAvatar();
 			expBarFillImage.color = GameData.GetPlayerColorTheme() ?? Color.cyan;
 			mapPanel.gameObject.SetActive(false);
+			uiControlsCanvas.SetActive(Touchscreen.current != null);
 		}
 	}
 }

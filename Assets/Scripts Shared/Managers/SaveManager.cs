@@ -25,13 +25,18 @@ namespace Managers
 				instance = this;
 			}
 			
-			_saveData = FindObjectOfType<SaveFile>();
+			_saveData = FindFirstObjectByType<SaveFile>();
 			Time.timeScale = 1f;
 			if (_isFirstLoad)
 			{
 				_isFirstLoad = false;
 				LoadGame();
 			}
+		}
+
+		public SaveFile GetSaveFile()
+		{
+			return _saveData;
 		}
 
 		public void SaveGame()

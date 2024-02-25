@@ -15,7 +15,7 @@ namespace DefaultNamespace.Data
 		public int RankUpLevel;
 		public ulong KillCount;
 		public int HighestInGameLevel;
-		public bool FinishedGame;
+		public int DifficultyFinished;
 		public int skillPoints;
 		public List<int> unlockedSkillPoints;
 		public int ExperienceNeeded => (int)(Level * 75 * 1.5f);
@@ -53,8 +53,8 @@ namespace DefaultNamespace.Data
 			if (gameResultData.Level > HighestInGameLevel)
 				HighestInGameLevel = gameResultData.Level;
 
-			if (!FinishedGame && gameResultData.IsWin)
-				FinishedGame = true;
+			if (gameResultData.IsWin && DifficultyFinished < (int)gameResultData.Difficulty)
+				DifficultyFinished = (int)gameResultData.Difficulty + 1;
 		}
 		
 		public void AddExperience(int experience)

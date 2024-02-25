@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Interfaces;
 using Objects.Drops;
+using Objects.Stage;
 using UnityEngine;
 
 public class GoldPickUpObject : PickupObject
@@ -10,7 +11,7 @@ public class GoldPickUpObject : PickupObject
 		
     public override void OnPickUp(Player player)
     {
-        player.AddGold(goldAmount);
+        player.AddGold((int)(goldAmount * GameData.GetCurrentDifficulty().PickUpValueModifier));
     }
 
     public override void SetAmount(int amount)
