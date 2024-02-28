@@ -19,7 +19,7 @@ namespace Objects.Environment
 
 		private void Start()
 		{
-			var saveFile = FindObjectOfType<SaveFile>();
+			var saveFile = FindFirstObjectByType<SaveFile>();
 			if (saveFile == null)
 			{
 				Debug.Log("Save file not found");

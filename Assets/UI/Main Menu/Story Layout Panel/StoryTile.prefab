@@ -85,8 +85,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6019069948123866373}
-  - component: {fileID: 4465756654844369788}
   - component: {fileID: 7704251090730622491}
+  - component: {fileID: 6580911157793809237}
   m_Layer: 5
   m_Name: StoryTile
   m_TagString: Untagged
@@ -116,27 +116,6 @@ RectTransform:
   m_AnchoredPosition: {x: 626, y: -352}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4465756654844369788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 606630238568651625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a270d48bb006614c8cb6285e2e82dd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  requiredStoryPoints: 0
-  loreEntry:
-    TextFile: {fileID: 0}
-    Background: {fileID: 0}
-  imageSprite: {fileID: 0}
-  uiImage: {fileID: 7333591728840515744}
-  notificationImage: {fileID: 264201378636830500}
-  chapterNumberText: {fileID: 6474086149653875928}
-  progressionText: {fileID: 1963797092053061293}
 --- !u!114 &7704251090730622491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +157,27 @@ MonoBehaviour:
   preferredDelay: 0
   playOnAwake: 0
   applyCurveAtStart: 1
+--- !u!114 &6580911157793809237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606630238568651625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b5dea823c1c4e4989dd8c60b9e0ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredStoryPoints: 0
+  loreEntry:
+    TextFile: {fileID: 0}
+    Background: {fileID: 0}
+  imageSprite: {fileID: 0}
+  uiImage: {fileID: 7333591728840515744}
+  notificationImage: {fileID: 264201378636830500}
+  chapterNumberText: {fileID: 6474086149653875928}
+  progressionText: {fileID: 1963797092053061293}
 --- !u!1 &2335071222228170203
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +525,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4465756654844369788}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UI.Main_Menu.Story_Layout_Panel.StoryTile, Assembly-CSharp
         m_MethodName: OpenStoryEntry
         m_Mode: 1

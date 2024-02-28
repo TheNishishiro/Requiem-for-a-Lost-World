@@ -22,7 +22,8 @@ namespace DefaultNamespace.Data
 {
 	public class SaveFile : MonoBehaviour
 	{
-		private const string SavePath = "./saveFile.json";
+		private const string _saveName = "saveFile.json";
+		private static string SavePath => Application.platform == RuntimePlatform.Android ? Path.Combine(Application.persistentDataPath, _saveName) : Path.Combine("./", _saveName);
 		public Dictionary<CharactersEnum, CharacterSaveData> CharacterSaveData;
 		public Dictionary<PermUpgradeType, int> PermUpgradeSaveData;
 		public Dictionary<AchievementEnum, bool> AchievementSaveData;

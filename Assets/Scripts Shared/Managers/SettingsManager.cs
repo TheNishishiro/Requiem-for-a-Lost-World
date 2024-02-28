@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace.Data;
+using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -165,8 +166,7 @@ namespace Managers
 		
 		public void SaveSettings()
 		{
-			var configuration = FindObjectOfType<SaveFile>().ConfigurationFile;
-			
+			var configuration = FindFirstObjectByType<SaveFile>().ConfigurationFile;
 			configuration.PresetIndex = presetDropdown.value;
 			configuration.Vsync = vsyncToggle.isOn;
 			configuration.GrassRenderDistance = grassRenderDistanceDropdown.value;

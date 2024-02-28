@@ -8,16 +8,20 @@ namespace Managers
 	{
 		public void Blur()
 		{
-			var volume = FindObjectOfType<Volume>();
-			volume.profile.TryGet(out DepthOfField _dof);
-			_dof.active = true;
+			var volume = FindAnyObjectByType<Volume>(FindObjectsInactive.Include);
+			volume.profile.TryGet(out DepthOfField dof);
+			if (dof == null) return;
+			
+			dof.active = true;
 		}
 		
 		public void DeBlur()
 		{
-			var volume = FindObjectOfType<Volume>();
-			volume.profile.TryGet(out DepthOfField _dof);
-			_dof.active = false;
+			var volume = FindAnyObjectByType<Volume>(FindObjectsInactive.Include);
+			volume.profile.TryGet(out DepthOfField dof);
+			if (dof == null) return;
+			
+			dof.active = false;
 		}
 	}
 }

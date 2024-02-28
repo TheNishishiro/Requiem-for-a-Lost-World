@@ -10,6 +10,7 @@ namespace Managers
 {
 	public class DestructablesManager : MonoBehaviour
 	{
+		public static DestructablesManager instance;
 		[SerializeField] private List<Destructable> destructables;
 		[SerializeField] private Vector2 spawnArea;
 		[SerializeField] private float spawnCooldown;
@@ -18,15 +19,24 @@ namespace Managers
 		private Player _player;
 		private float _currentSpawnCooldown;
 		private float Range => spawnArea.x + 3;
+		public bool IsSpawnDisabled { get; set; }
+
 		private readonly Collider[] _results = new Collider[10];
 		
 		public void Start()
 		{
+			if (instance == null)
+			{
+				instance = this;
+			}
+			
 			_player = FindFirstObjectByType<Player>();
 		}
 
 		public void Update()
 		{
+			if (IsSpawnDisabled) return;
+			
 			if (_currentSpawnCooldown > 0)
 			{
 				_currentSpawnCooldown -= Time.deltaTime;

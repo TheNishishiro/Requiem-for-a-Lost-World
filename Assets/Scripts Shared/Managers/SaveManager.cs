@@ -85,10 +85,12 @@ namespace Managers
 			QualitySettings.lodBias = settings.LodLevel switch
 			{
 				0 => 0.4f,
-				1 => 1f,
-				2 => 2f,
-				3 => 3f,
-				4 => 4f,
+				1 => 0.8f,
+				2 => 1f,
+				3 => 2f,
+				4 => 3f,
+				5 => 4f,
+				6 => 5f,
 				_ => QualitySettings.lodBias
 			};
 
@@ -186,24 +188,27 @@ namespace Managers
 				3 => 8,
 				_ => QualitySettings.antiAliasing
 			};
-
+			
+			if (Application.platform == RuntimePlatform.Android) return;
+			
 			switch (settings.WindowMode)
 			{
 				case 0:
 					Screen.fullScreen = true;
-					Screen.SetResolution(settings.ResolutionWidth, settings.ResolutionHeight, true);
+					Screen.SetResolution(Screen.width, Screen.height, true);
 					break;
 				case 1:
 					Screen.fullScreen = false;
 					Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-					Screen.SetResolution(settings.ResolutionWidth, settings.ResolutionHeight, FullScreenMode.FullScreenWindow);
+					Screen.SetResolution(settings.ResolutionWidth, settings.ResolutionHeight,
+						FullScreenMode.FullScreenWindow);
 					break;
 				case 2:
 					Screen.fullScreen = false;
 					Screen.SetResolution(settings.ResolutionWidth, settings.ResolutionHeight, false);
 					break;
 			}
-			
+
 		}
 	}
 }

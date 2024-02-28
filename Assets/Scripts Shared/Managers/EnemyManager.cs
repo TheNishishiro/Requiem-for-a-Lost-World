@@ -30,6 +30,7 @@ public class EnemyManager : Singleton<EnemyManager>
 	private float _healthMultiplier = 1.0f;
 	private EnemyData _currentEnemySpawning;
 	private float _enemySpeedMultiplier = 1;
+	public bool IsDisableEnemySpawn;
 
 	protected override void Awake()
 	{
@@ -99,7 +100,9 @@ public class EnemyManager : Singleton<EnemyManager>
 		var maxEnemyCount = enemyMaxCount * PlayerStatsScaler.GetScaler().GetEnemyCountIncrease() * GameData.GetCurrentDifficulty().EnemyCapacityModifier;
 		if (currentEnemyCount >= maxEnemyCount && !enemyToSpawn.isBossEnemy)
 			return;
-
+		if (IsDisableEnemySpawn)
+			return;
+		
 		_currentEnemySpawning = enemyToSpawn;
 		enemyPool.Get();
 	}

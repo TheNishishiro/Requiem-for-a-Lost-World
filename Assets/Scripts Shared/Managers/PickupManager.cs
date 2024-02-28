@@ -135,6 +135,14 @@ namespace Managers
 			}
 		}
 
+		public void DestroyAll()
+		{
+			foreach (var pickup in FindObjectsByType<Pickup>(FindObjectsInactive.Include,FindObjectsSortMode.None))
+			{
+				DestroyPickup(pickup);
+			}
+		}
+
 		private IEnumerator MergeGemPickups()
 		{
 			while (true)

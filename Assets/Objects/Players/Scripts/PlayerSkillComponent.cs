@@ -361,13 +361,13 @@ namespace Objects.Players.Scripts
 			const float skillDuration = 10f;
 			var hpPenalty = 0.1f;
 			if (rank >= CharacterRank.E2)
-				hpPenalty = 0.6f;
-			if (rank >= CharacterRank.E5)
 				hpPenalty = 0.4f;
+			if (rank >= CharacterRank.E5)
+				hpPenalty = 0.6f;
 			
 			playerStatsComponent.SetInvincible(true);
 			var targetHp = PlayerStatsScaler.GetScaler().GetMaxHealth() * (1 - hpPenalty);
-			var hpDiff = targetHp - PlayerStatsScaler.GetScaler().GetHealth();
+			var hpDiff = PlayerStatsScaler.GetScaler().GetHealth() - targetHp;
 			GameManager.instance.playerComponent.TakeDamage(hpDiff, true, true);
 			
 			var obj = Instantiate(GameData.GetSkillPrefab(), abilityContainer);

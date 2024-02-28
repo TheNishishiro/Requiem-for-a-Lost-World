@@ -14,6 +14,9 @@ namespace Managers
 		{
 			if (!GameData.GetPlayerCharacterData().PickWeaponOnStart)
 				HideCursor();
+			if (Application.platform == RuntimePlatform.Android)
+				ShowCursor();
+		
 		}
 
 		private void Update()
@@ -40,6 +43,8 @@ namespace Managers
 
 		public void HideCursor()
 		{
+			if (Application.platform == RuntimePlatform.Android) return;
+			
 			Cursor.visible = false;
 			Cursor.lockState = CursorLockMode.Locked;
 			starterAssetsInputs.cursorInputForLook = true;
