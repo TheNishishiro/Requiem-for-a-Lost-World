@@ -11,6 +11,7 @@ using StarterAssets;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class MulitplayerPlayer : NetworkBehaviour
 {
@@ -19,7 +20,8 @@ public class MulitplayerPlayer : NetworkBehaviour
     public FirstPersonController firstPersonController;
     public StarterAssetsInputs starterAssetsInputs;
     public SpriteRenderer spriteRenderer;
-    public CharactersEnum currentCharacter;
+    private CharactersEnum localCharacterId;
+    public NetworkVariable<CharactersEnum> currentCharacterId = new (0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private bool _keepAlive = true;
     
     public void Start()
@@ -35,8 +37,8 @@ public class MulitplayerPlayer : NetworkBehaviour
         playerInput.enabled = IsOwner;
         firstPersonController.enabled = IsOwner;
         starterAssetsInputs.enabled = IsOwner;
-        
         base.OnNetworkSpawn();
+        
         if (IsOwner)
         {
             StartCoroutine(WaitForAddWeapon());
@@ -45,7 +47,16 @@ public class MulitplayerPlayer : NetworkBehaviour
             StartCoroutine(WaitForGameManager());
             StartCoroutine(WaitForPlayerSkillComponent());
 
-            StartCoroutine(BroadcastSkinData());
+            currentCharacterId.Value = GameData.GetPlayerCharacterId();
+        }
+    }
+
+    public void Update()
+    {
+        if (localCharacterId != currentCharacterId.Value)
+        {
+            spriteRenderer.sprite = GameData.GetCharacterSprite(currentCharacterId.Value);
+            localCharacterId = currentCharacterId.Value;
         }
     }
 
@@ -56,25 +67,6 @@ public class MulitplayerPlayer : NetworkBehaviour
             _keepAlive = false;
             GameManager.instance.BackToMainMenu();
         }
-    }
-
-    private IEnumerator BroadcastSkinData()
-    {
-        while (_keepAlive)
-        {
-            NotifyMySkinRpc(this, GameData.GetPlayerCharacterId());
-            yield return new WaitForSeconds(5);
-        }
-    }
-    
-    [Rpc(SendTo.Everyone)]
-    private void NotifyMySkinRpc(NetworkBehaviourReference networkBehaviourReference, CharactersEnum characterEnum)
-    {
-        if (!networkBehaviourReference.TryGet(out MulitplayerPlayer player)) return;
-        if (currentCharacter == characterEnum) return;
-        
-        player.currentCharacter = characterEnum;
-        player.spriteRenderer.sprite = GameData.GetCharacterSprite(characterEnum);
     }
     
     private IEnumerator WaitForAddWeapon()

@@ -2,6 +2,7 @@
 {
 	public enum CharactersEnum
 	{
+		Unknown = 0,
 		[Character("Corina")]
 		Corina_BoB = 1,
 		[Character("Lucy")]
