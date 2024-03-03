@@ -17,8 +17,7 @@ namespace Weapons
 
         protected override void Destroy()
         {
-            if (IsOwner)
-                ReturnToPool(_objectPool, _object);
+            ReturnToPool(_objectPool, _object);
         }
     }
 }

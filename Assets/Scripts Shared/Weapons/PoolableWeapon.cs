@@ -17,18 +17,10 @@ namespace Weapons
         
         public override void Attack()
         {
-            if (useNetworkPool)
-            {
-                RpcManager.instance.FireProjectileRpc(WeaponId, transform.position, NetworkManager.Singleton.LocalClientId);
+            if (pool.CountActive >= maxCapacity)
+                return;
 
-            }
-            else
-            {
-                if (pool.CountActive >= maxCapacity)
-                    return;
-
-                pool.Get();
-            }
+            pool.Get();
         }
         
         protected override void InitPool()

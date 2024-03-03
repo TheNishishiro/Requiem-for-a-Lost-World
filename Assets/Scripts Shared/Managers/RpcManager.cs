@@ -30,26 +30,6 @@ namespace Managers
                 damageableComponent.Health -= damage;
             }
         }
-        
-        [Rpc(SendTo.Server)]
-        public void FireProjectileRpc(WeaponEnum weaponId, Vector3 spawnPosition, ulong clientId)
-        {
-            var projectile = NetworkObjectPool.Singleton.GetNetworkObject(WeaponManager.instance.weaponProjectilePrefabs[weaponId], spawnPosition, Quaternion.identity);
-            var netObj = projectile.GetComponent<NetworkObject>();
-            netObj.SpawnWithOwnership(clientId);
-            
-            FireProjectileRpc(weaponId, netObj, RpcTarget.Single(clientId, RpcTargetUse.Temp));
-        }        
-        
-        [Rpc(SendTo.SpecifiedInParams)]
-        public void FireProjectileRpc(WeaponEnum weaponId, NetworkObjectReference objectReference, RpcParams rpcParams)
-        {
-            if (objectReference.TryGet(out var networkObject))
-            {
-                var unlockedWeapon = WeaponManager.instance.GetUnlockedWeapon(weaponId);
-                unlockedWeapon.SetupProjectile(networkObject.gameObject);
-            }
-        }
 
         [Rpc(SendTo.Everyone)]
         public void AddEnemyKillRpc(bool isBoss)

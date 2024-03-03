@@ -8,7 +8,7 @@ using UnityTemplateProjects;
 
 namespace UI.Labels.InGame.PauseMenu
 {
-	public class ExitButton : NetworkBehaviour
+	public class ExitButton : MonoBehaviour
 	{
 		public void BackToMainMenu(bool isWin)
 		{

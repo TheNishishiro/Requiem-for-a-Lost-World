@@ -17,7 +17,7 @@ using UnityEngine.Serialization;
 
 namespace Weapons
 {
-	public abstract class WeaponBase : NetworkBehaviour, IPlayerItem
+	public abstract class WeaponBase : MonoBehaviour, IPlayerItem
 	{
 		[SerializeField] protected bool useNetworkPool;
 		[SerializeField] public GameObject spawnPrefab;
@@ -150,11 +150,6 @@ namespace Weapons
 
 		public virtual void OnEnemyKilled()
 		{
-		}
-
-		public virtual void SetupProjectile(GameObject projectile)
-		{
-			
 		}
 	}
 }

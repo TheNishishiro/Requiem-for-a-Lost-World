@@ -19,16 +19,7 @@ namespace Objects.Abilities.Katana
 
 			return true;
 		}
-
-		public override void SetupProjectile(GameObject projectile)
-		{
-			var katanaProjectile = projectile.GetComponent<KatanaProjectile>();
-			var transform1 = transform;
-			var slashPosition = transform1.position + transform1.forward/2;
-			katanaProjectile.transform.position = slashPosition;
-			katanaProjectile.SetParentWeapon(this);
-		}
-
+		
 		protected override int GetAttackCount()
 		{
 			var attackCount = base.GetAttackCount();

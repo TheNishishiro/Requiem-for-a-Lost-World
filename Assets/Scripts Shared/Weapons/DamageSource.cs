@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Weapons
 {
-    public class DamageSource : NetworkBehaviour
+    public class DamageSource : MonoBehaviour
     {
 	    protected IWeaponStatsStrategy WeaponStatsStrategy;
 	    protected WeaponBase ParentWeapon;
