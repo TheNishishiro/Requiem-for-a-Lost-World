@@ -69,14 +69,14 @@ namespace Managers
             {
                 "immortal", () =>
                 {
-                    GameManager.instance.playerStatsComponent.IsInvincible = true;
+                    GameManager.instance.playerComponent.playerStatsComponent.IsInvincible = true;
                     Debug.Log("Can die: false");
                 }
             },
             {
                 "mortal", () =>
                 {
-                    GameManager.instance.playerStatsComponent.IsInvincible = false;
+                    GameManager.instance.playerComponent.playerStatsComponent.IsInvincible = false;
                     Debug.Log("Can die: true");
                 }
             },

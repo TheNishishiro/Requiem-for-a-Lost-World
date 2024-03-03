@@ -26,8 +26,6 @@ namespace Managers
 		private void Start()
 		{
 			HideButtons();
-			if (GameData.GetPlayerCharacterData().PickWeaponOnStart)
-				OpenPickWeapon();
 		}
 
 		public void OpenPanel()
@@ -41,7 +39,7 @@ namespace Managers
 			WindowManager.instance.DeQueueWindow();
 		}
 
-		private void OpenPickWeapon()
+		public void OpenPickWeapon()
 		{
 			_isWeaponOnly = true;
 			WindowManager.instance.QueueWindow(this);

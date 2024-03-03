@@ -65,7 +65,7 @@ namespace Objects.Abilities.Tornado
 		protected override bool ProjectileSpawn(TornadoProjectile projectile)
 		{
 			var spawnRadius = GameData.GetPlayerCharacterId() == CharactersEnum.Natalie_BoW ? 
-				Mathf.Lerp(1, 4, (float)Utilities.GetTimeSpan(_stageTime.time).TotalSeconds / 300.0f)  
+				Mathf.Lerp(1, 4, (float)Utilities.GetTimeSpan(_stageTime.time.Value).TotalSeconds / 300.0f)  
 				: 4;
 			
 			var tornadoPosition = Utilities.GetRandomInAreaFreezeParameter(transform.position, spawnRadius, isFreezeY:true);

@@ -1,6 +1,7 @@
 ﻿using System;
 using Managers;
 using Objects.Players.Scripts;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Weapons;
@@ -20,7 +21,7 @@ namespace Objects.Abilities.Healing_Field
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (!other.CompareTag("Player")) return;
+			if (!other.CompareTag("Player") || other.gameObject.GetComponent<NetworkObject>()?.IsOwner == true) return;
 			var playerComponent = GameManager.instance.playerComponent;
 			playerComponent.TakeDamage(-_healAmount);
 				

@@ -108,9 +108,9 @@ namespace Objects.Characters.Nishi_HoF.Skill
             
             GameManager.instance.playerComponent.SetCharacterState(newState);
             if (newState == PlayerCharacterState.Nishi_HoF_Flame_State)
-                GameManager.instance.playerComponent.playerVfxComponent.PlayFlameTransform();
+                GameManager.instance.playerVfxComponent.PlayFlameTransform();
             else
-                GameManager.instance.playerComponent.playerVfxComponent.PlayVoidTransform();
+                GameManager.instance.playerVfxComponent.PlayVoidTransform();
             
             SpecialBarManager.ResetBar();
         }

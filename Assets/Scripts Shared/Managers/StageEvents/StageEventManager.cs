@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Managers.StageEvents
 {
-	public class StageEventManager : MonoBehaviour
+	public class StageEventManager : NetworkBehaviour
 	{
 		[SerializeField] private StageData stageData;
 		private EnemyManager _enemyManager;
@@ -16,15 +17,17 @@ namespace Managers.StageEvents
 		private void Start()
 		{
 			_stageTime = GetComponent<StageTime>();
-			_enemyManager = FindObjectOfType<EnemyManager>();
+			_enemyManager = FindFirstObjectByType<EnemyManager>();
 		}
 
 		private void Update()
 		{
+			if (!IsHost || NetworkManager.Singleton.ConnectedClients.Count == 0) return;
+			
 			if (_eventIndexer >= stageData.stageEvents.Count) return;
 
 			var stageEvent = stageData.stageEvents[_eventIndexer];
-			if (_stageTime.time < stageEvent.triggerTime) return;
+			if (_stageTime.time.Value < stageEvent.triggerTime) return;
 
 			if (stageEvent.enemies?.Any() == true)
 			{

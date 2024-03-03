@@ -2,12 +2,13 @@
 using DefaultNamespace;
 using TMPro;
 using UI.Labels.InGame;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace Managers
 {
-	public class MessageManager : MonoBehaviour
+	public class MessageManager : NetworkBehaviour
 	{
 		public static MessageManager instance;
 		[SerializeField] private GameObject damageMessage;
@@ -44,6 +45,12 @@ namespace Managers
 			_count += 1;
 			if (_count >= _objectCount)
 				_count = 0;
+		}
+
+		[Rpc(SendTo.Everyone)]
+		public void PostMessageRpc(string text, Vector3 worldPosition, Quaternion rotation, Color color)
+		{
+			PostMessage(text, worldPosition, rotation, color);
 		}
 	}
 }

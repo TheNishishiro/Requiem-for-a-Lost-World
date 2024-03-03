@@ -18,7 +18,7 @@ namespace Objects.Abilities.Back_Hole
 	public class BlackHoleWeapon : PoolableWeapon<BlackHoleProjectile>
 	{
 		private StageTime _stageTime;
-		private bool _isBelow5Minutes => Utilities.GetTimeSpan(_stageTime.time).Minutes <= 5;
+		private bool _isBelow5Minutes => Utilities.GetTimeSpan(_stageTime.time.Value).Minutes <= 5;
 		
 		public override void Awake()
 		{

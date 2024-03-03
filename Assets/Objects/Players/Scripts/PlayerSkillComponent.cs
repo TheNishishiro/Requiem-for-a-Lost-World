@@ -11,26 +11,26 @@ using Objects.Characters;
 using Objects.Characters.Chronastra.Skill;
 using Objects.Characters.Nishi.Skill;
 using Objects.Enemies;
+using Objects.Players.Containers;
 using Objects.Players.PermUpgrades;
 using Objects.Stage;
 using UI.Labels.InGame;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Objects.Players.Scripts
 {
-	public class PlayerSkillComponent : MonoBehaviour
+	public class PlayerSkillComponent : NetworkBehaviour
 	{
-		[SerializeField] private CharacterController controller;
 		[SerializeField] private Image skillCooldownImage;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
-		[SerializeField] private BoxCollider playerCollider;
-		[SerializeField] private Transform abilityContainer;
 		[SerializeField] private HealthComponent healthComponent;
 		[SerializeField] private SpecialBar specialBar;
 		[SerializeField] private AbilityDurationBar abilityDurationBar;
 		[SerializeField] private WeaponManager _weaponManager;
+		private Transform _abilityContainer;
 		private AmeliaGlassShield _ameliaGlassShield;
 		private float _currentSkillCooldown = 0f;
 		private float _skillCooldown = 5f;
@@ -42,15 +42,35 @@ namespace Objects.Players.Scripts
 		private float _positionRecordTimer;
 		private bool _applyQueuedPosition;
 
+		
 		public void Start()
 		{
 			_skillCooldown = GameData.GetCharacterSkillCooldown();
-			_transform = transform;
-			ApplySpecial();
+			NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
 		}
+
+		public override void OnDestroy()
+		{
+			if (NetworkManager.Singleton)
+				NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+			base.OnDestroy();
+		}
+		
+		private void OnClientConnected(ulong clientId)
+		{
+			if (clientId == NetworkManager.Singleton.LocalClientId)
+			{
+				_abilityContainer = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponentInChildren<PlayerAbilityContainer>().transform;
+				ApplySpecial();
+			}
+		}
+		
 
 		public void Update()
 		{
+			_transform = GameManager.instance.PlayerTransform;
+			if (_transform == null) return;
+			
 			if (_currentSkillCooldown > 0f)
 			{
 				skillCooldownImage.fillAmount = _currentSkillCooldown / _skillCooldown;
@@ -110,15 +130,15 @@ namespace Objects.Players.Scripts
 		private void ApplySpecial()
 		{
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Amelia)
-				_ameliaGlassShield = Instantiate(GameData.GetSpecialPrefab(), abilityContainer).GetComponent<AmeliaGlassShield>();
+				_ameliaGlassShield = Instantiate(GameData.GetSpecialPrefab(), _abilityContainer).GetComponent<AmeliaGlassShield>();
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Nishi)
-				Instantiate(GameData.GetSpecialPrefab(), abilityContainer);
+				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Nishi_HoF)
-				Instantiate(GameData.GetSpecialPrefab(), abilityContainer);
+				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Natalie_BoW && GameData.GetPlayerCharacterRank() >= CharacterRank.E5)
-				Instantiate(GameData.GetSpecialPrefab(), abilityContainer);
+				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Adam_OBoV && GameData.GetPlayerCharacterRank() >= CharacterRank.E5)
-				Instantiate(GameData.GetSpecialPrefab(), abilityContainer);
+				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
 		}
 
 		private void UseSkill(CharactersEnum activeCharacterId)
@@ -218,7 +238,7 @@ namespace Objects.Players.Scripts
 
 		private void OanaSkill()
 		{
-			var obj = Instantiate(GameData.GetSkillPrefab(), abilityContainer);
+			var obj = Instantiate(GameData.GetSkillPrefab(), _abilityContainer);
 			var skillDuration = obj.LifeTime;
 			abilityDurationBar.StartTick(skillDuration);
 		}
@@ -340,7 +360,7 @@ namespace Objects.Players.Scripts
 			var skillDuration = GameData.IsCharacterRank(CharacterRank.E1) ? 13f : 8f;
 			var damageIncreasePercentage = GameData.IsCharacterRank(CharacterRank.E3) ? 2f : 0.5f;
 			
-			var obj = Instantiate(GameData.GetSkillPrefab(), abilityContainer);
+			var obj = Instantiate(GameData.GetSkillPrefab(), _abilityContainer);
 			obj.LifeTime = skillDuration;
 			if (GameData.IsCharacterRank(CharacterRank.E2))
 				playerStatsComponent.TemporaryStatBoost(StatEnum.DodgeChance, 0.5f, skillDuration);
@@ -370,7 +390,7 @@ namespace Objects.Players.Scripts
 			var hpDiff = PlayerStatsScaler.GetScaler().GetHealth() - targetHp;
 			GameManager.instance.playerComponent.TakeDamage(hpDiff, true, true);
 			
-			var obj = Instantiate(GameData.GetSkillPrefab(), abilityContainer);
+			var obj = Instantiate(GameData.GetSkillPrefab(), _abilityContainer);
 			obj.LifeTime = skillDuration;
 			
 			abilityDurationBar.StartTick(skillDuration);

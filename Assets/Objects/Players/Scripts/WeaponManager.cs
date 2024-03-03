@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Data.ToggleableEntries;
@@ -7,52 +8,58 @@ using Interfaces;
 using Managers;
 using Objects.Abilities;
 using Objects.Items;
+using Objects.Players.Containers;
 using Objects.Players.Scripts;
 using Objects.Stage;
 using UI.Labels.InGame.LevelUpScreen;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 using Weapons;
 
-public class WeaponManager : MonoBehaviour
+public class WeaponManager : NetworkBehaviour
 {
     public static WeaponManager instance;
     [SerializeField] private WeaponContainer weapons;
     [SerializeField] private ItemContainer items;
-    [SerializeField] private Transform weaponContainer;
+    [SerializeField] private PlayerStatsComponent _playerStatsComponent;
+    private Transform _weaponContainer;
     private List<WeaponToggleableEntry> availableWeapons;
     private List<ItemToggleableEntry> availableItems;
     private List<WeaponBase> _unlockedWeapons;
     private List<ItemBase> _unlockedItems;
-    private PlayerStatsComponent _playerStatsComponent;
     public int maxWeaponCount = 6;
     public int maxItemCount = 6;
     private int _weaponsUpgraded;
     private int _itemsUpgraded;
     private SaveFile _saveFile;
-
-    private void Awake()
+    
+    public void Start()
     {
         if (instance == null)
         {
             instance = this;
         }
 
-        _saveFile = FindObjectOfType<SaveFile>();
-        _playerStatsComponent = FindObjectOfType<PlayerStatsComponent>();
+        _saveFile = FindAnyObjectByType<SaveFile>();
         _unlockedWeapons = new List<WeaponBase>();
         _unlockedItems = new List<ItemBase>();
 
         availableWeapons = weapons.GetWeapons();
         availableItems = items.GetItems();
-        
+    }
+    
+    public void AddStartingWeapon(Transform weaponContainer)
+    {
+        Debug.Log("AddStartingWeapon");
+        _weaponContainer = weaponContainer;
         var characterStartingWeapon = GameData.GetPlayerCharacterStartingWeapon() ?? availableWeapons.FirstOrDefault()?.weaponBase;
         AddWeapon(characterStartingWeapon, 1);
     }
 
     public void AddWeapon(WeaponBase weapon, int rarity)
     {
-        var weaponGameObject = Instantiate(weapon, weaponContainer);
+        var weaponGameObject = Instantiate(weapon, _weaponContainer);
         weaponGameObject.ApplyRarity(rarity);
         availableWeapons.RemoveAll(x => x.weaponBase == weapon);
         _unlockedWeapons.Add(weaponGameObject);
@@ -61,7 +68,7 @@ public class WeaponManager : MonoBehaviour
 
     public void AddItem(ItemBase item, int rarity)
     {
-        var itemGameObject = Instantiate(item, weaponContainer);
+        var itemGameObject = Instantiate(item, _weaponContainer);
         availableItems.RemoveAll(x => x.itemBase == item);
         itemGameObject.ApplyRarity(rarity);
         _playerStatsComponent.Apply(itemGameObject.ItemStats, 1);

@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Unity.Netcode;
+using UnityEngine;
 
 namespace Managers
 {
-	public class PauseManager : MonoBehaviour
+	public class PauseManager : NetworkBehaviour
 	{
 		[SerializeField] private CursorManager cursorManager;
 		[SerializeField] private BlurManager blurManager;
@@ -11,7 +12,9 @@ namespace Managers
 		{
 			cursorManager.ShowCursor();
 			blurManager.Blur();
-			Time.timeScale = 0;
+
+			if (IsHost && NetworkManager.Singleton.ConnectedClients.Count <= 1)
+				Time.timeScale = 0;
 		}
 
 		public void UnPauseGame()

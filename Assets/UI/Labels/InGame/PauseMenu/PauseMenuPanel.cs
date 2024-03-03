@@ -2,6 +2,7 @@
 using Objects.Players.Scripts;
 using Objects.Stage;
 using UI.Main_Menu.Character_List_Menu;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace UI.Labels.InGame.PauseMenu
@@ -18,7 +19,6 @@ namespace UI.Labels.InGame.PauseMenu
 		[SerializeField] private GameObject statsPanel;
 		[SerializeField] private GameObject weaponStatsPanel;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
-		
 
 		private void Update()
 		{

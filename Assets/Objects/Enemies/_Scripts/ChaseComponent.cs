@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using DefaultNamespace;
 using Interfaces;
 using Objects.Abilities.Back_Hole;
+using Unity.Netcode;
 using UnityEngine;
 
-public class ChaseComponent : MonoBehaviour
+public class ChaseComponent : NetworkBehaviour
 {
     [SerializeField] private Rigidbody _rigidbody;
     private Transform targetDestination;
@@ -58,6 +59,9 @@ public class ChaseComponent : MonoBehaviour
 
     void Update()
     {
+        if (!IsHost)
+            return;
+        
         if (targetDestination == null)
             return;
         

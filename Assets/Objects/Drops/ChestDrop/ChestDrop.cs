@@ -1,24 +1,18 @@
 ﻿using System;
 using Managers;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Objects.Drops.ChestDrop
 {
-	public class ChestDrop : MonoBehaviour
+	public class ChestDrop : NetworkBehaviour
 	{
-		private ChestPanelManager chestPanelManager;
-
-		private void Start()
-		{
-			chestPanelManager = FindObjectOfType<ChestPanelManager>();
-		}
-
 		private void OnTriggerEnter(Collider other)
 		{
-			if (!other.gameObject.CompareTag("Player")) return;
+			if (!other.gameObject.CompareTag("Player") || other.gameObject.GetComponent<NetworkObject>()?.IsOwner != true) return;
 			
-			chestPanelManager.OpenPanel();
-			Destroy(gameObject);
+			FindFirstObjectByType<ChestPanelManager>().OpenPanel();
+			PickupManager.instance.DestroyPickup(GetComponent<Pickup>());
 		}
 	}
 }

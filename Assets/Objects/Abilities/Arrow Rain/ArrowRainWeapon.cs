@@ -46,7 +46,7 @@ namespace Objects.Abilities.Arrow_Rain
 			var baseAmount = base.GetAttackCount();
 			
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Summer)
-				baseAmount += (Utilities.GetTimeSpan(_stageTime.time).Minutes / 2);
+				baseAmount += (Utilities.GetTimeSpan(_stageTime.time.Value).Minutes / 2);
 			
 			return baseAmount;
 		}

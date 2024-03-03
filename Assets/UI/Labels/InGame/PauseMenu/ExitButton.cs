@@ -1,21 +1,19 @@
-﻿using Objects.Players.Scripts;
+﻿using Managers;
+using Objects.Players.Scripts;
 using Objects.Stage;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityTemplateProjects;
 
 namespace UI.Labels.InGame.PauseMenu
 {
-	public class ExitButton : MonoBehaviour
+	public class ExitButton : NetworkBehaviour
 	{
-		[SerializeField] private GameResultData gameResultData;
 		
 		public void BackToMainMenu(bool isWin)
 		{
-			gameResultData.IsGameEnd = true;
-			gameResultData.IsWin = isWin;
-			gameResultData.Level = FindObjectOfType<LevelComponent>()?.GetLevel() ?? 0;
-			
-			SceneManager.LoadScene("Scenes/Main Menu");
+			GameManager.instance.BackToMainMenu(isWin);
 		}
 	}
 }

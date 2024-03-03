@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DefaultNamespace.Data.Statuses;
 using Events.Handlers;
 using Events.Scripts;
+using Managers;
 using Objects.Abilities;
 using Objects.Characters;
 using Objects.Items;
@@ -25,7 +27,12 @@ namespace Objects.Players.Scripts
 		private Coroutine _statBoostCoroutine;
 		private float _lastMoveSpeedIncrease;
 		private float _lastAttackIncrease;
-		
+
+		private void Start()
+		{
+			StatusEffectManager.instance.AddOrRemoveEffect(StatusEffectType.Revive, GetStats().Revives);
+		}
+
 		public void Set(PlayerStats playerStats)
 		{
 			this.playerStats ??= new PlayerStats();

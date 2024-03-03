@@ -106,6 +106,11 @@ namespace Objects.Stage
 			return _currentDifficultyData;
 		}
 
+		public static Sprite GetCharacterSprite(CharactersEnum characterEnum)
+		{
+			return CharacterListManager.instance?.GetCharacter(characterEnum)?.CharacterSprite;
+		}
+
 		public static bool IsCharacterWithRank(CharactersEnum characterId, CharacterRank rank)
 		{
 			return GetPlayerCharacterId() == characterId && GetPlayerCharacterRank() >= rank;

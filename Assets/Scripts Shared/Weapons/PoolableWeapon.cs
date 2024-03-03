@@ -13,11 +13,13 @@ namespace Weapons
         [Foldout("Pooling")]
         [SerializeField] public int maxCapacity = 50;
         protected ObjectPool<T> pool;
+        protected bool UseNetworkPool;
+        
         public override void Attack()
         {
             if (pool.CountActive >= maxCapacity)
                 return;
-            
+
             pool.Get();
         }
         

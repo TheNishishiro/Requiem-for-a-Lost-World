@@ -49,6 +49,8 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -94,10 +96,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3634895298855100170}
   - component: {fileID: 3634895298855100165}
-  - component: {fileID: 3634895298855100161}
+  - component: {fileID: 3915673274709625799}
   - component: {fileID: 3634895298855100166}
   - component: {fileID: 3634895298855100167}
   - component: {fileID: 5213355489588195026}
+  - component: {fileID: 6302921815489051940}
   m_Layer: 11
   m_Name: Exp pickup
   m_TagString: Pickup
@@ -138,6 +141,8 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -173,27 +178,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!65 &3634895298855100161
-BoxCollider:
+--- !u!114 &3915673274709625799
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3634895298855100171}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.21661335, y: 1.00864, z: 0.1697278}
-  m_Center: {x: -0.009350449, y: 0.42931998, z: 0.009682417}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2526351427
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &3634895298855100166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ae826a927a4a22ab67454dac553d00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expAmount: 200
+  expAmount:
+    m_InternalValue: 0
   gemImage: {fileID: 3634895298855100165}
   gemMinimapIcon: {fileID: 2706402273898009707}
 --- !u!114 &3634895298855100167
@@ -221,27 +227,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a2841170fe94ad7a8b87b7f20551a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnPickupAction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1279709384511189508, guid: 68a329e6ff192984283abbd09d0c154d,
-          type: 3}
-        m_TargetAssemblyTypeName: Managers.AchievementManager, Assembly-CSharp
-        m_MethodName: OnPickupCollected
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  PickupEnum: 0
-  boxCollider: {fileID: 3634895298855100161}
-  isStationary: 0
   pickUpObject: {fileID: 3634895298855100166}
-  expObject: {fileID: 3634895298855100166}
+  PickupEnum: 0
+  boxCollider: {fileID: 0}
+  isStationary: 0
+  canExpire: 0
+  lifeTime: 0
   canBeAttracted: 1
 --- !u!95 &5213355489588195026
 Animator:
@@ -265,3 +256,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!135 &6302921815489051940
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3634895298855100171}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.19
+  m_Center: {x: 0, y: 0.128, z: 0}

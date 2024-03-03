@@ -1,6 +1,7 @@
 ﻿using DefaultNamespace;
 using Interfaces;
 using Objects.Abilities;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Weapons
