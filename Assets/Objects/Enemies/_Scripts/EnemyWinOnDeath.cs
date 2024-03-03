@@ -1,5 +1,6 @@
 ﻿using System;
 using Managers;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Objects.Enemies
@@ -8,7 +9,7 @@ namespace Objects.Enemies
 	{
 		public void OnDisable()
 		{
-			FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(true);
+			RpcManager.instance.TriggerWin();
 		}
 	}
 }

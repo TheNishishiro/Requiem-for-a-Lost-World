@@ -3738,6 +3738,9 @@ MonoBehaviour:
   - Prefab: {fileID: 3634895298855100171, guid: d099174199599234c807f1eee918c770,
       type: 3}
     PrewarmCount: 150
+  - Prefab: {fileID: 5321679557440449815, guid: b16539e2119097f4c892a3cf331dad61,
+      type: 3}
+    PrewarmCount: 5
 --- !u!4 &531655828
 Transform:
   m_ObjectHideFlags: 0
@@ -9784,7 +9787,6 @@ MonoBehaviour:
   - {fileID: 1086061219}
   - {fileID: 1581083615}
   - {fileID: 1641790422}
-  weaponManager: {fileID: 1966883620}
   skipButton: {fileID: 1707866732}
   rerollButton: {fileID: 972877891}
   playerStatsComponent: {fileID: 1966883624}
@@ -9919,6 +9921,8 @@ MonoBehaviour:
   distanceFromPlayer: 12
   mainCamera: {fileID: 330585545}
   expShardPrefab: {fileID: 3634895298855100171, guid: d099174199599234c807f1eee918c770,
+    type: 3}
+  chestPrefab: {fileID: 5023575353268103864, guid: fe977e56248c07446a7574ed737f311e,
     type: 3}
 --- !u!114 &1557294570
 MonoBehaviour:

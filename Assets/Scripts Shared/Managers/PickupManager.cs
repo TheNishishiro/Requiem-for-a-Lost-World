@@ -24,6 +24,7 @@ namespace Managers
 		private ObjectPool<Pickup> _objectPool;
 		private List<Pickup> _expGem = new ();
 		[SerializeField] private GameObject expShardPrefab;
+		[SerializeField] private GameObject chestPrefab;
 
 		private GameObject _objectPrefab;
 		private int pickupAmount;
@@ -98,7 +99,7 @@ namespace Managers
 					_objectPool.Get();
 					break;
 				case PickupEnum.Chest:
-					if (IsHost) SpawnManager.instance.SpawnObject(position, pickupObject.gameObject).GetComponent<NetworkObject>().Spawn();
+					RequestPickupSpawnRpc(PickupEnum.Chest, pickupPosition);
 					break;
 				default:
 				{
@@ -123,6 +124,22 @@ namespace Managers
 			}
 		}
 
+		[Rpc(SendTo.Server)]
+		public void RequestPickupSpawnRpc(PickupEnum pickupEnum, Vector3 position)
+		{
+			if (pickupEnum == PickupEnum.Chest)
+				Instantiate(chestPrefab, position, Quaternion.identity).GetComponent<NetworkObject>().Spawn();
+		}
+
+		[Rpc(SendTo.Server)]
+		public void RequestPickupDespawnRpc(NetworkObjectReference networkObjectReference)
+		{
+			if (networkObjectReference.TryGet(out var networkObject))
+			{
+				networkObject.Despawn();
+			}
+		}
+
 		public void DestroyPickup(Pickup pickupObject)
 		{
 			switch (pickupObject.PickupType)
@@ -136,12 +153,7 @@ namespace Managers
 					_objectPool.Release(pickupObject);
 					break;
 				case PickupEnum.Chest:
-					if (IsHost)
-					{
-						var networkObject = pickupObject.GetComponent<NetworkObject>();
-						if (networkObject.IsSpawned)
-							networkObject.Despawn();
-					}
+					RequestPickupDespawnRpc(pickupObject.GetComponent<NetworkObject>());
 					break;
 				default:
 					Destroy(pickupObject.gameObject);

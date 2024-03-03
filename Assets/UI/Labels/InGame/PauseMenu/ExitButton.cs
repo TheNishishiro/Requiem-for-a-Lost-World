@@ -10,7 +10,6 @@ namespace UI.Labels.InGame.PauseMenu
 {
 	public class ExitButton : NetworkBehaviour
 	{
-		
 		public void BackToMainMenu(bool isWin)
 		{
 			GameManager.instance.BackToMainMenu(isWin);

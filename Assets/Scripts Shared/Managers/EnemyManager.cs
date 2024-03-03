@@ -93,13 +93,14 @@ public class EnemyManager : NetworkBehaviour
 		var enemy = NetworkObjectPool.Singleton.GetNetworkObject(enemyGameObject, position, Quaternion.identity);
 		var enemyComponent = enemy.GetComponent<Enemy>();
 		enemyComponent.transform.position = position;
-		if (_currentEnemySpawning.enemyName == "grand octi")
-			enemyComponent.SetupBoss();
 		enemy.Spawn();
 		
 		enemyComponent.SetPlayerTarget(targetClient);
 		enemyComponent.Setup(new EnemyNetworkStats(_currentEnemySpawning), _healthMultiplier * (1 + increasePerClient*0.5f), _enemySpeedMultiplier);
 		enemyComponent.gameObject.SetActive(true);
+		if (_currentEnemySpawning.enemyName == "grand octi")
+			enemyComponent.SetupBoss();
+		
 		_enemies.Add(enemyComponent);
 	}
 

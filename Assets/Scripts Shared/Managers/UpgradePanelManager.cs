@@ -17,16 +17,10 @@ namespace Managers
 	{
 		[SerializeField] private GameObject panel;
 		[SerializeField] private List<UpgradePanel> upgradeButtons;
-		[SerializeField] private WeaponManager weaponManager;
 		[SerializeField] private Button skipButton;
 		[SerializeField] private Button rerollButton;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
 		private bool _isWeaponOnly;
-		
-		private void Start()
-		{
-			HideButtons();
-		}
 
 		public void OpenPanel()
 		{
@@ -89,8 +83,8 @@ namespace Managers
 			skipButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Skip ({PlayerStatsScaler.GetScaler().GetSkips()})";
 			var chanceOfAppearance = Random.value;
 			var upgradesToPick = Random.Range(3, 5);
-			
-			var upgradeEntries = (_isWeaponOnly ? weaponManager.GetWeaponUnlocks() : weaponManager.GetUpgrades())
+
+			var upgradeEntries = (_isWeaponOnly ? WeaponManager.instance.GetWeaponUnlocks() : WeaponManager.instance.GetUpgrades())
 				.OrderByDescending(x => x.ChanceOfAppearance >= 1 - chanceOfAppearance)
 				.ThenBy(_ => Random.value)
 				.Take(upgradesToPick)

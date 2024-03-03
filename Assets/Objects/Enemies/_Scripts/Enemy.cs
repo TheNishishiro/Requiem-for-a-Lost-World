@@ -46,8 +46,9 @@ namespace Objects.Enemies
 		private float _currentDamageCooldown = 0;
 		private float _timeAlive = 0;
 		private bool _isBossEnemy = false;
-		private NetworkVariable<float> _removeCollisionsTimer = new ();
-		private NetworkVariable<bool> _isRemoveCollisions = new ();
+		private NetworkVariable<float> removeCollisionsTimer = new ();
+		private NetworkVariable<bool> isRemoveCollisions = new ();
+		private NetworkVariable<bool> isGrandOcti = new ();
 		private float _damageReduction;
 		private NetworkVariable<bool> _isDying= new ();
 		private bool _isPlayerControlled;
@@ -64,6 +65,7 @@ namespace Objects.Enemies
 		{
 			spriteRenderer.sprite = EnemyManager.instance.GetSpriteByEnemy(enemyType.Value);
 			enemyType.OnValueChanged += OnTypeChange;
+			isGrandOcti.OnValueChanged += OnBossChanged;
 		}
 
 		public override void OnNetworkDespawn()
@@ -76,6 +78,12 @@ namespace Objects.Enemies
 			spriteRenderer.sprite = EnemyManager.instance.GetSpriteByEnemy(newType);
 		}
 
+		private void OnBossChanged(bool oldValue, bool newValue)
+		{
+			if (newValue)
+				SetupBoss();
+		}
+
 		public void Setup(EnemyNetworkStats newStats, float healthMultiplier, float speedMultiplier)
 		{
 			damageableComponent.Clear();
@@ -86,8 +94,8 @@ namespace Objects.Enemies
 			_timeAlive = 0;
 			_currentDamageCooldown = 0;
 			_damageReduction = 0;
-			_removeCollisionsTimer.Value = 0;
-			_isRemoveCollisions.Value = false;
+			removeCollisionsTimer.Value = 0;
+			isRemoveCollisions.Value = false;
 			RevertIgnoredCollisions();
 			_ignoredEnemyColliders.Clear();
 			_isDying.Value = false;
@@ -124,7 +132,6 @@ namespace Objects.Enemies
 					chance = 1,
 					pickupObject = chestDrop,
 				});
-				dropOnDestroyComponent.AddDrop(expDropChance);
 			}
 
 			goldDropChance ??= new ChanceDrop()
@@ -175,6 +182,7 @@ namespace Objects.Enemies
 
 		public void SetupBoss()
 		{
+			if (IsHost) isGrandOcti.Value = true;
 			grandOctiBoss.SetActive(true);
 		}
 
@@ -199,9 +207,9 @@ namespace Objects.Enemies
 			
 			if (IsHost) HostUpdate();
 			
-			else if (_removeCollisionsTimer.Value <= 0 && _isRemoveCollisions.Value)
+			else if (removeCollisionsTimer.Value <= 0 && isRemoveCollisions.Value)
 			{
-				_isRemoveCollisions.Value = false;
+				isRemoveCollisions.Value = false;
 				RevertIgnoredCollisions();
 			}
 		}
@@ -229,10 +237,10 @@ namespace Objects.Enemies
 				}
 			}
 			
-			if (_removeCollisionsTimer.Value > 0)
+			if (removeCollisionsTimer.Value > 0)
 			{
-				_isRemoveCollisions.Value = true;
-				_removeCollisionsTimer.Value -= Time.deltaTime;
+				isRemoveCollisions.Value = true;
+				removeCollisionsTimer.Value -= Time.deltaTime;
 			}
 		}
 
@@ -243,10 +251,8 @@ namespace Objects.Enemies
 			capsuleCollider.enabled = false;
 			chaseComponent.SetMovementState(true);
 			_isDying.Value = true;
-			RpcManager.instance.AddEnemyKillRpc();
-			EnemyDiedEvent.Invoke();
+			RpcManager.instance.AddEnemyKillRpc(IsBoss());
 			dropOnDestroyComponent.CheckDrop();
-			AchievementManager.instance.OnEnemyKilled(this);
 			StartCoroutine(DieAnimation());
 		}
 
@@ -274,7 +280,7 @@ namespace Objects.Enemies
 				var playerComponent = GameManager.instance.playerComponent;
 				Attack(playerComponent);
 			}
-			else if (collisionInfo.gameObject.CompareTag("Enemy") && _isRemoveCollisions.Value)
+			else if (collisionInfo.gameObject.CompareTag("Enemy") && isRemoveCollisions.Value)
 			{
 				_ignoredEnemyColliders.Add(collisionInfo);
 				Physics.IgnoreCollision(collisionInfo.collider, GetComponent<CapsuleCollider>(), true);
@@ -288,7 +294,7 @@ namespace Objects.Enemies
 				var playerComponent = GameManager.instance.playerComponent;
 				Attack(playerComponent);
 			}
-			else if (collisionInfo.gameObject.CompareTag("Enemy") && _isRemoveCollisions.Value)
+			else if (collisionInfo.gameObject.CompareTag("Enemy") && isRemoveCollisions.Value)
 			{
 				_ignoredEnemyColliders.Add(collisionInfo);
 				Physics.IgnoreCollision(collisionInfo.collider, GetComponent<CapsuleCollider>(), true);
@@ -325,7 +331,7 @@ namespace Objects.Enemies
 
 		private void Attack(Player player)
 		{
-			if (_currentDamageCooldown > 0 || _isRemoveCollisions.Value)
+			if (_currentDamageCooldown > 0 || isRemoveCollisions.Value)
 				return;
 
 			_currentDamageCooldown = DamageCooldown;
@@ -334,8 +340,8 @@ namespace Objects.Enemies
 
 		public void SetNoCollisions(float timer)
 		{
-			if (_removeCollisionsTimer.Value < timer)
-				_removeCollisionsTimer.Value = timer;
+			if (removeCollisionsTimer.Value < timer)
+				removeCollisionsTimer.Value = timer;
 		}
 
 		public void MarkAsPlayerControlled(float? duration)

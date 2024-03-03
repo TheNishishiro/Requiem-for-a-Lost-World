@@ -84,7 +84,7 @@ namespace Managers
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Hold6Items);
 		}
 		
-		public void OnEnemyKilled(Enemy enemy)
+		public void OnEnemyKilled(bool isBoss)
 		{
 			_enemiesKilled++;
 			SaveFile.Instance.EnemiesKilled++;
@@ -92,7 +92,7 @@ namespace Managers
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Kill100000Enemies);
 			if (_enemiesKilled >= 1000)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Kill1000EnemiesInOneGame);
-			if (enemy.IsBoss())
+			if (isBoss)
 				SaveFile.Instance.BossKills++;
 			if (SaveFile.Instance.BossKills > 50)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Kill500BossEnemies);

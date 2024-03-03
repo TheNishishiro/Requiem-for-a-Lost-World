@@ -76,6 +76,11 @@ namespace Managers
 			return instance?.playerComponent?.CharacterState == characterState;
 		}
 
+		public void BackToMainMenu()
+		{
+			BackToMainMenu(gameResultData.IsWin);
+		}
+		
 		public void BackToMainMenu(bool isWin)
 		{
 			if (_isExiting) return;

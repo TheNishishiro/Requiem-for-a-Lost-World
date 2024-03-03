@@ -6,6 +6,7 @@ using DefaultNamespace.BaseClasses;
 using DefaultNamespace.Data;
 using Interfaces;
 using Managers;
+using Objects;
 using Objects.Abilities;
 using Objects.Items;
 using Objects.Players.Containers;
@@ -23,29 +24,43 @@ public class WeaponManager : NetworkBehaviour
     [SerializeField] private WeaponContainer weapons;
     [SerializeField] private ItemContainer items;
     [SerializeField] private PlayerStatsComponent _playerStatsComponent;
+    public Dictionary<WeaponEnum, GameObject> weaponProjectilePrefabs;
     private Transform _weaponContainer;
     private List<WeaponToggleableEntry> availableWeapons;
     private List<ItemToggleableEntry> availableItems;
-    private List<WeaponBase> _unlockedWeapons;
+    private Dictionary<WeaponEnum, WeaponBase> _unlockedWeapons;
     private List<ItemBase> _unlockedItems;
     public int maxWeaponCount = 6;
     public int maxItemCount = 6;
     private int _weaponsUpgraded;
     private int _itemsUpgraded;
     private SaveFile _saveFile;
+    private bool _isInitialized;
     
-    public void Start()
+    public void Awake()
     {
         if (instance == null)
         {
             instance = this;
         }
 
+        Init();
+    }
+
+    public void Init()
+    {
+        if (_isInitialized) return;
+        _isInitialized = true;
         _saveFile = FindAnyObjectByType<SaveFile>();
-        _unlockedWeapons = new List<WeaponBase>();
+        _unlockedWeapons = new Dictionary<WeaponEnum, WeaponBase>();
         _unlockedItems = new List<ItemBase>();
+        weaponProjectilePrefabs = new Dictionary<WeaponEnum, GameObject>();
 
         availableWeapons = weapons.GetWeapons();
+        foreach (var weapon in availableWeapons)
+        {
+            weaponProjectilePrefabs.TryAdd(weapon.weaponBase.WeaponId, weapon.weaponBase.spawnPrefab);
+        }
         availableItems = items.GetItems();
     }
     
@@ -62,7 +77,7 @@ public class WeaponManager : NetworkBehaviour
         var weaponGameObject = Instantiate(weapon, _weaponContainer);
         weaponGameObject.ApplyRarity(rarity);
         availableWeapons.RemoveAll(x => x.weaponBase == weapon);
-        _unlockedWeapons.Add(weaponGameObject);
+        _unlockedWeapons.Add(weaponGameObject.WeaponId, weaponGameObject);
         AchievementManager.instance.OnWeaponUnlocked(weapon, _unlockedWeapons.Count, rarity);
     }
 
@@ -90,12 +105,17 @@ public class WeaponManager : NetworkBehaviour
     
     public List<IPlayerItem> GetUnlockedWeaponsAsInterface()
     {
-        return _unlockedWeapons.Cast<IPlayerItem>().ToList();
+        return _unlockedWeapons.Select(x => x.Value).Cast<IPlayerItem>().ToList();
     }
     
     public List<IPlayerItem> GetUnlockedItemsAsInterface()
     {
         return _unlockedItems.Cast<IPlayerItem>().ToList();
+    }
+
+    public WeaponBase GetUnlockedWeapon(WeaponEnum weaponId)
+    {
+        return _unlockedWeapons[weaponId];
     }
 
     public IEnumerable<UpgradeEntry> GetUpgrades()
@@ -112,9 +132,9 @@ public class WeaponManager : NetworkBehaviour
     {
         return _unlockedWeapons.Select(unlockedWeapon => new UpgradeEntry()
         {
-            Weapon = unlockedWeapon,
-            Upgrade = unlockedWeapon.GetAvailableUpgrades().FirstOrDefault(),
-            ChanceOfAppearance = unlockedWeapon.chanceToAppear
+            Weapon = unlockedWeapon.Value,
+            Upgrade = unlockedWeapon.Value.GetAvailableUpgrades().FirstOrDefault(),
+            ChanceOfAppearance = unlockedWeapon.Value.chanceToAppear
         }).Where(x => x.Upgrade != null);
     }
     
@@ -163,7 +183,7 @@ public class WeaponManager : NetworkBehaviour
     {
         foreach (var weapon in _unlockedWeapons)
         {
-            weapon.ReduceCooldown(reductionPercentage);
+            weapon.Value.ReduceCooldown(reductionPercentage);
         }
     }
 }

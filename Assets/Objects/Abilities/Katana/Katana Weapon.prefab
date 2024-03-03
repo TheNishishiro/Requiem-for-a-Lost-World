@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5998221151522159986}
+  - component: {fileID: 8163999394325558600}
   - component: {fileID: -6109885102338104604}
   m_Layer: 0
   m_Name: Katana Weapon
@@ -32,6 +33,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8163999394325558600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3708821464393186405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 749025200
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &-6109885102338104604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,9 +68,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPrefab: {fileID: 5321679557440449815, guid: b16539e2119097f4c892a3cf331dad61,
     type: 3}
+  WeaponId: 13
   Name: Katana
   Description: Quickly slash enemies in front of you
+  chanceToAppear: 1
   Icon: {fileID: 21300000, guid: 490fbd0f780c3214a81629c73474b7f0, type: 3}
+  unlockOnAchievement: 0
+  requiredAchievement: 0
   element: 5
   weaponStats:
     Damage: 8
@@ -70,6 +96,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: b752044a7f1f64248947f970f9f7e99f, type: 2}
   - {fileID: 11400000, guid: 08f008bd3f5dd19428b58794f1ef5c53, type: 2}
@@ -80,7 +107,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 453de767db32c1f4f9dbe7a929210a5b, type: 2}
   - {fileID: 11400000, guid: 5cf8cd8544b6e4e479c83cca1b1ceada, type: 2}
   - {fileID: 11400000, guid: 657f17b3625e50546aa504aa8d48c580, type: 2}
-  chanceToAppear: 1
   isSkill: 0
   capacity: 50
   maxCapacity: 200
+  UseNetworkPool: 1

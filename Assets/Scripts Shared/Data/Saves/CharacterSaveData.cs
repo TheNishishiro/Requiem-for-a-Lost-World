@@ -53,7 +53,7 @@ namespace DefaultNamespace.Data
 			if (gameResultData.Level > HighestInGameLevel)
 				HighestInGameLevel = gameResultData.Level;
 
-			if (gameResultData.IsWin && DifficultyFinished < (int)gameResultData.Difficulty)
+			if (gameResultData.IsWin && DifficultyFinished < (int)gameResultData.Difficulty + 1)
 				DifficultyFinished = (int)gameResultData.Difficulty + 1;
 		}
 		

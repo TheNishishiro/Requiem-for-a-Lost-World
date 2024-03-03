@@ -24,6 +24,7 @@ namespace Objects.Players.Scripts
 {
 	public class PlayerSkillComponent : NetworkBehaviour
 	{
+		public static PlayerSkillComponent instance;
 		[SerializeField] private Image skillCooldownImage;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
 		[SerializeField] private HealthComponent healthComponent;
@@ -45,27 +46,18 @@ namespace Objects.Players.Scripts
 		
 		public void Start()
 		{
+			if (instance == null)
+				instance = this;
+            
 			_skillCooldown = GameData.GetCharacterSkillCooldown();
-			NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
 		}
 
-		public override void OnDestroy()
+		public void Init(Transform abilityContainerTransform)
 		{
-			if (NetworkManager.Singleton)
-				NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
-			base.OnDestroy();
+			_abilityContainer = abilityContainerTransform;
+			ApplySpecial();
 		}
 		
-		private void OnClientConnected(ulong clientId)
-		{
-			if (clientId == NetworkManager.Singleton.LocalClientId)
-			{
-				_abilityContainer = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponentInChildren<PlayerAbilityContainer>().transform;
-				ApplySpecial();
-			}
-		}
-		
-
 		public void Update()
 		{
 			_transform = GameManager.instance.PlayerTransform;
@@ -107,7 +99,7 @@ namespace Objects.Players.Scripts
 			{
 				_dashPosition = _transform.position;
 
-				_dashPosition = Utilities.GetPointOnColliderSurface(_dashPosition += transform.forward * (_dashDistance * Time.deltaTime), _transform, 0.5f);
+				_dashPosition = Utilities.GetPointOnColliderSurface(_dashPosition += _transform.forward * (_dashDistance * Time.deltaTime), _transform, 0.5f);
 				_transform.position = _dashPosition;
 				_dashDuration -= Time.deltaTime;
 			}
@@ -246,7 +238,7 @@ namespace Objects.Players.Scripts
 		private void NishiSkill()
 		{
 			var result = Utilities.GetPointOnColliderSurface(_transform.position + _transform.forward * 1.5f, gameObject.transform);
-			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, transform.rotation);
+			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, _transform.rotation);
 
 			if (GameData.GetPlayerCharacterRank() < CharacterRank.E2) return;
 			
@@ -263,19 +255,19 @@ namespace Objects.Players.Scripts
 				SpecialBarManager.instance.Increment(50);
 			
 			var result = Utilities.GetPointOnColliderSurface(_transform.position + _transform.forward * 10f, gameObject.transform, 1.5f);
-			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, transform.rotation);
+			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, _transform.rotation);
 		}
 
 		private void AdamSkill()
 		{
-			var result = Utilities.GetPointOnColliderSurface(transform.position + transform.forward * 2f, gameObject.transform);
-			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, transform.rotation);
+			var result = Utilities.GetPointOnColliderSurface(_transform.position + _transform.forward * 2f, gameObject.transform);
+			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, _transform.rotation);
 		}
 
 		private IEnumerator AliceSkill()
 		{
-			var result = Utilities.GetPointOnColliderSurface(transform.position + transform.forward, gameObject.transform);
-			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, transform.rotation);
+			var result = Utilities.GetPointOnColliderSurface(_transform.position + _transform.forward, gameObject.transform);
+			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, _transform.rotation);
 			
 			var rank = GameData.GetPlayerCharacterRank();
 			var reductionMultiplier = (_weaponManager.maxWeaponCount - _weaponManager.GetUnlockedWeaponsAsInterface().Count) + 1;
@@ -300,24 +292,24 @@ namespace Objects.Players.Scripts
 
 		private void NatalieSkill()
 		{
-			SpawnManager.instance.SpawnObject(transform.position, GameData.GetSkillPrefab().gameObject, transform.rotation);
+			SpawnManager.instance.SpawnObject(_transform.position, GameData.GetSkillPrefab().gameObject, _transform.rotation);
 		}
 
 		private void SummerSkill()
 		{
-			var arrow = SpawnManager.instance.SpawnObject(transform.position, GameData.GetSkillPrefab().gameObject);
+			var arrow = SpawnManager.instance.SpawnObject(_transform.position, GameData.GetSkillPrefab().gameObject);
 			var projectileComponent = arrow.GetComponent<SummerSkill>();
-			projectileComponent.SetDirection(transform.forward, 0);
+			projectileComponent.SetDirection(_transform.forward, 0);
 
 			if (GameData.IsCharacterRank(CharacterRank.E2))
 			{
-				arrow = SpawnManager.instance.SpawnObject(transform.position, GameData.GetSkillPrefab().gameObject);
+				arrow = SpawnManager.instance.SpawnObject(_transform.position, GameData.GetSkillPrefab().gameObject);
 				projectileComponent = arrow.GetComponent<SummerSkill>();
-				projectileComponent.SetDirection(transform.forward, 30);
+				projectileComponent.SetDirection(_transform.forward, 30);
 				
-				arrow = SpawnManager.instance.SpawnObject(transform.position, GameData.GetSkillPrefab().gameObject);
+				arrow = SpawnManager.instance.SpawnObject(_transform.position, GameData.GetSkillPrefab().gameObject);
 				projectileComponent = arrow.GetComponent<SummerSkill>();
-				projectileComponent.SetDirection(transform.forward, -30);
+				projectileComponent.SetDirection(_transform.forward, -30);
 			}
 		}
 
@@ -335,7 +327,7 @@ namespace Objects.Players.Scripts
 
 			foreach (var enemy in enemies)
 			{
-				var result = Utilities.GetPointOnColliderSurface(enemy.transform.position, transform);
+				var result = Utilities.GetPointOnColliderSurface(enemy.transform.position, _transform);
 				enemy.GetChaseComponent().SetImmobile(rank == CharacterRank.E5 ? 2f : 1.5f);
 				SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject);
 			}
@@ -372,7 +364,7 @@ namespace Objects.Players.Scripts
 		
 		private void AmeliaBoDSkill()
 		{
-			SpawnManager.instance.SpawnObject(transform.position, GameData.GetSkillPrefab().gameObject, transform.rotation);
+			SpawnManager.instance.SpawnObject(_transform.position, GameData.GetSkillPrefab().gameObject, _transform.rotation);
 		}
 
 		private IEnumerator DavidSkill()

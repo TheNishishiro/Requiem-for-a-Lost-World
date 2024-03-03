@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DefaultNamespace;
 using Managers;
 using Objects.Stage;
+using Unity.Netcode;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -12,7 +13,6 @@ namespace Objects.Enemies.Peace_Ender
 {
 	public class PEAttackComponent : MonoBehaviour
 	{
-		private ChaseComponent _chaseComponent;
 		[SerializeField] private GameObject lightPillarPrefab;
 		[SerializeField] private GameObject indicatorPrefab;
 		[SerializeField] private int lightPillarCount;
@@ -23,11 +23,6 @@ namespace Objects.Enemies.Peace_Ender
 		[SerializeField] private int enemySpawnCountMin;
 		[SerializeField] private int enemySpawnCountMax;
 		private float _currentCooldown;
-
-		private void Awake()
-		{
-			_chaseComponent = GetComponentInParent<ChaseComponent>();
-		}
 		
 		public void Update()
 		{

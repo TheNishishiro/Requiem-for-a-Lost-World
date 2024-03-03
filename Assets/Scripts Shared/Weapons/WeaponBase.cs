@@ -6,18 +6,22 @@ using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using Interfaces;
 using NaughtyAttributes;
+using Objects;
 using Objects.Abilities;
 using Objects.Items;
 using Objects.Players.Scripts;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Serialization;
 
 namespace Weapons
 {
-	public abstract class WeaponBase : MonoBehaviour, IPlayerItem
+	public abstract class WeaponBase : NetworkBehaviour, IPlayerItem
 	{
+		[SerializeField] protected bool useNetworkPool;
 		[SerializeField] public GameObject spawnPrefab;
+		[SerializeField] public WeaponEnum WeaponId;
 		[SerializeField] public string Name;
 		[SerializeField][TextArea] public string Description;
 		[SerializeField] public float chanceToAppear;
@@ -30,6 +34,7 @@ namespace Weapons
 		[SerializeField] List<UpgradeData> availableUpgrades;
 		protected PlayerStatsComponent _playerStatsComponent;
 		protected float _timer;
+		
 		
 		public string NameField => Name;
 		public string DescriptionField => Description;
@@ -145,6 +150,11 @@ namespace Weapons
 
 		public virtual void OnEnemyKilled()
 		{
+		}
+
+		public virtual void SetupProjectile(GameObject projectile)
+		{
+			
 		}
 	}
 }

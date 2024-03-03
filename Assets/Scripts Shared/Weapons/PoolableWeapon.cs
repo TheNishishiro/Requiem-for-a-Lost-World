@@ -1,6 +1,7 @@
 ﻿using DefaultNamespace;
 using Managers;
 using NaughtyAttributes;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -13,14 +14,21 @@ namespace Weapons
         [Foldout("Pooling")]
         [SerializeField] public int maxCapacity = 50;
         protected ObjectPool<T> pool;
-        protected bool UseNetworkPool;
         
         public override void Attack()
         {
-            if (pool.CountActive >= maxCapacity)
-                return;
+            if (useNetworkPool)
+            {
+                RpcManager.instance.FireProjectileRpc(WeaponId, transform.position, NetworkManager.Singleton.LocalClientId);
 
-            pool.Get();
+            }
+            else
+            {
+                if (pool.CountActive >= maxCapacity)
+                    return;
+
+                pool.Get();
+            }
         }
         
         protected override void InitPool()

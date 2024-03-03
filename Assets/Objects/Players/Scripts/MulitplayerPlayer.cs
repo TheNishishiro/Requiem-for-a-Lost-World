@@ -19,7 +19,9 @@ public class MulitplayerPlayer : NetworkBehaviour
     public FirstPersonController firstPersonController;
     public StarterAssetsInputs starterAssetsInputs;
     public SpriteRenderer spriteRenderer;
-
+    public CharactersEnum currentCharacter;
+    private bool _keepAlive = true;
+    
     public void Start()
     {
         tag = "Player";
@@ -33,8 +35,7 @@ public class MulitplayerPlayer : NetworkBehaviour
         playerInput.enabled = IsOwner;
         firstPersonController.enabled = IsOwner;
         starterAssetsInputs.enabled = IsOwner;
-
-
+        
         base.OnNetworkSpawn();
         if (IsOwner)
         {
@@ -42,35 +43,40 @@ public class MulitplayerPlayer : NetworkBehaviour
             StartCoroutine(WaitForCursorManager());
             StartCoroutine(WaitForEnemyManager());
             StartCoroutine(WaitForGameManager());
+            StartCoroutine(WaitForPlayerSkillComponent());
+
+            StartCoroutine(BroadcastSkinData());
         }
-
-
-        var charEnum = GameData.GetPlayerCharacterId();
-        spriteRenderer.sprite=GameData.GetCharacterSprite(charEnum);
-        SetForeignSpritesRpc(charEnum);
     }
 
     public override void OnNetworkDespawn()
     {
         if (IsOwner)
-            GameManager.instance.BackToMainMenu(false);
+        {
+            _keepAlive = false;
+            GameManager.instance.BackToMainMenu();
+        }
     }
 
-    [Rpc(SendTo.Server)]
-    private void SetForeignSpritesRpc(CharactersEnum characterEnum) 
+    private IEnumerator BroadcastSkinData()
     {
-        if (!IsOwner)
-            spriteRenderer.sprite = GameData.GetCharacterSprite(characterEnum);
-        SetClientSpritesRpc(GameData.GetPlayerCharacterId());
+        while (_keepAlive)
+        {
+            NotifyMySkinRpc(this, GameData.GetPlayerCharacterId());
+            yield return new WaitForSeconds(5);
+        }
     }
-
-    [Rpc(SendTo.NotMe)]
-    private void SetClientSpritesRpc(CharactersEnum characterEnum) 
+    
+    [Rpc(SendTo.Everyone)]
+    private void NotifyMySkinRpc(NetworkBehaviourReference networkBehaviourReference, CharactersEnum characterEnum)
     {
-        if (!IsOwner)
-            spriteRenderer.sprite = GameData.GetCharacterSprite(characterEnum);
+        if (!networkBehaviourReference.TryGet(out MulitplayerPlayer player)) return;
+        if (currentCharacter == characterEnum) return;
+        
+        player.currentCharacter = characterEnum;
+        player.spriteRenderer.sprite = GameData.GetCharacterSprite(characterEnum);
     }
-
+    
     private IEnumerator WaitForAddWeapon()
     {
         while (true)
@@ -92,6 +98,20 @@ public class MulitplayerPlayer : NetworkBehaviour
             if (GameManager.instance != null)
             {
                 GameManager.instance.playerVfxComponent = GetComponent<PlayerVfxComponent>();
+                yield break;
+            }
+
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+    private IEnumerator WaitForPlayerSkillComponent()
+    {
+        while (true)
+        {
+            if (PlayerSkillComponent.instance != null)
+            {
+                PlayerSkillComponent.instance.Init(GetComponentInChildren<PlayerAbilityContainer>().transform);
                 yield break;
             }
 
