@@ -8,6 +8,8 @@ using Objects.Players.Containers;
 using Objects.Players.Scripts;
 using Objects.Stage;
 using StarterAssets;
+using UI.Labels.InGame.MP_List;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -21,7 +23,13 @@ public class MulitplayerPlayer : NetworkBehaviour
     public StarterAssetsInputs starterAssetsInputs;
     public SpriteRenderer spriteRenderer;
     private CharactersEnum localCharacterId;
+    private ulong localPlayerId;
     public NetworkVariable<CharactersEnum> currentCharacterId = new (0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<float> currentCharacterHealth = new (0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<float> currentCharacterMaxHealth = new (0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<int> currentCharacterLevel = new (0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<FixedString128Bytes> currentPlayerName = new ("", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<ulong> currentPlayerId = new (0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private bool _keepAlive = true;
     
     public void Start()
@@ -53,22 +61,44 @@ public class MulitplayerPlayer : NetworkBehaviour
 
     public void Update()
     {
+        if (IsOwner)
+        {
+            currentCharacterHealth.Value = PlayerStatsScaler.GetScaler().GetHealth();
+            currentCharacterMaxHealth.Value = PlayerStatsScaler.GetScaler().GetMaxHealth();
+            currentCharacterLevel.Value = GameManager.instance.playerComponent.GetLevel();
+            currentPlayerId.Value = NetworkManager.Singleton.LocalClientId;
+        }
+        
         if (localCharacterId != currentCharacterId.Value)
         {
             spriteRenderer.sprite = GameData.GetCharacterSprite(currentCharacterId.Value);
             localCharacterId = currentCharacterId.Value;
+            localPlayerId = currentPlayerId.Value;
+            
+            if (!IsOwner)
+                MpActivePlayersInGameList.instance.UpdateEntryAvatar(currentPlayerId.Value, GameData.GetCharacterAvatar(currentCharacterId.Value));
         }
+
+        if (!IsOwner)
+        {
+            MpActivePlayersInGameList.instance.UpdateEntry(currentPlayerId.Value, currentCharacterHealth.Value, currentCharacterMaxHealth.Value, null, currentCharacterLevel.Value);
+        }
+        
     }
 
     public override void OnNetworkDespawn()
     {
+        if (!IsOwner)
+        {
+            MpActivePlayersInGameList.instance.RemoveEntry(localPlayerId);
+        }
         if (IsOwner)
         {
             _keepAlive = false;
             GameManager.instance.BackToMainMenu();
         }
     }
-    
+
     private IEnumerator WaitForAddWeapon()
     {
         while (true)

@@ -30,6 +30,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<int, List<int>> ReadStoryEntries { get; set; }
 		public ConfigurationFile ConfigurationFile;
 		public CharactersEnum? SelectedCharacterId;
+		public string Nickname;
 		public ulong Gold;
 		public ulong Gems;
 		public ulong EnemiesKilled;
@@ -109,6 +110,7 @@ namespace DefaultNamespace.Data
 			Pity = saveData.Pity;
 			SelectedDifficulty = saveData.SelectedDifficulty;
 			SelectedCharacterId = saveData.SelectedCharacterId;
+			Nickname = saveData.Nickname;
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
 			AchievementSaveData = saveData.AchievementSaveData ?? new Dictionary<AchievementEnum, bool>();
@@ -241,6 +243,7 @@ namespace DefaultNamespace.Data
 		public int Pity;
 		public DifficultyEnum SelectedDifficulty;
 		public CharactersEnum? SelectedCharacterId;
+		public string Nickname;
 		
 		public SaveData(){}
 		
@@ -264,7 +267,7 @@ namespace DefaultNamespace.Data
 			TimePlayed = saveFile.TimePlayed;
 			BossKills = saveFile.BossKills;
 			SelectedDifficulty = saveFile.SelectedDifficulty;
+			Nickname = saveFile.Nickname;
 		}
-
 	}
 }

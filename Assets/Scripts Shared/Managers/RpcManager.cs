@@ -4,6 +4,7 @@ using Events.Scripts;
 using Objects;
 using Objects.Enemies;
 using Objects.Stage;
+using UI.Labels.InGame.MP_List;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -50,6 +51,12 @@ namespace Managers
         {
             gameResultData.IsWin = true;
             FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(true);
+        }
+
+        [Rpc(SendTo.Everyone)]
+        public void RemovePlayerFromUiRpc(ulong clientId)
+        {
+            MpActivePlayersInGameList.instance.RemoveEntry(clientId);
         }
     }
 }
