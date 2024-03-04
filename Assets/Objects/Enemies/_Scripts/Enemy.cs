@@ -14,6 +14,7 @@ using Objects.Drops.ChestDrop;
 using Objects.Players.Scripts;
 using Objects.Stage;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -37,6 +38,7 @@ namespace Objects.Enemies
 		[SerializeField] private Pickup healingOrbDrop;
 		[SerializeField] private GameObject grandOctiBoss;
 		[SerializeField] private ParticleSystem curseParticleSystem;
+		[SerializeField] private NetworkTransform networkTransport;
 		public Transform TargetPoint => damageableComponent.targetPoint.transform;
 		private NetworkVariable<EnemyTypeEnum> enemyType = new ();
 		private EnemyStats stats;
@@ -172,6 +174,8 @@ namespace Objects.Enemies
 			chaseComponent.SetSpeed(stats.speed);
 			damageableComponent.SetHealth(stats.hp);
 			damageableComponent.SetResistances(stats.elementStats);
+			networkTransport.Interpolate = true;
+			
 		}
 
 		public void SetPlayerTarget(Transform targetClient)
@@ -209,7 +213,8 @@ namespace Objects.Enemies
 			
 			else if (removeCollisionsTimer.Value <= 0 && isRemoveCollisions.Value)
 			{
-				isRemoveCollisions.Value = false;
+				if (IsHost)
+					isRemoveCollisions.Value = false;
 				RevertIgnoredCollisions();
 			}
 		}
@@ -247,7 +252,7 @@ namespace Objects.Enemies
 		private void Die()
 		{
 			if (_isDying.Value) return;
-
+			networkTransport.Interpolate = false;
 			capsuleCollider.enabled = false;
 			chaseComponent.SetMovementState(true);
 			_isDying.Value = true;
@@ -340,7 +345,7 @@ namespace Objects.Enemies
 
 		public void SetNoCollisions(float timer)
 		{
-			if (removeCollisionsTimer.Value < timer)
+			if (IsHost && removeCollisionsTimer.Value < timer)
 				removeCollisionsTimer.Value = timer;
 		}
 

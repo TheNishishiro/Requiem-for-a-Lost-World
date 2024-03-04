@@ -59,7 +59,6 @@ public class WeaponManager : NetworkBehaviour
     
     public void AddStartingWeapon(Transform weaponContainer)
     {
-        Debug.Log("AddStartingWeapon");
         _weaponContainer = weaponContainer;
         var characterStartingWeapon = GameData.GetPlayerCharacterStartingWeapon() ?? availableWeapons.FirstOrDefault()?.weaponBase;
         AddWeapon(characterStartingWeapon, 1);

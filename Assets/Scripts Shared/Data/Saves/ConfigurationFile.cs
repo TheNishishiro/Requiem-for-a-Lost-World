@@ -41,11 +41,12 @@ namespace DefaultNamespace.Data
 				AntiAliasing = 0;
 				IsDiscordEnabled = false;
 				PresetIndex = 1;
-				ConfigurationVersion = 6;
 				RenderDistance = 1;
 				Use3dGrass = false;
 				ObjectDensity = 1;
 				Volume = 1;
+				TextureQuality = 2;
+				ConfigurationVersion = 7;
 			}
 			else
 			{
@@ -64,6 +65,7 @@ namespace DefaultNamespace.Data
 				Use3dGrass = false;
 				ObjectDensity = 1;
 				Volume = 1;
+				TextureQuality = 4;
 			}
 
 			return Update();
@@ -109,6 +111,17 @@ namespace DefaultNamespace.Data
 			{
 				Volume = 1;
 				ConfigurationVersion = 6;
+			}
+			if (ConfigurationVersion == 6)
+			{
+				TextureQuality = Quality switch
+				{
+					0 => 2,
+					1 => 3,
+					_ => 4
+				};
+
+				ConfigurationVersion = 7;
 			}
 
 			return this;

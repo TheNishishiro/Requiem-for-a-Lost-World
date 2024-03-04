@@ -22,6 +22,7 @@ namespace Managers
 		[SerializeField] private TMP_Dropdown renderScalingDropdown;
 		[SerializeField] private TMP_Dropdown shadowQualityDropdown;
 		[SerializeField] private TMP_Dropdown antialiasingDropdown;
+		[SerializeField] private TMP_Dropdown textureResolutionDropdown;
 		[SerializeField] private TMP_Dropdown lodDropdown;
 		[SerializeField] private TMP_Dropdown renderDistanceDropdown;
 		[SerializeField] private TMP_Dropdown presetDropdown;
@@ -59,6 +60,7 @@ namespace Managers
 					renderDistanceDropdown.value = 0;
 					use3DGrassToggle.isOn = false;
 					objectDensityDropdown.value = 0;
+					textureResolutionDropdown.value = 2;
 					break;
 				case 1:
 					vsyncToggle.isOn = false;
@@ -72,6 +74,7 @@ namespace Managers
 					renderDistanceDropdown.value = 0;
 					use3DGrassToggle.isOn = false;
 					objectDensityDropdown.value = 0;
+					textureResolutionDropdown.value = 2;
 					break;
 				case 2:
 					vsyncToggle.isOn = true;
@@ -84,6 +87,7 @@ namespace Managers
 					lodDropdown.value = 1;
 					use3DGrassToggle.isOn = false;
 					objectDensityDropdown.value = 1;
+					textureResolutionDropdown.value = 3;
 					break;
 				case 3:
 					vsyncToggle.isOn = true;
@@ -97,6 +101,7 @@ namespace Managers
 					renderDistanceDropdown.value = 1;
 					use3DGrassToggle.isOn = false;
 					objectDensityDropdown.value = 1;
+					textureResolutionDropdown.value = 4;
 					break;
 				case 4:
 					vsyncToggle.isOn = true;
@@ -110,6 +115,7 @@ namespace Managers
 					renderDistanceDropdown.value = 2;
 					use3DGrassToggle.isOn = true;
 					objectDensityDropdown.value = 2;
+					textureResolutionDropdown.value = 4;
 					break;
 				case 5:
 					vsyncToggle.isOn = true;
@@ -123,6 +129,7 @@ namespace Managers
 					renderDistanceDropdown.value = 3;
 					use3DGrassToggle.isOn = true;
 					objectDensityDropdown.value = 3;
+					textureResolutionDropdown.value = 4;
 					break;
 			}
 		}
@@ -146,6 +153,7 @@ namespace Managers
 			windowModeDropdown.value = configuration.WindowMode;
 			use3DGrassToggle.isOn = configuration.Use3dGrass;
 			volumeSlider.value = configuration.Volume;
+			textureResolutionDropdown.value = configuration.TextureQuality;
 			
 			resolutionDropdown.options ??= new List<TMP_Dropdown.OptionData>();
 			resolutionDropdown.options.Clear();
@@ -185,6 +193,7 @@ namespace Managers
 			configuration.ResolutionHeight = Screen.resolutions[resolutionDropdown.value].height;
 			configuration.RefreshRate = Screen.resolutions[resolutionDropdown.value].refreshRateRatio.numerator;
 			configuration.Volume = volumeSlider.value;
+			configuration.TextureQuality = textureResolutionDropdown.value;
 			
 			saveManager.SaveGame();
 			saveManager.ApplySettings();

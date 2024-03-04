@@ -92,7 +92,6 @@ public class EnemyManager : NetworkBehaviour
 		
 		var enemy = NetworkObjectPool.Singleton.GetNetworkObject(enemyGameObject, position, Quaternion.identity);
 		var enemyComponent = enemy.GetComponent<Enemy>();
-		enemyComponent.transform.position = position;
 		enemy.Spawn();
 		
 		enemyComponent.SetPlayerTarget(targetClient);

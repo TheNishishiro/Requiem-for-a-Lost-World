@@ -15,7 +15,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-public class MulitplayerPlayer : NetworkBehaviour
+public class MultiplayerPlayer : NetworkBehaviour
 {
     public GameObject cameraRoot;
     public PlayerInput playerInput;

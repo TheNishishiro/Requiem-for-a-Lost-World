@@ -31,7 +31,7 @@ public class AmeliaGlassShield : CharacterSkillBase, IDamageTakenHandler, ISpeci
         }
     }
     
-    private void Awake()
+    private new void Awake()
     {
         _activeShards = new List<AmeliaGlassShard>();
     }

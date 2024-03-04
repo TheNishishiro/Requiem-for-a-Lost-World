@@ -99,7 +99,8 @@ namespace Managers
 					_objectPool.Get();
 					break;
 				case PickupEnum.Chest:
-					RequestPickupSpawnRpc(PickupEnum.Chest, pickupPosition);
+					var networkObject = Instantiate(chestPrefab, position, Quaternion.identity).GetComponent<NetworkObject>();
+					networkObject.Spawn(true);
 					break;
 				default:
 				{
@@ -136,7 +137,7 @@ namespace Managers
 		{
 			if (networkObjectReference.TryGet(out var networkObject))
 			{
-				networkObject.Despawn();
+				Destroy(networkObject.gameObject);
 			}
 		}
 

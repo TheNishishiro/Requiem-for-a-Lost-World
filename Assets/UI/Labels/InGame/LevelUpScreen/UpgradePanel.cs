@@ -10,8 +10,6 @@ namespace UI.Labels.InGame.LevelUpScreen
 {
 	public class UpgradePanel : MonoBehaviour
 	{ 
-		private UpgradePanelManager _upgradePanelManager;
-		private WeaponManager _weaponManager;
 		private UpgradeEntry _upgradeEntry;
 		[SerializeField] private Image icon;
 		[SerializeField] private Image border;
@@ -20,12 +18,6 @@ namespace UI.Labels.InGame.LevelUpScreen
 		[SerializeField] private SVGImage elementIcon;
 		[SerializeField] private ElementIconData elementIconData;
 		[SerializeField] private Image upgradeBorder;
-		
-		private void Awake()
-		{
-			_upgradePanelManager = FindObjectOfType<UpgradePanelManager>();
-			_weaponManager = FindObjectOfType<WeaponManager>();
-		}
 
 		public void Set(UpgradeEntry upgradeEntry)
 		{
@@ -57,8 +49,8 @@ namespace UI.Labels.InGame.LevelUpScreen
 
 		public void SelectUpgrade()
 		{
-			_upgradeEntry.LevelUp(_weaponManager);
-			_upgradePanelManager.ClosePanel();
+			_upgradeEntry.LevelUp(WeaponManager.instance);
+			FindFirstObjectByType<UpgradePanelManager>().ClosePanel();
 		}
 	}
 }

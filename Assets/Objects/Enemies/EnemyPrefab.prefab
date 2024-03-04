@@ -5324,7 +5324,7 @@ GameObject:
   - component: {fileID: 4635495247598908059}
   - component: {fileID: 445137977363883629}
   - component: {fileID: 2022141020912838401}
-  - component: {fileID: 1103895287007389125}
+  - component: {fileID: 6305881953548018883}
   m_Layer: 6
   m_Name: EnemyPrefab
   m_TagString: Enemy
@@ -5403,6 +5403,7 @@ MonoBehaviour:
     type: 3}
   grandOctiBoss: {fileID: 9215985800514479204}
   curseParticleSystem: {fileID: 3041929888458073872}
+  networkTransport: {fileID: 6305881953548018883}
 --- !u!114 &1412954185048979437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5463,6 +5464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 2022141020912838401}
+  networkTransport: {fileID: 6305881953548018883}
 --- !u!136 &445137977363883629
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5513,7 +5515,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &1103895287007389125
+--- !u!114 &6305881953548018883
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

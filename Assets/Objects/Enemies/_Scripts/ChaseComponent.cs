@@ -5,11 +5,13 @@ using DefaultNamespace;
 using Interfaces;
 using Objects.Abilities.Back_Hole;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 public class ChaseComponent : NetworkBehaviour
 {
     [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] private NetworkTransform networkTransport;
     private Transform targetDestination;
     private GameObject tempTarget;
     private float movementSpeed;
@@ -61,12 +63,12 @@ public class ChaseComponent : NetworkBehaviour
     {
         if (!IsHost)
             return;
-        
-        if (targetDestination == null)
-            return;
-        
+
         if (_isMovementDisabled)
             return;
+        
+        if (targetDestination == null)
+            targetDestination = FindFirstObjectByType<MultiplayerPlayer>().transform;
 
         var currentPosition = transformCache.position;
 
@@ -101,6 +103,8 @@ public class ChaseComponent : NetworkBehaviour
         if (!isTempTarget && !_isPlayerControlled && Vector3.Distance(currentPosition, destination) > 12f)
         {
             currentPosition = Utilities.GetPointOnColliderSurface(destination - Utilities.GenerateRandomPositionOnEdge(new Vector2(8, 8)), transformCache, GetComponent<CapsuleCollider>().height);
+            networkTransport.Teleport(currentPosition, Quaternion.identity, transformCache.localScale);
+            return;
         }
 
         var speed = (isTempTarget ? tempSpeed : movementSpeed) * (_slowTimer > 0 ? _slowAmount : 1.0f) * (_isPlayerControlled ? 1.3f : 1.0f );

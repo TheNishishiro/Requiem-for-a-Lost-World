@@ -21,23 +21,8 @@ namespace Managers
 				ShowCursor();
 		}
 
-		private void Update()
-		{
-			if (Input.GetKeyDown(KeyCode.LeftControl))
-			{
-				ShowCursor();
-			}
-
-			if (Input.GetKeyUp(KeyCode.LeftControl))
-			{
-				HideCursor();
-			}
-		}
-
 		public void ShowCursor()
 		{
-			if (_starterAssetsInputs == null) return;
-			
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.None;
 			_starterAssetsInputs.cursorInputForLook = false;
@@ -48,7 +33,6 @@ namespace Managers
 		public void HideCursor()
 		{
 			if (Application.platform == RuntimePlatform.Android) return;
-			if (_starterAssetsInputs == null) return;
 			
 			Cursor.visible = false;
 			Cursor.lockState = CursorLockMode.Locked;
