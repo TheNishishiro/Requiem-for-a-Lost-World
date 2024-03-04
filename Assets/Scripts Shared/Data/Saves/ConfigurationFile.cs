@@ -24,6 +24,7 @@ namespace DefaultNamespace.Data
 		public int RenderDistance { get; set; }
 		public bool Use3dGrass { get; set; }
 		public int ObjectDensity { get; set; }
+		public int TextureQuality { get; set; }
 		public float Volume { get; set; }
 
 		public ConfigurationFile Default()

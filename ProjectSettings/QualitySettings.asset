@@ -20,7 +20,13 @@ QualitySettings:
     shadowmaskMode: 0
     skinWeights: 2
     globalTextureMipmapLimit: 3
-    textureMipmapLimitSettings: []
+    textureMipmapLimitSettings:
+    - serializedVersion: 0
+      limitBiasMode: 0
+      limitBias: 0
+    - serializedVersion: 0
+      limitBiasMode: 0
+      limitBias: 0
     anisotropicTextures: 0
     antiAliasing: 0
     softParticles: 0
@@ -73,7 +79,13 @@ QualitySettings:
     shadowmaskMode: 0
     skinWeights: 4
     globalTextureMipmapLimit: 1
-    textureMipmapLimitSettings: []
+    textureMipmapLimitSettings:
+    - serializedVersion: 0
+      limitBiasMode: 0
+      limitBias: 0
+    - serializedVersion: 0
+      limitBiasMode: 0
+      limitBias: 0
     anisotropicTextures: 1
     antiAliasing: 0
     softParticles: 0
@@ -126,7 +138,13 @@ QualitySettings:
     shadowmaskMode: 1
     skinWeights: 255
     globalTextureMipmapLimit: 0
-    textureMipmapLimitSettings: []
+    textureMipmapLimitSettings:
+    - serializedVersion: 0
+      limitBiasMode: 0
+      limitBias: 0
+    - serializedVersion: 0
+      limitBiasMode: 0
+      limitBias: 0
     anisotropicTextures: 2
     antiAliasing: 4
     softParticles: 0
@@ -179,7 +197,13 @@ QualitySettings:
     shadowmaskMode: 1
     skinWeights: 255
     globalTextureMipmapLimit: 0
-    textureMipmapLimitSettings: []
+    textureMipmapLimitSettings:
+    - serializedVersion: 0
+      limitBiasMode: 0
+      limitBias: 2
+    - serializedVersion: 0
+      limitBiasMode: 0
+      limitBias: -2
     anisotropicTextures: 2
     antiAliasing: 4
     softParticles: 0
@@ -218,5 +242,9 @@ QualitySettings:
     terrainFadeLength: 5
     terrainMaxTrees: 50
     excludedTargetPlatforms: []
-  m_TextureMipmapLimitGroupNames: []
-  m_PerPlatformDefaultQuality: {}
+  m_TextureMipmapLimitGroupNames:
+  - Lower than avarage
+  - Higer than avarage
+  m_PerPlatformDefaultQuality:
+    Android: 0
+    Standalone: 0
