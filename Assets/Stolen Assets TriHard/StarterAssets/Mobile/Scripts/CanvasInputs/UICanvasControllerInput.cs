@@ -7,25 +7,10 @@ namespace StarterAssets
     {
         [Header("Output")]
         private StarterAssetsInputs starterAssetsInputs;
-        
-        public void Start()
-        {
-            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
-        }
 
-        public override void OnDestroy()
+        public void SetInputAsset(StarterAssetsInputs playerAssetsInputs)
         {
-            if (NetworkManager.Singleton)
-                NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
-            base.OnDestroy();
-        }
-		
-        private void OnClientConnected(ulong clientId)
-        {
-            if (clientId == NetworkManager.Singleton.LocalClientId)
-            {
-                starterAssetsInputs = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponentInChildren<StarterAssetsInputs>();
-            }
+            starterAssetsInputs = playerAssetsInputs;
         }
 
         public void VirtualMoveInput(Vector2 virtualMoveDirection)

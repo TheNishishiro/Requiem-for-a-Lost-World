@@ -28,21 +28,43 @@ namespace DefaultNamespace.Data
 
 		public ConfigurationFile Default()
 		{
-			Vsync = true;
-			Quality = 4;
-			GrassDensity = 3;
-			GrassRenderDistance = 3;
-			RenderScaling = 2;
-			ShadowQuality = 5;
-			LodLevel = 2;
-			AntiAliasing = 4;
-			IsDiscordEnabled = true;
-			PresetIndex = 4;
-			ConfigurationVersion = 0;
-			RenderDistance = 1;
-			Use3dGrass = false;
-			ObjectDensity = 1;
-			Volume = 1;
+			if (Application.platform == RuntimePlatform.Android)
+			{
+				Vsync = true;
+				Quality = 1;
+				GrassDensity = 1;
+				GrassRenderDistance = 1;
+				RenderScaling = 2;
+				ShadowQuality = 0;
+				LodLevel = 2;
+				AntiAliasing = 0;
+				IsDiscordEnabled = false;
+				PresetIndex = 1;
+				ConfigurationVersion = 6;
+				RenderDistance = 1;
+				Use3dGrass = false;
+				ObjectDensity = 1;
+				Volume = 1;
+			}
+			else
+			{
+				Vsync = true;
+				Quality = 4;
+				GrassDensity = 3;
+				GrassRenderDistance = 3;
+				RenderScaling = 4;
+				ShadowQuality = 5;
+				LodLevel = 4;
+				AntiAliasing = 4;
+				IsDiscordEnabled = false;
+				PresetIndex = 4;
+				ConfigurationVersion = 0;
+				RenderDistance = 1;
+				Use3dGrass = false;
+				ObjectDensity = 1;
+				Volume = 1;
+			}
+
 			return Update();
 		}
 

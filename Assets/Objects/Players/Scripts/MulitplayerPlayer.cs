@@ -54,6 +54,7 @@ public class MulitplayerPlayer : NetworkBehaviour
             StartCoroutine(WaitForEnemyManager());
             StartCoroutine(WaitForGameManager());
             StartCoroutine(WaitForPlayerSkillComponent());
+            StartCoroutine(WaitScreenControlsManager());
 
             currentCharacterId.Value = GameData.GetPlayerCharacterId();
         }
@@ -169,6 +170,21 @@ public class MulitplayerPlayer : NetworkBehaviour
                     
                 if (GameData.GetPlayerCharacterData().PickWeaponOnStart)
                     upgradePanelManager.OpenPickWeapon();
+                yield break;
+            }
+
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+    private IEnumerator WaitScreenControlsManager()
+    {
+        while (true)
+        {
+            var touchScreenControllerInput = FindFirstObjectByType<UICanvasControllerInput>();
+            if (touchScreenControllerInput != null)
+            {
+                touchScreenControllerInput.SetInputAsset(GetComponentInChildren<StarterAssetsInputs>());
                 yield break;
             }
 
