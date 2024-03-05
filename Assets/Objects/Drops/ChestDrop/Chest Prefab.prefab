@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8064260009072169135}
   - component: {fileID: 7814660344872424984}
   - component: {fileID: 1962213444239490469}
+  - component: {fileID: 2264043776448485491}
   - component: {fileID: 3561127621986706836}
   - component: {fileID: -5662689963410785615}
-  - component: {fileID: 2264043776448485491}
   m_Layer: 11
   m_Name: Chest Prefab
   m_TagString: Untagged
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2198367623
+  GlobalObjectIdHash: 1786850923
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -134,37 +134,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &3561127621986706836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5023575353268103864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbaa1a5dec3c4bcbb90afe1ad8de206b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-5662689963410785615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5023575353268103864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a2841170fe94ad7a8b87b7f20551a95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUpObject: {fileID: 0}
-  PickupEnum: 5
-  boxCollider: {fileID: 0}
-  isStationary: 1
-  canExpire: 0
-  lifeTime: 0
-  canBeAttracted: 0
 --- !u!114 &2264043776448485491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +165,37 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &3561127621986706836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5023575353268103864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbaa1a5dec3c4bcbb90afe1ad8de206b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5662689963410785615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5023575353268103864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a2841170fe94ad7a8b87b7f20551a95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUpObject: {fileID: 0}
+  PickupEnum: 5
+  boxCollider: {fileID: 0}
+  isStationary: 1
+  canExpire: 0
+  lifeTime: 0
+  canBeAttracted: 0
 --- !u!1 &8779675110605944975
 GameObject:
   m_ObjectHideFlags: 0

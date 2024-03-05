@@ -86,7 +86,7 @@ namespace Objects.Enemies
 				SetupBoss();
 		}
 
-		public void Setup(EnemyNetworkStats newStats, float healthMultiplier, float speedMultiplier)
+		public void Setup(EnemyNetworkStats newStats, float healthMultiplier, float speedMultiplier, float expDropMultiplier)
 		{
 			damageableComponent.Clear();
 			chaseComponent.Clear();
@@ -119,7 +119,7 @@ namespace Objects.Enemies
 				{
 					pickupObject = expDrop,
 				};
-				expDropChance.amount = newStats.expDrop;
+				expDropChance.amount = (int)(newStats.expDrop * expDropMultiplier);
 				expDropChance.chance = 0.75f;
 				dropOnDestroyComponent.AddDrop(expDropChance);
 			}

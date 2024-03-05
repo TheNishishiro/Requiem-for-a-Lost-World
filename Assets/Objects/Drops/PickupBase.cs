@@ -11,7 +11,7 @@ using UnityEngine.Events;
 
 namespace Objects.Drops
 {
-	public class PickupBase : MonoBehaviour
+	public class PickupBase : NetworkBehaviour
 	{
 		[SerializeField] protected PickupObject pickUpObject;
 		[SerializeField] protected PickupEnum PickupEnum;

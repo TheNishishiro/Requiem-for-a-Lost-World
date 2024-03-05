@@ -100,7 +100,7 @@ namespace Managers
 					break;
 				case PickupEnum.Chest:
 					var networkObject = Instantiate(chestPrefab, position, Quaternion.identity).GetComponent<NetworkObject>();
-					networkObject.Spawn(true);
+					networkObject.Spawn();
 					break;
 				default:
 				{
@@ -123,13 +123,6 @@ namespace Managers
 				var expGem = _expGem.OrderBy(_ => Random.value).First().GetExpObject();
 				expGem.AddExp(amount);
 			}
-		}
-
-		[Rpc(SendTo.Server)]
-		public void RequestPickupSpawnRpc(PickupEnum pickupEnum, Vector3 position)
-		{
-			if (pickupEnum == PickupEnum.Chest)
-				Instantiate(chestPrefab, position, Quaternion.identity).GetComponent<NetworkObject>().Spawn();
 		}
 
 		[Rpc(SendTo.Server)]

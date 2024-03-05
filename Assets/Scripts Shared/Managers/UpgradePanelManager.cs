@@ -101,7 +101,7 @@ namespace Managers
 			for (var i = 0; i < upgradeEntries.Count; i++)
 			{
 				upgradeButtons[i].gameObject.SetActive(true);
-				upgradeButtons[i].Set(upgradeEntries[i]);
+				upgradeButtons[i].Set(upgradeEntries[i], this);
 			}
 		}
 	}
