@@ -10,32 +10,22 @@ namespace Objects.Abilities.Scythe
 {
 	public class ScytheWeapon : PoolableWeapon<ScytheProjectile>
 	{
-		private HealthComponent _healthComponent;
 		public bool IsBloodEmbrace;
 		public bool IsCursedStrikes;
 		public bool IsSoulHarvest;
 
 		public override void Awake()
 		{
-			_healthComponent = FindFirstObjectByType<HealthComponent>();
 			base.Awake();
 			if (GameData.IsCharacterWithRank(CharactersEnum.Corina_BoB, CharacterRank.E4))
 				weaponStats.Scale += 0.5f;
 		}
 
-		protected override ScytheProjectile ProjectileInit()
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
-			var katanaSlash = Instantiate(spawnPrefab, transform).GetComponent<ScytheProjectile>();
-			katanaSlash.SetParentWeapon(this);
-			katanaSlash.SetPlayerHealthComponent(_healthComponent);
-			return katanaSlash;
-		}
-
-		protected override bool ProjectileSpawn(ScytheProjectile projectile)
-		{
-			projectile.transform.position = transform.position;
-			projectile.SetParentWeapon(this);
-			return true;
+			networkProjectile.Initialize(this, transform.position);
+			networkProjectile.Parent(GameManager.instance.PlayerTransform);
+			networkProjectile.GetProjectile<ScytheProjectile>().SetPlayerHealthComponent(GameManager.instance.playerComponent.healthComponent);
 		}
 
 		protected override int GetAttackCount()

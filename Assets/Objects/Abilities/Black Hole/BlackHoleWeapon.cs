@@ -26,7 +26,7 @@ namespace Objects.Abilities.Back_Hole
 			base.Awake();
 		}
 
-		protected override bool ProjectileSpawn(BlackHoleProjectile projectile)
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
 			var spawnArea = 4.0f;
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Arika_BoV)
@@ -35,21 +35,19 @@ namespace Objects.Abilities.Back_Hole
 			}
 
 			var blackHolePosition = Utilities.GetRandomInAreaFreezeParameter(transform.position, spawnArea, isFreezeY:true);
-			projectile.transform.position = Utilities.GetPointOnColliderSurface(blackHolePosition, transform);
+			var positionOnSurface = Utilities.GetPointOnColliderSurface(blackHolePosition, transform);
 			
 			if (GameData.IsCharacterWithRank(CharactersEnum.Arika_BoV, CharacterRank.E4) && Random.value < 0.05f)
 			{
 				var originalScale = weaponStats.Scale;
 				weaponStats.Scale *= 2f;
-				projectile.SetParentWeapon(this);
+				networkProjectile.Initialize(this, positionOnSurface);
 				weaponStats.Scale = originalScale;
 			}
 			else
 			{
-				projectile.SetParentWeapon(this);
+				networkProjectile.Initialize(this, positionOnSurface);
 			}
-			
-			return true;
 		}
 
 		protected override void OnAttackEnd()

@@ -11,7 +11,8 @@ namespace Objects.Abilities.Book
 {
 	public class BookWeapon : PoolableWeapon<BookProjectile>
 	{
-		private float rotateOffset = 0;
+		private float _rotationStep = 0;
+		private float _rotateOffset = 0;
 		[HideInInspector] public bool IsShadowBurst;
 		[SerializeField] public GameObject ExplosionPrefab;
 		private ObjectPool<SimpleDamageProjectile> _subProjectilePool;
@@ -58,31 +59,26 @@ namespace Objects.Abilities.Book
 			_subProjectilePool.Get();
 		}
 
-		protected override BookProjectile ProjectileInit()
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
-			var book = Instantiate(spawnPrefab, transform).GetComponent<BookProjectile>();
-			book.SetParentWeapon(this);
-			book.SetTarget(gameObject);
-			return book;
-		}
-
-		protected override bool ProjectileSpawn(BookProjectile projectile)
-		{
-			projectile.transform.position = transform.position + new Vector3(WeaponStatsStrategy.GetScale(),0,0);
-			projectile.transform.RotateAround(transform.position, Vector3.up, rotateOffset);
-			projectile.SetParentWeapon(this);
-			return true;
+			var position = transform.position + new Vector3(WeaponStatsStrategy.GetScale(),0,0);
+			networkProjectile.Initialize(this, position);
+			networkProjectile.transform.RotateAround(transform.position, Vector3.up, _rotateOffset);
+			
+			var bookProjectile = networkProjectile.GetProjectile<BookProjectile>();
+			bookProjectile.SetTarget(gameObject);
+			
+			_rotateOffset += _rotationStep;
 		}
 
 		protected override IEnumerator AttackProcess()
 		{
-			var rotationStep = GetRotationByAttackCount();
-			rotateOffset = 0;
+			_rotationStep = GetRotationByAttackCount();
+			_rotateOffset = 0;
 			
 			for (var i = 0; i < WeaponStatsStrategy.GetAttackCount(); i++)
 			{
 				Attack();
-				rotateOffset += rotationStep;
 			}
 
 			yield break;

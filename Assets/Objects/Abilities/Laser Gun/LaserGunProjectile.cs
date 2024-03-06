@@ -12,6 +12,7 @@ namespace Objects.Abilities.Laser_Gun
 	{
 		[SerializeField] public LineRenderer lineRenderer;
 		[SerializeField] public Transform laserFirePoint;
+		[SerializeField] public LaserGunNetworkComponent gunNetworkComponent;
 		private Damageable _laserTarget;
 		private Transform _transform;
 		private Transform _targetTransform;

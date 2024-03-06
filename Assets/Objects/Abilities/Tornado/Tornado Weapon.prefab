@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eac81465a424009bd3a4d2bfd8c5450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 1
   spawnPrefab: {fileID: 6690290332192192340, guid: 80b17ffb0144cf14c97dea5e458c7c96,
     type: 3}
+  WeaponId: 28
   Name: Tornado
   Description: Summon a tornado at random location that travels around the field
   chanceToAppear: 0.8
@@ -73,6 +75,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 1
     DamageOverTimeFrequency: 1
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 315f6da1fc2b92b4886fd77b60ad0011, type: 2}
   - {fileID: 11400000, guid: e08b79527e76f6d4aab7550b211928ca, type: 2}

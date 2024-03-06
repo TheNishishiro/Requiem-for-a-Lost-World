@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using DefaultNamespace;
 using Events.Scripts;
 using Objects;
+using Objects.Abilities;
 using Objects.Enemies;
 using Objects.Stage;
 using UI.Labels.InGame.MP_List;
@@ -9,6 +11,7 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using Weapons;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -58,5 +61,51 @@ namespace Managers
         {
             MpActivePlayersInGameList.instance.RemoveEntry(clientId);
         }
+        
+        [Rpc(SendTo.Server)]
+        public void LucySkillRpc(bool isE3, bool isE1)
+        {
+            Debug.Log("LUCKY SKILL CAST");
+            var maxEnemies = isE3 ? 20 : 10;
+			
+            var enemies = EnemyManager.instance.GetActiveEnemies()
+                .Where(x => isE1 || !x.IsBoss())
+                .OrderBy(_ => Random.value)
+                .Take(Random.Range(5, maxEnemies));
+            foreach (var enemy in enemies)
+            {
+                enemy.MarkAsPlayerControlled(isE1 ? 25 : 10);
+            }
+        }
+        
+        [Rpc(SendTo.Server)]
+        public void FireProjectileRpc(WeaponEnum weaponId, Vector3 spawnPosition, ulong clientId)
+        {
+            var projectile = NetworkObjectPool.Singleton.GetNetworkObject(WeaponManager.instance.weaponProjectilePrefabs[weaponId], spawnPosition, Quaternion.identity);
+            var netObj = projectile.GetComponent<NetworkObject>();
+            netObj.SpawnWithOwnership(clientId);
+            
+            FireProjectileRpc(weaponId, netObj.GetComponent<NetworkProjectile>(), RpcTarget.Single(clientId, RpcTargetUse.Temp));
+        }        
+        
+        [Rpc(SendTo.SpecifiedInParams)]
+        public void FireProjectileRpc(WeaponEnum weaponId, NetworkBehaviourReference objectReference, RpcParams rpcParams)
+        {
+            if (objectReference.TryGet(out NetworkProjectile networkProjectile))
+            {
+                var unlockedWeapon = WeaponManager.instance.GetUnlockedWeapon(weaponId);
+                unlockedWeapon.SetupProjectile(networkProjectile);
+            }
+        }
+        
+        [Rpc(SendTo.Server)]
+        public void DespawnProjectileRpc(NetworkObjectReference networkObjectReference, WeaponEnum weaponId)
+        {
+            if (networkObjectReference.TryGet(out var networkObject))
+            {
+                NetworkObjectPool.Singleton.ReturnNetworkObject(networkObject, WeaponManager.instance.weaponProjectilePrefabs[weaponId]);
+                networkObject.Despawn(false);
+            }
+        }   
     }
 }

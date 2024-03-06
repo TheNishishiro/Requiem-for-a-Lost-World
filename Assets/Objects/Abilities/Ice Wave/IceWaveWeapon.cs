@@ -16,10 +16,11 @@ namespace Objects.Abilities.Ice_Wave
 	{
 		[SerializeField] private int waveCount = 3;
 		[SerializeField] private float scaleChangePerWave = 0.5f;
-		private float rotateOffset = 0;
-		private float currentWaveIndex = 0;
+		private float _rotationStep = 0;
+		private float _rotateOffset = 0;
+		private float _currentWaveIndex = 0;
 		public bool IsBlockingEnemies { get; private set; }
-		private Vector3 startPosition;
+		private Vector3 _startPosition;
 
 		private void Start()
 		{
@@ -30,30 +31,34 @@ namespace Objects.Abilities.Ice_Wave
 
 		protected override bool ProjectileSpawn(IceWaveProjectile projectile)
 		{
-			var currentScaleModifier = WeaponStatsStrategy.GetScale() * (scaleChangePerWave * currentWaveIndex);
-			var newPosition = new Vector3(startPosition.x + (currentWaveIndex/2) * currentScaleModifier, 0, startPosition.z);
-
-			projectile.transform.position = newPosition;
-			projectile.transform.RotateAround(startPosition, Vector3.up, rotateOffset);
-			projectile.transform.position = Utilities.GetPointOnColliderSurface(projectile.transform.position, transform);
-			projectile.SetParentWeapon(this);
 			
-			projectile.transform.localScale = new Vector3(currentScaleModifier,currentScaleModifier,currentScaleModifier);
 			return true;
+		}
+
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
+		{
+			var currentScaleModifier = WeaponStatsStrategy.GetScale() * (scaleChangePerWave * _currentWaveIndex);
+			var newPosition = new Vector3(_startPosition.x + (_currentWaveIndex/2) * currentScaleModifier, 0, _startPosition.z);
+
+			networkProjectile.Initialize(this, newPosition);
+			networkProjectile.transform.RotateAround(_startPosition, Vector3.up, _rotateOffset);
+			networkProjectile.transform.position = Utilities.GetPointOnColliderSurface(networkProjectile.transform.position, transform);
+			networkProjectile.transform.localScale = new Vector3(currentScaleModifier,currentScaleModifier,currentScaleModifier);
+			
+			_rotateOffset += _rotationStep;
 		}
 
 		protected override IEnumerator AttackProcess()
 		{
-			var rotationStep = GetRotationByAttackCount();
-			rotateOffset = 0;
-			startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+			_rotationStep = GetRotationByAttackCount();
+			_rotateOffset = 0;
+			_startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
-			for (currentWaveIndex = 1; currentWaveIndex <= waveCount; currentWaveIndex++)
+			for (_currentWaveIndex = 1; _currentWaveIndex <= waveCount; _currentWaveIndex++)
 			{
 				for (var i = 0; i < GetAttackCount(); i++)
 				{
 					Attack();
-					rotateOffset += rotationStep;
 				}
 				
 				yield return new WaitForSeconds(0.25f);

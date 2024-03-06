@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Managers;
 using UnityEngine;
 using Weapons;
 
@@ -8,28 +9,20 @@ namespace Objects.Abilities.Time_Blade
     {
         public bool IsTemporalMastery { get; set; }
         private bool _isMinuteTick;
-        
-        protected override TimeBladeProjectile ProjectileInit()
-        {
-            var timeBladeProjectile = Instantiate(spawnPrefab, transform).GetComponent<TimeBladeProjectile>();
-            timeBladeProjectile.SetParentWeapon(this);
-            return timeBladeProjectile;
-        }
-        
-        protected override bool ProjectileSpawn(TimeBladeProjectile projectile)
+
+        public override void SetupProjectile(NetworkProjectile networkProjectile)
         {
             var currentScaleModifier = WeaponStatsStrategy.GetScale() * (_isMinuteTick ? 0.5f : 1f);
-            projectile.SetParentWeapon(this);
 
-            var projectileTransform = projectile.transform;
-            projectileTransform.position = transform.position;
+            var projectileTransform = networkProjectile.transform;
+            networkProjectile.Initialize(this, transform.position);
+            networkProjectile.Parent(GameManager.instance.PlayerTransform);
             projectileTransform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
             projectileTransform.localScale = new Vector3(currentScaleModifier,currentScaleModifier,currentScaleModifier);
-
-            projectile.gameObject.SetActive(true);
-            return true;
+            
+            _isMinuteTick = !_isMinuteTick;
         }
-        
+
         protected override IEnumerator AttackProcess()
         {
             for (var i = 0; i < GetAttackCount(); i++)
@@ -37,7 +30,6 @@ namespace Objects.Abilities.Time_Blade
                 for (var j = 0; j < 2; j++)
                 {
                     Attack();
-                    _isMinuteTick = !_isMinuteTick;
                 }
                 yield return new WaitForSeconds(WeaponStatsStrategy.GetDuplicateSpawnDelay());
             }

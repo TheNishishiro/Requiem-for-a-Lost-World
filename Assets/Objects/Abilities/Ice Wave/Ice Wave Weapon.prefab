@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab4ad29002441c789f84f6d2805debc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 1
   spawnPrefab: {fileID: 424337869251227983, guid: 435ef4253c4a1e248843a6e2bcbef8fe,
     type: 3}
+  WeaponId: 12
   Name: Ice age
   Description: Send waves of ice spikes from the ground, sprading outwards from the
     character
@@ -74,6 +76,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 3270eb0e1055b744ab9317ae749a2113, type: 2}
   - {fileID: 11400000, guid: 6c9533fcb4f49c44292dada72d1a879e, type: 2}

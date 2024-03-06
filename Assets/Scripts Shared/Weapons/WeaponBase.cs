@@ -19,7 +19,7 @@ namespace Weapons
 {
 	public abstract class WeaponBase : MonoBehaviour, IPlayerItem
 	{
-		[SerializeField] protected bool useNetworkPool;
+		[SerializeField] public bool useNetworkPool;
 		[SerializeField] public GameObject spawnPrefab;
 		[SerializeField] public WeaponEnum WeaponId;
 		[SerializeField] public string Name;
@@ -150,6 +150,11 @@ namespace Weapons
 
 		public virtual void OnEnemyKilled()
 		{
+		}
+
+		public virtual void SetupProjectile(NetworkProjectile networkProjectile)
+		{
+			
 		}
 	}
 }

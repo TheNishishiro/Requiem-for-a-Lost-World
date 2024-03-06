@@ -62,7 +62,7 @@ namespace Objects.Abilities.Tornado
 			_subProjectilePool.Get();
 		}
 
-		protected override bool ProjectileSpawn(TornadoProjectile projectile)
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
 			var spawnRadius = GameData.GetPlayerCharacterId() == CharactersEnum.Natalie_BoW ? 
 				Mathf.Lerp(1, 4, (float)Utilities.GetTimeSpan(_stageTime.time.Value).TotalSeconds / 300.0f)  
@@ -70,10 +70,7 @@ namespace Objects.Abilities.Tornado
 			
 			var tornadoPosition = Utilities.GetRandomInAreaFreezeParameter(transform.position, spawnRadius, isFreezeY:true);
 			var pointOnSurface = Utilities.GetPointOnColliderSurface(tornadoPosition, transform);
-			projectile.transform.position = pointOnSurface;
-			projectile.gameObject.SetActive(true);
-			projectile.SetParentWeapon(this);
-			return true;
+			networkProjectile.Initialize(this, pointOnSurface, false);
 		}
 
 		protected override void OnLevelUp()

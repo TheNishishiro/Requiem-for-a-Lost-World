@@ -9,13 +9,23 @@ namespace Weapons
 {
     public class StagableProjectile : DamageSource
     {
-	    public ProjectileState State;
+	    private ProjectileState _projectileState;
+	    public ProjectileState State
+	    {
+		    get => _projectileState;
+		    set
+		    {
+			    _projectileState = value;
+			    networkProjectile?.SetNewState(_projectileState);
+		    }
+	    }
 	    
 	    protected Vector3 baseScale { get; private set; }
         protected Vector3 calculatedScale { get; private set; }
         protected float CurrentTimeToLive;
         protected float TimeAlive;
-        protected Transform transformCache;
+        [SerializeField] private NetworkProjectile networkProjectile;
+        [SerializeField] protected Transform transformCache;
         [SerializeField] public bool UseParticles;
         [ShowIf("UseParticles")]
         [SerializeField] public ParticleSystem ParticleSystem;
@@ -39,14 +49,23 @@ namespace Weapons
         [SerializeField] public Vector3 targetMinSize;
         [ShowIf("isChangeSizeOverLife")]
         [SerializeField] public bool multiplyTargetByScale;
+        [SerializeField] private bool dontTickLifeTime;
         private Vector3 calculatedAnimationTargetSize;
-        
+        private bool _isInitialized;
         
         protected virtual void Awake()
         {
-	        transformCache = transform;
-            var localScale = transformCache.localScale;
-            baseScale = new Vector3(localScale.x,localScale.y,localScale.z);
+	        Init();
+        }
+
+        public void Init()
+        {
+	        if (_isInitialized) return;
+	        _isInitialized = true;
+	        if (transformCache == null)
+		        transformCache = transform;
+	        var localScale = transformCache.localScale;
+	        baseScale = new Vector3(localScale.x,localScale.y,localScale.z);
         }
         
         public virtual void SetParentWeapon(WeaponBase parentWeapon, bool initStats = true)
@@ -64,7 +83,10 @@ namespace Weapons
 		        ? targetMinSize
 		        : new Vector3(targetMinSize.x * calculatedScale.x, targetMinSize.y * calculatedScale.y,
 			        targetMinSize.z * calculatedScale.z);
-            transform.localScale = calculatedScale;
+	        
+	        if (transformCache == null)
+				transformCache = transform;
+	        transformCache.localScale = calculatedScale;
             CurrentTimeToLive = GetTimeToLive();
             damageCooldown = WeaponStatsStrategy.GetDamageCooldown();
             currentPassedEnemies = WeaponStatsStrategy.GetPassThroughCount();
@@ -73,7 +95,6 @@ namespace Weapons
             TimeAlive = 0;
             isDamageCooldownExpired = false;
             ProjectileDamageIncreasePercentage = 0;
-            transformCache = transform;
             if (UseParticles)
             {
                 ParticleSystem.Simulate( 0.0f, true, true );
@@ -86,7 +107,7 @@ namespace Weapons
             SetState(ProjectileState.Spawning);
         }
 
-        protected void StopAllStages()
+        public void StopAllStages()
         {
 	        spawningStage.Stop();
 	        flyingStage.Stop();
@@ -194,7 +215,7 @@ namespace Weapons
 		    }
 	    }
 
-	    private void ToggleStage(ProjectileState state)
+	    public void ToggleStage(ProjectileState state)
 	    {
 		    if (state == this.State) return;
 		    
@@ -216,8 +237,10 @@ namespace Weapons
 
 	    private void TickLifeTime()
 	    {
+		    if (dontTickLifeTime) return;
+		    
 		    CurrentTimeToLive -= Time.deltaTime;
-		    TimeAlive += Time.deltaTime;
+			TimeAlive += Time.deltaTime;
 		    if (isLimitedHitBox)
 				UpdateCollider();
 

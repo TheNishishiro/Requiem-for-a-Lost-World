@@ -12,12 +12,12 @@ namespace Objects.Abilities.Magic_Ball
 		
 		public void SetDirection(float dirX, float dirY, float dirZ)
 		{
-			direction = (new Vector3(dirX, dirY, dirZ) - transform.position).normalized;
+			direction = (new Vector3(dirX, dirY, dirZ) - transformCache.position).normalized;
 		}
 
 		protected override void CustomUpdate()
 		{
-			transform.position += direction * ((WeaponStatsStrategy?.GetSpeed() ?? 0) * Time.deltaTime);
+			transformCache.position += direction * ((WeaponStatsStrategy?.GetSpeed() ?? 0) * Time.deltaTime);
 		}
 
 		private void OnTriggerEnter(Collider other)

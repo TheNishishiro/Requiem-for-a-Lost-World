@@ -17,10 +17,17 @@ namespace Weapons
         
         public override void Attack()
         {
-            if (pool.CountActive >= maxCapacity)
-                return;
+            if (useNetworkPool)
+            { 
+                RpcManager.instance.FireProjectileRpc(WeaponId, transform.position, NetworkManager.Singleton.LocalClientId);
+            }
+            else
+            {
+                if (pool.CountActive >= maxCapacity)
+                    return;
 
-            pool.Get();
+                pool.Get();
+            }
         }
         
         protected override void InitPool()
@@ -47,7 +54,10 @@ namespace Weapons
         {
             projectile.gameObject.SetActive(ProjectileSpawn(projectile));
         }
-        
-        protected abstract bool ProjectileSpawn(T projectile);
+
+        protected virtual bool ProjectileSpawn(T projectile)
+        {
+            return false;
+        }
     }
 }

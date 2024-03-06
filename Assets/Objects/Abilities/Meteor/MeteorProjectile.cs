@@ -6,7 +6,6 @@ namespace Objects.Abilities.Meteor
 	public class MeteorProjectile : PoolableProjectile<MeteorProjectile>
 	{
 		private Vector3 direction;
-		[SerializeField] private ParticleSystem explosionParticleSystem;
 		
 		public void SetDirection(float dirX, float dirY, float dirZ)
 		{

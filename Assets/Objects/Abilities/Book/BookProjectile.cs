@@ -12,17 +12,20 @@ namespace Objects.Abilities.Book
 		private GameObject rotateTarget;
 		private BookWeapon BookWeapon => ParentWeapon as BookWeapon;
 		private float _explosionCooldown;
+		private Vector3 offset;
 
 		public void SetTarget(GameObject rotateTarget)
 		{
 			this.rotateTarget = rotateTarget;
+			offset = transformCache.position - rotateTarget.transform.position;
 		}
 		
 		protected override void CustomUpdate()
 		{
 			if (rotateTarget != null)
 			{
-				transform.RotateAround(rotateTarget.transform.position, Vector3.up, Time.deltaTime * WeaponStatsStrategy.GetSpeed());
+				offset = Quaternion.AngleAxis(Time.deltaTime * WeaponStatsStrategy.GetSpeed(), Vector3.up) * offset;
+				transformCache.position = rotateTarget.transform.position + offset;
 			}
 
 			if (_explosionCooldown > 0)

@@ -60,14 +60,16 @@ namespace Objects.Abilities.LightningStrike
 			_subProjectilePool.Get();
 		}
 
-		protected override bool ProjectileSpawn(LightningStrikeProjectile projectile)
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
 			var enemy = EnemyManager.instance.GetRandomEnemy();
-			if (enemy == null) return false;
+			if (enemy == null) 
+			{
+				networkProjectile.Despawn(WeaponId);
+				return;
+			}
 
-			projectile.transform.position = enemy.transform.position;
-			projectile.SetParentWeapon(this);
-			return true;
+			networkProjectile.Initialize(this, enemy.transform.position);
 		}
 
 		protected override int GetAttackCount()

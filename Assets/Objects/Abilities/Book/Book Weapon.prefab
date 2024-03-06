@@ -44,11 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd67e499a544bb3b069bf437feb19a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 1
   spawnPrefab: {fileID: 1701135520514003166, guid: 12d666c9b8858e2449773b8cd1b48900,
     type: 3}
+  WeaponId: 4
   Name: Gem of Lonliness
   Description: Create a wheel of orbitting projectiles
+  chanceToAppear: 0.85
   Icon: {fileID: 21300000, guid: 731ecbe1e9163a542a002aa9b5032694, type: 3}
+  unlockOnAchievement: 0
+  requiredAchievement: 0
   element: 8
   weaponStats:
     Damage: 5
@@ -70,6 +75,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 06ad88406cae517409d8eee1c9eeb29e, type: 2}
   - {fileID: 11400000, guid: d867236135b30944284237ae161c5d32, type: 2}
@@ -80,7 +86,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f7d82acfa1df1784697e0e61d1420416, type: 2}
   - {fileID: 11400000, guid: b3b2d1a022b7c8a4cb4433ea10ebc3d4, type: 2}
   - {fileID: 11400000, guid: bba4a9df45b1e0d408fc0efd090988dd, type: 2}
-  chanceToAppear: 0.85
   isSkill: 0
   capacity: 50
   maxCapacity: 200

@@ -28,5 +28,10 @@ namespace Objects.Abilities.Healing_Field
 			if (_isEmpowering)
 				playerComponent.playerStatsComponent.TemporaryAttackBoost(0.5f, 1.5f);
 		}
+		
+		protected override void Destroy()
+		{
+			ReturnToPool(_objectPool, _object);
+		}
 	}
 }

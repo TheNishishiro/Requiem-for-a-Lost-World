@@ -9,12 +9,10 @@ namespace Objects.Abilities.Fire_Ring
         public bool IsSearingHeat  { get; set; }
         public bool IsInfernoTrail   { get; set; }
         private int _enemiesKilled = 0;
-        
-        protected override bool ProjectileSpawn(FireRingProjectile projectile)
+
+        public override void SetupProjectile(NetworkProjectile networkProjectile)
         {
-            projectile.transform.position = transform.position;
-            projectile.SetParentWeapon(this);
-            return true;
+            networkProjectile.Initialize(this, transform.position);
         }
 
         protected override void OnLevelUp()

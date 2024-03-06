@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53404135f3914aa98021c33647d5a0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 1
   spawnPrefab: {fileID: 5403249586319908733, guid: c417452db2bf47344a8a57ba0f2fe28e,
     type: 3}
+  WeaponId: 3
   Name: Gem of Emptiness
   Description: Spawn black holes in random locations
   chanceToAppear: 0.6
@@ -73,6 +75,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 477e6b22ae45f364caa794741c825510, type: 2}
   - {fileID: 11400000, guid: 0b331f883f4e1374eb1e6ce5e20a36a1, type: 2}

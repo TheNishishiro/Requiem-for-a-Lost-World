@@ -59,17 +59,18 @@ namespace Objects.Abilities.Bouncer
 			_subProjectilePool.Get();
 		}
 		
-		protected override bool ProjectileSpawn(BouncerProjectile projectile)
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
 			var currentPosition = transform.position;
 			var target = EnemyManager.instance.GetRandomEnemy().GetDamagableComponent();
 			if (target is null)
-				return false;
+			{
+				networkProjectile.Despawn(WeaponId);
+				return;
+			}
 
-			projectile.transform.position = currentPosition;
-			projectile.SetParentWeapon(this);
-			projectile.SetTarget(target);
-			return true;
+			networkProjectile.Initialize(this, currentPosition);
+			networkProjectile.GetProjectile<BouncerProjectile>().SetTarget(target);
 		}
 
 		protected override void OnLevelUp()

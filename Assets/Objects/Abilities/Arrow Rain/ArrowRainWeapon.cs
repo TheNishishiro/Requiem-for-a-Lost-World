@@ -26,19 +26,21 @@ namespace Objects.Abilities.Arrow_Rain
 			base.Awake();
 		}
 
-		protected override bool ProjectileSpawn(ArrowRainProjectile projectile)
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
 			if (_target == null)
 			{
 				OnAttackStart();
 				if (_target == null)
-					return false;
+				{
+					networkProjectile.Despawn(WeaponId);
+					return;
+				}
 			}
 			
 			var position = _target.transform.position;
-			projectile.transform.position = new Vector3(position.x, position.y + 2.5f, position.z);
-			projectile.SetParentWeapon(this);
-			return true;
+			position = new Vector3(position.x, position.y + 2.5f, position.z);
+			networkProjectile.Initialize(this, position);
 		}
 
 		protected override int GetAttackCount()

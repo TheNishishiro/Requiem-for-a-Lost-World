@@ -13,13 +13,12 @@ namespace Objects.Abilities.Pillar_Of_Despair
             WeaponStatsStrategy = new PillarOfDespairStrategy(this);
         }
 
-        protected override bool ProjectileSpawn(PillarOfDespairProjectile projectile)
+        public override void SetupProjectile(NetworkProjectile networkProjectile)
         {
-            projectile.transform.position = Utilities.GetPointOnColliderSurface(
-                Utilities.GetRandomInArea(transform.position, 3f), transform
+            var position = Utilities.GetPointOnColliderSurface(
+                Utilities.GetRandomInArea(transform.position, 4f), transform
             );
-            projectile.SetParentWeapon(this);
-            return true;
+            networkProjectile.Initialize(this, position);
         }
 
         protected override void OnLevelUp()
