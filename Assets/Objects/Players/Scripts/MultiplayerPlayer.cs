@@ -162,7 +162,7 @@ public class MultiplayerPlayer : NetworkBehaviour
         while (true)
         {
             var cM = FindFirstObjectByType<CursorManager>();
-            if (cM != null)
+            if (cM != null && WeaponManager.instance != null)
             {
                 cM.Setup(GetComponentInChildren<StarterAssetsInputs>());
                 

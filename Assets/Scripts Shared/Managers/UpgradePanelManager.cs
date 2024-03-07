@@ -73,7 +73,7 @@ namespace Managers
 			HideButtons();
 			panel.SetActive(false);
 		}
-
+		
 		private void ReloadUpgrades()
 		{
 			HideButtons();

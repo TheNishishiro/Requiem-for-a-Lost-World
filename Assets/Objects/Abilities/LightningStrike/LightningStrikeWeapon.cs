@@ -17,7 +17,7 @@ namespace Objects.Abilities.LightningStrike
 	public class LightningStrikeWeapon : PoolableWeapon<LightningStrikeProjectile>
 	{
 		[SerializeField] public GameObject chainLightningPrefab;
-		[HideInInspector] public bool IsChainLightning;
+		[SerializeField] public bool IsChainLightning = true;
 		
 		private ObjectPool<LightningChainProjectile> _subProjectilePool;
 		private Vector3 _subProjectilePosition;
@@ -87,6 +87,7 @@ namespace Objects.Abilities.LightningStrike
 
 		protected override void OnLevelUp()
 		{
+			IsChainLightning = true;
 			if (LevelField == 8)
 				IsChainLightning = true;
 		}

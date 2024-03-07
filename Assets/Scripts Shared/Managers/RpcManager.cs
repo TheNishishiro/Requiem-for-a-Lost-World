@@ -107,5 +107,39 @@ namespace Managers
                 networkObject.Despawn(false);
             }
         }   
+        
+        [Rpc(SendTo.Server)]
+        public void ParentObjectRpc(NetworkBehaviourReference networkBehaviourReference, ulong singletonLocalClientId)
+        {
+            if (networkBehaviourReference.TryGet(out var networkObject))
+            {
+                networkObject.transform.SetParent(NetworkManager.Singleton.ConnectedClients[singletonLocalClientId].PlayerObject.transform);
+            }
+        }   
+        
+        [Rpc(SendTo.Everyone)]
+        public void AddEnemyRpc(NetworkBehaviourReference enemy)
+        {
+            if (enemy.TryGet(out Enemy enemyComponent))
+            {
+                EnemyManager.instance.AddEnemy(enemyComponent);
+            }
+        }
+
+        [Rpc(SendTo.Everyone)]
+        public void RemoveEnemyRpc(NetworkBehaviourReference enemy)
+        {
+            if (enemy.TryGet(out Enemy enemyComponent))
+            {
+                if (IsHost)
+                {
+                    var networkObject = enemyComponent.GetComponent<NetworkObject>();
+                    NetworkObjectPool.Singleton.ReturnNetworkObject(networkObject, EnemyManager.instance.enemyGameObject);
+                    networkObject.Despawn(false);
+                }
+			
+                EnemyManager.instance.RemoveEnemy(enemyComponent);
+            }
+        }
     }
 }

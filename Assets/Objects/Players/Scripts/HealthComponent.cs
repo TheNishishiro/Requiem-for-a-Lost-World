@@ -39,7 +39,7 @@ namespace Objects.Players.Scripts
 			DamageTakenEvent.Invoke(amount);
 			UpdateHealthBar();
 			
-			if (playerStatsComponent.IsDead())
+			if (playerStatsComponent.CanDie())
 				Death();
 		}
 
@@ -54,6 +54,7 @@ namespace Objects.Players.Scripts
 
 		private void Regen()
 		{
+			if (playerStatsComponent.IsDead()) return;
 			if (playerStatsComponent.IsFullHealth()) return;
 
 			Damage(-PlayerStatsScaler.GetScaler().GetHealthRegeneration());
@@ -75,6 +76,7 @@ namespace Objects.Players.Scripts
 			}
 			
 			AchievementManager.instance.OnDeath();
+			playerStatsComponent.ChangeDeathState(true);
 			gameOverScreenManager.OpenPanel(false);
 		}
 

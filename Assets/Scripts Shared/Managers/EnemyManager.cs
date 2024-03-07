@@ -15,7 +15,7 @@ using Weapons;
 public class EnemyManager : NetworkBehaviour
 {
 	public static EnemyManager instance;
-	[SerializeField] private GameObject enemyGameObject;
+	[SerializeField] public GameObject enemyGameObject;
 	[SerializeField] private List<EnemyData> defaultSpawns;
 	[SerializeField] private List<EnemyData> possibleEnemies;
 	[SerializeField] private Vector2 spawnArea;
@@ -102,7 +102,7 @@ public class EnemyManager : NetworkBehaviour
 		if (_currentEnemySpawning.enemyName == "grand octi")
 			enemyComponent.SetupBoss();
 		
-		_enemies.Add(enemyComponent);
+		RpcManager.instance.AddEnemyRpc(enemyComponent);
 	}
 
 	public void ChangeDefaultSpawn(List<EnemyData> enemyData)
@@ -158,11 +158,7 @@ public class EnemyManager : NetworkBehaviour
 	{
 		if (!IsHost) return;
 		
-		var networkObject = enemy.gameObject.GetComponent<NetworkObject>();
-		NetworkObjectPool.Singleton.ReturnNetworkObject(networkObject, enemyGameObject);
-		networkObject.Despawn(false);
-		_enemies.Remove(enemy);
-		//enemyPool.Release(enemy.gameObject.GetComponent<NetworkObject>());
+		RpcManager.instance.RemoveEnemyRpc(enemy);
 	}
 
 	public void SetTimeStop(bool isTimeStop)
@@ -197,7 +193,7 @@ public class EnemyManager : NetworkBehaviour
 
 	public IEnumerable<Enemy> GetActiveEnemies()
 	{
-		return IsHost ? _enemies : FindObjectsByType<Enemy>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+		return _enemies;
 	}
 
 	public Enemy GetRandomEnemy()
@@ -220,5 +216,15 @@ public class EnemyManager : NetworkBehaviour
 	public Sprite GetSpriteByEnemy(EnemyTypeEnum enemyType)
 	{
 		return possibleEnemies.FirstOrDefault(x => x.enemyType == enemyType)?.sprite;
+	}
+
+	public void AddEnemy(Enemy networkBehaviour)
+	{
+		_enemies.Add(networkBehaviour);
+	}
+
+	public void RemoveEnemy(Enemy networkBehaviour)
+	{
+		_enemies.Remove(networkBehaviour);
 	}
 }

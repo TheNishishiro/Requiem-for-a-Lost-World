@@ -59,9 +59,9 @@ namespace Objects.Abilities
                 projectile.gameObject.SetActive(true);
         }
 
-        public void Parent(Transform parentTransform)
+        public void ParentToPlayer()
         {
-            transform.SetParent(parentTransform);
+            RpcManager.instance.ParentObjectRpc(this, NetworkManager.Singleton.LocalClientId);
         }
 
         public void Activate()

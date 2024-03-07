@@ -138,6 +138,9 @@ namespace Objects.Players.Scripts
 			if (_currentSkillCooldown > 0)
 				return;
 
+			if (playerStatsComponent.IsDead())
+				return;
+
 			_currentSkillCooldown = _skillCooldown * PlayerStatsScaler.GetScaler().GetSkillCooldownReductionPercentage();
 			switch (activeCharacterId)
 			{

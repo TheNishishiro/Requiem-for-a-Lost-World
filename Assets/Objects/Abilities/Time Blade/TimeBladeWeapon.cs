@@ -16,7 +16,7 @@ namespace Objects.Abilities.Time_Blade
 
             var projectileTransform = networkProjectile.transform;
             networkProjectile.Initialize(this, transform.position);
-            networkProjectile.Parent(GameManager.instance.PlayerTransform);
+            networkProjectile.ParentToPlayer();
             projectileTransform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
             projectileTransform.localScale = new Vector3(currentScaleModifier,currentScaleModifier,currentScaleModifier);
             

@@ -24,7 +24,7 @@ namespace Objects.Abilities.Scythe
 		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
 			networkProjectile.Initialize(this, transform.position);
-			networkProjectile.Parent(GameManager.instance.PlayerTransform);
+			networkProjectile.ParentToPlayer();
 			networkProjectile.GetProjectile<ScytheProjectile>().SetPlayerHealthComponent(GameManager.instance.playerComponent.healthComponent);
 		}
 

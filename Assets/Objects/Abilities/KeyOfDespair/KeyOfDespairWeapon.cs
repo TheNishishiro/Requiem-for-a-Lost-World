@@ -19,7 +19,7 @@ namespace Objects.Abilities.KeyOfDespair
         public override void SetupProjectile(NetworkProjectile networkProjectile)
         {
             networkProjectile.Initialize(this, transform.position);
-            networkProjectile.Parent(GameManager.instance.PlayerTransform);
+            networkProjectile.ParentToPlayer();
             _slashProjectile = networkProjectile;
         }
 
