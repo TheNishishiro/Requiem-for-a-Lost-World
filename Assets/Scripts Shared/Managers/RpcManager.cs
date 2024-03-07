@@ -140,6 +140,17 @@ namespace Managers
 			
                 EnemyManager.instance.RemoveEnemy(enemyComponent);
             }
+        }   
+
+        public void HealPlayer(float healAmount, ulong clientId)
+        {
+            HealPlayerRpc(healAmount, RpcTarget.Single(clientId, RpcTargetUse.Temp));
+        }
+        
+        [Rpc(SendTo.SpecifiedInParams)]
+        public void HealPlayerRpc(float amount, RpcParams rpcParams)
+        {
+            GameManager.instance.playerComponent.TakeDamage(-amount);
         }
     }
 }

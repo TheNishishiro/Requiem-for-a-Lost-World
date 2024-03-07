@@ -21,12 +21,12 @@ namespace Objects.Abilities.Healing_Field
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (!other.CompareTag("Player") || other.gameObject.GetComponent<NetworkObject>()?.IsOwner == true) return;
-			var playerComponent = GameManager.instance.playerComponent;
-			playerComponent.TakeDamage(-_healAmount);
-				
+			if (!other.CompareTag("Player")) return;
+			
+			RpcManager.instance.HealPlayer(_healAmount, other.GetComponent<NetworkObject>().OwnerClientId);
+
 			if (_isEmpowering)
-				playerComponent.playerStatsComponent.TemporaryAttackBoost(0.5f, 1.5f);
+				GameManager.instance.playerComponent.playerStatsComponent.TemporaryAttackBoost(0.5f, 1.5f);
 		}
 		
 		protected override void Destroy()

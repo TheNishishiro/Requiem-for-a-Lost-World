@@ -95,9 +95,10 @@ public class EnemyManager : NetworkBehaviour
 
 		
 		var expIncrease = playerCount <= 1 ? 1 : Mathf.Pow(0.85f, playerCount);
+		var damageIncrease = playerCount <= 1 ? 1 : playerCount * 0.2f;
 		
 		enemyComponent.SetPlayerTarget(targetClient);
-		enemyComponent.Setup(new EnemyNetworkStats(_currentEnemySpawning), _healthMultiplier * (1 + increasePerClient*0.5f), _enemySpeedMultiplier, expIncrease);
+		enemyComponent.Setup(new EnemyNetworkStats(_currentEnemySpawning), _healthMultiplier * (1 + increasePerClient*0.5f), _enemySpeedMultiplier, expIncrease, damageIncrease);
 		enemyComponent.gameObject.SetActive(true);
 		if (_currentEnemySpawning.enemyName == "grand octi")
 			enemyComponent.SetupBoss();
