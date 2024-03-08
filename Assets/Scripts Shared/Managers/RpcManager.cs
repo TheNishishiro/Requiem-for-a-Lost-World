@@ -55,17 +55,10 @@ namespace Managers
             gameResultData.IsWin = true;
             FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(true);
         }
-
-        [Rpc(SendTo.Everyone)]
-        public void RemovePlayerFromUiRpc(ulong clientId)
-        {
-            MpActivePlayersInGameList.instance.RemoveEntry(clientId);
-        }
         
         [Rpc(SendTo.Server)]
         public void LucySkillRpc(bool isE3, bool isE1)
         {
-            Debug.Log("LUCKY SKILL CAST");
             var maxEnemies = isE3 ? 20 : 10;
 			
             var enemies = EnemyManager.instance.GetActiveEnemies()
@@ -75,6 +68,23 @@ namespace Managers
             foreach (var enemy in enemies)
             {
                 enemy.MarkAsPlayerControlled(isE1 ? 25 : 10);
+            }
+        }
+
+        [Rpc(SendTo.Server)]
+        public void SpawnReviveCardRpc(Vector3 playerTransformPosition, ulong clientId)
+        {
+            var reviveCard = Instantiate(GameManager.instance.playerComponent.reviveCardPrefab, playerTransformPosition, Quaternion.identity).GetComponent<NetworkObject>();
+            reviveCard.Spawn();
+            reviveCard.GetComponent<ReviveCard>().SetClientId(clientId);
+        }
+
+        [Rpc(SendTo.Server)]
+        public void DeSpawnReviveCardRpc(NetworkBehaviourReference networkBehaviourReference)
+        {
+            if (networkBehaviourReference.TryGet(out var networkObject))
+            {
+                Destroy(networkObject.gameObject);
             }
         }
         

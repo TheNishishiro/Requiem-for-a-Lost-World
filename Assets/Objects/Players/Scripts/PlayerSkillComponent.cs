@@ -212,16 +212,7 @@ namespace Objects.Players.Scripts
 
 		private void LucySkill()
 		{
-			var maxEnemies = GameData.IsCharacterRank(CharacterRank.E3) ? 20 : 10;
-			
-			var enemies = EnemyManager.instance.GetActiveEnemies()
-				.Where(x => GameData.IsCharacterRank(CharacterRank.E1) || !x.IsBoss())
-				.OrderBy(_ => Random.value)
-				.Take(Random.Range(5, maxEnemies));
-			foreach (var enemy in enemies)
-			{
-				enemy.MarkAsPlayerControlled(GameData.IsCharacterRank(CharacterRank.E1) ? 25 : 10);
-			}
+			RpcManager.instance.LucySkillRpc(GameData.IsCharacterRank(CharacterRank.E3), GameData.IsCharacterRank(CharacterRank.E1));
 		}
 
 		private void AmeliaSkill()

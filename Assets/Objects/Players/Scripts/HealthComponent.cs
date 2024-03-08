@@ -2,6 +2,7 @@
 using Events.Scripts;
 using Managers;
 using UI.Labels.InGame;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -18,6 +19,8 @@ namespace Objects.Players.Scripts
 		
 		public void Damage(float amount, bool isIgnoreArmor = false, bool isPreventDeath = false)
 		{
+			if (playerStatsComponent.IsDead()) return;
+			
 			if (amount > 0)
 			{
 				amount *= PlayerStatsScaler.GetScaler().GetDamageTakenIncrease();
@@ -77,7 +80,9 @@ namespace Objects.Players.Scripts
 			
 			AchievementManager.instance.OnDeath();
 			playerStatsComponent.ChangeDeathState(true);
-			gameOverScreenManager.OpenPanel(false);
+			RpcManager.instance.SpawnReviveCardRpc(GameManager.instance.PlayerTransform.position, NetworkManager.Singleton.LocalClientId);
+			
+			//gameOverScreenManager.OpenPanel(false);
 		}
 
 		public void IncreaseMaxHealth(float amount)

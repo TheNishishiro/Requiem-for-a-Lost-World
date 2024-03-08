@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Objects.Players;
 using Objects.Players.Scripts;
 using Objects.Stage;
 using Unity.Mathematics;
+using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,6 +18,9 @@ public class Player : MonoBehaviour
 	[HideInInspector] public PlayerVfxComponent playerVfxComponent;
 	[HideInInspector] public Transform playerTransform;
 	[SerializeField] public GameResultData gameResultData;
+	[SerializeField] public GameObject reviveCardPrefab;
+	private List<ulong> clientCards = new ();
+	
 	public PlayerCharacterState CharacterState { get; private set; }
 	
 	private void Start()
@@ -60,5 +65,11 @@ public class Player : MonoBehaviour
 	public void SetCharacterState(PlayerCharacterState characterState)
 	{
 		CharacterState = characterState;
+	}
+
+	public void AddPlayerCard(ulong clientId)
+	{
+		if (!clientCards.Contains(clientId))
+			clientCards.Add(clientId);
 	}
 }

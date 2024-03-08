@@ -3933,6 +3933,9 @@ MonoBehaviour:
   - Prefab: {fileID: 2402120471238580864, guid: 3628eb11f781e5b4191628a32966436e,
       type: 3}
     PrewarmCount: 0
+  - Prefab: {fileID: 1425586960245378664, guid: 2106550b343fba54c83b353390e46261,
+      type: 3}
+    PrewarmCount: 0
 --- !u!4 &531655828
 Transform:
   m_ObjectHideFlags: 0
@@ -8735,51 +8738,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425725469}
   m_CullTransparentMesh: 1
---- !u!1 &1428273757
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1428273759}
-  - component: {fileID: 1428273758}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1428273758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428273757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49bb81f5adb75904c82a5e6f30afe7ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 0
---- !u!4 &1428273759
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428273757}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -357.60254, y: 532.6986, z: -12.388719}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1456279652
 GameObject:
   m_ObjectHideFlags: 0
@@ -12063,6 +12021,8 @@ MonoBehaviour:
   playerVfxComponent: {fileID: 0}
   playerTransform: {fileID: 0}
   gameResultData: {fileID: 11400000, guid: cb99eac292bd9d54aac189cbaa40dca7, type: 2}
+  reviveCardPrefab: {fileID: 1425586960245378664, guid: 2106550b343fba54c83b353390e46261,
+    type: 3}
 --- !u!4 &1966883628
 Transform:
   m_ObjectHideFlags: 0
@@ -13149,4 +13109,3 @@ SceneRoots:
   - {fileID: 1966883628}
   - {fileID: 1557294560}
   - {fileID: 531655828}
-  - {fileID: 1428273759}

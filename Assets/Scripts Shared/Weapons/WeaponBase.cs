@@ -106,6 +106,8 @@ namespace Weapons
 
 		protected virtual IEnumerator AttackProcess()
 		{
+			if (_playerStatsComponent.IsDead()) yield break;
+			
 			OnAttackStart();
 			for (var i = 0; i < GetAttackCount(); i++)
 			{

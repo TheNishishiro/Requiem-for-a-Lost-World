@@ -31,6 +31,7 @@ public class MultiplayerPlayer : NetworkBehaviour
     public NetworkVariable<int> currentCharacterLevel = new (0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<FixedString128Bytes> currentPlayerName = new ("", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<ulong> currentPlayerId = new (0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> isPlayerDead = new (false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private bool _keepAlive = true;
     
     public void Start()
@@ -71,6 +72,7 @@ public class MultiplayerPlayer : NetworkBehaviour
             currentCharacterLevel.Value = GameManager.instance.playerComponent.GetLevel();
             currentPlayerId.Value = NetworkManager.Singleton.LocalClientId;
             currentPlayerName.Value = saveFile.ConfigurationFile.Username ?? string.Empty;
+            isPlayerDead.Value = GameManager.instance.playerStatsComponent.IsDead();
         }
 
         if (localCharacterId != currentCharacterId.Value)
@@ -88,6 +90,7 @@ public class MultiplayerPlayer : NetworkBehaviour
             MpActivePlayersInGameList.instance.UpdateEntry(currentPlayerId.Value, currentCharacterHealth.Value, currentCharacterMaxHealth.Value, currentPlayerName.Value.ToString(), currentCharacterLevel.Value);
         }
         
+        spriteRenderer.enabled = !isPlayerDead.Value;
     }
 
     public override void OnNetworkDespawn()
