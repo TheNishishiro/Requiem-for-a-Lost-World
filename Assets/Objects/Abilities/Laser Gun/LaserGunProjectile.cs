@@ -2,6 +2,7 @@
 using DefaultNamespace;
 using Interfaces;
 using JetBrains.Annotations;
+using Objects.Enemies;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Weapons;
@@ -11,23 +12,15 @@ namespace Objects.Abilities.Laser_Gun
 	public class LaserGunProjectile : PoolableProjectile<LaserGunProjectile>
 	{
 		[SerializeField] public LineRenderer lineRenderer;
-		[SerializeField] public Transform laserFirePoint;
 		[SerializeField] public LaserGunNetworkComponent gunNetworkComponent;
-		private Damageable _laserTarget;
-		private Transform _transform;
+		private Enemy _laserTarget;
 		private Transform _targetTransform;
-
-		protected override void Awake()
-		{
-			base.Awake();
-			_laserTarget = null;
-			_transform = transform;
-		}
-
+		
 		public override void SetStats(IWeaponStatsStrategy weaponStatsStrategy)
 		{
 			base.SetStats(weaponStatsStrategy);
 			SetTarget();
+			_laserTarget = null;
 		}
 
 		protected override void CustomUpdate()
@@ -35,11 +28,12 @@ namespace Objects.Abilities.Laser_Gun
 			if (!isDamageCooldownExpired) return;
 			ResetDamageCooldown();
 
-			if (_laserTarget != null && _laserTarget.gameObject.activeSelf && lineRenderer.positionCount != 0 && Vector3.Distance(_targetTransform.position, _transform.position) < WeaponStatsStrategy.GetDetectionRange())
+			if (_laserTarget != null && !_laserTarget.IsDying() && _laserTarget.gameObject.activeSelf && lineRenderer.positionCount != 0 && Vector3.Distance(_targetTransform.position, transformCache.position) < WeaponStatsStrategy.GetDetectionRange())
 			{
-				lineRenderer.SetPosition(1, _targetTransform.position);
-				_transform.LookAt(_targetTransform);
-				SimpleDamage(_laserTarget, false, false);
+				var position = _targetTransform.position;
+				lineRenderer.SetPosition(1, position);
+				transformCache.LookAt(_targetTransform);
+				SimpleDamage(_laserTarget.GetDamagableComponent(), false, false);
 			}
 			else
 			{
@@ -49,19 +43,18 @@ namespace Objects.Abilities.Laser_Gun
 
 		private void SetTarget()
 		{
-			var closestTarget = Utilities.FindClosestEnemy(transform.position, EnemyManager.instance.GetActiveEnemies(), out var distanceToClosest);
-			if (closestTarget == null || distanceToClosest > WeaponStatsStrategy.GetDetectionRange())
+			_laserTarget = Utilities.FindClosestEnemy(transformCache.position, EnemyManager.instance.GetActiveEnemies(), out var distanceToClosest);
+			if (_laserTarget == null || distanceToClosest > WeaponStatsStrategy.GetDetectionRange())
 			{
 				lineRenderer.positionCount = 0;
 				return;
 			}
 			lineRenderer.positionCount = 2;
 
-			_laserTarget = closestTarget.GetDamagableComponent();
-			_targetTransform = closestTarget.TargetPoint;
-			lineRenderer.SetPosition(0, laserFirePoint.position);
-			lineRenderer.SetPosition(1, _targetTransform.position);
-			_transform.LookAt(_targetTransform);
+			_targetTransform = _laserTarget.TargetPoint;
+			gunNetworkComponent.SetTarget(_targetTransform.position);
+			
+			transformCache.LookAt(_targetTransform);
 		}
 	}
 }

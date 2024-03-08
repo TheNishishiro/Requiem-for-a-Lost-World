@@ -388,5 +388,10 @@ namespace Objects.Enemies
 		{
 			return _isPlayerControlled;
 		}
+
+		public bool IsDying()
+		{
+			return _isDying.Value;
+		}
 	}
 }

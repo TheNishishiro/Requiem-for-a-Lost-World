@@ -32,8 +32,8 @@ namespace Objects.Abilities.Laser_Gun
 				weaponStats.AttackCount += 1;
 			}
 		}
-        
-		protected override bool ProjectileSpawn(LaserGunProjectile projectile)
+
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
 			var position = transform.position;
 			var worldPosition = new Vector3(
@@ -41,11 +41,9 @@ namespace Objects.Abilities.Laser_Gun
 				Random.Range(position.y, position.y + 2),
 				Random.Range(position.z - 2, position.z - 0.5f));
 
-			projectile.transform.position = worldPosition;
-			projectile.SetParentWeapon(this);
+			networkProjectile.Initialize(this, worldPosition);
 			if (GameData.IsCharacterWithRank(CharactersEnum.Amelia_BoD, CharacterRank.E2))
 				_healthComponent.Damage(-1f);
-			return true;
 		}
 
 		protected override int GetAttackCount()
