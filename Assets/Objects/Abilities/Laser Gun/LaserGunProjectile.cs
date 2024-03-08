@@ -47,6 +47,7 @@ namespace Objects.Abilities.Laser_Gun
 			if (_laserTarget == null || distanceToClosest > WeaponStatsStrategy.GetDetectionRange())
 			{
 				lineRenderer.positionCount = 0;
+				gunNetworkComponent.SetTarget(Vector3.zero);
 				return;
 			}
 			lineRenderer.positionCount = 2;

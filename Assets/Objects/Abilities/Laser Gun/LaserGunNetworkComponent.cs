@@ -14,7 +14,22 @@ namespace Objects.Abilities.Laser_Gun
         public override void OnNetworkSpawn()
         {
             lineRenderer.positionCount = 0;
+            targetPosition.OnValueChanged += OnValueChanged;
             base.OnNetworkSpawn();
+        }
+
+        public override void OnNetworkDespawn()
+        {
+            targetPosition.OnValueChanged -= OnValueChanged;
+            base.OnNetworkDespawn();
+        }
+
+        private void OnValueChanged(Vector3 previousvalue, Vector3 newvalue)
+        {
+            if (newvalue != Vector3.zero)
+                lineRenderer.positionCount = 2;
+            else
+                lineRenderer.positionCount = 0;
         }
 
         public void SetTarget(Vector3 target)
