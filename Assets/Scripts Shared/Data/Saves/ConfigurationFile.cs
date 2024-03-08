@@ -26,6 +26,8 @@ namespace DefaultNamespace.Data
 		public int ObjectDensity { get; set; }
 		public int TextureQuality { get; set; }
 		public float Volume { get; set; }
+		public string Username { get; set; }
+		public bool RenderCoopProjectiles { get; set; }
 
 		public ConfigurationFile Default()
 		{
@@ -46,7 +48,8 @@ namespace DefaultNamespace.Data
 				ObjectDensity = 1;
 				Volume = 1;
 				TextureQuality = 2;
-				ConfigurationVersion = 7;
+				ConfigurationVersion = 8;
+				RenderCoopProjectiles = true;
 			}
 			else
 			{
@@ -66,6 +69,7 @@ namespace DefaultNamespace.Data
 				ObjectDensity = 1;
 				Volume = 1;
 				TextureQuality = 4;
+				RenderCoopProjectiles = false;
 			}
 
 			return Update();
@@ -122,6 +126,11 @@ namespace DefaultNamespace.Data
 				};
 
 				ConfigurationVersion = 7;
+			}
+			if (ConfigurationVersion == 7)
+			{
+				RenderCoopProjectiles = true;
+				ConfigurationVersion = 8;
 			}
 
 			return this;

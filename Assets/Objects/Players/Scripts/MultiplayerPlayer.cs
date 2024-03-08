@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using DefaultNamespace.Data;
 using Managers;
 using Objects.Characters;
 using Objects.Players.Containers;
@@ -64,12 +65,14 @@ public class MultiplayerPlayer : NetworkBehaviour
     {
         if (IsOwner)
         {
+            var saveFile = FindFirstObjectByType<SaveFile>();
             currentCharacterHealth.Value = PlayerStatsScaler.GetScaler().GetHealth();
             currentCharacterMaxHealth.Value = PlayerStatsScaler.GetScaler().GetMaxHealth();
             currentCharacterLevel.Value = GameManager.instance.playerComponent.GetLevel();
             currentPlayerId.Value = NetworkManager.Singleton.LocalClientId;
+            currentPlayerName.Value = saveFile.ConfigurationFile.Username ?? string.Empty;
         }
-        
+
         if (localCharacterId != currentCharacterId.Value)
         {
             spriteRenderer.sprite = GameData.GetCharacterSprite(currentCharacterId.Value);
@@ -82,7 +85,7 @@ public class MultiplayerPlayer : NetworkBehaviour
 
         if (!IsOwner)
         {
-            MpActivePlayersInGameList.instance.UpdateEntry(currentPlayerId.Value, currentCharacterHealth.Value, currentCharacterMaxHealth.Value, null, currentCharacterLevel.Value);
+            MpActivePlayersInGameList.instance.UpdateEntry(currentPlayerId.Value, currentCharacterHealth.Value, currentCharacterMaxHealth.Value, currentPlayerName.Value.ToString(), currentCharacterLevel.Value);
         }
         
     }

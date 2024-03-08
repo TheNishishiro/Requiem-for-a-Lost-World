@@ -200,7 +200,7 @@ namespace Managers
 			{
 				case 0:
 					Screen.fullScreen = true;
-					Screen.SetResolution(Screen.width, Screen.height, true);
+					Screen.SetResolution(settings.ResolutionWidth, settings.ResolutionHeight, true);
 					break;
 				case 1:
 					Screen.fullScreen = false;

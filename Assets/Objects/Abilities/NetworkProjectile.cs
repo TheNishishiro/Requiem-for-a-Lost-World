@@ -20,7 +20,8 @@ namespace Objects.Abilities
         public override void OnNetworkSpawn()
         {
             projectile.StopAllStages();
-            projectile.ToggleStage(networkProjectileState.Value);
+            if (GameManager.instance.saveFile.ConfigurationFile.RenderCoopProjectiles)
+                projectile.ToggleStage(networkProjectileState.Value);
             networkProjectileState.OnValueChanged += OnValueChanged;
             base.OnNetworkSpawn();
         }
@@ -33,7 +34,7 @@ namespace Objects.Abilities
 
         private void OnValueChanged(ProjectileState prevState, ProjectileState newState)
         {
-            if (prevState != newState && !IsOwner)
+            if (prevState != newState && !IsOwner && GameManager.instance.saveFile.ConfigurationFile.RenderCoopProjectiles)
             {
                 projectile.StopAllStages();
                 projectile.ToggleStage(newState);

@@ -39,6 +39,7 @@ namespace Managers
 		[SerializeField] public PlayerStatsComponent playerStatsComponent;
 		[SerializeField] private SpecialBarManager specialBarManager;
 		[SerializeField] private DifficultyContainer difficultyContainer;
+		[HideInInspector] public SaveFile saveFile;
 		
 		public void Awake()
 		{
@@ -52,7 +53,7 @@ namespace Managers
 		
 		private void Initialize()
 		{
-			var saveFile = FindFirstObjectByType<SaveFile>();
+			saveFile = FindFirstObjectByType<SaveFile>();
 			GameData.SetCurrentDifficultyData(difficultyContainer.GetData(saveFile.SelectedDifficulty));
 			playerStatsComponent.Set(GameData.GetPlayerStartingStats());
             if (GameData.GetPlayerCharacterData()?.UseSpecialBar == true)
