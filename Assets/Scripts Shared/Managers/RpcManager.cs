@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
 using DefaultNamespace;
@@ -33,13 +34,11 @@ namespace Managers
         }
         
         [Rpc(SendTo.Server)]
-        public void SpawnShrinesRpc(int amount, Vector3 mapCenter, float spawnRange)
+        public void SpawnShrinesRpc(int amount, Vector3 mapCenter, float spawnRange, float minDistance)
         {
-            for (int i = 0; i < amount; i++)
+            var spawnedPositions = Utilities.GetPositionsOnSurfaceWithMinDistance(amount, mapCenter, spawnRange, minDistance, transform, 100);
+            foreach (var position in spawnedPositions)
             {
-                var position = Utilities.GetRandomInAreaFreezeParameter(mapCenter, spawnRange, isFreezeY: true);
-                position = Utilities.GetPointOnColliderSurface(position, transform);
-                
                 NetworkObjectPool.Singleton.GetNetworkObject(shrinePrefab, position, Quaternion.identity).Spawn();
             }
         }

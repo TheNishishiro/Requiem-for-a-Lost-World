@@ -1,4 +1,6 @@
-﻿namespace Objects
+﻿using System;
+
+namespace Objects
 {
     public enum WeaponEnum
     {

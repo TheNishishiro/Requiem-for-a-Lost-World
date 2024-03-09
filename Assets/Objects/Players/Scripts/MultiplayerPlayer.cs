@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using DefaultNamespace.Data;
 using Managers;
+using Objects;
 using Objects.Characters;
 using Objects.Players.Containers;
 using Objects.Players.Scripts;
@@ -59,7 +60,7 @@ public class MultiplayerPlayer : NetworkBehaviour
             StartCoroutine(WaitForGameManager());
             StartCoroutine(WaitForPlayerSkillComponent());
             StartCoroutine(WaitScreenControlsManager());
-            StartCoroutine(WaitRpcManager());
+            StartCoroutine(WaitForRpcManager());
 
             currentCharacterId.Value = GameData.GetPlayerCharacterId();
         }
@@ -168,13 +169,13 @@ public class MultiplayerPlayer : NetworkBehaviour
         }
     }
 
-    private IEnumerator WaitRpcManager()
+    private IEnumerator WaitForRpcManager()
     {
         while (true)
         {
             if (RpcManager.instance != null)
             {
-                RpcManager.instance.SpawnShrinesRpc(50, new Vector3(0, 6, 0), 200);
+                RpcManager.instance.SpawnShrinesRpc(35, new Vector3(0, 6, 0), 250, 40);
                 yield break;
             }
 

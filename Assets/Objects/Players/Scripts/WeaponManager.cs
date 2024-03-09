@@ -36,7 +36,7 @@ public class WeaponManager : NetworkBehaviour
     private int _itemsUpgraded;
     private SaveFile _saveFile;
     private bool _isInitialized;
-    
+
     public void Start()
     {
         if (instance == null)
