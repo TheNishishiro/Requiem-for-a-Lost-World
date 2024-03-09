@@ -66,11 +66,25 @@ namespace Managers
                 WinRpc();
         }
 
+        [Rpc(SendTo.Server)]
+        public void TriggerLoseServerRpc()
+        {
+            LoseRpc();
+        }
+
         [Rpc(SendTo.Everyone)]
         public void WinRpc()
         {
             gameResultData.IsWin = true;
-            FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(true);
+            FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(true, true);
+        }
+
+        [Rpc(SendTo.Everyone)]
+        public void LoseRpc()
+        {
+            Debug.Log("Displaying lose screen");
+            gameResultData.IsWin = false;
+            FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(false, true);
         }
         
         [Rpc(SendTo.Server)]

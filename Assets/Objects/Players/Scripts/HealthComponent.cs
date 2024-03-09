@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Events.Scripts;
 using Managers;
 using UI.Labels.InGame;
@@ -80,9 +81,13 @@ namespace Objects.Players.Scripts
 			
 			AchievementManager.instance.OnDeath();
 			playerStatsComponent.ChangeDeathState(true);
-			
-			if (FindObjectsByType<MultiplayerPlayer>(FindObjectsSortMode.None).Length <= 1)
+
+			var players = FindObjectsByType<MultiplayerPlayer>(FindObjectsSortMode.None);
+			if (players.Length <= 1)
 				gameOverScreenManager.OpenPanel(false);
+			else if (players.Where(x => x != NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<MultiplayerPlayer>())
+			         .All(x => x.isPlayerDead.Value))
+				RpcManager.instance.TriggerLoseServerRpc();
 			else
 				RpcManager.instance.SpawnReviveCardRpc(GameManager.instance.PlayerTransform.position, NetworkManager.Singleton.LocalClientId);
 		}

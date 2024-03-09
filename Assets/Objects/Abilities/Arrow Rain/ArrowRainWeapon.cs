@@ -58,7 +58,7 @@ namespace Objects.Abilities.Arrow_Rain
 			_target = EnemyManager.instance.GetActiveEnemies()
 				.Select(x => x.GetDamagableComponent())
 				.OrderByDescending(x => x.Health)
-				.ThenBy(x =>Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
+				.ThenBy(x =>Vector3.Distance(x.transform.position, GameManager.instance.PlayerTransform.position)).FirstOrDefault();
 		}
 
 		protected override void OnLevelUp()
