@@ -5,6 +5,7 @@ using Data.Elements;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using Interfaces;
+using Managers;
 using NaughtyAttributes;
 using Objects;
 using Objects.Abilities;
@@ -101,13 +102,13 @@ namespace Weapons
 			if (_timer >= 0f) return;
 
 			_timer = WeaponStatsStrategy.GetTotalCooldown();
+			if (GameManager.instance.playerStatsComponent.IsDead()) return;
+			
 			StartCoroutine(AttackProcess());
 		}
 
 		protected virtual IEnumerator AttackProcess()
 		{
-			if (_playerStatsComponent.IsDead()) yield break;
-			
 			OnAttackStart();
 			for (var i = 0; i < GetAttackCount(); i++)
 			{

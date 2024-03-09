@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Linq;
+using Cinemachine;
 using DefaultNamespace;
 using Events.Scripts;
 using Objects;
 using Objects.Abilities;
 using Objects.Enemies;
+using Objects.Players.Scripts;
 using Objects.Stage;
 using UI.Labels.InGame.MP_List;
+using Unity.Mathematics;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using Unity.VisualScripting;
 using UnityEngine;
 using Weapons;
@@ -19,11 +23,25 @@ namespace Managers
     {
         public static RpcManager instance;
         [SerializeField] private GameResultData gameResultData;
+        [SerializeField] private GameObject shrinePrefab;
 
-        private void Awake()
+        public override void OnNetworkSpawn()
         {
             if (instance == null)
                 instance = this;
+            base.OnNetworkSpawn();
+        }
+        
+        [Rpc(SendTo.Server)]
+        public void SpawnShrinesRpc(int amount, Vector3 mapCenter, float spawnRange)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                var position = Utilities.GetRandomInAreaFreezeParameter(mapCenter, spawnRange, isFreezeY: true);
+                position = Utilities.GetPointOnColliderSurface(position, transform);
+                
+                NetworkObjectPool.Singleton.GetNetworkObject(shrinePrefab, position, Quaternion.identity).Spawn();
+            }
         }
         
         [Rpc(SendTo.Server)]
@@ -86,6 +104,24 @@ namespace Managers
             {
                 Destroy(networkObject.gameObject);
             }
+        }
+
+        [Rpc(SendTo.Server)]
+        public void SpectatePlayerServerRpc(ulong spectatingClientId, ulong clientToSpectateId)
+        {
+            var playerComponent = NetworkManager.Singleton.ConnectedClients[spectatingClientId].PlayerObject.GetComponent<MultiplayerPlayer>();
+            var targetComponent = NetworkManager.Singleton.ConnectedClients[clientToSpectateId].PlayerObject.GetComponent<MultiplayerPlayer>();
+
+            SpectatePlayerServerRpc(playerComponent, targetComponent, RpcTarget.Single(spectatingClientId, RpcTargetUse.Temp));
+        }
+
+        [Rpc(SendTo.SpecifiedInParams)]
+        public void SpectatePlayerServerRpc(NetworkBehaviourReference spectatingClient, NetworkBehaviourReference clientToSpectate, RpcParams rpcParams)
+        {
+            if (!spectatingClient.TryGet(out MultiplayerPlayer source)) return;
+            if (!clientToSpectate.TryGet(out MultiplayerPlayer target)) return;
+
+            source.SetCameraTarget(target.cameraRoot.transform);
         }
         
         [Rpc(SendTo.Server)]
@@ -161,6 +197,37 @@ namespace Managers
         public void HealPlayerRpc(float amount, RpcParams rpcParams)
         {
             GameManager.instance.playerComponent.TakeDamage(-amount);
+        }
+        
+        [Rpc(SendTo.Server)]
+        public void RevivePlayerServerRpc(NetworkObjectReference shrine, Vector3 respawnPointPosition, ulong clientId)
+        {
+            ReviveRpc(respawnPointPosition, RpcTarget.Single(clientId, RpcTargetUse.Temp));
+           
+            if (shrine.TryGet(out var oNetworkBehaviour))
+            {
+                MarkShrineUsedClientRpc(oNetworkBehaviour.GetComponent<Shrine>());
+            }
+        }
+        
+        [Rpc(SendTo.Everyone)]
+        public void MarkShrineUsedClientRpc(NetworkBehaviourReference shrine)
+        {
+            if (shrine.TryGet(out Shrine oNetworkBehaviour))
+            {
+                oNetworkBehaviour.MarkAsUsed();
+            }
+        }
+        
+        [Rpc(SendTo.SpecifiedInParams)]
+        public void ReviveRpc(Vector3 respawnPointPosition, RpcParams rpcParams)
+        {
+            GameManager.instance.PlayerTransform.position = respawnPointPosition;
+            GameManager.instance.playerStatsComponent.SetHealth(PlayerStatsScaler.GetScaler().GetMaxHealth());
+            GameManager.instance.playerComponent.healthComponent.UpdateHealthBar();
+            GameManager.instance.playerStatsComponent.ChangeDeathState(false);
+            GameManager.instance.playerMpComponent.ResetCameraFollow();
+            GameManager.instance.playerMpComponent.SetCollider(true);
         }
     }
 }

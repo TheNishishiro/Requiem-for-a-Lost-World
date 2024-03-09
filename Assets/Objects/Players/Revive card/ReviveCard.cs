@@ -16,12 +16,13 @@ public class ReviveCard : NetworkBehaviour
         if (other.GetComponent<NetworkObject>()?.IsOwner != true) return;
 
         GameManager.instance.playerComponent.AddPlayerCard(clientId.Value);
+        RpcManager.instance.SpectatePlayerServerRpc(clientId.Value, NetworkManager.Singleton.LocalClientId);
         RpcManager.instance.DeSpawnReviveCardRpc(this);
     }
 
     public void SetClientId(ulong id)
     {
         if (IsHost)
-            this.clientId.Value = id;
+            clientId.Value = id;
     }
 }

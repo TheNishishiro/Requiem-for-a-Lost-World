@@ -80,9 +80,11 @@ namespace Objects.Players.Scripts
 			
 			AchievementManager.instance.OnDeath();
 			playerStatsComponent.ChangeDeathState(true);
-			RpcManager.instance.SpawnReviveCardRpc(GameManager.instance.PlayerTransform.position, NetworkManager.Singleton.LocalClientId);
 			
-			//gameOverScreenManager.OpenPanel(false);
+			if (FindObjectsByType<MultiplayerPlayer>(FindObjectsSortMode.None).Length <= 1)
+				gameOverScreenManager.OpenPanel(false);
+			else
+				RpcManager.instance.SpawnReviveCardRpc(GameManager.instance.PlayerTransform.position, NetworkManager.Singleton.LocalClientId);
 		}
 
 		public void IncreaseMaxHealth(float amount)

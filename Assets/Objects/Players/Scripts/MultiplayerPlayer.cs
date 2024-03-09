@@ -33,6 +33,8 @@ public class MultiplayerPlayer : NetworkBehaviour
     public NetworkVariable<ulong> currentPlayerId = new (0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> isPlayerDead = new (false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private bool _keepAlive = true;
+    [SerializeField] private Collider boxCollider;
+    [SerializeField] private CharacterController characterController;
     
     public void Start()
     {
@@ -43,7 +45,7 @@ public class MultiplayerPlayer : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         if (IsOwner && cameraRoot != null)
-            FindFirstObjectByType<CinemachineVirtualCamera>().Follow = cameraRoot.transform;
+            SetCameraTarget(cameraRoot.transform);
         playerInput.enabled = IsOwner;
         firstPersonController.enabled = IsOwner;
         starterAssetsInputs.enabled = IsOwner;
@@ -57,9 +59,20 @@ public class MultiplayerPlayer : NetworkBehaviour
             StartCoroutine(WaitForGameManager());
             StartCoroutine(WaitForPlayerSkillComponent());
             StartCoroutine(WaitScreenControlsManager());
+            StartCoroutine(WaitRpcManager());
 
             currentCharacterId.Value = GameData.GetPlayerCharacterId();
         }
+    }
+
+    public void SetCameraTarget(Transform targetTransform)
+    {
+        FindFirstObjectByType<CinemachineVirtualCamera>().Follow = targetTransform;
+    }
+
+    public void ResetCameraFollow()
+    {
+        SetCameraTarget(cameraRoot.transform);
     }
 
     public void Update()
@@ -93,6 +106,12 @@ public class MultiplayerPlayer : NetworkBehaviour
         spriteRenderer.enabled = !isPlayerDead.Value;
     }
 
+    public void SetCollider(bool isEnabled)
+    {
+        boxCollider.enabled = isEnabled;
+        characterController.enabled = isEnabled;
+    }
+
     public override void OnNetworkDespawn()
     {
         if (!IsOwner)
@@ -116,7 +135,7 @@ public class MultiplayerPlayer : NetworkBehaviour
                 yield break;
             }
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -127,10 +146,11 @@ public class MultiplayerPlayer : NetworkBehaviour
             if (GameManager.instance != null)
             {
                 GameManager.instance.playerVfxComponent = GetComponent<PlayerVfxComponent>();
+                GameManager.instance.playerMpComponent = this;
                 yield break;
             }
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -144,7 +164,21 @@ public class MultiplayerPlayer : NetworkBehaviour
                 yield break;
             }
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    private IEnumerator WaitRpcManager()
+    {
+        while (true)
+        {
+            if (RpcManager.instance != null)
+            {
+                RpcManager.instance.SpawnShrinesRpc(50, new Vector3(0, 6, 0), 200);
+                yield break;
+            }
+
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -159,7 +193,7 @@ public class MultiplayerPlayer : NetworkBehaviour
                 yield break;
             }
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -179,7 +213,7 @@ public class MultiplayerPlayer : NetworkBehaviour
                 yield break;
             }
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -194,7 +228,7 @@ public class MultiplayerPlayer : NetworkBehaviour
                 yield break;
             }
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }

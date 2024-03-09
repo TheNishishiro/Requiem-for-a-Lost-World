@@ -9,6 +9,7 @@ using Objects.Characters;
 using Objects.Players.PermUpgrades;
 using Objects.Players.Scripts;
 using Objects.Stage;
+using UI.Labels.InGame;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,7 +21,9 @@ namespace Managers
 	public class GameManager : MonoBehaviour
 	{		
 		[SerializeField] private GameResultData gameResultData;
+		[SerializeField] public ExperienceBar reviveTimerBar;
 		public static GameManager instance;
+		[HideInInspector] public MultiplayerPlayer playerMpComponent;
 		private Transform _playerTransform;
 		public Transform PlayerTransform
 		{
@@ -40,7 +43,7 @@ namespace Managers
 		[SerializeField] private SpecialBarManager specialBarManager;
 		[SerializeField] private DifficultyContainer difficultyContainer;
 		[HideInInspector] public SaveFile saveFile;
-		
+
 		public void Awake()
 		{
 			if (instance == null)

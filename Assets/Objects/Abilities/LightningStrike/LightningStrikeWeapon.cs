@@ -17,36 +17,39 @@ namespace Objects.Abilities.LightningStrike
 	public class LightningStrikeWeapon : PoolableWeapon<LightningStrikeProjectile>
 	{
 		[SerializeField] public GameObject chainLightningPrefab;
-		[SerializeField] public bool IsChainLightning = true;
+		[SerializeField] public bool IsChainLightning;
 		
 		private ObjectPool<LightningChainProjectile> _subProjectilePool;
+		private WeaponStatsStrategyBase _subProjectileStatsStrategy;
 		private Vector3 _subProjectilePosition;
+		private WeaponStats _subProjectileStats;
 		private int _chargeStacks;
 
 		public override void Awake()
 		{
 			base.Awake();
 
-			var subProjectileStats = new WeaponStats()
+			_subProjectileStats = new WeaponStats()
 			{
 				TimeToLive = 0.5f,
 				DetectionRange = 1f
 			};
+			_subProjectileStatsStrategy = new WeaponStatsStrategyBase(_subProjectileStats, ElementField);
 			_subProjectilePool = new ObjectPool<LightningChainProjectile>(
 				() =>
 				{
 					var projectile = SpawnManager.instance.SpawnObject(_subProjectilePosition, chainLightningPrefab).GetComponent<LightningChainProjectile>();
 					projectile.Init(_subProjectilePool, projectile);
-					projectile.SetParentWeapon(this);
 					return projectile;
 				},
 				projectile =>
 				{
-					subProjectileStats.Damage = WeaponStatsStrategy.GetDamage() * (GameData.IsCharacterWithRank(CharactersEnum.Alice_BoL, CharacterRank.E4) ? 0.75f : 0.25f);
-					subProjectileStats.Scale = WeaponStatsStrategy.GetScale();
-					projectile.SetParentWeapon(this);
+					_subProjectileStats.Damage = WeaponStatsStrategy.GetDamage() * (GameData.IsCharacterWithRank(CharactersEnum.Alice_BoL, CharacterRank.E4) ? 0.75f : 0.25f);
+					_subProjectileStats.Scale = WeaponStatsStrategy.GetScale();
+					projectile.SetParentWeapon(this, false);
+					projectile.SetStats(_subProjectileStatsStrategy);
 					projectile.gameObject.SetActive(true);
-					projectile.SeekTargets(5);
+					projectile.SeekTargets(2);
 				},
 				projectile => projectile.gameObject.SetActive(false),
 				projectile => Destroy(projectile.gameObject),
@@ -87,7 +90,6 @@ namespace Objects.Abilities.LightningStrike
 
 		protected override void OnLevelUp()
 		{
-			IsChainLightning = true;
 			if (LevelField == 8)
 				IsChainLightning = true;
 		}

@@ -81,7 +81,10 @@ public class EnemyManager : NetworkBehaviour
 		_currentEnemySpawning = enemyToSpawn;
 
 		
-		var targetClient = NetworkManager.Singleton.ConnectedClients.OrderBy(x => Random.value).FirstOrDefault().Value.PlayerObject.transform;
+		var targetClient = NetworkManager.Singleton.ConnectedClients
+			.Where(x => !x.Value.PlayerObject.GetComponent<MultiplayerPlayer>().isPlayerDead.Value)
+			.OrderBy(x => Random.value)
+			.FirstOrDefault().Value.PlayerObject.transform;
 		var position = targetClient.position - Utilities.GenerateRandomPositionOnEdge(spawnArea);
 		var pointFound = Utilities.GetPointOnColliderSurface(position, 100f, targetClient, out var pointOnSurface);
 		if (!pointFound || Utilities.IsPositionOccupied(pointOnSurface, 0.3f))
@@ -92,10 +95,9 @@ public class EnemyManager : NetworkBehaviour
 		var enemy = NetworkObjectPool.Singleton.GetNetworkObject(enemyGameObject, position, Quaternion.identity);
 		var enemyComponent = enemy.GetComponent<Enemy>();
 		enemy.Spawn();
-
 		
 		var expIncrease = playerCount <= 1 ? 1 : Mathf.Pow(0.85f, playerCount);
-		var damageIncrease = playerCount <= 1 ? 1 : playerCount * 0.2f;
+		var damageIncrease = playerCount <= 1 ? 1 : playerCount * 0.25f;
 		
 		enemyComponent.SetPlayerTarget(targetClient);
 		enemyComponent.Setup(new EnemyNetworkStats(_currentEnemySpawning), _healthMultiplier * (1 + increasePerClient*0.5f), _enemySpeedMultiplier, expIncrease, damageIncrease);

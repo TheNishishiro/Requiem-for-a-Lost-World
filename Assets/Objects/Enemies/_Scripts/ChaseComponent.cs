@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DefaultNamespace;
 using Interfaces;
 using Objects.Abilities.Back_Hole;
@@ -68,7 +69,7 @@ public class ChaseComponent : NetworkBehaviour
             return;
         
         if (targetDestination == null)
-            targetDestination = FindFirstObjectByType<MultiplayerPlayer>().transform;
+            targetDestination = FindObjectsByType<MultiplayerPlayer>(FindObjectsSortMode.None).FirstOrDefault(x => !x.isPlayerDead.Value)?.transform;
 
         var currentPosition = transformCache.position;
 

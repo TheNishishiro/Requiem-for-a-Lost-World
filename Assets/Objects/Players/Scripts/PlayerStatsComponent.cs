@@ -103,6 +103,7 @@ namespace Objects.Players.Scripts
 		public void ChangeDeathState(bool isDead)
 		{
 			_isDead = isDead;
+			GameManager.instance.playerMpComponent.SetCollider(isDead);
 		}
 		
 		public bool IsDead()
