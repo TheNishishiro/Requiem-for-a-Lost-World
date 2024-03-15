@@ -78,6 +78,7 @@ public class WeaponManager : NetworkBehaviour
         weaponGameObject.ApplyRarity(rarity);
         availableWeapons.RemoveAll(x => x.weaponBase == weapon);
         _unlockedWeapons.Add(weaponGameObject);
+        weaponGameObject.ActivateWeapon();
         AchievementManager.instance.OnWeaponUnlocked(weapon, _unlockedWeapons.Count, rarity);
     }
 

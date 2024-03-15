@@ -130,13 +130,12 @@ public class MultiplayerPlayer : NetworkBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(1f);
             if (WeaponManager.instance != null)
             {
                 WeaponManager.instance.AddStartingWeapon(GetComponentInChildren<PlayerWeaponContainer>().transform);
                 yield break;
             }
-
-            yield return new WaitForSeconds(0.1f);
         }
     }
 

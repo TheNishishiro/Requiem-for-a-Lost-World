@@ -69,6 +69,10 @@ namespace Weapons
 			
 			_timer = WeaponStatsStrategy.GetTotalCooldown();
 			InitPool();
+		}
+
+		public void ActivateWeapon()
+		{
 			StartCoroutine(AttackProcess());
 		}
 

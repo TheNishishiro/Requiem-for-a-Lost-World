@@ -13,7 +13,7 @@ namespace Objects.Abilities.Book
 	{
 		private float _rotationStep = 0;
 		private float _rotateOffset = 0;
-		[HideInInspector] public bool IsShadowBurst;
+		public bool IsShadowBurst;
 		[SerializeField] public GameObject ExplosionPrefab;
 		private ObjectPool<SimpleDamageProjectile> _subProjectilePool;
 		private Vector3 _subProjectilePosition;

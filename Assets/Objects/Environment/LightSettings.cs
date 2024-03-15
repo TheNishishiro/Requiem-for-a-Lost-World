@@ -23,5 +23,10 @@ namespace Objects.Environment
                 _ => lightComponent.shadows
             };
         }
+
+        private void Update()
+        {
+
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using DefaultNamespace;
 using Managers;
+using Objects.Abilities.SpaceExpansionBall;
 using UnityEngine;
 using UnityEngine.Pool;
 using Weapons;
@@ -12,10 +13,11 @@ namespace Objects.Abilities.Bouncer
 		public float ElectroDefenceShred;
 		public bool Thunderstorm;
 
-		private ObjectPool<BouncerProjectile> _subProjectilePool;
+		private ObjectPool<BouncerSubProjectile> _subProjectilePool;
 		private Vector3 _subProjectilePosition;
 		private WeaponStats _subProjectileStats;
 		private WeaponStatsStrategyBase _subProjectileStatsStrategy;
+		[SerializeField] private GameObject subProjectilePrefab;
 
 		public override void Awake()
 		{
@@ -30,12 +32,11 @@ namespace Objects.Abilities.Bouncer
 			};
 			_subProjectileStatsStrategy = new WeaponStatsStrategyBase(_subProjectileStats, ElementField);
 			
-			_subProjectilePool = new ObjectPool<BouncerProjectile>(
+			_subProjectilePool = new ObjectPool<BouncerSubProjectile>(
 				() =>
 				{
-					var projectile = SpawnManager.instance.SpawnObject(_subProjectilePosition, spawnPrefab).GetComponent<BouncerProjectile>();
+					var projectile = SpawnManager.instance.SpawnObject(_subProjectilePosition, subProjectilePrefab).GetComponent<BouncerSubProjectile>();
 					projectile.Init(_subProjectilePool, projectile);
-					projectile.IsSubSpawned = true;
 					return projectile;
 				},
 				projectile =>
