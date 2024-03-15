@@ -21,7 +21,8 @@ namespace Managers
 
 		public void Awake()
 		{
-			instance = this;
+			if (instance == null)
+				instance = this;
 		}
 
 		private void LateUpdate()

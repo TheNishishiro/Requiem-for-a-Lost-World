@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f436e9b0d7d2e0a41a4139798258da8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 1
   spawnPrefab: {fileID: 5293197033241543336, guid: 3404c1578224906428f08dbdaa015e8d,
     type: 3}
+  WeaponId: 11
   Name: Blessing of Light
   Description: Create a healing emitter at current position that heals in an area
     around it for a set time
@@ -74,6 +76,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 54f6a183810e16a4280b0037d2237d2b, type: 2}
   - {fileID: 11400000, guid: 6d7cef024953ad545abc9e6d5e6d561d, type: 2}

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using Objects.Stage;
 using StarterAssets;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,37 +10,24 @@ namespace Managers
 {
 	public class CursorManager : MonoBehaviour
 	{
-		[SerializeField] private StarterAssetsInputs starterAssetsInputs;
+		private StarterAssetsInputs _starterAssetsInputs;
 
-		private void Start()
+		public void Setup(StarterAssetsInputs starterAssetsInputs)
 		{
+			_starterAssetsInputs = starterAssetsInputs;
 			if (!GameData.GetPlayerCharacterData().PickWeaponOnStart)
 				HideCursor();
 			if (Application.platform == RuntimePlatform.Android)
 				ShowCursor();
-		
-		}
-
-		private void Update()
-		{
-			if (Input.GetKeyDown(KeyCode.LeftControl))
-			{
-				ShowCursor();
-			}
-
-			if (Input.GetKeyUp(KeyCode.LeftControl))
-			{
-				HideCursor();
-			}
 		}
 
 		public void ShowCursor()
 		{
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.None;
-			starterAssetsInputs.cursorInputForLook = false;
-			starterAssetsInputs.cursorLocked = false;
-			starterAssetsInputs.LookInput(Vector2.zero);
+			_starterAssetsInputs.cursorInputForLook = false;
+			_starterAssetsInputs.cursorLocked = false;
+			_starterAssetsInputs.LookInput(Vector2.zero);
 		}
 
 		public void HideCursor()
@@ -47,8 +36,8 @@ namespace Managers
 			
 			Cursor.visible = false;
 			Cursor.lockState = CursorLockMode.Locked;
-			starterAssetsInputs.cursorInputForLook = true;
-			starterAssetsInputs.cursorLocked = true;
+			_starterAssetsInputs.cursorInputForLook = true;
+			_starterAssetsInputs.cursorLocked = true;
 		}
 	}
 }

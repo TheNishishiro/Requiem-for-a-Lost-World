@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Data.Elements;
 
 namespace Objects.Enemies
@@ -23,6 +24,14 @@ namespace Objects.Enemies
 			{
 				elementStats?.Add(new ElementStats(x));
 			});
+		}
+
+		public void Copy(EnemyNetworkStats enemyStats)
+		{
+			hp = enemyStats.hp;
+			damage = enemyStats.damage;
+			speed = enemyStats.speed;
+			elementStats ??= new List<ElementStats>();
 		}
 	}
 }

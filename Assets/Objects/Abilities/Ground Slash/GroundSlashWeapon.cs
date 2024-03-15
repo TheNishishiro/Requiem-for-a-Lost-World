@@ -20,21 +20,19 @@ namespace Objects.Abilities.Ground_Slash
 			for (var i = 0; i < spawnCount; i++)
 			{
 				_actualOffset = offset * (i % 2 == 0 ? 1 : -1);
-				pool.Get();
+				base.Attack();
 			}
 		}
 
-		protected override bool ProjectileSpawn(GroundSlashProjectile projectile)
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
-			var playerTransform = GameManager.instance.playerComponent.transform;
+			var playerTransform = GameManager.instance.PlayerTransform;
 			var playerPosition = transform.position;
 			var position = new Vector3(playerPosition.x + _actualOffset, playerPosition.y, playerPosition.z) + playerTransform.transform.forward;
-			projectile.transform.position = Utilities.GetPointOnColliderSurface(position, playerTransform.transform);
+			position = Utilities.GetPointOnColliderSurface(position, playerTransform.transform);
 			
-			projectile.gameObject.SetActive(true);
-			projectile.SetParentWeapon(this);
-			projectile.SetDirection(playerTransform.transform.forward);
-			return true;
+			networkProjectile.Initialize(this, position);
+			networkProjectile.GetProjectile<GroundSlashProjectile>().SetDirection(playerTransform.transform.forward);
 		}
 
 		protected override void OnLevelUp()

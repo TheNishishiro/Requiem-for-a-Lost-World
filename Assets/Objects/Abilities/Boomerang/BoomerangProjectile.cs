@@ -21,7 +21,7 @@ namespace Objects.Abilities.Boomerang
 
 		private void SetDirectionInternal(Vector3 targetPoint)
 		{
-			direction = (targetPoint - transform.position).normalized;
+			direction = (targetPoint - transformCache.position).normalized;
 		}
 
 		private IEnumerator FlyCoroutine()
@@ -32,8 +32,8 @@ namespace Objects.Abilities.Boomerang
 		
 		protected override void CustomUpdate()
 		{
-			transform.Rotate(0, Time.deltaTime * 250, 0);
-			transform.position += direction * (WeaponStatsStrategy.GetSpeed() * Time.deltaTime);
+			transformCache.Rotate(0, Time.deltaTime * 250, 0);
+			transformCache.position += direction * (WeaponStatsStrategy.GetSpeed() * Time.deltaTime);
 		}
 
 		private void OnTriggerEnter(Collider other)

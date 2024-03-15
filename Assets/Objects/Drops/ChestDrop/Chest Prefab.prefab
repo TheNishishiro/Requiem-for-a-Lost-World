@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8857614189862792942}
   - component: {fileID: 8064260009072169135}
   - component: {fileID: 7814660344872424984}
+  - component: {fileID: 1962213444239490469}
+  - component: {fileID: 2264043776448485491}
   - component: {fileID: 3561127621986706836}
   - component: {fileID: -5662689963410785615}
   m_Layer: 11
@@ -53,6 +55,8 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -109,6 +113,58 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7118268, y: 0.7137851, z: 0.30996573}
   m_Center: {x: -0.021971166, y: -0.008522092, z: -0.0061857477}
+--- !u!114 &1962213444239490469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5023575353268103864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1786850923
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &2264043776448485491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5023575353268103864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a3bb07b8ca27642ae2b7d0412decf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!114 &3561127621986706836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,12 +189,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a2841170fe94ad7a8b87b7f20551a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnPickupAction:
-    m_PersistentCalls:
-      m_Calls: []
-  PickupEnum: 5
-  isStationary: 1
   pickUpObject: {fileID: 0}
+  PickupEnum: 5
+  boxCollider: {fileID: 0}
+  isStationary: 1
+  canExpire: 0
+  lifeTime: 0
   canBeAttracted: 0
 --- !u!1 &8779675110605944975
 GameObject:
@@ -189,6 +245,8 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using Objects.Enemies;
+using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -194,6 +196,39 @@ namespace DefaultNamespace
 		public static Vector3 GetWorldPositionFromUI(Vector3 uiPosition)
 		{
 			return Camera.current.ScreenToWorldPoint(uiPosition);
+		}
+
+		public static List<Vector3> GetPositionsOnSurfaceWithMinDistance(int amount, Vector3 center, float spawnRange, float minDistance, Transform transform, int maxAttempts)
+		{
+			var availablePositions = new List<Vector3>();
+			for (int i = 0; i < amount; i++)
+			{
+				Vector3 position;
+				bool isValidPosition = false;
+				int attempts = 0;
+				do
+				{
+					position = Utilities.GetRandomInAreaFreezeParameter(center, spawnRange, isFreezeY: true);
+					position = Utilities.GetPointOnColliderSurface(position, transform);
+
+					// Calculate the distance between new position and existing positions
+					if (availablePositions.Count == 0 || availablePositions.All(spawnedPos => Vector3.Distance(spawnedPos, position) >= minDistance))
+					{
+						isValidPosition = true;
+					}
+					else
+					{
+						attempts++;
+					}
+				} while (!isValidPosition && attempts < maxAttempts); //Max attempts to try 
+
+				if (isValidPosition)
+				{
+					availablePositions.Add(position);
+				}
+			}
+
+			return availablePositions;
 		}
 	}
 }

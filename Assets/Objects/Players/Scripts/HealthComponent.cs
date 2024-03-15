@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using Events.Scripts;
 using Managers;
 using UI.Labels.InGame;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -18,6 +20,8 @@ namespace Objects.Players.Scripts
 		
 		public void Damage(float amount, bool isIgnoreArmor = false, bool isPreventDeath = false)
 		{
+			if (playerStatsComponent.IsDead()) return;
+			
 			if (amount > 0)
 			{
 				amount *= PlayerStatsScaler.GetScaler().GetDamageTakenIncrease();
@@ -39,7 +43,7 @@ namespace Objects.Players.Scripts
 			DamageTakenEvent.Invoke(amount);
 			UpdateHealthBar();
 			
-			if (playerStatsComponent.IsDead())
+			if (playerStatsComponent.CanDie())
 				Death();
 		}
 
@@ -54,6 +58,7 @@ namespace Objects.Players.Scripts
 
 		private void Regen()
 		{
+			if (playerStatsComponent.IsDead()) return;
 			if (playerStatsComponent.IsFullHealth()) return;
 
 			Damage(-PlayerStatsScaler.GetScaler().GetHealthRegeneration());
@@ -75,7 +80,16 @@ namespace Objects.Players.Scripts
 			}
 			
 			AchievementManager.instance.OnDeath();
-			gameOverScreenManager.OpenPanel(false);
+			playerStatsComponent.ChangeDeathState(true);
+
+			var players = FindObjectsByType<MultiplayerPlayer>(FindObjectsSortMode.None);
+			if (players.Length <= 1)
+				gameOverScreenManager.OpenPanel(false);
+			else if (players.Where(x => x != NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<MultiplayerPlayer>())
+			         .All(x => x.isPlayerDead.Value))
+				RpcManager.instance.TriggerLoseServerRpc();
+			else
+				RpcManager.instance.SpawnReviveCardRpc(GameManager.instance.PlayerTransform.position, NetworkManager.Singleton.LocalClientId);
 		}
 
 		public void IncreaseMaxHealth(float amount)

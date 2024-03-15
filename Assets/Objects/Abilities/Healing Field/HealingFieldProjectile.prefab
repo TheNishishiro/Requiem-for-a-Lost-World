@@ -51,6 +51,8 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4862,6 +4864,100 @@ Transform:
   - {fileID: 4479049980447987243}
   m_Father: {fileID: 352583475892921004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4110294283663076965
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 254840192863159675}
+  - component: {fileID: 697007758559197011}
+  - component: {fileID: 116086536280208967}
+  m_Layer: 0
+  m_Name: Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &254840192863159675
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4110294283663076965}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 352583475892921004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &697007758559197011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4110294283663076965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e682633d76bc8440ae1b3527c4c3871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  networkProjectile: {fileID: 6511026498462259453}
+  transformCache: {fileID: 352583475892921004}
+  UseParticles: 0
+  ParticleSystem: {fileID: 0}
+  disableHitbox: 0
+  hitbox: {fileID: 116086536280208967}
+  spawningStage:
+    stageObject: {fileID: 0}
+    stageDuration: 0
+    particleSystems: []
+  flyingStage:
+    stageObject: {fileID: 1556739428120405827}
+    stageDuration: 0
+    particleSystems: []
+  dissipationStage:
+    stageObject: {fileID: 0}
+    stageDuration: 0
+    particleSystems: []
+  isLimitedHitBox: 0
+  hitBoxDuration: 0
+  hitBoxStart: 0
+  isChangeSizeOverLife: 0
+  increaseSizeUntilTime: 0
+  reduceSizeBeforeTime: 0
+  targetMinSize: {x: 0, y: 0, z: 0}
+  multiplyTargetByScale: 0
+  dontTickLifeTime: 0
+  healingFrequency: 2
+--- !u!65 &116086536280208967
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4110294283663076965}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4790163904254457865
 GameObject:
   m_ObjectHideFlags: 0
@@ -9683,6 +9779,8 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -14522,6 +14620,8 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -14587,8 +14687,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 352583475892921004}
-  - component: {fileID: -1174013633710871910}
-  - component: {fileID: 3401131739883179675}
+  - component: {fileID: 1028110438777390842}
+  - component: {fileID: 1513519427286618507}
+  - component: {fileID: 6511026498462259453}
   m_Layer: 0
   m_Name: HealingFieldProjectile
   m_TagString: Untagged
@@ -14610,9 +14711,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8542740982665486325}
+  - {fileID: 254840192863159675}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1174013633710871910
+--- !u!114 &1028110438777390842
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14621,44 +14723,61 @@ MonoBehaviour:
   m_GameObject: {fileID: 5293197033241543336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e682633d76bc8440ae1b3527c4c3871, type: 3}
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  State: 0
-  UseParticles: 0
-  ParticleSystem: {fileID: 0}
-  hitbox: {fileID: 3401131739883179675}
-  spawningStage:
-    stageObject: {fileID: 0}
-    stageDuration: 0
-  flyingStage:
-    stageObject: {fileID: 1556739428120405827}
-    stageDuration: 0
-  dissipationStage:
-    stageObject: {fileID: 0}
-    stageDuration: 0
-  isLimitedHitBox: 0
-  hitBoxDuration: 0
-  hitBoxStart: 0
-  healingFrequency: 2
---- !u!65 &3401131739883179675
-BoxCollider:
+  GlobalObjectIdHash: 3530939293
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &1513519427286618507
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5293197033241543336}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0, y: 0, z: 0}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a3bb07b8ca27642ae2b7d0412decf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 0
+  SyncRotAngleY: 0
+  SyncRotAngleZ: 0
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 0
+  SlerpPosition: 0
+--- !u!114 &6511026498462259453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5293197033241543336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5cf1d06af1445abe9665ad9fd5f9f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 697007758559197011}
+  networkObject: {fileID: 1028110438777390842}
+  networkTransport: {fileID: 1513519427286618507}

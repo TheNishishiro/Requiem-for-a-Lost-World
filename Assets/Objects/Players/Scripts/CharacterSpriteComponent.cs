@@ -1,5 +1,6 @@
 ﻿using System;
 using Objects.Stage;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Objects.Players.Scripts
@@ -8,9 +9,11 @@ namespace Objects.Players.Scripts
 	{
 		private void Awake()
 		{
-			var characterSprite = GameData.GetPlayerSprite();
-			if (characterSprite != null)
-				GetComponent<SpriteRenderer>().sprite = characterSprite;
+			//if (!IsOwner) return;
+//
+			//var characterSprite = GameData.GetPlayerSprite();
+			//if (characterSprite != null)
+			//	GetComponent<SpriteRenderer>().sprite = characterSprite;
 		}
 	}
 }

@@ -26,19 +26,21 @@ namespace Objects.Abilities.Arrow_Rain
 			base.Awake();
 		}
 
-		protected override bool ProjectileSpawn(ArrowRainProjectile projectile)
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
 			if (_target == null)
 			{
 				OnAttackStart();
 				if (_target == null)
-					return false;
+				{
+					networkProjectile.Despawn(WeaponId);
+					return;
+				}
 			}
 			
 			var position = _target.transform.position;
-			projectile.transform.position = new Vector3(position.x, position.y + 2.5f, position.z);
-			projectile.SetParentWeapon(this);
-			return true;
+			position = new Vector3(position.x, position.y + 2.5f, position.z);
+			networkProjectile.Initialize(this, position);
 		}
 
 		protected override int GetAttackCount()
@@ -46,7 +48,7 @@ namespace Objects.Abilities.Arrow_Rain
 			var baseAmount = base.GetAttackCount();
 			
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Summer)
-				baseAmount += (Utilities.GetTimeSpan(_stageTime.time).Minutes / 2);
+				baseAmount += (Utilities.GetTimeSpan(_stageTime.time.Value).Minutes / 2);
 			
 			return baseAmount;
 		}
@@ -56,7 +58,7 @@ namespace Objects.Abilities.Arrow_Rain
 			_target = EnemyManager.instance.GetActiveEnemies()
 				.Select(x => x.GetDamagableComponent())
 				.OrderByDescending(x => x.Health)
-				.ThenBy(x =>Vector3.Distance(x.transform.position, transform.position)).FirstOrDefault();
+				.ThenBy(x =>Vector3.Distance(x.transform.position, GameManager.instance.PlayerTransform.position)).FirstOrDefault();
 		}
 
 		protected override void OnLevelUp()

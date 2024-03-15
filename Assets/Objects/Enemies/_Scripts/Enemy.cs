@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Data.Elements;
 using DefaultNamespace;
 using DefaultNamespace.Data.Weapons;
 using Events.Scripts;
@@ -11,6 +13,8 @@ using Objects.Drops;
 using Objects.Drops.ChestDrop;
 using Objects.Players.Scripts;
 using Objects.Stage;
+using Unity.Netcode;
+using Unity.Netcode.Components;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,7 +22,7 @@ using Random = UnityEngine.Random;
 
 namespace Objects.Enemies
 {
-	public class Enemy : MonoBehaviour
+	public class Enemy : NetworkBehaviour
 	{
 		[SerializeField] private ChaseComponent chaseComponent;
 		[SerializeField] private GameResultData gameResultData;
@@ -34,18 +38,21 @@ namespace Objects.Enemies
 		[SerializeField] private Pickup healingOrbDrop;
 		[SerializeField] private GameObject grandOctiBoss;
 		[SerializeField] private ParticleSystem curseParticleSystem;
+		[SerializeField] private NetworkTransform networkTransport;
 		public Transform TargetPoint => damageableComponent.targetPoint.transform;
+		private NetworkVariable<EnemyTypeEnum> enemyType = new ();
 		private EnemyStats stats;
-		private GameObject targetGameObject;
-		private Player playerTarget;
-		private float _damageCooldown = 0.5f;
+		private NetworkVariable<float> damage = new();
+		private Transform playerTarget;
+		private const float DamageCooldown = 0.5f;
 		private float _currentDamageCooldown = 0;
 		private float _timeAlive = 0;
 		private bool _isBossEnemy = false;
-		private float _removeCollisionsTimer;
-		private bool _isRemoveCollisions;
+		private NetworkVariable<float> removeCollisionsTimer = new ();
+		private NetworkVariable<bool> isRemoveCollisions = new ();
+		private NetworkVariable<bool> isGrandOcti = new ();
 		private float _damageReduction;
-		private bool _isDying;
+		private NetworkVariable<bool> _isDying= new ();
 		private bool _isPlayerControlled;
 		private float? _playerControlDuration;
 		private List<Collision> _ignoredEnemyColliders = new();
@@ -56,8 +63,30 @@ namespace Objects.Enemies
 		private ChanceDrop gemDropChance;
 		private ChanceDrop healingOrbDropChance;
 
-		public void Setup(EnemyData newStats, Player target, PlayerStatsComponent playerStats, float healthMultiplier,
-			float speedMultiplier, Sprite sprite)
+		public override void OnNetworkSpawn()
+		{
+			spriteRenderer.sprite = EnemyManager.instance.GetSpriteByEnemy(enemyType.Value);
+			enemyType.OnValueChanged += OnTypeChange;
+			isGrandOcti.OnValueChanged += OnBossChanged;
+		}
+
+		public override void OnNetworkDespawn()
+		{
+			enemyType.OnValueChanged -= OnTypeChange;
+		}
+
+		private void OnTypeChange(EnemyTypeEnum oldType, EnemyTypeEnum newType)
+		{
+			spriteRenderer.sprite = EnemyManager.instance.GetSpriteByEnemy(newType);
+		}
+
+		private void OnBossChanged(bool oldValue, bool newValue)
+		{
+			if (newValue)
+				SetupBoss();
+		}
+
+		public void Setup(EnemyNetworkStats newStats, float healthMultiplier, float speedMultiplier, float expDropMultiplier, float damageMultiplier)
 		{
 			damageableComponent.Clear();
 			chaseComponent.Clear();
@@ -66,33 +95,31 @@ namespace Objects.Enemies
 
 			_timeAlive = 0;
 			_currentDamageCooldown = 0;
-			_damageCooldown = 0.5f;
-			_removeCollisionsTimer = 0;
 			_damageReduction = 0;
-			_isRemoveCollisions = false;
+			removeCollisionsTimer.Value = 0;
+			isRemoveCollisions.Value = false;
 			RevertIgnoredCollisions();
 			_ignoredEnemyColliders.Clear();
-			_isDying = false;
+			_isDying.Value = false;
 			_isPlayerControlled = false;
 			_isBossEnemy = false;
 			_playerControlDuration = null;
 			curseParticleSystem.gameObject.SetActive(false);
 
-			playerTarget = target;
+			enemyType.Value = newStats.enemyType;
 			spriteRenderer.transform.localPosition = new Vector3(0, newStats.groundOffset, 0);
-			spriteRenderer.sprite = sprite;
 			grandOctiBoss.SetActive(false);
 			stats ??= new EnemyStats();
-			stats.Copy(newStats.stats);
+			stats.Copy(newStats);
 			dropOnDestroyComponent.ClearDrop();
 
-			if (newStats.ExpDrop > 0)
+			if (newStats.expDrop > 0)
 			{
 				expDropChance ??= new ChanceDrop()
 				{
 					pickupObject = expDrop,
 				};
-				expDropChance.amount = newStats.ExpDrop;
+				expDropChance.amount = (int)(newStats.expDrop * expDropMultiplier);
 				expDropChance.chance = 0.75f;
 				dropOnDestroyComponent.AddDrop(expDropChance);
 			}
@@ -100,14 +127,13 @@ namespace Objects.Enemies
 			if (newStats.isBossEnemy)
 			{
 				_isBossEnemy = true;
-				stats.hp *= playerTarget?.GetLevel() ?? 1;
+				stats.hp *= GameManager.instance.playerComponent?.GetLevel() ?? 1;
 
 				dropOnDestroyComponent.AddDrop(chestDropChance ??= new ChanceDrop()
 				{
 					chance = 1,
 					pickupObject = chestDrop,
 				});
-				dropOnDestroyComponent.AddDrop(expDropChance);
 			}
 
 			goldDropChance ??= new ChanceDrop()
@@ -142,14 +168,25 @@ namespace Objects.Enemies
 			stats.speed *= speedMultiplier;
 			stats.speed *= PlayerStatsScaler.GetScaler().GetEnemySpeedIncrease();
 			stats.speed *= GameData.GetCurrentDifficulty().EnemySpeedModifier;
-			stats.damage *= GameData.GetCurrentDifficulty().EnemyDamageModifier;
-			
+			stats.damage *= GameData.GetCurrentDifficulty().EnemyDamageModifier * damageMultiplier;
+			damage.Value = stats.damage;
 			chaseComponent.FollowYAxis = newStats.allowFlying;
-			SetChaseTarget(target.gameObject);
+			chaseComponent.SetSpeed(stats.speed);
+			damageableComponent.SetHealth(stats.hp);
+			damageableComponent.SetResistances(stats.elementStats);
+			networkTransport.Interpolate = true;
+			
+		}
+
+		public void SetPlayerTarget(Transform targetClient)
+		{
+			playerTarget = targetClient;
+			SetChaseTarget(playerTarget.gameObject);
 		}
 
 		public void SetupBoss()
 		{
+			if (IsHost) isGrandOcti.Value = true;
 			grandOctiBoss.SetActive(true);
 		}
 
@@ -160,22 +197,34 @@ namespace Objects.Enemies
 
 		private void SetChaseTarget(GameObject target)
 		{
-			targetGameObject = target;
+			if (!IsHost) return;
+			
 			chaseComponent.SetTarget(target);
-			chaseComponent.SetSpeed(stats.speed);
-			damageableComponent.SetHealth(stats.hp);
-			damageableComponent.SetResistances(stats.elementStats);
 		}
 
 		private void Update()
 		{
-			if (_isDying) return;
-
-			chaseComponent.SetMovementState(EnemyManager.instance.IsTimeStop());
-			_timeAlive += Time.deltaTime;
+			if (_isDying.Value) return;
 
 			if (_currentDamageCooldown > 0)
 				_currentDamageCooldown -= Time.deltaTime;
+			
+			if (IsHost) HostUpdate();
+			
+			else if (removeCollisionsTimer.Value <= 0 && isRemoveCollisions.Value)
+			{
+				if (IsHost)
+					isRemoveCollisions.Value = false;
+				RevertIgnoredCollisions();
+			}
+		}
+
+		private void HostUpdate()
+		{
+			chaseComponent.SetMovementState(EnemyManager.instance.IsTimeStop());
+			_timeAlive += Time.deltaTime;
+			
+			
 			if (_timeAlive > 90 && !_isBossEnemy)
 			{
 				EnemyManager.instance.Despawn(this);
@@ -193,29 +242,22 @@ namespace Objects.Enemies
 				}
 			}
 			
-			if (_removeCollisionsTimer > 0)
+			if (removeCollisionsTimer.Value > 0)
 			{
-				_isRemoveCollisions = true;
-				_removeCollisionsTimer -= Time.deltaTime;
-			}
-			else if (_removeCollisionsTimer <= 0 && _isRemoveCollisions)
-			{
-				_isRemoveCollisions = false;
-				RevertIgnoredCollisions();
+				isRemoveCollisions.Value = true;
+				removeCollisionsTimer.Value -= Time.deltaTime;
 			}
 		}
 
 		private void Die()
 		{
-			if (_isDying) return;
-
+			if (_isDying.Value) return;
+			networkTransport.Interpolate = false;
 			capsuleCollider.enabled = false;
 			chaseComponent.SetMovementState(true);
-			_isDying = true;
-			gameResultData.MonstersKilled++;
-			EnemyDiedEvent.Invoke();
+			_isDying.Value = true;
+			RpcManager.instance.AddEnemyKillRpc(IsBoss());
 			dropOnDestroyComponent.CheckDrop();
-			AchievementManager.instance.OnEnemyKilled(this);
 			StartCoroutine(DieAnimation());
 		}
 
@@ -227,22 +269,37 @@ namespace Objects.Enemies
 			EnemyManager.instance.Despawn(this);
 		}
 
-		public bool IsDead()
-		{
-			return _isDying;
-		}
-
 		private void OnCollisionStay(Collision collisionInfo)
 		{
-			if (_isDying)
+			if (_isDying.Value)
 				return;
 
-			if (collisionInfo.gameObject.CompareTag("Player"))
+			if (IsHost) HostCollisionDetection(collisionInfo);
+			else ClientCollisionDetection(collisionInfo);
+		}
+
+		private void ClientCollisionDetection(Collision collisionInfo)
+		{
+			if (collisionInfo.gameObject.CompareTag("Player") && collisionInfo.gameObject.GetComponent<NetworkObject>()?.IsOwner == true)
 			{
 				var playerComponent = GameManager.instance.playerComponent;
 				Attack(playerComponent);
 			}
-			else if (collisionInfo.gameObject.CompareTag("Enemy") && _isRemoveCollisions)
+			else if (collisionInfo.gameObject.CompareTag("Enemy") && isRemoveCollisions.Value)
+			{
+				_ignoredEnemyColliders.Add(collisionInfo);
+				Physics.IgnoreCollision(collisionInfo.collider, GetComponent<CapsuleCollider>(), true);
+			}
+		}
+
+		private void HostCollisionDetection(Collision collisionInfo)
+		{
+			if (collisionInfo.gameObject.CompareTag("Player") && collisionInfo.gameObject.GetComponent<NetworkObject>()?.IsOwner == true)
+			{
+				var playerComponent = GameManager.instance.playerComponent;
+				Attack(playerComponent);
+			}
+			else if (collisionInfo.gameObject.CompareTag("Enemy") && isRemoveCollisions.Value)
 			{
 				_ignoredEnemyColliders.Add(collisionInfo);
 				Physics.IgnoreCollision(collisionInfo.collider, GetComponent<CapsuleCollider>(), true);
@@ -253,12 +310,12 @@ namespace Objects.Enemies
 				var isE5Lucy = GameData.IsCharacterWithRank(CharactersEnum.Lucy_BoC, CharacterRank.E5);
 				
 				var damageIncrease = isE5Lucy ? 2f : 1f;
-				enemyComponent.GetDamagableComponent().TakeDamageWithCooldown(new DamageResult{Damage = stats.damage * damageIncrease * PlayerStatsScaler.GetScaler().GetDamageIncreasePercentage() }, collisionInfo.gameObject, _damageCooldown, null);
+				enemyComponent.GetDamagableComponent().TakeDamageWithCooldown(new DamageResult{Damage = damage.Value * damageIncrease * PlayerStatsScaler.GetScaler().GetDamageIncreasePercentage() }, collisionInfo.gameObject, DamageCooldown, null);
 				
 				// Take damage from other enemies
 				var damageReduction = isE5Lucy ? 0.3f : 1f;
-				GetDamagableComponent().TakeDamageWithCooldown(new DamageResult{Damage = enemyComponent.GetDamage() * damageReduction}
-					, collisionInfo.gameObject, _damageCooldown, null);
+				GetDamagableComponent().TakeDamageWithCooldown(new DamageResult{Damage = damage.Value * damageReduction}
+					, collisionInfo.gameObject, DamageCooldown, null);
 			}
 		}
 
@@ -279,17 +336,17 @@ namespace Objects.Enemies
 
 		private void Attack(Player player)
 		{
-			if (_currentDamageCooldown > 0 || _isRemoveCollisions)
+			if (_currentDamageCooldown > 0 || isRemoveCollisions.Value)
 				return;
 
-			_currentDamageCooldown = _damageCooldown;
-			player.TakeDamage(stats.damage * (1 + Math.Max(_damageReduction, -1)));
+			_currentDamageCooldown = DamageCooldown;
+			player.TakeDamage(damage.Value * (1 + Math.Max(_damageReduction, -1)));
 		}
 
 		public void SetNoCollisions(float timer)
 		{
-			if (_removeCollisionsTimer < timer)
-				_removeCollisionsTimer = timer;
+			if (IsHost && removeCollisionsTimer.Value < timer)
+				removeCollisionsTimer.Value = timer;
 		}
 
 		public void MarkAsPlayerControlled(float? duration)
@@ -311,11 +368,6 @@ namespace Objects.Enemies
 			else
 				chaseComponent.SetTarget(playerTarget.gameObject);
 		}
-		
-		public void AddDamageReduction(float amount)
-		{
-			_damageReduction -= amount;
-		}
 
 		public Damageable GetDamagableComponent()
 		{
@@ -332,14 +384,14 @@ namespace Objects.Enemies
 			return capsuleCollider;
 		}
 
-		public float GetDamage()
-		{
-			return stats.damage;
-		}
-
 		public bool IsPlayerControlled()
 		{
 			return _isPlayerControlled;
+		}
+
+		public bool IsDying()
+		{
+			return _isDying.Value;
 		}
 	}
 }

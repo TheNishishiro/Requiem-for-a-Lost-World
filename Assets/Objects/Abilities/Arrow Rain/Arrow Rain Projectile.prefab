@@ -1,5 +1,97 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2472863041646030294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2922154144296807961}
+  - component: {fileID: 6015736762456784678}
+  - component: {fileID: 6898409984210790506}
+  m_Layer: 0
+  m_Name: Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2922154144296807961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2472863041646030294}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2895347279212440635}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6015736762456784678
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2472863041646030294}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1230096, y: 3.005751, z: 0.7777178}
+  m_Center: {x: -0.043129504, y: -1.2082075, z: 0.09707841}
+--- !u!114 &6898409984210790506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2472863041646030294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2eca4e17c7940f491a931937f6180ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  networkProjectile: {fileID: 7106396702237737788}
+  transformCache: {fileID: 2895347279212440635}
+  UseParticles: 1
+  ParticleSystem: {fileID: 864475544790997432}
+  disableHitbox: 0
+  hitbox: {fileID: 6015736762456784678}
+  spawningStage:
+    stageObject: {fileID: 0}
+    stageDuration: 0
+    particleSystems: []
+  flyingStage:
+    stageObject: {fileID: 5000459491395547195}
+    stageDuration: 0
+    particleSystems: []
+  dissipationStage:
+    stageObject: {fileID: 0}
+    stageDuration: 0
+    particleSystems: []
+  isLimitedHitBox: 1
+  hitBoxDuration: 0.1
+  hitBoxStart: 0.05
+  isChangeSizeOverLife: 0
+  increaseSizeUntilTime: 0
+  reduceSizeBeforeTime: 0
+  targetMinSize: {x: 0, y: 0, z: 0}
+  multiplyTargetByScale: 0
 --- !u!1 &5000459491395547195
 GameObject:
   m_ObjectHideFlags: 0
@@ -52,6 +144,8 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -182,7 +276,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
   randomSeed: 0
@@ -9728,6 +9822,8 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9793,8 +9889,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2895347279212440635}
-  - component: {fileID: 4090098535650745555}
-  - component: {fileID: -3722947920499062232}
+  - component: {fileID: 3248696869294461770}
+  - component: {fileID: 2731906442395085800}
+  - component: {fileID: 7106396702237737788}
   m_Layer: 0
   m_Name: Arrow Rain Projectile
   m_TagString: Untagged
@@ -9816,30 +9913,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3206129587893255519}
+  - {fileID: 2922154144296807961}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4090098535650745555
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6692321715920914300}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.1230096, y: 3.005751, z: 0.7777178}
-  m_Center: {x: -0.043129504, y: -1.2082075, z: 0.09707841}
---- !u!114 &-3722947920499062232
+--- !u!114 &3248696869294461770
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9848,22 +9925,61 @@ MonoBehaviour:
   m_GameObject: {fileID: 6692321715920914300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2eca4e17c7940f491a931937f6180ea, type: 3}
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  State: 0
-  UseParticles: 1
-  ParticleSystem: {fileID: 864475544790997432}
-  hitbox: {fileID: 4090098535650745555}
-  spawningStage:
-    stageObject: {fileID: 0}
-    stageDuration: 0
-  flyingStage:
-    stageObject: {fileID: 5000459491395547195}
-    stageDuration: 0
-  dissipationStage:
-    stageObject: {fileID: 0}
-    stageDuration: 0
-  isLimitedHitBox: 1
-  hitBoxDuration: 0.1
-  hitBoxStart: 0.05
+  GlobalObjectIdHash: 2314750412
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &2731906442395085800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6692321715920914300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a3bb07b8ca27642ae2b7d0412decf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 0
+  SyncRotAngleY: 0
+  SyncRotAngleZ: 0
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 0
+  SlerpPosition: 0
+--- !u!114 &7106396702237737788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6692321715920914300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5cf1d06af1445abe9665ad9fd5f9f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 6898409984210790506}
+  networkObject: {fileID: 3248696869294461770}
+  networkTransport: {fileID: 2731906442395085800}

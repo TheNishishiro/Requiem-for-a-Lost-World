@@ -1,4 +1,5 @@
-﻿using Objects.Players.Scripts;
+﻿using Managers;
+using Objects.Players.Scripts;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -22,7 +23,6 @@ namespace StarterAssets
 		public float RotationSpeed = 1.0f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
-		[SerializeField] public PlayerStatsComponent PlayerStatsComponent;
 
 		[Space(10)]
 		[Tooltip("The height the player can jump")]
@@ -161,6 +161,8 @@ namespace StarterAssets
 
 		private void Move()
 		{
+			if (GameManager.instance.playerStatsComponent.IsDead()) return;
+			
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			float targetSpeed = PlayerStatsScaler.GetScaler().GetMovementSpeed();
 

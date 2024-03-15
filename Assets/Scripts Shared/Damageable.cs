@@ -10,6 +10,7 @@ using Managers;
 using NaughtyAttributes;
 using Objects.Characters;
 using Objects.Stage;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -19,7 +20,7 @@ using Random = UnityEngine.Random;
 
 namespace DefaultNamespace
 {
-	public class Damageable : MonoBehaviour, IDamageable
+	public class Damageable : NetworkBehaviour, IDamageable
 	{
 		[SerializeField] public float Health;
 		[SerializeField] private GameResultData gameResultData;
@@ -191,8 +192,11 @@ namespace DefaultNamespace
 			var damageMessage = calculatedDamage.ToString("0");
 			if (damageResult.IsCriticalHit)
 				damageMessage += "!";
-			MessageManager.instance.PostMessage(damageMessage, _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(weaponBase?.element));
-			Health -= calculatedDamage;
+			if (IsHost || !IsSpawned)
+				Health -= calculatedDamage;
+			else
+				RpcManager.instance.DealDamageToEnemyRpc(this, calculatedDamage);
+			MessageManager.instance.PostMessageRpc(damageMessage, _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(weaponBase?.element));
 			DamageDealtEvent.Invoke(this, calculatedDamage, isRecursion);
 			if (IsDestroyed())
 				weaponBase?.OnEnemyKilled();
@@ -279,7 +283,7 @@ namespace DefaultNamespace
 
 		public bool IsDestroyed()
 		{
-			return Health <= 0;
+			return (IsHost || !IsSpawned) && Health <= 0;
 		}
 		
 		public void SetVulnerable(float time, float percentage)

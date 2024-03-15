@@ -44,11 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868074b54ca74ef981838aa6074aa345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 1
   spawnPrefab: {fileID: 7276909831825634127, guid: b52fc777c250b1346af436bba9576b12,
     type: 3}
+  WeaponId: 10
   Name: Ground Slash
   Description: Send a slash cutting through the ground ahead of you
+  chanceToAppear: 0.7
   Icon: {fileID: 21300000, guid: 8bccdcc0f0b7f3d4bb9cfdc845e734ca, type: 3}
+  unlockOnAchievement: 0
+  requiredAchievement: 0
   element: 9
   weaponStats:
     Damage: 5
@@ -70,6 +75,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: db0d1924ff28bde4f99b2b1c97858ba1, type: 2}
   - {fileID: 11400000, guid: c57a96c04d5b7a7428a8327ffe287ee3, type: 2}
@@ -81,9 +87,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a0c360b030060824cb65796d51e8a2ed, type: 2}
   - {fileID: 11400000, guid: 3a9a5ef91eeda90479197e280d845483, type: 2}
   - {fileID: 11400000, guid: 27ac9a7d88e45b4448e183ab86401a76, type: 2}
-  chanceToAppear: 0.7
   isSkill: 0
   capacity: 50
   maxCapacity: 50
   isDualStrike: 0
-  isShatteredEarth: 0

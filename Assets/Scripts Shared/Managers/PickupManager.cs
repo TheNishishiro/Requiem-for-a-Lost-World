@@ -6,13 +6,14 @@ using DefaultNamespace;
 using Interfaces;
 using Objects.Drops;
 using Objects.Drops.ExpDrop;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
 namespace Managers
 {
-	public class PickupManager : MonoBehaviour
+	public class PickupManager : NetworkBehaviour
 	{
 		public static PickupManager instance;
 		[SerializeField] int mergingThreshold;
@@ -23,6 +24,7 @@ namespace Managers
 		private ObjectPool<Pickup> _objectPool;
 		private List<Pickup> _expGem = new ();
 		[SerializeField] private GameObject expShardPrefab;
+		[SerializeField] private GameObject chestPrefab;
 
 		private GameObject _objectPrefab;
 		private int pickupAmount;
@@ -85,13 +87,9 @@ namespace Managers
 			pickupPosition = position;
 			switch (pickupObject.PickupType)
 			{
-				case PickupEnum.Experience when _expGem.Count < 400:
-					_shardPool.Get();
-					break;
 				case PickupEnum.Experience:
 				{
-					var expGem = _expGem.OrderBy(_ => Random.value).First().GetExpObject();
-					expGem.AddExp(amount);
+					RequestClientSpawnPickupRpc(pickupAmount, pickupPosition);
 					break;
 				}
 				case PickupEnum.Gold:
@@ -100,12 +98,41 @@ namespace Managers
 					_objectPrefab = pickupObject.GetPickUpObject();
 					_objectPool.Get();
 					break;
+				case PickupEnum.Chest:
+					var networkObject = Instantiate(chestPrefab, position, Quaternion.identity).GetComponent<NetworkObject>();
+					networkObject.Spawn();
+					break;
 				default:
 				{
 					var spawnedObject = SpawnManager.instance.SpawnObject(position, pickupObject.gameObject).GetComponent<Pickup>();
 					spawnedObject.SetAmount(amount);
 					break;
 				}
+			}
+		}
+
+		[Rpc(SendTo.Everyone)]
+		public void RequestClientSpawnPickupRpc(int amount, Vector3 position)
+		{
+			if (GameManager.instance.playerStatsComponent.IsDead()) return;
+			
+			pickupAmount = amount;
+			pickupPosition = position;
+			if (_expGem.Count < 400)
+				_shardPool.Get();
+			else
+			{
+				var expGem = _expGem.OrderBy(_ => Random.value).First().GetExpObject();
+				expGem.AddExp(amount);
+			}
+		}
+
+		[Rpc(SendTo.Server)]
+		public void RequestPickupDespawnRpc(NetworkObjectReference networkObjectReference)
+		{
+			if (networkObjectReference.TryGet(out var networkObject))
+			{
+				Destroy(networkObject.gameObject);
 			}
 		}
 
@@ -120,6 +147,9 @@ namespace Managers
 				case PickupEnum.Gem:
 				case PickupEnum.HealingOrb:
 					_objectPool.Release(pickupObject);
+					break;
+				case PickupEnum.Chest:
+					RequestPickupDespawnRpc(pickupObject.GetComponent<NetworkObject>());
 					break;
 				default:
 					Destroy(pickupObject.gameObject);

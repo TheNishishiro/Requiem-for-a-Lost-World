@@ -31,6 +31,11 @@ namespace Objects.Stage
 			return CharacterListManager.instance?.GetActiveCharacter()?.Avatar;
 		}
 		
+		public static Sprite GetCharacterAvatar(CharactersEnum characterEnum)
+		{
+			return CharacterListManager.instance?.GetCharacter(characterEnum)?.Avatar;
+		}
+		
 		public static Color? GetPlayerColorTheme()
 		{
 			return CharacterListManager.instance?.GetActiveCharacter()?.ColorTheme;
@@ -79,6 +84,11 @@ namespace Objects.Stage
 		public static Sprite GetPlayerSprite()
 		{
 			return CharacterListManager.instance?.GetActiveCharacter()?.CharacterSprite;
+		}
+		
+		public static Sprite GetCharacterSprite(CharactersEnum characterEnum)
+		{
+			return CharacterListManager.instance?.GetCharacter(characterEnum)?.CharacterSprite;
 		}
 
 		public static PlayerStats GetPlayerStartingStats()

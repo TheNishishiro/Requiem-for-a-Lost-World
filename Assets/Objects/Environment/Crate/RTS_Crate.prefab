@@ -49,6 +49,8 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -96,6 +98,7 @@ GameObject:
   - component: {fileID: 4278096970193547020}
   - component: {fileID: 4860405999945656698}
   - component: {fileID: -1919017562126110567}
+  - component: {fileID: 8868516942053931024}
   - component: {fileID: -1676600751553829303}
   - component: {fileID: 8864211574758387995}
   - component: {fileID: 1608978063}
@@ -140,6 +143,8 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -200,6 +205,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25d500119534af682349c1a76cd4464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8868516942053931024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6262703081192922951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3232372736
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &-1676600751553829303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,6 +242,19 @@ MonoBehaviour:
   gameResultData: {fileID: 11400000, guid: cb99eac292bd9d54aac189cbaa40dca7, type: 2}
   targetPoint: {fileID: 0}
   takeDamageSound: {fileID: 8300000, guid: 477e022444f09cb4eb750e9354d2b6c0, type: 3}
+  canBeAfflictedWithElements: 0
+  chaseComponent: {fileID: 0}
+  fireParticles: {fileID: 0}
+  lightningParticles: {fileID: 0}
+  iceParticles: {fileID: 0}
+  lightParticles: {fileID: 0}
+  cosmicParticles: {fileID: 0}
+  earthParticles: {fileID: 0}
+  meltParticles: {fileID: 0}
+  explosionParticles: {fileID: 0}
+  swirlParticles: {fileID: 0}
+  shockParticles: {fileID: 0}
+  erodeParticles: {fileID: 0}
   vulnerabilityTimer: 0
   vulnerabilityPercentage: 0
   additionalDamageTimer: 0

@@ -15,18 +15,20 @@ namespace Objects.Abilities.Meteor
 {
 	public class MeteorWeapon : PoolableWeapon<MeteorProjectile>
 	{
-		protected override bool ProjectileSpawn(MeteorProjectile projectile)
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
 			var position1 = transform.position;
 			var spawnPosition = new Vector3(position1.x, position1.y + 5.0f, position1.z);
 			var enemy = EnemyManager.instance.GetRandomEnemy();
 			if (enemy == null)
-				return false;
+			{
+				networkProjectile.Despawn(WeaponId);
+				return;
+			}
 			
 			var position = enemy.transform.position;
-			projectile.transform.position = spawnPosition;
-			projectile.SetParentWeapon(this);
-			projectile.SetDirection(position.x, position.y, position.z);
+			networkProjectile.Initialize(this, spawnPosition);
+			networkProjectile.GetProjectile<MeteorProjectile>().SetDirection(position.x, position.y, position.z);
 
 			if (GameData.IsCharacterWithRank(CharactersEnum.David_BoF, CharacterRank.E2))
 			{
@@ -38,8 +40,6 @@ namespace Objects.Abilities.Meteor
 					GameManager.instance.playerComponent.TakeDamage(2, true, true);
 				}
 			}
-			
-			return true;
 		}
 
 		protected override int GetAttackCount()

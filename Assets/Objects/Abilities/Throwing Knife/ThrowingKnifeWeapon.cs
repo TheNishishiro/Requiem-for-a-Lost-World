@@ -11,12 +11,11 @@ namespace Objects.Abilities.Throwing_Knife
 {
 	public class ThrowingKnifeWeapon : PoolableWeapon<ThrowingKnifeProjectile>
 	{
-		protected override bool ProjectileSpawn(ThrowingKnifeProjectile projectile)
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
-			projectile.transform.position = Utilities.GetRandomInAreaFreezeParameter(transform.position, 0.2f, isFreezeZ: true);
-			projectile.SetDirection(transform.forward);
-			projectile.SetParentWeapon(this);
-			return true;
+			var position = Utilities.GetRandomInAreaFreezeParameter(transform.position, 0.2f, isFreezeZ: true);
+			networkProjectile.Initialize(this, position);
+			networkProjectile.GetProjectile<ThrowingKnifeProjectile>().SetDirection(transform.forward);
 		}
 	}
 }

@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DefaultNamespace.Data.Statuses;
 using Events.Handlers;
 using Events.Scripts;
+using Managers;
 using Objects.Abilities;
 using Objects.Characters;
 using Objects.Items;
@@ -25,7 +27,13 @@ namespace Objects.Players.Scripts
 		private Coroutine _statBoostCoroutine;
 		private float _lastMoveSpeedIncrease;
 		private float _lastAttackIncrease;
-		
+		private bool _isDead;
+
+		private void Start()
+		{
+			StatusEffectManager.instance.AddOrRemoveEffect(StatusEffectType.Revive, GetStats().Revives);
+		}
+
 		public void Set(PlayerStats playerStats)
 		{
 			this.playerStats ??= new PlayerStats();
@@ -87,9 +95,20 @@ namespace Objects.Players.Scripts
 			return Math.Abs((playerStats?.Health - playerStats?.HealthMax).GetValueOrDefault()) < 0.01f;
 		}
 
-		public bool IsDead()
+		public bool CanDie()
 		{
 			return playerStats?.Health <= 0 && !IsInvincible;
+		}
+
+		public void ChangeDeathState(bool isDead)
+		{
+			_isDead = isDead;
+			GameManager.instance.playerMpComponent.SetCollider(isDead);
+		}
+		
+		public bool IsDead()
+		{
+			return _isDead;
 		}
 
 		public void ApplyRegeneration()

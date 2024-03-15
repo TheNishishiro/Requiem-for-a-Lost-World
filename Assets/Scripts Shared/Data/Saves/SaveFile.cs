@@ -241,6 +241,7 @@ namespace DefaultNamespace.Data
 		public int Pity;
 		public DifficultyEnum SelectedDifficulty;
 		public CharactersEnum? SelectedCharacterId;
+		public string Nickname;
 		
 		public SaveData(){}
 		
@@ -265,6 +266,5 @@ namespace DefaultNamespace.Data
 			BossKills = saveFile.BossKills;
 			SelectedDifficulty = saveFile.SelectedDifficulty;
 		}
-
 	}
 }

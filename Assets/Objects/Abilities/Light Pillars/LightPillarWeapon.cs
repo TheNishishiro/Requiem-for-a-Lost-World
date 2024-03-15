@@ -6,14 +6,13 @@ namespace Objects.Abilities.Light_Pillars
     public class LightPillarWeapon : PoolableWeapon<LightPillarProjectile>
     {
         public bool IsDivineBarrage { get; set; }
-        
-        protected override bool ProjectileSpawn(LightPillarProjectile projectile)
+
+        public override void SetupProjectile(NetworkProjectile networkProjectile)
         {
-            projectile.transform.position = Utilities.GetPointOnColliderSurface(
-                Utilities.GetRandomInArea(transform.position, 3f), transform
-                );
-            projectile.SetParentWeapon(this);
-            return true;
+            var position = Utilities.GetPointOnColliderSurface(
+                Utilities.GetRandomInArea(transform.position, 4f), transform
+            );
+            networkProjectile.Initialize(this, position);
         }
 
         protected override void OnLevelUp()

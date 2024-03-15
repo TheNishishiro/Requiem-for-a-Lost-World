@@ -18,19 +18,22 @@ public class FireBallWeapon : PoolableWeapon<FireBallProjectile>
     [SerializeField] private AudioClip fireballSpawnSound;
     private int enemiesKilled = 0;
 
-    protected override bool ProjectileSpawn(FireBallProjectile projectile)
+    public override void SetupProjectile(NetworkProjectile networkProjectile)
     {
         var closestTarget = Utilities.FindClosestEnemy(transform.position, EnemyManager.instance.GetActiveEnemies(), out var distanceToClosest);
         if (closestTarget is null)
-            return false;
-            
-        var position = closestTarget.TargetPoint.position;
-        projectile.transform.position = transform.position;
-        projectile.SetParentWeapon(this);
-        projectile.SetDirection(position.x, position.y, position.z);
-        return true;
-    }
+        {
+            networkProjectile.Despawn(WeaponId);
+            return;
+        }
 
+        var position = closestTarget.TargetPoint.position;
+        
+        networkProjectile.Initialize(this, transform.position);
+        networkProjectile.GetProjectile<FireBallProjectile>().SetDirection(position.x, position.y, position.z);
+        networkProjectile.projectile.gameObject.SetActive(true);
+    }
+    
     public override void OnEnemyKilled()
     {
         if (!GameData.IsCharacterWithRank(CharactersEnum.Chitose, CharacterRank.E2)) return;

@@ -5,18 +5,17 @@ using NaughtyAttributes;
 using Objects.Drops.ExpDrop;
 using Objects.Players.Scripts;
 using Objects.Stage;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Objects.Drops
 {
-	public class PickupBase : MonoBehaviour
+	public class PickupBase : NetworkBehaviour
 	{
 		[SerializeField] protected PickupObject pickUpObject;
 		[SerializeField] protected PickupEnum PickupEnum;
 		[SerializeField] public BoxCollider boxCollider;
-		private PlayerStatsComponent _playerStatsComponent;
-		private Player _player;
 		private Transform _cachedTransform;
 		protected bool IsFollowingPlayer;
 		private const float Speed = 20f;
@@ -28,8 +27,6 @@ namespace Objects.Drops
 
 		protected void Init()
 		{
-			_player = GameManager.instance.playerComponent;
-			_playerStatsComponent = _player.playerStatsComponent;
 			_cachedTransform = transform;
 		}
 
@@ -49,24 +46,20 @@ namespace Objects.Drops
 		
 			if (!IsFollowingPlayer)
 			{
-				var distance = Vector3.Distance(_player.playerTransform.position, _cachedTransform.position);
+				var distance = Vector3.Distance(GameManager.instance.PlayerTransform.position, _cachedTransform.position);
 				if (distance < PlayerStatsScaler.GetScaler().GetMagnetSize() * GameData.GetCurrentDifficulty().ItemAttractionModifier)
 					IsFollowingPlayer = true;
 				return;
 			}
 		
-			_cachedTransform.position = Vector3.MoveTowards(_cachedTransform.position, _player.playerTransform.position, Speed * Time.deltaTime);
+			_cachedTransform.position = Vector3.MoveTowards(_cachedTransform.position, GameManager.instance.PlayerTransform.position, Speed * Time.deltaTime);
 		}
 		
 		protected void OnCollision(Collider col)
 		{
-			if (col.gameObject.CompareTag("Player"))
+			if (col.gameObject.CompareTag("Player") && col.gameObject.GetComponent<NetworkObject>()?.IsOwner == true)
 			{
-				var character = col.GetComponent<Player>();
-				if (character is null)
-					return;
-				
-				pickUpObject?.OnPickUp(character);
+				pickUpObject?.OnPickUp(GameManager.instance.playerComponent);
 				AchievementManager.instance.OnPickupCollected(PickupEnum);
 				Destroy();
 			}

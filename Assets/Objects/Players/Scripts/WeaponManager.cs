@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Data.ToggleableEntries;
@@ -5,63 +6,85 @@ using DefaultNamespace.BaseClasses;
 using DefaultNamespace.Data;
 using Interfaces;
 using Managers;
+using Objects;
 using Objects.Abilities;
 using Objects.Items;
+using Objects.Players.Containers;
 using Objects.Players.Scripts;
 using Objects.Stage;
 using UI.Labels.InGame.LevelUpScreen;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 using Weapons;
 
-public class WeaponManager : MonoBehaviour
+public class WeaponManager : NetworkBehaviour
 {
     public static WeaponManager instance;
     [SerializeField] private WeaponContainer weapons;
     [SerializeField] private ItemContainer items;
-    [SerializeField] private Transform weaponContainer;
+    [SerializeField] private PlayerStatsComponent _playerStatsComponent;
+    private Transform _weaponContainer;
+    public Dictionary<WeaponEnum, GameObject> weaponProjectilePrefabs;
     private List<WeaponToggleableEntry> availableWeapons;
     private List<ItemToggleableEntry> availableItems;
     private List<WeaponBase> _unlockedWeapons;
     private List<ItemBase> _unlockedItems;
-    private PlayerStatsComponent _playerStatsComponent;
     public int maxWeaponCount = 6;
     public int maxItemCount = 6;
     private int _weaponsUpgraded;
     private int _itemsUpgraded;
     private SaveFile _saveFile;
+    private bool _isInitialized;
 
-    private void Awake()
+    public void Start()
     {
         if (instance == null)
         {
             instance = this;
         }
+        
+        Init();
+    }
 
-        _saveFile = FindObjectOfType<SaveFile>();
-        _playerStatsComponent = FindObjectOfType<PlayerStatsComponent>();
+    public void Init()
+    {
+        if (_isInitialized) return;
+        _isInitialized = true;
+        _saveFile = FindAnyObjectByType<SaveFile>();
         _unlockedWeapons = new List<WeaponBase>();
         _unlockedItems = new List<ItemBase>();
+        weaponProjectilePrefabs = new Dictionary<WeaponEnum, GameObject>();
 
         availableWeapons = weapons.GetWeapons();
-        availableItems = items.GetItems();
+        foreach (var availableWeapon in availableWeapons)
+        {
+            weaponProjectilePrefabs.TryAdd(availableWeapon.weaponBase.WeaponId, availableWeapon.weaponBase.spawnPrefab);
+        }
         
+        availableItems = items.GetItems();
+    }
+    
+    public void AddStartingWeapon(Transform weaponContainer)
+    {
+        _weaponContainer = weaponContainer;
         var characterStartingWeapon = GameData.GetPlayerCharacterStartingWeapon() ?? availableWeapons.FirstOrDefault()?.weaponBase;
         AddWeapon(characterStartingWeapon, 1);
     }
 
     public void AddWeapon(WeaponBase weapon, int rarity)
     {
-        var weaponGameObject = Instantiate(weapon, weaponContainer);
+        var weaponGameObject = Instantiate(weapon, _weaponContainer);
         weaponGameObject.ApplyRarity(rarity);
         availableWeapons.RemoveAll(x => x.weaponBase == weapon);
         _unlockedWeapons.Add(weaponGameObject);
+        weaponGameObject.ActivateWeapon();
         AchievementManager.instance.OnWeaponUnlocked(weapon, _unlockedWeapons.Count, rarity);
     }
 
     public void AddItem(ItemBase item, int rarity)
     {
-        var itemGameObject = Instantiate(item, weaponContainer);
+        var itemGameObject = Instantiate(item, _weaponContainer);
         availableItems.RemoveAll(x => x.itemBase == item);
         itemGameObject.ApplyRarity(rarity);
         _playerStatsComponent.Apply(itemGameObject.ItemStats, 1);
@@ -158,5 +181,10 @@ public class WeaponManager : MonoBehaviour
         {
             weapon.ReduceCooldown(reductionPercentage);
         }
+    }
+
+    public WeaponBase GetUnlockedWeapon(WeaponEnum weaponId)
+    {
+        return _unlockedWeapons.FirstOrDefault(x => x.WeaponId == weaponId);
     }
 }

@@ -62,6 +62,8 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4930,6 +4932,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9787,6 +9791,8 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9901,6 +9907,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9976,6 +9984,8 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10143,6 +10153,8 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10287,6 +10299,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10410,21 +10424,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ccc4bbbb4084f379323cbcac0117f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  State: 0
+  transformCache: {fileID: 0}
   UseParticles: 1
   ParticleSystem: {fileID: 5837978072324516343}
+  disableHitbox: 0
   hitbox: {fileID: 1216243815590347225}
   spawningStage:
     stageObject: {fileID: 0}
     stageDuration: 0
+    particleSystems: []
   flyingStage:
     stageObject: {fileID: 2376544417031659138}
     stageDuration: 0
+    particleSystems: []
   dissipationStage:
     stageObject: {fileID: 0}
     stageDuration: 0
+    particleSystems: []
   isLimitedHitBox: 0
   hitBoxDuration: 0
   hitBoxStart: 0
+  isChangeSizeOverLife: 0
+  increaseSizeUntilTime: 0
+  reduceSizeBeforeTime: 0
+  targetMinSize: {x: 0, y: 0, z: 0}
+  multiplyTargetByScale: 0
 --- !u!1 &8758038519619592498
 GameObject:
   m_ObjectHideFlags: 0
@@ -10475,6 +10500,8 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

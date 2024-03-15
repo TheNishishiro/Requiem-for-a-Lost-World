@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Objects.Players;
 using Objects.Players.Scripts;
 using Objects.Stage;
 using Unity.Mathematics;
+using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,11 +19,13 @@ public class Player : MonoBehaviour
 	[HideInInspector] public PlayerVfxComponent playerVfxComponent;
 	[HideInInspector] public Transform playerTransform;
 	[SerializeField] public GameResultData gameResultData;
+	[SerializeField] public GameObject reviveCardPrefab;
+	private Queue<ulong> clientCards = new ();
+	
 	public PlayerCharacterState CharacterState { get; private set; }
 	
 	private void Start()
 	{
-		tag = "Player";
 		levelComponent = GetComponent<LevelComponent>();
 		healthComponent = GetComponent<HealthComponent>();
 		playerStatsComponent = GetComponent<PlayerStatsComponent>();
@@ -61,5 +66,21 @@ public class Player : MonoBehaviour
 	public void SetCharacterState(PlayerCharacterState characterState)
 	{
 		CharacterState = characterState;
+	}
+
+	public void AddPlayerCard(ulong clientId)
+	{
+		if (!clientCards.Contains(clientId))
+			clientCards.Enqueue(clientId);
+	}
+
+	public ulong GetActivePlayerCard()
+	{
+		return clientCards.TryDequeue(out var result) ? result : ulong.MaxValue;
+	}
+
+	public bool HasPlayerCard()
+	{
+		return clientCards.Count > 0;
 	}
 }

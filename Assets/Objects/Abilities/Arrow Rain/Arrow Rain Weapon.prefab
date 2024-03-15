@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9fd982aec04343a3f9a9b79dea45e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 1
   spawnPrefab: {fileID: 6692321715920914300, guid: 78dc00ba3187e9d4e9765aea71ddc7cc,
     type: 3}
+  WeaponId: 1
   Name: Make it rain!
   Description: Rain arrows on a closest target, prioritizes high hp targets
   chanceToAppear: 0.9
@@ -73,6 +75,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 94d620dd1014d664d994c21520908f95, type: 2}
   - {fileID: 11400000, guid: 5edcf7918733ea246829238b085b0c4d, type: 2}

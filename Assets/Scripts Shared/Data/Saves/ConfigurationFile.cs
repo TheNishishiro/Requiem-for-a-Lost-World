@@ -24,25 +24,54 @@ namespace DefaultNamespace.Data
 		public int RenderDistance { get; set; }
 		public bool Use3dGrass { get; set; }
 		public int ObjectDensity { get; set; }
+		public int TextureQuality { get; set; }
 		public float Volume { get; set; }
+		public string Username { get; set; }
+		public bool RenderCoopProjectiles { get; set; }
 
 		public ConfigurationFile Default()
 		{
-			Vsync = true;
-			Quality = 4;
-			GrassDensity = 3;
-			GrassRenderDistance = 3;
-			RenderScaling = 2;
-			ShadowQuality = 5;
-			LodLevel = 2;
-			AntiAliasing = 4;
-			IsDiscordEnabled = true;
-			PresetIndex = 4;
-			ConfigurationVersion = 0;
-			RenderDistance = 1;
-			Use3dGrass = false;
-			ObjectDensity = 1;
-			Volume = 1;
+			if (Application.platform == RuntimePlatform.Android)
+			{
+				Vsync = true;
+				Quality = 1;
+				GrassDensity = 1;
+				GrassRenderDistance = 1;
+				RenderScaling = 2;
+				ShadowQuality = 0;
+				LodLevel = 2;
+				AntiAliasing = 0;
+				IsDiscordEnabled = false;
+				PresetIndex = 1;
+				RenderDistance = 1;
+				Use3dGrass = false;
+				ObjectDensity = 1;
+				Volume = 1;
+				TextureQuality = 2;
+				ConfigurationVersion = 8;
+				RenderCoopProjectiles = true;
+			}
+			else
+			{
+				Vsync = true;
+				Quality = 4;
+				GrassDensity = 3;
+				GrassRenderDistance = 3;
+				RenderScaling = 4;
+				ShadowQuality = 5;
+				LodLevel = 4;
+				AntiAliasing = 4;
+				IsDiscordEnabled = false;
+				PresetIndex = 4;
+				ConfigurationVersion = 0;
+				RenderDistance = 1;
+				Use3dGrass = false;
+				ObjectDensity = 1;
+				Volume = 1;
+				TextureQuality = 4;
+				RenderCoopProjectiles = false;
+			}
+
 			return Update();
 		}
 
@@ -86,6 +115,22 @@ namespace DefaultNamespace.Data
 			{
 				Volume = 1;
 				ConfigurationVersion = 6;
+			}
+			if (ConfigurationVersion == 6)
+			{
+				TextureQuality = Quality switch
+				{
+					0 => 2,
+					1 => 3,
+					_ => 4
+				};
+
+				ConfigurationVersion = 7;
+			}
+			if (ConfigurationVersion == 7)
+			{
+				RenderCoopProjectiles = true;
+				ConfigurationVersion = 8;
 			}
 
 			return this;

@@ -6,7 +6,7 @@ QualitySettings:
   serializedVersion: 5
   m_CurrentQuality: 3
   m_QualitySettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     name: Performant
     pixelLightCount: 0
     shadows: 0
@@ -28,8 +28,11 @@ QualitySettings:
     realtimeReflectionProbes: 0
     billboardsFaceCameraPosition: 0
     useLegacyDetailDistribution: 1
+    adaptiveVsync: 0
     vSyncCount: 0
     realtimeGICPUUsage: 25
+    adaptiveVsyncExtraA: 0
+    adaptiveVsyncExtraB: 0
     lodBias: 0.4
     maximumLODLevel: 0
     enableLODCrossFade: 1
@@ -56,7 +59,7 @@ QualitySettings:
     terrainFadeLength: 5
     terrainMaxTrees: 50
     excludedTargetPlatforms: []
-  - serializedVersion: 3
+  - serializedVersion: 4
     name: Balanced
     pixelLightCount: 1
     shadows: 1
@@ -78,8 +81,11 @@ QualitySettings:
     realtimeReflectionProbes: 0
     billboardsFaceCameraPosition: 0
     useLegacyDetailDistribution: 1
+    adaptiveVsync: 0
     vSyncCount: 1
     realtimeGICPUUsage: 25
+    adaptiveVsyncExtraA: 0
+    adaptiveVsyncExtraB: 0
     lodBias: 1
     maximumLODLevel: 0
     enableLODCrossFade: 1
@@ -106,7 +112,7 @@ QualitySettings:
     terrainFadeLength: 5
     terrainMaxTrees: 50
     excludedTargetPlatforms: []
-  - serializedVersion: 3
+  - serializedVersion: 4
     name: High Fidelity
     pixelLightCount: 2
     shadows: 2
@@ -128,8 +134,11 @@ QualitySettings:
     realtimeReflectionProbes: 1
     billboardsFaceCameraPosition: 1
     useLegacyDetailDistribution: 1
+    adaptiveVsync: 0
     vSyncCount: 1
     realtimeGICPUUsage: 25
+    adaptiveVsyncExtraA: 0
+    adaptiveVsyncExtraB: 0
     lodBias: 2
     maximumLODLevel: 0
     enableLODCrossFade: 1
@@ -156,14 +165,14 @@ QualitySettings:
     terrainFadeLength: 5
     terrainMaxTrees: 50
     excludedTargetPlatforms: []
-  - serializedVersion: 3
+  - serializedVersion: 4
     name: Custom
     pixelLightCount: 2
     shadows: 2
-    shadowResolution: 1
+    shadowResolution: 3
     shadowProjection: 1
-    shadowCascades: 2
-    shadowDistance: 40
+    shadowCascades: 4
+    shadowDistance: 150
     shadowNearPlaneOffset: 3
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
@@ -175,12 +184,15 @@ QualitySettings:
     antiAliasing: 4
     softParticles: 0
     softVegetation: 1
-    realtimeReflectionProbes: 0
+    realtimeReflectionProbes: 1
     billboardsFaceCameraPosition: 1
     useLegacyDetailDistribution: 1
+    adaptiveVsync: 0
     vSyncCount: 1
     realtimeGICPUUsage: 25
-    lodBias: 1
+    adaptiveVsyncExtraA: 0
+    adaptiveVsyncExtraB: 0
+    lodBias: 3
     maximumLODLevel: 0
     enableLODCrossFade: 0
     streamingMipmapsActive: 0
@@ -209,18 +221,4 @@ QualitySettings:
   m_TextureMipmapLimitGroupNames: []
   m_PerPlatformDefaultQuality:
     Android: 3
-    CloudRendering: 2
-    GameCoreScarlett: 2
-    GameCoreXboxOne: 2
-    Lumin: 2
-    Nintendo Switch: 2
-    PS4: 2
-    PS5: 2
-    Server: 0
-    Stadia: 2
     Standalone: 3
-    WebGL: 1
-    Windows Store Apps: 2
-    XboxOne: 2
-    iPhone: 1
-    tvOS: 1

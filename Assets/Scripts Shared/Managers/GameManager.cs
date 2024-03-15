@@ -9,28 +9,54 @@ using Objects.Characters;
 using Objects.Players.PermUpgrades;
 using Objects.Players.Scripts;
 using Objects.Stage;
+using UI.Labels.InGame;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityTemplateProjects;
 
 namespace Managers
 {
 	public class GameManager : MonoBehaviour
-	{
+	{		
+		[SerializeField] private GameResultData gameResultData;
+		[SerializeField] public ExperienceBar reviveTimerBar;
 		public static GameManager instance;
-		[SerializeField] public PlayerStatsComponent playerStatsComponent;
+		[HideInInspector] public MultiplayerPlayer playerMpComponent;
+		private Transform _playerTransform;
+		public Transform PlayerTransform
+		{
+			get
+			{
+				if (_playerTransform == null && NetworkManager.Singleton && NetworkManager.Singleton.LocalClient != null && NetworkManager.Singleton.LocalClient.PlayerObject)
+					_playerTransform = NetworkManager.Singleton.LocalClient.PlayerObject.transform;
+				return _playerTransform;
+			}
+		}
+
+		private bool _isExiting;
+		
 		[SerializeField] public Player playerComponent;
+		[HideInInspector] public PlayerVfxComponent playerVfxComponent;
+		[SerializeField] public PlayerStatsComponent playerStatsComponent;
 		[SerializeField] private SpecialBarManager specialBarManager;
 		[SerializeField] private DifficultyContainer difficultyContainer;
-		
+		[HideInInspector] public SaveFile saveFile;
 
-		private void Awake()
+		public void Awake()
 		{
 			if (instance == null)
 			{
 				instance = this;
 			}
 
-			var saveFile = FindFirstObjectByType<SaveFile>();
+			Initialize();
+		}
+		
+		private void Initialize()
+		{
+			saveFile = FindFirstObjectByType<SaveFile>();
 			GameData.SetCurrentDifficultyData(difficultyContainer.GetData(saveFile.SelectedDifficulty));
 			playerStatsComponent.Set(GameData.GetPlayerStartingStats());
             if (GameData.GetPlayerCharacterData()?.UseSpecialBar == true)
@@ -52,6 +78,27 @@ namespace Managers
 		public static bool IsCharacterState(PlayerCharacterState characterState)
 		{
 			return instance?.playerComponent?.CharacterState == characterState;
+		}
+
+		public void BackToMainMenu()
+		{
+			BackToMainMenu(gameResultData.IsWin);
+		}
+		
+		public void BackToMainMenu(bool isWin)
+		{
+			if (_isExiting) return;
+			
+			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.None;
+			_isExiting = true;
+			gameResultData.IsGameEnd = true;
+			gameResultData.IsWin = isWin;
+			gameResultData.Level = FindFirstObjectByType<LevelComponent>()?.GetLevel() ?? 0;
+
+			NetworkManager.Singleton.Shutdown(true);
+			NetworkingContainer.IsHostPlayer = true;
+			SceneManager.LoadScene("Scenes/Main Menu");
 		}
 	}
 }

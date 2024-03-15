@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cac0801f19643d38deab2b38bda0bcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 1
   spawnPrefab: {fileID: 9182164364222965760, guid: 99faf397097c503498a816950c8c7d18,
     type: 3}
+  WeaponId: 19
   Name: Lightning strike
   Description: Summon lightning down on your enemies
   chanceToAppear: 0.9
@@ -73,6 +75,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: bc2676d731cc6ef459323a4bcd2c6648, type: 2}
   - {fileID: 11400000, guid: 5a42629ff7ad7504a9ad6fe39e9289a7, type: 2}

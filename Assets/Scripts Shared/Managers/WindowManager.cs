@@ -20,6 +20,11 @@ namespace Managers
                 instance = this;
         }
 
+        public bool IsQueueEmpty()
+        {
+            return _windowQueue.Count == 0;
+        }
+
         public void QueueWindow(IQueueableWindow window)
         {
             pauseManager.PauseGame();
@@ -31,6 +36,12 @@ namespace Managers
             }
 
             _windowQueue.Push(window);
+        }
+
+        public void QueueUniqueWindow(IQueueableWindow window)
+        {
+            if (!_windowQueue.Contains(window))
+                QueueWindow(window);
         }
 
         public void DeQueueWindow()

@@ -94,12 +94,21 @@ namespace Managers
 				_ => QualitySettings.lodBias
 			};
 
+			QualitySettings.globalTextureMipmapLimit = settings.TextureQuality switch
+			{
+				0 => 4,
+				1 => 3,
+				2 => 2,
+				3 => 1,
+				4 => 0,
+				_ => QualitySettings.globalTextureMipmapLimit
+			};
+			
 			switch (settings.Quality)
 			{
 				case 0:
 					renderPipeline.supportsHDR = false;
 					QualitySettings.realtimeReflectionProbes = false;
-					QualitySettings.globalTextureMipmapLimit = 2;
 					QualitySettings.anisotropicFiltering = AnisotropicFiltering.Disable;
 					QualitySettings.particleRaycastBudget = 4;
 					QualitySettings.billboardsFaceCameraPosition = false;
@@ -108,7 +117,6 @@ namespace Managers
 				case 1:
 					renderPipeline.supportsHDR = true;
 					QualitySettings.realtimeReflectionProbes = false;
-					QualitySettings.globalTextureMipmapLimit = 1;
 					QualitySettings.anisotropicFiltering = AnisotropicFiltering.Disable;
 					QualitySettings.particleRaycastBudget = 4;
 					QualitySettings.billboardsFaceCameraPosition = false;
@@ -117,7 +125,6 @@ namespace Managers
 				case 2:
 					renderPipeline.supportsHDR = true;
 					QualitySettings.realtimeReflectionProbes = false;
-					QualitySettings.globalTextureMipmapLimit = 0;
 					QualitySettings.anisotropicFiltering = AnisotropicFiltering.Enable;
 					QualitySettings.particleRaycastBudget = 64;
 					QualitySettings.billboardsFaceCameraPosition = false;
@@ -126,7 +133,6 @@ namespace Managers
 				case 3:
 					renderPipeline.supportsHDR = true;
 					QualitySettings.realtimeReflectionProbes = false;
-					QualitySettings.globalTextureMipmapLimit = 0;
 					QualitySettings.anisotropicFiltering = AnisotropicFiltering.Enable;
 					QualitySettings.particleRaycastBudget = 1024;
 					QualitySettings.billboardsFaceCameraPosition = true;
@@ -135,7 +141,6 @@ namespace Managers
 				case 4:
 					renderPipeline.supportsHDR = true;
 					QualitySettings.realtimeReflectionProbes = true;
-					QualitySettings.globalTextureMipmapLimit = 0;
 					QualitySettings.anisotropicFiltering = AnisotropicFiltering.ForceEnable;
 					QualitySettings.particleRaycastBudget = 2048;
 					QualitySettings.billboardsFaceCameraPosition = true;
@@ -195,7 +200,7 @@ namespace Managers
 			{
 				case 0:
 					Screen.fullScreen = true;
-					Screen.SetResolution(Screen.width, Screen.height, true);
+					Screen.SetResolution(settings.ResolutionWidth, settings.ResolutionHeight, true);
 					break;
 				case 1:
 					Screen.fullScreen = false;

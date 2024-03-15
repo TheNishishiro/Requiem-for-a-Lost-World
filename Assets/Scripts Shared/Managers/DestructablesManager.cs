@@ -16,7 +16,6 @@ namespace Managers
 		[SerializeField] private float spawnCooldown;
 		[SerializeField] private int maxObjectsCountInArea;
 		[SerializeField] private int maxObjectsCount;
-		private Player _player;
 		private float _currentSpawnCooldown;
 		private float Range => spawnArea.x + 3;
 		public bool IsSpawnDisabled { get; set; }
@@ -29,8 +28,6 @@ namespace Managers
 			{
 				instance = this;
 			}
-			
-			_player = FindFirstObjectByType<Player>();
 		}
 
 		public void Update()
@@ -46,13 +43,16 @@ namespace Managers
 			
 			if (destructables.Count >= maxObjectsCount)
 				return;
+
+			if (GameManager.instance == null || GameManager.instance.PlayerTransform == null)
+				return;
 			
-			var numberOfCollisions = Physics.OverlapSphereNonAlloc(_player.transform.position, Range, _results, LayerMask.GetMask("DestructablesLayer"));
+			var numberOfCollisions = Physics.OverlapSphereNonAlloc(GameManager.instance.PlayerTransform.position, Range, _results, LayerMask.GetMask("DestructablesLayer"));
 			if (numberOfCollisions >= maxObjectsCountInArea)
 				return;
 			
-			var position = _player.transform.position - Utilities.GenerateRandomPositionOnEdge(spawnArea);
-			var pointFound = Utilities.GetPointOnColliderSurface(position, 100f, _player.transform, out var pointOnSurface);
+			var position = GameManager.instance.PlayerTransform.position - Utilities.GenerateRandomPositionOnEdge(spawnArea);
+			var pointFound = Utilities.GetPointOnColliderSurface(position, 100f, GameManager.instance.PlayerTransform, out var pointOnSurface);
   
 			if (!pointFound)
 				return;

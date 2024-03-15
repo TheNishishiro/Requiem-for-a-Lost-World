@@ -44,11 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2abd9eda716466c95f6dd5b5d76befd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 1
   spawnPrefab: {fileID: 7653434814239074656, guid: 02fbe0d9412594b4ca9e33f8149a31ef,
     type: 3}
+  WeaponId: 5
   Name: Sacred Ring
   Description: Shoot a ring of light that will return back to you
+  chanceToAppear: 0.75
   Icon: {fileID: 21300000, guid: 22e335154cb6dec42b376d5b210ad131, type: 3}
+  unlockOnAchievement: 0
+  requiredAchievement: 0
   element: 7
   weaponStats:
     Damage: 4
@@ -70,6 +75,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 74c43354ebc1fc2458daa12a55ef9491, type: 2}
   - {fileID: 11400000, guid: b15386a5ef648cf4288e44d326b27158, type: 2}
@@ -79,7 +85,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8a64d6979da2b404fbab90a83ffc1862, type: 2}
   - {fileID: 11400000, guid: 4d7c45339d246ec4fbcfa06772ad8fe9, type: 2}
   - {fileID: 11400000, guid: 34b36219cf898bf4bb06b8d6d80c3996, type: 2}
-  chanceToAppear: 0.75
   isSkill: 0
   capacity: 50
   maxCapacity: 200

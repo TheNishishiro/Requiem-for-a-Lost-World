@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using Managers;
 using Objects.Players.Scripts;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Objects.Enemies.Peace_Ender.Attacks
@@ -25,9 +27,9 @@ namespace Objects.Enemies.Peace_Ender.Attacks
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.CompareTag("Player"))
+			if (other.CompareTag("Player") && other.gameObject.GetComponent<NetworkObject>()?.IsOwner == true)
 			{
-                other.GetComponent<Player>().TakeDamage(30);
+                GameManager.instance.playerComponent.TakeDamage(30);
 			}
 		}
 	}

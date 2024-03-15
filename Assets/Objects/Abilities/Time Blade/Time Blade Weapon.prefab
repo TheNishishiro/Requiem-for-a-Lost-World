@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a69a1c593344fbb449eb0330dcc02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 1
   spawnPrefab: {fileID: 7198378712882613625, guid: 1d291b3bf0121c6469469b81de645c17,
     type: 3}
+  WeaponId: 27
   Name: Time Blade
   Description: Summon clock hands around you dealing damage, will freeze enemy in
     time on hit
@@ -74,6 +76,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades: []
   isSkill: 0
   capacity: 50

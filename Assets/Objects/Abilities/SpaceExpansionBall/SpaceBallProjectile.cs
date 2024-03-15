@@ -27,19 +27,19 @@ namespace Objects.Abilities.SpaceExpansionBall
 
 		public void SetDirection(float dirX, float dirY, float dirZ)
 		{
-			direction = (new Vector3(dirX, dirY, dirZ) - transform.position).normalized;
+			direction = (new Vector3(dirX, dirY, dirZ) - transformCache.position).normalized;
 			direction.y = 0;
 		}
 
 		protected override void CustomUpdate()
 		{
 			if (state == State.Traveling)
-				transform.position += direction * (WeaponStatsStrategy.GetSpeed() * Time.deltaTime);
+				transformCache.position += direction * (WeaponStatsStrategy.GetSpeed() * Time.deltaTime);
 			
 			if ((CurrentTimeToLive <= WeaponStatsStrategy.GetTotalTimeToLive() / 2 || enemiesHit > WeaponStatsStrategy.GetPassThroughCount()) && state == State.Traveling)
 			{
 				state = State.Exploding;
-				transform.localScale *= WeaponStatsStrategy.GetScale();
+				transformCache.localScale *= WeaponStatsStrategy.GetScale();
 				ProjectileDamageIncreasePercentage = 0.7f;
 				StartCoroutine(Enlarge());
 			}
@@ -63,8 +63,8 @@ namespace Objects.Abilities.SpaceExpansionBall
 					state = State.Developed;
 				
 				increaseTimes++;
-				transform.localScale *= 1.1f;
-				transform.localPosition.Scale(new Vector3(0,1.1f,0));
+				transformCache.localScale *= 1.1f;
+				transformCache.localPosition.Scale(new Vector3(0,1.1f,0));
 				yield return new WaitForSeconds(0.1f);
 			}
 			
@@ -74,13 +74,13 @@ namespace Objects.Abilities.SpaceExpansionBall
 		private IEnumerator Collapse()
 		{
 			// Collapse object on itself
-			var scale = transform.localScale;
+			var scale = transformCache.localScale;
 			while (scale.x > 0)
 			{
 				scale.x -= 0.2f;
 				scale.y -= 0.2f;
 				scale.z -= 0.2f;
-				transform.localScale = scale;
+				transformCache.localScale = scale;
 				yield return new WaitForSeconds(0.01f);
 			}
 			

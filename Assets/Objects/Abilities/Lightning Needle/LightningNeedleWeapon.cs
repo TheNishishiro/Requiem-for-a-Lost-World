@@ -8,14 +8,13 @@ namespace Objects.Abilities.Lightning_Needle
         private float _currentOffset;
         private float _offsetStep;
         public bool StormSurge { get; set; }
-
-        protected override bool ProjectileSpawn(LightningNeedleProjectile projectile)
+        
+        public override void SetupProjectile(NetworkProjectile networkProjectile)
         {
-            projectile.transform.position = Utilities.GetRandomInAreaFreezeParameter(transform.position, 0.2f, isFreezeZ: true);
-            projectile.SetDirection(transform.forward, _currentOffset);
+            var position = Utilities.GetRandomInAreaFreezeParameter(transform.position, 0.2f, isFreezeZ: true);
+            networkProjectile.GetProjectile<LightningNeedleProjectile>().SetDirection(transform.forward, _currentOffset);
+            networkProjectile.Initialize(this, position);
             _currentOffset += _offsetStep;
-            projectile.SetParentWeapon(this);
-            return true;
         }
 
         protected override void OnAttackStart()

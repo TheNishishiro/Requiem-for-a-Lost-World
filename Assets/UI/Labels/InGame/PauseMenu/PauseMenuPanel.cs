@@ -1,12 +1,14 @@
-﻿using Managers;
+﻿using Interfaces;
+using Managers;
 using Objects.Players.Scripts;
 using Objects.Stage;
 using UI.Main_Menu.Character_List_Menu;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace UI.Labels.InGame.PauseMenu
 {
-	public class PauseMenuPanel : MonoBehaviour
+	public class PauseMenuPanel : MonoBehaviour, IQueueableWindow
 	{
 		[SerializeField] private GameObject panel;
 		[SerializeField] private GameObject levelUpPanel;
@@ -18,18 +20,23 @@ namespace UI.Labels.InGame.PauseMenu
 		[SerializeField] private GameObject statsPanel;
 		[SerializeField] private GameObject weaponStatsPanel;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
-		
 
 		private void Update()
 		{
-			if (!Input.GetKeyDown(KeyCode.Escape)) return;
-
-			ToggleMenu();
+			if (Input.GetKeyDown(KeyCode.Escape))
+				ToggleMenu();
 		}
 
 		public void ToggleMenu()
 		{
-			if (levelUpPanel.activeInHierarchy || chestPanel.activeInHierarchy || gameOverPanel.activeInHierarchy) return;
+			if (!WindowManager.instance.IsQueueEmpty() && panel.activeInHierarchy)
+			{
+				CloseMenu();
+				return;
+			}
+
+			if (!WindowManager.instance.IsQueueEmpty()) return;
+			
 			if (!panel.activeInHierarchy)
 				OpenMenu();
 			else
@@ -38,16 +45,16 @@ namespace UI.Labels.InGame.PauseMenu
 
 		public void CloseMenu()
 		{
-			pauseManager.UnPauseGame();
-			
-			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();
-			statsPanelComponent.ClearEntries();
-			panel.SetActive(false);
+			WindowManager.instance.DeQueueWindow();
 		}
 		
 		public void OpenMenu()
 		{
-			pauseManager.PauseGame();
+			WindowManager.instance.QueueWindow(this);
+		}
+
+		public void Open()
+		{
 			panel.SetActive(true);
 			
 			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();
@@ -60,6 +67,13 @@ namespace UI.Labels.InGame.PauseMenu
 			var weaponStatsComponent = weaponStatsPanel.GetComponent<StatsScrollMenuPanel>();
 			unlockedWeaponsPanel.UpdatePanel(weaponStatsComponent);
 			unlockedItemsPanel.UpdatePanel(weaponStatsComponent);
+		}
+
+		public void Close()
+		{
+			var statsPanelComponent = statsPanel.GetComponent<StatsScrollMenuPanel>();
+			statsPanelComponent.ClearEntries();
+			panel.SetActive(false);
 		}
 	}
 }

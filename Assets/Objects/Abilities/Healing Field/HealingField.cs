@@ -1,6 +1,7 @@
 ﻿using System;
 using Managers;
 using Objects.Players.Scripts;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Weapons;
@@ -21,11 +22,16 @@ namespace Objects.Abilities.Healing_Field
 		private void OnTriggerEnter(Collider other)
 		{
 			if (!other.CompareTag("Player")) return;
-			var playerComponent = GameManager.instance.playerComponent;
-			playerComponent.TakeDamage(-_healAmount);
-				
+			
+			RpcManager.instance.HealPlayer(_healAmount, other.GetComponent<NetworkObject>().OwnerClientId);
+
 			if (_isEmpowering)
-				playerComponent.playerStatsComponent.TemporaryAttackBoost(0.5f, 1.5f);
+				GameManager.instance.playerComponent.playerStatsComponent.TemporaryAttackBoost(0.5f, 1.5f);
+		}
+		
+		protected override void Destroy()
+		{
+			ReturnToPool(_objectPool, _object);
 		}
 	}
 }

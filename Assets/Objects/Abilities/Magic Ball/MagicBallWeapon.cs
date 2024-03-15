@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using Managers;
+using Objects.Abilities;
 using Objects.Abilities.Magic_Ball;
 using Objects.Enemies;
 using UnityEngine;
@@ -9,17 +10,20 @@ using Weapons;
 
 public class MagicBallWeapon : PoolableWeapon<MagicBallProjectile>
 {
-    protected override bool ProjectileSpawn(MagicBallProjectile projectile)
+    public override void SetupProjectile(NetworkProjectile networkProjectile)
     {
         var closestTarget = Utilities.FindClosestEnemy(transform.position, EnemyManager.instance.GetActiveEnemies(), out var distanceToClosest);
         if (closestTarget == null)
-            return false;
+        {
+            networkProjectile.Despawn(WeaponId);
+            return;
+        }
 
-        projectile.transform.position = transform.position;
-        projectile.SetParentWeapon(this);
+        networkProjectile.Initialize(this, transform.position);
         var position = closestTarget.TargetPoint.position;
+
+        var projectile = networkProjectile.GetProjectile<MagicBallProjectile>();
         projectile.SetDirection(position.x, position.y, position.z);
         projectile.ClearTrail();
-        return true;
     }
 }

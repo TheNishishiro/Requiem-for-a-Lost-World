@@ -15,8 +15,6 @@ namespace Managers
             {
                 instance = this;
             }
-
-            AddOrRemoveEffect(StatusEffectType.Revive, GameManager.instance.playerStatsComponent.GetStats().Revives);
         }
 
         public void AddEffect(StatusEffectType statusEffect, int stackCount)

@@ -10,5 +10,10 @@ namespace Objects.Abilities.SpaceExpansionBall
 		{
 			SimpleDamage(other, false);
 		}
+		
+		protected override void Destroy()
+		{
+			ReturnToPool(_objectPool, _object);
+		}
 	}
 }

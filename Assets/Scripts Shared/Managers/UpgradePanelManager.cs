@@ -17,18 +17,10 @@ namespace Managers
 	{
 		[SerializeField] private GameObject panel;
 		[SerializeField] private List<UpgradePanel> upgradeButtons;
-		[SerializeField] private WeaponManager weaponManager;
 		[SerializeField] private Button skipButton;
 		[SerializeField] private Button rerollButton;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
 		private bool _isWeaponOnly;
-		
-		private void Start()
-		{
-			HideButtons();
-			if (GameData.GetPlayerCharacterData().PickWeaponOnStart)
-				OpenPickWeapon();
-		}
 
 		public void OpenPanel()
 		{
@@ -41,7 +33,7 @@ namespace Managers
 			WindowManager.instance.DeQueueWindow();
 		}
 
-		private void OpenPickWeapon()
+		public void OpenPickWeapon()
 		{
 			_isWeaponOnly = true;
 			WindowManager.instance.QueueWindow(this);
@@ -81,7 +73,7 @@ namespace Managers
 			HideButtons();
 			panel.SetActive(false);
 		}
-
+		
 		private void ReloadUpgrades()
 		{
 			HideButtons();
@@ -91,8 +83,8 @@ namespace Managers
 			skipButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Skip ({PlayerStatsScaler.GetScaler().GetSkips()})";
 			var chanceOfAppearance = Random.value;
 			var upgradesToPick = Random.Range(3, 5);
-			
-			var upgradeEntries = (_isWeaponOnly ? weaponManager.GetWeaponUnlocks() : weaponManager.GetUpgrades())
+
+			var upgradeEntries = (_isWeaponOnly ? WeaponManager.instance.GetWeaponUnlocks() : WeaponManager.instance.GetUpgrades())
 				.OrderByDescending(x => x.ChanceOfAppearance >= 1 - chanceOfAppearance)
 				.ThenBy(_ => Random.value)
 				.Take(upgradesToPick)
@@ -109,7 +101,7 @@ namespace Managers
 			for (var i = 0; i < upgradeEntries.Count; i++)
 			{
 				upgradeButtons[i].gameObject.SetActive(true);
-				upgradeButtons[i].Set(upgradeEntries[i]);
+				upgradeButtons[i].Set(upgradeEntries[i], this);
 			}
 		}
 	}

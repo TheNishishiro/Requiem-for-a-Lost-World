@@ -7,20 +7,21 @@ using Managers;
 using Objects.Enemies;
 using Objects.Players.Scripts;
 using Objects.Stage;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Pool;
 using Weapons;
 
-public class EnemyManager : Singleton<EnemyManager>
+public class EnemyManager : NetworkBehaviour
 {
 	public static EnemyManager instance;
-	[SerializeField] private GameObject enemyGameObject;
+	[SerializeField] public GameObject enemyGameObject;
 	[SerializeField] private List<EnemyData> defaultSpawns;
+	[SerializeField] private List<EnemyData> possibleEnemies;
 	[SerializeField] private Vector2 spawnArea;
 	[SerializeField] private float spawnTimer;
-	[SerializeField] private Player player;
 	[SerializeField] private PlayerStatsComponent _playerStatsComponent;
-	private ObjectPool<Enemy> enemyPool;
+	private static Transform PlayerTransform => GameManager.instance.PlayerTransform;
 	private List<Enemy> _enemies = new ();
 	public int currentEnemyCount => _enemies.Count;
 	private int enemyMinCount;
@@ -30,51 +31,17 @@ public class EnemyManager : Singleton<EnemyManager>
 	private float _healthMultiplier = 1.0f;
 	private EnemyData _currentEnemySpawning;
 	private float _enemySpeedMultiplier = 1;
-	public bool IsDisableEnemySpawn;
+	public bool IsDisableEnemySpawn = true;
 
-	protected override void Awake()
+	public void Awake()
 	{
 		if (instance == null)
 		{
 			instance = this;
 		}
 		
-		base.Awake();
 		defaultSpawns = new List<EnemyData>();
-		enemyPool = new ObjectPool<Enemy>(OnCreateEnemy, OnRequestEnemy, OnEnemyRelease, enemy => Destroy(enemy.gameObject), true, 600, 1000);
 	}
-
-	#region Pooling methods
-
-	private Enemy OnCreateEnemy()
-	{
-		return Instantiate(enemyGameObject, transform).GetComponent<Enemy>();
-	}
-
-	private void OnRequestEnemy(Enemy enemy)
-	{
-		var position = player.transform.position - Utilities.GenerateRandomPositionOnEdge(spawnArea);
-		var pointFound = Utilities.GetPointOnColliderSurface(position, 100f, player.transform, out var pointOnSurface);
-		if (!pointFound || Utilities.IsPositionOccupied(pointOnSurface, 0.3f))
-			return;
-		
-		position = pointOnSurface;
-		enemy.transform.position = position;
-		enemy.Setup(_currentEnemySpawning, player, _playerStatsComponent, _healthMultiplier, _enemySpeedMultiplier, _currentEnemySpawning.sprite);
-		if (_currentEnemySpawning.enemyName == "grand octi")
-			enemy.SetupBoss();
-
-		enemy.gameObject.SetActive(true);
-		_enemies.Add(enemy);
-	}
-
-	private void OnEnemyRelease(Enemy enemy)
-	{
-		enemy.gameObject.SetActive(false);
-		_enemies.Remove(enemy);
-	}
-
-	#endregion
 	
 	private void Update()
 	{
@@ -97,14 +64,48 @@ public class EnemyManager : Singleton<EnemyManager>
 
 	public void SpawnEnemy(EnemyData enemyToSpawn)
 	{
-		var maxEnemyCount = enemyMaxCount * PlayerStatsScaler.GetScaler().GetEnemyCountIncrease() * GameData.GetCurrentDifficulty().EnemyCapacityModifier;
+		if (!IsHost) return;
+		if (PlayerTransform == null) return;
+
+		var playerCount = NetworkManager.Singleton.ConnectedClients.Count;
+		var increasePerClient = playerCount <= 1 ? 0 : playerCount * 0.5f;
+		
+		var maxEnemyCount = 
+			enemyMaxCount * PlayerStatsScaler.GetScaler().GetEnemyCountIncrease() * GameData.GetCurrentDifficulty().EnemyCapacityModifier
+			* (1 + increasePerClient);
 		if (currentEnemyCount >= maxEnemyCount && !enemyToSpawn.isBossEnemy)
 			return;
 		if (IsDisableEnemySpawn)
 			return;
 		
 		_currentEnemySpawning = enemyToSpawn;
-		enemyPool.Get();
+
+		
+		var targetClient = NetworkManager.Singleton.ConnectedClients
+			.Where(x => !x.Value.PlayerObject.GetComponent<MultiplayerPlayer>().isPlayerDead.Value)
+			.OrderBy(x => Random.value)
+			.FirstOrDefault().Value.PlayerObject.transform;
+		var position = targetClient.position - Utilities.GenerateRandomPositionOnEdge(spawnArea);
+		var pointFound = Utilities.GetPointOnColliderSurface(position, 100f, targetClient, out var pointOnSurface);
+		if (!pointFound || Utilities.IsPositionOccupied(pointOnSurface, 0.3f))
+			return;
+		
+		position = pointOnSurface;
+		
+		var enemy = NetworkObjectPool.Singleton.GetNetworkObject(enemyGameObject, position, Quaternion.identity);
+		var enemyComponent = enemy.GetComponent<Enemy>();
+		enemy.Spawn();
+		
+		var expIncrease = playerCount <= 1 ? 1 : Mathf.Pow(0.85f, playerCount);
+		var damageIncrease = playerCount <= 1 ? 1 : playerCount * 0.25f;
+		
+		enemyComponent.SetPlayerTarget(targetClient);
+		enemyComponent.Setup(new EnemyNetworkStats(_currentEnemySpawning), _healthMultiplier * (1 + increasePerClient*0.5f), _enemySpeedMultiplier, expIncrease, damageIncrease);
+		enemyComponent.gameObject.SetActive(true);
+		if (_currentEnemySpawning.enemyName == "grand octi")
+			enemyComponent.SetupBoss();
+		
+		RpcManager.instance.AddEnemyRpc(enemyComponent);
 	}
 
 	public void ChangeDefaultSpawn(List<EnemyData> enemyData)
@@ -158,7 +159,9 @@ public class EnemyManager : Singleton<EnemyManager>
 
 	public void Despawn(Enemy enemy)
 	{
-		enemyPool.Release(enemy);
+		if (!IsHost) return;
+		
+		RpcManager.instance.RemoveEnemyRpc(enemy);
 	}
 
 	public void SetTimeStop(bool isTimeStop)
@@ -182,8 +185,8 @@ public class EnemyManager : Singleton<EnemyManager>
 
 	public void DamageInView(float damage, WeaponBase weapon)
 	{
-		var enemiesToDamage = _enemies.Where(x => Utilities.IsWithinCameraView(Camera.main, x.GetCollider().bounds,
-			x.transform.position, player.transform.position, 15f)).Select(x => x.GetDamagableComponent());
+		var enemiesToDamage = GetActiveEnemies().Where(x => Utilities.IsWithinCameraView(Camera.main, x.GetCollider().bounds,
+			x.transform.position, PlayerTransform.position, 15f)).Select(x => x.GetDamagableComponent());
 		
 		foreach (var enemy in enemiesToDamage)
 		{
@@ -198,16 +201,33 @@ public class EnemyManager : Singleton<EnemyManager>
 
 	public Enemy GetRandomEnemy()
 	{
-		return _enemies.OrderBy(_ => Random.value).FirstOrDefault();
+		var activeEnemies = GetActiveEnemies();
+		return activeEnemies.OrderBy(_ => Random.value).FirstOrDefault();
 	}
 
 	public Enemy GetUncontrolledClosestEnemy(Vector3 position)
 	{
-		return _enemies.Where(x => !x.IsPlayerControlled()).OrderBy(enemy => Vector3.Distance(position, enemy.transform.position)).FirstOrDefault();
+		var activeEnemies = GetActiveEnemies();
+		return activeEnemies.Where(x => !x.IsPlayerControlled()).OrderBy(enemy => Vector3.Distance(position, enemy.transform.position)).FirstOrDefault();
 	}
 
 	public void ChangeSpeedMultiplier(float speedMultiplier)
 	{
 		_enemySpeedMultiplier = speedMultiplier;
+	}
+
+	public Sprite GetSpriteByEnemy(EnemyTypeEnum enemyType)
+	{
+		return possibleEnemies.FirstOrDefault(x => x.enemyType == enemyType)?.sprite;
+	}
+
+	public void AddEnemy(Enemy networkBehaviour)
+	{
+		_enemies.Add(networkBehaviour);
+	}
+
+	public void RemoveEnemy(Enemy networkBehaviour)
+	{
+		_enemies.Remove(networkBehaviour);
 	}
 }
