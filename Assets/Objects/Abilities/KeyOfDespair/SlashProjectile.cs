@@ -24,8 +24,7 @@ namespace Objects.Abilities.KeyOfDespair
                 1 => -45,
                 _ => 0
             };
-            
-            transformCache.localRotation = Quaternion.Euler(0, 0, zRotationByStage);
+            transformCache.localRotation = Quaternion.Euler(0, 0, zRotationByStage); 
         }
 
         protected override void Destroy()

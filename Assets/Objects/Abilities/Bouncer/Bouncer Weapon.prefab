@@ -44,11 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f010cadf84c4cc790f1dcfd62126a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 1
   spawnPrefab: {fileID: 4893334577155030736, guid: b218829fd530ff042bada37a3504a144,
     type: 3}
+  WeaponId: 6
   Name: Seeking Orb
   Description: Send a projectile that bounces between random enemies
+  chanceToAppear: 1
   Icon: {fileID: 21300000, guid: da9a07f001ffbc74a860631df945e24b, type: 3}
+  unlockOnAchievement: 0
+  requiredAchievement: 0
   element: 3
   weaponStats:
     Damage: 5
@@ -70,6 +75,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 7fc6a517bf6694a4ea3265c7543ce6c1, type: 2}
   - {fileID: 11400000, guid: 71fc99c1c33dacc43ad43c4a75a6b7ab, type: 2}
@@ -81,9 +87,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7fd37f704a0ca1a4c8ceb710553ef6e3, type: 2}
   - {fileID: 11400000, guid: c9c65cd2513940147973ddf73946a3b5, type: 2}
   - {fileID: 11400000, guid: 8282a724c5ad3bb46ab6c4c09ca613ae, type: 2}
-  chanceToAppear: 1
   isSkill: 0
   capacity: 50
   maxCapacity: 200
   ElectroDefenceShred: 0
   Thunderstorm: 0
+  subProjectilePrefab: {fileID: 4893334577155030736, guid: 7b2c2364a48699e49894480cb80a49ae,
+    type: 3}

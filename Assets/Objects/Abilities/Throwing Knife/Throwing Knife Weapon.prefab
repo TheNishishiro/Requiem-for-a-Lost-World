@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2481156a8644bcb8383fdcfdadb6a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 1
   spawnPrefab: {fileID: 2183727061146650386, guid: 604e514b983b94f4787e4df0cb627acb,
     type: 3}
+  WeaponId: 26
   Name: Throwing knife
   Description: Throw knifes forward
   chanceToAppear: 1
@@ -73,6 +75,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: fa2bf92f6c1b8bb4bb58b0ca8d61fef5, type: 2}
   - {fileID: 11400000, guid: 18b875762cf061a469c087415ad38793, type: 2}

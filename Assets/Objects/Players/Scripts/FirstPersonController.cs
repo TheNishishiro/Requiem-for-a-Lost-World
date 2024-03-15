@@ -1,4 +1,5 @@
-﻿using Objects.Players.Scripts;
+﻿using Managers;
+using Objects.Players.Scripts;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -160,6 +161,8 @@ namespace StarterAssets
 
 		private void Move()
 		{
+			if (GameManager.instance.playerStatsComponent.IsDead()) return;
+			
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			float targetSpeed = PlayerStatsScaler.GetScaler().GetMovementSpeed();
 

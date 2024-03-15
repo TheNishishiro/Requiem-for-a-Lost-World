@@ -15,7 +15,7 @@ using Weapons;
 public class EnemyManager : NetworkBehaviour
 {
 	public static EnemyManager instance;
-	[SerializeField] private GameObject enemyGameObject;
+	[SerializeField] public GameObject enemyGameObject;
 	[SerializeField] private List<EnemyData> defaultSpawns;
 	[SerializeField] private List<EnemyData> possibleEnemies;
 	[SerializeField] private Vector2 spawnArea;
@@ -81,7 +81,10 @@ public class EnemyManager : NetworkBehaviour
 		_currentEnemySpawning = enemyToSpawn;
 
 		
-		var targetClient = NetworkManager.Singleton.ConnectedClients.OrderBy(x => Random.value).FirstOrDefault().Value.PlayerObject.transform;
+		var targetClient = NetworkManager.Singleton.ConnectedClients
+			.Where(x => !x.Value.PlayerObject.GetComponent<MultiplayerPlayer>().isPlayerDead.Value)
+			.OrderBy(x => Random.value)
+			.FirstOrDefault().Value.PlayerObject.transform;
 		var position = targetClient.position - Utilities.GenerateRandomPositionOnEdge(spawnArea);
 		var pointFound = Utilities.GetPointOnColliderSurface(position, 100f, targetClient, out var pointOnSurface);
 		if (!pointFound || Utilities.IsPositionOccupied(pointOnSurface, 0.3f))
@@ -92,17 +95,17 @@ public class EnemyManager : NetworkBehaviour
 		var enemy = NetworkObjectPool.Singleton.GetNetworkObject(enemyGameObject, position, Quaternion.identity);
 		var enemyComponent = enemy.GetComponent<Enemy>();
 		enemy.Spawn();
-
 		
 		var expIncrease = playerCount <= 1 ? 1 : Mathf.Pow(0.85f, playerCount);
+		var damageIncrease = playerCount <= 1 ? 1 : playerCount * 0.25f;
 		
 		enemyComponent.SetPlayerTarget(targetClient);
-		enemyComponent.Setup(new EnemyNetworkStats(_currentEnemySpawning), _healthMultiplier * (1 + increasePerClient*0.5f), _enemySpeedMultiplier, expIncrease);
+		enemyComponent.Setup(new EnemyNetworkStats(_currentEnemySpawning), _healthMultiplier * (1 + increasePerClient*0.5f), _enemySpeedMultiplier, expIncrease, damageIncrease);
 		enemyComponent.gameObject.SetActive(true);
 		if (_currentEnemySpawning.enemyName == "grand octi")
 			enemyComponent.SetupBoss();
 		
-		_enemies.Add(enemyComponent);
+		RpcManager.instance.AddEnemyRpc(enemyComponent);
 	}
 
 	public void ChangeDefaultSpawn(List<EnemyData> enemyData)
@@ -158,11 +161,7 @@ public class EnemyManager : NetworkBehaviour
 	{
 		if (!IsHost) return;
 		
-		var networkObject = enemy.gameObject.GetComponent<NetworkObject>();
-		NetworkObjectPool.Singleton.ReturnNetworkObject(networkObject, enemyGameObject);
-		networkObject.Despawn(false);
-		_enemies.Remove(enemy);
-		//enemyPool.Release(enemy.gameObject.GetComponent<NetworkObject>());
+		RpcManager.instance.RemoveEnemyRpc(enemy);
 	}
 
 	public void SetTimeStop(bool isTimeStop)
@@ -197,7 +196,7 @@ public class EnemyManager : NetworkBehaviour
 
 	public IEnumerable<Enemy> GetActiveEnemies()
 	{
-		return IsHost ? _enemies : FindObjectsByType<Enemy>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+		return _enemies;
 	}
 
 	public Enemy GetRandomEnemy()
@@ -220,5 +219,15 @@ public class EnemyManager : NetworkBehaviour
 	public Sprite GetSpriteByEnemy(EnemyTypeEnum enemyType)
 	{
 		return possibleEnemies.FirstOrDefault(x => x.enemyType == enemyType)?.sprite;
+	}
+
+	public void AddEnemy(Enemy networkBehaviour)
+	{
+		_enemies.Add(networkBehaviour);
+	}
+
+	public void RemoveEnemy(Enemy networkBehaviour)
+	{
+		_enemies.Remove(networkBehaviour);
 	}
 }

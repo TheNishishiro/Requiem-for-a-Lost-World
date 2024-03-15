@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dcddc53beb942ee9b3e402305fa631c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 1
   spawnPrefab: {fileID: 1830482525884650664, guid: 8ad831e06f5149c488ea627b5d0de3af,
     type: 3}
+  WeaponId: 21
   Name: Meteor
   Description: Summon meteors on your enemies
   chanceToAppear: 0.8
@@ -73,6 +75,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 65b13b62bbfc2fb4f940409c3bf13ee8, type: 2}
   - {fileID: 11400000, guid: 2fc0c1795d030f941ae8df6e2cce0fa1, type: 2}

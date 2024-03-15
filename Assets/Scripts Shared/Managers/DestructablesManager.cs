@@ -44,7 +44,7 @@ namespace Managers
 			if (destructables.Count >= maxObjectsCount)
 				return;
 
-			if (GameManager.instance.PlayerTransform == null)
+			if (GameManager.instance == null || GameManager.instance.PlayerTransform == null)
 				return;
 			
 			var numberOfCollisions = Physics.OverlapSphereNonAlloc(GameManager.instance.PlayerTransform.position, Range, _results, LayerMask.GetMask("DestructablesLayer"));

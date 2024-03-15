@@ -6,6 +6,7 @@ using DefaultNamespace.BaseClasses;
 using DefaultNamespace.Data;
 using Interfaces;
 using Managers;
+using Objects;
 using Objects.Abilities;
 using Objects.Items;
 using Objects.Players.Containers;
@@ -24,6 +25,7 @@ public class WeaponManager : NetworkBehaviour
     [SerializeField] private ItemContainer items;
     [SerializeField] private PlayerStatsComponent _playerStatsComponent;
     private Transform _weaponContainer;
+    public Dictionary<WeaponEnum, GameObject> weaponProjectilePrefabs;
     private List<WeaponToggleableEntry> availableWeapons;
     private List<ItemToggleableEntry> availableItems;
     private List<WeaponBase> _unlockedWeapons;
@@ -34,7 +36,7 @@ public class WeaponManager : NetworkBehaviour
     private int _itemsUpgraded;
     private SaveFile _saveFile;
     private bool _isInitialized;
-    
+
     public void Start()
     {
         if (instance == null)
@@ -52,8 +54,14 @@ public class WeaponManager : NetworkBehaviour
         _saveFile = FindAnyObjectByType<SaveFile>();
         _unlockedWeapons = new List<WeaponBase>();
         _unlockedItems = new List<ItemBase>();
+        weaponProjectilePrefabs = new Dictionary<WeaponEnum, GameObject>();
 
         availableWeapons = weapons.GetWeapons();
+        foreach (var availableWeapon in availableWeapons)
+        {
+            weaponProjectilePrefabs.TryAdd(availableWeapon.weaponBase.WeaponId, availableWeapon.weaponBase.spawnPrefab);
+        }
+        
         availableItems = items.GetItems();
     }
     
@@ -70,6 +78,7 @@ public class WeaponManager : NetworkBehaviour
         weaponGameObject.ApplyRarity(rarity);
         availableWeapons.RemoveAll(x => x.weaponBase == weapon);
         _unlockedWeapons.Add(weaponGameObject);
+        weaponGameObject.ActivateWeapon();
         AchievementManager.instance.OnWeaponUnlocked(weapon, _unlockedWeapons.Count, rarity);
     }
 
@@ -172,5 +181,10 @@ public class WeaponManager : NetworkBehaviour
         {
             weapon.ReduceCooldown(reductionPercentage);
         }
+    }
+
+    public WeaponBase GetUnlockedWeapon(WeaponEnum weaponId)
+    {
+        return _unlockedWeapons.FirstOrDefault(x => x.WeaponId == weaponId);
     }
 }

@@ -46,22 +46,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c48720b7b9d79d342af743c57e4ddfd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  State: 0
+  networkProjectile: {fileID: 0}
+  transformCache: {fileID: 8439061432642027227}
   UseParticles: 1
   ParticleSystem: {fileID: 2234952067216254773}
+  disableHitbox: 0
   hitbox: {fileID: 3213901146434901481}
   spawningStage:
     stageObject: {fileID: 0}
     stageDuration: 0
+    particleSystems: []
   flyingStage:
     stageObject: {fileID: 8599029351238140928}
     stageDuration: 0
+    particleSystems: []
   dissipationStage:
     stageObject: {fileID: 0}
     stageDuration: 0
+    particleSystems: []
   isLimitedHitBox: 0
   hitBoxDuration: 0
   hitBoxStart: 0
+  isChangeSizeOverLife: 0
+  increaseSizeUntilTime: 0
+  reduceSizeBeforeTime: 0
+  targetMinSize: {x: 0, y: 0, z: 0}
+  multiplyTargetByScale: 0
+  dontTickLifeTime: 0
 --- !u!65 &3213901146434901481
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -134,6 +145,8 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

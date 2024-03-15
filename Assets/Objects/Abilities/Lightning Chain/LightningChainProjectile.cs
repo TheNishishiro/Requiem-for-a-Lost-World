@@ -49,5 +49,10 @@ namespace Objects.Abilities.Lightning_Chain
 			lineRenderer.positionCount++;
 			lineRenderer.SetPosition(lineRenderer.positionCount - 1, targetPosition);
 		}
+
+		protected override void Destroy()
+		{
+			ReturnToPool(_objectPool, _object);
+		}
 	}
 }

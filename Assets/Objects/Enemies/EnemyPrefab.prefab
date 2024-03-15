@@ -5324,7 +5324,7 @@ GameObject:
   - component: {fileID: 4635495247598908059}
   - component: {fileID: 445137977363883629}
   - component: {fileID: 2022141020912838401}
-  - component: {fileID: 6305881953548018883}
+  - component: {fileID: 1621128170779005758}
   m_Layer: 6
   m_Name: EnemyPrefab
   m_TagString: Enemy
@@ -5365,7 +5365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 231215780
+  GlobalObjectIdHash: 1451208485
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -5403,7 +5403,7 @@ MonoBehaviour:
     type: 3}
   grandOctiBoss: {fileID: 9215985800514479204}
   curseParticleSystem: {fileID: 3041929888458073872}
-  networkTransport: {fileID: 6305881953548018883}
+  networkTransport: {fileID: 1621128170779005758}
 --- !u!114 &1412954185048979437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5464,7 +5464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 2022141020912838401}
-  networkTransport: {fileID: 6305881953548018883}
+  networkTransport: {fileID: 1621128170779005758}
 --- !u!136 &445137977363883629
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5484,7 +5484,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.12
+  m_Radius: 0.2
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
@@ -5513,9 +5513,9 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &6305881953548018883
+--- !u!114 &1621128170779005758
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5524,7 +5524,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5541245172042377187}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03a3bb07b8ca27642ae2b7d0412decf8, type: 3}
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UseUnreliableDeltas: 0

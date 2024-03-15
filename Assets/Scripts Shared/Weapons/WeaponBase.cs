@@ -5,6 +5,7 @@ using Data.Elements;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using Interfaces;
+using Managers;
 using NaughtyAttributes;
 using Objects;
 using Objects.Abilities;
@@ -19,7 +20,7 @@ namespace Weapons
 {
 	public abstract class WeaponBase : MonoBehaviour, IPlayerItem
 	{
-		[SerializeField] protected bool useNetworkPool;
+		[SerializeField] public bool useNetworkPool;
 		[SerializeField] public GameObject spawnPrefab;
 		[SerializeField] public WeaponEnum WeaponId;
 		[SerializeField] public string Name;
@@ -68,6 +69,10 @@ namespace Weapons
 			
 			_timer = WeaponStatsStrategy.GetTotalCooldown();
 			InitPool();
+		}
+
+		public void ActivateWeapon()
+		{
 			StartCoroutine(AttackProcess());
 		}
 
@@ -101,6 +106,8 @@ namespace Weapons
 			if (_timer >= 0f) return;
 
 			_timer = WeaponStatsStrategy.GetTotalCooldown();
+			if (GameManager.instance.playerStatsComponent.IsDead()) return;
+			
 			StartCoroutine(AttackProcess());
 		}
 
@@ -150,6 +157,11 @@ namespace Weapons
 
 		public virtual void OnEnemyKilled()
 		{
+		}
+
+		public virtual void SetupProjectile(NetworkProjectile networkProjectile)
+		{
+			
 		}
 	}
 }

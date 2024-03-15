@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Slider = UnityEngine.UI.Slider;
+using Toggle = UnityEngine.UI.Toggle;
 
 namespace Managers
 {
@@ -15,6 +17,7 @@ namespace Managers
 		[SerializeField] private Toggle vsyncToggle;
 		[SerializeField] private Toggle discordToggle;
 		[SerializeField] private Toggle use3DGrassToggle;
+		[SerializeField] private Toggle displayCoopProjectilesToggle;
 		[SerializeField] private TMP_Dropdown grassRenderDistanceDropdown;
 		[SerializeField] private TMP_Dropdown grassDensityDropdown;
 		[SerializeField] private TMP_Dropdown objectDensityDropdown;
@@ -28,8 +31,11 @@ namespace Managers
 		[SerializeField] private TMP_Dropdown presetDropdown;
 		[SerializeField] private TMP_Dropdown windowModeDropdown;
 		[SerializeField] private TMP_Dropdown resolutionDropdown;
+		[SerializeField] private TMP_InputField usernameField;
 		[SerializeField] private Slider volumeSlider;
 		private bool _isLoading;
+		private const int minResolutionWidth = 800;
+		private const int minResolutionHeight = 600;
 		
 		public void Start()
 		{
@@ -154,11 +160,16 @@ namespace Managers
 			use3DGrassToggle.isOn = configuration.Use3dGrass;
 			volumeSlider.value = configuration.Volume;
 			textureResolutionDropdown.value = configuration.TextureQuality;
+			usernameField.text = configuration.Username;
+			displayCoopProjectilesToggle.isOn = configuration.RenderCoopProjectiles;
 			
 			resolutionDropdown.options ??= new List<TMP_Dropdown.OptionData>();
 			resolutionDropdown.options.Clear();
 			foreach (var resolution in Screen.resolutions)
 			{
+				if (resolution.width < minResolutionWidth || resolution.height < minResolutionHeight) 
+					continue;
+				
 				resolutionDropdown.options.Add(new TMP_Dropdown.OptionData($"{resolution.width}x{resolution.height} @{resolution.refreshRateRatio.value:0}hz"));
 			}
 			resolutionDropdown.value = GetResolutionIndex(configuration.ResolutionWidth, configuration.ResolutionHeight, configuration.RefreshRate);
@@ -194,6 +205,8 @@ namespace Managers
 			configuration.RefreshRate = Screen.resolutions[resolutionDropdown.value].refreshRateRatio.numerator;
 			configuration.Volume = volumeSlider.value;
 			configuration.TextureQuality = textureResolutionDropdown.value;
+			configuration.Username = usernameField.text;
+			configuration.RenderCoopProjectiles = displayCoopProjectilesToggle.isOn;
 			
 			saveManager.SaveGame();
 			saveManager.ApplySettings();
@@ -202,15 +215,46 @@ namespace Managers
 		
 		private int GetResolutionIndex(int width, int height, uint refreshRate)
 		{
+			var bestMatchResolution = Screen.resolutions[0];
+			var bestMatchIndex = -1;
+			var hasMatchingResolution = false;
+
 			for (var i = 0; i < Screen.resolutions.Length; i++)
 			{
-				if (Screen.resolutions[i].width == width && Screen.resolutions[i].height == height && Screen.resolutions[i].refreshRateRatio.numerator == refreshRate)
+				var resolution = Screen.resolutions[i];
+
+				if (resolution.width < minResolutionWidth || resolution.height < minResolutionHeight) 
 				{
-					return i;
+					// Skip small resolutions
+					continue;
+				}
+
+				if (resolution.width == width && resolution.height == height)
+				{
+					hasMatchingResolution = true;
+					if (resolution.refreshRateRatio.numerator == refreshRate)
+					{
+						// Exact match found, return immediately
+						return i;
+					}
+					else if (bestMatchResolution.refreshRateRatio.numerator < resolution.refreshRateRatio.numerator)
+					{
+						// We found same resolution but with a better refresh rate, update our best match
+						bestMatchResolution = resolution;
+						bestMatchIndex = i;
+					}
+				}
+				else if (bestMatchResolution.width < resolution.width)
+				{
+					// This is a higher resolution, update our fallback option
+					bestMatchResolution = resolution;
+					bestMatchIndex = i;
 				}
 			}
 
-			return -1;
+			// If we found a matching resolution with best available refresh rate, return that index
+			// Otherwise return highest resolution available
+			return hasMatchingResolution ? bestMatchIndex : Screen.resolutions.Length - 1;   
 		}
 
 		public void LiveAdjustVolume()

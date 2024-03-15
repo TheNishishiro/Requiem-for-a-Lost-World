@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9898a35336d442cd9c1153dd0f4bc1ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 1
   spawnPrefab: {fileID: 1270610944524131206, guid: d4bb4b7bbcc928a48b4abd4e53f6672b,
     type: 3}
+  WeaponId: 25
   Name: Bubble Universe
   Description: Spawn bubble universe traveling in a random direction that expands
     after traveling a certain distance
@@ -74,6 +76,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 88f5f7e47025a7b42bc0f561b13692d4, type: 2}
   - {fileID: 11400000, guid: 39b8157c3bd30214d8726146c3cc8165, type: 2}

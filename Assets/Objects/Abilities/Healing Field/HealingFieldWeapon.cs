@@ -54,13 +54,11 @@ namespace Objects.Abilities.Healing_Field
 			_subProjectilePosition = position;
 			_subProjectilePool.Get();
 		}
-		
-		protected override bool ProjectileSpawn(HealingFieldProjectile projectile)
+
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
 			var pointOnSurface = Utilities.GetPointOnColliderSurface(new Vector3(transform.position.x, 0, transform.position.z), transform);
-			projectile.transform.position = pointOnSurface;
-			projectile.SetParentWeapon(this);
-			return true;
+			networkProjectile.Initialize(this, pointOnSurface);
 		}
 
 		protected override void OnLevelUp()

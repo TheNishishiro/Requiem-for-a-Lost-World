@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b32a378cef43f3b9f43b4d8b95f729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 1
   spawnPrefab: {fileID: 2402120471238580864, guid: 3628eb11f781e5b4191628a32966436e,
     type: 3}
+  WeaponId: 15
   Name: Gem of Dream
   Description: Create a hovering weapon that shoot and tracks nearby targets
   chanceToAppear: 0.8
@@ -73,6 +75,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 420a7b69e1b0d0840b826ded5d20e49b, type: 2}
   - {fileID: 11400000, guid: ddc5e220ca31e4548bdc535100e5bf8a, type: 2}

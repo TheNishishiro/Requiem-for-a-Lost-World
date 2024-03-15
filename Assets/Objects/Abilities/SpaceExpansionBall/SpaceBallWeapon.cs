@@ -55,19 +55,20 @@ namespace Objects.Abilities.SpaceExpansionBall
 			_subProjectilePosition = position;
 			_subProjectilePool.Get();
 		}
-		
-		protected override bool ProjectileSpawn(SpaceBallProjectile projectile)
+
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
 			var enemy = EnemyManager.instance.GetRandomEnemy();
 			if (enemy == null)
-				return false;
+			{
+				networkProjectile.Despawn(WeaponId);
+				return;
+			}
 			
 			var position = enemy.TargetPoint.position;
 
-			projectile.transform.position = transform.position;
-			projectile.SetParentWeapon(this);
-			projectile.SetDirection(position.x, position.y, position.z);
-			return true;
+			networkProjectile.Initialize(this, transform.position);
+			networkProjectile.GetProjectile<SpaceBallProjectile>().SetDirection(position.x, position.y, position.z);
 		}
 
 		protected override void OnLevelUp()

@@ -2,6 +2,7 @@
 using Interfaces;
 using Objects.Characters;
 using Objects.Stage;
+using Unity.Netcode;
 using UnityEngine;
 using Weapons;
 
@@ -9,6 +10,7 @@ namespace Objects.Abilities.Back_Hole
 {
 	public class BlackHoleCenterComponent : ProjectileBase
 	{
+		[SerializeField] private NetworkProjectile networkProjectile;
 		private float _weaknessIncrease;
 
 		private void Start()
@@ -18,6 +20,8 @@ namespace Objects.Abilities.Back_Hole
 
 		private void OnTriggerStay(Collider other)
 		{
+			if (!networkProjectile.IsOwner) return;
+			
 			DamageArea(other, out var damageable);
 			damageable?.SetVulnerable(1f, WeaponStatsStrategy.GetWeakness() + _weaknessIncrease);
 		}

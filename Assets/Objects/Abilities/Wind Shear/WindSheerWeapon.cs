@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
@@ -25,6 +26,18 @@ namespace Objects.Abilities.Wind_Shear
             return true;
         }
 
+        public override void SetupProjectile(NetworkProjectile networkProjectile)
+        {
+            var enemy = EnemyManager.instance.GetRandomEnemy();
+            if (enemy == null)
+            {
+                networkProjectile.Despawn(WeaponId);
+                return;
+            }
+
+            networkProjectile.Initialize(this, enemy.TargetPoint.position);
+        }
+        
         protected override void OnLevelUp()
         {
             if (LevelField == 9)

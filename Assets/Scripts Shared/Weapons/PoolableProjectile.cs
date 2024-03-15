@@ -1,4 +1,6 @@
 ﻿using Interfaces;
+using Managers;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -6,8 +8,8 @@ namespace Weapons
 {
     public class PoolableProjectile<T> : StagableProjectile where T : MonoBehaviour
     {
-        private ObjectPool<T> _objectPool;
-        private T _object;
+        protected ObjectPool<T> _objectPool;
+        protected T _object;
         
         public void Init(ObjectPool<T> objectPool, T entity)
         {
@@ -17,7 +19,10 @@ namespace Weapons
 
         protected override void Destroy()
         {
-            ReturnToPool(_objectPool, _object);
+            if (ParentWeapon.useNetworkPool)
+                RpcManager.instance.DespawnProjectileRpc(transformCache.GetComponent<NetworkObject>(), ParentWeapon.WeaponId);
+            else
+                ReturnToPool(_objectPool, _object);
         }
     }
 }

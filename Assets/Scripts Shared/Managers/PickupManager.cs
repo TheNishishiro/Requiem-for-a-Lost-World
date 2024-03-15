@@ -114,6 +114,8 @@ namespace Managers
 		[Rpc(SendTo.Everyone)]
 		public void RequestClientSpawnPickupRpc(int amount, Vector3 position)
 		{
+			if (GameManager.instance.playerStatsComponent.IsDead()) return;
+			
 			pickupAmount = amount;
 			pickupPosition = position;
 			if (_expGem.Count < 400)

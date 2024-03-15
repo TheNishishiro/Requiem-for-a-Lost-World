@@ -86,7 +86,7 @@ namespace Objects.Enemies
 				SetupBoss();
 		}
 
-		public void Setup(EnemyNetworkStats newStats, float healthMultiplier, float speedMultiplier, float expDropMultiplier)
+		public void Setup(EnemyNetworkStats newStats, float healthMultiplier, float speedMultiplier, float expDropMultiplier, float damageMultiplier)
 		{
 			damageableComponent.Clear();
 			chaseComponent.Clear();
@@ -168,7 +168,7 @@ namespace Objects.Enemies
 			stats.speed *= speedMultiplier;
 			stats.speed *= PlayerStatsScaler.GetScaler().GetEnemySpeedIncrease();
 			stats.speed *= GameData.GetCurrentDifficulty().EnemySpeedModifier;
-			stats.damage *= GameData.GetCurrentDifficulty().EnemyDamageModifier;
+			stats.damage *= GameData.GetCurrentDifficulty().EnemyDamageModifier * damageMultiplier;
 			damage.Value = stats.damage;
 			chaseComponent.FollowYAxis = newStats.allowFlying;
 			chaseComponent.SetSpeed(stats.speed);
@@ -387,6 +387,11 @@ namespace Objects.Enemies
 		public bool IsPlayerControlled()
 		{
 			return _isPlayerControlled;
+		}
+
+		public bool IsDying()
+		{
+			return _isDying.Value;
 		}
 	}
 }
