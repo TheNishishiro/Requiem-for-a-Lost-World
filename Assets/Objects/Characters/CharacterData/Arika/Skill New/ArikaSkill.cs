@@ -54,7 +54,7 @@ namespace Objects.Characters.Chronastra.Skill
 			}
 			EnemyManager.instance.SetTimeStop(false);
 			gameObject.SetActive(false);
-			var field = SpawnManager.instance.SpawnObject(GameManager.instance.playerComponent.transform.position, skillPrefab);
+			var field = SpawnManager.instance.SpawnObject(GameManager.instance.PlayerTransform.position, skillPrefab);
 			field.GetComponent<ArikaExplosion>().SetDuration(_duration);
 			EnemyManager.instance.GlobalDamage(100, new ElementalWeapon(Element.Cosmic));
 		}

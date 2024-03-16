@@ -33,6 +33,7 @@ namespace Managers
 		[SerializeField] private TMP_Dropdown resolutionDropdown;
 		[SerializeField] private TMP_InputField usernameField;
 		[SerializeField] private Slider volumeSlider;
+		private List<Resolution> availableResolutions = new ();
 		private bool _isLoading;
 		private const int minResolutionWidth = 800;
 		private const int minResolutionHeight = 600;
@@ -170,6 +171,7 @@ namespace Managers
 				if (resolution.width < minResolutionWidth || resolution.height < minResolutionHeight) 
 					continue;
 				
+				availableResolutions.Add(resolution);
 				resolutionDropdown.options.Add(new TMP_Dropdown.OptionData($"{resolution.width}x{resolution.height} @{resolution.refreshRateRatio.value:0}hz"));
 			}
 			resolutionDropdown.value = GetResolutionIndex(configuration.ResolutionWidth, configuration.ResolutionHeight, configuration.RefreshRate);
@@ -200,9 +202,9 @@ namespace Managers
 			configuration.IsDiscordEnabled = discordToggle.isOn;
 			configuration.WindowMode = windowModeDropdown.value;
 			configuration.Use3dGrass = use3DGrassToggle.isOn;
-			configuration.ResolutionWidth = Screen.resolutions[resolutionDropdown.value].width;
-			configuration.ResolutionHeight = Screen.resolutions[resolutionDropdown.value].height;
-			configuration.RefreshRate = Screen.resolutions[resolutionDropdown.value].refreshRateRatio.numerator;
+			configuration.ResolutionWidth = availableResolutions[resolutionDropdown.value].width;
+			configuration.ResolutionHeight = availableResolutions[resolutionDropdown.value].height;
+			configuration.RefreshRate = availableResolutions[resolutionDropdown.value].refreshRateRatio.numerator;
 			configuration.Volume = volumeSlider.value;
 			configuration.TextureQuality = textureResolutionDropdown.value;
 			configuration.Username = usernameField.text;
@@ -215,20 +217,13 @@ namespace Managers
 		
 		private int GetResolutionIndex(int width, int height, uint refreshRate)
 		{
-			var bestMatchResolution = Screen.resolutions[0];
+			var bestMatchResolution = availableResolutions[0];
 			var bestMatchIndex = -1;
 			var hasMatchingResolution = false;
 
-			for (var i = 0; i < Screen.resolutions.Length; i++)
+			for (var i = 0; i < availableResolutions.Count; i++)
 			{
-				var resolution = Screen.resolutions[i];
-
-				if (resolution.width < minResolutionWidth || resolution.height < minResolutionHeight) 
-				{
-					// Skip small resolutions
-					continue;
-				}
-
+				var resolution = availableResolutions[i];
 				if (resolution.width == width && resolution.height == height)
 				{
 					hasMatchingResolution = true;
@@ -254,7 +249,7 @@ namespace Managers
 
 			// If we found a matching resolution with best available refresh rate, return that index
 			// Otherwise return highest resolution available
-			return hasMatchingResolution ? bestMatchIndex : Screen.resolutions.Length - 1;   
+			return hasMatchingResolution ? bestMatchIndex : availableResolutions.Count - 1;   
 		}
 
 		public void LiveAdjustVolume()

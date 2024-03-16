@@ -127,7 +127,7 @@ namespace Objects.Players.Scripts
 				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Nishi_HoF)
 				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
-			if (GameData.GetPlayerCharacterId() == CharactersEnum.Natalie_BoW && GameData.GetPlayerCharacterRank() >= CharacterRank.E5)
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Natalie_BoW && GameData.GetPlayerCharacterRank() >= CharacterRank.E3)
 				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Adam_OBoV && GameData.GetPlayerCharacterRank() >= CharacterRank.E5)
 				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);

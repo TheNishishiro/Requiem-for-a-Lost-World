@@ -12,7 +12,7 @@ namespace Objects.Characters.Nishi_HoF
         {
             if (!GameManager.IsCharacterState(PlayerCharacterState.Nishi_HoF_Flame_State))
                 return base.GetDamageIncreasePercentage();
-            return base.GetDamageIncreasePercentage() + (GetMaxHealth() - GetHealth()) * 0.01f;
+            return base.GetDamageIncreasePercentage() + ((GetMaxHealth() - GetHealth()) * 0.005f);
         }
 
         public override float GetFireDamageIncrease()
@@ -20,8 +20,8 @@ namespace Objects.Characters.Nishi_HoF
             if (!GameManager.IsCharacterState(PlayerCharacterState.Nishi_HoF_Flame_State) || !GameData.IsCharacterRank(CharacterRank.E1))
                 return base.GetFireDamageIncrease();
             
-            var damageIncrease = WeaponManager.instance.GetUnlockedWeaponsAsInterface().Count(x => x.ElementField == Element.Fire) * 0.25f;
-            return base.GetFireDamageIncrease() + 0.5f + damageIncrease;
+            var damageIncrease = WeaponManager.instance.GetUnlockedWeaponsAsInterface().Count(x => x.ElementField == Element.Fire) * 0.1f;
+            return base.GetFireDamageIncrease() + 0.25f + damageIncrease;
         }
 
         public override float GetCosmicDamageIncrease()
@@ -29,10 +29,10 @@ namespace Objects.Characters.Nishi_HoF
             if (!GameManager.IsCharacterState(PlayerCharacterState.Nishi_HoF_Void_State))
                 return base.GetCosmicDamageIncrease();
             if (!GameData.IsCharacterRank(CharacterRank.E1))
-                return base.GetCosmicDamageIncrease() + 1f;
+                return base.GetCosmicDamageIncrease() + 0.25f;
             
-            var damageIncrease = WeaponManager.instance.GetUnlockedWeaponsAsInterface().Count(x => x.ElementField == Element.Cosmic) * 0.5f;
-            return base.GetCosmicDamageIncrease() + 1f + damageIncrease;
+            var damageIncrease = WeaponManager.instance.GetUnlockedWeaponsAsInterface().Count(x => x.ElementField == Element.Cosmic) * 0.30f;
+            return base.GetCosmicDamageIncrease() + 0.25f + damageIncrease;
         }
     }
 }

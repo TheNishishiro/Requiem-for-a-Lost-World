@@ -84,15 +84,16 @@ namespace Objects.Characters.Nishi_HoF.Skill
         
         public void OnDamageTaken(float damage)
         {
+            if (damage <= 0) return;
             if (GameManager.IsCharacterState(PlayerCharacterState.Nishi_HoF_Flame_State))
-                SpecialBarManager.Increment(5);
+                SpecialBarManager.Increment();
         }
 
         public void OnDamageDealt(Damageable damageable, float damage, bool isRecursion)
         {
             if (isRecursion || !GameData.IsCharacterRank(CharacterRank.E2)) return;
-
             if (!GameManager.IsCharacterState(PlayerCharacterState.Nishi_HoF_Void_State)) return;
+            
             SpecialBarManager.Increment(0.1f);
             if (Random.value >= 0.5f) return;
                 

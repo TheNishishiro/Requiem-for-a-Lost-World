@@ -33,7 +33,7 @@ namespace Objects.Characters.Amelia.Skill
 
             statToUpgrade = Enum.GetValues(typeof(StatEnum)).Cast<StatEnum>().Except(new[]
             {
-                StatEnum.AttackCount, StatEnum.Revives, StatEnum.Rerolls, StatEnum.Skips
+                StatEnum.AttackCount, StatEnum.Revives, StatEnum.Rerolls, StatEnum.Skips, StatEnum.CooldownReduction
             }).ToList().OrderBy(_ => Random.value).FirstOrDefault();
             statIncrease = statToUpgrade.IsPercent() ? (GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 0.1f : 0.02f) : (GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 2f : 1f);
             playerStatsComponent.Add(statToUpgrade, statIncrease);

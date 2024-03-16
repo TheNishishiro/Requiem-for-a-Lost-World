@@ -11,12 +11,10 @@ namespace Objects.Characters.Natalie
 {
 	public class NatalieSpecial : CharacterSkillBase, IDamageOverTimeExpiredHandler
 	{
-		private PlayerStatsComponent _playerStatsComponent;
 		private ElementalWeapon _elementalWeapon;
 
 		private void Start()
 		{
-			_playerStatsComponent = GetComponentInParent<PlayerStatsComponent>();
 			_elementalWeapon = new ElementalWeapon(Element.Wind);
 		}
 
