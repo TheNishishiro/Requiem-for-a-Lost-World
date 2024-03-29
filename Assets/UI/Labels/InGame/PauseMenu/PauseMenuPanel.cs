@@ -29,13 +29,13 @@ namespace UI.Labels.InGame.PauseMenu
 
 		public void ToggleMenu()
 		{
-			if (!WindowManager.instance.IsQueueEmpty() && panel.activeInHierarchy)
+			if (!QueueableWindowManager.instance.IsQueueEmpty() && panel.activeInHierarchy)
 			{
 				CloseMenu();
 				return;
 			}
 
-			if (!WindowManager.instance.IsQueueEmpty()) return;
+			if (!QueueableWindowManager.instance.IsQueueEmpty()) return;
 			
 			if (!panel.activeInHierarchy)
 				OpenMenu();
@@ -45,12 +45,12 @@ namespace UI.Labels.InGame.PauseMenu
 
 		public void CloseMenu()
 		{
-			WindowManager.instance.DeQueueWindow();
+			QueueableWindowManager.instance.DeQueueWindow();
 		}
 		
 		public void OpenMenu()
 		{
-			WindowManager.instance.QueueWindow(this);
+			QueueableWindowManager.instance.QueueWindow(this);
 		}
 
 		public void Open()

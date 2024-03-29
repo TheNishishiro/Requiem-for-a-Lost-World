@@ -16,9 +16,11 @@ MonoBehaviour:
   Name: David
   Title: General of Animosity
   CharacterCard: {fileID: 21300000, guid: 2b9915ea212849b45a0b087433cf7704, type: 3}
+  FullArt: {fileID: 21300000, guid: 90f6450306e98fe4daf06f2086edc878, type: 3}
   Avatar: {fileID: 21300000, guid: 14707ba5d67b4be4c9d0a48049a815e5, type: 3}
   CharacterSprite: {fileID: 21300000, guid: f43d0999940499948851d0f5efe243eb, type: 3}
   signet: {fileID: 21300000, guid: b4123ca9ef9fe654a98eaf80a8ec3ce6, type: 3}
+  nameAnnouncer: {fileID: 8300000, guid: 54e903c7442aa9e41a9c5b8c44b87fd5, type: 3}
   PassiveDescription: Send additional 2 meteors per attack and increase crit damage
     by 80%. Every point of HP lost will increase damage dealt by 1%
   AbilityName: Firey Rage
@@ -76,6 +78,15 @@ MonoBehaviour:
     Skips: 0
     DamageOverTimeFrequencyReductionPercentage: 0
     DamageOverTimeDurationIncreasePercentage: 0
+    LifeSteal: 0
+    FireDamageIncrease: 0
+    LightningDamageIncrease: 0
+    IceDamageIncrease: 0
+    PhysicalDamageIncrease: 0
+    WindDamageIncrease: 0
+    LightDamageIncrease: 0
+    CosmicDamageIncrease: 0
+    EarthDamageIncrease: 0
   skillNodes:
   - {fileID: 11400000, guid: b84d168975d63e14bb8f3f5ed325bd13, type: 2}
   - {fileID: 11400000, guid: f07d43f8f9f6c1b4ab66c778a69b4ac6, type: 2}

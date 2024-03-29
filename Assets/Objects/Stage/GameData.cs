@@ -15,10 +15,21 @@ namespace Objects.Stage
 	public class GameData
 	{
 		private static DifficultyData _currentDifficultyData;
+		private static StageEnum _currentStage;
 
 		public static void SetCurrentDifficultyData(DifficultyData difficultyData)
 		{
 			_currentDifficultyData = difficultyData;
+		}
+		
+		public static void SetCurrentStage(StageEnum stage)
+		{
+			_currentStage = stage;
+		}
+		
+		public static StageEnum GetCurrentStage()
+		{
+			return _currentStage;
 		}
 		
 		public static Sprite GetPlayerAbilityIcon()

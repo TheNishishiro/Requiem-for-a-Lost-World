@@ -29,7 +29,7 @@ namespace UI.Main_Menu.End_Screen
 			_saveFile = FindObjectOfType<SaveFile>();
 			if (gameResultData.IsGameEnd)
 			{
-				titleScreen.gameObject.SetActive(false);
+				//titleScreen.gameObject.SetActive(false);
 				winLoseText.text = gameResultData.IsWin ? "Victory" : "Defeat";
 				panel.SetActive(true);
 				
@@ -52,7 +52,7 @@ namespace UI.Main_Menu.End_Screen
 			}
 			else
 			{
-				titleScreen.gameObject.SetActive(true);
+				//titleScreen.gameObject.SetActive(true);
 				discordManager.SetMainMenu();
 			}
             

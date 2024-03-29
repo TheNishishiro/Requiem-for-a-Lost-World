@@ -16,9 +16,11 @@ MonoBehaviour:
   Name: Nishi
   Title: Shadow of the Past
   CharacterCard: {fileID: 21300000, guid: 0ce2b7f99c94bb54090320d4a672696a, type: 3}
+  FullArt: {fileID: 21300000, guid: 4bd39fd9f8cefcb4e8e7779319577066, type: 3}
   Avatar: {fileID: 21300000, guid: 8f49d35216dbf874ca224480855b63a4, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 63199ad1f76c53042a363dc64f49ab83, type: 3}
   signet: {fileID: 21300000, guid: edc40b7f0bfd31c498afd44aeaef7e98, type: 3}
+  nameAnnouncer: {fileID: 8300000, guid: 31f8f2fcaf6e2284e87fc1f90d1b070d, type: 3}
   PassiveDescription: "Charge special by <color=yellow>1</color> with each <color=#00B1FF>killed
     enemy</color>. After killing enough enemies summon dark flames on surrounding
     enemies, dealing instance of damage and consuming part of Nishi's health. \n\nUnleashing
@@ -78,6 +80,15 @@ MonoBehaviour:
     Skips: 0
     DamageOverTimeFrequencyReductionPercentage: 0
     DamageOverTimeDurationIncreasePercentage: 0
+    LifeSteal: 0
+    FireDamageIncrease: 0
+    LightningDamageIncrease: 0
+    IceDamageIncrease: 0
+    PhysicalDamageIncrease: 0
+    WindDamageIncrease: 0
+    LightDamageIncrease: 0
+    CosmicDamageIncrease: 0
+    EarthDamageIncrease: 0
   skillNodes:
   - {fileID: 11400000, guid: 36cac3b8631fa27438eec42e01810255, type: 2}
   - {fileID: 11400000, guid: 43615b0b574f1514e9ad4d1d7ca6e3a3, type: 2}

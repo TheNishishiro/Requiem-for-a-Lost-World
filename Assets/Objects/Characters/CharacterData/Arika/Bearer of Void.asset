@@ -16,9 +16,11 @@ MonoBehaviour:
   Name: Arika
   Title: Will of the Void
   CharacterCard: {fileID: 21300000, guid: 893e9caf0c25bad40932d3acec26abf9, type: 3}
+  FullArt: {fileID: 21300000, guid: cd187ecce6e976442962d4dbffb1f0f5, type: 3}
   Avatar: {fileID: 21300000, guid: 9410322f27c9b924386a9d25f5b28976, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 135530b080ac34444b39f8df18be6ac3, type: 3}
   signet: {fileID: 21300000, guid: e96274df46be6224da0dcc0e7a1c5495, type: 3}
+  nameAnnouncer: {fileID: 8300000, guid: 91325a42ef20f06408bd9dae61fed19f, type: 3}
   PassiveDescription: Radius and cooldown of black hole spawns is reduced for the
     first 5 minutes in combat, also gain projectile size every 20 levels
   AbilityName: Void's Embrace
@@ -29,7 +31,7 @@ MonoBehaviour:
   AbilityPrefab: {fileID: 8699453097623444231, guid: dd8a0e0db35b86d4aae6ac40a2b03893,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 89aed4a773ec0294fb9d1c14880b782c, type: 3}
-  ColorTheme: {r: 0.13333334, g: 0.4117647, b: 0.63529414, a: 1}
+  ColorTheme: {r: 0.64705884, g: 0.27058825, b: 1, a: 1}
   Alignment: 2
   StarRating: 5
   StartingWeapon: {fileID: 4937499201459452257, guid: e5b694096ad9bf54cbcc9ac2b3a2ba7a,
@@ -76,6 +78,15 @@ MonoBehaviour:
     Skips: 0
     DamageOverTimeFrequencyReductionPercentage: 0
     DamageOverTimeDurationIncreasePercentage: 0
+    LifeSteal: 0
+    FireDamageIncrease: 0
+    LightningDamageIncrease: 0
+    IceDamageIncrease: 0
+    PhysicalDamageIncrease: 0
+    WindDamageIncrease: 0
+    LightDamageIncrease: 0
+    CosmicDamageIncrease: 0
+    EarthDamageIncrease: 0
   skillNodes:
   - {fileID: 11400000, guid: d2d0714d6bd503b478562e62a98b5d22, type: 2}
   - {fileID: 11400000, guid: 6cd525698035cb44fa24f5d39800493d, type: 2}

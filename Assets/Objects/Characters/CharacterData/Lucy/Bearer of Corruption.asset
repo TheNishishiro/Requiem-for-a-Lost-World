@@ -16,9 +16,11 @@ MonoBehaviour:
   Name: Lucy
   Title: Bearer of Corruption
   CharacterCard: {fileID: 21300000, guid: 5d9162cb974102447a74de7e584c2376, type: 3}
+  FullArt: {fileID: 21300000, guid: e5cba2b4221d0b5448c8ae8ff1e1b539, type: 3}
   Avatar: {fileID: 21300000, guid: 88dfde6aec7eb9640925662224f7311f, type: 3}
   CharacterSprite: {fileID: 21300000, guid: ba49fbf638fcf6f478b04d8ba9f1a37d, type: 3}
   signet: {fileID: 21300000, guid: 2d1826e6251112e4285781a2abff6b5e, type: 3}
+  nameAnnouncer: {fileID: 8300000, guid: c33770ef0d4553048a42b9b04ce3436b, type: 3}
   PassiveDescription: Each kill has a 5% chance of dropping a healing particle that
     heals <color=green>1</color> HP upon being picked up
   AbilityName: Absolute Command
@@ -29,7 +31,7 @@ MonoBehaviour:
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 0}
   AbilityIcon: {fileID: 21300000, guid: 7baa46a83cddaef48a2e6e4ab42ef901, type: 3}
-  ColorTheme: {r: 0.5529412, g: 0.48235294, b: 0.40392157, a: 1}
+  ColorTheme: {r: 0.8117647, g: 0.65882355, b: 0.4862745, a: 1}
   Alignment: 2
   StarRating: 5
   StartingWeapon: {fileID: 693573438688654377, guid: b2c971a91b4815d4e81ba1fd64a5ceeb,
@@ -76,6 +78,15 @@ MonoBehaviour:
     Skips: 0
     DamageOverTimeFrequencyReductionPercentage: 0
     DamageOverTimeDurationIncreasePercentage: 0
+    LifeSteal: 0
+    FireDamageIncrease: 0
+    LightningDamageIncrease: 0
+    IceDamageIncrease: 0
+    PhysicalDamageIncrease: 0
+    WindDamageIncrease: 0
+    LightDamageIncrease: 0
+    CosmicDamageIncrease: 0
+    EarthDamageIncrease: 0
   skillNodes:
   - {fileID: 11400000, guid: 8260ce2dbfe02934bb44dccac611b20b, type: 2}
   - {fileID: 11400000, guid: aa884236ff11c314dbf4d24a44ab1b24, type: 2}

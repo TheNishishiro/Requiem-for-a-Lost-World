@@ -3,6 +3,7 @@ using System.Collections;
 using DefaultNamespace.Data;
 using Managers;
 using Objects.Characters;
+using Objects.Stage;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -39,7 +40,7 @@ namespace UI.Main_Menu.Character_List_Menu
 			
 			nameTextField.text = characterData.Name;
 			levelTextField.text = $"lv. {_characterSaveData.Level}";
-			finsihedDifficultyTextField.text = new string('\u2726', _characterSaveData.DifficultyFinished);
+			finsihedDifficultyTextField.text = new string('\u2726', _characterSaveData.GetFinishedDifficulty(StageEnum.CapitalOutskirts));
 			finsihedDifficultyTextField.color = characterData.ColorTheme;
 			experienceSlider.SetValue(_characterSaveData.Experience, _characterSaveData.ExperienceNeeded);
 			lockPanel.SetActive(!_characterSaveData.IsUnlocked);

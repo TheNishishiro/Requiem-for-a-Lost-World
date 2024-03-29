@@ -15,12 +15,12 @@ namespace Managers
 		
 		public void OpenPanel()
 		{
-			WindowManager.instance.QueueWindow(this);
+			QueueableWindowManager.instance.QueueWindow(this);
 		}
 		
 		public void ClosePanel()
 		{
-			WindowManager.instance.DeQueueWindow();
+			QueueableWindowManager.instance.DeQueueWindow();
 		}
 		
 		public void HideButtons()

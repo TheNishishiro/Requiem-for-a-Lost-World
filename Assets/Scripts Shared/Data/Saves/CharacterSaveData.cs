@@ -15,9 +15,9 @@ namespace DefaultNamespace.Data
 		public int RankUpLevel;
 		public ulong KillCount;
 		public int HighestInGameLevel;
-		public int DifficultyFinished;
 		public int skillPoints;
 		public List<int> unlockedSkillPoints;
+		public Dictionary<StageEnum, int> FinishedDifficulty = new ();
 		public int ExperienceNeeded => (int)(Level * 75 * 1.5f);
 
 		public CharacterSaveData()
@@ -29,6 +29,13 @@ namespace DefaultNamespace.Data
 		{
 			unlockedSkillPoints ??= new List<int>();
 			return unlockedSkillPoints;
+		}
+
+		public int GetFinishedDifficulty(StageEnum stage)
+		{
+			FinishedDifficulty ??= new Dictionary<StageEnum, int>();
+			FinishedDifficulty.TryAdd(stage, 0);
+			return FinishedDifficulty[stage];
 		}
 
 		public CharacterRank GetRankEnum()
@@ -53,8 +60,8 @@ namespace DefaultNamespace.Data
 			if (gameResultData.Level > HighestInGameLevel)
 				HighestInGameLevel = gameResultData.Level;
 
-			if (gameResultData.IsWin && DifficultyFinished < (int)gameResultData.Difficulty + 1)
-				DifficultyFinished = (int)gameResultData.Difficulty + 1;
+			if (gameResultData.IsWin && GetFinishedDifficulty(GameData.GetCurrentStage()) < (int)gameResultData.Difficulty + 1)
+				FinishedDifficulty.TryAdd(GameData.GetCurrentStage(), (int)gameResultData.Difficulty + 1);
 		}
 		
 		public void AddExperience(int experience)

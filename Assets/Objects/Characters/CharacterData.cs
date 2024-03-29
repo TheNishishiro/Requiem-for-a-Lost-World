@@ -19,9 +19,11 @@ namespace Objects.Characters
 		public string Name;
 		public string Title;
 		public Sprite CharacterCard;
+		public Sprite FullArt;
 		public Sprite Avatar;
 		public Sprite CharacterSprite;
 		public Sprite signet;
+		public AudioClip nameAnnouncer;
 		[ResizableTextArea]
 		public string PassiveDescription;
 		public string AbilityName;

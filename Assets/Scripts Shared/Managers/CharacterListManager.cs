@@ -41,6 +41,16 @@ namespace Managers
 		{
 			return characters.Count;
 		}
+		
+		public CharactersEnum GetCharacterIdByIndex(int index)
+		{
+			return characters[index].Id;
+		}
+		
+		public int GetCharacterIndexById(CharactersEnum characterId)
+		{
+			return characters.FindIndex(x => x.Id == characterId);
+		}
 
 		public CharacterData GetRandomCharacter()
 		{

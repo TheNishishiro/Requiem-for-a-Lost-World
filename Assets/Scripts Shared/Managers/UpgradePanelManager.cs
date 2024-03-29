@@ -25,18 +25,18 @@ namespace Managers
 		public void OpenPanel()
 		{
 			_isWeaponOnly = false;
-			WindowManager.instance.QueueWindow(this);
+			QueueableWindowManager.instance.QueueWindow(this);
 		}
 
 		public void ClosePanel()
 		{
-			WindowManager.instance.DeQueueWindow();
+			QueueableWindowManager.instance.DeQueueWindow();
 		}
 
 		public void OpenPickWeapon()
 		{
 			_isWeaponOnly = true;
-			WindowManager.instance.QueueWindow(this);
+			QueueableWindowManager.instance.QueueWindow(this);
 		}
 
 		private void Clean()

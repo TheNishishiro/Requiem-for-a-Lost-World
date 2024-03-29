@@ -16,9 +16,11 @@ MonoBehaviour:
   Name: Natalie
   Title: Breath of Nature
   CharacterCard: {fileID: 21300000, guid: e798ef21ffe445645b8111484e52b042, type: 3}
+  FullArt: {fileID: 21300000, guid: e23a0654c74ec384e9727209a066fda6, type: 3}
   Avatar: {fileID: 21300000, guid: 2f0f2258f33bf5d418058d37095e8934, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 44ac0eb5cbbfdc94696f73474ef610d3, type: 3}
   signet: {fileID: 21300000, guid: 4c75574c642bf6f4baff74994431fa62, type: 3}
+  nameAnnouncer: {fileID: 8300000, guid: 48efa6cda68ddee4ebe1dec668ed5cff, type: 3}
   PassiveDescription: 'Begin with low Tornado spawning radius and increase it''s
     speed by <color=green>50%</color>
 
@@ -34,7 +36,7 @@ MonoBehaviour:
   AbilityPrefab: {fileID: -6151377061064853923, guid: 328e447a0e02aa649adea30cc671114e,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 2a39b6f7df5bcdc48bc80df011300e09, type: 3}
-  ColorTheme: {r: 1, g: 0.7647059, b: 0, a: 1}
+  ColorTheme: {r: 0.3019608, g: 1, b: 0.27058825, a: 1}
   Alignment: 1
   StarRating: 5
   StartingWeapon: {fileID: -1210981128314417668, guid: d40c8cdd411557a45963d2005107c041,
@@ -82,6 +84,14 @@ MonoBehaviour:
     DamageOverTimeFrequencyReductionPercentage: 0
     DamageOverTimeDurationIncreasePercentage: 0
     LifeSteal: 0
+    FireDamageIncrease: 0
+    LightningDamageIncrease: 0
+    IceDamageIncrease: 0
+    PhysicalDamageIncrease: 0
+    WindDamageIncrease: 0
+    LightDamageIncrease: 0
+    CosmicDamageIncrease: 0
+    EarthDamageIncrease: 0
   skillNodes:
   - {fileID: 11400000, guid: e222e7c0df65d244190ce3ad145a4084, type: 2}
   - {fileID: 11400000, guid: 55673078510933e44a8c31a86ba6a1d1, type: 2}

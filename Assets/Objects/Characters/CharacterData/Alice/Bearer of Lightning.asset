@@ -16,9 +16,11 @@ MonoBehaviour:
   Name: Alice
   Title: The First Sinner
   CharacterCard: {fileID: 21300000, guid: 50e798b2a27322749b3e77e9a4b949f6, type: 3}
+  FullArt: {fileID: 21300000, guid: 94bc91ba667f6c14bae28a3d19af7a25, type: 3}
   Avatar: {fileID: 21300000, guid: 3a60d6b44c8a8b74d8b8d5a43104760a, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 8e2fd4ba853941743974dfde1ce94c74, type: 3}
   signet: {fileID: 21300000, guid: 37c9d2a824073604283f0dbc216ff921, type: 3}
+  nameAnnouncer: {fileID: 8300000, guid: d399809531b0c374dade8d865f1b9d09, type: 3}
   PassiveDescription: Every 10 levels increase <color=#FFC300>cooldown reduction</color>
     by <color=green>1.5%</color>
   AbilityName: Kaminari Kiretsu
@@ -30,7 +32,7 @@ MonoBehaviour:
   AbilityPrefab: {fileID: 3587274077961109647, guid: d576beee47a482c40a305ed5a4005058,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: d19ad89914d292c4ea045a3ea6b1553c, type: 3}
-  ColorTheme: {r: 0.21960784, g: 0.18039216, b: 0.29803923, a: 1}
+  ColorTheme: {r: 0.67058825, g: 0.5921569, b: 0.83137256, a: 1}
   Alignment: 1
   StarRating: 5
   StartingWeapon: {fileID: 8000290219869719478, guid: 939fd167da7dc944a99764b849f19669,
@@ -77,6 +79,15 @@ MonoBehaviour:
     Skips: 0
     DamageOverTimeFrequencyReductionPercentage: 0
     DamageOverTimeDurationIncreasePercentage: 0
+    LifeSteal: 0
+    FireDamageIncrease: 0
+    LightningDamageIncrease: 0
+    IceDamageIncrease: 0
+    PhysicalDamageIncrease: 0
+    WindDamageIncrease: 0
+    LightDamageIncrease: 0
+    CosmicDamageIncrease: 0
+    EarthDamageIncrease: 0
   skillNodes:
   - {fileID: 11400000, guid: 6b5653952d9ade942a7c0b21bea047ef, type: 2}
   - {fileID: 11400000, guid: 1eb8a78f365aa974f8d3e789bc07aec6, type: 2}

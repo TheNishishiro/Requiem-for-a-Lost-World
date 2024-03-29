@@ -16,9 +16,11 @@ MonoBehaviour:
   Name: Eliza
   Title: The Royal Maid
   CharacterCard: {fileID: 21300000, guid: 08ed45bd92f1a4748bba34a707f7e605, type: 3}
+  FullArt: {fileID: 21300000, guid: 20483ca284710f94ebccddaed11f543f, type: 3}
   Avatar: {fileID: 21300000, guid: fc95ef9c7d235eb47959f93bac8eb32e, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 10bbff2e72afa9c4bade4d0b811a689b, type: 3}
   signet: {fileID: 21300000, guid: 6ac091ae041939c45848dc85c01083c5, type: 3}
+  nameAnnouncer: {fileID: 8300000, guid: 8c3d2c96712827143a4cb3d36d2f7406, type: 3}
   PassiveDescription: Every 10 levels increase crit rate by <color=green>5%</color>
     up to 20%
   AbilityName: Precision Strike
@@ -76,6 +78,15 @@ MonoBehaviour:
     Skips: 0
     DamageOverTimeFrequencyReductionPercentage: 0
     DamageOverTimeDurationIncreasePercentage: 0
+    LifeSteal: 0
+    FireDamageIncrease: 0
+    LightningDamageIncrease: 0
+    IceDamageIncrease: 0
+    PhysicalDamageIncrease: 0
+    WindDamageIncrease: 0
+    LightDamageIncrease: 0
+    CosmicDamageIncrease: 0
+    EarthDamageIncrease: 0
   skillNodes:
   - {fileID: 11400000, guid: 1ffd29d9f9359434b912408931226565, type: 2}
   - {fileID: 11400000, guid: d6e8f77ef0cc1204c826065c4297c15d, type: 2}

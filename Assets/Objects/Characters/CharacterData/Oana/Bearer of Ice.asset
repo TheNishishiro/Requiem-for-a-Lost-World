@@ -16,9 +16,11 @@ MonoBehaviour:
   Name: Oana
   Title: Gheata Frumoasa
   CharacterCard: {fileID: 21300000, guid: 4f2ef50b3d089a1458244c729efb65a0, type: 3}
+  FullArt: {fileID: 21300000, guid: e303645490fcca443af55f04cf317fd2, type: 3}
   Avatar: {fileID: 21300000, guid: 49b95cf29764ebb4b82ed828653eac92, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 8f04cf7a799f04841a33a471e78dffd0, type: 3}
   signet: {fileID: 21300000, guid: 49e7941b3505efc48b35d706df4892db, type: 3}
+  nameAnnouncer: {fileID: 8300000, guid: 58447874a25fbc14dae48c76de69a9bf, type: 3}
   PassiveDescription: Stars with <color=#FFC300>experience gain</color> increased
     by <color=green>25%</color> and <color=#FFC300>attack size</color> by <color=green>20%</color>
   AbilityName: Snow hail
@@ -29,7 +31,7 @@ MonoBehaviour:
   AbilityPrefab: {fileID: -3946794187556888350, guid: 361cbcae307231f409ad753f8bfaa661,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: 5c9f52f2b121a8a419aa4aa866778294, type: 3}
-  ColorTheme: {r: 0.1882353, g: 0.60784316, b: 0.72156864, a: 1}
+  ColorTheme: {r: 0.5529412, g: 0.90588236, b: 1, a: 1}
   Alignment: 1
   StarRating: 5
   StartingWeapon: {fileID: -3280506597268986020, guid: 370b1024b90bdb3449ea1c8ca5619f62,
@@ -76,6 +78,15 @@ MonoBehaviour:
     Skips: 0
     DamageOverTimeFrequencyReductionPercentage: 0
     DamageOverTimeDurationIncreasePercentage: 0
+    LifeSteal: 0
+    FireDamageIncrease: 0
+    LightningDamageIncrease: 0
+    IceDamageIncrease: 0
+    PhysicalDamageIncrease: 0
+    WindDamageIncrease: 0
+    LightDamageIncrease: 0
+    CosmicDamageIncrease: 0
+    EarthDamageIncrease: 0
   skillNodes:
   - {fileID: 11400000, guid: 2d5e7e65574bbfb41854cea69d13217c, type: 2}
   - {fileID: 11400000, guid: 1f32ca14ffd02a541b960ab5f4ab424f, type: 2}
