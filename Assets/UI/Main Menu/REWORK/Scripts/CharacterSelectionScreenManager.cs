@@ -37,7 +37,7 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            StartLevel(GameData.GetCurrentStage());
+            OpenGameSettingsScreen();
             return;
         }
 
@@ -110,25 +110,10 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
             characterCards[cardIndex].Setup(characterSaveData.IsUnlocked, characters[characterIndex].CharacterCard);
         }
     }
-    
-    private void StartLevel(StageEnum currentStage)
+
+    public void OpenGameSettingsScreen()
     {
-        StartCoroutine(StartLevelCoroutine(currentStage));
-    }
-
-    private IEnumerator StartLevelCoroutine(StageEnum currentStage)
-    {
-        if (!NetworkManager.Singleton.ShutdownInProgress)
-            NetworkManager.Singleton.Shutdown();
-
-        while (NetworkManager.Singleton.ShutdownInProgress);
-
-        NetworkingContainer.IsHostPlayer = true;
-        AudioManager.instance.PlayButtonConfirmClick();
-        SceneManager.LoadScene("Scenes/Main Level", LoadSceneMode.Single);
-        SceneManager.LoadScene("Scenes/Essential", LoadSceneMode.Additive);
-			
-        yield break;
+        mainCharacterCard.OpenGameSettingsMenu();
     }
 
     public bool IsInFocus { get; set; }

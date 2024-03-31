@@ -2,9 +2,10 @@
 {
     public enum DifficultyEnum
     {
-        Normal = 0,
-        Hard = 1,
-        VeryHard = 2,
-        Insane = 3
+        None = 0,
+        Normal = 1,
+        Hard = 2,
+        VeryHard = 3,
+        Insane = 4
     }
 }

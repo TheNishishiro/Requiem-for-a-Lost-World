@@ -20,7 +20,6 @@ namespace Managers
 {
 	public class GameManager : MonoBehaviour
 	{		
-		[SerializeField] private GameResultData gameResultData;
 		[SerializeField] public ExperienceBar reviveTimerBar;
 		public static GameManager instance;
 		[HideInInspector] public MultiplayerPlayer playerMpComponent;
@@ -41,7 +40,6 @@ namespace Managers
 		[HideInInspector] public PlayerVfxComponent playerVfxComponent;
 		[SerializeField] public PlayerStatsComponent playerStatsComponent;
 		[SerializeField] private SpecialBarManager specialBarManager;
-		[SerializeField] private DifficultyContainer difficultyContainer;
 		[HideInInspector] public SaveFile saveFile;
 
 		public void Awake()
@@ -57,7 +55,6 @@ namespace Managers
 		private void Initialize()
 		{
 			saveFile = FindFirstObjectByType<SaveFile>();
-			GameData.SetCurrentDifficultyData(difficultyContainer.GetData(saveFile.SelectedDifficulty));
 			playerStatsComponent.Set(GameData.GetPlayerStartingStats());
             if (GameData.GetPlayerCharacterData()?.UseSpecialBar == true)
 	            specialBarManager.gameObject.SetActive(true);
@@ -82,7 +79,7 @@ namespace Managers
 
 		public void BackToMainMenu()
 		{
-			BackToMainMenu(gameResultData.IsWin);
+			BackToMainMenu(GameResultData.IsWin);
 		}
 		
 		public void BackToMainMenu(bool isWin)
@@ -92,9 +89,9 @@ namespace Managers
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.None;
 			_isExiting = true;
-			gameResultData.IsGameEnd = true;
-			gameResultData.IsWin = isWin;
-			gameResultData.Level = FindFirstObjectByType<LevelComponent>()?.GetLevel() ?? 0;
+			GameResultData.IsGameEnd = true;
+			GameResultData.IsWin = isWin;
+			GameResultData.Level = FindFirstObjectByType<LevelComponent>()?.GetLevel() ?? 0;
 
 			NetworkManager.Singleton.Shutdown(true);
 			NetworkingContainer.IsHostPlayer = true;

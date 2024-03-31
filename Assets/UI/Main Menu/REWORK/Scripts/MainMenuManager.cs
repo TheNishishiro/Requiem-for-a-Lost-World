@@ -4,6 +4,7 @@ using System.Linq;
 using Interfaces;
 using Managers;
 using NUnit.Framework;
+using Objects.Stage;
 using UnityEngine;
 
 namespace UI.Main_Menu.REWORK.Scripts
@@ -12,6 +13,7 @@ namespace UI.Main_Menu.REWORK.Scripts
     {
         public static MainMenuManager instance;
         [SerializeField] private StageSelectionManager stageSelectionManager;
+        [SerializeField] private GameResultScreenManager gameResultScreenManager;
         [SerializeField] private List<MainMenuButton> mainMenuButtons;
         private int selectedIndex;
 
@@ -24,6 +26,11 @@ namespace UI.Main_Menu.REWORK.Scripts
             
             StackableWindowManager.instance.OpenWindow(this);
             SetSelected(mainMenuButtons.First().GetInstanceID());
+
+            if (GameResultData.IsGameEnd)
+            {
+                gameResultScreenManager.Open();
+            }
         }
 
         public void Update()
@@ -77,6 +84,9 @@ namespace UI.Main_Menu.REWORK.Scripts
         public bool IsInFocus { get; set; }
         public void SetActive(bool isActive)
         {
+            if (isActive)
+                DiscordManager.instance.SetMainMenu();
+            
             gameObject.SetActive(isActive);
         }
     }

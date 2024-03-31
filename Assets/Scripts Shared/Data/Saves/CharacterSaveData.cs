@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Data.Difficulty;
 using Objects.Characters;
 using Objects.Stage;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace DefaultNamespace.Data
 		public int HighestInGameLevel;
 		public int skillPoints;
 		public List<int> unlockedSkillPoints;
-		public Dictionary<StageEnum, int> FinishedDifficulty = new ();
+		public Dictionary<StageEnum, DifficultyEnum> FinishedDifficulty = new ();
 		public int ExperienceNeeded => (int)(Level * 75 * 1.5f);
 
 		public CharacterSaveData()
@@ -31,10 +32,10 @@ namespace DefaultNamespace.Data
 			return unlockedSkillPoints;
 		}
 
-		public int GetFinishedDifficulty(StageEnum stage)
+		public DifficultyEnum GetFinishedDifficulty(StageEnum stage)
 		{
-			FinishedDifficulty ??= new Dictionary<StageEnum, int>();
-			FinishedDifficulty.TryAdd(stage, 0);
+			FinishedDifficulty ??= new Dictionary<StageEnum, DifficultyEnum>();
+			FinishedDifficulty.TryAdd(stage, DifficultyEnum.None);
 			return FinishedDifficulty[stage];
 		}
 
@@ -53,15 +54,15 @@ namespace DefaultNamespace.Data
 				AddExperience(500);
 		}
 		
-		public void AddGameResultStats(GameResultData gameResultData)
+		public void AddGameResultStats()
 		{
-			AddExperience(gameResultData.CharacterExp);
-			KillCount += (ulong)gameResultData.MonstersKilled;
-			if (gameResultData.Level > HighestInGameLevel)
-				HighestInGameLevel = gameResultData.Level;
+			AddExperience(GameResultData.CharacterExp);
+			KillCount += (ulong)GameResultData.MonstersKilled;
+			if (GameResultData.Level > HighestInGameLevel)
+				HighestInGameLevel = GameResultData.Level;
 
-			if (gameResultData.IsWin && GetFinishedDifficulty(GameData.GetCurrentStage()) < (int)gameResultData.Difficulty + 1)
-				FinishedDifficulty.TryAdd(GameData.GetCurrentStage(), (int)gameResultData.Difficulty + 1);
+			if (GameResultData.IsWin && GetFinishedDifficulty(GameData.GetCurrentStage().id) < GameResultData.Difficulty)
+				FinishedDifficulty.TryAdd(GameData.GetCurrentStage().id, GameResultData.Difficulty);
 		}
 		
 		public void AddExperience(int experience)

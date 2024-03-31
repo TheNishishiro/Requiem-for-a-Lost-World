@@ -19,7 +19,7 @@ public class StageSelectionManager : MonoBehaviour, IStackableWindow
     [SerializeField] private TextMeshProUGUI labelStageTitle;
     [SerializeField] private Animator animatorChangeStage;
     
-    private StageEnum _selectedStage;
+    private StageDefinition _selectedStage;
     private int _selectedIndex;
     private const float KeyHoldDelay = 0.4f;
     private float _keyNextActionTime = 0f;
@@ -99,12 +99,12 @@ public class StageSelectionManager : MonoBehaviour, IStackableWindow
     
     public void Open()
     {
-        _selectedStage = stageDefinitions[_selectedIndex].id;
+        _selectedStage = stageDefinitions[_selectedIndex];
         UpdateListDisplay();
         StackableWindowManager.instance.OpenWindow(this);
     }
 
-    private void Close()
+    public void Close()
     {
         StackableWindowManager.instance.CloseWindow(this);
     }

@@ -40,7 +40,7 @@ namespace UI.Main_Menu.Character_List_Menu
 			
 			nameTextField.text = characterData.Name;
 			levelTextField.text = $"lv. {_characterSaveData.Level}";
-			finsihedDifficultyTextField.text = new string('\u2726', _characterSaveData.GetFinishedDifficulty(StageEnum.CapitalOutskirts));
+			finsihedDifficultyTextField.text = new string('\u2726', (int)_characterSaveData.GetFinishedDifficulty(StageEnum.CapitalOutskirts));
 			finsihedDifficultyTextField.color = characterData.ColorTheme;
 			experienceSlider.SetValue(_characterSaveData.Experience, _characterSaveData.ExperienceNeeded);
 			lockPanel.SetActive(!_characterSaveData.IsUnlocked);

@@ -1,4 +1,5 @@
 ﻿using System;
+using Data.Difficulty;
 using DefaultNamespace.Data;
 using Managers;
 using Objects.Stage;
@@ -15,7 +16,6 @@ namespace UI.Main_Menu.End_Screen
 		[SerializeField] private DamageSummaryContainer damageSummaryContainer;
 		[SerializeField] private StatsSummaryContainer statsSummaryContainer;
 		[SerializeField] private CharacterListMenu characterListMenu;
-		[SerializeField] private GameResultData gameResultData;
 		[SerializeField] private TextMeshProUGUI winLoseText;
 		[SerializeField] private Image characterImage;
 		[SerializeField] private SaveManager saveManager;
@@ -27,28 +27,28 @@ namespace UI.Main_Menu.End_Screen
 		{
 			var discordManager = FindObjectOfType<DiscordManager>();
 			_saveFile = FindObjectOfType<SaveFile>();
-			if (gameResultData.IsGameEnd)
+			if (GameResultData.IsGameEnd)
 			{
 				//titleScreen.gameObject.SetActive(false);
-				winLoseText.text = gameResultData.IsWin ? "Victory" : "Defeat";
+				winLoseText.text = GameResultData.IsWin ? "Victory" : "Defeat";
 				panel.SetActive(true);
 				
-				gameResultData.FinalizeGameResult();
-				damageSummaryContainer.Setup(gameResultData);
-				statsSummaryContainer.Setup(gameResultData);
+				GameResultData.FinalizeGameResult();
+				damageSummaryContainer.Setup();
+				statsSummaryContainer.Setup();
 
 				var activeCharacter = CharacterListManager.instance.GetActiveCharacter();
 				
 				var characterSaveData = _saveFile.GetCharacterSaveData(activeCharacter.Id);
-				characterSaveData.AddGameResultStats(gameResultData);
+				characterSaveData.AddGameResultStats();
 				
-				_saveFile.AddGameResultData(gameResultData);
+				_saveFile.AddGameResultData();
 				
 				characterListMenu.UpdateCharacterPanels();
-				gameResultData.IsGameEnd = false;
+				GameResultData.IsGameEnd = false;
 				saveManager.SaveGame();
 				achievementManager.ClearPerGameStats();
-				discordManager.SetEndMenu(gameResultData.IsWin);
+				discordManager.SetEndMenu(GameResultData.IsWin);
 			}
 			else
 			{
@@ -56,7 +56,7 @@ namespace UI.Main_Menu.End_Screen
 				discordManager.SetMainMenu();
 			}
             
-			gameResultData.Reset();
+			GameResultData.Reset();
 		}
 		
 		public void Close()

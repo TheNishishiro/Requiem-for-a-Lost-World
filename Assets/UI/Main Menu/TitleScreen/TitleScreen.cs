@@ -2,25 +2,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using Managers;
+using UI.Main_Menu.REWORK.Scripts;
 using UnityEngine;
 
 namespace UI.Main_Menu.TitleScreen
 {
 	public class TitleScreen : MonoBehaviour
     {
+        [SerializeField] private MainMenuManager mainMenuManager;
         public TutorialManager tutorialManager;
-        public CanvasGroup titleScreen; // Assumes an Image component. If you're using a CanvasGroup, change this to CanvasGroup.
-        public Animator titleScreenAnimator;
-        public GameObject mainMenu; // The animator of your title screen.
+        public CanvasGroup titleScreen;
         public GameObject versionText;
-        public float fadeDuration = 1.0f; // Duration of the fade effect in seconds.
-
+        public float fadeDuration = 1.0f;
+        private bool _canClose;
+        
+        public void MarkAsCanClose()
+        {
+            _canClose = true;
+        }
+        
         private void Update()
         {
+            if (!_canClose) return;
+            
             if (Input.anyKeyDown || Input.GetMouseButtonDown(0))
             {
-                titleScreenAnimator.Update(float.PositiveInfinity);
-                mainMenu.SetActive(true);
+                mainMenuManager.gameObject.SetActive(true);
                 versionText.SetActive(false);
                 StartCoroutine(FadeOutTitleScreen());
                 tutorialManager.DisplayFirst();

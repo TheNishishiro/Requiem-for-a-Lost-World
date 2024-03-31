@@ -163,7 +163,7 @@ namespace Managers
 			}
 		}
 
-		public void OnGameEnd(SaveFile saveFile, GameResultData gameResultData)
+		public void OnGameEnd(SaveFile saveFile)
 		{
 			if (saveFile.TimePlayed >= 60 * 5)
 			{

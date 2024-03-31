@@ -12,6 +12,7 @@ namespace Managers
 	public class DiscordManager : MonoBehaviour
 	{
 		[SerializeField] private bool isEnabled;
+		public static DiscordManager instance;
 		private global::Discord.Discord _discord;
 		private ActivityManager _activityManager; 
 		private SaveFile _saveFile;
@@ -29,16 +30,17 @@ namespace Managers
 
 		public void Awake()
 		{
-			var instances = FindObjectsOfType<AchievementManager>();
-			if (instances.Length > 1)
+			if (instance == null)
+			{
+				_discord = new global::Discord.Discord(1126131759722012674, (ulong)CreateFlags.NoRequireDiscord);
+				_activityManager = _discord.GetActivityManager();
+				DontDestroyOnLoad(gameObject);
+				instance = this;
+			}
+			else
 			{
 				Destroy(gameObject);
-				return;
 			}
-			
-			_discord = new global::Discord.Discord(1126131759722012674, (ulong)CreateFlags.NoRequireDiscord);
-			_activityManager = _discord.GetActivityManager();
-			DontDestroyOnLoad(gameObject);
 		}
 
 		private void Update()

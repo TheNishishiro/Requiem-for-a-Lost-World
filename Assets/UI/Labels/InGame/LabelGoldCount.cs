@@ -6,7 +6,6 @@ namespace UI.Labels.InGame
 {
 	public class LabelGoldCount : MonoBehaviour
 	{
-		[SerializeField] private GameResultData gameResultData;
 		private TextMeshProUGUI text;
 
 		private void Awake()
@@ -17,7 +16,7 @@ namespace UI.Labels.InGame
 		public void Update()
 		{
 			if (Time.frameCount % 60 == 0)
-				text.text = $"{gameResultData.Gold}";
+				text.text = $"{GameResultData.Gold}";
 		}
 	}
 }

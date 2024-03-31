@@ -116,14 +116,14 @@ namespace DefaultNamespace.Data
 			ReadStoryEntries = saveData.ReadStoryEntries ?? new Dictionary<int, List<int>>();
 		}
 
-		public void AddGameResultData(GameResultData gameResultData)
+		public void AddGameResultData()
 		{
-			Gold += (ulong)gameResultData.Gold;
-			Gems += (ulong)gameResultData.Gems;
-			StoryPoints += (ulong)(gameResultData.Time.ToMinutes()*3);
-			TimePlayed += (ulong)gameResultData.Time.ToMinutes();
+			Gold += (ulong)GameResultData.Gold;
+			Gems += (ulong)GameResultData.Gems;
+			StoryPoints += (ulong)(GameResultData.Time.ToMinutes()*3);
+			TimePlayed += (ulong)GameResultData.Time.ToMinutes();
 			
-			AchievementManager.instance.OnGameEnd(this, gameResultData);
+			AchievementManager.instance.OnGameEnd(this);
 		}
 
 		public void AddUpgradeLevel(PermUpgradeType permUpgradeType)

@@ -25,7 +25,6 @@ namespace Objects.Enemies
 	public class Enemy : NetworkBehaviour
 	{
 		[SerializeField] private ChaseComponent chaseComponent;
-		[SerializeField] private GameResultData gameResultData;
 		[SerializeField] private Damageable damageableComponent;
 		[SerializeField] private SpriteRenderer spriteRenderer;
 		[SerializeField] private CapsuleCollider capsuleCollider;

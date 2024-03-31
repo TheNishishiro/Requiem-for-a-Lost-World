@@ -8,7 +8,6 @@ namespace Managers.StageEvents
 {
 	public class StageTime : NetworkBehaviour
 	{
-		[SerializeField] private GameResultData gameResultData;
 		public NetworkVariable<float> time = new ();
 		private LabelTime _labelTime;
 		private float _labelUpdateTimer;
@@ -29,7 +28,7 @@ namespace Managers.StageEvents
 			if (IsHost)
 				time.Value += _deltaTimeCache;
 			_labelUpdateTimer -= _deltaTimeCache;
-			gameResultData.Time = time.Value;
+			GameResultData.Time = time.Value;
 
 			if (_labelUpdateTimer <= 0) 
 			{

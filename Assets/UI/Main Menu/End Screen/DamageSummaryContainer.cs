@@ -12,16 +12,16 @@ namespace UI.Main_Menu.End_Screen
 		[SerializeField] private PanelDamageSummary panelDamageSummaryPrefab;
 		private List<GameObject> _panelDamageSummaries;
 
-		public void Setup(GameResultData gameResultData)
+		public void Setup()
 		{
 			_panelDamageSummaries ??= new List<GameObject>();
-			if (!gameResultData.ItemDamage.Any())
+			if (!GameResultData.ItemDamage.Any())
 				return;
 			
-			var maxDamage = gameResultData.ItemDamage.Values.Max();
+			var maxDamage = GameResultData.ItemDamage.Values.Max();
 			var delay = 0f;
 			var entryId = 0;
-			foreach (var damageSummaryEntry in gameResultData.ItemDamage.OrderByDescending(x => x.Value))
+			foreach (var damageSummaryEntry in GameResultData.ItemDamage.OrderByDescending(x => x.Value))
 			{
 				var panelDamageSummary = Instantiate(panelDamageSummaryPrefab, transform);
 				panelDamageSummary.Setup(new DamageSummaryEntry()

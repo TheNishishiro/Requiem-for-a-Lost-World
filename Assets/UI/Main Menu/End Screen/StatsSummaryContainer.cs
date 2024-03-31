@@ -10,12 +10,12 @@ namespace UI.Main_Menu.End_Screen
 		[SerializeField] private PanelStatsSummary panelStatsSummaryPrefab;
 		private List<GameObject> _statsSummaries;
 
-		public void Setup(GameResultData gameResultData)
+		public void Setup()
 		{
 			_statsSummaries ??= new List<GameObject>();
 			var entryId = 0;
 			var delay = 0f;
-			foreach (var statSummary in gameResultData.GetStatsSummary())
+			foreach (var statSummary in GameResultData.GetStatsSummary())
 			{
 				var panelStatsSummary = Instantiate(panelStatsSummaryPrefab, transform);
 				panelStatsSummary.Setup(statSummary, entryId++ % 2 != 0, delay += 0.1f);

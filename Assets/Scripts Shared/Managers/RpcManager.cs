@@ -23,7 +23,6 @@ namespace Managers
     public class RpcManager : NetworkBehaviour
     {
         public static RpcManager instance;
-        [SerializeField] private GameResultData gameResultData;
         [SerializeField] private GameObject shrinePrefab;
 
         public override void OnNetworkSpawn()
@@ -55,7 +54,7 @@ namespace Managers
         [Rpc(SendTo.Everyone)]
         public void AddEnemyKillRpc(bool isBoss)
         {
-            gameResultData.MonstersKilled++;
+            GameResultData.MonstersKilled++;
             EnemyDiedEvent.Invoke();
             AchievementManager.instance.OnEnemyKilled(isBoss);
         }
@@ -75,7 +74,7 @@ namespace Managers
         [Rpc(SendTo.Everyone)]
         public void WinRpc()
         {
-            gameResultData.IsWin = true;
+            GameResultData.IsWin = true;
             FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(true, true);
         }
 
@@ -83,7 +82,7 @@ namespace Managers
         public void LoseRpc()
         {
             Debug.Log("Displaying lose screen");
-            gameResultData.IsWin = false;
+            GameResultData.IsWin = false;
             FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(false, true);
         }
         

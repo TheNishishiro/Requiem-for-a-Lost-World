@@ -15,19 +15,19 @@ namespace Objects.Stage
 	public class GameData
 	{
 		private static DifficultyData _currentDifficultyData;
-		private static StageEnum _currentStage;
+		private static StageDefinition _currentStage;
 
 		public static void SetCurrentDifficultyData(DifficultyData difficultyData)
 		{
 			_currentDifficultyData = difficultyData;
 		}
 		
-		public static void SetCurrentStage(StageEnum stage)
+		public static void SetCurrentStage(StageDefinition stage)
 		{
 			_currentStage = stage;
 		}
 		
-		public static StageEnum GetCurrentStage()
+		public static StageDefinition GetCurrentStage()
 		{
 			return _currentStage;
 		}

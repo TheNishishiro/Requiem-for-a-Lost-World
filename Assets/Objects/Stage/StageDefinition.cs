@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Objects.Stage
 {
@@ -7,6 +8,7 @@ namespace Objects.Stage
     {
         public StageEnum id;
         public Sprite background;
+        public Sprite backgroundBlur;
         public string title;
     }
 }

@@ -23,7 +23,6 @@ namespace DefaultNamespace
 	public class Damageable : NetworkBehaviour, IDamageable
 	{
 		[SerializeField] public float Health;
-		[SerializeField] private GameResultData gameResultData;
 		[SerializeField] public GameObject targetPoint;
 		[SerializeField] private AudioClip takeDamageSound;
 		[SerializeField] private bool canBeAfflictedWithElements;
@@ -188,7 +187,7 @@ namespace DefaultNamespace
 					GameManager.instance.playerComponent.TakeDamage(-healPerHit, true, true);
 			}
 
-			gameResultData.AddDamage(calculatedDamage, weaponBase);
+			GameResultData.AddDamage(calculatedDamage, weaponBase);
 			var damageMessage = calculatedDamage.ToString("0");
 			if (damageResult.IsCriticalHit)
 				damageMessage += "!";

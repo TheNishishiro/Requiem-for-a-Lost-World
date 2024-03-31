@@ -6,7 +6,6 @@ namespace UI.Labels.InGame.PauseMenu
 {
 	public class GemCountText : MonoBehaviour
 	{
-		[SerializeField] private GameResultData gameResultData;
 		private TextMeshProUGUI text;
 
 		private void Awake()
@@ -19,7 +18,7 @@ namespace UI.Labels.InGame.PauseMenu
 			if (Time.frameCount % 10 != 0)
 				return;
 			
-			text.text = $"{gameResultData.Gems}";
+			text.text = $"{GameResultData.Gems}";
 		}
 	}
 }

@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
 	[HideInInspector] public PlayerStatsComponent playerStatsComponent;
 	[HideInInspector] public PlayerVfxComponent playerVfxComponent;
 	[HideInInspector] public Transform playerTransform;
-	[SerializeField] public GameResultData gameResultData;
 	[SerializeField] public GameObject reviveCardPrefab;
 	private Queue<ulong> clientCards = new ();
 	
@@ -54,13 +53,13 @@ public class Player : MonoBehaviour
 	public void AddGold(int goldAmount)
 	{
 		var goldEarned = (int)Math.Ceiling(goldAmount * PlayerStatsScaler.GetScaler().GetItemRewardIncrease());
-		gameResultData.AddGold(goldEarned);
+		GameResultData.AddGold(goldEarned);
 	}
 
 	public void AddGems(int gemAmount)
 	{
 		var gemsEarned = (int)Math.Ceiling(gemAmount * PlayerStatsScaler.GetScaler().GetItemRewardIncrease());
-		gameResultData.AddGems(gemsEarned);
+		GameResultData.AddGems(gemsEarned);
 	}
 
 	public void SetCharacterState(PlayerCharacterState characterState)

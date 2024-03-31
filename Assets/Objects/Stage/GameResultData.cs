@@ -8,22 +8,20 @@ using Weapons;
 
 namespace Objects.Stage
 {
-	[CreateAssetMenu]
-	public class GameResultData : ScriptableObject
+	public static class GameResultData
 	{
-		[SerializeField] private DifficultyContainer difficultyContainer;
-		public int Gold;
-		public int Gems;
-		public int MonstersKilled;
-		public Dictionary<WeaponBase, ulong> ItemDamage = new ();
-		public float Time;
-		public bool IsGameEnd;
-		public bool IsWin;
-		public int Level;
-		public DifficultyEnum Difficulty;
-		public int CharacterExp => (int) (MonstersKilled / 1000.0f + Time * 0.25f);
+		public static int Gold;
+		public static int Gems;
+		public static int MonstersKilled;
+		public static Dictionary<WeaponBase, ulong> ItemDamage = new ();
+		public static float Time;
+		public static bool IsGameEnd;
+		public static bool IsWin;
+		public static int Level;
+		public static DifficultyEnum Difficulty;
+		public static int CharacterExp => (int) (MonstersKilled / 1000.0f + Time * 0.25f);
 
-		public void AddDamage(float damage, WeaponBase weaponBase)
+		public static void AddDamage(float damage, WeaponBase weaponBase)
 		{
 			if (weaponBase == null)
 				return;
@@ -41,7 +39,7 @@ namespace Objects.Stage
 			ItemDamage[weaponBase] += (ulong) damage;
 		}
 
-		public void Reset()
+		public static void Reset()
 		{
 			Gold = 0;
 			Gems = 0;
@@ -52,7 +50,7 @@ namespace Objects.Stage
 			IsWin = false;
 		}
 		
-		public List<string> GetStatsSummary()
+		public static List<string> GetStatsSummary()
 		{
 			var statsSummary = new List<string>();
 			var minutes = (int) (Time / 60f);
@@ -67,21 +65,19 @@ namespace Objects.Stage
 			return statsSummary;
 		}
 
-		public void AddGold(int goldAmount)
+		public static void AddGold(int goldAmount)
 		{
 			Gold += goldAmount;
 		}
 
-		public void AddGems(int gemAmount)
+		public static void AddGems(int gemAmount)
 		{
 			Gems += gemAmount;
 		}
 
-		public void FinalizeGameResult()
+		public static void FinalizeGameResult()
 		{
-			var saveFile = SaveManager.instance.GetSaveFile();
-			Difficulty = saveFile.SelectedDifficulty;
-			var currentDifficulty = difficultyContainer.GetData(Difficulty);
+			var currentDifficulty = GameData.GetCurrentDifficulty();
 			
 			var timeSpent = Time / 60.0f;
 			var goldIncreaseByTime = timeSpent * 0.03f * currentDifficulty.RewardModifier;
@@ -94,6 +90,8 @@ namespace Objects.Stage
 				Gold += 2000;
 				Gems += 750;
 			}
+
+			IsGameEnd = false;
 		}
 	}
 }

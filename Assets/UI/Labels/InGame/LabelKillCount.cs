@@ -7,7 +7,6 @@ namespace UI.Labels.InGame
 {
 	public class LabelKillCount : MonoBehaviour
 	{
-		[SerializeField] private GameResultData gameResultData;
 		private TextMeshProUGUI text;
 
 		private void Awake()
@@ -20,7 +19,7 @@ namespace UI.Labels.InGame
 			if (Time.frameCount % 10 != 0)
 				return;
 			
-			text.text = $"{gameResultData.MonstersKilled}";
+			text.text = $"{GameResultData.MonstersKilled}";
 		}
 	}
 }
