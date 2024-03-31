@@ -146,6 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6698735940355708680}
+  - component: {fileID: 8257685000214424381}
   m_Layer: 5
   m_Name: Settings Sub Section
   m_TagString: Untagged
@@ -174,6 +175,24 @@ RectTransform:
   m_AnchoredPosition: {x: -70, y: 419.8}
   m_SizeDelta: {x: 403.3057, y: 48.2318}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8257685000214424381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2151875589676414408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f9bf2ff393420f95aa865acacd9bb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  background: {fileID: 7589899866286346831}
+  button: {fileID: 3149677835758072947}
+  enabledColor: {r: 0.4392157, g: 0.65882355, b: 1, a: 1}
+  disabledColor: {r: 0, g: 0, b: 0, a: 0.79607844}
+  subContainer: {fileID: 0}
+  settingsContainer: {fileID: 0}
 --- !u!1 &6041027169447421171
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,4 +312,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7589899866286346831}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8257685000214424381}
+        m_TargetAssemblyTypeName: UI.Main_Menu.REWORK.Scripts.SettingSection, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

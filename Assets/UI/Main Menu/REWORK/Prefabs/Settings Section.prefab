@@ -68,8 +68,7 @@ MonoBehaviour:
   m_text: Graphic settings
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 847133c7dbab5d5498ac22e03aa90dc0, type: 2}
-  m_sharedMaterial: {fileID: 6238947613683144924, guid: 847133c7dbab5d5498ac22e03aa90dc0,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: ec474f8a44ee4ce4f876d0471bd539a3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -195,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -214,6 +213,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5989974916876639214}
+  - component: {fileID: 5281027169302438129}
   m_Layer: 5
   m_Name: Settings Section
   m_TagString: Untagged
@@ -243,6 +243,22 @@ RectTransform:
   m_AnchoredPosition: {x: -93.6355, y: 421.51578}
   m_SizeDelta: {x: 403.3057, y: 48.2318}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5281027169302438129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7933430561051992815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f9bf2ff393420f95aa865acacd9bb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  background: {fileID: 8278168201468485365}
+  button: {fileID: 8259639501647208110}
+  enabledColor: {r: 0.4392157, g: 0.65882355, b: 1, a: 1}
+  disabledColor: {r: 0, g: 0, b: 0, a: 0.79607844}
 --- !u!1 &8824922291325818283
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,4 +378,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8278168201468485365}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5281027169302438129}
+        m_TargetAssemblyTypeName: UI.Main_Menu.REWORK.Scripts.SettingSection, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

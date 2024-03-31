@@ -37,15 +37,10 @@ namespace CarouselUI
 
         private void Initialize()
         {
-            if (_options.Length == 0 || _options == null) //ERROR IF THE OPTIONS ARRAY IS EMPTY
-            {
-                Debug.LogError($"Carousel UI at {this.gameObject.name} has incomplete options array. Please fix.");
-
+            if (_options.Length == 0 || _options == null)
                 return;
-            }
 
             _resetDelay = new WaitForSeconds(_resetDuration);
-
             UpdateUI();
         }
 
@@ -148,6 +143,12 @@ namespace CarouselUI
             }
 
             InputEvent?.Invoke();
+        }
+
+        public void SetOptions(string[] options)
+        {
+            _options = options;
+            Initialize();
         }
 
         /// <summary>
