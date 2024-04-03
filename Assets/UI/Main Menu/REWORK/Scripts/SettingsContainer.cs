@@ -69,7 +69,8 @@ namespace UI.Main_Menu.REWORK.Scripts
         public void Close()
         {
             gameObject.SetActive(false);
-            _relatedSubContainer.ActivateInput();
+            if (_relatedSubContainer != null)
+                _relatedSubContainer.ActivateInput();
         }
     }
 }

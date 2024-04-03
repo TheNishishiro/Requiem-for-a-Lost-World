@@ -18,6 +18,7 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
     [SerializeField] private MainCharacterCard mainCharacterCard;
     [SerializeField] private Animator animatorChangeCharacter;
     private int _selectedIndex = 0;
+    private bool _isCoopSelect;
 
     private const float KeyHoldDelay = 0.4f;
     private float _keyNextActionTime = 0f;
@@ -113,7 +114,10 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
 
     public void OpenGameSettingsScreen()
     {
-        mainCharacterCard.OpenGameSettingsMenu();
+        if (_isCoopSelect)
+            mainCharacterCard.OpenGameSettingsMenu();
+        else
+            mainCharacterCard.OpenGameSettingsMenu();
     }
 
     public bool IsInFocus { get; set; }

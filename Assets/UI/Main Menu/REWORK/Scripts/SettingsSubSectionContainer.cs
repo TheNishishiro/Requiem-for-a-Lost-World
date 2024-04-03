@@ -16,7 +16,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         private void Start()
         {
-            _settingsScreenManager = GetComponentInParent<SettingsScreenManager>();
+            _settingsScreenManager = GetComponentInParent<SettingsScreenManager>(true);
             _sectionButtons = GetComponentsInChildren<SettingSection>(true).ToList();
         }
 
@@ -25,10 +25,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             if (_isSectionOpened) return;
             
             if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                gameObject.SetActive(false);
-                _settingsScreenManager.CloseSubSectionPanel();
-            }
+                Close();
             
             if (Input.GetKeyDown(KeyCode.Return))
                 _sectionButtons[_selectedIndex].Activate();
@@ -61,6 +58,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         public void Activate()
         {
+            ActivateInput();
             gameObject.SetActive(true);
         }
 
@@ -72,6 +70,12 @@ namespace UI.Main_Menu.REWORK.Scripts
         public void DeactivateInput()
         {
             _isSectionOpened = true;
+        }
+
+        public void Close()
+        {
+            gameObject.SetActive(false);
+            _settingsScreenManager.CloseSubSectionPanel();
         }
     }
 }

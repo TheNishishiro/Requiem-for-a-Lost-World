@@ -34,8 +34,14 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entry3dGrass;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryGrassDensity;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryGrassRenderDistance;
+        [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryDiscordPresence;
+        [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryCoopNickname;
+        [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryCoopDisplayProjectiles;
+        [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryVolume;
         [Space]
         [BoxGroup("Entries")] [SerializeField] private List<SettingSection> mainSettingSections;
+        [Space]
+        [BoxGroup("Animations")] [SerializeField] private Animator animator;
         
         private List<Resolution> availableResolutions = new ();
         private const int minResolutionWidth = 800;
@@ -126,6 +132,10 @@ namespace UI.Main_Menu.REWORK.Scripts
             entry3dGrass.SetSelection(configuration.Use3dGrass ? 1 : 0);
             entryGrassDensity.SetSelection(configuration.GrassDensity);
             entryGrassRenderDistance.SetSelection(configuration.GrassRenderDistance);
+            entryDiscordPresence.SetSelection(configuration.IsDiscordEnabled ? 1 : 0);
+            entryCoopNickname.SetText(configuration.Username);
+            entryCoopDisplayProjectiles.SetSelection(configuration.RenderCoopProjectiles ? 1 : 0);
+            entryVolume.SetSliderValue(configuration.Volume);
         }
 
         private void SaveSettings()
@@ -147,6 +157,10 @@ namespace UI.Main_Menu.REWORK.Scripts
             configuration.Use3dGrass = entry3dGrass.GetSelectedOption() == 1;
             configuration.GrassDensity = entryGrassDensity.GetSelectedOption();
             configuration.GrassRenderDistance = entryGrassRenderDistance.GetSelectedOption();
+            configuration.IsDiscordEnabled = entryDiscordPresence.GetSelectedOption() == 1;
+            configuration.RenderCoopProjectiles = entryCoopDisplayProjectiles.GetSelectedOption() == 1;
+            configuration.Username = entryCoopNickname.GetText();
+            configuration.Volume = entryVolume.GetSliderValue();
             
             SaveManager.instance.ApplySettings();
             SaveManager.instance.SaveGame();
@@ -203,6 +217,12 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         public void CloseSubSectionPanel()
         {
+            var sectionComponent = panelSubSection.GetComponentInChildren<SettingsSubSectionContainer>();
+            if (sectionComponent != null)
+                sectionComponent.gameObject.SetActive(false);
+            if (panelSettings.activeSelf)
+                CloseSettingsPanel();
+                
             _isSubsectionOpened = false;
             panelSubSection.SetActive(false);
         }
@@ -214,7 +234,15 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         public void CloseSettingsPanel()
         {
+            var settingsContainer = panelSettings.GetComponentInChildren<SettingsContainer>();
+            if (settingsContainer != null)
+                settingsContainer.Close();
             panelSettings.SetActive(false);
+        }
+
+        public void LiveAdjustVolume()
+        {
+            AudioListener.volume = entryVolume.GetSliderValue();
         }
     }
 }

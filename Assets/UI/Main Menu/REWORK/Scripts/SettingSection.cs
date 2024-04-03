@@ -28,6 +28,9 @@ namespace UI.Main_Menu.REWORK.Scripts
             if (!settingsContainer)
             {
                 _settingsScreenManager.OpenSubSectionPanel();
+                foreach (var container in FindObjectsByType<SettingsSubSectionContainer>(FindObjectsSortMode.None))
+                    container.Close();
+                
                 subContainer.Activate();
             }
             else if (settingsContainer)

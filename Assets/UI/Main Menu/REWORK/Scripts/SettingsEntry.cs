@@ -11,6 +11,8 @@ namespace UI.Main_Menu.REWORK.Scripts
         [SerializeField] private Image background;
         [SerializeField] private Color enabledColor;
         [SerializeField] private Color disabledColor;
+        [SerializeField] private TMP_InputField textInput; 
+        [SerializeField] private Slider sliderInput; 
         
         public void SetOptions(string[] options, int defaultSelection = 0)
         {
@@ -30,17 +32,37 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         public void Next()
         {
-            carousel.PressNext();
+            carousel?.PressNext();
         }
 
         public void Previous()
         {
-            carousel.PressPrevious();
+            carousel?.PressPrevious();
         }
 
         public void SetActive(bool isActive)
         {
             background.color = isActive ? enabledColor : disabledColor;
+        }
+
+        public void SetText(string text)
+        {
+            textInput.text = text;
+        }
+
+        public string GetText()
+        {
+            return textInput.text;
+        }
+
+        public void SetSliderValue(float value)
+        {
+            sliderInput.value = value;
+        }
+
+        public float GetSliderValue()
+        {
+            return sliderInput.value;
         }
     }
 }
