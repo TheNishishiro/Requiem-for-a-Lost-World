@@ -112,7 +112,7 @@ public class StageSelectionManager : MonoBehaviour, IStackableWindow
     public void OpenCharacterSelection()
     {
         GameData.SetCurrentStage(_selectedStage);
-        characterSelectionScreenManager.Open();
+        characterSelectionScreenManager.Open(false);
     }
 
     public bool IsInFocus { get; set; }

@@ -15,6 +15,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [SerializeField] private StageSelectionManager stageSelectionManager;
         [SerializeField] private GameResultScreenManager gameResultScreenManager;
         [SerializeField] private SettingsScreenManager settingsScreenManager;
+        [SerializeField] private CharacterSelectionScreenManager characterSelectionScreenManager;
         [SerializeField] private List<MainMenuButton> mainMenuButtons;
         private int selectedIndex;
 
@@ -72,6 +73,11 @@ namespace UI.Main_Menu.REWORK.Scripts
         public void OpenStageSelection()
         {
             stageSelectionManager.Open();
+        }
+
+        public void OpenCoopCharacterSelection()
+        {
+            characterSelectionScreenManager.Open(true);
         }
 
         public void OpenSettings()   

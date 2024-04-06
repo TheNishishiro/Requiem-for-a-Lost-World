@@ -28,6 +28,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<PermUpgradeType, int> PermUpgradeSaveData;
 		public Dictionary<AchievementEnum, bool> AchievementSaveData;
 		public Dictionary<int, List<int>> ReadStoryEntries { get; set; }
+		public List<ServerData> Servers;
 		public ConfigurationFile ConfigurationFile;
 		public CharactersEnum? SelectedCharacterId;
 		public ulong Gold;
@@ -65,6 +66,7 @@ namespace DefaultNamespace.Data
 		{
 			CharacterSaveData ??= new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData ??= new Dictionary<PermUpgradeType, int>();
+			Servers ??= new List<ServerData>();
 			AchievementSaveData ??= new Dictionary<AchievementEnum, bool>();
 			ReadStoryEntries ??= new Dictionary<int, List<int>>();
 			ConfigurationFile ??= new ConfigurationFile().Default();
@@ -111,6 +113,7 @@ namespace DefaultNamespace.Data
 			SelectedCharacterId = saveData.SelectedCharacterId;
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
+			Servers = saveData.Servers ?? new List<ServerData>();
 			AchievementSaveData = saveData.AchievementSaveData ?? new Dictionary<AchievementEnum, bool>();
 			ConfigurationFile = (saveData.ConfigurationFile ?? new ConfigurationFile().Default()).Update();
 			ReadStoryEntries = saveData.ReadStoryEntries ?? new Dictionary<int, List<int>>();
@@ -227,6 +230,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<PermUpgradeType, int> PermUpgradeSaveData;
 		public Dictionary<AchievementEnum, bool> AchievementSaveData;
 		public Dictionary<int, List<int>> ReadStoryEntries;
+		public List<ServerData> Servers;
 		public ConfigurationFile ConfigurationFile;
 		public ulong Gold;
 		public ulong Gems;
@@ -249,6 +253,7 @@ namespace DefaultNamespace.Data
 		{
 			CharacterSaveData = saveFile.CharacterSaveData;
 			PermUpgradeSaveData = saveFile.PermUpgradeSaveData;
+			Servers = saveFile.Servers;
 			AchievementSaveData = saveFile.AchievementSaveData;
 			ConfigurationFile = saveFile.ConfigurationFile;
 			Gold = saveFile.Gold;
@@ -266,5 +271,6 @@ namespace DefaultNamespace.Data
 			BossKills = saveFile.BossKills;
 			SelectedDifficulty = saveFile.SelectedDifficulty;
 		}
+
 	}
 }

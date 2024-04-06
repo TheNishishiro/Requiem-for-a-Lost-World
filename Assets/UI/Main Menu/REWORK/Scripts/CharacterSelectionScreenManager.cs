@@ -38,7 +38,7 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            OpenGameSettingsScreen();
+            OpenNextScreen();
             return;
         }
 
@@ -75,8 +75,9 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
         }
     }
 
-    public void Open()
+    public void Open(bool isCoopSelect)
     {
+        _isCoopSelect = isCoopSelect;
         _selectedIndex = CharacterListManager.instance.GetCharacterIndexById(CharacterListManager.instance.GetActiveCharacter().Id);
         UpdateListDisplay();
         StackableWindowManager.instance.OpenWindow(this);
@@ -112,10 +113,10 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
         }
     }
 
-    public void OpenGameSettingsScreen()
+    public void OpenNextScreen()
     {
         if (_isCoopSelect)
-            mainCharacterCard.OpenGameSettingsMenu();
+            mainCharacterCard.JoinGameScreen();
         else
             mainCharacterCard.OpenGameSettingsMenu();
     }

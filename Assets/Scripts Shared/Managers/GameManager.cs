@@ -17,8 +17,7 @@ using UnityEngine.SceneManagement;
 using UnityTemplateProjects;
 
 namespace Managers
-{
-	public class GameManager : MonoBehaviour
+{	public class GameManager : MonoBehaviour
 	{		
 		[SerializeField] public ExperienceBar reviveTimerBar;
 		public static GameManager instance;

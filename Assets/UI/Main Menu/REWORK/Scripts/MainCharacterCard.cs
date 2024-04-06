@@ -58,6 +58,7 @@ public class MainCharacterCard : MonoBehaviour
     [Space]
     [BoxGroup("Menus")] [SerializeField] private ShardScreenManager shardScreenManager;
     [BoxGroup("Menus")] [SerializeField] private GameSettingsScManareenger gameSettingsScreenManager;
+    [BoxGroup("Menus")] [SerializeField] private ServerScreenManager serverScreenManager;
 
     private CharacterData _currentCharacterData;
     private CharacterSaveData _currentCharacterSaveData;
@@ -77,8 +78,8 @@ public class MainCharacterCard : MonoBehaviour
         
         imageLock.gameObject.SetActive(!characterSaveData.IsUnlocked);
         
-        fullStars = new string ('\u25c8', (int)characterSaveData.GetFinishedDifficulty(GameData.GetCurrentStage().id));
-        missingStars = new string ('\u25c7', 4 - (int)characterSaveData.GetFinishedDifficulty(GameData.GetCurrentStage().id));
+        fullStars = new string ('\u25c8', (int)characterSaveData.GetFinishedDifficulty(GameData.GetCurrentStage()?.id ?? StageEnum.CapitalOutskirts));
+        missingStars = new string ('\u25c7', 4 - (int)characterSaveData.GetFinishedDifficulty(GameData.GetCurrentStage()?.id ?? StageEnum.CapitalOutskirts));
         labelFinishedDifficulty.text = fullStars + missingStars;
         labelLevel.text = "lv. " + characterSaveData.Level;
         experienceSlider.SetValue(characterSaveData.Experience, characterSaveData.ExperienceNeeded);
@@ -179,5 +180,12 @@ public class MainCharacterCard : MonoBehaviour
         if (!_currentCharacterSaveData.IsUnlocked) return;
         
         gameSettingsScreenManager.Open();
+    }
+
+    public void JoinGameScreen()
+    {
+        if (!_currentCharacterSaveData.IsUnlocked) return;
+        
+        serverScreenManager.Open();
     }
 }

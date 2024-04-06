@@ -29,6 +29,7 @@ namespace Managers
         {
             if (instance == null)
                 instance = this;
+            
             base.OnNetworkSpawn();
         }
         
