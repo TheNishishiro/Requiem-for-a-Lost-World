@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Data.Difficulty;
+using DefaultNamespace.Extensions;
 using Objects.Characters;
 using Objects.Stage;
 using UnityEngine;
@@ -17,6 +18,8 @@ namespace DefaultNamespace.Data
 		public ulong KillCount;
 		public int HighestInGameLevel;
 		public int skillPoints;
+		public ulong TotalPlayTime;
+		public ulong LongestGameTime;
 		public List<int> unlockedSkillPoints;
 		public Dictionary<StageEnum, DifficultyEnum> FinishedDifficulty = new ();
 		public int ExperienceNeeded => (int)(Level * 75 * 1.5f);
@@ -63,6 +66,11 @@ namespace DefaultNamespace.Data
 
 			if (GameResultData.IsWin && GetFinishedDifficulty(GameData.GetCurrentStage().id) < GameResultData.Difficulty)
 				FinishedDifficulty.TryAdd(GameData.GetCurrentStage().id, GameResultData.Difficulty);
+
+			var timePlayed = (ulong)GameResultData.Time.ToMinutes();
+			TotalPlayTime += timePlayed;
+			if (LongestGameTime < timePlayed)
+				LongestGameTime = timePlayed;
 		}
 		
 		public void AddExperience(int experience)

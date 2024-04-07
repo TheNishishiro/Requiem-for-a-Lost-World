@@ -40,6 +40,11 @@ namespace DefaultNamespace.Data
 		public ulong StoryPoints;
 		public ulong TimePlayed;
 		public ulong BossKills;
+		public ulong TotalLegendaryItemsObtained;
+		public ulong HealAmountInOneGame;
+		public ulong TotalAmountHealed;
+		public ulong DamageTakeInOneGame;
+		public ulong TotalDamageTaken;
 		public bool IsFirstTutorialCompleted;
 		public int Pity;
 		public DifficultyEnum SelectedDifficulty;
@@ -107,6 +112,11 @@ namespace DefaultNamespace.Data
 			PullsPerformed = saveData.PullsPerformed;
 			TimePlayed = saveData.TimePlayed;
 			BossKills = saveData.BossKills;
+			TotalLegendaryItemsObtained = saveData.TotalLegendaryItemsObtained;
+			HealAmountInOneGame = saveData.HealAmountInOneGame;
+			TotalAmountHealed = saveData.TotalAmountHealed;
+			DamageTakeInOneGame = saveData.DamageTakeInOneGame;
+			TotalDamageTaken = saveData.TotalDamageTaken;
 			IsFirstTutorialCompleted = saveData.IsFirstTutorialCompleted;
 			Pity = saveData.Pity;
 			SelectedDifficulty = saveData.SelectedDifficulty;
@@ -241,6 +251,11 @@ namespace DefaultNamespace.Data
 		public ulong StoryPoints;
 		public ulong TimePlayed;
 		public ulong BossKills;
+		public ulong TotalLegendaryItemsObtained;
+		public ulong HealAmountInOneGame;
+		public ulong TotalAmountHealed;
+		public ulong DamageTakeInOneGame;
+		public ulong TotalDamageTaken;
 		public bool IsFirstTutorialCompleted;
 		public int Pity;
 		public DifficultyEnum SelectedDifficulty;
@@ -270,7 +285,11 @@ namespace DefaultNamespace.Data
 			TimePlayed = saveFile.TimePlayed;
 			BossKills = saveFile.BossKills;
 			SelectedDifficulty = saveFile.SelectedDifficulty;
+			TotalLegendaryItemsObtained = saveFile.TotalLegendaryItemsObtained;
+			HealAmountInOneGame = saveFile.HealAmountInOneGame;
+			TotalAmountHealed = saveFile.TotalAmountHealed;
+			DamageTakeInOneGame = saveFile.DamageTakeInOneGame;
+			TotalDamageTaken = saveFile.TotalDamageTaken;
 		}
-
 	}
 }

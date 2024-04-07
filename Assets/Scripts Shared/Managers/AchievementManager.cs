@@ -60,8 +60,9 @@ namespace Managers
 		public void OnWeaponUnlocked(WeaponBase weapon, int unlockedCount, int rarity)
 		{
 			if (rarity >= 3)
-				_highRarityPickupsObtained++;
-			if (_highRarityPickupsObtained > 10)
+				SaveFile.Instance.TotalLegendaryItemsObtained++;
+			
+			if (SaveFile.Instance.TotalLegendaryItemsObtained > 20)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Obtain10HighRarityItems);
 			
 			if (unlockedCount == 2 && rarity == 5)
@@ -73,8 +74,8 @@ namespace Managers
 		public void OnItemUnlocked(ItemBase item, int unlockedCount, int rarity)
 		{
 			if (rarity >= 3)
-				_highRarityPickupsObtained++;
-			if (_highRarityPickupsObtained > 10)
+				SaveFile.Instance.TotalLegendaryItemsObtained++;
+			if (SaveFile.Instance.TotalLegendaryItemsObtained > 20)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Obtain10HighRarityItems);
 			
 			if (unlockedCount == 1 && rarity == 5)
@@ -109,6 +110,9 @@ namespace Managers
 		public void OnHealing(float amount)
 		{
 			_healAmountInOneGame += Math.Abs(amount);
+			SaveFile.Instance.HealAmountInOneGame = (ulong)_healAmountInOneGame;
+			SaveFile.Instance.TotalAmountHealed = (ulong)(SaveFile.Instance.TotalAmountHealed + _healAmountInOneGame);
+			
 			if (_healAmountInOneGame >= 1000)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Heal1000HealthInOneGame);
 			
@@ -119,6 +123,10 @@ namespace Managers
 		public void OnDamageTaken(float amount)
 		{
 			_damageTakenInOneGame += amount;
+			SaveFile.Instance.DamageTakeInOneGame = (ulong)_damageTakenInOneGame;
+			SaveFile.Instance.TotalDamageTaken = (ulong)(SaveFile.Instance.TotalDamageTaken + _damageTakenInOneGame);
+			
+			
 			if (_damageTakenInOneGame >= 1000)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Take1000DamageInOneGame);
 		}
@@ -132,7 +140,7 @@ namespace Managers
 		public void OnPull(CharacterData characterData)
 		{
 			SaveFile.Instance.PullsPerformed++;
-			if (SaveFile.Instance.PullsPerformed >= 100)
+			if (SaveFile.Instance.PullsPerformed >= 50)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.PerformGacha100Times);
 			
 			SaveFile.Instance.UnlockAchievement(AchievementEnum.PerformGacha);
@@ -140,14 +148,15 @@ namespace Managers
 		
 		public void OnPickupCollected(PickupEnum pickup)
 		{
+			if (pickup != PickupEnum.Experience)
+				SaveFile.Instance.PickupsCollected++;
+			
 			switch (SaveFile.Instance.PickupsCollected)
 			{
 				case >= 1000 when pickup != PickupEnum.Experience:
-					SaveFile.Instance.PickupsCollected++;
 					SaveFile.Instance.UnlockAchievement(AchievementEnum.Collect1000Pickups);
 					break;
 				case >= 100 when pickup != PickupEnum.Experience:
-					SaveFile.Instance.PickupsCollected++;
 					SaveFile.Instance.UnlockAchievement(AchievementEnum.Collect100Pickups);
 					break;
 			}

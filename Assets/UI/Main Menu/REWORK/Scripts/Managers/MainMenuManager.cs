@@ -16,6 +16,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [SerializeField] private GameResultScreenManager gameResultScreenManager;
         [SerializeField] private SettingsScreenManager settingsScreenManager;
         [SerializeField] private CharacterSelectionScreenManager characterSelectionScreenManager;
+        [SerializeField] private AchievementScreenManager achievementScreenManager;
         [SerializeField] private List<MainMenuButton> mainMenuButtons;
         private int selectedIndex;
 
@@ -83,6 +84,11 @@ namespace UI.Main_Menu.REWORK.Scripts
         public void OpenSettings()   
         {
             settingsScreenManager.Open();
+        }
+
+        public void OpenAchievements()   
+        {
+            achievementScreenManager.Open();
         }
         
         public void QuitApplication()
