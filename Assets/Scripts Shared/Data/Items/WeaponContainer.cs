@@ -2,8 +2,10 @@
 using System.Linq;
 using Data.ToggleableEntries;
 using DefaultNamespace.Data.Achievements;
+using Interfaces;
 using JetBrains.Annotations;
 using UnityEngine;
+using Weapons;
 
 namespace DefaultNamespace.Data
 {
@@ -17,9 +19,9 @@ namespace DefaultNamespace.Data
 			return availableWeapons.ToList();
 		}
 
-		public Sprite GetIconByAchievement(AchievementEnum achievementEnum)
+		public IPlayerItem GetWeaponByAchievement(AchievementEnum achievementEnum)
 		{
-			return availableWeapons.FirstOrDefault(w => w.weaponBase.requiredAchievement == achievementEnum)?.weaponBase?.Icon;
+			return availableWeapons.FirstOrDefault(w => w.weaponBase.requiredAchievement == achievementEnum)?.weaponBase;
 		}
 	}
 }

@@ -31,6 +31,11 @@ namespace DefaultNamespace.Data
 		public List<ServerData> Servers;
 		public ConfigurationFile ConfigurationFile;
 		public CharactersEnum? SelectedCharacterId;
+		public CharactersEnum CurrentBannerCharacterId;
+		public CharactersEnum CurrentBannerSubCharacterId1;
+		public CharactersEnum CurrentBannerSubCharacterId2;
+		public CharactersEnum CurrentBannerSubCharacterId3;
+		public DateTime? LastBannerChangeDate;
 		public ulong Gold;
 		public ulong Gems;
 		public ulong EnemiesKilled;
@@ -119,6 +124,11 @@ namespace DefaultNamespace.Data
 			TotalDamageTaken = saveData.TotalDamageTaken;
 			IsFirstTutorialCompleted = saveData.IsFirstTutorialCompleted;
 			Pity = saveData.Pity;
+			CurrentBannerCharacterId = saveData.CurrentBannerCharacterId;    
+			CurrentBannerSubCharacterId1 = saveData.CurrentBannerSubCharacterId1;
+			CurrentBannerSubCharacterId2 = saveData.CurrentBannerSubCharacterId2;
+			CurrentBannerSubCharacterId3 = saveData.CurrentBannerSubCharacterId3;
+			LastBannerChangeDate = saveData.LastBannerChangeDate;
 			SelectedDifficulty = saveData.SelectedDifficulty;
 			SelectedCharacterId = saveData.SelectedCharacterId;
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
@@ -173,20 +183,19 @@ namespace DefaultNamespace.Data
 		{
 			foreach (var achievementEnum in Enum.GetValues(typeof(AchievementEnum)).Cast<AchievementEnum>())
 			{
-				if (!AchievementSaveData.ContainsKey(achievementEnum))
-					AchievementSaveData.Add(achievementEnum, false);
+				AchievementSaveData.TryAdd(achievementEnum, false);
 			}
 		}
 
-		public void UnlockCharacter(CharacterData pullResult)
+		public void UnlockCharacter(CharactersEnum characterId)
 		{
-			if (!CharacterSaveData.ContainsKey(pullResult.Id))
+			if (!CharacterSaveData.ContainsKey(characterId))
 			{
-				CharacterSaveData.Add(pullResult.Id, new CharacterSaveData());
+				CharacterSaveData.Add(characterId, new CharacterSaveData());
 			}
 			
-			CharacterSaveData[pullResult.Id].Unlock();
-			OnCharacterUnlocked?.Invoke(pullResult.Id, CharacterSaveData[pullResult.Id].GetRankEnum());
+			CharacterSaveData[characterId].Unlock();
+			OnCharacterUnlocked?.Invoke(characterId, CharacterSaveData[characterId].GetRankEnum());
 		}
 
 		public void UnlockAchievement(string achievementEnum)
@@ -198,7 +207,21 @@ namespace DefaultNamespace.Data
 		{
 			if (IsAchievementUnlocked(achievementEnum)) return;
 
-			Gems += 210;
+			var achievementData = achievementEnum.GetAchievementValue();
+			switch (achievementData.Reward.Key)
+			{
+				case RewardType.Gems:
+					Gems += (ulong)achievementData.Reward.Value;
+					break;
+				case RewardType.Coins:
+					Gold += (ulong)achievementData.Reward.Value;
+					break;
+				case RewardType.Shards:
+					UnlockCharacter((CharactersEnum)(int)achievementData.Reward.Value);
+			        break;
+			}
+
+			
 			if (!AchievementSaveData.ContainsKey(achievementEnum))
 				AchievementSaveData.Add(achievementEnum, true);
 			else
@@ -260,7 +283,11 @@ namespace DefaultNamespace.Data
 		public int Pity;
 		public DifficultyEnum SelectedDifficulty;
 		public CharactersEnum? SelectedCharacterId;
-		public string Nickname;
+		public CharactersEnum CurrentBannerCharacterId;
+		public CharactersEnum CurrentBannerSubCharacterId1;
+		public CharactersEnum CurrentBannerSubCharacterId2;
+		public CharactersEnum CurrentBannerSubCharacterId3;
+		public DateTime? LastBannerChangeDate;
 		
 		public SaveData(){}
 		
@@ -290,6 +317,11 @@ namespace DefaultNamespace.Data
 			TotalAmountHealed = saveFile.TotalAmountHealed;
 			DamageTakeInOneGame = saveFile.DamageTakeInOneGame;
 			TotalDamageTaken = saveFile.TotalDamageTaken;
+			CurrentBannerCharacterId = saveFile.CurrentBannerCharacterId;
+			CurrentBannerSubCharacterId1 = saveFile.CurrentBannerSubCharacterId1;
+			CurrentBannerSubCharacterId2 = saveFile.CurrentBannerSubCharacterId2;
+			CurrentBannerSubCharacterId3 = saveFile.CurrentBannerSubCharacterId3;
+			LastBannerChangeDate = saveFile.LastBannerChangeDate;
 		}
 	}
 }

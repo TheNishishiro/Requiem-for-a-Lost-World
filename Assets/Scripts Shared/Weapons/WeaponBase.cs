@@ -51,6 +51,8 @@ namespace Weapons
 			return weaponStats.GetStatsDisplayData();
 		}
 
+		public bool IsItem => false;
+
 		public string GetDescription(int rarity)
 		{
 			return weaponStats.GetDescription(Description, rarity);

@@ -2,10 +2,12 @@
 using System.Linq;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
+using Interfaces;
 using Managers;
 using Objects.Characters;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI.Main_Menu.REWORK.Scripts
@@ -19,9 +21,10 @@ namespace UI.Main_Menu.REWORK.Scripts
         [SerializeField] private WeaponContainer weaponContainer;
         [SerializeField] private ItemContainer itemContainer;
         [SerializeField] private Material materialBlackAndWhite;
+        [SerializeField] private Sprite iconDefault;
+        private IPlayerItem _unlocksItem;
         private AchievementValueAttribute _achievementData;
         private AchievementEnum _achievementId;
-        private AchievementSection _filterSection;
         private AchievementState _filterState;
         private bool _isUnlocked;
         
@@ -31,17 +34,13 @@ namespace UI.Main_Menu.REWORK.Scripts
             _achievementId = achievementEnum;
             
             title.text = achievementValue.Title;
-            iconUnlockable.sprite = weaponContainer.GetIconByAchievement(achievementEnum) ?? itemContainer.GetIconByAchievement(achievementEnum);
-            if (achievementValue.Character != CharactersEnum.Unknown && iconUnlockable.sprite == null)
-                iconUnlockable.sprite = CharacterListManager.instance.GetCharacter(achievementValue.Character).Avatar;
-            
-            Refresh();
-        }
+            _unlocksItem = weaponContainer.GetWeaponByAchievement(achievementEnum) ??
+                           itemContainer.GetItemByAchievement(achievementEnum);
+            iconUnlockable.sprite = _unlocksItem?.IconField;
+            if (iconUnlockable.sprite == null)
+                iconUnlockable.sprite = iconDefault;
 
-        public void VisibleSection(AchievementSection section)
-        {
-            _filterSection = section;
-            UpdateVisibility();
+            Refresh();
         }
 
         public void VisibleState(AchievementState state)
@@ -53,15 +52,13 @@ namespace UI.Main_Menu.REWORK.Scripts
         private void UpdateVisibility()
         {
             var filterUnlockState = _filterState == AchievementState.Completed;
-            var isVisible = (_achievementData.Section == _filterSection || _filterSection == AchievementSection.None)
-                             && (_isUnlocked == filterUnlockState || _filterState == AchievementState.All);
-            
+            var isVisible = _isUnlocked == filterUnlockState || _filterState == AchievementState.All;
             gameObject.SetActive(isVisible);
         }
 
         public void OpenAchievementDisplay()
         {
-            GetComponentInParent<AchievementScreenManager>().OpenAchievementDisplay(_achievementData);
+            GetComponentInParent<AchievementScreenManager>().OpenAchievementDisplay(_achievementData, _unlocksItem);
         }
 
         public void Refresh()
@@ -76,9 +73,12 @@ namespace UI.Main_Menu.REWORK.Scripts
             };
 
             SaveFile.Instance.AchievementSaveData.TryGetValue(_achievementId, out _isUnlocked);
+            progressBar.color = color;
             if (!_isUnlocked)
                 color = Color.grey;
-            background.color = progressBar.color = color;
+            if (_unlocksItem == null)
+                iconUnlockable.color = color;
+            background.color = color;
             iconUnlockable.material = _isUnlocked ? null : materialBlackAndWhite;
 
             var requirementValue = _achievementData.Requirement.Value;
@@ -142,10 +142,6 @@ namespace UI.Main_Menu.REWORK.Scripts
             }
 
             progressBar.fillAmount = _isUnlocked ? 1 : fillAmount;
-            
-            
-            
-            _filterSection = AchievementSection.None;
             _filterState = AchievementState.All;
         }
     }

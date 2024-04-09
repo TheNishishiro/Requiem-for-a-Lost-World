@@ -20,6 +20,7 @@ namespace Objects.Characters
 		public string Title;
 		public Sprite CharacterCard;
 		public Sprite FullArt;
+		public Sprite GatchaArt;
 		public Sprite Avatar;
 		public Sprite CharacterSprite;
 		public Sprite signet;
@@ -45,8 +46,10 @@ namespace Objects.Characters
 		public List<EidolonData> Eidolons;
 		public List<CharacterLoreEntry> loreEntries;
 		private string BonusSeparator => "\n\n" + new string('\u2500', 9) + "» Bonus stats «" + new string('\u2500', 9);
-		
-		
+		public float GachaArtOffsetX;
+		public float GachaArtOffsetY;
+
+
 		public IEnumerable<StatsDisplayData> GetStatsList()
 		{
 			return Stats.GetStatsList();

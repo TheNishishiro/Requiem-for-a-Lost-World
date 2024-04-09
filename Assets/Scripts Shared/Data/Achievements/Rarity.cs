@@ -2,9 +2,10 @@
 {
     public enum Rarity
     {
-        Common = 0,
-        Rare = 1,
-        Legendary = 2,
-        Mythic = 3
+        None = 0,
+        Common = 1,
+        Rare = 2,
+        Legendary = 3,
+        Mythic = 4
     }
 }

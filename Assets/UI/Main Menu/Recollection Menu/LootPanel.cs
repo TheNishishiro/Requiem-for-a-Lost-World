@@ -42,7 +42,7 @@ namespace UI.Main_Menu.Recollection_Menu
 			var pullResult = DoPull();
 			var characterSaveData = _saveFile.GetCharacterSaveData(pullResult.Id);
 			var pullColor = GetPullColor(characterSaveData);
-			_saveFile.UnlockCharacter(pullResult);
+			_saveFile.UnlockCharacter(pullResult.Id);
 			OnPull?.Invoke(pullResult);
 			saveManager.SaveGame();
 

@@ -6,6 +6,7 @@ using DefaultNamespace.Data.Achievements;
 using Interfaces;
 using Managers;
 using NaughtyAttributes;
+using Objects.Characters;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,6 +41,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Side Panel")] [SerializeField] private GameObject sidePanel;
         [BoxGroup("Side Panel")] [SerializeField] private TextMeshProUGUI labelTitle;
         [BoxGroup("Side Panel")] [SerializeField] private TextMeshProUGUI labelDescription;
+        [BoxGroup("Side Panel")] [SerializeField] private TextMeshProUGUI labelRewards;
         
         private List<AchievementCard> _achievementCards;
         private int currentSectionId;
@@ -97,13 +99,17 @@ namespace UI.Main_Menu.REWORK.Scripts
             labelSurvival.SetActive(section is AchievementSection.CharacterSurvival or AchievementSection.None);
             labelMisc.SetActive(section is AchievementSection.Misc or AchievementSection.None);
             
+            containerCharacter.gameObject.SetActive(section is AchievementSection.Character or AchievementSection.None);
+            containerCombat.gameObject.SetActive(section is AchievementSection.Combat or AchievementSection.None);
+            containerCollection.gameObject.SetActive(section is AchievementSection.Collection or AchievementSection.None);
+            containerEnvironment.gameObject.SetActive(section is AchievementSection.Environment or AchievementSection.None);
+            containerSurvival.gameObject.SetActive(section is AchievementSection.CharacterSurvival or AchievementSection.None);
+            containerMisc.gameObject.SetActive(section is AchievementSection.Misc or AchievementSection.None);
+            
             buttonSections.ForEach(x => x.GetComponent<Image>().color = Color.clear);
             buttonSections.ForEach(x => x.GetComponentInChildren<TextMeshProUGUI>().fontSharedMaterial = materialIdleText);
             buttonSections[sectionId].GetComponent<Image>().color = colorHighlight;
             buttonSections[sectionId].GetComponentInChildren<TextMeshProUGUI>().fontSharedMaterial = materialSelectedText;
-            
-            
-            _achievementCards.ForEach(x => x.VisibleSection(section));
         }
 
         public void FilterState(int stateId)
@@ -117,11 +123,38 @@ namespace UI.Main_Menu.REWORK.Scripts
             _achievementCards.ForEach(x => x.VisibleState(state));
         }
 
-        public void OpenAchievementDisplay(AchievementValueAttribute achievementData)
+        public void OpenAchievementDisplay(AchievementValueAttribute achievementData, IPlayerItem unlocksItem)
         {
             sidePanel.gameObject.SetActive(true);
             labelTitle.text = achievementData.Title;
             labelDescription.text = achievementData.Description;
+            switch (achievementData.Reward.Key)
+            {
+                case RewardType.None when unlocksItem == null:
+                    labelRewards.text = "None";
+                    break;
+                case RewardType.None:
+                    labelRewards.text = "";
+                    break;
+                case RewardType.Gems:
+                    labelRewards.text = $"Gems: {achievementData.Reward.Value}<br>";
+                    break;
+                case RewardType.Coins:
+                    labelRewards.text = $"Coins: {achievementData.Reward.Value}<br>";
+                    break;
+                case RewardType.Shards:
+                    var character = CharacterListManager.instance.GetCharacter((CharactersEnum)achievementData.Reward.Value);
+                    labelRewards.text = $"Character shard: {character.Name}<br>";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            if (unlocksItem != null)
+            {
+                var title = unlocksItem.IsItem ? "Item" : "Weapon";
+                labelRewards.text += $"{title}: {unlocksItem.NameField}";
+            }
         }
 
         public void CloseAchievementDisplay()

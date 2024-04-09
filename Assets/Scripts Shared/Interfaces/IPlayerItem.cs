@@ -16,6 +16,7 @@ namespace Interfaces
 		int LevelField { get; }
 		Element ElementField { get; }
 		ICollection<StatsDisplayData> GetStatsData();
+		bool IsItem { get; }
 		bool IsUnlocked(SaveFile saveFile);
 		bool ReliesOnAchievement(AchievementEnum achievement);
 		string GetDescription(int rarity);

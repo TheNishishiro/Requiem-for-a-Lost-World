@@ -20,7 +20,7 @@ namespace DefaultNamespace.Data.Achievements
 			Description = description;
 			Section = section;
 			Rarity = rarity;
-			Reward = new KeyValuePair<RewardType, float>(RewardType.None, 200);
+			Reward = new KeyValuePair<RewardType, float>(RewardType.Gems, 100 * (int)rarity);
 			Requirement = new KeyValuePair<RequirementType, float>(RequirementType.None, 1);
 		}		
 		
@@ -30,7 +30,7 @@ namespace DefaultNamespace.Data.Achievements
 			Description = description;
 			Section = section;
 			Rarity = rarity;
-			Reward = new KeyValuePair<RewardType, float>(RewardType.None, 200);
+			Reward = new KeyValuePair<RewardType, float>(RewardType.Gems, 100 * (int)rarity);
 			Requirement = new KeyValuePair<RequirementType, float>(requirementType, requirementQuantity);
 		}			
 		
@@ -41,7 +41,7 @@ namespace DefaultNamespace.Data.Achievements
 			Section = section;
 			Character = character;
 			Rarity = rarity;
-			Reward = new KeyValuePair<RewardType, float>(RewardType.None, 200);
+			Reward = new KeyValuePair<RewardType, float>(RewardType.Gems, 100 * (int)rarity);
 			Requirement = new KeyValuePair<RequirementType, float>(requirementType, requirementQuantity);
 		}	
 		

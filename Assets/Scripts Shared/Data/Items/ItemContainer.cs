@@ -2,6 +2,8 @@
 using System.Linq;
 using Data.ToggleableEntries;
 using DefaultNamespace.Data.Achievements;
+using Interfaces;
+using Objects.Items;
 using UnityEngine;
 
 namespace DefaultNamespace.Data
@@ -16,9 +18,9 @@ namespace DefaultNamespace.Data
 			return availableItems.ToList();
 		}
 
-		public Sprite GetIconByAchievement(AchievementEnum achievementEnum)
+		public IPlayerItem GetItemByAchievement(AchievementEnum achievementEnum)
 		{
-			return availableItems.FirstOrDefault(w => w.itemBase.requiredAchievement == achievementEnum)?.itemBase?.Icon;
+			return availableItems.FirstOrDefault(w => w.itemBase.requiredAchievement == achievementEnum)?.itemBase;
 		}
 	}
 }

@@ -34,6 +34,8 @@ namespace Objects.Items
 			return ItemStats.GetStatsDisplayData();
 		}
 
+		public bool IsItem => true;
+
 		public IEnumerable<ItemUpgrade> GetAvailableUpgrades()
 		{
 			return ItemUpgrades;
