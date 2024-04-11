@@ -8,10 +8,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: UI Moving Line Material
-  m_Shader: {fileID: -6465566751694194690, guid: 012cb9cad2c949443876fec51e177923,
+  m_Shader: {fileID: -6465566751694194690, guid: 4205213876351c7439d7924008b7fe70,
     type: 3}
-  m_Parent: {fileID: 2100000, guid: a06914b911defce48a1ddd4d20790bf2, type: 2}
-  m_ModifiedSerializedProperties: 18
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
@@ -25,13 +25,39 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Background_Texture:
+        m_Texture: {fileID: 2800000, guid: 5ad18196d3862d74d818dde6093baf1e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LineTexture:
+        m_Texture: {fileID: 2800000, guid: ddb5c3904db176a48b2c98e79f2b300d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _Line_Size: 1
+    - _Line_Speed: 3
+    - _Offset: 0
+    - _QueueControl: 0
+    - _QueueOffset: 0
     m_Colors:
+    - _Background_Color: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 34.29675, g: 34.29675, b: 34.29675, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

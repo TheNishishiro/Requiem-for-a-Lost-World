@@ -43,6 +43,19 @@ namespace DefaultNamespace
 			
 			return value.Replace(",", ".").TrimEnd('0').TrimEnd('.');
 		}
+		
+		public static Color HexToColor(string hexColor)
+		{
+			// Remove the '#' character from the start if it exists
+			if (hexColor.IndexOf('#') != -1)
+				hexColor = hexColor.Replace("#", "");
+
+			var r = byte.Parse(hexColor.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+			var g = byte.Parse(hexColor.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+			var b = byte.Parse(hexColor.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+
+			return new Color32(r, g, b, 255); // Alpha = 255 (opaque)
+		}
 
 		public static string FloatToTimeString(float time)
 		{
