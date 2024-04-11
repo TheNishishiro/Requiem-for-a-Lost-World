@@ -16,7 +16,6 @@ namespace Managers
 		private static bool _isFirstLoad = true;
 		public static SaveManager instance;
 		[SerializeField] private CharacterListMenu characterListMenu;
-		private SaveFile _saveData;
 
 		private void Awake()
 		{
@@ -25,7 +24,6 @@ namespace Managers
 				instance = this;
 			}
 			
-			_saveData = FindFirstObjectByType<SaveFile>();
 			Time.timeScale = 1f;
 			if (_isFirstLoad)
 			{
@@ -36,33 +34,33 @@ namespace Managers
 
 		public SaveFile GetSaveFile()
 		{
-			return _saveData;
+			return SaveFile.Instance;
 		}
 
 		public void SaveGame()
 		{
-			_saveData.UpdateMissingCharacterEntries(CharacterListManager.instance.GetCharacters());
-			_saveData.UpdateMissingAchievementEntries();
-			_saveData.Save();
+			SaveFile.Instance.UpdateMissingCharacterEntries(CharacterListManager.instance.GetCharacters());
+			SaveFile.Instance.UpdateMissingAchievementEntries();
+			SaveFile.Instance.Save();
 		}
 
 		public void LoadGame()
 		{
-			_saveData.Initialize();
-			_saveData.Load();
-			_saveData.UpdateMissingCharacterEntries(CharacterListManager.instance.GetCharacters());
-			_saveData.UpdateMissingAchievementEntries();
-			if (!_saveData.CharacterSaveData[CharactersEnum.Nishi].IsUnlocked)
-				_saveData.CharacterSaveData[CharactersEnum.Nishi].Unlock();
-			if (!_saveData.CharacterSaveData[CharactersEnum.Amelia].IsUnlocked)
-				_saveData.CharacterSaveData[CharactersEnum.Amelia].Unlock();
+			SaveFile.Instance.Initialize();
+			SaveFile.Instance.Load();
+			SaveFile.Instance.UpdateMissingCharacterEntries(CharacterListManager.instance.GetCharacters());
+			SaveFile.Instance.UpdateMissingAchievementEntries();
+			if (!SaveFile.Instance.CharacterSaveData[CharactersEnum.Nishi].IsUnlocked)
+				SaveFile.Instance.CharacterSaveData[CharactersEnum.Nishi].Unlock();
+			if (!SaveFile.Instance.CharacterSaveData[CharactersEnum.Amelia].IsUnlocked)
+				SaveFile.Instance.CharacterSaveData[CharactersEnum.Amelia].Unlock();
 			characterListMenu.UpdateCharacterPanels();
 			ApplySettings();
 		}
 
 		public void ApplySettings()
 		{
-			var settings = _saveData.ConfigurationFile;
+			var settings = SaveFile.Instance.ConfigurationFile;
 
 			AudioListener.volume = settings.Volume;
 			var renderPipeline = (UniversalRenderPipelineAsset)QualitySettings.renderPipeline;

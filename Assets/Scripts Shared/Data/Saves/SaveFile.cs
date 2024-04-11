@@ -60,7 +60,7 @@ namespace DefaultNamespace.Data
 
 		private void Awake()
 		{
-			var saveFiles = FindObjectsOfType<SaveFile>();
+			var saveFiles = FindObjectsByType<SaveFile>(FindObjectsSortMode.None);
 			if (saveFiles.Length > 1)
 			{
 				Destroy(gameObject);

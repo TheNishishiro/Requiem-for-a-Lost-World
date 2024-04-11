@@ -137,7 +137,7 @@ namespace Managers
 				SaveFile.Instance.UnlockAchievement($"Obtain{characterId.GetName()}_{rank}");
 		}
 
-		public void OnPull(CharacterData characterData)
+		public void OnPull(CharactersEnum characterId)
 		{
 			SaveFile.Instance.PullsPerformed++;
 			if (SaveFile.Instance.PullsPerformed >= 50)

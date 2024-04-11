@@ -55,6 +55,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         public void Pull(int amount)
         {
             var saveFile = SaveFile.Instance;
+            saveFile.Pity++;
             gachaShards.ForEach(x => x.gameObject.SetActive(false));
             gachaCards.ForEach(x => x.gameObject.SetActive(false));
             highestRarity = GachaRewardType.Extra;
@@ -74,24 +75,37 @@ namespace UI.Main_Menu.REWORK.Scripts
                 var pulledCharacter = pullDecision switch
                 {
                     GachaRewardType.Main => saveFile.CurrentBannerCharacterId,
-                    GachaRewardType.Sub when rnd.NextDouble() <= 0.5 => rnd.NextDouble() switch
-                    {
-                        < 0.33 => saveFile.CurrentBannerSubCharacterId1,
-                        < 0.66 => saveFile.CurrentBannerSubCharacterId2,
-                        _ => saveFile.CurrentBannerSubCharacterId3
-                    },
+                    GachaRewardType.Sub when rnd.NextDouble() <= 0.5 => GetAnyPromotionalCharacters(saveFile),
                     GachaRewardType.Sub when rnd.NextDouble() > 0.5 => CharacterListManager.instance.GetCharacters().Where(x => x.Id != saveFile.CurrentBannerCharacterId).OrderBy(x => rnd.NextDouble()).First().Id,
                     _ => CharactersEnum.Unknown
                 };
+                if (saveFile.Pity >= 30)
+                {
+                    pulledCharacter = saveFile.CurrentBannerCharacterId;
+                    saveFile.Pity = 0;
+                }
+
+                AchievementManager.instance.OnPull(pulledCharacter);
+                
                 gachaCards[i].SetDisplay(pullColor, pulledCharacter);
                 gachaCards[i].gameObject.SetActive(true);
-                
+
                 gachaShards[i].SetColor(pullColor);
                 gachaShards[i].gameObject.SetActive(true);
             }
             
             pullFlash.SetColor(Color.white);
             animator.SetTrigger("Pull");
+        }
+
+        private CharactersEnum GetAnyPromotionalCharacters(SaveFile saveFile)
+        {
+            return rnd.NextDouble() switch
+            {
+                < 0.33 => saveFile.CurrentBannerSubCharacterId1,
+                < 0.66 => saveFile.CurrentBannerSubCharacterId2,
+                _ => saveFile.CurrentBannerSubCharacterId3
+            };
         }
 
         public void ApplyPullColorToFlash()
