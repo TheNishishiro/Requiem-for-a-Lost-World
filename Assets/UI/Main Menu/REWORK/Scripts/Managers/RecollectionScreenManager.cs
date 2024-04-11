@@ -26,6 +26,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Image")] [SerializeField] private Image imageSubBanner3;
         [BoxGroup("Image")] [SerializeField] private Image imageTimeTheme;
         [BoxGroup("Image")] [SerializeField] private Image imagePityTheme;
+        [BoxGroup("Image")] [SerializeField] private Image imageGemsTheme;
         [BoxGroup("Image")] [SerializeField] private Image imagePull1;
         [BoxGroup("Image")] [SerializeField] private Image imagePull10;
         [Space]
@@ -33,6 +34,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Text")] [SerializeField] private TextMeshProUGUI textCharacterName;
         [BoxGroup("Text")] [SerializeField] private TextMeshProUGUI textTimeLeft;
         [BoxGroup("Text")] [SerializeField] private TextMeshProUGUI textPity;
+        [BoxGroup("Text")] [SerializeField] private TextMeshProUGUI textGems;
         [Space]
         [BoxGroup("Image")] [SerializeField] private MaterialController pullFlash;
         [BoxGroup("Pulls")] [SerializeField] private List<GachaShardComponent> gachaShards;
@@ -40,8 +42,9 @@ namespace UI.Main_Menu.REWORK.Scripts
         [Space]
         [BoxGroup("Animator")] [SerializeField] private Animator animator;
 
-        private Random rnd = new Random();
-        private GachaRewardType highestRarity;
+        private readonly Random _rnd = new ();
+        private GachaRewardType _highestRarity;
+        private const int MaxPity = 40;
 
         public void Update()
         {
@@ -49,37 +52,42 @@ namespace UI.Main_Menu.REWORK.Scripts
             var date2 = SaveFile.Instance.LastBannerChangeDate.GetValueOrDefault().AddHours(24);
             var difference = date2 - date1;
             textTimeLeft.text = $"{difference.Hours}h {difference.Minutes}m";
-            textPity.text = (30 - SaveFile.Instance.Pity).ToString();
+            textPity.text = (MaxPity - SaveFile.Instance.Pity).ToString();
+            textGems.text = SaveFile.Instance.Gems.ToString();
         }
 
         public void Pull(int amount)
         {
             var saveFile = SaveFile.Instance;
-            saveFile.Pity++;
+            var pullCost = (ulong)(amount == 1 ? 350 : 3000);
+            if (saveFile.Gems < pullCost) return;
+            saveFile.Gems -= pullCost;
+            
             gachaShards.ForEach(x => x.gameObject.SetActive(false));
             gachaCards.ForEach(x => x.gameObject.SetActive(false));
-            highestRarity = GachaRewardType.Extra;
+            _highestRarity = GachaRewardType.Extra;
             for (var i = 0; i < amount; i++)
             {
-                var pullDecision = rnd.NextDouble() switch
+                saveFile.Pity++;
+                var pullDecision = _rnd.NextDouble() switch
                 {
                     < 0.1f => GachaRewardType.Main,
                     < 0.5f => GachaRewardType.Sub,
                     <= 1f => GachaRewardType.Extra,
                     _ => throw new ArgumentOutOfRangeException()
                 };
-                if (highestRarity > pullDecision)
-                    highestRarity = pullDecision;
+                if (_highestRarity > pullDecision)
+                    _highestRarity = pullDecision;
 
                 var pullColor = GetColorByRarity(pullDecision);
                 var pulledCharacter = pullDecision switch
                 {
                     GachaRewardType.Main => saveFile.CurrentBannerCharacterId,
-                    GachaRewardType.Sub when rnd.NextDouble() <= 0.5 => GetAnyPromotionalCharacters(saveFile),
-                    GachaRewardType.Sub when rnd.NextDouble() > 0.5 => CharacterListManager.instance.GetCharacters().Where(x => x.Id != saveFile.CurrentBannerCharacterId).OrderBy(x => rnd.NextDouble()).First().Id,
+                    GachaRewardType.Sub when _rnd.NextDouble() <= 0.5 => GetAnyPromotionalCharacters(saveFile),
+                    GachaRewardType.Sub => CharacterListManager.instance.GetCharacters().Where(x => x.Id != saveFile.CurrentBannerCharacterId).OrderBy(x => _rnd.NextDouble()).First().Id,
                     _ => CharactersEnum.Unknown
                 };
-                if (saveFile.Pity >= 30)
+                if (saveFile.Pity >= MaxPity)
                 {
                     pulledCharacter = saveFile.CurrentBannerCharacterId;
                     saveFile.Pity = 0;
@@ -100,7 +108,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         private CharactersEnum GetAnyPromotionalCharacters(SaveFile saveFile)
         {
-            return rnd.NextDouble() switch
+            return _rnd.NextDouble() switch
             {
                 < 0.33 => saveFile.CurrentBannerSubCharacterId1,
                 < 0.66 => saveFile.CurrentBannerSubCharacterId2,
@@ -110,7 +118,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         public void ApplyPullColorToFlash()
         {
-            var newColor = GetColorByRarity(highestRarity);
+            var newColor = GetColorByRarity(_highestRarity);
             StartCoroutine(ChangeFlashColor(Color.white, newColor));
         }
 
@@ -163,6 +171,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             textCharacterName.color = mainCharacter.ColorTheme;
             textTimeLeft.color = mainCharacter.ColorTheme;
             textPity.color = mainCharacter.ColorTheme;
+            imageGemsTheme.color = mainCharacter.ColorTheme;
 
             textCharacterName.text = mainCharacter.Name;
             textCharacterTitle.text = mainCharacter.Title;
