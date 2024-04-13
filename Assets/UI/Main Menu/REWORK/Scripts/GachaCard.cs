@@ -27,7 +27,8 @@ namespace UI.Main_Menu.REWORK.Scripts
                 var characterSaveData = SaveFile.Instance.GetCharacterSaveData(characterId);
 
                 var isConvertIntoGems = characterSaveData.IsUnlocked && characterSaveData.GetRankEnum() >= CharacterRank.E5;
-                imageCharacter.sprite = characterData.FullArt;
+                imageCharacter.sprite = characterData.CharacterCard;
+                imageCharacter.rectTransform.anchoredPosition = new Vector2(characterData.GachaSubArtOffset.x,0);
                 textRewardTitle.text = characterData.Name;
                 textDescription.text = !characterSaveData.IsUnlocked ? "<color=yellow>NEW</color>" :
                     characterSaveData.GetRankEnum() < CharacterRank.E5 ? "Shard +1" : "Converted<br>Gems +500";

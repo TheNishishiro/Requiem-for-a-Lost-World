@@ -78,7 +78,7 @@ public class GameSettingsScManareenger : MonoBehaviour, IStackableWindow
     public void Open()
     {
         var character = CharacterListManager.instance.GetActiveCharacter();
-        imageCharacterCard.sprite = character.FullArt;
+        imageCharacterCard.sprite = character.CharacterCard;
         imageSettingsLine.color = character.ColorTheme;
         imageEffectsLine.color = character.ColorTheme;
         imageGlowLine.color = character.ColorTheme;

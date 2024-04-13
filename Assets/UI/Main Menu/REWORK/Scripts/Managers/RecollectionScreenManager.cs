@@ -177,16 +177,16 @@ namespace UI.Main_Menu.REWORK.Scripts
             textCharacterTitle.text = mainCharacter.Title;
             
             var subCharacter1 = CharacterListManager.instance.GetCharacter(saveFile.CurrentBannerSubCharacterId1);
-            imageSubBanner1.rectTransform.anchoredPosition = new Vector2(subCharacter1.GachaArtOffsetX, subCharacter1.GachaArtOffsetY);
-            imageSubBanner1.sprite = subCharacter1.FullArt;
+            imageSubBanner1.rectTransform.anchoredPosition = new Vector2(subCharacter1.GachaSubArtOffset.x, subCharacter1.GachaSubArtOffset.y);
+            imageSubBanner1.sprite = subCharacter1.CharacterCard;
             
             var subCharacter2 = CharacterListManager.instance.GetCharacter(saveFile.CurrentBannerSubCharacterId2);
-            imageSubBanner2.rectTransform.anchoredPosition = new Vector2(subCharacter2.GachaArtOffsetX, subCharacter2.GachaArtOffsetY);
-            imageSubBanner2.sprite = subCharacter2.FullArt;
+            imageSubBanner2.rectTransform.anchoredPosition = new Vector2(subCharacter2.GachaSubArtOffset.x, subCharacter2.GachaSubArtOffset.y);
+            imageSubBanner2.sprite = subCharacter2.CharacterCard;
             
             var subCharacter3 = CharacterListManager.instance.GetCharacter(saveFile.CurrentBannerSubCharacterId3);
-            imageSubBanner3.rectTransform.anchoredPosition = new Vector2(subCharacter3.GachaArtOffsetX, subCharacter3.GachaArtOffsetY);
-            imageSubBanner3.sprite = subCharacter3.FullArt;
+            imageSubBanner3.rectTransform.anchoredPosition = new Vector2(subCharacter3.GachaSubArtOffset.x, subCharacter3.GachaSubArtOffset.y);
+            imageSubBanner3.sprite = subCharacter3.CharacterCard;
             
             StackableWindowManager.instance.OpenWindow(this);
         }
@@ -204,7 +204,9 @@ namespace UI.Main_Menu.REWORK.Scripts
             saveFile.CurrentBannerSubCharacterId2 = characters.GetNextRandom();
             saveFile.CurrentBannerSubCharacterId3 = characters.GetNextRandom();
             saveFile.Pity = 0;
-            saveFile.LastBannerChangeDate = saveFile.LastBannerChangeDate?.AddHours(24) ?? DateTime.Now;
+            saveFile.LastBannerChangeDate = saveFile.LastBannerChangeDate?.AddHours(24) < DateTime.Now
+                ? DateTime.Now.AddHours(24)
+                : saveFile.LastBannerChangeDate?.AddHours(24) ?? DateTime.Now;
             saveFile.Save();
         }
         

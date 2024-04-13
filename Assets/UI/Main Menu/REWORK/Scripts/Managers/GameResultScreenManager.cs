@@ -52,7 +52,7 @@ public class GameResultScreenManager : MonoBehaviour, IStackableWindow
         imageGlowStripRight.gameObject.SetActive(GameResultData.IsWin);
         
         var currentCharacter = GameData.GetPlayerCharacterData();
-        imageCharacterCard.sprite = currentCharacter.FullArt;
+        imageCharacterCard.sprite = currentCharacter.CharacterCard;
         imageGlowStripLeft.color = currentCharacter.ColorTheme;
         imageGlowStripRight.color = currentCharacter.ColorTheme;
         barExperience.SetColor(currentCharacter.ColorTheme);

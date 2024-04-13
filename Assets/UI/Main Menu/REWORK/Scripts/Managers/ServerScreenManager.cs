@@ -160,7 +160,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             serverListScreen.SetActive(true);
             serverSettingsScreen.SetActive(false);
             var character = CharacterListManager.instance.GetActiveCharacter();
-            imageCharacterCard.sprite = character.FullArt;
+            imageCharacterCard.sprite = character.CharacterCard;
             
             StackableWindowManager.instance.OpenWindow(this);
         }

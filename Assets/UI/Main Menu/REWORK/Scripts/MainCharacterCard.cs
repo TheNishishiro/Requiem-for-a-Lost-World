@@ -68,7 +68,7 @@ public class MainCharacterCard : MonoBehaviour
         _currentCharacterData = character;
         _currentCharacterSaveData = characterSaveData;
         
-        characterCardImage.sprite = character.FullArt;
+        characterCardImage.sprite = character.CharacterCard;
         characterCardImage.material = null;
         labelName.text = character.Name;
         labelTitle.text = character.Title;
