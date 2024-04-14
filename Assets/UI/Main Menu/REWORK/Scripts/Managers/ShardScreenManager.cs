@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DefaultNamespace.Data;
 using Interfaces;
 using Managers;
 using Objects.Characters;
@@ -18,6 +19,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [SerializeField] private TextMeshProUGUI labelTitle;
         [SerializeField] private TextMeshProUGUI labelDescription;
         [SerializeField] private TextMeshProUGUI labelQuote;
+        [SerializeField] private TextMeshProUGUI labelFragmentsRequired;
         [SerializeField] private SVGImage lockIcon;
         private int _selectedRank;
 
@@ -31,7 +33,8 @@ namespace UI.Main_Menu.REWORK.Scripts
 
             if (characterRank > 0)
                 MarkSelected(1);
-            
+
+            labelFragmentsRequired.text = $"{SaveFile.Instance.CharacterSaveData[characterData.Id].Fragments}/50";
             StackableWindowManager.instance.OpenWindow(this);
         }
 

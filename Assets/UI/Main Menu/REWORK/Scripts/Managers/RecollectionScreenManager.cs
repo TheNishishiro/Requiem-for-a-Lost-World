@@ -14,7 +14,7 @@ using TMPro;
 using UI.Shared;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 namespace UI.Main_Menu.REWORK.Scripts
 {
@@ -42,7 +42,6 @@ namespace UI.Main_Menu.REWORK.Scripts
         [Space]
         [BoxGroup("Animator")] [SerializeField] private Animator animator;
 
-        private readonly Random _rnd = new ();
         private GachaRewardType _highestRarity;
         private const int MaxPity = 40;
 
@@ -73,7 +72,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             for (var i = 0; i < amount; i++)
             {
                 saveFile.Pity++;
-                var pullDecision = _rnd.NextDouble() switch
+                var pullDecision = Random.value switch
                 {
                     < 0.1f => GachaRewardType.Main,
                     < 0.4f => GachaRewardType.Sub,
@@ -86,8 +85,8 @@ namespace UI.Main_Menu.REWORK.Scripts
                 var pulledCharacter = pullDecision switch
                 {
                     GachaRewardType.Main => saveFile.CurrentBannerCharacterId,
-                    GachaRewardType.Sub when _rnd.NextDouble() <= 0.5 => GetAnyPromotionalCharacters(saveFile),
-                    GachaRewardType.Sub => CharacterListManager.instance.GetCharacters().Where(x => x.Id != saveFile.CurrentBannerCharacterId).OrderBy(x => _rnd.NextDouble()).First().Id,
+                    GachaRewardType.Sub when Random.value <= 0.5 => GetAnyPromotionalCharacters(saveFile),
+                    GachaRewardType.Sub => CharacterListManager.instance.GetCharacters().Where(x => x.Id != saveFile.CurrentBannerCharacterId).OrderBy(x => Random.value).First().Id,
                     _ => CharactersEnum.Unknown
                 };
                 if (saveFile.Pity >= MaxPity)
@@ -111,10 +110,10 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         private CharactersEnum GetAnyPromotionalCharacters(SaveFile saveFile)
         {
-            return _rnd.NextDouble() switch
+            return Random.value switch
             {
-                < 0.33 => saveFile.CurrentBannerSubCharacterId1,
-                < 0.66 => saveFile.CurrentBannerSubCharacterId2,
+                < 0.33f => saveFile.CurrentBannerSubCharacterId1,
+                < 0.66f => saveFile.CurrentBannerSubCharacterId2,
                 _ => saveFile.CurrentBannerSubCharacterId3
             };
         }

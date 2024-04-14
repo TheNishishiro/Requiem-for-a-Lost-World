@@ -20,50 +20,104 @@ namespace UI.Main_Menu.REWORK.Scripts
         [SerializeField] private Sprite spriteGoldStack;
         [SerializeField] private Sprite spriteGemPouch;
         
-
-        public void SetDisplay(Color gachaColor, CharactersEnum characterId)
+        public void SetDisplay(Color displayColor, CharactersEnum characterId)
         {
             if (characterId != CharactersEnum.Unknown)
             {
-                var characterData = CharacterListManager.instance.GetCharacter(characterId);
-                var characterSaveData = SaveFile.Instance.GetCharacterSaveData(characterId);
-
-                var isConvertIntoGems = characterSaveData.IsUnlocked && characterSaveData.GetRankEnum() >= CharacterRank.E5;
-                imageCharacter.sprite = characterData.CharacterCard;
-                imageCharacter.rectTransform.anchoredPosition = new Vector2(characterData.GachaSubArtOffset.x,0);
-                textRewardTitle.text = characterData.Name;
-                textDescription.text = !characterSaveData.IsUnlocked ? "<color=yellow>NEW</color>" :
-                    characterSaveData.GetRankEnum() < CharacterRank.E5 ? "Shard +1" : "Converted<br>Gems +200";
-                if (isConvertIntoGems)
-                    SaveFile.Instance.Gems += 200;
-
-                SaveFile.Instance.UnlockCharacter(characterId);
+                SetCharacterDisplay(characterId);
             }
             else
             {
-                switch (Random.value)
-                {
-                    case <= 0.5f:
-                        imageCharacter.sprite = spriteGoldStack;
-                        textRewardTitle.text = "Coins";
-                        textDescription.text = "Gold +500";
-                        SaveFile.Instance.Gold += 500;
-                        break;
-                    default:
-                        imageCharacter.sprite = spriteGemPouch;
-                        textRewardTitle.text = "Pouch";
-                        textDescription.text = "Gem +150";
-                        SaveFile.Instance.Gems += 150;
-                        break;
-                }
+                SetRandomDisplay();
             }
             
             var particleMain = particles.main;
-            particleMain.startColor = gachaColor;
-            materialControllerFrontGlow.SetColor(gachaColor);
-            imageLeftStrip.color = imageRightStrip.color = gachaColor;
-            
+            particleMain.startColor = displayColor;
+            materialControllerFrontGlow.SetColor(displayColor);
+            imageLeftStrip.color = imageRightStrip.color = displayColor;
             SaveManager.instance.SaveGame();
+        }
+        
+        private void SetCharacterDisplay(CharactersEnum characterId)
+        {
+            var characterData = CharacterListManager.instance.GetCharacter(characterId);
+            var characterSaveData = SaveFile.Instance.GetCharacterSaveData(characterId);
+        
+            var isConvertIntoGems = characterSaveData.IsUnlocked && characterSaveData.GetRankEnum() >= CharacterRank.E5;
+            SetCharacterCommonDisplayProperties(characterData);
+            
+            textDescription.text = !characterSaveData.IsUnlocked ? "<color=yellow>NEW</color>" :
+                characterSaveData.GetRankEnum() < CharacterRank.E5 ? "Shard +1" : "Converted<br>Gems +200";
+        
+            if (!isConvertIntoGems)
+                SaveFile.Instance.UnlockCharacter(characterId);
+            else
+                AddGems(200);
+        }
+        
+        private void SetRandomDisplay()
+        {
+            switch (Random.value)
+            {
+                case <= 0.35f:
+                    SetGoldReward("Coins", 500);
+                    break;
+                case <= 0.70f:
+                    SetGemReward("Pouch", 150);
+                    break;
+                default:
+                    SetRandomCharacterFragmentReward();
+                    break;
+            }
+        }
+        
+        private void SetRandomCharacterFragmentReward()
+        {
+            var character = CharacterListManager.instance.GetRandomCharacter();
+            var characterSaveData = SaveFile.Instance.CharacterSaveData[character.Id];
+            if (characterSaveData.GetRankEnum() >= CharacterRank.E5)
+            {
+                if (Random.value <= 0.5f)
+                    SetGoldReward("Coins", 500);
+                else
+                    SetGemReward("Pouch", 150);
+            }
+            else
+            {
+                SetCharacterCommonDisplayProperties(character);
+        
+                var fragmentReward = Random.Range(1, 6);
+                textDescription.text = $"Fragments +{fragmentReward}";
+                characterSaveData.AddFragments(fragmentReward);
+            }
+        }
+        
+        private void SetCharacterCommonDisplayProperties(CharacterData character)
+        {
+            imageCharacter.sprite = character.CharacterCard;
+            imageCharacter.rectTransform.anchoredPosition = new Vector2(character.GachaSubArtOffset.x,0);
+            textRewardTitle.text = character.Name;
+        }
+        
+        private void SetGoldReward(string title, ulong goldAmount)
+        {
+            imageCharacter.sprite = spriteGoldStack;
+            textRewardTitle.text = title;
+            textDescription.text = $"Gold +{goldAmount}";
+            SaveFile.Instance.Gold += goldAmount;
+        }
+        
+        private void SetGemReward(string title, ulong gemAmount)
+        {
+            imageCharacter.sprite = spriteGemPouch;
+            textRewardTitle.text = title;
+            textDescription.text = $"Gem +{gemAmount}";
+            AddGems(gemAmount);
+        }
+        
+        private void AddGems(ulong amount)
+        {
+            SaveFile.Instance.Gems += amount;
         }
     }
 }

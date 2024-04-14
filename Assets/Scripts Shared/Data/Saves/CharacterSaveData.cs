@@ -18,6 +18,7 @@ namespace DefaultNamespace.Data
 		public ulong KillCount;
 		public int HighestInGameLevel;
 		public int skillPoints;
+		public int Fragments;
 		public ulong TotalPlayTime;
 		public ulong LongestGameTime;
 		public List<int> unlockedSkillPoints;
@@ -55,6 +56,16 @@ namespace DefaultNamespace.Data
 				RankUpLevel++;
 			else
 				AddExperience(500);
+		}
+
+		public void AddFragments(int fragmentReward)
+		{
+			Fragments += fragmentReward;
+			if (Fragments > 50)
+			{
+				Unlock();
+				Fragments = 0;
+			}
 		}
 		
 		public void AddGameResultStats()
