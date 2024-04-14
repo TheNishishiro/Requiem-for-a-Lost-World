@@ -192,6 +192,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             imageSubBanner3.rectTransform.anchoredPosition = new Vector2(subCharacter3.GachaSubArtOffset.x, subCharacter3.GachaSubArtOffset.y);
             imageSubBanner3.sprite = subCharacter3.CharacterCard;
             
+            
             StackableWindowManager.instance.OpenWindow(this);
         }
 
@@ -202,7 +203,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         private static void BuildBanner(SaveFile saveFile)
         {
-            var characters = CharacterListManager.instance.GetCharacters().Select(x => x.Id).ToList();
+            var characters = CharacterListManager.instance.GetCharacters().Where(x => !saveFile.BannerHistory.Contains(x.Id)).Select(x => x.Id).ToList();
             saveFile.CurrentBannerCharacterId = characters.GetNextRandom();
             saveFile.CurrentBannerSubCharacterId1 = characters.GetNextRandom();
             saveFile.CurrentBannerSubCharacterId2 = characters.GetNextRandom();
@@ -214,7 +215,10 @@ namespace UI.Main_Menu.REWORK.Scripts
             {
                 diffInDays = (int)(now - saveFile.NextBannerChangeDate.Value).TotalDays;
             }
-    
+            
+            saveFile.BannerHistory.Add(saveFile.CurrentBannerCharacterId);
+            if (saveFile.BannerHistory.Count > 7)
+                saveFile.BannerHistory.Remove(saveFile.BannerHistory.FirstOrDefault());
             saveFile.NextBannerChangeDate = saveFile.NextBannerChangeDate?.AddDays(diffInDays + 1) ?? now.AddHours(24);
             saveFile.Save();
         }

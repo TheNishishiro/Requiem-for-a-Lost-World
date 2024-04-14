@@ -29,6 +29,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<AchievementEnum, bool> AchievementSaveData;
 		public Dictionary<int, List<int>> ReadStoryEntries { get; set; }
 		public List<ServerData> Servers;
+		public List<CharactersEnum> BannerHistory;
 		public ConfigurationFile ConfigurationFile;
 		public CharactersEnum? SelectedCharacterId;
 		public CharactersEnum CurrentBannerCharacterId;
@@ -77,6 +78,7 @@ namespace DefaultNamespace.Data
 			CharacterSaveData ??= new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData ??= new Dictionary<PermUpgradeType, int>();
 			Servers ??= new List<ServerData>();
+			BannerHistory ??= new List<CharactersEnum>();
 			AchievementSaveData ??= new Dictionary<AchievementEnum, bool>();
 			ReadStoryEntries ??= new Dictionary<int, List<int>>();
 			ConfigurationFile ??= new ConfigurationFile().Default();
@@ -131,6 +133,7 @@ namespace DefaultNamespace.Data
 			NextBannerChangeDate = saveData.LastBannerChangeDate;
 			SelectedDifficulty = saveData.SelectedDifficulty;
 			SelectedCharacterId = saveData.SelectedCharacterId;
+			BannerHistory = saveData.BannerHistory ?? new List<CharactersEnum>();
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
 			Servers = saveData.Servers ?? new List<ServerData>();
@@ -264,6 +267,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<AchievementEnum, bool> AchievementSaveData;
 		public Dictionary<int, List<int>> ReadStoryEntries;
 		public List<ServerData> Servers;
+		public List<CharactersEnum> BannerHistory;
 		public ConfigurationFile ConfigurationFile;
 		public ulong Gold;
 		public ulong Gems;
@@ -296,6 +300,7 @@ namespace DefaultNamespace.Data
 			CharacterSaveData = saveFile.CharacterSaveData;
 			PermUpgradeSaveData = saveFile.PermUpgradeSaveData;
 			Servers = saveFile.Servers;
+			BannerHistory = saveFile.BannerHistory;
 			AchievementSaveData = saveFile.AchievementSaveData;
 			ConfigurationFile = saveFile.ConfigurationFile;
 			Gold = saveFile.Gold;
@@ -323,5 +328,6 @@ namespace DefaultNamespace.Data
 			CurrentBannerSubCharacterId3 = saveFile.CurrentBannerSubCharacterId3;
 			LastBannerChangeDate = saveFile.NextBannerChangeDate;
 		}
+
 	}
 }
