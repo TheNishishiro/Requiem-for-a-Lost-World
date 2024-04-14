@@ -17,6 +17,8 @@ namespace UI.Main_Menu.REWORK.Scripts
         [SerializeField] private Image imageRightStrip;
         [SerializeField] private TextMeshProUGUI textRewardTitle;
         [SerializeField] private TextMeshProUGUI textDescription;
+        [SerializeField] private Sprite spriteGoldStack;
+        [SerializeField] private Sprite spriteGemPouch;
         
 
         public void SetDisplay(Color gachaColor, CharactersEnum characterId)
@@ -31,15 +33,29 @@ namespace UI.Main_Menu.REWORK.Scripts
                 imageCharacter.rectTransform.anchoredPosition = new Vector2(characterData.GachaSubArtOffset.x,0);
                 textRewardTitle.text = characterData.Name;
                 textDescription.text = !characterSaveData.IsUnlocked ? "<color=yellow>NEW</color>" :
-                    characterSaveData.GetRankEnum() < CharacterRank.E5 ? "Shard +1" : "Converted<br>Gems +500";
+                    characterSaveData.GetRankEnum() < CharacterRank.E5 ? "Shard +1" : "Converted<br>Gems +200";
                 if (isConvertIntoGems)
-                    SaveFile.Instance.Gems += 500;
+                    SaveFile.Instance.Gems += 200;
 
                 SaveFile.Instance.UnlockCharacter(characterId);
             }
             else
             {
-                imageCharacter.sprite = null;
+                switch (Random.value)
+                {
+                    case <= 0.5f:
+                        imageCharacter.sprite = spriteGoldStack;
+                        textRewardTitle.text = "Coins";
+                        textDescription.text = "Gold +500";
+                        SaveFile.Instance.Gold += 500;
+                        break;
+                    default:
+                        imageCharacter.sprite = spriteGemPouch;
+                        textRewardTitle.text = "Pouch";
+                        textDescription.text = "Gem +150";
+                        SaveFile.Instance.Gems += 150;
+                        break;
+                }
             }
             
             var particleMain = particles.main;

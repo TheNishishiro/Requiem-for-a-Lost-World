@@ -49,9 +49,13 @@ namespace UI.Main_Menu.REWORK.Scripts
         public void Update()
         {
             var date1 = DateTime.Now;
-            var date2 = SaveFile.Instance.LastBannerChangeDate.GetValueOrDefault().AddHours(24);
+            var date2 = SaveFile.Instance.NextBannerChangeDate.GetValueOrDefault();
             var difference = date2 - date1;
-            textTimeLeft.text = $"{difference.Hours}h {difference.Minutes}m";
+            var totalHoursLeft = (int)difference.TotalHours;
+            var totalMinutesLeft = (int)difference.TotalMinutes;
+            var displayMinutesLeft = totalMinutesLeft % 60; // get the "minute portion" of the total minutes left
+
+            textTimeLeft.text = $"{totalHoursLeft}h {displayMinutesLeft}m";
             textPity.text = (MaxPity - SaveFile.Instance.Pity).ToString();
             textGems.text = SaveFile.Instance.Gems.ToString();
         }
@@ -154,8 +158,8 @@ namespace UI.Main_Menu.REWORK.Scripts
         public void Open()
         {
             var saveFile = SaveFile.Instance;
-            var isRefreshBanner = saveFile.LastBannerChangeDate is null ||
-                                  DateTime.Now.AddHours(-24) > saveFile.LastBannerChangeDate;
+            var isRefreshBanner = saveFile.NextBannerChangeDate is null ||
+                                  DateTime.Now > saveFile.NextBannerChangeDate;
             if (isRefreshBanner)
             {
                 BuildBanner(saveFile);
@@ -204,9 +208,14 @@ namespace UI.Main_Menu.REWORK.Scripts
             saveFile.CurrentBannerSubCharacterId2 = characters.GetNextRandom();
             saveFile.CurrentBannerSubCharacterId3 = characters.GetNextRandom();
             saveFile.Pity = 0;
-            saveFile.LastBannerChangeDate = saveFile.LastBannerChangeDate?.AddHours(24) < DateTime.Now
-                ? DateTime.Now.AddHours(24)
-                : saveFile.LastBannerChangeDate?.AddHours(24) ?? DateTime.Now;
+            var now = DateTime.Now;
+            var diffInDays = 0;
+            if (saveFile.NextBannerChangeDate.HasValue)
+            {
+                diffInDays = (int)(now - saveFile.NextBannerChangeDate.Value).TotalDays;
+            }
+    
+            saveFile.NextBannerChangeDate = saveFile.NextBannerChangeDate?.AddDays(diffInDays + 1) ?? now.AddHours(24);
             saveFile.Save();
         }
         

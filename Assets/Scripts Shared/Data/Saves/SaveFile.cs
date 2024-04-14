@@ -35,7 +35,7 @@ namespace DefaultNamespace.Data
 		public CharactersEnum CurrentBannerSubCharacterId1;
 		public CharactersEnum CurrentBannerSubCharacterId2;
 		public CharactersEnum CurrentBannerSubCharacterId3;
-		public DateTime? LastBannerChangeDate;
+		public DateTime? NextBannerChangeDate;
 		public ulong Gold;
 		public ulong Gems;
 		public ulong EnemiesKilled;
@@ -128,7 +128,7 @@ namespace DefaultNamespace.Data
 			CurrentBannerSubCharacterId1 = saveData.CurrentBannerSubCharacterId1;
 			CurrentBannerSubCharacterId2 = saveData.CurrentBannerSubCharacterId2;
 			CurrentBannerSubCharacterId3 = saveData.CurrentBannerSubCharacterId3;
-			LastBannerChangeDate = saveData.LastBannerChangeDate;
+			NextBannerChangeDate = saveData.LastBannerChangeDate;
 			SelectedDifficulty = saveData.SelectedDifficulty;
 			SelectedCharacterId = saveData.SelectedCharacterId;
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
@@ -321,7 +321,7 @@ namespace DefaultNamespace.Data
 			CurrentBannerSubCharacterId1 = saveFile.CurrentBannerSubCharacterId1;
 			CurrentBannerSubCharacterId2 = saveFile.CurrentBannerSubCharacterId2;
 			CurrentBannerSubCharacterId3 = saveFile.CurrentBannerSubCharacterId3;
-			LastBannerChangeDate = saveFile.LastBannerChangeDate;
+			LastBannerChangeDate = saveFile.NextBannerChangeDate;
 		}
 	}
 }
