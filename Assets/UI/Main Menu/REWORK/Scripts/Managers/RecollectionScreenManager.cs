@@ -76,9 +76,8 @@ namespace UI.Main_Menu.REWORK.Scripts
                 var pullDecision = _rnd.NextDouble() switch
                 {
                     < 0.1f => GachaRewardType.Main,
-                    < 0.5f => GachaRewardType.Sub,
-                    <= 1f => GachaRewardType.Extra,
-                    _ => throw new ArgumentOutOfRangeException()
+                    < 0.4f => GachaRewardType.Sub,
+                    _ => GachaRewardType.Extra
                 };
                 if (_highestRarity > pullDecision)
                     _highestRarity = pullDecision;
