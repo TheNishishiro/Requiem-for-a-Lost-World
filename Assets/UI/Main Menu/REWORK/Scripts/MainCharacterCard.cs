@@ -107,10 +107,10 @@ public class MainCharacterCard : MonoBehaviour
         var stats = new PlayerStats(character.Stats);
         statEntryHealth.Set(stats.HealthMax.ToString(CultureInfo.InvariantCulture));
         statEntryArmor.Set(stats.Armor.ToString(CultureInfo.InvariantCulture));
-        statEntryDamage.Set($"{stats.Damage} | {stats.DamagePercentageIncrease*100:F}%");
-        statEntryCooldown.Set($"{stats.CooldownReduction*100:F} | {stats.CooldownReductionPercentage*100:F}%");
-        statEntryCrit.Set($"{stats.CritRate*100:F} | {stats.CritDamage*100:F}%");
-        statEntryDot.Set($"{stats.DamageOverTime} | {stats.DamageOverTimeDurationIncreasePercentage*100:F}% | {stats.DamageOverTimeFrequencyReductionPercentage*100F}%");
+        statEntryDamage.Set($"{stats.Damage} | {stats.DamagePercentageIncrease*100:N0}%");
+        statEntryCooldown.Set($"{stats.CooldownReduction*100:F}s | {stats.CooldownReductionPercentage*100:N0}%");
+        statEntryCrit.Set($"\u2684 {stats.CritRate*100:N0}% | \u2694 {stats.CritDamage*100:N0}%");
+        statEntryDot.Set($"\u2694 {stats.DamageOverTime:N0} | \u23f2 {stats.DamageOverTimeDurationIncreasePercentage*100:N0}% | \u23f6 {stats.DamageOverTimeFrequencyReductionPercentage*100:N0}%");
         
         if (!characterSaveData.IsUnlocked)
         {

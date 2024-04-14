@@ -22,6 +22,8 @@ namespace UI.Main_Menu.REWORK.Scripts
         [SerializeField] private ItemContainer itemContainer;
         [SerializeField] private Material materialBlackAndWhite;
         [SerializeField] private Sprite iconDefault;
+        [SerializeField] private TextMeshProUGUI textCompletionPercentage;
+        [SerializeField] private GameObject completionPercentageContainer;
         private IPlayerItem _unlocksItem;
         private AchievementValueAttribute _achievementData;
         private AchievementEnum _achievementId;
@@ -80,6 +82,7 @@ namespace UI.Main_Menu.REWORK.Scripts
                 iconUnlockable.color = color;
             background.color = color;
             iconUnlockable.material = _isUnlocked ? null : materialBlackAndWhite;
+            completionPercentageContainer.SetActive(!_isUnlocked);
 
             var requirementValue = _achievementData.Requirement.Value;
             var saveFile = SaveFile.Instance;
@@ -141,6 +144,7 @@ namespace UI.Main_Menu.REWORK.Scripts
                     throw new ArgumentOutOfRangeException();
             }
 
+            textCompletionPercentage.text = $"{fillAmount * 100:N0}%";
             progressBar.fillAmount = _isUnlocked ? 1 : fillAmount;
             _filterState = AchievementState.All;
         }
