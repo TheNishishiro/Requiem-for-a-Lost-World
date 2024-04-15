@@ -106,7 +106,7 @@ public class MainCharacterCard : MonoBehaviour
 
         var stats = new PlayerStats(character.Stats);
         statEntryHealth.Set(stats.HealthMax.ToString(CultureInfo.InvariantCulture));
-        statEntryArmor.Set(stats.Armor.ToString(CultureInfo.InvariantCulture));
+        statEntryArmor.Set($"{stats.Armor*100:N0}%");
         statEntryDamage.Set($"{stats.Damage} | {stats.DamagePercentageIncrease*100:N0}%");
         statEntryCooldown.Set($"{stats.CooldownReduction*100:F}s | {stats.CooldownReductionPercentage*100:N0}%");
         statEntryCrit.Set($"\u2684 {stats.CritRate*100:N0}% | \u2694 {stats.CritDamage*100:N0}%");

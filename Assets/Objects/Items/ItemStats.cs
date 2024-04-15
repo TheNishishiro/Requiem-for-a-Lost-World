@@ -76,7 +76,7 @@ namespace Objects.Items
 			CritRate *= rarityFactor;
 			CritDamage *= rarityFactor;
 			PassThroughCount = PassThroughCount != 0 ? PassThroughCount + (rarity - 1) : PassThroughCount;
-			Armor = Armor != 0 ? Armor + (rarity - 1) : Armor;
+			Armor *= rarityFactor;
 			EnemySpeedIncreasePercentage *= rarityFactor;
 			EnemySpawnRateIncreasePercentage *= rarityFactor;
 			EnemyHealthIncreasePercentage *= rarityFactor;
@@ -126,7 +126,7 @@ namespace Objects.Items
             CritRate += itemUpgradeItemStats.CritRate * rarityFactor;
             CritDamage += itemUpgradeItemStats.CritDamage * rarityFactor;
             PassThroughCount += itemUpgradeItemStats.PassThroughCount == 0 ? 0 : itemUpgradeItemStats.PassThroughCount + (rarity - 1);
-            Armor += itemUpgradeItemStats.Armor == 0 ? 0 : itemUpgradeItemStats.Armor + (rarity - 1);
+            Armor += itemUpgradeItemStats.Armor * rarityFactor;
             EnemySpeedIncreasePercentage += itemUpgradeItemStats.EnemySpeedIncreasePercentage * rarityFactor;
             EnemySpawnRateIncreasePercentage += itemUpgradeItemStats.EnemySpawnRateIncreasePercentage * rarityFactor;
             EnemyHealthIncreasePercentage += itemUpgradeItemStats.EnemyHealthIncreasePercentage * rarityFactor;
@@ -178,7 +178,7 @@ namespace Objects.Items
 				.Replace("{CritRate}", Utilities.StatToString(CritRate, rarityFactor, true))
 				.Replace("{CritDamage}", Utilities.StatToString(CritDamage, rarityFactor, true))
 				.Replace("{PassThroughCount}", (PassThroughCount == 0 ? 0 : PassThroughCount + (rarity - 1)).ToString())
-				.Replace("{Armor}", Utilities.StatToString(Armor, rarityFactor))
+				.Replace("{Armor}", Utilities.StatToString(Armor, rarityFactor, true))
 				.Replace("{EnemySpeedIncreasePercentage}", Utilities.StatToString(EnemySpeedIncreasePercentage, rarityFactor, true))
 				.Replace("{EnemySpawnRateIncreasePercentage}", Utilities.StatToString(EnemySpawnRateIncreasePercentage, rarityFactor, true))
 				.Replace("{EnemyHealthIncreasePercentage}", Utilities.StatToString(EnemyHealthIncreasePercentage, rarityFactor, true))
@@ -232,7 +232,7 @@ namespace Objects.Items
 				new("Movement speed", MovementSpeed),
 				new("Skill CDR%", SkillCooldownReductionPercentage, isPercentage: true),
 				new("Pass through", PassThroughCount),
-				new("Armor", Armor),
+				new("Damage reduction", Armor, isPercentage: true),
 				new("Enemy speed%", EnemySpeedIncreasePercentage, isPercentage: true, isInvertedColor: true),
 				new("Enemy spawn rate%", EnemySpawnRateIncreasePercentage, isPercentage: true, isInvertedColor: true),
 				new("Enemy health%", EnemyHealthIncreasePercentage, isPercentage: true, isInvertedColor: true),

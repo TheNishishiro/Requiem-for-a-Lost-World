@@ -65,7 +65,7 @@ namespace Objects.Characters
             return PlayerStats?.MovementSpeed ?? 0;
         }
 
-        public virtual float GetArmor()
+        public virtual float GetDamageReduction()
         {
             return PlayerStats?.Armor ?? 0;
         }

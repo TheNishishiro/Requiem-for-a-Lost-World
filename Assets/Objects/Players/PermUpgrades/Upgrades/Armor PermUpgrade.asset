@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 6
   name: Armor
-  description: Increase armor by 1 per level, reducing incoming damage
+  description: Reduce damage taken by 1% per upgrade level
   icon: {fileID: 21300000, guid: 1279e6533ef6a2d449c89132b57f6901, type: 3}
+  basePrice: 500
   costPerLevel: 500
-  maxLevel: 3
-  increasePerLevel: 1
+  maxLevel: 10
+  increasePerLevel: 0.01

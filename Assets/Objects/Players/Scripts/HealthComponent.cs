@@ -26,7 +26,7 @@ namespace Objects.Players.Scripts
 			{
 				amount *= PlayerStatsScaler.GetScaler().GetDamageTakenIncrease();
 				if (!isIgnoreArmor)
-					amount -= PlayerStatsScaler.GetScaler().GetArmor();
+					amount *= 1f - PlayerStatsScaler.GetScaler().GetDamageReduction();
 				if (amount < 0)
 					amount = 0;
 				
