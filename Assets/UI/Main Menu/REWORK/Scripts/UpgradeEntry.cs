@@ -28,7 +28,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             var upgradeMaxLevel = _permUpgrade.maxLevel;
             var cost = _permUpgrade.basePrice + _permUpgrade.costPerLevel * savedUpgradeLevel;
             
-            labelTitle.text = _permUpgrade.name;
+            labelTitle.text = $"{_permUpgrade.name} <size=60%><i><color=#E0E0E0>({savedUpgradeLevel}/{upgradeMaxLevel})</color></i></size>";
             labelDescription.text = _permUpgrade.description;
             imageIcon.sprite = _permUpgrade.icon;
             var isMaxLevel = savedUpgradeLevel >= upgradeMaxLevel;
