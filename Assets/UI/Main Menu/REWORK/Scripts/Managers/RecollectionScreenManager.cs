@@ -47,6 +47,11 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         public void Update()
         {
+            if (!IsInFocus) return;
+            
+            if (Input.GetKeyDown(KeyCode.Escape))
+                Close();
+            
             var date1 = DateTime.Now;
             var date2 = SaveFile.Instance.NextBannerChangeDate.GetValueOrDefault();
             var difference = date2 - date1;

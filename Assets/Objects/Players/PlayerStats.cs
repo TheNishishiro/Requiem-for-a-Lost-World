@@ -361,8 +361,6 @@ namespace Objects.Players
 				case PermUpgradeType.Skip:
 					Skips += (int) value;
 					break;
-				case PermUpgradeType.BuyGems:
-					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(permUpgradeType), permUpgradeType, null);
 			}

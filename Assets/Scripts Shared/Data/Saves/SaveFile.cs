@@ -156,13 +156,9 @@ namespace DefaultNamespace.Data
 		{
 			PermUpgradeSaveData ??= new Dictionary<PermUpgradeType, int>();
 			
-			if (PermUpgradeSaveData.ContainsKey(permUpgradeType))
+			if (!PermUpgradeSaveData.TryAdd(permUpgradeType, 1))
 			{
 				PermUpgradeSaveData[permUpgradeType]++;
-			}
-			else
-			{
-				PermUpgradeSaveData.Add(permUpgradeType, 1);
 			}
 		}
 

@@ -18,6 +18,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [SerializeField] private CharacterSelectionScreenManager characterSelectionScreenManager;
         [SerializeField] private AchievementScreenManager achievementScreenManager;
         [SerializeField] private RecollectionScreenManager recollectionScreenManager;
+        [SerializeField] private ShopScreenManager shopScreenManager;
         [SerializeField] private List<MainMenuButton> mainMenuButtons;
         private int selectedIndex;
 
@@ -95,6 +96,11 @@ namespace UI.Main_Menu.REWORK.Scripts
         public void OpenGamba()   
         {
             recollectionScreenManager.Open();
+        }
+
+        public void OpenShop()   
+        {
+            shopScreenManager.Open();
         }
         
         public void QuitApplication()
