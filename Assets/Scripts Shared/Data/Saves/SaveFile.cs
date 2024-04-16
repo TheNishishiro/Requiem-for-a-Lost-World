@@ -253,6 +253,13 @@ namespace DefaultNamespace.Data
 			ReadStoryEntries[loreEntryChapterNumber] ??= new List<int>();
 			ReadStoryEntries[loreEntryChapterNumber].Add(loreEntryEntryNumber);
 		}
+
+		public void ExchangeGoldForGems()
+		{
+			Gold -= 500;
+			Gems += 200;
+			Save();
+		}
 	}
 	
 	[Serializable]

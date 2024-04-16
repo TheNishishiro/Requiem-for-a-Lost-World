@@ -32,7 +32,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             labelDescription.text = _permUpgrade.description;
             imageIcon.sprite = _permUpgrade.icon;
             var isMaxLevel = savedUpgradeLevel >= upgradeMaxLevel;
-            labelPrice.text = isMaxLevel ? "---" : cost.ToString("0");
+            labelPrice.text = isMaxLevel ? "---" : cost.ToString("0") + " gold";
             labelUpgrade.text = isMaxLevel ? "Maxed" : "Upgrade";
                 
             
@@ -52,6 +52,14 @@ namespace UI.Main_Menu.REWORK.Scripts
                 SaveFile.Instance.Gold -= (ulong)cost;
                 SaveFile.Instance.AddUpgradeLevel(_permUpgrade.type);
                 Refresh();
+            }
+        }
+
+        public void Exchange(int exchangeId)
+        {
+            if (exchangeId == 0)
+            {
+                SaveFile.Instance.ExchangeGoldForGems();
             }
         }
     }
