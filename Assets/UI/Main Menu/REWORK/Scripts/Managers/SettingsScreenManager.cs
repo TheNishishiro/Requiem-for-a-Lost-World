@@ -9,11 +9,13 @@ using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace UI.Main_Menu.REWORK.Scripts
 {
     public class SettingsScreenManager : MonoBehaviour, IStackableWindow
     {
+	    public static SettingsScreenManager instance;
         [BoxGroup("Buttons")] [SerializeField] private List<Button> buttonSections;
         [Space]
         [BoxGroup("Styling")] [SerializeField] private Material materialSelectedText;
@@ -43,6 +45,10 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryCoopNickname;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryCoopDisplayProjectiles;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryVolume;
+        [Space]
+        [BoxGroup("Description")] [SerializeField] private Image imageExample;
+        [BoxGroup("Description")] [SerializeField] private TextMeshProUGUI textDescription;
+        
         
         private readonly List<Resolution> _availableResolutions = new ();
         private const int MinResolutionWidth = 800;
@@ -53,7 +59,13 @@ namespace UI.Main_Menu.REWORK.Scripts
         private const float KeyHoldDelay = 0.25f;
         private float _keyNextActionTime = 0f;
         private bool _isSubsectionOpened;
-        
+
+        private void Start()
+        {
+	        if (instance == null)
+		        instance = this;
+        }
+
         private void Update()
         {
             if (!IsInFocus || _isSubsectionOpened) return;
@@ -94,13 +106,22 @@ namespace UI.Main_Menu.REWORK.Scripts
             buttonSections[sectionId].GetComponent<Image>().color = colorHighlight;
             buttonSections[sectionId].GetComponentInChildren<TextMeshProUGUI>().fontSharedMaterial = materialSelectedText;
         }
-        
+
+        public void OpenDescription(string description, Sprite exampleImage)
+        {
+	        imageExample.sprite = exampleImage;
+	        imageExample.gameObject.SetActive(exampleImage != null);
+
+	        textDescription.text = description;
+	        textDescription.gameObject.SetActive(!string.IsNullOrWhiteSpace(description));
+        }
         
         public void Open()
         {
             _saveFile = SaveManager.instance.GetSaveFile();
             LoadSettings();
             FilterSection(0);
+            OpenDescription(null, null);
             StackableWindowManager.instance.OpenWindow(this);
         }
 

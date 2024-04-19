@@ -152,32 +152,32 @@ namespace Managers
 					QualitySettings.shadows = ShadowQuality.Disable;
 					break;
 				case 1:
-					QualitySettings.shadowDistance = 50;
-					QualitySettings.shadowCascades = 1;
+					renderPipeline.shadowDistance = 5f;
+					renderPipeline.shadowCascadeCount = 1;
 					QualitySettings.shadows = ShadowQuality.HardOnly;
 					QualitySettings.shadowResolution = ShadowResolution.Low;
 					break;
 				case 2:
-					QualitySettings.shadowDistance = 100;
-					QualitySettings.shadowCascades = 1;
+					renderPipeline.shadowDistance = 20;
+					renderPipeline.shadowCascadeCount = 1;
 					QualitySettings.shadows = ShadowQuality.HardOnly;
 					QualitySettings.shadowResolution = ShadowResolution.Medium;
 					break;
 				case 3:
-					QualitySettings.shadowDistance = 150;
-					QualitySettings.shadowCascades = 1;
+					renderPipeline.shadowDistance = 50;
+					renderPipeline.shadowCascadeCount = 1;
 					QualitySettings.shadows = ShadowQuality.All;
 					QualitySettings.shadowResolution = ShadowResolution.Medium;
 					break;
 				case 4:
-					QualitySettings.shadowDistance = 150;
-					QualitySettings.shadowCascades = 4;
+					renderPipeline.shadowDistance = 100;
+					renderPipeline.shadowCascadeCount = 2;
 					QualitySettings.shadows = ShadowQuality.All;
 					QualitySettings.shadowResolution = ShadowResolution.High;
 					break;
 				case 5:
-					QualitySettings.shadowDistance = 150;
-					QualitySettings.shadowCascades = 4;
+					renderPipeline.shadowDistance = 200;
+					renderPipeline.shadowCascadeCount = 4;
 					QualitySettings.shadows = ShadowQuality.All;
 					QualitySettings.shadowResolution = ShadowResolution.VeryHigh;
 					break;

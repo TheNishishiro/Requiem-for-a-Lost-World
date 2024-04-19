@@ -1,23 +1,37 @@
 ﻿using CarouselUI;
+using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI.Main_Menu.REWORK.Scripts
 {
-    public class SettingsEntry : MonoBehaviour
+    public class SettingsEntry : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+        [BoxGroup("Description")] [SerializeField] [Multiline] private string description;
+        [BoxGroup("Description")] [SerializeField] private Sprite exampleImage;
         [SerializeField] private CarouselUIElement carousel;
         [SerializeField] private Image background;
         [SerializeField] private Color enabledColor;
         [SerializeField] private Color disabledColor;
         [SerializeField] private TMP_InputField textInput; 
-        [SerializeField] private Slider sliderInput; 
+        [SerializeField] private Slider sliderInput;
         
         public void SetOptions(string[] options, int defaultSelection = 0)
         {
             carousel.SetOptions(options);
             carousel.UpdateIndex(defaultSelection);
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            SettingsScreenManager.instance.OpenDescription(description, exampleImage);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            SettingsScreenManager.instance.OpenDescription(null, null);
         }
 
         public void SetSelection(int selectedOption)

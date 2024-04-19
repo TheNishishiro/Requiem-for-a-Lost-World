@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -282,6 +282,10 @@ MonoBehaviour:
   background: {fileID: 265483196257686636}
   enabledColor: {r: 0.2028302, g: 0.33700728, b: 1, a: 0.3529412}
   disabledColor: {r: 0, g: 0, b: 0, a: 0.3529412}
+  textInput: {fileID: 0}
+  sliderInput: {fileID: 0}
+  description: 
+  exampleImage: {fileID: 0}
 --- !u!1001 &2503441304066620515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -410,6 +414,11 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 173007366815083194, guid: 74b8abea775bb6449bf77a5c0386a260,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 173007366873351274, guid: 74b8abea775bb6449bf77a5c0386a260,
         type: 3}
       propertyPath: m_text
@@ -424,6 +433,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontSizeMin
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 173007366873351274, guid: 74b8abea775bb6449bf77a5c0386a260,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 173007366873351274, guid: 74b8abea775bb6449bf77a5c0386a260,
         type: 3}
