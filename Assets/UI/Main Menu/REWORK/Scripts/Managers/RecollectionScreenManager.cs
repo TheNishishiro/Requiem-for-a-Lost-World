@@ -221,11 +221,16 @@ namespace UI.Main_Menu.REWORK.Scripts
             }    
         
             saveFile.CurrentBannerCharacterId = weightedCharacters.GetNextRandom();
+            weightedCharacters.Remove(saveFile.CurrentBannerCharacterId);
             saveFile.GetCharacterSaveData(saveFile.CurrentBannerCharacterId).LastBannerDate = DateTime.Now;
             
+            
             saveFile.CurrentBannerSubCharacterId1 = weightedCharacters.GetNextRandom();
+            weightedCharacters.Remove(saveFile.CurrentBannerSubCharacterId1);
             saveFile.CurrentBannerSubCharacterId2 = weightedCharacters.GetNextRandom();
+            weightedCharacters.Remove(saveFile.CurrentBannerSubCharacterId2);
             saveFile.CurrentBannerSubCharacterId3 = weightedCharacters.GetNextRandom();
+            weightedCharacters.Remove(saveFile.CurrentBannerSubCharacterId3);
         
             var now = DateTime.Now;
             var diffInDays = 0;
