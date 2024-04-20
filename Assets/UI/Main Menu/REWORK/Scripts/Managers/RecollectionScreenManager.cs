@@ -29,6 +29,9 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Image")] [SerializeField] private Image imageGemsTheme;
         [BoxGroup("Image")] [SerializeField] private Image imagePull1;
         [BoxGroup("Image")] [SerializeField] private Image imagePull10;
+        [BoxGroup("Image")] [SerializeField] private Image imageUnderscoreLine1;
+        [BoxGroup("Image")] [SerializeField] private Image imageUnderscoreLine2;
+        [BoxGroup("Image")] [SerializeField] private Image imageSubUnderscoreLine;
         [Space]
         [BoxGroup("Text")] [SerializeField] private TextMeshProUGUI textCharacterTitle;
         [BoxGroup("Text")] [SerializeField] private TextMeshProUGUI textCharacterName;
@@ -179,6 +182,9 @@ namespace UI.Main_Menu.REWORK.Scripts
             textTimeLeft.color = mainCharacter.ColorTheme;
             textPity.color = mainCharacter.ColorTheme;
             imageGemsTheme.color = mainCharacter.ColorTheme;
+            imageUnderscoreLine1.color = mainCharacter.ColorTheme;
+            imageUnderscoreLine2.color = mainCharacter.ColorTheme;
+            imageSubUnderscoreLine.color = mainCharacter.ColorTheme;
 
             textCharacterName.text = mainCharacter.Name;
             textCharacterTitle.text = mainCharacter.Title;
