@@ -19,6 +19,7 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
     [SerializeField] private Animator animatorChangeCharacter;
     private int _selectedIndex = 0;
     private bool _isCoopSelect;
+    private bool IsLockedByAnimation => !animatorChangeCharacter.GetCurrentAnimatorStateInfo(0).IsName("Idle");
 
     private const float KeyHoldDelay = 0.4f;
     private float _keyNextActionTime = 0f;
@@ -30,7 +31,7 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
         if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow)) 
             _keyNextActionTime = 0;
 
-        if (animatorChangeCharacter.GetCurrentAnimatorStateInfo(0).IsName("ChangeCharacter")) 
+        if (IsLockedByAnimation) 
             return;
         
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -125,6 +126,9 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
 
     public void OpenNextScreen()
     {
+        if (IsLockedByAnimation) 
+            return;
+        
         if (_isCoopSelect)
             mainCharacterCard.JoinGameScreen();
         else

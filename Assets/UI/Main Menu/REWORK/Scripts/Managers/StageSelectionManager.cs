@@ -18,59 +18,70 @@ public class StageSelectionManager : MonoBehaviour, IStackableWindow
     [SerializeField] private Image imageBackground;
     [SerializeField] private TextMeshProUGUI labelStageTitle;
     [SerializeField] private Animator animatorChangeStage;
+    private bool IsLockedByAnimation => !animatorChangeStage.GetCurrentAnimatorStateInfo(0).IsName("Idle");
     
     private StageDefinition _selectedStage;
     private int _selectedIndex;
     private const float KeyHoldDelay = 0.4f;
     private float _keyNextActionTime = 0f;
-    
+
     private void Update()
     {
         if (!IsInFocus) return;
-        
-        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow)) 
+
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
             _keyNextActionTime = 0;
-        
-        if (animatorChangeStage.GetCurrentAnimatorStateInfo(0).IsName("StageChangeForward") || animatorChangeStage.GetCurrentAnimatorStateInfo(0).IsName("StageChangeBackward")) 
+
+        if (IsLockedByAnimation)
             return;
-        
+
         if (Input.GetKeyDown(KeyCode.Escape))
             Close();
-        
+
         if (Input.GetKeyDown(KeyCode.Return))
         {
             OpenCharacterSelection();
             return;
         }
-        
-        if (Time.time >= _keyNextActionTime) 
-        {
-            if (Input.GetKey(KeyCode.RightArrow)) 
-            {
-                _selectedIndex++;
-                if (_selectedIndex >= stageDefinitions.Count)
-                {
-                    _selectedIndex = 0;
-                }
 
-                AudioManager.instance.PlayButtonClick();
-                _keyNextActionTime = Time.time + KeyHoldDelay;
-                animatorChangeStage.Play("StageChangeBackward");
+        if (Time.time >= _keyNextActionTime)
+        {
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                NextStage();
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                _selectedIndex--;
-                if (_selectedIndex < 0)
-                {
-                    _selectedIndex = stageDefinitions.Count - 1;
-                }
-
-                AudioManager.instance.PlayButtonClick();
-                _keyNextActionTime = Time.time + KeyHoldDelay;
-                animatorChangeStage.Play("StageChangeForward");
+                PreviousStage();
             }
         }
+    }
+
+    public void NextStage()
+    {
+        _selectedIndex++;
+        if (_selectedIndex >= stageDefinitions.Count)
+        {
+            _selectedIndex = 0;
+        }
+
+        AudioManager.instance.PlayButtonClick();
+        _keyNextActionTime = Time.time + KeyHoldDelay;
+        animatorChangeStage.Play("StageChangeBackward");
+    }
+
+    public void PreviousStage()
+    {
+        _selectedIndex--;
+        if (_selectedIndex < 0)
+        {
+            _selectedIndex = stageDefinitions.Count - 1;
+        }
+
+        AudioManager.instance.PlayButtonClick();
+        _keyNextActionTime = Time.time + KeyHoldDelay;
+        animatorChangeStage.Play("StageChangeForward");
     }
 
     public void UpdateListDisplay()
@@ -111,6 +122,9 @@ public class StageSelectionManager : MonoBehaviour, IStackableWindow
 
     public void OpenCharacterSelection()
     {
+        if (IsLockedByAnimation) 
+            return;
+        
         GameData.SetCurrentStage(_selectedStage);
         characterSelectionScreenManager.Open(false);
     }
