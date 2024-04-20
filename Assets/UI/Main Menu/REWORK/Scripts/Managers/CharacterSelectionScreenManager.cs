@@ -96,6 +96,7 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
 
     public void Close()
     {
+        if (IsLockedByAnimation) return;
         StackableWindowManager.instance.CloseWindow(this);
     }
 

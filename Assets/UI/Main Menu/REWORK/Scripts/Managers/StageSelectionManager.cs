@@ -68,7 +68,7 @@ public class StageSelectionManager : MonoBehaviour, IStackableWindow
 
         AudioManager.instance.PlayButtonClick();
         _keyNextActionTime = Time.time + KeyHoldDelay;
-        animatorChangeStage.Play("StageChangeBackward");
+        animatorChangeStage.SetTrigger("ChangeBackward");
     }
 
     public void PreviousStage()
@@ -81,7 +81,7 @@ public class StageSelectionManager : MonoBehaviour, IStackableWindow
 
         AudioManager.instance.PlayButtonClick();
         _keyNextActionTime = Time.time + KeyHoldDelay;
-        animatorChangeStage.Play("StageChangeForward");
+        animatorChangeStage.SetTrigger("ChangeForward");
     }
 
     public void UpdateListDisplay()
@@ -117,6 +117,8 @@ public class StageSelectionManager : MonoBehaviour, IStackableWindow
 
     public void Close()
     {
+        if (IsLockedByAnimation) return;
+        
         StackableWindowManager.instance.CloseWindow(this);
     }
 

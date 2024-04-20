@@ -12,7 +12,6 @@ namespace UI.Main_Menu.TitleScreen
         [SerializeField] private MainMenuManager mainMenuManager;
         public TutorialManager tutorialManager;
         public CanvasGroup titleScreen;
-        public GameObject versionText;
         public float fadeDuration = 1.0f;
         private bool _canClose;
         
@@ -28,7 +27,6 @@ namespace UI.Main_Menu.TitleScreen
             if (Input.anyKeyDown || Input.GetMouseButtonDown(0))
             {
                 mainMenuManager.gameObject.SetActive(true);
-                versionText.SetActive(false);
                 StartCoroutine(FadeOutTitleScreen());
                 tutorialManager.DisplayFirst();
                 AudioManager.instance.PlayButtonConfirmClick();
