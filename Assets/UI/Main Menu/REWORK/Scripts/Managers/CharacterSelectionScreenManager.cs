@@ -47,32 +47,42 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
         
         if (Time.time >= _keyNextActionTime) 
         {
-            if (Input.GetKey(KeyCode.RightArrow)) 
+            if (Input.GetKey(KeyCode.RightArrow))
             {
-                _selectedIndex++;
-                if (_selectedIndex >= CharacterListManager.instance.GetCharacters().Count)
-                {
-                    _selectedIndex = 0;
-                }
-
-                AudioManager.instance.PlayButtonClick();
-                animatorChangeCharacter.Play("ChangeCharacter");
-                _keyNextActionTime = Time.time + KeyHoldDelay;
+                NextCharacter();
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                _selectedIndex--;
-                if (_selectedIndex < 0)
-                {
-                    _selectedIndex = CharacterListManager.instance.GetCharacters().Count - 1;
-                }
-
-                AudioManager.instance.PlayButtonClick();
-                animatorChangeCharacter.Play("ChangeCharacter");
-                _keyNextActionTime = Time.time + KeyHoldDelay;
+                PreviousCharacter();
             }
         }
+    }
+
+    public void NextCharacter()
+    {
+        _selectedIndex++;
+        if (_selectedIndex >= CharacterListManager.instance.GetCharacters().Count)
+        {
+            _selectedIndex = 0;
+        }
+
+        AudioManager.instance.PlayButtonClick();
+        animatorChangeCharacter.Play("ChangeCharacter");
+        _keyNextActionTime = Time.time + KeyHoldDelay;
+    }
+
+    public void PreviousCharacter()
+    {
+        _selectedIndex--;
+        if (_selectedIndex < 0)
+        {
+            _selectedIndex = CharacterListManager.instance.GetCharacters().Count - 1;
+        }
+
+        AudioManager.instance.PlayButtonClick();
+        animatorChangeCharacter.Play("ChangeCharacter");
+        _keyNextActionTime = Time.time + KeyHoldDelay;
     }
 
     public void Open(bool isCoopSelect)

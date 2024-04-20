@@ -59,6 +59,9 @@ public class MainCharacterCard : MonoBehaviour
     [BoxGroup("Menus")] [SerializeField] private ShardScreenManager shardScreenManager;
     [BoxGroup("Menus")] [SerializeField] private GameSettingsScManareenger gameSettingsScreenManager;
     [BoxGroup("Menus")] [SerializeField] private ServerScreenManager serverScreenManager;
+    [Space]
+    [BoxGroup("Navigation")] [SerializeField] private TextMeshProUGUI arrowPreviousCharacter;
+    [BoxGroup("Navigation")] [SerializeField] private TextMeshProUGUI arrowNextCharacter;
 
     private CharacterData _currentCharacterData;
     private CharacterSaveData _currentCharacterSaveData;
@@ -103,6 +106,8 @@ public class MainCharacterCard : MonoBehaviour
         labelSkillLinesAbility.color = character.ColorTheme;
         labelSkillLinesPassive.color = character.ColorTheme;
         labelSkillLinesStats.color = character.ColorTheme;
+        arrowPreviousCharacter.color = character.ColorTheme;
+        arrowNextCharacter.color = character.ColorTheme;
 
         var stats = new PlayerStats(character.Stats);
         statEntryHealth.Set(stats.HealthMax.ToString(CultureInfo.InvariantCulture));
