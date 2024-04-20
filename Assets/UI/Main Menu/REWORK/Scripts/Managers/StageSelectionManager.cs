@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace.Data.Stages;
 using Interfaces;
 using Managers;
 using Objects.Stage;
@@ -12,7 +13,7 @@ using UnityEngine.UI;
 public class StageSelectionManager : MonoBehaviour, IStackableWindow
 {
     [SerializeField] private CharacterSelectionScreenManager characterSelectionScreenManager;
-    [SerializeField] private List<StageDefinition> stageDefinitions;
+    [SerializeField] private StageContainer stageContainer;
     [SerializeField] private List<StageCard> stageCards;
     [SerializeField] private Image imageStageBanner;
     [SerializeField] private Image imageBackground;
@@ -61,7 +62,7 @@ public class StageSelectionManager : MonoBehaviour, IStackableWindow
     public void NextStage()
     {
         _selectedIndex++;
-        if (_selectedIndex >= stageDefinitions.Count)
+        if (_selectedIndex >= stageContainer.Count())
         {
             _selectedIndex = 0;
         }
@@ -76,7 +77,7 @@ public class StageSelectionManager : MonoBehaviour, IStackableWindow
         _selectedIndex--;
         if (_selectedIndex < 0)
         {
-            _selectedIndex = stageDefinitions.Count - 1;
+            _selectedIndex = stageContainer.Count() - 1;
         }
 
         AudioManager.instance.PlayButtonClick();
@@ -91,26 +92,27 @@ public class StageSelectionManager : MonoBehaviour, IStackableWindow
         for (var i = _selectedIndex - cardsOnTheSideCount; i <= _selectedIndex + cardsOnTheSideCount; i++)
         {
             cardIndex++;
-            var stageIndex = ((i % stageDefinitions.Count) + stageDefinitions.Count) % stageDefinitions.Count;
+            var stageIndex = ((i % stageContainer.Count()) + stageContainer.Count()) % stageContainer.Count();
 
             if (stageIndex == _selectedIndex)
             {
-                if (stageDefinitions.Count > 0)
+                if (stageContainer.Count() > 0)
                 {
-                    imageStageBanner.sprite = stageDefinitions[stageIndex].background;
-                    imageBackground.sprite = stageDefinitions[stageIndex].background;
-                    labelStageTitle.text = stageDefinitions[stageIndex].title;
+                    var stageData = stageContainer.GetData(stageIndex);
+                    imageStageBanner.sprite = stageData.background;
+                    imageBackground.sprite = stageData.background;
+                    labelStageTitle.text = stageData.title;
                 }
             }
 
             if (stageCards.Count > cardIndex)
-                stageCards[cardIndex].Setup(stageDefinitions[stageIndex]);
+                stageCards[cardIndex].Setup(stageContainer.GetData(stageIndex));
         }
     }
     
     public void Open()
     {
-        _selectedStage = stageDefinitions[_selectedIndex];
+        _selectedStage = stageContainer.GetData(_selectedIndex);
         UpdateListDisplay();
         StackableWindowManager.instance.OpenWindow(this);
     }

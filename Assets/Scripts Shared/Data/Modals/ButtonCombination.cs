@@ -2,6 +2,7 @@
 {
     public enum ButtonCombination
     {
+        None,
         Yes,
         YesCancel,
         YesNoCancel

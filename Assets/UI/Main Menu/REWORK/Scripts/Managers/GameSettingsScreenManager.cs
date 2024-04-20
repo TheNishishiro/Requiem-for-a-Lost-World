@@ -73,6 +73,8 @@ public class GameSettingsScManareenger : MonoBehaviour, IStackableWindow
         labelCoopPlayAllow.fontSharedMaterial = isAllow ? materialSelectionPositive : materialNeutral;
         labelCoopPlayDeny.fontSharedMaterial = !isAllow ? materialSelectionNegative : materialNeutral;
         svgCoop.gameObject.SetActive(isAllow);
+
+        NetworkingContainer.IsAllowJoins = isAllow;
     }
 
     public void Open()

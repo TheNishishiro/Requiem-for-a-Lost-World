@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Data.Difficulty;
 using DefaultNamespace.Data;
+using DefaultNamespace.Data.Stages;
 using Managers;
 using Objects;
 using Objects.Characters;
@@ -33,9 +35,13 @@ public class MultiplayerPlayer : NetworkBehaviour
     public NetworkVariable<FixedString128Bytes> currentPlayerName = new ("", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<ulong> currentPlayerId = new (0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> isPlayerDead = new (false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<DifficultyEnum> difficulty = new ();
+    public NetworkVariable<StageEnum> stage = new ();
     private bool _keepAlive = true;
     [SerializeField] private Collider boxCollider;
     [SerializeField] private CharacterController characterController;
+    [SerializeField] private DifficultyContainer difficultyContainer;
+    [SerializeField] private StageContainer stageContainer;
     
     public void Start()
     {
@@ -45,8 +51,17 @@ public class MultiplayerPlayer : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        if (IsHost)
+        {
+            difficulty.Value = GameData.GetCurrentDifficulty().Difficulty;
+            stage.Value = GameData.GetCurrentStage().id;
+        }
+
         if (IsOwner && cameraRoot != null)
             SetCameraTarget(cameraRoot.transform);
+        
+        GameData.SetCurrentDifficultyData(difficultyContainer.GetData(difficulty.Value));
+        GameData.SetCurrentStage(stageContainer.GetData(stage.Value));
         playerInput.enabled = IsOwner;
         firstPersonController.enabled = IsOwner;
         starterAssetsInputs.enabled = IsOwner;

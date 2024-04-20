@@ -1074,7 +1074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 535377724
+  GlobalObjectIdHash: 2308889901
   InScenePlacedSourceGlobalObjectIdHash: 4262040808
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1280,8 +1280,15 @@ MonoBehaviour:
     m_InternalValue: 0
   isPlayerDead:
     m_InternalValue: 0
+  difficulty:
+    m_InternalValue: 0
+  stage:
+    m_InternalValue: 0
   boxCollider: {fileID: 1697154574074297831}
   characterController: {fileID: 8941528487158153505}
+  difficultyContainer: {fileID: 11400000, guid: 634a99120d364f84faa6fd54cd52bfb6,
+    type: 2}
+  stageContainer: {fileID: 11400000, guid: 2e109439288f9dd4babfbee5d0a7cbf2, type: 2}
 --- !u!1 &7723549727805241436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,7 +1373,7 @@ SpriteRenderer:
   m_Size: {x: 7.68, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6062816866504131356

@@ -14,9 +14,9 @@ namespace UI.Main_Menu.REWORK.Scripts
                 instance = this;
         }
         
-        public void Open(ButtonCombination buttonCombination, string title, string message, string textYes = "Yes", string textNo = "No", string textCancel = "Cancel")
+        public void Open(ButtonCombination buttonCombination, string title, string message, string textYes = "Yes", string textNo = "No", string textCancel = "Cancel", ModalState modalState = ModalState.None)
         {
-            modal.Open(buttonCombination, title, message, textYes, textNo, textCancel);
+            modal.Open(buttonCombination, title, message, textYes, textNo, textCancel, modalState);
         }
 
         public void Close()

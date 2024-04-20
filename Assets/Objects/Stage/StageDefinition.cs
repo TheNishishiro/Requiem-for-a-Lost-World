@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Objects.Stage
 {
-    [CreateAssetMenu]
-    public class StageDefinition : ScriptableObject
+    [Serializable]
+    public class StageDefinition
     {
         public StageEnum id;
         public Sprite background;
