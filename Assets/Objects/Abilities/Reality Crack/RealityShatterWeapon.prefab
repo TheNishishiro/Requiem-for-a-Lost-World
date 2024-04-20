@@ -44,11 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e7485cde5b42c79a9e62007594bc66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNetworkPool: 0
   spawnPrefab: {fileID: 3014508959350109954, guid: 90c8b64f5fdcc514683a3d3e6e92d5f5,
     type: 3}
+  WeaponId: 0
   Name: Reality Shatter
-  Description: Destroy the fabric of reality itself in a few slashes, briefly enemy
-    movement and dealing damage in an area
+  Description: With a few slashes destroy the fabric of reality, while slashing briefly
+    halt enemy movement then deal damage to every enemy alive
   chanceToAppear: 0
   Icon: {fileID: 21300000, guid: 0cbe78bc581b96c4daef51dfc7e1e50d, type: 3}
   unlockOnAchievement: 1
@@ -74,6 +76,7 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
   availableUpgrades:
   - {fileID: 11400000, guid: c9dd771c35449be4193210d982d60cfa, type: 2}
   - {fileID: 11400000, guid: c7463f7163f4ab9448397bad1cc7248b, type: 2}

@@ -51,6 +51,44 @@ namespace UI.Main_Menu.REWORK.Scripts
             if (instance == null)
                 instance = this;
         }
+        
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+                Close();
+            
+            if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) 
+                _keyNextActionTime = 0;
+            
+            if (Input.GetKey(KeyCode.UpArrow) && Time.time > _keyNextActionTime)
+            {
+                _keyNextActionTime = Time.time + KeyHoldDelay;
+                _currentSectionId--;
+                if (_currentSectionId < 0) _currentSectionId = buttonSections.Count - 1;
+                FilterSection(_currentSectionId);
+            }
+            else if (Input.GetKey(KeyCode.DownArrow) && Time.time > _keyNextActionTime)
+            {
+                _keyNextActionTime = Time.time + KeyHoldDelay;
+                _currentSectionId++;
+                if (_currentSectionId >= buttonSections.Count) _currentSectionId = 0;
+                FilterSection(_currentSectionId);
+            }                
+            else if (Input.GetKey(KeyCode.LeftArrow) && Time.time > _keyNextActionTime)
+            {
+                _keyNextActionTime = Time.time + KeyHoldDelay;
+                _currentStateId--;
+                if (_currentStateId < 0) _currentStateId = buttonStates.Count - 1;
+                FilterState(_currentStateId);
+            }
+            else if (Input.GetKey(KeyCode.RightArrow) && Time.time > _keyNextActionTime)
+            {
+                _keyNextActionTime = Time.time + KeyHoldDelay;
+                _currentStateId++;
+                if (_currentStateId >= buttonStates.Count) _currentStateId = 0;
+                FilterState(_currentStateId);
+            }    
+        }
 
         public void FilterSection(int sectionId)
         {
@@ -81,11 +119,11 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         public void Display(IPlayerItem currentItem)
         {
+            var isUnlocked = currentItem.IsUnlocked(SaveFile.Instance);
             sidePanel.SetActive(true);
-            labelTitle.text = currentItem.NameField;
+            labelTitle.text = isUnlocked ? currentItem.NameField : "???";
             labelDescription.text = currentItem.GetDescription(1);
 
-            var isUnlocked = currentItem.IsUnlocked(SaveFile.Instance);
             labelUnlock.gameObject.SetActive(!isUnlocked);
             labelUnlockDescription.gameObject.SetActive(!isUnlocked);
             if (!isUnlocked)
@@ -118,7 +156,8 @@ namespace UI.Main_Menu.REWORK.Scripts
                 }
             }
             
-            
+            FilterSection(0);
+            FilterState(0);
             StackableWindowManager.instance.OpenWindow(this);
         }
 
