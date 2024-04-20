@@ -44,6 +44,11 @@ namespace DefaultNamespace
 			return value.Replace(",", ".").TrimEnd('0').TrimEnd('.');
 		}
 		
+		public static float RandomDoubleRange(float min1, float max1, float min2, float max2)
+		{
+			return Random.value < 0.5f ? Random.Range(min1, max1) : Random.Range(min2, max2);
+		}
+		
 		public static Color HexToColor(string hexColor)
 		{
 			// Remove the '#' character from the start if it exists

@@ -28,6 +28,7 @@ namespace Objects.Items
 		public Sprite IconField => Icon;
 		public int LevelField { get; private set; } = 1;
 		public Element ElementField => Element.Disabled;
+		
 
 		public ICollection<StatsDisplayData> GetStatsData()
 		{
@@ -35,6 +36,7 @@ namespace Objects.Items
 		}
 
 		public bool IsItem => true;
+		public AchievementEnum? RequiredAchievementField => unlockOnAchievement ? requiredAchievement : null;
 
 		public IEnumerable<ItemUpgrade> GetAvailableUpgrades()
 		{

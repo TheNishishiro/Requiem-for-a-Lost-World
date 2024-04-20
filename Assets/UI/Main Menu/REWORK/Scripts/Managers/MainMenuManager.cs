@@ -20,6 +20,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [SerializeField] private RecollectionScreenManager recollectionScreenManager;
         [SerializeField] private ShopScreenManager shopScreenManager;
         [SerializeField] private StoryScreenManager storyScreenManager;
+        [SerializeField] private CollectionScreenManager collectionScreenManager;
         [SerializeField] private List<MainMenuButton> mainMenuButtons;
         private int selectedIndex;
 
@@ -107,6 +108,11 @@ namespace UI.Main_Menu.REWORK.Scripts
         public void OpenStory()   
         {
             storyScreenManager.Open();
+        }
+
+        public void OpenCollection()   
+        {
+            collectionScreenManager.Open();
         }
         
         public void QuitApplication()

@@ -52,6 +52,7 @@ namespace Weapons
 		}
 
 		public bool IsItem => false;
+		public AchievementEnum? RequiredAchievementField => unlockOnAchievement ? requiredAchievement : null;
 
 		public string GetDescription(int rarity)
 		{
