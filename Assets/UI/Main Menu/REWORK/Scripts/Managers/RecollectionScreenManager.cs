@@ -234,6 +234,7 @@ namespace UI.Main_Menu.REWORK.Scripts
                 diffInDays = (int)(now - saveFile.NextBannerChangeDate.Value).TotalDays;
             }
 
+            saveFile.Pity = 0;
             saveFile.NextBannerChangeDate = saveFile.NextBannerChangeDate?.AddDays(diffInDays + 1) ?? now.AddHours(24);
             saveFile.Save();
         }
