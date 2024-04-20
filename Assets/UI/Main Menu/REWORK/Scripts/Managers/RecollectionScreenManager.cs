@@ -206,22 +206,34 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         private static void BuildBanner(SaveFile saveFile)
         {
-            var characters = CharacterListManager.instance.GetCharacters().Where(x => !saveFile.BannerHistory.Contains(x.Id)).Select(x => x.Id).ToList();
-            saveFile.CurrentBannerCharacterId = characters.GetNextRandom();
-            saveFile.CurrentBannerSubCharacterId1 = characters.GetNextRandom();
-            saveFile.CurrentBannerSubCharacterId2 = characters.GetNextRandom();
-            saveFile.CurrentBannerSubCharacterId3 = characters.GetNextRandom();
-            saveFile.Pity = 0;
+            var characters = CharacterListManager.instance.GetCharacters().Select(x => x.Id).ToList();
+            var weightedCharacters = new List<CharactersEnum>();
+
+            foreach (var character in characters)
+            {
+                var lastBannerDate = saveFile.GetCharacterSaveData(character).LastBannerDate;
+                var daysSinceLastBannerAppearance = Math.Min((DateTime.Now - lastBannerDate).Days, 20);
+                
+                for (var i = 0; i < daysSinceLastBannerAppearance; i++)
+                {
+                    weightedCharacters.Add(character);
+                }
+            }    
+        
+            saveFile.CurrentBannerCharacterId = weightedCharacters.GetNextRandom();
+            saveFile.GetCharacterSaveData(saveFile.CurrentBannerCharacterId).LastBannerDate = DateTime.Now;
+            
+            saveFile.CurrentBannerSubCharacterId1 = weightedCharacters.GetNextRandom();
+            saveFile.CurrentBannerSubCharacterId2 = weightedCharacters.GetNextRandom();
+            saveFile.CurrentBannerSubCharacterId3 = weightedCharacters.GetNextRandom();
+        
             var now = DateTime.Now;
             var diffInDays = 0;
             if (saveFile.NextBannerChangeDate.HasValue)
             {
                 diffInDays = (int)(now - saveFile.NextBannerChangeDate.Value).TotalDays;
             }
-            
-            saveFile.BannerHistory.Add(saveFile.CurrentBannerCharacterId);
-            if (saveFile.BannerHistory.Count > 7)
-                saveFile.BannerHistory.Remove(saveFile.BannerHistory.FirstOrDefault());
+
             saveFile.NextBannerChangeDate = saveFile.NextBannerChangeDate?.AddDays(diffInDays + 1) ?? now.AddHours(24);
             saveFile.Save();
         }

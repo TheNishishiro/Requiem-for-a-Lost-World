@@ -24,6 +24,7 @@ namespace DefaultNamespace.Data
 		public List<int> unlockedSkillPoints;
 		public Dictionary<StageEnum, DifficultyEnum> FinishedDifficulty = new ();
 		public int ExperienceNeeded => (int)(Level * 75 * 1.5f);
+		public DateTime LastBannerDate;
 
 		public CharacterSaveData()
 		{
