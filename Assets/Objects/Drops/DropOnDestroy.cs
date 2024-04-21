@@ -3,6 +3,7 @@ using System.Linq;
 using Interfaces;
 using Managers;
 using Objects.Drops;
+using Objects.Players.Scripts;
 using UnityEditor;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ namespace DefaultNamespace
 			if (pickup?.Any() != true)
 				return;
 			
-			var itemsToDrop = pickup.Where(x => x.chance >= Random.value);
+			var itemsToDrop = pickup.Where(x => x.chance >= Random.value - PlayerStatsScaler.GetScaler().GetLuck());
 
 			foreach (var item in itemsToDrop)
 			{
