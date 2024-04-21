@@ -41,6 +41,7 @@ namespace UI.Main_Menu.REWORK.Scripts
                 {
                     _stringBuilder.Clear();
                     _stringBuilder.Append(_currentText);
+                    textContent.text = _stringBuilder.ToString();
                     break;
                 }
 

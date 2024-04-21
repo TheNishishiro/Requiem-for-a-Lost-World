@@ -126,8 +126,8 @@ namespace UI.Main_Menu.REWORK.Scripts
         public bool IsInFocus { get; set; }
         public void SetActive(bool isActive)
         {
-            if (isActive)
-                DiscordManager.instance.SetMainMenu();
+            if (isActive && DiscordManager.instance != null)
+                DiscordManager.instance?.SetMainMenu();
             
             gameObject.SetActive(isActive);
         }
