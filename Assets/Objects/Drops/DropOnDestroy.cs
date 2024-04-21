@@ -33,7 +33,7 @@ namespace DefaultNamespace
 			{
 				var randomPoint = Utilities.GetRandomInAreaFreezeParameter(transform.position, 0.05f, isFreezeY: true);
 				var positionOnGround = Utilities.GetPointOnColliderSurface(randomPoint, transform, 0.25f);
-				PickupManager.instance.SpawnPickup(positionOnGround, item.pickupObject, item.amount);
+				PickupManager.instance.SpawnPickup(positionOnGround, item.pickupObject, Random.Range(item.amountMin, item.amountMax));
 			}
 		}
 

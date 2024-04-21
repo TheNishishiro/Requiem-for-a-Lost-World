@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
+using DefaultNamespace.Data;
+using DefaultNamespace.Data.Settings;
 using Interfaces;
 using Managers;
 using Objects.Abilities;
@@ -34,9 +36,12 @@ namespace Objects.Players.Scripts
 		private Transform _abilityContainer;
 		private AmeliaGlassShield _ameliaGlassShield;
 		private float _currentSkillCooldown = 0f;
+		private float _currentDashCooldown = 0f;
 		private float _skillCooldown = 5f;
+		private float _dashCooldown = 10f;
 		private float _dashDuration = 0;
 		private float _dashDistance = 10;
+		private int _dashStacks = 2;
 		private Transform _transform;
 		private Vector3 _dashPosition;
 		private Queue<Vector3> _previousPositions = new ();
@@ -68,6 +73,16 @@ namespace Objects.Players.Scripts
 				skillCooldownImage.fillAmount = _currentSkillCooldown / _skillCooldown;
 				_currentSkillCooldown -= Time.deltaTime;
 			}
+			
+			if (_dashStacks < 2)
+			{
+				_currentDashCooldown -= Time.deltaTime;
+				if (_currentDashCooldown <= 0f)
+                {
+                    _dashStacks++;
+                    _currentDashCooldown = _dashCooldown;
+                }
+			}
 
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Truzi_BoT)
 			{
@@ -82,15 +97,31 @@ namespace Objects.Players.Scripts
 				}
 			}
 			
-			if (Input.GetKeyDown(KeyCode.Space))
+			if (Input.GetKeyDown(SaveFile.Instance.GetKeybinding(KeyAction.Ability)))
 			{
 				UseSkill();
+			}
+			
+			if (Input.GetKeyDown(SaveFile.Instance.GetKeybinding(KeyAction.Dash)))
+			{
+				UseDash();
 			}
 		}
 
 		public void UseSkill()
 		{
 			UseSkill(GameData.GetPlayerCharacterId());
+		}
+
+		public void UseDash()
+		{
+			if (_dashStacks <= 0)
+				return;
+			_dashStacks--;
+			_currentDashCooldown = _dashCooldown;
+			_dashDuration = 0.2f;
+			_dashDistance = 10;
+			StartCoroutine(IFrames(0.2f));
 		}
 
 		public void FixedUpdate()
@@ -336,7 +367,7 @@ namespace Objects.Players.Scripts
 			_dashDistance = 10;
 			
 			if (GameData.IsCharacterRank(CharacterRank.E1))
-				playerStatsComponent.TemporaryStatBoost(StatEnum.CritDamage, 2.5f, 3);
+				playerStatsComponent.TemporaryStatBoost(StatEnum.CritDamage, 2.5f, 6);
 			if (GameData.IsCharacterRank(CharacterRank.E5))
 				WeaponManager.instance.ReduceWeaponCooldowns(1);
 		}

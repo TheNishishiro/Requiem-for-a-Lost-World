@@ -1,4 +1,6 @@
-﻿using Managers;
+﻿using DefaultNamespace.Data;
+using DefaultNamespace.Data.Settings;
+using Managers;
 using Objects.Players.Scripts;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
@@ -23,6 +25,8 @@ namespace StarterAssets
 		public float RotationSpeed = 1.0f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
+		public float Stamina = 2.0f;
+		public float StaminaRegenCooldown = 2.0f;
 
 		[Space(10)]
 		[Tooltip("The height the player can jump")]
@@ -71,6 +75,9 @@ namespace StarterAssets
 		
 		private Vector2 _previousTouchPosition;
 		private bool _touchHasBegun;
+
+		private float _currentStaminaCooldown;
+		private float _currentStamina;
 
 	
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
@@ -123,6 +130,24 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			RegenStamina();
+		}
+
+		private void RegenStamina()
+		{
+			if (Input.GetKey(SaveFile.Instance.GetKeybinding(KeyAction.Sprint)))
+				return;
+
+			if (_currentStaminaCooldown > 0)
+			{
+				_currentStaminaCooldown -= Time.deltaTime;
+				return;
+			}
+
+			if (_currentStamina >= Stamina)
+				return;
+
+			_currentStamina += Time.deltaTime;
 		}
 
 		private void LateUpdate()
@@ -164,7 +189,13 @@ namespace StarterAssets
 			if (GameManager.instance.playerStatsComponent.IsDead()) return;
 			
 			// set target speed based on move speed, sprint speed and if sprint is pressed
-			float targetSpeed = PlayerStatsScaler.GetScaler().GetMovementSpeed();
+			var targetSpeed = PlayerStatsScaler.GetScaler().GetMovementSpeed();
+			if (Input.GetKey(SaveFile.Instance.GetKeybinding(KeyAction.Sprint)) && _currentStamina > 0)
+			{
+				targetSpeed *= 2;
+				_currentStamina -= Time.deltaTime;
+				_currentStaminaCooldown = StaminaRegenCooldown;
+			}
 
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 

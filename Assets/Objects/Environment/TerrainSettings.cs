@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DefaultNamespace.Data;
+using DefaultNamespace.Data.Environment;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,6 +15,7 @@ namespace Objects.Environment
 		private int detailIndex2D = 0;
 		private int detailIndex3D = 1;
 		private int detailIndex3D_Flowers = 2;
+		private int detailIndex3DDetailed = 3;
 
 		private float _treeDensity;
 
@@ -50,7 +52,7 @@ namespace Objects.Environment
 				0 => 0,
 				1 => 0.2f,
 				2 => 0.5f,
-				3 => saveFile.ConfigurationFile.Use3dGrass ? 0.65f : 0.8f,
+				3 => saveFile.ConfigurationFile.GrassType == GrassType._2D ? 0.8f : 0.65f,
 				4 => 1,
 				_ => terrain.detailObjectDensity
 			};
@@ -58,10 +60,18 @@ namespace Objects.Environment
 			//RemoveTrees(treePrototypeIndex);
 			//PlaceTrees(treePrototypeIndex);
 
-			if (saveFile.ConfigurationFile.Use3dGrass)
-				SwitchTo3DGrass();
-			else
-				SwitchTo2DGrass();
+			switch (saveFile.ConfigurationFile.GrassType)
+			{
+				case GrassType._3D:
+					SwitchTo3DGrass();
+					break;
+				case GrassType.Detailed3D:
+					SwitchToDetailed3DGrass();
+					break;
+				default:
+					SwitchTo2DGrass();
+					break;
+			}
 		}
 
 		private void SwitchTo2DGrass()
@@ -75,6 +85,12 @@ namespace Objects.Environment
 			Clear();
 			PopulateTerrainWithGrass(detailIndex3D, 300, 500);
 			PopulateTerrainWithGrass(detailIndex3D_Flowers, 10, 20);
+		}
+
+		private void SwitchToDetailed3DGrass()
+		{
+			Clear();
+			PopulateTerrainWithGrass(detailIndex3DDetailed, 300, 500);
 		}
 
 		private void PopulateTerrainWithGrass(int detailIndex, int minAmount, int maxAmount)
@@ -97,6 +113,7 @@ namespace Objects.Environment
 		{
 			ClearTerrainGrass(detailIndex2D);
 			ClearTerrainGrass(detailIndex3D);
+			ClearTerrainGrass(detailIndex3DDetailed);
 			ClearTerrainGrass(detailIndex3D_Flowers);
 		}
 

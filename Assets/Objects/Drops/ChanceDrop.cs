@@ -8,6 +8,7 @@ namespace Objects.Drops
 	{
 		[SerializeField] public Pickup pickupObject;
 		[SerializeField] [Range(0f, 1f)] public float chance;
-		[SerializeField] public int amount;
+		[SerializeField] public int amountMin;
+		[SerializeField] public int amountMax;
 	}
 }

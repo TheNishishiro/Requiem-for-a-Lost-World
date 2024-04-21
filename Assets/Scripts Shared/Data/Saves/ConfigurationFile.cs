@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using DefaultNamespace.Data.Environment;
 using UnityEngine;
 
 namespace DefaultNamespace.Data
@@ -22,7 +23,7 @@ namespace DefaultNamespace.Data
 		public int ResolutionHeight { get; set; }
 		public uint RefreshRate { get; set; }
 		public int RenderDistance { get; set; }
-		public bool Use3dGrass { get; set; }
+		public GrassType GrassType { get; set; }
 		public int ObjectDensity { get; set; }
 		public int TextureQuality { get; set; }
 		public float Volume { get; set; }
@@ -44,7 +45,7 @@ namespace DefaultNamespace.Data
 				IsDiscordEnabled = false;
 				PresetIndex = 1;
 				RenderDistance = 1;
-				Use3dGrass = false;
+				GrassType = GrassType._2D;
 				ObjectDensity = 1;
 				Volume = 1;
 				TextureQuality = 2;
@@ -65,7 +66,7 @@ namespace DefaultNamespace.Data
 				PresetIndex = 4;
 				ConfigurationVersion = 0;
 				RenderDistance = 1;
-				Use3dGrass = false;
+				GrassType = GrassType._2D;
 				ObjectDensity = 1;
 				Volume = 1;
 				TextureQuality = 4;

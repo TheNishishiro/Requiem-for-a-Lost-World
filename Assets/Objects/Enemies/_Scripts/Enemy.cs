@@ -118,7 +118,7 @@ namespace Objects.Enemies
 				{
 					pickupObject = expDrop,
 				};
-				expDropChance.amount = (int)(newStats.expDrop * expDropMultiplier);
+				expDropChance.amountMin = expDropChance.amountMax = (int)(newStats.expDrop * expDropMultiplier);
 				expDropChance.chance = 0.75f;
 				dropOnDestroyComponent.AddDrop(expDropChance);
 			}
@@ -141,7 +141,8 @@ namespace Objects.Enemies
 			};
 			
 			goldDropChance.chance = PlayerStatsScaler.GetScaler().GetLuck() / 16;
-			goldDropChance.amount = Random.Range(1, 25);
+			goldDropChance.amountMin = 1;
+			goldDropChance.amountMax = 25;
 			dropOnDestroyComponent.AddDrop(goldDropChance);
 
 			if (GameData.IsCharacter(CharactersEnum.Lucy_BoC))
@@ -151,7 +152,8 @@ namespace Objects.Enemies
 					pickupObject = healingOrbDrop,
 				};
 				healingOrbDropChance.chance = 0.05f;
-				healingOrbDropChance.amount = 1;
+				healingOrbDropChance.amountMin = 1;
+				healingOrbDropChance.amountMax = 1;
 				dropOnDestroyComponent.AddDrop(healingOrbDropChance);
 			}
 
@@ -160,7 +162,8 @@ namespace Objects.Enemies
 				pickupObject = gemDrop,
 			};
 			gemDropChance.chance = PlayerStatsScaler.GetScaler().GetLuck() / 100;
-			gemDropChance.amount = Random.Range(1, 50);
+			gemDropChance.amountMin = 1;
+			gemDropChance.amountMax = 50;
 			dropOnDestroyComponent.AddDrop(gemDropChance);
 
 			stats.hp = (int)(stats.hp * healthMultiplier * PlayerStatsScaler.GetScaler().GetEnemyHealthIncrease()) * GameData.GetCurrentDifficulty().EnemyHealthModifier;

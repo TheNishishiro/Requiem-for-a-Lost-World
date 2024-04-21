@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Data.Difficulty;
 using DefaultNamespace.Data.Achievements;
+using DefaultNamespace.Data.Settings;
 using DefaultNamespace.Extensions;
 using JetBrains.Annotations;
 using Managers;
@@ -27,6 +28,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<CharactersEnum, CharacterSaveData> CharacterSaveData;
 		public Dictionary<PermUpgradeType, int> PermUpgradeSaveData;
 		public Dictionary<AchievementEnum, bool> AchievementSaveData;
+		public Dictionary<KeyAction, KeyCode> Keybindings;
 		public Dictionary<int, List<int>> ReadStoryEntries { get; set; }
 		public List<ServerData> Servers;
 		public List<CharactersEnum> BannerHistory;
@@ -82,6 +84,7 @@ namespace DefaultNamespace.Data
 			AchievementSaveData ??= new Dictionary<AchievementEnum, bool>();
 			ReadStoryEntries ??= new Dictionary<int, List<int>>();
 			ConfigurationFile ??= new ConfigurationFile().Default();
+			Keybindings ??= DefaultKeyBinds();
 			ConfigurationFile.Update();
 		}
 
@@ -138,8 +141,33 @@ namespace DefaultNamespace.Data
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
 			Servers = saveData.Servers ?? new List<ServerData>();
 			AchievementSaveData = saveData.AchievementSaveData ?? new Dictionary<AchievementEnum, bool>();
+			Keybindings = saveData.Keybindings ?? DefaultKeyBinds();
 			ConfigurationFile = (saveData.ConfigurationFile ?? new ConfigurationFile().Default()).Update();
 			ReadStoryEntries = saveData.ReadStoryEntries ?? new Dictionary<int, List<int>>();
+		}
+
+		private Dictionary<KeyAction, KeyCode> DefaultKeyBinds()
+		{
+			if (Keybindings?.Any() == true)
+				return Keybindings;
+
+			var keybindings = new Dictionary<KeyAction, KeyCode>
+			{
+				{ KeyAction.Ability, KeyCode.Space },
+				{ KeyAction.MoveDown, KeyCode.S },
+				{ KeyAction.MoveUp, KeyCode.W },
+				{ KeyAction.MoveLeft, KeyCode.A },
+				{ KeyAction.MoveRight, KeyCode.R },
+				{ KeyAction.Accept, KeyCode.Return },
+				{ KeyAction.Dash, KeyCode.LeftShift },
+				{ KeyAction.Sprint, KeyCode.LeftControl }
+			};
+			return keybindings;
+		}
+
+		public KeyCode GetKeybinding(KeyAction action)
+		{
+			return Keybindings[action];
 		}
 
 		public void AddGameResultData()
@@ -268,6 +296,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<CharactersEnum, CharacterSaveData> CharacterSaveData;
 		public Dictionary<PermUpgradeType, int> PermUpgradeSaveData;
 		public Dictionary<AchievementEnum, bool> AchievementSaveData;
+		public Dictionary<KeyAction, KeyCode> Keybindings;
 		public Dictionary<int, List<int>> ReadStoryEntries;
 		public List<ServerData> Servers;
 		public List<CharactersEnum> BannerHistory;
@@ -305,6 +334,7 @@ namespace DefaultNamespace.Data
 			Servers = saveFile.Servers;
 			BannerHistory = saveFile.BannerHistory;
 			AchievementSaveData = saveFile.AchievementSaveData;
+			Keybindings = saveFile.Keybindings;
 			ConfigurationFile = saveFile.ConfigurationFile;
 			Gold = saveFile.Gold;
 			Gems = saveFile.Gems;

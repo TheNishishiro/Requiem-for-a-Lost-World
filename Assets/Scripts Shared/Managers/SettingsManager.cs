@@ -158,7 +158,6 @@ namespace Managers
 			renderDistanceDropdown.value = configuration.RenderDistance;
 			discordToggle.isOn = configuration.IsDiscordEnabled;
 			windowModeDropdown.value = configuration.WindowMode;
-			use3DGrassToggle.isOn = configuration.Use3dGrass;
 			volumeSlider.value = configuration.Volume;
 			textureResolutionDropdown.value = configuration.TextureQuality;
 			usernameField.text = configuration.Username;
@@ -201,7 +200,6 @@ namespace Managers
 			configuration.RenderDistance = renderDistanceDropdown.value;
 			configuration.IsDiscordEnabled = discordToggle.isOn;
 			configuration.WindowMode = windowModeDropdown.value;
-			configuration.Use3dGrass = use3DGrassToggle.isOn;
 			configuration.ResolutionWidth = availableResolutions[resolutionDropdown.value].width;
 			configuration.ResolutionHeight = availableResolutions[resolutionDropdown.value].height;
 			configuration.RefreshRate = availableResolutions[resolutionDropdown.value].refreshRateRatio.numerator;

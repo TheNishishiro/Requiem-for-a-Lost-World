@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace.Data;
+using DefaultNamespace.Data.Environment;
 using DefaultNamespace.Data.Settings;
 using Interfaces;
 using Managers;
@@ -236,7 +237,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             entryRenderDistance.SetSelection(configuration.RenderDistance);
             entryShadows.SetSelection(configuration.ShadowQuality);
             entryAntialiasing.SetSelection(configuration.AntiAliasing);
-            entry3dGrass.SetSelection(configuration.Use3dGrass ? 1 : 0);
+            entry3dGrass.SetSelection((int)configuration.GrassType);
             entryGrassDensity.SetSelection(configuration.GrassDensity);
             entryGrassRenderDistance.SetSelection(configuration.GrassRenderDistance);
             entryDiscordPresence.SetSelection(configuration.IsDiscordEnabled ? 1 : 0);
@@ -261,7 +262,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             configuration.RenderDistance = entryRenderDistance.GetSelectedOption();
             configuration.ShadowQuality = entryShadows.GetSelectedOption();
             configuration.AntiAliasing = entryAntialiasing.GetSelectedOption();
-            configuration.Use3dGrass = entry3dGrass.GetSelectedOption() == 1;
+            configuration.GrassType = (GrassType)entry3dGrass.GetSelectedOption();
             configuration.GrassDensity = entryGrassDensity.GetSelectedOption();
             configuration.GrassRenderDistance = entryGrassRenderDistance.GetSelectedOption();
             configuration.IsDiscordEnabled = entryDiscordPresence.GetSelectedOption() == 1;

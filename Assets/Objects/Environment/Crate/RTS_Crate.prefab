@@ -239,7 +239,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 0
-  gameResultData: {fileID: 11400000, guid: cb99eac292bd9d54aac189cbaa40dca7, type: 2}
   targetPoint: {fileID: 0}
   takeDamageSound: {fileID: 8300000, guid: 477e022444f09cb4eb750e9354d2b6c0, type: 3}
   canBeAfflictedWithElements: 0
@@ -276,19 +275,23 @@ MonoBehaviour:
   - pickupObject: {fileID: 3634895298855100167, guid: 05020269b5b385048b9f6957428fae35,
       type: 3}
     chance: 0.7
-    amount: 50
+    amountMin: 50
+    amountMax: 100
   - pickupObject: {fileID: 3634895298855100167, guid: 275792940c647844196d33239fe7d5cf,
       type: 3}
     chance: 0.35
-    amount: 40
+    amountMin: 30
+    amountMax: 200
   - pickupObject: {fileID: 3634895298855100167, guid: a146265883438a44cad22daed1bd3bd9,
       type: 3}
     chance: 0.5
-    amount: 50
+    amountMin: 20
+    amountMax: 80
   - pickupObject: {fileID: -6043924431006343057, guid: 4b2f42db8889dc043b045b791f2467b9,
       type: 3}
     chance: 0.15
-    amount: 0
+    amountMin: 1
+    amountMax: 1
 --- !u!65 &1608978063
 BoxCollider:
   m_ObjectHideFlags: 0
