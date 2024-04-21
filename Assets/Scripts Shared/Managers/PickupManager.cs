@@ -21,7 +21,9 @@ namespace Managers
 		[SerializeField] Camera mainCamera;
 		private Player player;
 		private ObjectPool<Pickup> _shardPool;
-		private ObjectPool<Pickup> _objectPool;
+		private ObjectPool<Pickup> _goldPool;
+		private ObjectPool<Pickup> _gemPool;
+		private ObjectPool<Pickup> _healingOrbPool;
 		private List<Pickup> _expGem = new ();
 		[SerializeField] private GameObject expShardPrefab;
 		[SerializeField] private GameObject chestPrefab;
@@ -58,7 +60,7 @@ namespace Managers
 					Destroy(expGem.gameObject);
 				}, true, 600);
 			
-			_objectPool = new ObjectPool<Pickup>(
+			_goldPool = new ObjectPool<Pickup>(
 				() => SpawnManager.instance.SpawnObject(transform.position, _objectPrefab).GetComponent<Pickup>(), 
 				pickup =>
 				{
@@ -74,7 +76,43 @@ namespace Managers
 				pickup =>
 				{
 					Destroy(pickup.gameObject);
-				}, true, 1000);
+				}, true, 100);
+			
+			_gemPool = new ObjectPool<Pickup>(
+				() => SpawnManager.instance.SpawnObject(transform.position, _objectPrefab).GetComponent<Pickup>(), 
+				pickup =>
+				{
+					pickup.Reset();
+					pickup.SetAmount(pickupAmount);
+					pickup.transform.position = pickupPosition;
+					pickup.gameObject.SetActive(true);
+				}, 
+				pickup =>
+				{
+					pickup.gameObject.SetActive(false);
+				}, 
+				pickup =>
+				{
+					Destroy(pickup.gameObject);
+				}, true, 100);
+			
+			_healingOrbPool = new ObjectPool<Pickup>(
+				() => SpawnManager.instance.SpawnObject(transform.position, _objectPrefab).GetComponent<Pickup>(), 
+				pickup =>
+				{
+					pickup.Reset();
+					pickup.SetAmount(pickupAmount);
+					pickup.transform.position = pickupPosition;
+					pickup.gameObject.SetActive(true);
+				}, 
+				pickup =>
+				{
+					pickup.gameObject.SetActive(false);
+				}, 
+				pickup =>
+				{
+					Destroy(pickup.gameObject);
+				}, true, 300);
 			
 			
 			player = FindFirstObjectByType<Player>();
@@ -93,10 +131,16 @@ namespace Managers
 					break;
 				}
 				case PickupEnum.Gold:
+					_objectPrefab = pickupObject.GetPickUpObject();
+					_goldPool.Get();
+					break;
 				case PickupEnum.Gem:
+					_objectPrefab = pickupObject.GetPickUpObject();
+					_gemPool.Get();
+					break;
 				case PickupEnum.HealingOrb:
 					_objectPrefab = pickupObject.GetPickUpObject();
-					_objectPool.Get();
+					_healingOrbPool.Get();
 					break;
 				case PickupEnum.Chest:
 					var networkObject = Instantiate(chestPrefab, position, Quaternion.identity).GetComponent<NetworkObject>();
@@ -144,9 +188,13 @@ namespace Managers
 					_shardPool.Release(pickupObject);
 					break;
 				case PickupEnum.Gold:
+					_goldPool.Release(pickupObject);
+					break;
 				case PickupEnum.Gem:
+					_gemPool.Release(pickupObject);
+					break;
 				case PickupEnum.HealingOrb:
-					_objectPool.Release(pickupObject);
+					_healingOrbPool.Release(pickupObject);
 					break;
 				case PickupEnum.Chest:
 					RequestPickupDespawnRpc(pickupObject.GetComponent<NetworkObject>());
