@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Interfaces;
 using NaughtyAttributes;
 using Objects.Stage;
 using TMPro;
@@ -62,6 +63,9 @@ namespace UI.In_Game.GUI.Scripts.Managers
         [BoxGroup("Game Stats")] [SerializeField] private UiInfoEntry infoEntryGold;
         [BoxGroup("Game Stats")] [SerializeField] private UiInfoEntry infoEntryGem;
         [BoxGroup("Game Stats")] [SerializeField] private UiInfoEntry infoEntryKills;
+        [Space]
+        [BoxGroup("Item Container")] [SerializeField] private List<UiItemContainer> weapons;
+        [BoxGroup("Item Container")] [SerializeField] private List<UiItemContainer> items;
         
         public void Awake()
         {
@@ -106,6 +110,8 @@ namespace UI.In_Game.GUI.Scripts.Managers
             infoEntryKills.SetTheme(characterData.ColorTheme);
             
             SetLevelText(1);
+            weapons.ForEach(x => x.gameObject.SetActive(false));
+            items.ForEach(x => x.gameObject.SetActive(false));
         }
 
         private void Update()
@@ -118,6 +124,24 @@ namespace UI.In_Game.GUI.Scripts.Managers
             }
         }
 
+        public void UpdateItems()
+        {
+            weapons.ForEach(x => x.gameObject.SetActive(false));
+            items.ForEach(x => x.gameObject.SetActive(false));
+
+            var index = 0;
+            foreach (var weapon in WeaponManager.instance.GetUnlockedWeaponsAsInterface())
+            {
+                weapons[index++].Setup(weapon);
+            }
+
+            index = 0;
+            foreach (var item in WeaponManager.instance.GetUnlockedItemsAsInterface())
+            {
+                items[index++].Setup(item);
+            }
+        }
+        
         public void SetLevelText(int level)
         {
             labelLevel.text = $"lv. {level}";

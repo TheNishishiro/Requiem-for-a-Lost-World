@@ -12,6 +12,7 @@ using Objects.Items;
 using Objects.Players.Containers;
 using Objects.Players.Scripts;
 using Objects.Stage;
+using UI.In_Game.GUI.Scripts.Managers;
 using UI.Labels.InGame.LevelUpScreen;
 using Unity.Netcode;
 using UnityEngine;
@@ -80,6 +81,7 @@ public class WeaponManager : NetworkBehaviour
         _unlockedWeapons.Add(weaponGameObject);
         weaponGameObject.ActivateWeapon();
         AchievementManager.instance.OnWeaponUnlocked(weapon, _unlockedWeapons.Count, rarity);
+        GuiManager.instance.UpdateItems();
     }
 
     public void AddItem(ItemBase item, int rarity)
@@ -90,11 +92,13 @@ public class WeaponManager : NetworkBehaviour
         _playerStatsComponent.Apply(itemGameObject.ItemStats, 1);
         _unlockedItems.Add(itemGameObject);
         AchievementManager.instance.OnItemUnlocked(item, _unlockedItems.Count, rarity);
+        GuiManager.instance.UpdateItems();
     }
 
     public void UpgradeWeapon(WeaponBase weapon, UpgradeData upgradeData, int rarity)
     {
         weapon.Upgrade(upgradeData, rarity);
+        GuiManager.instance.UpdateItems();
     }
 
     public void UpgradeItem(ItemBase itemBase, ItemUpgrade itemUpgrade, int rarity)
@@ -102,6 +106,7 @@ public class WeaponManager : NetworkBehaviour
         itemBase.RemoveUpgrade(itemUpgrade);
         itemBase.ApplyUpgrade(itemUpgrade, rarity);
         _playerStatsComponent.Apply(itemUpgrade.ItemStats, rarity);
+        GuiManager.instance.UpdateItems();
     }
     
     public List<IPlayerItem> GetUnlockedWeaponsAsInterface()
