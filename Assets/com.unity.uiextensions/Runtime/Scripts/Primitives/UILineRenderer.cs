@@ -499,10 +499,10 @@ namespace UnityEngine.UI.Extensions
             {
 				m_points = new Vector2[1];
             }
-			if (transform.GetComponent<RectTransform>().position != Vector3.zero)
-			{
-				Debug.LogWarning("A Line Renderer component should be on a RectTransform positioned at (0,0,0), do not use in child Objects.\nFor best results, create separate RectTransforms as children of the canvas positioned at (0,0) for a UILineRenderer and do not move.");
-			}
+			//if (transform.GetComponent<RectTransform>().position != Vector3.zero)
+			//{
+			//	Debug.LogWarning("A Line Renderer component should be on a RectTransform positioned at (0,0,0), do not use in child Objects.\nFor best results, create separate RectTransforms as children of the canvas positioned at (0,0) for a UILineRenderer and do not move.");
+			//}
         }
     }
 }

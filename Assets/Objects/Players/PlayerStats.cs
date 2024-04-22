@@ -65,6 +65,8 @@ namespace Objects.Players
 		public float LightDamageIncrease;
 		public float CosmicDamageIncrease;
 		public float EarthDamageIncrease;
+		public int DashCount;
+		public float Stamina;
 
 		public int RevivesField
 		{
@@ -136,6 +138,8 @@ namespace Objects.Players
 			LightDamageIncrease = 0;
 			CosmicDamageIncrease = 0;
 			EarthDamageIncrease = 0;
+			DashCount = 2;
+			Stamina = 2;
 		}
 
 		public void Sum(ItemStats item, int rarity)
@@ -145,6 +149,7 @@ namespace Objects.Players
             AttackCount += item.AttackCount;
             PassThroughCount += item.PassThroughCount;            
             RevivesField += item.Revives;
+            DashCount += item.DashCount;
             Health += item.Health * rarityFactor;
             HealthMax += item.HealthMax * rarityFactor;
             MagnetSize += item.MagnetSize * rarityFactor;
@@ -179,14 +184,15 @@ namespace Objects.Players
             Rerolls += item.Rerolls != 0 ? item.Rerolls + (rarity - 1) : item.Rerolls;
             Skips += item.Skips != 0 ? item.Skips + (rarity - 1) : item.Skips;
             LifeSteal += item.LifeSteal * rarityFactor;
-            FireDamageIncrease = item.FireDamageIncrease * rarityFactor;
-			LightningDamageIncrease = item.LightningDamageIncrease * rarityFactor;
-			IceDamageIncrease = item.IceDamageIncrease * rarityFactor;
-			PhysicalDamageIncrease = item.PhysicalDamageIncrease * rarityFactor;
-			WindDamageIncrease = item.WindDamageIncrease * rarityFactor;
-			LightDamageIncrease = item.LightDamageIncrease * rarityFactor;
-			CosmicDamageIncrease = item.CosmicDamageIncrease * rarityFactor;
-			EarthDamageIncrease = item.EarthDamageIncrease * rarityFactor;
+            FireDamageIncrease += item.FireDamageIncrease * rarityFactor;
+			LightningDamageIncrease += item.LightningDamageIncrease * rarityFactor;
+			IceDamageIncrease += item.IceDamageIncrease * rarityFactor;
+			PhysicalDamageIncrease += item.PhysicalDamageIncrease * rarityFactor;
+			WindDamageIncrease += item.WindDamageIncrease * rarityFactor;
+			LightDamageIncrease += item.LightDamageIncrease * rarityFactor;
+			CosmicDamageIncrease += item.CosmicDamageIncrease * rarityFactor;
+			EarthDamageIncrease += item.EarthDamageIncrease * rarityFactor;
+			Stamina += item.Stamina * rarityFactor;
         }
 
 		public void Set(PlayerStats playerStats)
@@ -248,6 +254,8 @@ namespace Objects.Players
             LightDamageIncrease =  playerStats.LightDamageIncrease;
             CosmicDamageIncrease = playerStats.CosmicDamageIncrease;
             EarthDamageIncrease =  playerStats.EarthDamageIncrease;
+            DashCount = playerStats.DashCount;
+            Stamina = playerStats.Stamina;
         }
 
 		public IEnumerable<StatsDisplayData> GetStatsList()

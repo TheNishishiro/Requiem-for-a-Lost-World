@@ -12,6 +12,7 @@ namespace DefaultNamespace
 	public class DropOnDestroy : MonoBehaviour
 	{
 		[SerializeField] private List<ChanceDrop> pickup;
+		[SerializeField] private bool scaleWithLuck;
 		private bool isQuitting;
 
 		
@@ -28,7 +29,7 @@ namespace DefaultNamespace
 			if (pickup?.Any() != true)
 				return;
 			
-			var itemsToDrop = pickup.Where(x => x.chance >= Random.value - PlayerStatsScaler.GetScaler().GetLuck());
+			var itemsToDrop = pickup.Where(x => x.chance >= Random.value - (scaleWithLuck ?PlayerStatsScaler.GetScaler().GetLuck() : 0));
 
 			foreach (var item in itemsToDrop)
 			{

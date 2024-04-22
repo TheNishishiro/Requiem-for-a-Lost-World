@@ -2,6 +2,7 @@
 using System.Linq;
 using Events.Scripts;
 using Managers;
+using UI.In_Game.GUI.Scripts.Managers;
 using UI.Labels.InGame;
 using Unity.Netcode;
 using UnityEngine;
@@ -13,11 +14,15 @@ namespace Objects.Players.Scripts
 	public class HealthComponent : MonoBehaviour
 	{
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
-		[SerializeField] private ExperienceBar healthBar;
 		[SerializeField] private GameOverScreenManager gameOverScreenManager;
 		private const float HealthRegenCooldown = 1;
 		private float _healthRegenCurrentCooldown = 1;
-		
+
+		private void Start()
+		{
+			UpdateHealthBar();
+		}
+
 		public void Damage(float amount, bool isIgnoreArmor = false, bool isPreventDeath = false)
 		{
 			if (playerStatsComponent.IsDead()) return;
@@ -66,7 +71,7 @@ namespace Objects.Players.Scripts
 
 		public void UpdateHealthBar()
 		{
-			healthBar.UpdateSlider(PlayerStatsScaler.GetScaler().GetHealth(), PlayerStatsScaler.GetScaler().GetMaxHealth());
+			GuiManager.instance.UpdateHealth(PlayerStatsScaler.GetScaler().GetHealth(), PlayerStatsScaler.GetScaler().GetMaxHealth());
 		}
 		
 		private void Death()

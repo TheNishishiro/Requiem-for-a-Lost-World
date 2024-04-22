@@ -2,6 +2,7 @@
 using DefaultNamespace.Data.Settings;
 using Managers;
 using Objects.Players.Scripts;
+using UI.In_Game.GUI.Scripts.Managers;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -25,7 +26,6 @@ namespace StarterAssets
 		public float RotationSpeed = 1.0f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
-		public float Stamina = 2.0f;
 		public float StaminaRegenCooldown = 2.0f;
 
 		[Space(10)]
@@ -131,6 +131,7 @@ namespace StarterAssets
 			GroundedCheck();
 			Move();
 			RegenStamina();
+			GuiManager.instance.UpdateStamina(_currentStamina, PlayerStatsScaler.GetScaler().GetStamina());
 		}
 
 		private void RegenStamina()
@@ -144,7 +145,8 @@ namespace StarterAssets
 				return;
 			}
 
-			if (_currentStamina >= Stamina)
+			var stamina = PlayerStatsScaler.GetScaler().GetStamina();
+			if (_currentStamina >= stamina)
 				return;
 
 			_currentStamina += Time.deltaTime;

@@ -53,6 +53,8 @@ namespace Objects.Items
 		public float LightDamageIncrease;
 		public float CosmicDamageIncrease;
 		public float EarthDamageIncrease;
+		public int DashCount;
+		public float Stamina;
 
 		public void ApplyRarity(int rarity)
 		{
@@ -101,6 +103,7 @@ namespace Objects.Items
 			EarthDamageIncrease *= rarityFactor;
 			Rerolls = Rerolls != 0 ? Rerolls + (rarity - 1) : Rerolls;
 			Skips = Skips != 0 ? Skips + (rarity - 1) : Skips;
+			Stamina *= rarityFactor;
 		}
 		
 		public void Apply(ItemStats itemUpgradeItemStats, int rarity)
@@ -133,6 +136,7 @@ namespace Objects.Items
             EnemyMaxCountIncreasePercentage += itemUpgradeItemStats.EnemyMaxCountIncreasePercentage * rarityFactor;
             ItemRewardIncrease += itemUpgradeItemStats.ItemRewardIncrease * rarityFactor;
             Revives += itemUpgradeItemStats.Revives;
+            DashCount += itemUpgradeItemStats.DashCount;
             ProjectileLifeTimeIncreasePercentage += itemUpgradeItemStats.ProjectileLifeTimeIncreasePercentage * rarityFactor;
             DodgeChance += itemUpgradeItemStats.DodgeChance * rarityFactor;
             DamageTakenIncreasePercentage += itemUpgradeItemStats.DamageTakenIncreasePercentage * rarityFactor;
@@ -152,6 +156,7 @@ namespace Objects.Items
             EarthDamageIncrease += itemUpgradeItemStats.EarthDamageIncrease * rarityFactor;
             Rerolls += itemUpgradeItemStats.Rerolls == 0 ? 0 : itemUpgradeItemStats.Rerolls + (rarity - 1);
             Skips += itemUpgradeItemStats.Skips == 0 ? 0 : itemUpgradeItemStats.Skips + (rarity - 1);
+            Stamina += itemUpgradeItemStats.Stamina * rarityFactor;
         }
 
 		public string GetDescription(string description, int rarity)

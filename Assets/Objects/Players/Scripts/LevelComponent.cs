@@ -2,6 +2,7 @@
 using Managers;
 using Objects.Characters;
 using Objects.Stage;
+using UI.In_Game.GUI.Scripts.Managers;
 using UI.Labels.InGame;
 using Unity.Netcode;
 using UnityEngine;
@@ -14,7 +15,6 @@ namespace Objects.Players.Scripts
 		private float experience = 0;
 		private int level = 1;
 		[SerializeField] private UpgradePanelManager _upgradePanelManager;
-		[SerializeField] private ExperienceBar experienceBar;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
 		private int ToLevelUp => level * 1000;
 
@@ -23,17 +23,17 @@ namespace Objects.Players.Scripts
 			return level;
 		}
 		
-		private void Awake()
+		private void Start()
 		{
-			experienceBar.SetLevelText(level);
-			experienceBar.UpdateSlider(experience, ToLevelUp);
+			GuiManager.instance.SetLevelText(level);
+			GuiManager.instance.UpdateExperience(experience, ToLevelUp);
 		}
 
 		public void AddExperience(float amount)
 		{
 			experience += amount * PlayerStatsScaler.GetScaler().GetExperienceIncrease() * GameData.GetCurrentDifficulty().ExperienceGainModifier;
 			CheckLevelUp();
-			experienceBar.UpdateSlider(experience, ToLevelUp);
+			GuiManager.instance.UpdateExperience(experience, ToLevelUp);
 		}
 
 		private void CheckLevelUp()
@@ -48,7 +48,7 @@ namespace Objects.Players.Scripts
 		{
 			experience -= ToLevelUp;
 			level++;
-			experienceBar.SetLevelText(level);
+			GuiManager.instance.SetLevelText(level);
 			_upgradePanelManager.OpenPanel();
 			OnLevelUp();
 		}

@@ -313,5 +313,15 @@ namespace Objects.Characters
 		{
 			return GetMaxHealth() - GetHealth();
 		}
+
+		public int GetDashCount()
+		{
+			return PlayerStats?.DashCount ?? 0;
+		}
+
+		public float GetStamina()
+		{
+			return PlayerStats?.Stamina ?? 0;
+		}
     }
 }

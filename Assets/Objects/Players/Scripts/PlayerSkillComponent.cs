@@ -16,6 +16,7 @@ using Objects.Enemies;
 using Objects.Players.Containers;
 using Objects.Players.PermUpgrades;
 using Objects.Stage;
+using UI.In_Game.GUI.Scripts.Managers;
 using UI.Labels.InGame;
 using Unity.Netcode;
 using UnityEngine;
@@ -27,7 +28,6 @@ namespace Objects.Players.Scripts
 	public class PlayerSkillComponent : NetworkBehaviour
 	{
 		public static PlayerSkillComponent instance;
-		[SerializeField] private Image skillCooldownImage;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
 		[SerializeField] private HealthComponent healthComponent;
 		[SerializeField] private SpecialBar specialBar;
@@ -42,6 +42,16 @@ namespace Objects.Players.Scripts
 		private float _dashDuration = 0;
 		private float _dashDistance = 10;
 		private int _dashStacks = 2;
+
+		private int DashStacks
+		{
+			get => _dashStacks;
+			set
+			{
+				_dashStacks = value;
+				GuiManager.instance.UpdateDashes(_dashStacks);
+			}
+		}
 		private Transform _transform;
 		private Vector3 _dashPosition;
 		private Queue<Vector3> _previousPositions = new ();
@@ -60,6 +70,7 @@ namespace Objects.Players.Scripts
 		public void Init(Transform abilityContainerTransform)
 		{
 			_abilityContainer = abilityContainerTransform;
+			DashStacks = PlayerStatsScaler.GetScaler().GetDashCount();
 			ApplySpecial();
 		}
 		
@@ -70,16 +81,16 @@ namespace Objects.Players.Scripts
 			
 			if (_currentSkillCooldown > 0f)
 			{
-				skillCooldownImage.fillAmount = _currentSkillCooldown / _skillCooldown;
+				GuiManager.instance.UpdateAbilityCooldown(_currentSkillCooldown, _skillCooldown);
 				_currentSkillCooldown -= Time.deltaTime;
 			}
 			
-			if (_dashStacks < 2)
+			if (_dashStacks < PlayerStatsScaler.GetScaler().GetDashCount())
 			{
 				_currentDashCooldown -= Time.deltaTime;
 				if (_currentDashCooldown <= 0f)
                 {
-                    _dashStacks++;
+	                DashStacks++;
                     _currentDashCooldown = _dashCooldown;
                 }
 			}
@@ -117,7 +128,7 @@ namespace Objects.Players.Scripts
 		{
 			if (_dashStacks <= 0)
 				return;
-			_dashStacks--;
+			DashStacks--;
 			_currentDashCooldown = _dashCooldown;
 			_dashDuration = 0.2f;
 			_dashDistance = 10;

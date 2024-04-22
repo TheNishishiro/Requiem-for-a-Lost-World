@@ -6,12 +6,7 @@ namespace UI.Labels.InGame
 {
 	public class LabelTime : MonoBehaviour
 	{
-		private TextMeshProUGUI text;
-
-		private void Awake()
-		{
-			text = GetComponent<TextMeshProUGUI>();
-		}
+		[SerializeField] private TextMeshProUGUI text;
 
 		public void UpdateTime(float time)
 		{
