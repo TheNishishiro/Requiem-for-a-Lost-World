@@ -15,7 +15,6 @@ namespace Managers
 	{
 		private static bool _isFirstLoad = true;
 		public static SaveManager instance;
-		[SerializeField] private CharacterListMenu characterListMenu;
 
 		private void Awake()
 		{
@@ -54,7 +53,6 @@ namespace Managers
 				SaveFile.Instance.CharacterSaveData[CharactersEnum.Nishi].Unlock();
 			if (!SaveFile.Instance.CharacterSaveData[CharactersEnum.Amelia].IsUnlocked)
 				SaveFile.Instance.CharacterSaveData[CharactersEnum.Amelia].Unlock();
-			characterListMenu.UpdateCharacterPanels();
 			ApplySettings();
 		}
 
