@@ -30,7 +30,7 @@ namespace UI.Labels.InGame.Status_Icon_Bar
             if (statusIconToDisplay == null)
                 return;
 
-            statusIconToDisplay.Show(statusIconData.GetIcon(statusEffect), statusEffect, stackCount);
+            statusIconToDisplay.Show(statusIconData.GetStatusData(statusEffect), statusEffect, stackCount);
         }
 
         public void RemoveStatus(StatusEffectType statusEffect)

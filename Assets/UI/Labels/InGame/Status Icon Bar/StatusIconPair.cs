@@ -9,6 +9,6 @@ namespace UI.Labels.InGame.Status_Icon_Bar
     {
         public StatusEffectType statusEffectType;
         public Sprite icon;
-        public Color color;
+        public bool isNegative;
     }
 }

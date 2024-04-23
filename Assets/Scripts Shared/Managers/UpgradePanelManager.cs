@@ -79,7 +79,7 @@ namespace Managers
 			HideButtons();
 			rerollButton.gameObject.SetActive(PlayerStatsScaler.GetScaler().HasRerolls());
 			skipButton.gameObject.SetActive(PlayerStatsScaler.GetScaler().HasSkips());
-			rerollButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Reroll ({PlayerStatsScaler.GetScaler().GetRerolls()})";
+			rerollButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Refresh ({PlayerStatsScaler.GetScaler().GetRerolls()})";
 			skipButton.GetComponentInChildren<TextMeshProUGUI>().text = $"Skip ({PlayerStatsScaler.GetScaler().GetSkips()})";
 			var chanceOfAppearance = Random.value;
 			var upgradesToPick = Random.Range(3, 5);

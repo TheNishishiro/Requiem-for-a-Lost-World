@@ -136,7 +136,7 @@ namespace StarterAssets
 
 		private void RegenStamina()
 		{
-			if (Input.GetKey(SaveFile.Instance.GetKeybinding(KeyAction.Sprint)))
+			if (Input.GetKey(SaveFile.Instance.GetKeybinding(KeyAction.Sprint)) || GameManager.instance.IsPlayerSprinting)
 				return;
 
 			if (_currentStaminaCooldown > 0)
@@ -192,7 +192,7 @@ namespace StarterAssets
 			
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			var targetSpeed = PlayerStatsScaler.GetScaler().GetMovementSpeed();
-			if (Input.GetKey(SaveFile.Instance.GetKeybinding(KeyAction.Sprint)) && _currentStamina > 0)
+			if ((Input.GetKey(SaveFile.Instance.GetKeybinding(KeyAction.Sprint)) || GameManager.instance.IsPlayerSprinting) && _currentStamina > 0)
 			{
 				targetSpeed *= 2;
 				_currentStamina -= Time.deltaTime;

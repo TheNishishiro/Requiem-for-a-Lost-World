@@ -2,6 +2,7 @@
 using Data.Elements;
 using Objects.Abilities;
 using Objects.Items;
+using Objects.Players.Scripts;
 using Objects.Stage;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -26,7 +27,7 @@ namespace UI.Labels.InGame.LevelUpScreen
 
 		public UpgradeEntry()
 		{
-			Rarity = (Random.value + GameData.GetPlayerCharacterData().Stats.Luck) switch
+			Rarity = (Random.value + PlayerStatsScaler.GetScaler().GetLuck()) switch
 			{
 				<= 0.75f => 1,
 				<= 0.85f => 2,
@@ -38,7 +39,7 @@ namespace UI.Labels.InGame.LevelUpScreen
 
 		public void BoostRarity()
 		{
-			Rarity = (Random.value + GameData.GetPlayerCharacterData().Stats.Luck) switch
+			Rarity = (Random.value + PlayerStatsScaler.GetScaler().GetLuck()) switch
 			{
 				<= 0.3f => 1,
 				<= 0.5f => 2,
@@ -125,7 +126,22 @@ namespace UI.Labels.InGame.LevelUpScreen
 				_ => Color.gray
 			};
 			
-			return new Color(color.r, color.g, color.b,0.2f);
+			return new Color(color.r, color.g, color.b);
+		}
+
+		public string GetRarityName()
+		{
+			var name = Rarity switch
+			{
+				1 => "Common",
+				2 => "Uncommon",
+				3 => "Rare",
+				4 => "Legendary",
+				5 => "Mythical",
+				_ => "Unknown"
+			};
+			
+			return name;
 		}
 	}
 }

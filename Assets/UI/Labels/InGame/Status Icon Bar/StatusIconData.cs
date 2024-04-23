@@ -9,9 +9,9 @@ namespace UI.Labels.InGame.Status_Icon_Bar
     {
         public List<StatusIconPair> statusIcons;
         
-        public Sprite GetIcon(StatusEffectType statusEffect)
+        public StatusIconPair GetStatusData(StatusEffectType statusEffect)
         {
-            return statusIcons.Find(x => x.statusEffectType == statusEffect).icon;
+            return statusIcons.Find(x => x.statusEffectType == statusEffect);
         }
     }
 }

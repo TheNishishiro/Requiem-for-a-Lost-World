@@ -40,6 +40,7 @@ namespace Managers
 		[SerializeField] public PlayerStatsComponent playerStatsComponent;
 		[SerializeField] private SpecialBarManager specialBarManager;
 		[HideInInspector] public SaveFile saveFile;
+		[HideInInspector] public bool IsPlayerSprinting;
 
 		public void Awake()
 		{
@@ -79,6 +80,11 @@ namespace Managers
 		public void BackToMainMenu()
 		{
 			BackToMainMenu(GameResultData.IsWin);
+		}
+
+		public void ToggleSprint()
+		{
+			IsPlayerSprinting = !IsPlayerSprinting;
 		}
 		
 		public void BackToMainMenu(bool isWin)
