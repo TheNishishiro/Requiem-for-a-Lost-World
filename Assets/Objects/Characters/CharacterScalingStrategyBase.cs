@@ -323,5 +323,10 @@ namespace Objects.Characters
 		{
 			return PlayerStats?.Stamina ?? 0;
 		}
+
+		public float GetArmor()
+		{
+			return PlayerStats?.Armor ?? 0;
+		}
     }
 }

@@ -55,6 +55,8 @@ public class MainCharacterCard : MonoBehaviour
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryCrit;
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryDot;
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryArmor;
+    [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryRegen;
+    [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryLuck;
     [Space]
     [BoxGroup("Menus")] [SerializeField] private ShardScreenManager shardScreenManager;
     [BoxGroup("Menus")] [SerializeField] private GameSettingsScManareenger gameSettingsScreenManager;
@@ -113,9 +115,11 @@ public class MainCharacterCard : MonoBehaviour
         statEntryHealth.Set(stats.HealthMax.ToString(CultureInfo.InvariantCulture));
         statEntryArmor.Set($"{stats.Armor*100:N0}%");
         statEntryDamage.Set($"{stats.Damage} | {stats.DamagePercentageIncrease*100:N0}%");
-        statEntryCooldown.Set($"{stats.CooldownReduction*100:F}s | {stats.CooldownReductionPercentage*100:N0}%");
+        statEntryCooldown.Set($"{stats.CooldownReduction}s | {stats.CooldownReductionPercentage*100:N0}%");
         statEntryCrit.Set($"\u2684 {stats.CritRate*100:N0}% | \u2694 {stats.CritDamage*100:N0}%");
         statEntryDot.Set($"\u2694 {stats.DamageOverTime:N0} | \u23f2 {stats.DamageOverTimeDurationIncreasePercentage*100:N0}% | \u23f6 {stats.DamageOverTimeFrequencyReductionPercentage*100:N0}%");
+        statEntryLuck.Set($"{stats.Luck*100:N0}%");
+        statEntryRegen.Set($"{stats.HealthRegen} /s");
         
         if (!characterSaveData.IsUnlocked)
         {
@@ -145,6 +149,8 @@ public class MainCharacterCard : MonoBehaviour
             statEntryCooldown.Set("???");
             statEntryCrit.Set("???");
             statEntryDot.Set("???");
+            statEntryLuck.Set("???");
+            statEntryRegen.Set("???");
 
             return;
         }
