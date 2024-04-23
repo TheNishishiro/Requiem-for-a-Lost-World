@@ -26,6 +26,9 @@ namespace UI.In_Game.GUI.Scripts.Managers
         [BoxGroup("Player Stats Bars")] [SerializeField] private Slider sliderHealth;
         [BoxGroup("Player Stats Bars")] [SerializeField] private Slider sliderExperience;
         [Space]
+        [BoxGroup("Revive")] [SerializeField] private GameObject containerRevive;
+        [BoxGroup("Revive")] [SerializeField] private Slider sliderReviveTime;
+        [Space]
         [BoxGroup("Player Stats Color Theme")] [SerializeField] private DiamondGraph imageAvatarBorder;
         [BoxGroup("Player Stats Color Theme")] [SerializeField] private DiamondGraph imageSmallTriangle;
         [BoxGroup("Player Stats Color Theme")] [SerializeField] private DiamondGraph imageBigTriangle;
@@ -160,6 +163,16 @@ namespace UI.In_Game.GUI.Scripts.Managers
         public void UpdateStamina(float value, float maxValue)
         {
             UpdateSlider(sliderStamina, value, maxValue);
+        }
+
+        public void UpdateReviveTime(float value, float maxValue)
+        {
+            UpdateSlider(sliderReviveTime, value, maxValue);
+        }
+
+        public void SetReviveTimerVisible(bool isVisible)
+        {
+            containerRevive.SetActive(isVisible);
         }
 
         public void UpdateDashes(int dashCount)

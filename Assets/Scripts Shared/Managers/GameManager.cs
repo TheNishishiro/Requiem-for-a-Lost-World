@@ -19,7 +19,6 @@ using UnityTemplateProjects;
 namespace Managers
 {	public class GameManager : MonoBehaviour
 	{		
-		[SerializeField] public ExperienceBar reviveTimerBar;
 		public static GameManager instance;
 		[HideInInspector] public MultiplayerPlayer playerMpComponent;
 		private Transform _playerTransform;

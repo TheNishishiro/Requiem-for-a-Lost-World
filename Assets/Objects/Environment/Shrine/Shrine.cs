@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Managers;
+using UI.In_Game.GUI.Scripts.Managers;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -19,11 +20,11 @@ public class Shrine : NetworkBehaviour
         if (!isLoadingRevive) return;
 
         reviveTimer += Time.deltaTime;
-        GameManager.instance.reviveTimerBar.UpdateSlider(reviveTimer, maxReviveTimer);
+        GuiManager.instance.UpdateReviveTime(reviveTimer, maxReviveTimer);
         if (reviveTimer >= maxReviveTimer)
         {
             RpcManager.instance.RevivePlayerServerRpc(GetComponent<NetworkObject>(), respawnPoint.position, GameManager.instance.playerComponent.GetActivePlayerCard());
-            GameManager.instance.reviveTimerBar.gameObject.SetActive(false);
+            GuiManager.instance.SetReviveTimerVisible(false);
         }
     }
 
@@ -38,13 +39,13 @@ public class Shrine : NetworkBehaviour
     {
         if (!IsPlayer(other)) return;
         isLoadingRevive = true;
-        GameManager.instance.reviveTimerBar.gameObject.SetActive(true);
+        GuiManager.instance.SetReviveTimerVisible(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!IsPlayer(other)) return;
-        GameManager.instance.reviveTimerBar.gameObject.SetActive(false);
+        GuiManager.instance.SetReviveTimerVisible(false);
         isLoadingRevive = false;
         reviveTimer = 0;
     }
