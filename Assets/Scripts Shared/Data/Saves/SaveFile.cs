@@ -254,7 +254,7 @@ namespace DefaultNamespace.Data
 			else
 				AchievementSaveData[achievementEnum] = true;
 			
-			FindObjectOfType<AchievementGetDisplay>(true).Display(achievementEnum);
+			FindFirstObjectByType<AchievementGetDisplay>(FindObjectsInactive.Include).Display(achievementEnum);
 		}
 
 		public bool IsAchievementUnlocked(AchievementEnum achievementEnum)

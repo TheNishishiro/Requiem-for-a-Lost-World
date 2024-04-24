@@ -8,14 +8,14 @@ namespace UI.Shared
 	public class AchievementGetDisplay : MonoBehaviour
 	{
 		[SerializeField] private TextMeshProUGUI achievementText;
-		[SerializeField] private GameObject achievementGetPanel;
+		[SerializeField] private Animator animator;
 		private float _displayTime;
 		
 		public void Display(AchievementEnum achievement)
 		{
 			_displayTime = 5f;
-			achievementGetPanel.SetActive(true);
-			achievementText.text = achievement.GetDescription();
+			gameObject.SetActive(true);
+			achievementText.text = achievement.GetTitle();
 		}
 
 		private void Update()
@@ -26,12 +26,12 @@ namespace UI.Shared
 				return;
 			}
 			
-			Hide();
+			animator.SetTrigger("Hide");
 		}
-		
-		private void Hide()
+
+		public void Hide()
 		{
-			achievementGetPanel.SetActive(false);
+			gameObject.SetActive(false);
 		}
 	}
 }
