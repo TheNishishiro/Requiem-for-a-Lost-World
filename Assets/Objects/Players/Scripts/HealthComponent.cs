@@ -54,6 +54,7 @@ namespace Objects.Players.Scripts
 
 		public void Update()
 		{
+			UpdateHealthBar();
 			_healthRegenCurrentCooldown -= Time.deltaTime;
 			if (_healthRegenCurrentCooldown >= 0) return;
 			

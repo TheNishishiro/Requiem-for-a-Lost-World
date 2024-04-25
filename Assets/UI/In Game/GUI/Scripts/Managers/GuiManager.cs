@@ -25,6 +25,7 @@ namespace UI.In_Game.GUI.Scripts.Managers
         [Space]
         [BoxGroup("Player Stats Bars")] [SerializeField] private Slider sliderHealth;
         [BoxGroup("Player Stats Bars")] [SerializeField] private Slider sliderExperience;
+        [BoxGroup("Player Stats Bars")] [SerializeField] private Image imageSpecialColor;
         [Space]
         [BoxGroup("Revive")] [SerializeField] private GameObject containerRevive;
         [BoxGroup("Revive")] [SerializeField] private Slider sliderReviveTime;
@@ -81,6 +82,7 @@ namespace UI.In_Game.GUI.Scripts.Managers
             imageSkillIcon.sprite = characterData.AbilityIcon;
             textSkillName.text = characterData.AbilityName;
 
+            imageSpecialColor.color = characterData.ColorTheme;
             imageAvatarBorder.color = characterData.ColorTheme;
             imageSmallTriangle.color = characterData.ColorTheme;
             imageBigTriangle.color = new Color(characterData.ColorTheme.r, characterData.ColorTheme.g, characterData.ColorTheme.b, 200f/255f);

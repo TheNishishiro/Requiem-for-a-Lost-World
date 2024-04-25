@@ -16,7 +16,7 @@ namespace Managers
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
 		public static SpecialBarManager instance;
 
-		private void Awake()
+		private void Start()
 		{
 			if (instance == null)
 			{

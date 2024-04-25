@@ -1,30 +1,31 @@
-﻿using TMPro;
+﻿using Managers;
+using TMPro;
 using UI.Labels.InGame.LevelUpScreen;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UI.Extensions;
 
 namespace UI.Labels.InGame.UpgradeScreen
 {
 	public class UpgradePanel : MonoBehaviour
 	{
-		[SerializeField] private TextMeshProUGUI upgradeName;
-		[SerializeField] private TextMeshProUGUI upgradeDescription;
+		[SerializeField] private TextMeshProUGUI labelName;
 		[SerializeField] private Image upgradeIcon;
-		[SerializeField] private Image panelBackground;
+		[SerializeField] private ParticleSystem highlightParticles;
+		private UpgradeEntry _upgradeEntry;
 		
 		public void SetUpgradeData(UpgradeEntry upgradeEntry)
 		{
-			upgradeName.text = upgradeEntry.GetUnlockName();
-			upgradeDescription.text = upgradeEntry.GetUnlockDescription();
+			_upgradeEntry = upgradeEntry;
+			labelName.text = upgradeEntry.GetUnlockName();
 			upgradeIcon.sprite = upgradeEntry.GetUnlockIcon();
-			panelBackground.color = upgradeEntry.GetUpgradeColor();
+			var p = highlightParticles.main;
+			p.startColor = upgradeEntry.GetUpgradeColor();
 		}
 
-		public void Clean()
+		public void Open()
 		{
-			upgradeName.text = string.Empty;
-			upgradeDescription.text = string.Empty;
-			upgradeIcon.sprite = null;
+			ChestPanelManager.instance.ShowDescription(_upgradeEntry.GetUnlockDescription());
 		}
 	}
 }

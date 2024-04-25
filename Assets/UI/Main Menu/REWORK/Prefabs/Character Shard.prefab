@@ -322,6 +322,7 @@ GameObject:
   - component: {fileID: 1405044478692259834}
   - component: {fileID: 4122224927498875861}
   - component: {fileID: 3260961716785298400}
+  - component: {fileID: 8448072879324919601}
   m_Layer: 5
   m_Name: Character Shard
   m_TagString: Untagged
@@ -362,7 +363,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74513eba061647a4b81db968bda503bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rectTransform: {fileID: 1405044478692259834}
   imageShard: {fileID: 2386179751645843660}
   imageShardOverlay: {fileID: 2416066108911213937}
   shardRank: 0
@@ -376,10 +376,6 @@ MonoBehaviour:
     SkillUpgradeDescription: 
     PassiveUpgradeDescription: 
     EidolonQuote: 
-  maxTiltAngle: 6
-  idleMoveMagnitude: 30
-  idleMoveSpeed: 4
-  idleRotateSpeed: 1
 --- !u!225 &3260961716785298400
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -392,6 +388,23 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &8448072879324919601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5675716003884953110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f40b050417468c8007934c3f204601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rectTransform: {fileID: 1405044478692259834}
+  maxTiltAngle: 6
+  idleMoveMagnitude: 30
+  idleMoveSpeed: 4
+  idleRotateSpeed: 1
 --- !u!1 &7836906663711087919
 GameObject:
   m_ObjectHideFlags: 0
