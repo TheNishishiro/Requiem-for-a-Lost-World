@@ -6,6 +6,7 @@ using NaughtyAttributes;
 using Objects.Stage;
 using TMPro;
 using UI.Labels.InGame;
+using Unity.VectorGraphics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -70,6 +71,10 @@ namespace UI.In_Game.GUI.Scripts.Managers
         [Space]
         [BoxGroup("Item Container")] [SerializeField] private List<UiItemContainer> weapons;
         [BoxGroup("Item Container")] [SerializeField] private List<UiItemContainer> items;
+        [Space]
+        [BoxGroup("Icons Theme")] [SerializeField] private SVGImage svgPause;
+        [BoxGroup("Icons Theme")] [SerializeField] private SVGImage svgDash;
+        [BoxGroup("Icons Theme")] [SerializeField] private SVGImage svgSprint;
         
         public void Awake()
         {
@@ -105,6 +110,9 @@ namespace UI.In_Game.GUI.Scripts.Managers
             imageSkillNameBackground.color = characterData.ColorTheme;
             imageSkillNameBorder.color = characterData.ColorTheme;
             imageSkillNameCircle.color = characterData.ColorTheme;
+            svgPause.color = characterData.ColorTheme;
+            svgDash.color = characterData.ColorTheme;
+            svgSprint.color = characterData.ColorTheme;
             var p1 = particleSkillActiveRipples.main;
             p1.startColor = characterData.ColorTheme;
             var p2 = particleSkillActiveRipples.main;

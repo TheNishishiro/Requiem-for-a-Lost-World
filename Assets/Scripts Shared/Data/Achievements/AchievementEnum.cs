@@ -134,73 +134,73 @@ namespace DefaultNamespace.Data.Achievements
 		
 		#region Obtain characters
 		
-		[AchievementValue("Let the bloodshed begin", "Obtain Corina", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Corina_BoB, RequirementType.Shards, 1)]
+		[AchievementValue("Let the bloodshed begin", "Obtain Corina", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Corina_BoB, RequirementType.Shards, 0)]
 		ObtainCorina_E0 = 52,
-		[AchievementValue("The red moon rises once again", "Unlock final shard of Corina", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Corina_BoB, RequirementType.Shards, 6)]
+		[AchievementValue("The red moon rises once again", "Unlock final shard of Corina", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Corina_BoB, RequirementType.Shards, 5)]
 		ObtainCorina_E5 = 53,
-		[AchievementValue("Sleep tight little one", "Obtain Lucy", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Lucy_BoC, RequirementType.Shards, 1)]
+		[AchievementValue("Sleep tight little one", "Obtain Lucy", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Lucy_BoC, RequirementType.Shards, 0)]
 		ObtainLucy_E0 = 54,
-		[AchievementValue("Decay escapes no one", "Unlock final shard of Lucy", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Lucy_BoC, RequirementType.Shards, 6)]
+		[AchievementValue("Decay escapes no one", "Unlock final shard of Lucy", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Lucy_BoC, RequirementType.Shards, 5)]
 		ObtainLucy_E5 = 55,
-		[AchievementValue("Light of hope", "Obtain final shard of Amelia", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Amelia, RequirementType.Shards, 6)]
+		[AchievementValue("Light of hope", "Obtain final shard of Amelia", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Amelia, RequirementType.Shards, 5)]
 		ObtainAmelia_E5 = 56,
-		[AchievementValue("Soldiers! Onwards!", "Obtain David", AchievementSection.Collection, Rarity.Rare, CharactersEnum.David_BoF, RequirementType.Shards, 1)]
+		[AchievementValue("Soldiers! Onwards!", "Obtain David", AchievementSection.Collection, Rarity.Rare, CharactersEnum.David_BoF, RequirementType.Shards, 0)]
 		ObtainDavid_E0 = 57,
-		[AchievementValue("Fire shall cleanse the land", "Unlock final shard of David", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.David_BoF, RequirementType.Shards, 6)]
+		[AchievementValue("Fire shall cleanse the land", "Unlock final shard of David", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.David_BoF, RequirementType.Shards, 5)]
 		ObtainDavid_E5 = 58,
-		[AchievementValue("Glimpses of the past", "Obtain Oana", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Oana_BoI, RequirementType.Shards, 1)]
+		[AchievementValue("Glimpses of the past", "Obtain Oana", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Oana_BoI, RequirementType.Shards, 0)]
 		ObtainOana_E0 = 59,
-		[AchievementValue("Rest upon endless layers of ice", "Unlock final shard of Oana", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Oana_BoI, RequirementType.Shards, 6)]
+		[AchievementValue("Rest upon endless layers of ice", "Unlock final shard of Oana", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Oana_BoI, RequirementType.Shards, 5)]
 		ObtainOana_E5 = 60,
-		[AchievementValue("In need of a hero", "Obtain Alice", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Alice_BoL, RequirementType.Shards, 1)]
+		[AchievementValue("In need of a hero", "Obtain Alice", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Alice_BoL, RequirementType.Shards, 0)]
 		ObtainAlice_E0 = 61,
-		[AchievementValue("Thundering retribution", "Unlock final shard of Alice", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Alice_BoL, RequirementType.Shards, 6)]
+		[AchievementValue("Thundering retribution", "Unlock final shard of Alice", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Alice_BoL, RequirementType.Shards, 5)]
 		ObtainAlice_E5 = 62,
-		[AchievementValue("Tainted dreams", "Obtain Amelisana", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Amelisana_BoN, RequirementType.Shards, 1)]
+		[AchievementValue("Tainted dreams", "Obtain Amelisana", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Amelisana_BoN, RequirementType.Shards, 0)]
 		ObtainAmelisana_E0 = 63,
-		[AchievementValue("All shall suffer as I did", "Unlock final shard of Amelisana", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Amelisana_BoN, RequirementType.Shards, 6)]
+		[AchievementValue("All shall suffer as I did", "Unlock final shard of Amelisana", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Amelisana_BoN, RequirementType.Shards, 5)]
 		ObtainAmelisana_E5 = 64,
-		[AchievementValue("The end is nigh", "Obtain Chronastra", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Chornastra_BoR, RequirementType.Shards, 1)]
+		[AchievementValue("The end is nigh", "Obtain Chronastra", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Chornastra_BoR, RequirementType.Shards, 0)]
 		ObtainChornastra_E0 = 65,
-		[AchievementValue("Requiem for a Lost World", "Unlock final shard of Chronastra", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Chornastra_BoR, RequirementType.Shards, 6)]
+		[AchievementValue("Requiem for a Lost World", "Unlock final shard of Chronastra", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Chornastra_BoR, RequirementType.Shards, 5)]
 		ObtainChornastra_E5 = 66,
-		[AchievementValue("Time waits for nobody", "Obtain Truzi", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Truzi_BoT, RequirementType.Shards, 1)]
+		[AchievementValue("Time waits for nobody", "Obtain Truzi", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Truzi_BoT, RequirementType.Shards, 0)]
 		ObtainTruzi_E0 = 67,
-		[AchievementValue("Untapped potential", "Unlock final shard of Truzi", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Truzi_BoT, RequirementType.Shards, 6)]
+		[AchievementValue("Untapped potential", "Unlock final shard of Truzi", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Truzi_BoT, RequirementType.Shards, 5)]
 		ObtainTruzi_E5 = 68,
-		[AchievementValue("Void consumes all", "Obtain Arika", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Arika_BoV, RequirementType.Shards, 1)]
+		[AchievementValue("Void consumes all", "Obtain Arika", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Arika_BoV, RequirementType.Shards, 0)]
 		ObtainArika_E0 = 69,
-		[AchievementValue("Promise of the end", "Unlock final shard of Arika", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Arika_BoV, RequirementType.Shards, 6)]
+		[AchievementValue("Promise of the end", "Unlock final shard of Arika", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Arika_BoV, RequirementType.Shards, 5)]
 		ObtainArika_E5 = 70,
-		[AchievementValue("Wind of peace", "Obtain Natalie", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Natalie_BoW, RequirementType.Shards, 1)]
+		[AchievementValue("Wind of peace", "Obtain Natalie", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Natalie_BoW, RequirementType.Shards, 0)]
 		ObtainNatalie_E0 = 71,
-		[AchievementValue("The wind shall guide us", "Unlock final shard of Natalie", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Natalie_BoW, RequirementType.Shards, 6)]
+		[AchievementValue("The wind shall guide us", "Unlock final shard of Natalie", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Natalie_BoW, RequirementType.Shards, 5)]
 		ObtainNatalie_E5 = 72,
-		[AchievementValue("Present!", "Obtain Chitose", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Chitose, RequirementType.Shards, 1)]
+		[AchievementValue("Present!", "Obtain Chitose", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Chitose, RequirementType.Shards, 0)]
 		ObtainChitose_E0 = 73,
-		[AchievementValue("The future is now", "Unlock final shard of Chitose", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Chitose, RequirementType.Shards, 6)]
+		[AchievementValue("The future is now", "Unlock final shard of Chitose", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Chitose, RequirementType.Shards, 5)]
 		ObtainChitose_E5 = 74,
-		[AchievementValue("*Sigh* More work?", "Obtain Eliza", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Maid, RequirementType.Shards, 1)]
+		[AchievementValue("*Sigh* More work?", "Obtain Eliza", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Maid, RequirementType.Shards, 0)]
 		ObtainEliza_E0 = 75,
-		[AchievementValue("Vacation time!", "Unlock final shard of Eliza", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Maid, RequirementType.Shards, 6)]
+		[AchievementValue("Vacation time!", "Unlock final shard of Eliza", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Maid, RequirementType.Shards, 5)]
 		ObtainEliza_E5 = 76,
-		[AchievementValue("Kneel before me!", "Obtain Adam", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Adam_OBoV, RequirementType.Shards, 1)]
+		[AchievementValue("Kneel before me!", "Obtain Adam", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Adam_OBoV, RequirementType.Shards, 0)]
 		ObtainAdam_E0 = 77,
-		[AchievementValue("All shall know despair", "Unlock final shard of Adam", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Adam_OBoV, RequirementType.Shards, 6)]
+		[AchievementValue("All shall know despair", "Unlock final shard of Adam", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Adam_OBoV, RequirementType.Shards, 5)]
 		ObtainAdam_E5 = 78,
-		[AchievementValue("Looming darkness", "Obtain final shard of Nishi", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Nishi, RequirementType.Shards, 6)]
+		[AchievementValue("Looming darkness", "Obtain final shard of Nishi", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Nishi, RequirementType.Shards, 5)]
 		ObtainNishi_E5 = 79,
-		[AchievementValue("I alone will forge my destiny", "Obtain Amelia", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Amelia_BoD, RequirementType.Shards, 1)]
+		[AchievementValue("I alone will forge my destiny", "Obtain Amelia", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Amelia_BoD, RequirementType.Shards, 0)]
 		ObtainAmelia_BoD_E0 = 80,
-		[AchievementValue("Never falter, never surrender", "Unlock final shard of Amelia", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Amelia_BoD, RequirementType.Shards, 6)]
+		[AchievementValue("Never falter, never surrender", "Unlock final shard of Amelia", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Amelia_BoD, RequirementType.Shards, 5)]
 		ObtainAmelia_BoD_E5 = 81,
-		[AchievementValue("Arrow of novae", "Obtain Summer", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Summer, RequirementType.Shards, 1)]
+		[AchievementValue("Arrow of novae", "Obtain Summer", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Summer, RequirementType.Shards, 0)]
 		ObtainSummer_E0 = 82,
-		[AchievementValue("The cutest of them all", "Unlock final shard of Summer", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Summer, RequirementType.Shards, 6)]
+		[AchievementValue("The cutest of them all", "Unlock final shard of Summer", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Summer, RequirementType.Shards, 5)]
 		ObtainSummer_E5 = 83,
-		[AchievementValue("Time of Reckoning", "Obtain Nishi the Vanquisher of Faith", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Nishi_HoF, RequirementType.Shards, 1)]
+		[AchievementValue("Time of Reckoning", "Obtain Nishi the Vanquisher of Faith", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Nishi_HoF, RequirementType.Shards, 0)]
 		ObtainNishi_HoF_E0 = 92,
-		[AchievementValue("For you, I will reverse all creation", "Unlock final shard of the Vanquisher of Faith", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Nishi_HoF, RequirementType.Shards, 6)]
+		[AchievementValue("For you, I will reverse all creation", "Unlock final shard of the Vanquisher of Faith", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Nishi_HoF, RequirementType.Shards, 5)]
 		ObtainNishi_HoF_E5 = 93,
 		
 		#endregion

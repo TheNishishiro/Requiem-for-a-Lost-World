@@ -67,8 +67,6 @@ namespace Managers
 					playerStatsComponent.ApplyPermanent(permUpgrade, permUpgradesSaveData.Value);
 				}
 			}
-			
-			FindFirstObjectByType<DiscordManager>().SetInGame();
 		}
 
 		public static bool IsCharacterState(PlayerCharacterState characterState)

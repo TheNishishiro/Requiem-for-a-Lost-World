@@ -117,18 +117,12 @@ namespace UI.Main_Menu.REWORK.Scripts
         
         public void QuitApplication()
         {
-            var discordManager = FindAnyObjectByType<DiscordManager>();
-            if (discordManager != null)
-                discordManager.ClearActivity();
             Application.Quit();
         }
 
         public bool IsInFocus { get; set; }
         public void SetActive(bool isActive)
         {
-            if (isActive && DiscordManager.instance != null)
-                DiscordManager.instance?.SetMainMenu();
-            
             gameObject.SetActive(isActive);
         }
     }

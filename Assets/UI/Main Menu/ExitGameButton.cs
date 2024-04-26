@@ -7,9 +7,6 @@ namespace UI.Main_Menu
 	{
 		public void QuitApplication()
 		{
-			var discordManager = FindObjectOfType<DiscordManager>();
-			if (discordManager != null)
-				discordManager.ClearActivity();
 			Application.Quit();
 		}
 	}

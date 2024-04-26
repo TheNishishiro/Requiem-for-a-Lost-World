@@ -96,10 +96,13 @@ namespace UI.Main_Menu.REWORK.Scripts
                     fillAmount = saveFile.PickupsCollected / requirementValue;
                     break;
                 case RequirementType.Shards when _achievementData.Character != CharactersEnum.Unknown:
-                    fillAmount = saveFile.CharacterSaveData[_achievementData.Character].RankUpLevel + 1 / requirementValue;
+                    if (_achievementData.Requirement.Value == 0)
+                        fillAmount = saveFile.CharacterSaveData[_achievementData.Character].IsUnlocked ? 1 : 0;
+                    else
+                        fillAmount = saveFile.CharacterSaveData[_achievementData.Character].RankUpLevel / requirementValue;
                     break;
                 case RequirementType.Shards:
-                    fillAmount = saveFile.CharacterSaveData.Sum(x => x.Value.RankUpLevel) + 1 / requirementValue;
+                    fillAmount = saveFile.CharacterSaveData.Sum(x => x.Value.RankUpLevel) / requirementValue;
                     break;
                 case RequirementType.EnemyKillInSingleGame:
                     fillAmount = saveFile.CharacterSaveData.Max(x => x.Value.KillCount) / requirementValue;

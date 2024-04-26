@@ -25,11 +25,9 @@ namespace UI.Main_Menu.End_Screen
 		
 		private void Start()
 		{
-			var discordManager = FindObjectOfType<DiscordManager>();
-			_saveFile = FindObjectOfType<SaveFile>();
+			_saveFile = SaveFile.Instance;
 			if (GameResultData.IsGameEnd)
 			{
-				//titleScreen.gameObject.SetActive(false);
 				winLoseText.text = GameResultData.IsWin ? "Victory" : "Defeat";
 				panel.SetActive(true);
 				
@@ -48,12 +46,6 @@ namespace UI.Main_Menu.End_Screen
 				GameResultData.IsGameEnd = false;
 				saveManager.SaveGame();
 				achievementManager.ClearPerGameStats();
-				discordManager.SetEndMenu(GameResultData.IsWin);
-			}
-			else
-			{
-				//titleScreen.gameObject.SetActive(true);
-				discordManager.SetMainMenu();
 			}
             
 			GameResultData.Reset();

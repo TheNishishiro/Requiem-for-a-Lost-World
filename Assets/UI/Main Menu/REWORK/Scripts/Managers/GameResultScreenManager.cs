@@ -76,7 +76,6 @@ public class GameResultScreenManager : MonoBehaviour, IStackableWindow
         
         SaveManager.instance.SaveGame();
         AchievementManager.instance.ClearPerGameStats();
-        DiscordManager.instance.SetEndMenu(GameResultData.IsWin);
         GameResultData.Reset();
         
         StackableWindowManager.instance.OpenWindow(this);
