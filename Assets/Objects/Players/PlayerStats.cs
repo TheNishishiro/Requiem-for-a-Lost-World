@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
+using DefaultNamespace.Data;
 using DefaultNamespace.Data.Statuses;
 using DefaultNamespace.Extensions;
 using Managers;
@@ -204,15 +205,19 @@ namespace Objects.Players
         
             var playerStatsUpdater = new PlayerStrategyApplier();
             playerStatsUpdater.ApplyRankStrategy(characterId, GameData.GetPlayerCharacterRank(), this);
-            playerStatsUpdater.ApplySkillTreeStrategy(characterId, GameData.GetUnlockedSkillTreeNodeIds(), this);
+            //playerStatsUpdater.ApplySkillTreeStrategy(characterId, GameData.GetUnlockedSkillTreeNodeIds(), this);
+            foreach (var characterRune in SaveFile.Instance.GetCharacterSaveData(characterId).GetCharacterRunes())
+            {
+	            Add(characterRune.statType, characterRune.runeValue);
+            }
         }
 		
 		private void CopyPlayerStats(PlayerStats playerStats)
 		{
-		    var properties = typeof(PlayerStats).GetProperties();
+		    var properties = typeof(PlayerStats).GetFields();
 		    foreach (var property in properties)
 		    {
-		        if (property.CanWrite)
+		        if (property.IsPublic)
 		        {
 		            property.SetValue(this, property.GetValue(playerStats));
 		        }

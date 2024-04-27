@@ -9,8 +9,8 @@ using NaughtyAttributes;
 using Objects.Stage;
 using TMPro;
 using UI.Labels.InGame;
-using UI.Main_Menu.Character_List_Menu;
 using UI.Main_Menu.REWORK.Scripts;
+using UI.UI_Elements;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,7 +34,7 @@ public class GameResultScreenManager : MonoBehaviour, IStackableWindow
     [BoxGroup("Stat Entries")] [SerializeField] private GameStatsCard statGemEarned;
     [BoxGroup("Stat Entries")] [SerializeField] private GameStatsCard statKillCount;
     [Space]
-    [BoxGroup("Progress Bar")] [SerializeField] private CharacterExpBar barExperience;
+    [BoxGroup("Progress Bar")] [SerializeField] private SliderBarComponent barExperience;
     
     private bool _canClose;
 

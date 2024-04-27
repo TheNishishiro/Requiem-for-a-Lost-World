@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using DefaultNamespace.Data;
 using Objects.Characters;
-using UI.Main_Menu.Character_List_Menu;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using ShadowQuality = UnityEngine.ShadowQuality;

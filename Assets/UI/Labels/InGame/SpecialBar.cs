@@ -29,7 +29,7 @@ namespace UI.Labels.InGame
 		
 		public bool IsFull()
 		{
-			return Math.Abs(slider.value - slider.maxValue) < 0.01f;
+			return Math.Abs(slider.value - slider.maxValue) < 0.01f && slider.maxValue != 0;
 		}
 	}
 }

@@ -9,8 +9,8 @@ using Objects.Characters;
 using Objects.Players;
 using Objects.Stage;
 using TMPro;
-using UI.Main_Menu.Character_List_Menu;
 using UI.Main_Menu.REWORK.Scripts;
+using UI.UI_Elements;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,7 +31,7 @@ public class MainCharacterCard : MonoBehaviour
     [BoxGroup("Labels")] [SerializeField] private TextMeshProUGUI labelSkillLinesPassive;
     [BoxGroup("Labels")] [SerializeField] private TextMeshProUGUI labelSkillLinesStats;
     [Space]
-    [BoxGroup("Bars")] [SerializeField] private CharacterExpBar experienceSlider;
+    [BoxGroup("Bars")] [SerializeField] private SliderBarComponent experienceSlider;
     [Space]
     [BoxGroup("Images")] [SerializeField] private Image characterCardImage;
     [BoxGroup("Images")] [SerializeField] private Image experienceSliderImage;
@@ -53,12 +53,14 @@ public class MainCharacterCard : MonoBehaviour
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryDamage;
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryCooldown;
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryCrit;
+    [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statsEntryAttackCount;
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryDot;
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryArmor;
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryRegen;
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryLuck;
     [Space]
     [BoxGroup("Menus")] [SerializeField] private ShardScreenManager shardScreenManager;
+    [BoxGroup("Menus")] [SerializeField] private RuneScreenManager runeScreenManager;
     [BoxGroup("Menus")] [SerializeField] private GameSettingsScManareenger gameSettingsScreenManager;
     [BoxGroup("Menus")] [SerializeField] private ServerScreenManager serverScreenManager;
     [Space]
@@ -110,16 +112,6 @@ public class MainCharacterCard : MonoBehaviour
         labelSkillLinesStats.color = character.ColorTheme;
         arrowPreviousCharacter.color = character.ColorTheme;
         arrowNextCharacter.color = character.ColorTheme;
-
-        var stats = new PlayerStats(character.Stats);
-        statEntryHealth.Set(stats.HealthMax.ToString(CultureInfo.InvariantCulture));
-        statEntryArmor.Set($"{stats.Armor*100:N0}%");
-        statEntryDamage.Set($"{stats.Damage} | {stats.DamagePercentageIncrease*100:N0}%");
-        statEntryCooldown.Set($"{stats.CooldownReduction}s | {stats.CooldownReductionPercentage*100:N0}%");
-        statEntryCrit.Set($"\u2684 {stats.CritRate*100:N0}% | \u2694 {stats.CritDamage*100:N0}%");
-        statEntryDot.Set($"\u2694 {stats.DamageOverTime:N0} | \u23f2 {stats.DamageOverTimeDurationIncreasePercentage*100:N0}% | \u23f6 {stats.DamageOverTimeFrequencyReductionPercentage*100:N0}%");
-        statEntryLuck.Set($"{stats.Luck*100:N0}%");
-        statEntryRegen.Set($"{stats.HealthRegen} /s");
         
         if (!characterSaveData.IsUnlocked)
         {
@@ -156,6 +148,18 @@ public class MainCharacterCard : MonoBehaviour
         }
 
         SaveManager.instance.GetSaveFile().SelectedCharacterId = _currentCharacterData.Id;
+
+        var stats = new PlayerStats(character.Stats);
+        statEntryHealth.Set(stats.HealthMax.ToString(CultureInfo.InvariantCulture));
+        statEntryArmor.Set($"{stats.Armor*100:N0}%");
+        statEntryDamage.Set($"{stats.Damage} | {stats.DamagePercentageIncrease*100:N0}%");
+        statEntryCooldown.Set($"{stats.CooldownReduction}s | {stats.CooldownReductionPercentage*100:N0}%");
+        statEntryCrit.Set($"\u2684 {stats.CritRate*100:N0}% | \u2694 {stats.CritDamage*100:N0}%");
+        statEntryDot.Set($"\u2694 {stats.DamageOverTime:N0} | \u23f2 {stats.DamageOverTimeDurationIncreasePercentage*100:N0}% | \u23f6 {stats.DamageOverTimeFrequencyReductionPercentage*100:N0}%");
+        statEntryLuck.Set($"{stats.Luck*100:N0}%");
+        statEntryRegen.Set($"{stats.HealthRegen} /s");
+        statsEntryAttackCount.Set($"{stats.AttackCount}");
+        
         audioManager.PlaySound(character.nameAnnouncer, 2.5f);
     }
 
@@ -184,6 +188,13 @@ public class MainCharacterCard : MonoBehaviour
         if (!_currentCharacterSaveData.IsUnlocked) return;
         
         shardScreenManager.Open(_currentCharacterData, _currentCharacterSaveData.RankUpLevel);
+    }
+
+    public void OpenRuneMenu()
+    {
+        if (!_currentCharacterSaveData.IsUnlocked) return;
+        
+        runeScreenManager.Open(SaveFile.Instance.GetCharacterSaveData(_currentCharacterData.Id));
     }
 
     public void OpenGameSettingsMenu()

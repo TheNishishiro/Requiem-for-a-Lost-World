@@ -44,8 +44,7 @@ namespace Objects.Characters
 		public PlayerStats Stats;
 		public List<SkillNode> skillNodes;
 		public List<EidolonData> Eidolons;
-		public List<CharacterLoreEntry> loreEntries;
-		private string BonusSeparator => "\n\n" + new string('\u2500', 9) + "» Bonus stats «" + new string('\u2500', 9);
+		private string BonusSeparator => "\n\n" + new string('\u2500', 5) + "» Bonus stats «" + new string('\u2500', 5);
 
 		public IEnumerable<StatsDisplayData> GetStatsList()
 		{

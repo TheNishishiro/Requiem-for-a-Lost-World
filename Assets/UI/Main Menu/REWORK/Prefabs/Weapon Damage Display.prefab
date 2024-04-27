@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba43e7fe48754755858519e13afb3eb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barDamage: {fileID: 38766048887010561}
+  barDamage: {fileID: 2192926125619883756}
   imageWeaponIcon: {fileID: 4415168687161914675}
   textWeaponName: {fileID: 3503037775242208240}
   textWeaponDamage: {fileID: 9025589721928015}
@@ -701,8 +701,8 @@ GameObject:
   - component: {fileID: 6333350326327872303}
   - component: {fileID: 8949071710508638493}
   - component: {fileID: 391315445147595043}
-  - component: {fileID: 38766048887010561}
   - component: {fileID: 4355114634742510290}
+  - component: {fileID: 2192926125619883756}
   m_Layer: 5
   m_Name: Damage Bar
   m_TagString: Untagged
@@ -819,20 +819,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &38766048887010561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8312161652432840947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6fbaa5327a94a309eba057c315eb520, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 391315445147595043}
-  fillImage: {fileID: 538699102916044495}
 --- !u!114 &4355114634742510290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -848,3 +834,17 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: -10, y: -5}
   m_UseGraphicAlpha: 1
+--- !u!114 &2192926125619883756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8312161652432840947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0993dbda7a734008895a5c63499d9767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 391315445147595043}
+  fillImage: {fileID: 538699102916044495}

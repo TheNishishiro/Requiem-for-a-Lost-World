@@ -3,7 +3,6 @@ using Interfaces;
 using Managers;
 using Objects.Players.Scripts;
 using Objects.Stage;
-using UI.Main_Menu.Character_List_Menu;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +22,7 @@ namespace UI.Labels.InGame.PauseMenu
 		[SerializeField] private CharacterStatsEntry statEntryRegen;
 		[SerializeField] private CharacterStatsEntry statEntryArmor;
 		[SerializeField] private CharacterStatsEntry statEntryLuck;
+		[SerializeField] private CharacterStatsEntry statsEntryAttackCount;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
 
 		private void Update()
@@ -71,6 +71,7 @@ namespace UI.Labels.InGame.PauseMenu
 			statEntryDot.Set($"\u2694 {statsScaler.GetDamageOverTime():N0} | \u23f2 {(1 -statsScaler.GetDamageOverTimeDurationIncreasePercentage())*100:N0}% | \u23f6 {(1 - statsScaler.GetDamageOverTimeFrequencyReductionPercentage())*100:N0}%");
 			statEntryLuck.Set($"{statsScaler.GetLuck()*100:N0}%");
 			statEntryRegen.Set($"{statsScaler.GetHealthRegeneration()} /s");
+			statsEntryAttackCount.Set($"{statsScaler.GetAttackCount()}");
 			
 			panel.SetActive(true);
 		}

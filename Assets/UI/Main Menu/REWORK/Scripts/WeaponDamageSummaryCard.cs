@@ -1,6 +1,6 @@
 ﻿using DefaultNamespace;
 using TMPro;
-using UI.Main_Menu.Character_List_Menu;
+using UI.UI_Elements;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +8,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 {
     public class WeaponDamageSummaryCard : MonoBehaviour
     {
-        [SerializeField] private CharacterExpBar barDamage;
+        [SerializeField] private SliderBarComponent barDamage;
         [SerializeField] private Image imageWeaponIcon;
         [SerializeField] private TextMeshProUGUI textWeaponName;
         [SerializeField] private TextMeshProUGUI textWeaponDamage;

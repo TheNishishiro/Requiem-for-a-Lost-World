@@ -212,7 +212,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         private static void BuildBanner(SaveFile saveFile)
         {
-            var characters = CharacterListManager.instance.GetCharacters().Select(x => x.Id).ToList();
+            var characters = CharacterListManager.instance.GetCharacters().Where(x => x.IsPullable).Select(x => x.Id).ToList();
             var weightedCharacters = new List<CharactersEnum>();
 
             foreach (var character in characters)

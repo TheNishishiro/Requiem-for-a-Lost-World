@@ -32,6 +32,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<int, List<int>> ReadStoryEntries { get; set; }
 		public List<ServerData> Servers;
 		public List<CharactersEnum> BannerHistory;
+		public List<RuneSaveData> Runes;
 		public ConfigurationFile ConfigurationFile;
 		public CharactersEnum? SelectedCharacterId;
 		public CharactersEnum CurrentBannerCharacterId;
@@ -83,6 +84,7 @@ namespace DefaultNamespace.Data
 			BannerHistory ??= new List<CharactersEnum>();
 			AchievementSaveData ??= new Dictionary<AchievementEnum, bool>();
 			ReadStoryEntries ??= new Dictionary<int, List<int>>();
+			Runes ??= new List<RuneSaveData>();
 			ConfigurationFile ??= new ConfigurationFile().Default();
 			Keybindings ??= DefaultKeyBinds();
 			ConfigurationFile.Update();
@@ -140,6 +142,7 @@ namespace DefaultNamespace.Data
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
 			Servers = saveData.Servers ?? new List<ServerData>();
+			Runes = saveData.Runes ?? new List<RuneSaveData>();
 			AchievementSaveData = saveData.AchievementSaveData ?? new Dictionary<AchievementEnum, bool>();
 			Keybindings = saveData.Keybindings ?? DefaultKeyBinds();
 			ConfigurationFile = (saveData.ConfigurationFile ?? new ConfigurationFile().Default()).Update();
@@ -288,6 +291,16 @@ namespace DefaultNamespace.Data
 			Gems += 200;
 			Save();
 		}
+
+		public void DiscardRune(RuneSaveData runeSaveData)
+		{
+			Runes.Remove(runeSaveData);
+		}
+
+		public void AddRune(RuneSaveData rune)
+		{
+			Runes.Add(rune);
+		}
 	}
 	
 	[Serializable]
@@ -298,6 +311,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<AchievementEnum, bool> AchievementSaveData;
 		public Dictionary<KeyAction, KeyCode> Keybindings;
 		public Dictionary<int, List<int>> ReadStoryEntries;
+		public List<RuneSaveData> Runes;
 		public List<ServerData> Servers;
 		public List<CharactersEnum> BannerHistory;
 		public ConfigurationFile ConfigurationFile;
@@ -331,6 +345,7 @@ namespace DefaultNamespace.Data
 		{
 			CharacterSaveData = saveFile.CharacterSaveData;
 			PermUpgradeSaveData = saveFile.PermUpgradeSaveData;
+			Runes = saveFile.Runes;
 			Servers = saveFile.Servers;
 			BannerHistory = saveFile.BannerHistory;
 			AchievementSaveData = saveFile.AchievementSaveData;

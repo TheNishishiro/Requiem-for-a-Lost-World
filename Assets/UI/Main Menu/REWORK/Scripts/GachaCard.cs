@@ -19,6 +19,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [SerializeField] private TextMeshProUGUI textDescription;
         [SerializeField] private Sprite spriteGoldStack;
         [SerializeField] private Sprite spriteGemPouch;
+        [SerializeField] private Sprite spriteRune;
         
         public void SetDisplay(Color displayColor, CharactersEnum characterId)
         {
@@ -59,14 +60,17 @@ namespace UI.Main_Menu.REWORK.Scripts
         {
             switch (Random.value)
             {
-                case <= 0.35f:
-                    SetGoldReward("Coins", 500);
+                case <= 0.2f:
+                    SetRandomCharacterFragmentReward();
                     break;
-                case <= 0.70f:
+                case <= 0.45f:
                     SetGemReward("Pouch", 150);
                     break;
+                case <= 0.75f:
+                    SetGoldReward("Coins", 500);
+                    break;
                 default:
-                    SetRandomCharacterFragmentReward();
+                    SetRuneReward("Rune");
                     break;
             }
         }
@@ -77,10 +81,18 @@ namespace UI.Main_Menu.REWORK.Scripts
             var characterSaveData = SaveFile.Instance.CharacterSaveData[character.Id];
             if (characterSaveData.GetRankEnum() >= CharacterRank.E5)
             {
-                if (Random.value <= 0.5f)
-                    SetGoldReward("Coins", 500);
-                else
-                    SetGemReward("Pouch", 150);
+                switch (Random.value)
+                {
+                    case <= 0.33f:
+                        SetGemReward("Pouch", 150);
+                        break;
+                    case <= 0.66f:
+                        SetGoldReward("Coins", 500);
+                        break;
+                    default:
+                        SetRuneReward("Rune");
+                        break;
+                }
             }
             else
             {
@@ -113,6 +125,16 @@ namespace UI.Main_Menu.REWORK.Scripts
             textRewardTitle.text = title;
             textDescription.text = $"Gem +{gemAmount}";
             AddGems(gemAmount);
+        }
+        
+        private void SetRuneReward(string title)
+        {
+            var rune = RuneListManager.instance.GetRandomRune().ResolveRune();
+            
+            imageCharacter.sprite = spriteRune;
+            textRewardTitle.text = title;
+            textDescription.text = $"{rune.statType} +{rune.runeValue}" ;
+            SaveFile.Instance.AddRune(rune);
         }
         
         private void AddGems(ulong amount)

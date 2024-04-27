@@ -22,6 +22,7 @@ namespace DefaultNamespace.Data
 		public ulong TotalPlayTime;
 		public ulong LongestGameTime;
 		public List<int> unlockedSkillPoints;
+		public List<RuneSaveData> characterRunes;
 		public Dictionary<StageEnum, DifficultyEnum> FinishedDifficulty = new ();
 		public int ExperienceNeeded => (int)(Level * 75 * 1.5f);
 		public DateTime LastBannerDate;
@@ -35,6 +36,24 @@ namespace DefaultNamespace.Data
 		{
 			unlockedSkillPoints ??= new List<int>();
 			return unlockedSkillPoints;
+		}
+
+		public void EquipRune(RuneSaveData runeSaveData)
+		{
+			characterRunes ??= new List<RuneSaveData>();
+			characterRunes.Add(runeSaveData);
+		}
+
+		public void UnEquipRune(RuneSaveData runeSaveData)
+		{
+			characterRunes ??= new List<RuneSaveData>();
+			characterRunes.Remove(runeSaveData);
+		}
+
+		public List<RuneSaveData> GetCharacterRunes()
+		{
+			characterRunes ??= new List<RuneSaveData>();
+			return characterRunes;
 		}
 
 		public DifficultyEnum GetFinishedDifficulty(StageEnum stage)
