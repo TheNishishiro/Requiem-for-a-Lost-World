@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using DefaultNamespace.Data.Statuses;
 using DefaultNamespace.Extensions;
@@ -205,59 +206,19 @@ namespace Objects.Players
             playerStatsUpdater.ApplyRankStrategy(characterId, GameData.GetPlayerCharacterRank(), this);
             playerStatsUpdater.ApplySkillTreeStrategy(characterId, GameData.GetUnlockedSkillTreeNodeIds(), this);
         }
-        
-        private void CopyPlayerStats(PlayerStats playerStats)
-        {
-            Health = HealthMax = playerStats.HealthMax;
-            MagnetSize = playerStats.MagnetSize;
-            CooldownReduction = playerStats.CooldownReduction;
-            CooldownReductionPercentage = playerStats.CooldownReductionPercentage;
-            AttackCount = playerStats.AttackCount;
-            Damage = playerStats.Damage;
-            Scale = playerStats.Scale;
-            Speed = playerStats.Speed;
-            TimeToLive = playerStats.TimeToLive;
-            DetectionRange = playerStats.DetectionRange;
-            DamagePercentageIncrease = playerStats.DamagePercentageIncrease;
-            ExperienceIncreasePercentage = playerStats.ExperienceIncreasePercentage;
-            MovementSpeed = playerStats.MovementSpeed;
-            SkillCooldownReductionPercentage = playerStats.SkillCooldownReductionPercentage;
-            HealthRegen = playerStats.HealthRegen;
-            CritRate = playerStats.CritRate;
-            CritDamage = playerStats.CritDamage;
-            PassThroughCount = playerStats.PassThroughCount;
-            Armor = playerStats.Armor;
-            EnemySpeedIncreasePercentage = playerStats.EnemySpeedIncreasePercentage;
-            EnemySpawnRateIncreasePercentage = playerStats.EnemySpawnRateIncreasePercentage;
-            EnemyHealthIncreasePercentage = playerStats.EnemyHealthIncreasePercentage;
-            EnemyMaxCountIncreasePercentage = playerStats.EnemyMaxCountIncreasePercentage;
-            ItemRewardIncrease = playerStats.ItemRewardIncrease;
-            Revives = playerStats.Revives;
-            ProjectileLifeTimeIncreasePercentage = playerStats.ProjectileLifeTimeIncreasePercentage;
-            DodgeChance = playerStats.DodgeChance;
-            DamageTakenIncreasePercentage = playerStats.DamageTakenIncreasePercentage;
-            HealingIncreasePercentage = playerStats.HealingIncreasePercentage;
-            Luck = playerStats.Luck;
-            DamageOverTime = playerStats.DamageOverTime;
-            Rerolls = playerStats.Rerolls;
-            Skips = playerStats.Skips;
-            SpecialIncrease = playerStats.SpecialIncrease;
-            SpecialMax = playerStats.SpecialMax;
-            DamageOverTimeFrequencyReductionPercentage = playerStats.DamageOverTimeFrequencyReductionPercentage;
-            DamageOverTimeDurationIncreasePercentage = playerStats.DamageOverTimeDurationIncreasePercentage;
-            LifeSteal = playerStats.LifeSteal;
-            FireDamageIncrease = playerStats.FireDamageIncrease;
-            LightningDamageIncrease =  playerStats.LightningDamageIncrease;
-            IceDamageIncrease = playerStats.IceDamageIncrease;
-            PhysicalDamageIncrease =  playerStats.PhysicalDamageIncrease;
-            WindDamageIncrease =  playerStats.WindDamageIncrease;
-            LightDamageIncrease =  playerStats.LightDamageIncrease;
-            CosmicDamageIncrease = playerStats.CosmicDamageIncrease;
-            EarthDamageIncrease =  playerStats.EarthDamageIncrease;
-            DashCount = playerStats.DashCount;
-            Stamina = playerStats.Stamina;
-        }
-
+		
+		private void CopyPlayerStats(PlayerStats playerStats)
+		{
+		    var properties = typeof(PlayerStats).GetProperties();
+		    foreach (var property in properties)
+		    {
+		        if (property.CanWrite)
+		        {
+		            property.SetValue(this, property.GetValue(playerStats));
+		        }
+		    }
+		}
+		
 		public IEnumerable<StatsDisplayData> GetStatsList()
 		{
 			var stats = new List<StatsDisplayData>
