@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using Objects.Players.PermUpgrades;
@@ -25,11 +26,16 @@ namespace Objects.Runes
             return new RuneSaveData { runeName = runeName, statType = statType, runeValue = runeValue, rarity = rarity};
         }
 
-        private (Rarity, float) GetRandomRuneValue()
+        public float GetScaledValue(RuneSaveData runeSaveData)
+        {
+            return GetScaledValue(runeSaveData.rarity, runeSaveData.runeValue);
+        }
+
+        public float GetScaledValue(Rarity rarity, float runeValue)
         {
             float minValue;
             float maxValue;
-            var rarity = (Rarity)Random.Range((int)Rarity.None, (int)Rarity.Mythic + 1);
+            
             switch (rarity)
             {
                 case Rarity.None:
@@ -56,11 +62,32 @@ namespace Objects.Runes
                     throw new ArgumentOutOfRangeException();
             }
 
-            var value = Random.Range(minValue, maxValue);
-            // limit to one decimal place
-            value = Mathf.Round(value * 10f) / 10f;
-            
-            return (rarity, value);
+            if (minValue > maxValue)
+            {
+                (maxValue, minValue) = (minValue, maxValue);
+            }
+
+            if (statType.IsPercent())
+                return Mathf.Round(Mathf.Lerp(minValue, maxValue, runeValue) * 1000f) / 1000f;
+            if (statType.IsInteger())
+                return (int)Mathf.Round(Mathf.Lerp(minValue, maxValue, runeValue));
+            return Mathf.Round(Mathf.Lerp(minValue, maxValue, runeValue) * 100f) / 100f;
+        }
+
+        private (Rarity, float) GetRandomRuneValue()
+        {
+            var rarityValue = Random.value;
+            var rarity = rarityValue switch
+            {
+                <= 0.4f => Rarity.None,
+                <= 0.7f => Rarity.Common,
+                <= 0.85f => Rarity.Rare,
+                <= 0.95f => Rarity.Legendary,
+                _ => Rarity.Mythic
+            };
+
+            var rangeValue = Random.Range(0f, 1f);
+            return (rarity, rangeValue);
         }
     }
 }

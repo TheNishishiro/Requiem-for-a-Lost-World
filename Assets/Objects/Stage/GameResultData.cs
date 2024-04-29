@@ -83,12 +83,12 @@ namespace Objects.Stage
 			var goldIncreaseByTime = timeSpent * 0.03f * currentDifficulty.RewardModifier;
 			var gemIncreaseByTime = timeSpent * 0.05f * currentDifficulty.RewardModifier;
 							
-			Gold += (int)(Gold * (1 + goldIncreaseByTime) + MonstersKilled / 10.0f * currentDifficulty.RewardModifier);
+			Gold += (int)((Gold * (1 + goldIncreaseByTime) + MonstersKilled / 35.0f) * currentDifficulty.RewardModifier);
 			Gems += (int)(MonstersKilled / 100.0f * currentDifficulty.RewardModifier * (1 + gemIncreaseByTime));
 			if (IsWin)
 			{
 				Gold += 2000;
-				Gems += 750;
+				Gems += 600;
 			}
 
 			IsGameEnd = false;

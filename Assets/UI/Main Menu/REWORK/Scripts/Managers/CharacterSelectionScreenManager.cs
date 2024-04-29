@@ -45,6 +45,9 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
 
         if (Input.GetKeyDown(KeyCode.S))
             mainCharacterCard.OpenShardsMenu();
+
+        if (Input.GetKeyDown(KeyCode.R))
+            mainCharacterCard.OpenRuneMenu();
         
         if (Time.time >= _keyNextActionTime) 
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using DefaultNamespace.Data.Achievements;
 using Objects.Enemies;
 using Unity.Netcode;
 using UnityEngine;
@@ -247,6 +248,19 @@ namespace DefaultNamespace
 			}
 
 			return availablePositions;
+		}
+
+		public static Color RarityToColor(Rarity rarity)
+		{
+			return rarity switch
+			{
+				Rarity.None => Color.white,
+				Rarity.Common => Color.green,
+				Rarity.Rare => Color.cyan,
+				Rarity.Legendary => Color.yellow,
+				Rarity.Mythic => Color.red,
+				_ => throw new ArgumentOutOfRangeException()
+			};
 		}
 	}
 }

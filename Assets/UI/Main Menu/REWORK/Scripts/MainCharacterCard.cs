@@ -11,6 +11,7 @@ using Objects.Stage;
 using TMPro;
 using UI.Main_Menu.REWORK.Scripts;
 using UI.UI_Elements;
+using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,6 +46,7 @@ public class MainCharacterCard : MonoBehaviour
     [BoxGroup("Images")] [SerializeField] private Image imageWeaponBorder;
     [BoxGroup("Images")] [SerializeField] private Image imageLock;
     [BoxGroup("Images")] [SerializeField] private Image skillLines;
+    [BoxGroup("Images")] [SerializeField] private SVGImage imageRuneIcon;
     [Space]
     [BoxGroup("Materials")] [SerializeField] private Material weaponIconHighlightMaterial;
     [BoxGroup("Materials")] [SerializeField] private Material grayScaleMaterial;
@@ -112,6 +114,7 @@ public class MainCharacterCard : MonoBehaviour
         labelSkillLinesStats.color = character.ColorTheme;
         arrowPreviousCharacter.color = character.ColorTheme;
         arrowNextCharacter.color = character.ColorTheme;
+        imageRuneIcon.color = character.ColorTheme;
         
         if (!characterSaveData.IsUnlocked)
         {
@@ -134,6 +137,7 @@ public class MainCharacterCard : MonoBehaviour
             labelSkillLinesAbility.color = Color.gray;
             labelSkillLinesPassive.color = Color.gray;
             labelSkillLinesStats.color = Color.gray;
+            imageRuneIcon.color = Color.gray;
             characterCardImage.material = grayScaleMaterial;
             statEntryHealth.Set("???");
             statEntryArmor.Set("???");
@@ -194,7 +198,7 @@ public class MainCharacterCard : MonoBehaviour
     {
         if (!_currentCharacterSaveData.IsUnlocked) return;
         
-        runeScreenManager.Open(SaveFile.Instance.GetCharacterSaveData(_currentCharacterData.Id));
+        runeScreenManager.Open(_currentCharacterData, SaveFile.Instance.GetCharacterSaveData(_currentCharacterData.Id));
     }
 
     public void OpenGameSettingsMenu()

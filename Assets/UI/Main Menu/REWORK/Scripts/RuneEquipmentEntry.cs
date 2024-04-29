@@ -1,6 +1,7 @@
 ﻿using System;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
+using Managers;
 using Objects.Players.PermUpgrades;
 using TMPro;
 using Unity.VectorGraphics;
@@ -11,6 +12,7 @@ namespace UI.Main_Menu.REWORK.Scripts
     public class RuneEquipmentEntry : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI labelName;
+        [SerializeField] private TextMeshProUGUI labelDescription;
         [SerializeField] private Material materialCommon;
         [SerializeField] private Material materialUncommon;
         [SerializeField] private Material materialRare;
@@ -22,9 +24,11 @@ namespace UI.Main_Menu.REWORK.Scripts
         public void Setup(RuneSaveData runeSaveData)
         {
             _runeSaveData = runeSaveData;
-            var value = runeSaveData.statType.IsPercent() ? $"{runeSaveData.runeValue*100:N0}%" : $"{runeSaveData.runeValue}";
-            labelName.text = $"{runeSaveData.runeName} +{value}";
-            labelName.material = runeSaveData.rarity switch
+            var runeValue = RuneListManager.instance.GetScaledValue(runeSaveData);
+            var value = runeSaveData.statType.IsPercent() ? $"{runeValue*100:0.##}%" : $"{runeValue:0.##}";
+            labelName.text = runeSaveData.runeName;
+            labelDescription.text = $"{runeSaveData.statType.GetLongName()} +{value}";
+            labelName.fontSharedMaterial = runeSaveData.rarity switch
             {
                 Rarity.None => materialCommon,
                 Rarity.Common => materialUncommon,
@@ -33,6 +37,12 @@ namespace UI.Main_Menu.REWORK.Scripts
                 Rarity.Mythic => materialMythic,
                 _ => throw new ArgumentOutOfRangeException()
             };
+            svgIcon.sprite = RuneListManager.instance.GetIcon(runeSaveData.statType);
+        }
+
+        public bool IsOfCategory(StatCategory statCategory)
+        {
+            return _runeSaveData.statType.GetStatType() == statCategory;
         }
 
         public void Discard()

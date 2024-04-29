@@ -82,7 +82,6 @@ namespace Managers
         [Rpc(SendTo.Everyone)]
         public void LoseRpc()
         {
-            Debug.Log("Displaying lose screen");
             GameResultData.IsWin = false;
             FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(false, true);
         }

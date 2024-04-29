@@ -6,6 +6,8 @@ using NUnit.Framework;
 using Objects.Characters;
 using Objects.Players;
 using Objects.Players.PermUpgrades;
+using Objects.Runes;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Weapons;
@@ -120,6 +122,16 @@ namespace Objects.Stage
 		public static List<SkillNode> GetCharacterSkillNodes()
 		{
 			return CharacterListManager.instance?.GetActiveCharacter()?.skillNodes ?? new List<SkillNode>();
+		}
+
+		public static List<RuneData> GetRunesNodes()
+		{
+			return RuneListManager.instance?.GetRunes() ?? new List<RuneData>();
+		}
+
+		public static float ScaleRune(RuneSaveData runeSaveData)
+		{
+			return RuneListManager.instance?.GetScaledValue(runeSaveData) ?? 0;
 		}
 
 		public static DifficultyData GetCurrentDifficulty()

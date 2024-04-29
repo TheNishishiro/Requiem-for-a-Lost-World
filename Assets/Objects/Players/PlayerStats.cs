@@ -208,7 +208,7 @@ namespace Objects.Players
             //playerStatsUpdater.ApplySkillTreeStrategy(characterId, GameData.GetUnlockedSkillTreeNodeIds(), this);
             foreach (var characterRune in SaveFile.Instance.GetCharacterSaveData(characterId).GetCharacterRunes())
             {
-	            Add(characterRune.statType, characterRune.runeValue);
+	            Add(characterRune.statType, GameData.ScaleRune(characterRune));
             }
         }
 		
@@ -484,6 +484,9 @@ namespace Objects.Players
 					break;
 				case StatEnum.EarthDamageIncrease:
 					EarthDamageIncrease += value;
+					break;
+				case StatEnum.StaminaIncrease:
+					Stamina += value;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(stat), stat, null);

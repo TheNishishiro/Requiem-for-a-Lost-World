@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using Interfaces;
@@ -65,15 +66,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         public void Refresh()
         {
-            var color = _achievementData.Rarity switch
-            {
-                Rarity.Common => Color.green,
-                Rarity.Rare => Color.cyan,
-                Rarity.Legendary => Color.yellow,
-                Rarity.Mythic => Color.red,
-                _ => throw new ArgumentOutOfRangeException()
-            };
-
+            var color = Utilities.RarityToColor(_achievementData.Rarity);
             SaveFile.Instance.AchievementSaveData.TryGetValue(_achievementId, out _isUnlocked);
             progressBar.color = color;
             if (!_isUnlocked)

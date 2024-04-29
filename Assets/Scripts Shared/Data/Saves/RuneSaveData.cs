@@ -11,15 +11,5 @@ namespace DefaultNamespace.Data
         public Rarity rarity;
         public string runeName;
         public float runeValue;
-
-        public string GetName()
-        {
-            return $"{runeName} +{runeValue}";
-        }
-
-        public string GetShortStats()
-        {
-            return $"{runeValue}";
-        }
     }
 }

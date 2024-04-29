@@ -89,6 +89,7 @@ namespace Managers
 				upgradePanels[i].SetUpgradeData(upgradeEntries[i]);
 				upgradeEntries[i].LevelUp(weaponManager);
 			}
+			labelDescription.text = upgradeEntries[0].GetUnlockDescription();
 
 			var p = highlightParticles.main;
 			if (highestRarity != null)

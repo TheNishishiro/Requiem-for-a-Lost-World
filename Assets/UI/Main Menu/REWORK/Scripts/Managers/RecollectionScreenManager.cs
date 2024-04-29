@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
 using DefaultNamespace.Data;
+using DefaultNamespace.Data.Achievements;
 using DefaultNamespace.Data.Gacha;
+using DefaultNamespace.Data.Modals;
 using DefaultNamespace.Extensions;
 using Interfaces;
 using Managers;
@@ -46,7 +48,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Animator")] [SerializeField] private Animator animator;
 
         private GachaRewardType _highestRarity;
-        private const int MaxPity = 40;
+        private const int MaxPity = 60;
 
         public void Update()
         {
@@ -70,6 +72,11 @@ namespace UI.Main_Menu.REWORK.Scripts
         public void Pull(int amount)
         {
             var saveFile = SaveFile.Instance;
+            if (saveFile.Runes.Count + amount > 300)
+            {
+                StartCoroutine(RuneCapacityNotification());
+                return;
+            }
             var pullCost = (ulong)(amount == 1 ? 350 : 3000);
             if (saveFile.Gems < pullCost) return;
             saveFile.Gems -= pullCost;
@@ -83,7 +90,7 @@ namespace UI.Main_Menu.REWORK.Scripts
                 var pullDecision = Random.value switch
                 {
                     < 0.1f => GachaRewardType.Main,
-                    < 0.4f => GachaRewardType.Sub,
+                    < 0.3f => GachaRewardType.Sub,
                     _ => GachaRewardType.Extra
                 };
                 if (_highestRarity > pullDecision)
@@ -114,6 +121,24 @@ namespace UI.Main_Menu.REWORK.Scripts
             
             pullFlash.SetColor(Color.white);
             animator.SetTrigger("Pull");
+        }
+
+        private IEnumerator RuneCapacityNotification()
+        {
+            ModalManager.instance.Open(ButtonCombination.YesCancel, "Inventory capacity", 
+                $"Cannot hold more than 300 runes ({SaveFile.Instance.Runes.Count}). Discard some runes and try again. You can automatically remove 100 runes below 'blue' rarity.", textYes: "Ok", textCancel: "Auto-discard", modalState: ModalState.Error);
+            while (ModalManager.instance.GetResult() == ModalResult.None) yield return new WaitForSeconds(0.5f);
+            
+            if (ModalManager.instance.GetResult() == ModalResult.Yes)
+                yield break;
+
+            var runes = SaveFile.Instance.Runes.Where(x => x.rarity < Rarity.Rare).OrderBy(x => x.rarity).ThenBy(_ => Random.value).Take(100);
+            foreach (var rune in runes)
+            {
+                SaveFile.Instance.Runes.Remove(rune);
+            }
+            
+            SaveFile.Instance.Save();
         }
 
         private CharactersEnum GetAnyPromotionalCharacters(SaveFile saveFile)

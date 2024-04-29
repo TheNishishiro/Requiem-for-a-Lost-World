@@ -35,7 +35,7 @@ namespace Objects.Characters.Amelia.Skill
             {
                 StatEnum.AttackCount, StatEnum.Revives, StatEnum.Rerolls, StatEnum.Skips, StatEnum.CooldownReduction
             }).ToList().OrderBy(_ => Random.value).FirstOrDefault();
-            statIncrease = statToUpgrade.IsPercent() ? (GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 0.1f : 0.02f) : (GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 2f : 1f);
+            statIncrease = statToUpgrade.IsPercent() || statToUpgrade == StatEnum.MovementSpeed  ? (GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 0.1f : 0.02f) : (GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 2f : 1f);
             playerStatsComponent.Add(statToUpgrade, statIncrease);
         }
 

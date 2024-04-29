@@ -1,6 +1,8 @@
-﻿using DefaultNamespace.Data;
+﻿using DefaultNamespace;
+using DefaultNamespace.Data;
 using Managers;
 using Objects.Characters;
+using Objects.Players.PermUpgrades;
 using TMPro;
 using UI.Shared;
 using UnityEngine;
@@ -23,6 +25,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         
         public void SetDisplay(Color displayColor, CharactersEnum characterId)
         {
+            textDescription.color = Color.white;
             if (characterId != CharactersEnum.Unknown)
             {
                 SetCharacterDisplay(characterId);
@@ -129,12 +132,16 @@ namespace UI.Main_Menu.REWORK.Scripts
         
         private void SetRuneReward(string title)
         {
-            var rune = RuneListManager.instance.GetRandomRune().ResolveRune();
+            var runeData = RuneListManager.instance.GetRandomRune();
+            var runeSaveData = runeData.ResolveRune();
+            var runeValue = runeData.GetScaledValue(runeSaveData);
+            var displayValue = runeSaveData.statType.IsPercent() ? $"{runeValue*100:0.##}%" : $"{runeValue:0.##}";
             
             imageCharacter.sprite = spriteRune;
             textRewardTitle.text = title;
-            textDescription.text = $"{rune.statType} +{rune.runeValue}" ;
-            SaveFile.Instance.AddRune(rune);
+            textDescription.text = $"{runeData.statType.GetLongName()} +{displayValue}" ;
+            textDescription.color = Utilities.RarityToColor(runeSaveData.rarity);
+            SaveFile.Instance.AddRune(runeSaveData);
         }
         
         private void AddGems(ulong amount)

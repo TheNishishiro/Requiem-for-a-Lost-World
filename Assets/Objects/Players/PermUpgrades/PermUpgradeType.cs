@@ -4,7 +4,6 @@
 	{
 		[StatType(true)]
 		Magnet = 1,
-		[StatType(true)]
 		MovementSpeed = 2,
 		AttackCount = 3,
 		[StatType(true)]

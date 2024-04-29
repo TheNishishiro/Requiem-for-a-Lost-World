@@ -5,8 +5,12 @@ using DefaultNamespace.Data;
 using Interfaces;
 using Managers;
 using NaughtyAttributes;
+using Objects.Characters;
+using Objects.Players.PermUpgrades;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace UI.Main_Menu.REWORK.Scripts
 {
@@ -20,7 +24,13 @@ namespace UI.Main_Menu.REWORK.Scripts
         [Space]
         [BoxGroup("Details")] [SerializeField] private TextMeshProUGUI textRuneDetails;
         [Space]
-        [BoxGroup("Containers")] [SerializeField] private List<RuneSlotEntry> runeSlots;
+        [BoxGroup("Character")] [SerializeField] private TextMeshProUGUI textCharacterName;
+        [BoxGroup("Character")] [SerializeField] private Image imageCharacterSignet;
+        [Space]
+        [BoxGroup("Containers")] [SerializeField] private List<RuneSlotEntry> runeSlotsOffensive;
+        [BoxGroup("Containers")] [SerializeField] private List<RuneSlotEntry> runeSlotsDefensive;
+        [BoxGroup("Containers")] [SerializeField] private List<RuneSlotEntry> runeSlotsUtility;
+        [BoxGroup("Containers")] [SerializeField] private List<RuneSlotEntry> runeSlotsMixed;
 
         private CharacterSaveData _openedCharacterSaveData;
         private List<RuneEquipmentEntry> _runeEquipment;
@@ -39,22 +49,52 @@ namespace UI.Main_Menu.REWORK.Scripts
                 Close();
         }
 
-        public void Open(CharacterSaveData characterSaveData)
+        public void Open(CharacterData characterData, CharacterSaveData characterSaveData)
         {
             _openedCharacterSaveData = characterSaveData;
-            _runeEquipment ??= new List<RuneEquipmentEntry>();
-            runeSlots.ForEach(x => x.Clear());
-            foreach (var characterRune in characterSaveData.GetCharacterRunes().TakeWhile(_ => runeSlots.Any(x => x.IsEmpty())))
-            {
-                runeSlots.First(x => x.IsEmpty()).Setup(characterRune);
-            }
+            textCharacterName.text = characterData.Name;
+            imageCharacterSignet.sprite = characterData.signet;
             
-            foreach (var runeSaveData in SaveFile.Instance.Runes)
+            _runeEquipment ??= new List<RuneEquipmentEntry>();
+            runeSlotsOffensive.ForEach(x => x.Clear());
+            runeSlotsDefensive.ForEach(x => x.Clear());
+            runeSlotsUtility.ForEach(x => x.Clear());
+            runeSlotsMixed.ForEach(x => x.Clear());
+            var characterRunes = characterSaveData.GetCharacterRunes();
+            InsertRuneIntoSlot(StatCategory.Offensive, characterRunes);
+            InsertRuneIntoSlot(StatCategory.Defensive, characterRunes);
+            InsertRuneIntoSlot(StatCategory.Utility, characterRunes);
+            
+            foreach (var runeSaveData in SaveFile.Instance.Runes.OrderBy(x => x.statType.GetStatType())
+                         .ThenByDescending(x => x.rarity)
+                         .ThenBy(x => x.statType)
+                         .ThenByDescending(x => x.runeValue))
             {
                 CreateRuneEquipmentEntry(runeSaveData);
             }
             
             StackableWindowManager.instance.OpenWindow(this);
+        }
+
+        private void InsertRuneIntoSlot(StatCategory statCategory, IEnumerable<RuneSaveData> characterRunes, bool isInit = true)
+        {
+            var slots = statCategory switch
+            {
+                StatCategory.Offensive => runeSlotsOffensive,
+                StatCategory.Defensive => runeSlotsDefensive,
+                StatCategory.Utility => runeSlotsUtility,
+                _ => throw new ArgumentOutOfRangeException(nameof(statCategory), statCategory, null)
+            };
+            
+            foreach (var characterRune in characterRunes.Where(x => x.statType.GetStatType() == statCategory))
+            {
+                if (slots.Any(x => x.IsEmpty()))
+                    slots.First(x => x.IsEmpty()).Setup(characterRune, isInit);
+                else if (runeSlotsMixed.Any(x => x.IsEmpty()))
+                    runeSlotsMixed.First(x => x.IsEmpty()).Setup(characterRune, isInit);
+                else
+                    return;
+            }
         }
 
         private void CreateRuneEquipmentEntry(RuneSaveData runeSaveData)
@@ -77,13 +117,27 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         public void Equip(RuneSaveData runeSaveData, RuneEquipmentEntry runeEquipmentEntry)
         {
-            if (!runeSlots.Any(x => x.IsEmpty())) 
+            if (!HasEmptySlots(runeSaveData.statType.GetStatType())) 
                 return;
             
             _openedCharacterSaveData.EquipRune(runeSaveData);
-            runeSlots.First(x => x.IsEmpty()).Setup(runeSaveData);
-            
+            InsertRuneIntoSlot(runeSaveData.statType.GetStatType(), new[] { runeSaveData }, false);
             Discard(runeSaveData, runeEquipmentEntry);
+        }
+
+        private bool HasEmptySlots(StatCategory statCategory)
+        {
+            switch (statCategory)
+            {
+                case StatCategory.Offensive:
+                    return runeSlotsOffensive.Any(x => x.IsEmpty()) || runeSlotsMixed.Any(x => x.IsEmpty());
+                case StatCategory.Defensive:
+                    return runeSlotsDefensive.Any(x => x.IsEmpty()) || runeSlotsMixed.Any(x => x.IsEmpty());
+                case StatCategory.Utility:
+                    return runeSlotsUtility.Any(x => x.IsEmpty()) || runeSlotsMixed.Any(x => x.IsEmpty());
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(statCategory), statCategory, null);
+            }
         }
 
         public void UnEquipRune(RuneSlotEntry runeSlotEntry, RuneSaveData runeSaveData)
@@ -101,15 +155,14 @@ namespace UI.Main_Menu.REWORK.Scripts
             Destroy(runeEquipmentEntry.gameObject);
         }
 
-        public void DisplayDetails(RuneSaveData runeSaveData)
+        public void Filter(int categoryId)
         {
-            textRuneDetails.text = runeSaveData?.GetName();
-            panelDetails.SetActive(runeSaveData != null);
+            _runeEquipment.ForEach(x => x.gameObject.SetActive(x.IsOfCategory((StatCategory)categoryId)));
         }
 
-        public void HideDetails()
+        public void RemoveFilter()
         {
-            panelDetails.SetActive(false);
+            _runeEquipment.ForEach(x => x.gameObject.SetActive(true));
         }
         
         public bool IsInFocus { get; set; }
