@@ -18,8 +18,6 @@ MonoBehaviour:
   CharacterCard: {fileID: 21300000, guid: 1a167ffea6aa9c848ab0777a280fc206, type: 3}
   GatchaArt: {fileID: 21300000, guid: 82f2cf22072eb144abd317cc73c70dc6, type: 3}
   GachaSubArtOffset: {x: -15, y: -100}
-  GachaPullDisplayOffsetX: 0
-  GachaPullDisplayOffsetY: 0
   Avatar: {fileID: 21300000, guid: 34b7b3f5b7984584c9c56cafa6b9a03c, type: 3}
   CharacterSprite: {fileID: 21300000, guid: dcc8c0d245ab4ab488390b853f0a4d23, type: 3}
   signet: {fileID: 21300000, guid: 7c06493d9dc44c1489f9507a7e688c0f, type: 3}
@@ -95,6 +93,8 @@ MonoBehaviour:
     LightDamageIncrease: 0
     CosmicDamageIncrease: 0
     EarthDamageIncrease: 0
+    DashCount: 2
+    Stamina: 2
   skillNodes:
   - {fileID: 11400000, guid: 10ccfe9d8d31bbd4193a052a099d9b35, type: 2}
   - {fileID: 11400000, guid: dfdbe79c7ca7d354f9db39659cf930f6, type: 2}
@@ -106,7 +106,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 956bfd48ac29f1644b989379ba3cf209, type: 2}
   - {fileID: 11400000, guid: 9a474ae776623f04da7b4179ea297d17, type: 2}
   Eidolons:
-  - EidolonTexture: {fileID: 21300000, guid: c7e6f877e496a6445bb1c55045ee3ec8, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 25d0edb8847bd01439c91bad5444fde8, type: 3}
     EidolonName: One and only
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -122,7 +122,7 @@ MonoBehaviour:
 
 
       Ah, nonsense, so? Where to next?'
-  - EidolonTexture: {fileID: 21300000, guid: dc18419a4c2dc62438a85ef3b369b9ad, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 9ddfc0a9e97153f449dc99b8b2fb1afe, type: 3}
     EidolonName: Void unleashed
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -140,7 +140,7 @@ MonoBehaviour:
 
       To hell with warnings, didn''t even give me
       a choice to begin with!'
-  - EidolonTexture: {fileID: 21300000, guid: 87894f8bde96bf94dba41db12e9a7997, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 7220fb31e400e794a9c338aff3c993d8, type: 3}
     EidolonName: Before the cataclysm
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -161,7 +161,7 @@ MonoBehaviour:
 
       Never
       been there, couldn''t say.'
-  - EidolonTexture: {fileID: 21300000, guid: 9cdc89ae391652a449189d1c3da04460, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: b85a22a7d90f8d74db47ef4d0747b209, type: 3}
     EidolonName: When I see you again
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -171,7 +171,7 @@ MonoBehaviour:
       hp/s
     EidolonQuote: "Are you enjoying the spectacle? \n\nI don't feel much of an enjojyment,
       no.\n\nNot much of a talker recently, huh? No matter, who's the next target?"
-  - EidolonTexture: {fileID: 21300000, guid: 8bfb8dda4b2ac464fb8329431b0946b3, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 543a6777a99f8df49b27c2b44f3108ce, type: 3}
     EidolonName: Price of mistakes
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -179,4 +179,3 @@ MonoBehaviour:
       but increase damage taken by <color=red>1%</color> for each use
     PassiveUpgradeDescription: 
     EidolonQuote: 'Your contribution have been acknowledged '
-  loreEntries: []

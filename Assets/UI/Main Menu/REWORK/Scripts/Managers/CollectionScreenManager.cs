@@ -22,12 +22,18 @@ namespace UI.Main_Menu.REWORK.Scripts
         [Space]
         [BoxGroup("Section Containers")] [SerializeField] private Transform transformWeapon;
         [BoxGroup("Section Containers")] [SerializeField] private Transform transformItem;
+        [BoxGroup("Section Containers")] [SerializeField] private Transform transformShard;
         [Space]
         [BoxGroup("Section Labels")] [SerializeField] private GameObject labelWeapon;
         [BoxGroup("Section Labels")] [SerializeField] private GameObject labelItem;
+        [BoxGroup("Section Labels")] [SerializeField] private GameObject labelShard;
         [Space]
         [BoxGroup("Buttons")] [SerializeField] private List<Button> buttonSections;
         [BoxGroup("Buttons")] [SerializeField] private List<Button> buttonStates;
+        [Space]
+        [BoxGroup("Button Section")] [SerializeField] private TextMeshProUGUI textButtonWeapons;
+        [BoxGroup("Button Section")] [SerializeField] private TextMeshProUGUI textButtonItems;
+        [BoxGroup("Button Section")] [SerializeField] private TextMeshProUGUI textButtonShards;
         [Space]
         [BoxGroup("Styling")] [SerializeField] private Material materialSelectedText;
         [BoxGroup("Styling")] [SerializeField] private Material materialIdleText;
@@ -96,9 +102,11 @@ namespace UI.Main_Menu.REWORK.Scripts
             var section = (CollectionSection)sectionId;
             labelWeapon.SetActive(section is CollectionSection.Weapon or CollectionSection.None);
             labelItem.SetActive(section is CollectionSection.Item or CollectionSection.None);
+            labelShard.SetActive(section is CollectionSection.Shard or CollectionSection.None);
             
             transformWeapon.gameObject.SetActive(section is CollectionSection.Weapon or CollectionSection.None);
             transformItem.gameObject.SetActive(section is CollectionSection.Item or CollectionSection.None);
+            transformShard.gameObject.SetActive(section is CollectionSection.Shard or CollectionSection.None);
             
             buttonSections.ForEach(x => x.GetComponent<Image>().color = Color.clear);
             buttonSections.ForEach(x => x.GetComponentInChildren<TextMeshProUGUI>().fontSharedMaterial = materialIdleText);
@@ -154,7 +162,20 @@ namespace UI.Main_Menu.REWORK.Scripts
                     collectionEntry.Setup(itemToggleableEntry.itemBase);
                     _collectionEntries.Add(collectionEntry);
                 }
+                foreach (var characterData in CharacterListManager.instance.GetCharacters().Where(x => x.IsPullable))
+                {
+                    foreach (var characterEidolon in characterData.Eidolons)
+                    {
+                        var collectionEntry = Instantiate(collectionEntryPrefab, transformShard);
+                        collectionEntry.Setup(characterEidolon, characterData);
+                        _collectionEntries.Add(collectionEntry);
+                    }
+                }
             }
+
+            textButtonWeapons.text = $"Weapons ({containerWeapon.GetWeapons().Count(x => x.weaponBase.IsUnlocked(SaveFile.Instance))}/{containerWeapon.GetWeapons().Count})";
+            textButtonItems.text = $"Items ({containerItem.GetItems().Count(x => x.itemBase.IsUnlocked(SaveFile.Instance))}/{containerItem.GetItems().Count})";
+            textButtonShards.text = $"Shards ({SaveFile.Instance.CharacterSaveData.Select(x => x.Value).Sum(x => x.RankUpLevel)}/{CharacterListManager.instance.GetCharacters().Count(x => x.IsPullable) * 5})";
             
             FilterSection(0);
             FilterState(0);

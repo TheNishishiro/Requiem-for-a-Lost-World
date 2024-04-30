@@ -54,7 +54,7 @@ namespace Managers
 
 		public CharacterData GetRandomCharacter()
 		{
-			return characters.OrderBy(x => Random.value).FirstOrDefault();
+			return characters.Where(x => x.IsPullable).OrderBy(x => Random.value).FirstOrDefault();
 		}
 
 		public CharacterData GetRandomUnlockedCharacter()

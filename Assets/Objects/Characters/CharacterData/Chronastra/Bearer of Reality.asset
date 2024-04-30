@@ -22,9 +22,18 @@ MonoBehaviour:
   CharacterSprite: {fileID: 21300000, guid: 643214c9e9c36aa49a5c2d046522ee84, type: 3}
   signet: {fileID: 21300000, guid: a065fec491803cb4db1aa9d92ba02682, type: 3}
   nameAnnouncer: {fileID: 8300000, guid: 9fbd28549ed29f64daa7613540d827a8, type: 3}
-  PassiveDescription: 
-  AbilityName: 
-  AbilityDescription: 
+  PassiveDescription: "Unleash periodic bursts of energy that halve the health of
+    nearby enemies, accumulating <color=purple>Cosmic Revelation</color> over time.
+    \nThe stack limit is capped at the potency of Yami-no-Tokiya's single strongest
+    strike. \nWhen struck, <color=purple>Cosmic Revelation</color> stacks shield
+    against damage instead of health loss. Under this protective aura, unleash a
+    devastating follow-up attack for amplified damage."
+  AbilityName: Void Sunder
+  AbilityDescription: "With a snap of her fingers transform the battlefield into
+    a starry expansion. \nDuring this state pause all timers, weapon attacks and
+    enemy movements.\nRecast this ability up to 3 times to perform devastating attacks
+    targetting all enemies. \nEach enemy killed this way will provide a stack of
+    <color=purple>Cosmic Revelation</color>."
   AbilityCooldown: 0
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 0}
@@ -85,6 +94,8 @@ MonoBehaviour:
     LightDamageIncrease: 0
     CosmicDamageIncrease: 0
     EarthDamageIncrease: 0
+    DashCount: 2
+    Stamina: 2
   skillNodes:
   - {fileID: 11400000, guid: ec5b7111586339c42a0d5deaca3618a6, type: 2}
   - {fileID: 11400000, guid: 2c0e081f69955ef4a99bf6bedc38c1cb, type: 2}
@@ -97,4 +108,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2c7140d0989a10a4694fa6715d67d715, type: 2}
   - {fileID: 11400000, guid: 9b2131e0f805fbf44ba9017755a6ef0d, type: 2}
   Eidolons: []
-  loreEntries: []

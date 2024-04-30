@@ -22,9 +22,17 @@ MonoBehaviour:
   CharacterSprite: {fileID: 0}
   signet: {fileID: 21300000, guid: fc268f8786e98e746955a333b5ad7cee, type: 3}
   nameAnnouncer: {fileID: 8300000, guid: aabb7866c1480e2478afd1a65cda1e11, type: 3}
-  PassiveDescription: 
-  AbilityName: 
-  AbilityDescription: 
+  PassiveDescription: "Cannot regenerate health. \r\nInstead accumulates <color=red>Binding</color>
+    equal to 100% of regenerated health. \r\n<color=red>Bind</color> cannot exceed
+    500% of her <color=#FFC300>max health</color>.\r\nEvery time she attacks consume
+    8.5% of <color=red>Bind</color> to increase the base damage dealt by that attack
+    by a 100% of remaining <color=red>Bind</color> value.\n<color=red>Binding</color>
+    cannot be consumed for 5 seconds after being obtained."
+  AbilityName: Nightmare Bind
+  AbilityDescription: "Plunge the world into darkness for 15 seconds. \nDuring this
+    period, <color=red>Binding</color> value remains static, and enemy movement slows
+    by 50%. \nUpon its conclusion, instantly dispel all <color=red>Binding</color>,
+    healing for the total amount consumed."
   AbilityCooldown: 0
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 0}
@@ -85,6 +93,8 @@ MonoBehaviour:
     LightDamageIncrease: 0
     CosmicDamageIncrease: 0
     EarthDamageIncrease: 0
+    DashCount: 2
+    Stamina: 2
   skillNodes:
   - {fileID: 11400000, guid: 1ad7550678e7554488620caee6bb5639, type: 2}
   - {fileID: 11400000, guid: 128537cb8da97084a9fe5b7e804586dd, type: 2}
@@ -97,4 +107,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3a0dee37d611c56439f311f5b71b71a9, type: 2}
   - {fileID: 11400000, guid: 4e940014caa866648a0f081a5f72b943, type: 2}
   Eidolons: []
-  loreEntries: []

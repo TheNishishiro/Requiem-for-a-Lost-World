@@ -18,8 +18,6 @@ MonoBehaviour:
   CharacterCard: {fileID: 21300000, guid: a1a75f22733aa164693093412ccc9cbd, type: 3}
   GatchaArt: {fileID: 21300000, guid: f29e11321646be843b7be793b3747528, type: 3}
   GachaSubArtOffset: {x: 0, y: -60}
-  GachaPullDisplayOffsetX: 0
-  GachaPullDisplayOffsetY: 0
   Avatar: {fileID: 21300000, guid: 3a60d6b44c8a8b74d8b8d5a43104760a, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 8e2fd4ba853941743974dfde1ce94c74, type: 3}
   signet: {fileID: 21300000, guid: 37c9d2a824073604283f0dbc216ff921, type: 3}
@@ -91,6 +89,8 @@ MonoBehaviour:
     LightDamageIncrease: 0
     CosmicDamageIncrease: 0
     EarthDamageIncrease: 0
+    DashCount: 2
+    Stamina: 2
   skillNodes:
   - {fileID: 11400000, guid: 6b5653952d9ade942a7c0b21bea047ef, type: 2}
   - {fileID: 11400000, guid: 1eb8a78f365aa974f8d3e789bc07aec6, type: 2}
@@ -102,7 +102,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0fae403dc1a225b4db0ff1226930f9fc, type: 2}
   - {fileID: 11400000, guid: d159a03ca9de1814eae5cf0a2630d4a6, type: 2}
   Eidolons:
-  - EidolonTexture: {fileID: 21300000, guid: 0bb9275cc46816447bbff0b42bf8e579, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: ba8d39c0b8b25fc4cbcd90bc05bc360e, type: 3}
     EidolonName: Thunder Awakens
     EidolonDescription: 
     WeaponUpgradeDescription: Increase amount of thunder bolts called with <color=orange>Lightning
@@ -111,7 +111,7 @@ MonoBehaviour:
     PassiveUpgradeDescription: 
     EidolonQuote: In the dance of blades, remember that patience and precision often
       triumph over brute force - In that sense, I deem you lacking.
-  - EidolonTexture: {fileID: 21300000, guid: e530a4f3da2afef4381f470c156d2fe4, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 67dbe5fa389f8a541b4d6e9921be02a8, type: 3}
     EidolonName: Endless Glow
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -120,7 +120,7 @@ MonoBehaviour:
     PassiveUpgradeDescription: 
     EidolonQuote: Do not get used to my presence, I'm only helping you because Oana
       wouldn't stop pestering me about it. Really, I have no idea what she's thinking.
-  - EidolonTexture: {fileID: 21300000, guid: dd32c9b7293ac6347955b793dd82bd64, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: bcf2b36d25ebf7644b4ee8accf32783c, type: 3}
     EidolonName: On my own
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -130,7 +130,7 @@ MonoBehaviour:
     EidolonQuote: "I do have a long history, but you already know that, don't you?
       \nDid that digusting thing you home in your body told you? - Very well, when
       the time comes, I will cut you down myself."
-  - EidolonTexture: {fileID: 21300000, guid: e1278d4b316159e44b9cf300364f09cc, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 981176f572685bf43a279b5eee97c82f, type: 3}
     EidolonName: Energy influx
     EidolonDescription: 
     WeaponUpgradeDescription: Lightning chaines caused by <color=orange>Lightning
@@ -143,7 +143,7 @@ MonoBehaviour:
       these smarts stuck around to this day. No matter, smarts are for no use in
       this world, at least not the kind I possesed. Better for that knowledge to
       rot in hell with the old world.
-  - EidolonTexture: {fileID: 21300000, guid: 8124624c4332b1049b409d099fc90adb, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: b2524bf9c48c0a94698165282074ef44, type: 3}
     EidolonName: Memory of despair
     EidolonDescription: 
     WeaponUpgradeDescription: 'Every kill caused by <color=orange>Lightning strike</color>
@@ -159,4 +159,3 @@ MonoBehaviour:
     EidolonQuote: "I watched the world crumble in front of my very eyes once.\nI
       am not letting it happen again. \nThat is my only duty as the guardian of this
       new era. "
-  loreEntries: []
