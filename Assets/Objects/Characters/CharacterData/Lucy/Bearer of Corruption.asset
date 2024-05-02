@@ -15,8 +15,8 @@ MonoBehaviour:
   Id: 2
   Name: Lucy
   Title: Bearer of Corruption
-  CharacterCard: {fileID: 21300000, guid: 1e7961ef2f5dee94293f17cafe4b877c, type: 3}
-  GatchaArt: {fileID: 21300000, guid: cd5b867237597874893182ec252b5791, type: 3}
+  CharacterCard: {fileID: 21300000, guid: aa9c6b2950421534fa3884ddf1a1caa9, type: 3}
+  GatchaArt: {fileID: 21300000, guid: 49d8962e843e3624eba56b16c4e14932, type: 3}
   GachaSubArtOffset: {x: 15, y: -45}
   Avatar: {fileID: 21300000, guid: 88dfde6aec7eb9640925662224f7311f, type: 3}
   CharacterSprite: {fileID: 21300000, guid: ba49fbf638fcf6f478b04d8ba9f1a37d, type: 3}
@@ -27,11 +27,11 @@ MonoBehaviour:
   AbilityName: Absolute Command
   AbilityDescription: Pick random enemies from the field to fight for you for 10
     seconds. Damage of enemies controlled in this way is affected by current <color=#FFC300>damage
-    increase %</color>
+    increase</color> provided by items or runes
   AbilityCooldown: 40
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 0}
-  AbilityIcon: {fileID: 21300000, guid: 7baa46a83cddaef48a2e6e4ab42ef901, type: 3}
+  AbilityIcon: {fileID: 21300000, guid: e64e4c6b0606bcb408717399fde1765f, type: 3}
   ColorTheme: {r: 0.8117647, g: 0.65882355, b: 0.4862745, a: 1}
   Alignment: 2
   StarRating: 5
@@ -88,6 +88,8 @@ MonoBehaviour:
     LightDamageIncrease: 0
     CosmicDamageIncrease: 0
     EarthDamageIncrease: 0
+    DashCount: 2
+    Stamina: 2
   skillNodes:
   - {fileID: 11400000, guid: 8260ce2dbfe02934bb44dccac611b20b, type: 2}
   - {fileID: 11400000, guid: aa884236ff11c314dbf4d24a44ab1b24, type: 2}
@@ -100,7 +102,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 678e144405ea0454db7f2005ffe62718, type: 2}
   - {fileID: 11400000, guid: 907f9dd79ea4dca4d89b877a5be64c85, type: 2}
   Eidolons:
-  - EidolonTexture: {fileID: 21300000, guid: f735f8f9160de734b8a1cce1a6259bfb, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: c9af2a84a3f54ad46be83e8349614663, type: 3}
     EidolonName: Veil of Shadows
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -112,7 +114,7 @@ MonoBehaviour:
     PassiveUpgradeDescription: 
     EidolonQuote: "Pain... The gnawing on my skin... \nWhere is everyone... I can't
       see anything... \nMom... Dad..."
-  - EidolonTexture: {fileID: 21300000, guid: cf8f6be0537a4ae47b61a94143580c7a, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: da8f1a4524543064e89a3350f306905d, type: 3}
     EidolonName: Cursed Enchantment
     EidolonDescription: 
     WeaponUpgradeDescription: <color=orange>Corruption Aura</color> will slow down
@@ -121,7 +123,7 @@ MonoBehaviour:
     PassiveUpgradeDescription: 
     EidolonQuote: "The whispers... Never go away... \nI'm all alone... I wish to
       be all alone...\nLEAVE ME ALONE!"
-  - EidolonTexture: {fileID: 21300000, guid: 6174617a2719019429c2bf8914e4c8f2, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 1c6fb04530efe184196838ecbc306584, type: 3}
     EidolonName: The Ebon Convergence
     EidolonDescription: 
     WeaponUpgradeDescription: Increase damage tick rate caused by <color=orange>Corruption
@@ -131,7 +133,7 @@ MonoBehaviour:
     PassiveUpgradeDescription: 
     EidolonQuote: "I'm sorry... I'm so very... sorry... \nForgive me... \nI never
       meant... any of this...\nSomebody... Help me..."
-  - EidolonTexture: {fileID: 21300000, guid: 5f4f59cca63f19d49888c555b064b211, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: e9afa823b9a0c054a92f40679c3b3169, type: 3}
     EidolonName: Whispers of the Abyss
     EidolonDescription: 
     WeaponUpgradeDescription: Enemies inside of <color=orange>Corruption Aura</color>
@@ -148,7 +150,7 @@ MonoBehaviour:
       ...
       I wish things would have gone differently... I did overhear your conversation
       before you know...'
-  - EidolonTexture: {fileID: 21300000, guid: bfc628a2ab4fd1c4cb712f9fe2aac0b5, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 569d1cc86bf9c9b4aaf0c656e61189c1, type: 3}
     EidolonName: The Arcane Plague
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -160,4 +162,3 @@ MonoBehaviour:
       by people who barely care about her, then abandoned again just to be taken
       by the sickness most deadly... \nSo is the nature of human life that the humanity
       have constructed for themselves."
-  loreEntries: []

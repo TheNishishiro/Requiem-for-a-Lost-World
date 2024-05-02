@@ -18,8 +18,6 @@ MonoBehaviour:
   CharacterCard: {fileID: 21300000, guid: 73bc0bd3f6966fa41b0acb792957fa71, type: 3}
   GatchaArt: {fileID: 21300000, guid: 2f36a0c95d1cc75449aa21e502aa0fbb, type: 3}
   GachaSubArtOffset: {x: 0, y: -60}
-  GachaPullDisplayOffsetX: 0
-  GachaPullDisplayOffsetY: 0
   Avatar: {fileID: 21300000, guid: 55cfe46bedcd40549a4133a64270336f, type: 3}
   CharacterSprite: {fileID: 21300000, guid: a8c16fdf57417c44b8943985e232236c, type: 3}
   signet: {fileID: 21300000, guid: b157de6452dc4ce4e97f3e33589420f5, type: 3}
@@ -96,6 +94,8 @@ MonoBehaviour:
     LightDamageIncrease: 0
     CosmicDamageIncrease: 0
     EarthDamageIncrease: 0
+    DashCount: 2
+    Stamina: 2
   skillNodes:
   - {fileID: 11400000, guid: 523f1b0dc0f65fc408f32f41534ba7b7, type: 2}
   - {fileID: 11400000, guid: 6b66f82aaeccc2745857d987f4722891, type: 2}
@@ -107,7 +107,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 003e31989b30907468062ccec3076ae0, type: 2}
   - {fileID: 11400000, guid: dfe55e08628fb084b9adef9ca5688f03, type: 2}
   Eidolons:
-  - EidolonTexture: {fileID: 21300000, guid: 608ffd980e9202044a92e119ebc1f81d, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: c39db24d2d2b3974ba7b4b09bc390455, type: 3}
     EidolonName: Dreams shattered
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -122,7 +122,7 @@ MonoBehaviour:
     EidolonQuote: "Yes...! You are very much ready...\nYou want to protect her, don't
       you? You have what *it* wants, I have what you need.\nUh-huh, I don't think
       you even have a choice... \nLevel the Capital to the ground!"
-  - EidolonTexture: {fileID: 21300000, guid: 9b08c7a9c75aa794087cec19b608007e, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 9c7007bc43a3cd2488139558f2c533ab, type: 3}
     EidolonName: 'By any means necessary '
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -132,7 +132,7 @@ MonoBehaviour:
     EidolonQuote: "*cough* \nSeems like... We are not so different after all...\nYou
       are bound to experience the same... There is... No happiness in this world...\nGo
       on... take it, you've already made up your mind... didn't you?"
-  - EidolonTexture: {fileID: 21300000, guid: 2455cc6f6750ebb46b9002d88a3506b2, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 337dcca0ba2e4964bbf380e4072de5e7, type: 3}
     EidolonName: Painful days without you
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -149,7 +149,7 @@ MonoBehaviour:
       We
       don''t want to have anything to do with the Capital... But if you decide to
       disturb our peace... I won''t stand for it!'
-  - EidolonTexture: {fileID: 21300000, guid: 9e94e102971aba64fb10f6e9597bda29, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 7019edbc3b7cb21438ab8e6fecb2f913, type: 3}
     EidolonName: Roaring Awakening
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -164,7 +164,7 @@ MonoBehaviour:
       can pull it off?\nOr have madness completely blinded you...\nEither way, it's
       too late, isn't it...? \nI hope you won't regret anything but <b>I</b> won't
       go down until <b>you</b> pay the price."
-  - EidolonTexture: {fileID: 21300000, guid: c9c436be07a0dd441bd2896e5b5820b2, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 19704d0f6763d6046af8ecc1e47a87e3, type: 3}
     EidolonName: Ultimate Sacrafice
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -175,4 +175,3 @@ MonoBehaviour:
     EidolonQuote: Forgive me... I've done it all... for your sake... you will understand...
       no... you won't even have to understand... huh... why are the... tears flowing...
       now of all times...
-  loreEntries: []

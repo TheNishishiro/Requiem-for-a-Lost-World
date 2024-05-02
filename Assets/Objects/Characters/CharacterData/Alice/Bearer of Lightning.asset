@@ -32,7 +32,7 @@ MonoBehaviour:
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 3587274077961109647, guid: d576beee47a482c40a305ed5a4005058,
     type: 3}
-  AbilityIcon: {fileID: 21300000, guid: d19ad89914d292c4ea045a3ea6b1553c, type: 3}
+  AbilityIcon: {fileID: 21300000, guid: 0320ad7659b54d34c9e5ca01a3466b9e, type: 3}
   ColorTheme: {r: 0.67058825, g: 0.5921569, b: 0.83137256, a: 1}
   Alignment: 1
   StarRating: 5
@@ -103,35 +103,58 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d159a03ca9de1814eae5cf0a2630d4a6, type: 2}
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: ba8d39c0b8b25fc4cbcd90bc05bc360e, type: 3}
-    EidolonName: Thunder Awakens
+    EidolonName: The Art of Combat
     EidolonDescription: 
     WeaponUpgradeDescription: Increase amount of thunder bolts called with <color=orange>Lightning
       strike</color> by <color=green>4</color>
     SkillUpgradeDescription: 
     PassiveUpgradeDescription: 
-    EidolonQuote: In the dance of blades, remember that patience and precision often
-      triumph over brute force - In that sense, I deem you lacking.
+    EidolonQuote: 'In the dance of blades, where steel meets steel, patience and
+      precision often prove more potent than brute force. Yet, I fear you lack both.
+      Your aggression may serve you well in battle, but it is a fleeting advantage.
+      True mastery lies in balance and control.
+
+
+
+      Don''t be fooled by your
+      initial victories; they will soon turn to defeats if you continue down this
+      path. You would do well to learn from your mistakes and temper your passion
+      with wisdom.'
   - EidolonTexture: {fileID: 21300000, guid: 67dbe5fa389f8a541b4d6e9921be02a8, type: 3}
-    EidolonName: Endless Glow
+    EidolonName: A Sullen Mentor
     EidolonDescription: 
     WeaponUpgradeDescription: 
     SkillUpgradeDescription: Increase duration of the buff from <color=#9EFFF3>Kaminari
       Kiretsu</color> to <color=green>10s</color>
     PassiveUpgradeDescription: 
-    EidolonQuote: Do not get used to my presence, I'm only helping you because Oana
-      wouldn't stop pestering me about it. Really, I have no idea what she's thinking.
+    EidolonQuote: 'Do not grow accustomed to my presence. I''m merely lending a hand
+      because Oana insisted upon it. Her persistence is admirable, if maddening.
+      Honestly, I fail to understand her motives. Perhaps she believes you have potential,
+      or perhaps she simply enjoys seeing me scowl.
+
+      Regardless, our association
+      ends when I deem it appropriate. Do not assume otherwise.
+
+
+
+      Remember,
+      my aid is conditional upon your willingness to learn and improve. Anything
+      less would be an insult to my time and expertise.'
   - EidolonTexture: {fileID: 21300000, guid: bcf2b36d25ebf7644b4ee8accf32783c, type: 3}
-    EidolonName: On my own
+    EidolonName: A Legacy of Power
     EidolonDescription: 
     WeaponUpgradeDescription: 
     SkillUpgradeDescription: Buff from <color=#9EFFF3>Kaminari Kiretsu</color> will
       always be considered to have at least 4 free slots
     PassiveUpgradeDescription: 
-    EidolonQuote: "I do have a long history, but you already know that, don't you?
-      \nDid that digusting thing you home in your body told you? - Very well, when
-      the time comes, I will cut you down myself."
+    EidolonQuote: 'You think you''re clever, don''t you? Trying to sense the secrets
+      of the past through some sort of intuition. Newsflash: I have a long history,
+      one that spans centuries. You already know that, don''t you? The disgusting
+      thing growing inside your body might have whispered hints of it to you - Very
+      well, when the time comes, I''ll cut you down myself. Don''t think for a moment
+      that you can rival me.'
   - EidolonTexture: {fileID: 21300000, guid: 981176f572685bf43a279b5eee97c82f, type: 3}
-    EidolonName: Energy influx
+    EidolonName: A Forgotten Mind
     EidolonDescription: 
     WeaponUpgradeDescription: Lightning chaines caused by <color=orange>Lightning
       strike</color>'s bolts will deal <color=green>75%</color> of bolt damage instead
@@ -139,12 +162,19 @@ MonoBehaviour:
     SkillUpgradeDescription: 
     PassiveUpgradeDescription: Increase <color=#FFC300>dodge chance</color> by <color=green>2%</color>
       per 10 levels (up to 40%)
-    EidolonQuote: I used to be a researcher back in the day, unfortunately none of
-      these smarts stuck around to this day. No matter, smarts are for no use in
-      this world, at least not the kind I possesed. Better for that knowledge to
-      rot in hell with the old world.
+    EidolonQuote: 'I once was a researcher, driven by curiosity and a thirst for
+      knowledge. Alas, those days are behind me now. None of my discoveries or insights
+      have proven useful in this new world. Better that they rot in the ashes of
+      the old, alongside all else that''s been lost.
+
+
+
+      In this era, intelligence
+      is a liability, not an asset. My mind may still function, but it serves no
+      purpose here. At least, not until the day we can reclaim our heritage and rebuild
+      what''s been destroyed.'
   - EidolonTexture: {fileID: 21300000, guid: b2524bf9c48c0a94698165282074ef44, type: 3}
-    EidolonName: Memory of despair
+    EidolonName: The Guardian's Vow
     EidolonDescription: 
     WeaponUpgradeDescription: 'Every kill caused by <color=orange>Lightning strike</color>
       has a 60% chance to generate one stack of <color=yellow>Charge</color>. For
@@ -156,6 +186,13 @@ MonoBehaviour:
       from <color=#9EFFF3>Kaminari Kiretsu</color> will always be considered to have
       at least 6 free weapon slots. '
     PassiveUpgradeDescription: 
-    EidolonQuote: "I watched the world crumble in front of my very eyes once.\nI
-      am not letting it happen again. \nThat is my only duty as the guardian of this
-      new era. "
+    EidolonQuote: 'I stood witness to the downfall of civilization, watched as the
+      world crumbled beneath the weight of its own hubris. I vowed then that I would
+      not let such a catastrophe occur again. That is my duty as the guardian of
+      this new era.
+
+
+
+      As long as I draw breath, I will strive to protect what
+      remains of humanity and prevent the repetition of past mistakes. This burden
+      weighs heavily upon me, but I will carry it nonetheless.'

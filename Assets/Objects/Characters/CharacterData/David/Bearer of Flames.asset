@@ -15,9 +15,9 @@ MonoBehaviour:
   Id: 4
   Name: David
   Title: General of Animosity
-  CharacterCard: {fileID: 21300000, guid: acbee9b55c95c9c4dabfe36de25e4f5f, type: 3}
-  GatchaArt: {fileID: 21300000, guid: 20ffe8746497f2940b5901a58bb1b4ee, type: 3}
-  GachaSubArtOffset: {x: -15, y: -70}
+  CharacterCard: {fileID: 21300000, guid: 9e841080cbc654f409afff75700ed887, type: 3}
+  GatchaArt: {fileID: 21300000, guid: 5502a8362722fbb4e8f145b19d603927, type: 3}
+  GachaSubArtOffset: {x: 0, y: -40}
   Avatar: {fileID: 21300000, guid: 14707ba5d67b4be4c9d0a48049a815e5, type: 3}
   CharacterSprite: {fileID: 21300000, guid: f43d0999940499948851d0f5efe243eb, type: 3}
   signet: {fileID: 21300000, guid: b4123ca9ef9fe654a98eaf80a8ec3ce6, type: 3}
@@ -31,7 +31,7 @@ MonoBehaviour:
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: -4520040666531008762, guid: de45e94a07fd2fa4caecb2582d5798cd,
     type: 3}
-  AbilityIcon: {fileID: 21300000, guid: 6a8a5f1221052844b8fc637483fa1ed9, type: 3}
+  AbilityIcon: {fileID: 21300000, guid: ff3e3153a2f6c8f4db1d6fa1a6e9b76a, type: 3}
   ColorTheme: {r: 0.90196085, g: 0.3137255, b: 0.15294118, a: 1}
   Alignment: 2
   StarRating: 5
@@ -88,6 +88,8 @@ MonoBehaviour:
     LightDamageIncrease: 0
     CosmicDamageIncrease: 0
     EarthDamageIncrease: 0
+    DashCount: 2
+    Stamina: 2
   skillNodes:
   - {fileID: 11400000, guid: b84d168975d63e14bb8f3f5ed325bd13, type: 2}
   - {fileID: 11400000, guid: f07d43f8f9f6c1b4ab66c778a69b4ac6, type: 2}
@@ -99,7 +101,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 607315c5e42778149a1400671f219c65, type: 2}
   - {fileID: 11400000, guid: 2019dfef3ba31a4419f82f925b5ae9f3, type: 2}
   Eidolons:
-  - EidolonTexture: {fileID: 21300000, guid: 56ed3ffff00db3c46a57bd57e5277aab, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: febdc77744ebab34487b76ccd3a94476, type: 3}
     EidolonName: For victory I stand
     EidolonDescription: 
     WeaponUpgradeDescription: Increase amount of <color=orange>meteors</color> sent
@@ -109,7 +111,7 @@ MonoBehaviour:
     EidolonQuote: 'I grew up in a poor side of the city, not slams by any means but
       life didn''t treat me well there either. I persevered. Bullies or gangs would
       always pick a young boy as their target, too bad for them to misjudge. '
-  - EidolonTexture: {fileID: 21300000, guid: ba29e2173e1fc9342b174250fff7d07f, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: b673c93a28501d7448f413ee4be2aaf7, type: 3}
     EidolonName: Anger surfaced
     EidolonDescription: 
     WeaponUpgradeDescription: Whenever <color=orange>Meteor</color> is used, reduce
@@ -121,7 +123,7 @@ MonoBehaviour:
       which you where too lazy to fix before getting old. I personally hate that
       term. I got into this position with my own sweat and tears, I won't let the
       so called "talent" still away my hard work.
-  - EidolonTexture: {fileID: 21300000, guid: 1d1014d831922be44a1662087b9fa4ee, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 9112595feb8fe2b4280d0705209914f9, type: 3}
     EidolonName: With pride I fight
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -134,7 +136,7 @@ MonoBehaviour:
       eyes burning with passion I never had. Feels like I missed the point, maybe
       it is less about me and more about others in this whole "fighting for better
       tomorrow" thing.
-  - EidolonTexture: {fileID: 21300000, guid: f2b1e1bdc570dee4791f79e64fdc91d0, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 39137017aeec3234987fa873952fc9a4, type: 3}
     EidolonName: When I'm with Her
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -146,7 +148,7 @@ MonoBehaviour:
       the reason why I achieved all I did. She assured me many times I don't need
       to be the best, of course I get that, but how am I going to protect her if
       I'm weak.
-  - EidolonTexture: {fileID: 21300000, guid: e0ab369a6a2895640b27bd4080d19387, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 4020343bb2904854880825eb84b15616, type: 3}
     EidolonName: Final Regret
     EidolonDescription: 
     WeaponUpgradeDescription: 'Each <color=orange>Meteor</color> will drain David''s
@@ -169,4 +171,3 @@ MonoBehaviour:
       sudden pain in my abdomen, sharp as getting pierced right through then the
       feeling of an overwhelming anger and regret rippled through my mind... \n\nNeedless
       to say, I stay away from them as best as I can"
-  loreEntries: []

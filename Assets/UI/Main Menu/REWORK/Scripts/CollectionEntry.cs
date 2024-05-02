@@ -1,6 +1,7 @@
 ﻿using System;
 using DefaultNamespace;
 using DefaultNamespace.Data;
+using DefaultNamespace.Data.Achievements;
 using DefaultNamespace.Data.Collection;
 using Interfaces;
 using Objects.Characters;
@@ -38,7 +39,9 @@ namespace UI.Main_Menu.REWORK.Scripts
         public void ShowDetails()
         {
             if (_currentItem != null)
-                CollectionScreenManager.instance.Display(_currentItem);
+                ShowItemDetails();
+            else if (_currentEidolon != null)
+                ShowShardDetails();
         }
 
         public void Refresh()
@@ -53,6 +56,25 @@ namespace UI.Main_Menu.REWORK.Scripts
             var filterUnlockState = state == CollectionState.Collected;
             var isVisible = isUnlocked == filterUnlockState || state == CollectionState.All;
             gameObject.SetActive(isVisible);
+        }
+        
+        private void ShowItemDetails()
+        {
+            CollectionScreenManager.instance.Display(
+                _currentItem.NameField,
+                _currentItem.GetDescription(1),
+                _currentItem.RequiredAchievementField?.GetDescription(),
+                _currentItem.IsUnlocked(SaveFile.Instance));
+        }
+        
+        private void ShowShardDetails()
+        {
+            var isUnlocked = IsShardUnlocked();
+            CollectionScreenManager.instance.Display(
+                _currentEidolon.EidolonName,
+                isUnlocked ? _currentEidolon.GetDescription() + $"<br><br><i><size=70%><color=#D8D8D8>{_currentEidolon.EidolonQuote}</color></size></i>" : _currentEidolon.GetDescription(),
+                $"Unlock by obtaining duplicates of {_currentCharacter.Name}",
+                isUnlocked);
         }
 
         private void RefreshItem()

@@ -125,18 +125,17 @@ namespace UI.Main_Menu.REWORK.Scripts
             _collectionEntries.ForEach(x => x.VisibleState(state));
         }
 
-        public void Display(IPlayerItem currentItem)
+        public void Display(string title, string description, string achievementRequirements, bool isUnlocked)
         {
-            var isUnlocked = currentItem.IsUnlocked(SaveFile.Instance);
             sidePanel.SetActive(true);
-            labelTitle.text = isUnlocked ? currentItem.NameField : "???";
-            labelDescription.text = currentItem.GetDescription(1);
+            labelTitle.text = isUnlocked ? title : "???";
+            labelDescription.text = description;
 
             labelUnlock.gameObject.SetActive(!isUnlocked);
             labelUnlockDescription.gameObject.SetActive(!isUnlocked);
             if (!isUnlocked)
             {
-                labelUnlockDescription.text = currentItem.RequiredAchievementField?.GetDescription();
+                labelUnlockDescription.text = achievementRequirements;
             }
         }
         

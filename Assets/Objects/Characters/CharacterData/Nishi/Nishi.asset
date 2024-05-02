@@ -33,7 +33,7 @@ MonoBehaviour:
     type: 3}
   AbilityPrefab: {fileID: 7089003118366457812, guid: 2c651463a691f834d945ccdaf4b95bca,
     type: 3}
-  AbilityIcon: {fileID: 21300000, guid: 9f3d47405a2a1ad4e8e9446d237b600c, type: 3}
+  AbilityIcon: {fileID: 21300000, guid: 4bd3638379784a24a86b13e97cfa3f13, type: 3}
   ColorTheme: {r: 0, g: 0.38660192, b: 1, a: 1}
   Alignment: 2
   StarRating: 5
@@ -90,6 +90,8 @@ MonoBehaviour:
     LightDamageIncrease: 0
     CosmicDamageIncrease: 0
     EarthDamageIncrease: 0
+    DashCount: 2
+    Stamina: 2
   skillNodes:
   - {fileID: 11400000, guid: 36cac3b8631fa27438eec42e01810255, type: 2}
   - {fileID: 11400000, guid: 43615b0b574f1514e9ad4d1d7ca6e3a3, type: 2}
@@ -101,14 +103,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5b13059a0bedbbc4eae594a8bc575eb7, type: 2}
   - {fileID: 11400000, guid: 260d4fb2563a6de41a7faa295b0fdac8, type: 2}
   Eidolons:
-  - EidolonTexture: {fileID: 21300000, guid: 9129604a9abd7e647ada4345e1f1194e, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 5033411c6d3f9854cac64271dab0e6ee, type: 3}
     EidolonName: From Beyond
     EidolonDescription: 
     WeaponUpgradeDescription: 
     SkillUpgradeDescription: 
     PassiveUpgradeDescription: 'Increase dodge chance by <color=green>20%</color> '
     EidolonQuote: ...
-  - EidolonTexture: {fileID: 21300000, guid: 7ed8c2b3bc30cc147b6a76aca2598961, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 2fa3b7f1745871a45a178d5670aeab04, type: 3}
     EidolonName: Hope of Bright Future
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -116,7 +118,7 @@ MonoBehaviour:
       is cast additionally summon 3 lightning bolts in a random spot around Nishi
     PassiveUpgradeDescription: 
     EidolonQuote: ...
-  - EidolonTexture: {fileID: 21300000, guid: 7db54a9b736b73a48b1a2a4bfad5c148, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 08eef582870d248469ededb2a43b55a9, type: 3}
     EidolonName: Weakness Rejected
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -124,7 +126,7 @@ MonoBehaviour:
     PassiveUpgradeDescription: Increase damage by <color=green>75%</color> and crit
       rate  by <color=green>20%</color>
     EidolonQuote: ...
-  - EidolonTexture: {fileID: 21300000, guid: 71a05cbebdd1c5b448f1b353e271c0ab, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: cc2ffe17045255040a6885034f37bdf8, type: 3}
     EidolonName: Lightning's Blessing
     EidolonDescription: 
     WeaponUpgradeDescription: Increase amount of <color=orange>Katana</color> cuts
@@ -133,7 +135,7 @@ MonoBehaviour:
       by <color=green>250</color>
     PassiveUpgradeDescription: 
     EidolonQuote: ...
-  - EidolonTexture: {fileID: 21300000, guid: c975dbcde7cadd045a1fc68ecd696814, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 1a865319b2b33034589480f178fabc8b, type: 3}
     EidolonName: Void Descent
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -141,4 +143,3 @@ MonoBehaviour:
     PassiveUpgradeDescription: No longer lose health upon casting <color=yellow>black
       flames</color> and increase it's base damage by <color=green>100</color>
     EidolonQuote: ...
-  loreEntries: []

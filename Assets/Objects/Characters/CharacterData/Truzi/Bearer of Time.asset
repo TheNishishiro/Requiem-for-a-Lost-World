@@ -15,9 +15,9 @@ MonoBehaviour:
   Id: 9
   Name: Truzi
   Title: Bearer of Time
-  CharacterCard: {fileID: 21300000, guid: afea7149ff628be4aacdedeed4dddd6d, type: 3}
-  GatchaArt: {fileID: 21300000, guid: 959be61042043764a92d77a359ad86b2, type: 3}
-  GachaSubArtOffset: {x: 10, y: -30}
+  CharacterCard: {fileID: 21300000, guid: 64dc763ab113e914e9e3d564d35b73b9, type: 3}
+  GatchaArt: {fileID: 21300000, guid: 1036f3831cc01f04aa589e2fb8713c6d, type: 3}
+  GachaSubArtOffset: {x: -15, y: 0}
   Avatar: {fileID: 21300000, guid: adcef7cc9fe2b38409b25032be7543f5, type: 3}
   CharacterSprite: {fileID: 21300000, guid: d0eb6500af9d9bf48a81f3fd9957c2a0, type: 3}
   signet: {fileID: 21300000, guid: 31a97b3a2096a754bae665a9fa44cbf2, type: 3}
@@ -31,7 +31,7 @@ MonoBehaviour:
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: -3122666315348539954, guid: 1bda917795965f549b679b15292e8312,
     type: 3}
-  AbilityIcon: {fileID: 21300000, guid: 0701d025807c94640b46bc79c15df73b, type: 3}
+  AbilityIcon: {fileID: 21300000, guid: abdf9332df856094db67db86160a63f4, type: 3}
   ColorTheme: {r: 0.6431373, g: 0.8392157, b: 0.91764706, a: 1}
   Alignment: 1
   StarRating: 4
@@ -88,6 +88,8 @@ MonoBehaviour:
     LightDamageIncrease: 0
     CosmicDamageIncrease: 0
     EarthDamageIncrease: 0
+    DashCount: 2
+    Stamina: 2
   skillNodes:
   - {fileID: 11400000, guid: d69a099279b18b749a33b45ae1bd3cdd, type: 2}
   - {fileID: 11400000, guid: eee4ae9ecc87c6848a7ff76a3d7feceb, type: 2}
@@ -98,7 +100,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ffa816b7aee49d04fb5a2837d63d45e7, type: 2}
   - {fileID: 11400000, guid: 0e5183c8ad2972140a5ac18980312c25, type: 2}
   Eidolons:
-  - EidolonTexture: {fileID: 21300000, guid: ba4bcf87fb51942479fcf1405df837c8, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 5d3f2863c8de1c84d857883820622969, type: 3}
     EidolonName: Day frozen in time
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -109,7 +111,7 @@ MonoBehaviour:
     EidolonQuote: "Are you bothered by something? You seem out of it...\n...Is that
       so? I think it's alright, I mean... \nThe night sky really is beautiful. Say,
       should we just... Run away? Just the two of us. "
-  - EidolonTexture: {fileID: 21300000, guid: df988be28c277aa4a8cba2cd4cc207a2, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 14f146c6ea3e3eb4ba6c84f242a89ade, type: 3}
     EidolonName: Rich kid's life
     EidolonDescription: 
     WeaponUpgradeDescription: Double the duration of the time freeze caused by <color=orange>Time
@@ -122,7 +124,7 @@ MonoBehaviour:
 
       I only started growing tired of it when I noticed my
       childhood just kinda... passed me by.'
-  - EidolonTexture: {fileID: 21300000, guid: 8afc4b8d082bac24ea11d11f73c5bc5d, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: b9f3cefa25d0f064db9ea83d237a0ee1, type: 3}
     EidolonName: Embraced by her
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -137,7 +139,7 @@ MonoBehaviour:
 
       Hehe,
       am I flattering you?'
-  - EidolonTexture: {fileID: 21300000, guid: aabb777d425bf1940a966fa0b973a3fd, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: 34c51649a027c4f4b8e21468154ba92e, type: 3}
     EidolonName: We will always have enough time
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -155,7 +157,7 @@ MonoBehaviour:
 
       And the cute smile composing perfectly into the
       nature''s scenery... Is all I could ever want.'
-  - EidolonTexture: {fileID: 21300000, guid: 08d801ca56eb8004481b75a2e4197a1d, type: 3}
+  - EidolonTexture: {fileID: 21300000, guid: c42e95020a3c3fc4a8088c9ade478f31, type: 3}
     EidolonName: I'm here to save you
     EidolonDescription: 
     WeaponUpgradeDescription: 
@@ -171,4 +173,3 @@ MonoBehaviour:
       but a bird flew right under my axe's swing... \nI cut it right down the middle
       alongside the log... I felt so sick I had to throw up...\nNatalie have been
       doing the wood cutting since..."
-  loreEntries: []

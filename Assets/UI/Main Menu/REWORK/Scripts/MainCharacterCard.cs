@@ -119,7 +119,7 @@ public class MainCharacterCard : MonoBehaviour
         if (!characterSaveData.IsUnlocked)
         {
             labelName.text = "Locked";
-            labelTitle.text = _currentCharacterData.IsPullable ? $"Fragments: {_currentCharacterSaveData.Fragments}/50" : "Coming soon.";
+            labelTitle.text = _currentCharacterData.IsPullable ? $"Fragments: {_currentCharacterSaveData.Fragments}/50" : "Coming soon";
             labelStarRating.text = "";
             labelFinishedDifficulty.text = "";
             labelLevel.text = "";
