@@ -61,8 +61,26 @@ namespace Managers
 
 			AudioListener.volume = settings.Volume;
 			var renderPipeline = (UniversalRenderPipelineAsset)QualitySettings.renderPipeline;
-			
 			QualitySettings.vSyncCount = settings.Vsync ? 1 : 0;
+
+			switch (settings.FpsLimit)
+			{
+				case 0:
+					Application.targetFrameRate = 30;
+					break;
+				case 1:
+					Application.targetFrameRate = 60;
+					break;
+				case 2:
+					Application.targetFrameRate = 144;
+					break;
+				case 3:
+					Application.targetFrameRate = 240;
+					break;
+				case 4:
+					Application.targetFrameRate = -1;
+					break;
+			}
 
 			renderPipeline.renderScale = settings.RenderScaling switch
 			{
@@ -188,7 +206,32 @@ namespace Managers
 				3 => 8,
 				_ => QualitySettings.antiAliasing
 			};
-			
+
+			switch (settings.UpscalingMethod)
+			{
+				case 0:
+					renderPipeline.upscalingFilter = UpscalingFilterSelection.Auto;
+					renderPipeline.msaaSampleCount = QualitySettings.antiAliasing;
+					break;
+				case 1:
+					renderPipeline.upscalingFilter = UpscalingFilterSelection.Point;
+					renderPipeline.msaaSampleCount = QualitySettings.antiAliasing;
+					break;
+				case 2:
+					renderPipeline.upscalingFilter = UpscalingFilterSelection.Linear;
+					renderPipeline.msaaSampleCount = QualitySettings.antiAliasing;
+					break;
+				case 3:
+					renderPipeline.upscalingFilter = UpscalingFilterSelection.FSR;
+					renderPipeline.msaaSampleCount = QualitySettings.antiAliasing;
+					break;
+				case 4:
+					renderPipeline.upscalingFilter = UpscalingFilterSelection.STP;
+					QualitySettings.antiAliasing = 0;
+					renderPipeline.msaaSampleCount = 0;
+					break;
+			}
+
 			if (Application.platform == RuntimePlatform.Android) return;
 			
 			switch (settings.WindowMode)

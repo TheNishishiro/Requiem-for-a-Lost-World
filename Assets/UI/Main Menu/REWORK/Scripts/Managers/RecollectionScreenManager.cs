@@ -101,7 +101,7 @@ namespace UI.Main_Menu.REWORK.Scripts
                 {
                     GachaRewardType.Main => saveFile.CurrentBannerCharacterId,
                     GachaRewardType.Sub when Random.value <= 0.5 => GetAnyPromotionalCharacters(saveFile),
-                    GachaRewardType.Sub => CharacterListManager.instance.GetCharacters().Where(x => x.Id != saveFile.CurrentBannerCharacterId).OrderBy(x => Random.value).First().Id,
+                    GachaRewardType.Sub => CharacterListManager.instance.GetCharacters().Where(x => x.Id != saveFile.CurrentBannerCharacterId && x.IsPullable).OrderBy(x => Random.value).First().Id,
                     _ => CharactersEnum.Unknown
                 };
                 if (saveFile.Pity >= MaxPity)

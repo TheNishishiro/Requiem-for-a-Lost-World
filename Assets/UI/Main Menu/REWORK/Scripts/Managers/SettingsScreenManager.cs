@@ -32,7 +32,9 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryResolution;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryWindowMode;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryVSync;
+        [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryMaxFps;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryRenderScaling;
+        [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryUpscaling;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryVfxQuality;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryTextureQuality;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryLod;
@@ -230,6 +232,8 @@ namespace UI.Main_Menu.REWORK.Scripts
             entryResolution.SetOptions(_availableResolutions.Select(x => $"{x.width}x{x.height} @{x.refreshRateRatio.value:0}hz").ToArray(), GetResolutionIndex(configuration.ResolutionWidth, configuration.ResolutionHeight, configuration.RefreshRate));
             entryWindowMode.SetSelection(configuration.WindowMode);
             entryVSync.SetSelection(configuration.Vsync ? 1 : 0);
+            entryUpscaling.SetSelection(configuration.UpscalingMethod);
+            entryMaxFps.SetSelection(configuration.FpsLimit);
             entryRenderScaling.SetSelection(configuration.RenderScaling);
             entryVfxQuality.SetSelection(configuration.Quality);
             entryTextureQuality.SetSelection(configuration.TextureQuality);
@@ -255,6 +259,8 @@ namespace UI.Main_Menu.REWORK.Scripts
             configuration.RefreshRate = _availableResolutions[entryResolution.GetSelectedOption()].refreshRateRatio.numerator;
             configuration.WindowMode = entryWindowMode.GetSelectedOption();
             configuration.Vsync = entryVSync.GetSelectedOption() == 1;
+            configuration.UpscalingMethod = entryUpscaling.GetSelectedOption();
+            configuration.FpsLimit = entryMaxFps.GetSelectedOption();
             configuration.RenderScaling = entryRenderScaling.GetSelectedOption();
             configuration.Quality = entryVfxQuality.GetSelectedOption();
             configuration.TextureQuality = entryTextureQuality.GetSelectedOption();
