@@ -3,7 +3,7 @@
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 32
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -19,8 +19,9 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: _DetailNormalMap
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -42,10 +43,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DissolveScale: 35
+    - _DissolveScale: 60
+    - _QueueControl: 0
+    - _QueueOffset: 0
     m_Colors:
-    - _Color01: {r: 4.2443857, g: 0, b: 0, a: 0}
-    - _Color02: {r: 4.077188, g: 8.969813, b: 38.937145, a: 0}
+    - _Color01: {r: 1.9766748, g: 0, b: 0, a: 1}
+    - _Color02: {r: 1.9020761, g: 4.1845675, b: 18.164827, a: 1}
     - _DissolveSpeed: {r: -0.5, g: 0, b: 0, a: 0}
     - _MainTextSpeed: {r: -0.1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

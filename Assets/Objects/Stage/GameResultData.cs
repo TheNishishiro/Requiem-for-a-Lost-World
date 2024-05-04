@@ -78,6 +78,7 @@ namespace Objects.Stage
 		public static void FinalizeGameResult()
 		{
 			var currentDifficulty = GameData.GetCurrentDifficulty();
+			Difficulty = currentDifficulty.Difficulty;
 			
 			var timeSpent = Time / 60.0f;
 			var goldIncreaseByTime = timeSpent * 0.03f * currentDifficulty.RewardModifier;

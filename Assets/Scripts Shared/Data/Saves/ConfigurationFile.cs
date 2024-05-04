@@ -29,6 +29,8 @@ namespace DefaultNamespace.Data
 		public float Volume { get; set; }
 		public string Username { get; set; }
 		public bool RenderCoopProjectiles { get; set; }
+		public int UpscalingMethod { get; set; }
+		public int FpsLimit { get; set; }
 
 		public ConfigurationFile Default()
 		{
@@ -49,8 +51,10 @@ namespace DefaultNamespace.Data
 				ObjectDensity = 1;
 				Volume = 1;
 				TextureQuality = 2;
-				ConfigurationVersion = 8;
+				ConfigurationVersion = 9;
 				RenderCoopProjectiles = true;
+				UpscalingMethod = 0;
+				FpsLimit = 0;
 			}
 			else
 			{
@@ -71,6 +75,8 @@ namespace DefaultNamespace.Data
 				Volume = 1;
 				TextureQuality = 4;
 				RenderCoopProjectiles = false;
+				UpscalingMethod = 0;
+				FpsLimit = 4;
 			}
 
 			return Update();
@@ -132,6 +138,11 @@ namespace DefaultNamespace.Data
 			{
 				RenderCoopProjectiles = true;
 				ConfigurationVersion = 8;
+			}
+			if (ConfigurationVersion == 8)
+			{
+				FpsLimit = 4;
+				ConfigurationVersion = 9;
 			}
 
 			return this;
