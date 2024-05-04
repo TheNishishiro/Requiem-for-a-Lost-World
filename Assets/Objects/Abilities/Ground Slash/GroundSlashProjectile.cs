@@ -33,7 +33,7 @@ namespace Objects.Abilities.Ground_Slash
 			while (!IsDead && elapsedLifetime < GetTimeToLive())
 			{
 				var speed = Mathf.Lerp(startSpeed, 0, elapsedLifetime / GetTimeToLive());
-				rigidbody.velocity = direction.normalized * speed;
+				rigidbody.linearVelocity = direction.normalized * speed;
 				transformCache.localScale = Vector3.Lerp(startScale, endScale, elapsedLifetime / GetTimeToLive());
 				elapsedLifetime += Time.deltaTime;
 				yield return null;

@@ -94,7 +94,7 @@ namespace Managers
 				7 => 2f,
 				_ => renderPipeline.renderScale
 			};
-
+			
 			QualitySettings.lodBias = settings.LodLevel switch
 			{
 				0 => 0.4f,

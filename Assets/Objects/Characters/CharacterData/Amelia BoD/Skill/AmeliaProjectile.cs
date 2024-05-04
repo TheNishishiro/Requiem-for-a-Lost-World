@@ -90,10 +90,6 @@ namespace Objects.Characters.Amelia.Skill
 			yield return new WaitForSeconds(0.3f);
 			perlinNoise.m_AmplitudeGain = 1.5f;
 			yield return new WaitForSeconds(0.5f);
-			perlinNoise.m_AmplitudeGain = 1;
-			yield return new WaitForSeconds(0.3f);
-			perlinNoise.m_AmplitudeGain = 0.5f;
-			yield return new WaitForSeconds(0.7f);
 			perlinNoise.m_AmplitudeGain = 0f;
 			
 		}

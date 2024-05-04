@@ -36,6 +36,13 @@ namespace UI.Main_Menu.REWORK.Scripts
             Refresh();
         }
 
+        public void Setup(CharacterData characterData)
+        {
+            _currentCharacter = characterData;
+            rectTransform.Rotate(new Vector3(0,0,Utilities.RandomDoubleRange(-7f, -3f, 3f, 7f)));
+            Refresh();
+        }
+
         public void ShowDetails()
         {
             if (_currentItem != null)
@@ -46,13 +53,14 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         public void Refresh()
         {
-            if (_currentItem == null) RefreshShard();
-            else RefreshItem();
+            if (_currentItem != null) RefreshItem();
+            else if (_currentEidolon != null) RefreshShard();
+            else if (_currentCharacter != null) RefreshCharacter();
         }
 
         public void VisibleState(CollectionState state)
         {
-            var isUnlocked = _currentItem?.IsUnlocked(SaveFile.Instance) ??  IsShardUnlocked();
+            var isUnlocked = IsUnlocked();
             var filterUnlockState = state == CollectionState.Collected;
             var isVisible = isUnlocked == filterUnlockState || state == CollectionState.All;
             gameObject.SetActive(isVisible);
@@ -94,6 +102,26 @@ namespace UI.Main_Menu.REWORK.Scripts
             imageIcon.sprite = _currentEidolon.EidolonTexture;
             imageIcon.color = isUnlocked ? Color.white : Color.gray;
             labelName.text = isUnlocked ? _currentEidolon.EidolonName : "???";
+        }
+
+        private void RefreshCharacter()
+        {
+            var isUnlocked =  SaveFile.Instance.GetCharacterSaveData(_currentCharacter.Id).IsUnlocked;
+            imageIcon.material = isUnlocked ? null : materialBlackAndWhite;
+            imageIcon.sprite = _currentCharacter.Avatar;
+            imageIcon.color = isUnlocked ? Color.white : Color.gray;
+            labelName.text = isUnlocked ? _currentCharacter.Name : "???";
+        }
+
+        private bool IsUnlocked()
+        {
+            if (_currentItem != null) 
+                return _currentItem.IsUnlocked(SaveFile.Instance);
+            if (_currentEidolon != null) 
+                return IsShardUnlocked();
+            if (_currentCharacter != null)
+                return SaveFile.Instance.GetCharacterSaveData(_currentCharacter.Id).IsUnlocked;
+            return false;
         }
 
         private bool IsShardUnlocked()
