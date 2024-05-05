@@ -7,7 +7,9 @@ namespace UI.Labels.InGame
 {
 	public class AbilityDurationBar : MonoBehaviour
 	{
-		[SerializeField] private Slider slider;
+		[SerializeField] private Image imageIndicator;
+		private float _value;
+		private float _maxValue;
 		private IEnumerator _tickCoroutine;
 
 		public void StartTick(float maxValue)
@@ -24,7 +26,7 @@ namespace UI.Labels.InGame
 
 		private void SetMaxValue(float maxValue)
 		{
-			slider.value = slider.maxValue = maxValue;
+			_value = _maxValue = maxValue;
 		}
 
 		private void SetActive(bool isActive)
@@ -34,10 +36,11 @@ namespace UI.Labels.InGame
 
 		private IEnumerator Tick()
 		{
-			while (slider.value > 0)
+			while (_value > 0)
 			{
-				slider.value -= 0.1f;
-				yield return new WaitForSeconds(0.1f);
+				_value -= 0.05f;
+				imageIndicator.fillAmount = _value / _maxValue;
+				yield return new WaitForSeconds(0.05f);
 			}
 
 			SetActive(false);

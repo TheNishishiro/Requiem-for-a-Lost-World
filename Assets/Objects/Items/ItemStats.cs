@@ -207,6 +207,8 @@ namespace Objects.Items
 				.Replace("{LightDamageIncrease}", Utilities.StatToString(LightDamageIncrease, rarityFactor, true))
 				.Replace("{CosmicDamageIncrease}", Utilities.StatToString(CosmicDamageIncrease, rarityFactor, true))
 				.Replace("{EarthDamageIncrease}", Utilities.StatToString(EarthDamageIncrease, rarityFactor, true))
+				.Replace("{Stamina}", Utilities.StatToString(Stamina, rarityFactor))
+				.Replace("{DashCount}", DashCount.ToString())
 				.Replace("{Rerolls}", (Rerolls == 0 ? 0 : Rerolls + (rarity - 1)).ToString())
 				.Replace("{Skips}", (Skips == 0 ? 0 : Skips + (rarity - 1)).ToString())
 				;

@@ -59,8 +59,7 @@ namespace UI.Labels.InGame.LevelUpScreen
 
 		public void SelectUpgrade()
 		{
-			_upgradeEntry.LevelUp(WeaponManager.instance);
-			_upgradePanelManager.ClosePanel();
+			_upgradePanelManager.Upgrade(_upgradeEntry);
 		}
 	}
 }

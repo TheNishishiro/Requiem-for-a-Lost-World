@@ -4,7 +4,7 @@ using Objects.Characters;
 
 namespace DefaultNamespace.Data.Achievements
 {
-	public enum AchievementEnum // 93
+	public enum AchievementEnum // 95
 	{
 		[AchievementValue("Jack of all trades", "Obtain 6 weapons in a single game", AchievementSection.Misc, Rarity.Common)]
 		Hold6Weapons = 0,
@@ -54,6 +54,10 @@ namespace DefaultNamespace.Data.Achievements
 		HealAndTake6000Damage = 88,
 		[AchievementValue("Haste", "Have over 55% cooldown reduction upon leveling up", AchievementSection.Combat, Rarity.Rare)]
 		Reach55PercentCdr = 89,
+		[AchievementValue("Path of Thousand Steps", "Walk for 10 kilometers", AchievementSection.Misc, Rarity.Rare, RequirementType.DistanceTraveled, 10000)]
+		WalkAThousandSteps = 94,
+		[AchievementValue("Decide already", "Be indecisive for too long", AchievementSection.Misc, Rarity.Legendary)]
+		ScrollCharactersTooManyTimes = 95,
 		
 		#region Survive with characters
 

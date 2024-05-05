@@ -15,6 +15,7 @@
         TimeSpendWithDarkCharacter = 10,
         PlayTime = 11,
         EnemyBossKills = 12,
-        HealAndDamageInSingleGame = 13
+        HealAndDamageInSingleGame = 13,
+        DistanceTraveled = 14
     }
 }

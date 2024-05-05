@@ -18,9 +18,11 @@ namespace Managers
 		public static AchievementManager instance;
 		private int _enemiesKilled;
 		private int _bossKills;
+		private int _menuScrolls;
 		private int _highRarityPickupsObtained;
 		private float _healAmountInOneGame;
 		private float _damageTakenInOneGame;
+		private float _distanceTraveled;
         
 		public void Awake()
 		{
@@ -36,6 +38,7 @@ namespace Managers
 			_highRarityPickupsObtained = 0;
 			_healAmountInOneGame = 0;
 			_damageTakenInOneGame = 0;
+			_menuScrolls = 0;
 		}
 
 		public void OnStageTimeUpdated(float time)
@@ -184,6 +187,20 @@ namespace Managers
 		{
 			if (PlayerStatsScaler.GetScaler().GetCooldownReductionPercentage() <= 0.45f)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Reach55PercentCdr);
+		}
+
+		public void OnCharacterMove(float distanceMoved)
+		{
+			SaveFile.Instance.DistanceTraveled += distanceMoved;
+			if (SaveFile.Instance.DistanceTraveled > 10000)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.WalkAThousandSteps);
+		}
+
+		public void OnMenuCharacterChange()
+		{
+			_menuScrolls++;
+			if (_menuScrolls >= 69)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.ScrollCharactersTooManyTimes);
 		}
 	}
 }

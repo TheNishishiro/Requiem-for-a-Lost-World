@@ -134,6 +134,9 @@ namespace UI.Main_Menu.REWORK.Scripts
                     var fill2 = saveFile.DamageTakeInOneGame / requirementValue;
                     fillAmount = fill1 / 2 + fill2 / 2;
                     break;
+                case RequirementType.DistanceTraveled:
+                    fillAmount = (float)(saveFile.DistanceTraveled / requirementValue);
+                    break;
                 case RequirementType.None:
                     break;
                 default:

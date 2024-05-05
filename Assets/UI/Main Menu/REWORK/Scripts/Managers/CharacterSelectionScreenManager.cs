@@ -74,6 +74,7 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
         AudioManager.instance.PlayButtonClick();
         animatorChangeCharacter.Play("ChangeCharacter");
         _keyNextActionTime = Time.time + KeyHoldDelay;
+        AchievementManager.instance.OnMenuCharacterChange();
     }
 
     public void PreviousCharacter()
@@ -87,6 +88,7 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
         AudioManager.instance.PlayButtonClick();
         animatorChangeCharacter.Play("ChangeCharacter");
         _keyNextActionTime = Time.time + KeyHoldDelay;
+        AchievementManager.instance.OnMenuCharacterChange();
     }
 
     public void Open(bool isCoopSelect)

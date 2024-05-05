@@ -51,6 +51,7 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -145,6 +146,7 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -281,8 +283,8 @@ MonoBehaviour:
   - pickupObject: {fileID: 3634895298855100167, guid: 275792940c647844196d33239fe7d5cf,
       type: 3}
     chance: 0.35
-    amountMin: 30
-    amountMax: 200
+    amountMin: 75
+    amountMax: 225
   - pickupObject: {fileID: 3634895298855100167, guid: a146265883438a44cad22daed1bd3bd9,
       type: 3}
     chance: 0.5

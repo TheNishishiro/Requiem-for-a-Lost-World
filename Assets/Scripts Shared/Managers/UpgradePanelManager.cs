@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
 using Interfaces;
@@ -10,6 +11,7 @@ using UI.Labels.InGame.LevelUpScreen;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -21,6 +23,12 @@ namespace Managers
 		[SerializeField] private Button rerollButton;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
 		private bool _isWeaponOnly;
+		private float _timeOpened;
+
+		private void Update()
+		{
+			_timeOpened += Time.unscaledDeltaTime;
+		}
 
 		public void OpenPanel()
 		{
@@ -65,6 +73,7 @@ namespace Managers
 		
 		public void Open()
 		{
+			_timeOpened = 0;
 			ReloadUpgrades();
 		}
 
@@ -103,6 +112,14 @@ namespace Managers
 				upgradeButtons[i].gameObject.SetActive(true);
 				upgradeButtons[i].Set(upgradeEntries[i], this);
 			}
+		}
+
+		public void Upgrade(UpgradeEntry upgradeEntry)
+		{
+			if (_timeOpened < 1.5f) return;
+			
+			upgradeEntry.LevelUp(WeaponManager.instance);
+			ClosePanel();
 		}
 	}
 }

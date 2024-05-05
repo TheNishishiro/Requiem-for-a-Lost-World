@@ -84,6 +84,9 @@ VFXRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_StaticBatchInfo:
@@ -275,9 +278,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc556108044442f8a5a9b1316ebd50f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  State: 0
+  networkProjectile: {fileID: 0}
+  transformCache: {fileID: 0}
   UseParticles: 0
   ParticleSystem: {fileID: 0}
+  disableHitbox: 0
   hitbox: {fileID: 5590379859172102884}
   spawningStage:
     stageObject: {fileID: 0}
@@ -299,6 +304,7 @@ MonoBehaviour:
   reduceSizeBeforeTime: 0
   targetMinSize: {x: 0, y: 0, z: 0}
   multiplyTargetByScale: 0
+  dontTickLifeTime: 0
   LifeTime: 8
   damageDelay: 3.3
 --- !u!65 &5590379859172102884
@@ -363,7 +369,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3562339239812459043}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 774ad8e0ba3d37049b0756718f4648fc, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 9454738fc8e794848978828b5a37dab9, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -458,6 +464,9 @@ VFXRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_StaticBatchInfo:

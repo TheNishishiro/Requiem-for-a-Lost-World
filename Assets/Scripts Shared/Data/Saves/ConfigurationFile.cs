@@ -51,10 +51,10 @@ namespace DefaultNamespace.Data
 				ObjectDensity = 1;
 				Volume = 1;
 				TextureQuality = 2;
-				ConfigurationVersion = 9;
 				RenderCoopProjectiles = true;
 				UpscalingMethod = 0;
 				FpsLimit = 0;
+				ConfigurationVersion = 9;
 			}
 			else
 			{
@@ -65,7 +65,7 @@ namespace DefaultNamespace.Data
 				RenderScaling = 4;
 				ShadowQuality = 5;
 				LodLevel = 4;
-				AntiAliasing = 4;
+				AntiAliasing = 3;
 				IsDiscordEnabled = false;
 				PresetIndex = 4;
 				ConfigurationVersion = 0;
@@ -77,6 +77,11 @@ namespace DefaultNamespace.Data
 				RenderCoopProjectiles = false;
 				UpscalingMethod = 0;
 				FpsLimit = 4;
+				WindowMode = 0;
+				ResolutionWidth = Screen.currentResolution.width;
+				ResolutionHeight = Screen.currentResolution.height;
+				RefreshRate = Screen.currentResolution.refreshRateRatio.numerator;
+				ConfigurationVersion = 9;
 			}
 
 			return Update();
@@ -142,6 +147,8 @@ namespace DefaultNamespace.Data
 			if (ConfigurationVersion == 8)
 			{
 				FpsLimit = 4;
+				if (AntiAliasing > 3)
+					AntiAliasing = 3;
 				ConfigurationVersion = 9;
 			}
 

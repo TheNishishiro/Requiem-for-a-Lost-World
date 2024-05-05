@@ -60,6 +60,7 @@ namespace DefaultNamespace.Data
 		public UnityEvent<CharactersEnum, CharacterRank> OnCharacterUnlocked;
 		
 		public static SaveFile Instance { get; private set; }
+		public double DistanceTraveled { get; set; }
 
 		private void Awake()
 		{
@@ -137,6 +138,7 @@ namespace DefaultNamespace.Data
 			NextBannerChangeDate = saveData.LastBannerChangeDate;
 			SelectedDifficulty = saveData.SelectedDifficulty;
 			SelectedCharacterId = saveData.SelectedCharacterId;
+			DistanceTraveled = saveData.DistanceTraveled;
 			BannerHistory = saveData.BannerHistory ?? new List<CharactersEnum>();
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
@@ -328,6 +330,7 @@ namespace DefaultNamespace.Data
 		public ulong TotalAmountHealed;
 		public ulong DamageTakeInOneGame;
 		public ulong TotalDamageTaken;
+		public double DistanceTraveled;
 		public bool IsFirstTutorialCompleted;
 		public int Pity;
 		public DifficultyEnum SelectedDifficulty;
@@ -368,6 +371,7 @@ namespace DefaultNamespace.Data
 			HealAmountInOneGame = saveFile.HealAmountInOneGame;
 			TotalAmountHealed = saveFile.TotalAmountHealed;
 			DamageTakeInOneGame = saveFile.DamageTakeInOneGame;
+			DistanceTraveled = saveFile.DistanceTraveled;
 			TotalDamageTaken = saveFile.TotalDamageTaken;
 			CurrentBannerCharacterId = saveFile.CurrentBannerCharacterId;
 			CurrentBannerSubCharacterId1 = saveFile.CurrentBannerSubCharacterId1;
