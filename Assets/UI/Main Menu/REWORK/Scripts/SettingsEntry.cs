@@ -16,7 +16,9 @@ namespace UI.Main_Menu.REWORK.Scripts
         [SerializeField] private Color enabledColor;
         [SerializeField] private Color disabledColor;
         [SerializeField] private TMP_InputField textInput; 
+        [SerializeField] private TextMeshProUGUI labelValue; 
         [SerializeField] private Slider sliderInput;
+        private int _labelUnderlyingValue; 
         
         public void SetOptions(string[] options, int defaultSelection = 0)
         {
@@ -77,6 +79,22 @@ namespace UI.Main_Menu.REWORK.Scripts
         public float GetSliderValue()
         {
             return sliderInput.value;
+        }
+
+        public void SetLabelValue(string text)
+        {
+            labelValue.text = text;
+        }
+
+        public void SetLabelValue(string text, int value)
+        {
+            labelValue.text = text;
+            _labelUnderlyingValue = value;
+        }
+
+        public int GetLabelValue()
+        {
+            return _labelUnderlyingValue;
         }
     }
 }

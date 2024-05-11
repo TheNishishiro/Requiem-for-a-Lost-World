@@ -29,11 +29,11 @@ MonoBehaviour:
     Each <color=#BAFFB2>character level</color>
     increases her crit damage by <color=green>3%</color>'
   AbilityName: Piercing Shot
-  AbilityDescription: Shoot an arrow traveling forward, dealing continuous damage
-    and pushing enemies away
-  AbilityCooldown: 15
+  AbilityDescription: Summon an energy dome that bounces arrows around dealing physical
+    damage with each hit
+  AbilityCooldown: 25
   SpecialPrefab: {fileID: 0}
-  AbilityPrefab: {fileID: 7756303805229472153, guid: edb4c9865779c8140a83909e39695570,
+  AbilityPrefab: {fileID: 7522501103392669851, guid: 0c655f411a6edf84f80d91ab53b5b9eb,
     type: 3}
   AbilityIcon: {fileID: 21300000, guid: b68b7e4319e80e142ae6b475cedf8502, type: 3}
   ColorTheme: {r: 0.94117653, g: 0.6, b: 0.5647059, a: 1}
@@ -93,7 +93,7 @@ MonoBehaviour:
     CosmicDamageIncrease: 0
     EarthDamageIncrease: 0
     DashCount: 2
-    Stamina: 2
+    Stamina: 3.5
   skillNodes:
   - {fileID: 11400000, guid: 9e08047635e98f246b3060c64cb4a3d6, type: 2}
   - {fileID: 11400000, guid: ef40ea8f98ac5584887bdd38f32645de, type: 2}
@@ -111,7 +111,7 @@ MonoBehaviour:
     EidolonDescription: 
     WeaponUpgradeDescription: 
     SkillUpgradeDescription: 
-    PassiveUpgradeDescription: Each unlocked shard increases her damage by <color=green>1</color>
+    PassiveUpgradeDescription: Each unlocked shard increases her damage by <color=green>2</color>
     EidolonQuote: 'The cards have been dealt, and I''m the queen. My name is Summer,
       and I''m the prettiest around here - and don''t you forget it. Let me be your
       guide through this mess, because I''m the only one who can keep you entertained.
@@ -130,8 +130,8 @@ MonoBehaviour:
     EidolonName: The Weight of Beauty
     EidolonDescription: 
     WeaponUpgradeDescription: 
-    SkillUpgradeDescription: <color=#9EFFF3>Piercing Shot</color> will shoot two
-      additional arrows in a cone
+    SkillUpgradeDescription: Enemies hit by <color=#9EFFF3>Piercing Shot</color>
+      will take a 100% more damage for 2 seconds
     PassiveUpgradeDescription: 
     EidolonQuote: 'Ugh, being this beautiful is exhausting. Especially when everyone
       expects me to be some kind of goddess just because of my looks. In the military,
@@ -149,10 +149,10 @@ MonoBehaviour:
     EidolonDescription: 
     WeaponUpgradeDescription: 
     SkillUpgradeDescription: 
-    PassiveUpgradeDescription: 'Increase crit rate by <color=green>15%</color>
+    PassiveUpgradeDescription: 'Increase crit rate by <color=green>25%</color>
 
       Increase
-      movement speed by <color=green>0.05 m/s</color>'
+      movement speed by <color=green>0.15 m/s</color>'
     EidolonQuote: 'Oh, Chitose? That girl''s a wild card, always bursting with energy
       like a fireworks explosion. I''ve never seen anyone match her intensity, but
       too bad we don''t get to hang out more often... or less often, depending on
@@ -168,7 +168,8 @@ MonoBehaviour:
     EidolonDescription: 
     WeaponUpgradeDescription: 
     SkillUpgradeDescription: 
-    PassiveUpgradeDescription: 'Increase enemy max count by <color=red>20%</color> '
+    PassiveUpgradeDescription: Gain additional 2% <color=#FFC300>crit damage</color>
+      per character level
     EidolonQuote: 'I put on a smile, and pretend everything''s fine. But deep down,
       I''m dying inside. Being a squad leader used to be fun, back in the day when
       we were still just a bunch of misfits running around. But now, every time we''re

@@ -166,11 +166,11 @@ namespace Objects.Enemies
 			gemDropChance.amountMax = 50;
 			dropOnDestroyComponent.AddDrop(gemDropChance);
 
-			stats.hp = (int)(stats.hp * healthMultiplier * PlayerStatsScaler.GetScaler().GetEnemyHealthIncrease()) * GameData.GetCurrentDifficulty().EnemyHealthModifier;
+			stats.hp = (int)(stats.hp * healthMultiplier * PlayerStatsScaler.GetScaler().GetEnemyHealthIncrease()) * GameData.GetCurrentDifficulty().EnemyHealthModifier * GameSettings.EnemyHealthModifier;
 			stats.speed *= speedMultiplier;
 			stats.speed *= PlayerStatsScaler.GetScaler().GetEnemySpeedIncrease();
 			stats.speed *= GameData.GetCurrentDifficulty().EnemySpeedModifier;
-			stats.damage *= GameData.GetCurrentDifficulty().EnemyDamageModifier * damageMultiplier;
+			stats.damage *= GameData.GetCurrentDifficulty().EnemyDamageModifier * damageMultiplier * GameSettings.EnemyDamageModifier;
 			damage.Value = stats.damage;
 			chaseComponent.FollowYAxis = newStats.allowFlying;
 			chaseComponent.SetSpeed(stats.speed);

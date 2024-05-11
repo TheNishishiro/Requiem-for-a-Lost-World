@@ -14,7 +14,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityTemplateProjects;
 
-public class GameSettingsScManareenger : MonoBehaviour, IStackableWindow
+public class GameSettingsScreenManager : MonoBehaviour, IStackableWindow
 {
     [BoxGroup("Containers")] [SerializeField] private DifficultyContainer containerDifficulties;
     [Space]
@@ -44,6 +44,7 @@ public class GameSettingsScManareenger : MonoBehaviour, IStackableWindow
     [BoxGroup("Labels")] [SerializeField] private TextMeshProUGUI labelDifficultyInsane;
     [BoxGroup("Labels")] [SerializeField] private TextMeshProUGUI labelCoopPlayAllow;
     [BoxGroup("Labels")] [SerializeField] private TextMeshProUGUI labelCoopPlayDeny;
+    [BoxGroup("Labels")] [SerializeField] private TextMeshProUGUI labelShortPlayTime;
 
     public void SetDifficulty(int difficultyId)
     {
@@ -77,6 +78,12 @@ public class GameSettingsScManareenger : MonoBehaviour, IStackableWindow
         NetworkingContainer.IsAllowJoins = isAllow;
     }
 
+    public void ToggleShortPlayTime()
+    {
+        GameSettings.IsShortPlayTime = !GameSettings.IsShortPlayTime;
+        labelShortPlayTime.fontSharedMaterial = GameSettings.IsShortPlayTime ? materialSelectionPositive : materialNeutral;
+    }
+
     public void Open()
     {
         var character = CharacterListManager.instance.GetActiveCharacter();
@@ -90,6 +97,7 @@ public class GameSettingsScManareenger : MonoBehaviour, IStackableWindow
 
         SetCoopPreference(true);
         SetDifficulty((int)SaveManager.instance.GetSaveFile().SelectedDifficulty);
+        labelShortPlayTime.fontSharedMaterial = GameSettings.IsShortPlayTime ? materialSelectionPositive : materialNeutral;
         
         StackableWindowManager.instance.OpenWindow(this);
     }

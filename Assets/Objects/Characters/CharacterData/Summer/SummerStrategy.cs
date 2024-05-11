@@ -17,22 +17,15 @@ namespace Objects.Characters.Summer
 		{
 			var critDamageIncrease = 0.03f;
 
-			if (characterRank >= CharacterRank.E2)
-				stats.SkillCooldownReductionPercentage += 0.20f;
+			if (characterRank >= CharacterRank.E1)
+				stats.Damage += 2f * (int)characterRank;
 			if (characterRank >= CharacterRank.E3)
 			{
-				stats.CritRate += 0.15f;
-				stats.MovementSpeed += 0.05f;
+				stats.CritRate += 0.25f;
+				stats.MovementSpeed += 0.15f;
 			}
 			if (characterRank >= CharacterRank.E4)
 			{
-				stats.EnemyMaxCountIncreasePercentage += 0.2f;
-				stats.Luck += 0.15f;
-			}
-			if (characterRank >= CharacterRank.E5)
-			{
-				stats.DodgeChance += 0.2f;
-				stats.ItemRewardIncrease += 0.15f;
 				critDamageIncrease += 0.02f;
 			}
 

@@ -22,10 +22,17 @@ namespace Objects.Abilities.Book
 		
 		protected override void CustomUpdate()
 		{
-			if (rotateTarget != null)
-			{
+			if (rotateTarget != null) {
 				offset = Quaternion.AngleAxis(Time.deltaTime * WeaponStatsStrategy.GetSpeed(), Vector3.up) * offset;
+
 				transformCache.position = rotateTarget.transform.position + offset;
+
+				Vector3 projectileToPlayer = (rotateTarget.transform.position - transformCache.position).normalized;
+
+				// Calculate the direction the projectile should face
+				Vector3 faceDirection = Vector3.Cross(projectileToPlayer, Vector3.up);
+
+				transformCache.rotation = Quaternion.LookRotation(faceDirection, Vector3.up);
 			}
 
 			if (_explosionCooldown > 0)

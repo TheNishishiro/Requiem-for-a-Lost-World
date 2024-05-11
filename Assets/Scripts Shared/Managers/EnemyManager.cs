@@ -45,6 +45,7 @@ public class EnemyManager : NetworkBehaviour
 	
 	private void Update()
 	{
+		if (Time.timeScale == 0) return;
 		_timer -= Time.deltaTime;
 
 		if (_timer <= 0 || currentEnemyCount < enemyMinCount)
@@ -56,7 +57,7 @@ public class EnemyManager : NetworkBehaviour
 		if (!defaultSpawns.Any())
 			return;
 		
-		_timer = spawnTimer * PlayerStatsScaler.GetScaler().GetEnemySpawnRateIncrease() * GameData.GetCurrentDifficulty().EnemySpawnRateModifier;
+		_timer = spawnTimer * PlayerStatsScaler.GetScaler().GetEnemySpawnRateIncrease() * GameData.GetCurrentDifficulty().EnemySpawnRateModifier * GameSettings.EnemySpawnRateModifier;
 		
 		var randomSpawn = defaultSpawns[Random.Range(0, defaultSpawns.Count)];
 		SpawnEnemy(randomSpawn);
@@ -97,6 +98,7 @@ public class EnemyManager : NetworkBehaviour
 		enemy.Spawn();
 		
 		var expIncrease = playerCount <= 1 ? 1 : Mathf.Pow(0.85f, playerCount);
+		expIncrease *= GameSettings.ExpDropModifier;
 		var damageIncrease = playerCount <= 1 ? 1 : playerCount * 0.25f;
 		
 		enemyComponent.SetPlayerTarget(targetClient);

@@ -63,7 +63,7 @@ public class MainCharacterCard : MonoBehaviour
     [Space]
     [BoxGroup("Menus")] [SerializeField] private ShardScreenManager shardScreenManager;
     [BoxGroup("Menus")] [SerializeField] private RuneScreenManager runeScreenManager;
-    [BoxGroup("Menus")] [SerializeField] private GameSettingsScManareenger gameSettingsScreenManager;
+    [BoxGroup("Menus")] [SerializeField] private GameSettingsScreenManager gameSettingsScreenManager;
     [BoxGroup("Menus")] [SerializeField] private ServerScreenManager serverScreenManager;
     [Space]
     [BoxGroup("Navigation")] [SerializeField] private TextMeshProUGUI arrowPreviousCharacter;

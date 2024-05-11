@@ -15,7 +15,7 @@ namespace Objects.Drops
 	{
 		[SerializeField] protected PickupObject pickUpObject;
 		[SerializeField] protected PickupEnum PickupEnum;
-		[SerializeField] public BoxCollider boxCollider;
+		[SerializeField] public Collider boxCollider;
 		private Transform _cachedTransform;
 		protected bool IsFollowingPlayer;
 		private const float Speed = 20f;

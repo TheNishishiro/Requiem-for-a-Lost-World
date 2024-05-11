@@ -288,6 +288,8 @@ namespace DefaultNamespace.Data
 
 		public void ExchangeGoldForGems()
 		{
+			if (Gold < 500) return;
+            
 			Gold -= 500;
 			Gems += 200;
 			Save();

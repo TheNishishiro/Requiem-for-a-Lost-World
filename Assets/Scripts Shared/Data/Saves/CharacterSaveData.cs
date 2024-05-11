@@ -96,7 +96,7 @@ namespace DefaultNamespace.Data
 				HighestInGameLevel = GameResultData.Level;
 
 			if (GameResultData.IsWin && GetFinishedDifficulty(GameData.GetCurrentStage().id) < GameResultData.Difficulty)
-				FinishedDifficulty.TryAdd(GameData.GetCurrentStage().id, GameResultData.Difficulty);
+				FinishedDifficulty[GameData.GetCurrentStage().id] = GameResultData.Difficulty;
 
 			var timePlayed = (ulong)GameResultData.Time.ToMinutes();
 			TotalPlayTime += timePlayed;

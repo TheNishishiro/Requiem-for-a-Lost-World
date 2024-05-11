@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Objects.Stage;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -27,7 +28,8 @@ namespace Managers.StageEvents
 			if (_eventIndexer >= stageData.stageEvents.Count) return;
 
 			var stageEvent = stageData.stageEvents[_eventIndexer];
-			if (_stageTime.time.Value < stageEvent.triggerTime) return;
+			var nextEventTime = GameSettings.IsShortPlayTime ? stageEvent.triggerTime / 2f : stageEvent.triggerTime;
+			if (_stageTime.time.Value < nextEventTime) return;
 
 			if (stageEvent.enemies?.Any() == true)
 			{

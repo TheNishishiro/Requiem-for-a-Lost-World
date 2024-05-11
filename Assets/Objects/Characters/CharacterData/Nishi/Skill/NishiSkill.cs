@@ -2,6 +2,7 @@
 using Data.Elements;
 using DefaultNamespace;
 using Objects.Enemies;
+using Objects.Players.Scripts;
 using Objects.Stage;
 using UnityEngine;
 using Weapons;
@@ -15,8 +16,7 @@ namespace Objects.Characters.Nishi.Skill
 		
 		private void Start()
 		{
-			var baseDamage = GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 300 : 50;
-			_damage = baseDamage * (1 + GameData.GetPlayerCharacterData().Stats.DamagePercentageIncrease);
+			_damage = GameData.GetPlayerCharacterRank() >= CharacterRank.E4 ? 300 : 50;
 			_elementalWeapon = new ElementalWeapon(Element.Lightning);
 			CurrentTimeToLive = LifeTime;
 			TimeAlive = 0;
@@ -34,7 +34,7 @@ namespace Objects.Characters.Nishi.Skill
 		{
 			if (!other.CompareTag("Enemy")) return;
             
-			other.GetComponent<Damageable>().TakeDamage(_damage, _elementalWeapon);
+			other.GetComponent<Damageable>().TakeDamage(PlayerStatsScaler.GetScaler().GetScaledDamageDealt(_damage).Damage, _elementalWeapon);
 		}
 	}
 }

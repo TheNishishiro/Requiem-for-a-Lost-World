@@ -24,6 +24,20 @@ namespace Objects.Characters
 
 		    return damageResult;
 	    }
+	    
+	    public virtual DamageResult GetScaledDamageDealt(float baseDamage, float damageIncrease = 0)
+	    {
+		    var damageResult = new DamageResult
+		    {
+			    IsCriticalHit = Random.value < GetCritRate()
+		    };
+
+		    damageResult.Damage = (float)(damageResult.IsCriticalHit
+			    ? (baseDamage + GetDamage()) * (GetDamageIncreasePercentage() + damageIncrease) * GetCritDamage()
+			    : (baseDamage + GetDamage()) * (GetDamageIncreasePercentage() + damageIncrease));
+
+		    return damageResult;
+	    }
         
         public virtual float GetHealth()
         {

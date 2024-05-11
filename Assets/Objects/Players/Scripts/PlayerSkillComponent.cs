@@ -208,7 +208,7 @@ namespace Objects.Players.Scripts
 					AmeliaSkill();
 					break;
 				case CharactersEnum.Nishi:
-					NishiSkill();
+					StartCoroutine(NishiSkill());
 					break;
 				case CharactersEnum.Nishi_HoF:
 					NishiHoFSkill();
@@ -271,16 +271,17 @@ namespace Objects.Players.Scripts
 			abilityDurationBar.StartTick(skillDuration);
 		}
 
-		private void NishiSkill()
+		private IEnumerator NishiSkill()
 		{
 			var result = Utilities.GetPointOnColliderSurface(_transform.position + _transform.forward * 1.5f, gameObject.transform);
 			SpawnManager.instance.SpawnObject(result, GameData.GetSkillPrefab().gameObject, _transform.rotation);
 
-			if (GameData.GetPlayerCharacterRank() < CharacterRank.E2) return;
+			if (GameData.GetPlayerCharacterRank() < CharacterRank.E2) yield break;
 			
-			for (var i = 0; i < 3; i++)
+			for (var i = 0; i < 8; i++)
 			{
-				var randomPosition = Utilities.GetPointOnColliderSurface(Utilities.GetRandomInArea(_transform.position, 5f), gameObject.transform);
+				yield return new WaitForSeconds(0.3f);
+				var randomPosition = Utilities.GetPointOnColliderSurface(Utilities.GetRandomInArea(_transform.position, 3.5f), gameObject.transform);
 				SpawnManager.instance.SpawnObject(randomPosition, GameData.GetSkillPrefab().gameObject, _transform.rotation);
 			}
 		}
@@ -335,18 +336,7 @@ namespace Objects.Players.Scripts
 		{
 			var arrow = SpawnManager.instance.SpawnObject(_transform.position, GameData.GetSkillPrefab().gameObject);
 			var projectileComponent = arrow.GetComponent<SummerSkill>();
-			projectileComponent.SetDirection(_transform.forward, 0);
-
-			if (GameData.IsCharacterRank(CharacterRank.E2))
-			{
-				arrow = SpawnManager.instance.SpawnObject(_transform.position, GameData.GetSkillPrefab().gameObject);
-				projectileComponent = arrow.GetComponent<SummerSkill>();
-				projectileComponent.SetDirection(_transform.forward, 30);
-				
-				arrow = SpawnManager.instance.SpawnObject(_transform.position, GameData.GetSkillPrefab().gameObject);
-				projectileComponent = arrow.GetComponent<SummerSkill>();
-				projectileComponent.SetDirection(_transform.forward, -30);
-			}
+			abilityDurationBar.StartTick(10f);
 		}
 
 		private IEnumerator CorinaSkill()
