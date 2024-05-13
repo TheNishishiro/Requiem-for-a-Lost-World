@@ -133,7 +133,7 @@ namespace Managers
             if (!spectatingClient.TryGet(out MultiplayerPlayer source)) return;
             if (!clientToSpectate.TryGet(out MultiplayerPlayer target)) return;
 
-            source.SetCameraTarget(target.cameraRoot.transform);
+            source.SetCameraTarget(target.GetRootCamera().transform);
         }
         
         [Rpc(SendTo.Server)]

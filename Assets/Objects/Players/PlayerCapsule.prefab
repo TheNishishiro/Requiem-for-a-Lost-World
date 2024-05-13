@@ -342,6 +342,7 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -504,6 +505,7 @@ VFXRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_StaticBatchInfo:
@@ -526,6 +528,68 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &3004865215991583242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1730860482530992552}
+  m_Layer: 0
+  m_Name: PlayerTopDownPersonCameraRoot
+  m_TagString: CinemachineTarget
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1730860482530992552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3004865215991583242}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 0, y: 0.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1285324612430987521}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
+--- !u!1 &3227211251895432691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4414077905234095257}
+  m_Layer: 0
+  m_Name: Player3rdPersonCameraRoot
+  m_TagString: CinemachineTarget
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4414077905234095257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3227211251895432691}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1285324612430987521}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4494398104223905184
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,6 +725,7 @@ VFXRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_StaticBatchInfo:
@@ -726,7 +791,7 @@ GameObject:
   m_Component:
   - component: {fileID: 263144740390832173}
   m_Layer: 0
-  m_Name: PlayerCameraRoot
+  m_Name: Player1stPersonCameraRoot
   m_TagString: CinemachineTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -802,6 +867,7 @@ GameObject:
   - component: {fileID: 1285324612430987521}
   - component: {fileID: 8941528487158153505}
   - component: {fileID: 5256499617130859163}
+  - component: {fileID: 2349815020991572741}
   - component: {fileID: 8094848157632211616}
   - component: {fileID: 899674151594234073}
   - component: {fileID: 1017688766209918019}
@@ -831,6 +897,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 263144740390832173}
+  - {fileID: 4414077905234095257}
+  - {fileID: 1730860482530992552}
   - {fileID: 7192733943534519902}
   - {fileID: 8293238058046017907}
   m_Father: {fileID: 0}
@@ -850,7 +918,6 @@ CharacterController:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -891,7 +958,35 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 6148446771177424525}
   TopClamp: 8
   BottomClamp: 8
-  CameraSensitivity: 1
+--- !u!114 &2349815020991572741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7663152931887335244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotationSmoothTime: 0.12
+  SpeedChangeRate: 10
+  JumpHeight: 0
+  Gravity: -9.8
+  JumpTimeout: 0.1
+  FallTimeout: 1
+  Grounded: 1
+  GroundedOffset: 0
+  GroundedRadius: 0.3
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 513
+  CinemachineCameraTarget: {fileID: 3227211251895432691}
+  TopClamp: 40
+  BottomClamp: -30
+  CameraAngleOverride: 0
+  LockCameraPosition: 0
 --- !u!114 &8094848157632211616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1075,7 +1170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 2308889901
-  InScenePlacedSourceGlobalObjectIdHash: 4262040808
+  InScenePlacedSourceGlobalObjectIdHash: 535377724
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -1126,9 +1221,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 082675a8f2963094392d6cde3d51c74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraRoot: {fileID: 6148446771177424525}
+  firstPersonCameraRoot: {fileID: 6148446771177424525}
+  thirdPersonCameraRoot: {fileID: 3227211251895432691}
+  topDownPersonCameraRoot: {fileID: 3004865215991583242}
   playerInput: {fileID: 1017688766209918019}
   firstPersonController: {fileID: 5256499617130859163}
+  thirdPersonController: {fileID: 2349815020991572741}
   starterAssetsInputs: {fileID: 899674151594234073}
   spriteRenderer: {fileID: 8259282880572190610}
   currentCharacterId:
@@ -1341,6 +1439,7 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1365,15 +1464,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a15c292a0738966488d741bcc168bbb7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 30c802ad28e83cc41965dfe6c388f4da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 7.68, y: 10.24}
+  m_Size: {x: 5.12, y: 7.68}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6062816866504131356

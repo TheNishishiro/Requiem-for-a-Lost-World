@@ -26,7 +26,6 @@ namespace StarterAssets
 		public float RotationSpeed = 1.0f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
-		public float StaminaRegenCooldown = 2.0f;
 
 		[Space(10)]
 		[Tooltip("The height the player can jump")]
@@ -58,8 +57,6 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
 
-		public float CameraSensitivity = 1.0f;
-
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -75,9 +72,6 @@ namespace StarterAssets
 		
 		private Vector2 _previousTouchPosition;
 		private bool _touchHasBegun;
-
-		private float _currentStaminaCooldown;
-		private float _currentStamina;
 
 	
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
@@ -130,26 +124,7 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
-			RegenStamina();
-			GuiManager.instance.UpdateStamina(_currentStamina, PlayerStatsScaler.GetScaler().GetStamina());
-		}
-
-		private void RegenStamina()
-		{
-			if (Input.GetKey(SaveFile.Instance.GetKeybinding(KeyAction.Sprint)) || GameManager.instance.IsPlayerSprinting)
-				return;
-
-			if (_currentStaminaCooldown > 0)
-			{
-				_currentStaminaCooldown -= Time.deltaTime;
-				return;
-			}
-
-			var stamina = PlayerStatsScaler.GetScaler().GetStamina();
-			if (_currentStamina >= stamina)
-				return;
-
-			_currentStamina += Time.deltaTime;
+			CustomPlayerMovement.Update();
 		}
 
 		private void LateUpdate()
@@ -191,14 +166,8 @@ namespace StarterAssets
 			if (GameManager.instance.playerStatsComponent.IsDead()) return;
 			
 			// set target speed based on move speed, sprint speed and if sprint is pressed
-			var targetSpeed = PlayerStatsScaler.GetScaler().GetMovementSpeed();
-			if ((Input.GetKey(SaveFile.Instance.GetKeybinding(KeyAction.Sprint)) || GameManager.instance.IsPlayerSprinting) && _currentStamina > 0)
-			{
-				targetSpeed *= 2;
-				_currentStamina -= Time.deltaTime;
-				_currentStaminaCooldown = StaminaRegenCooldown;
-			}
-
+			var targetSpeed = CustomPlayerMovement.GetSpeed();
+			
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
 			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude

@@ -61,6 +61,7 @@ namespace DefaultNamespace.Data
 		
 		public static SaveFile Instance { get; private set; }
 		public double DistanceTraveled { get; set; }
+		public int CameraMode;
 
 		private void Awake()
 		{
@@ -139,6 +140,7 @@ namespace DefaultNamespace.Data
 			SelectedDifficulty = saveData.SelectedDifficulty;
 			SelectedCharacterId = saveData.SelectedCharacterId;
 			DistanceTraveled = saveData.DistanceTraveled;
+			CameraMode = saveData.CameraMode;
 			BannerHistory = saveData.BannerHistory ?? new List<CharactersEnum>();
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
@@ -318,6 +320,7 @@ namespace DefaultNamespace.Data
 		public List<ServerData> Servers;
 		public List<CharactersEnum> BannerHistory;
 		public ConfigurationFile ConfigurationFile;
+		public int CameraMode;
 		public ulong Gold;
 		public ulong Gems;
 		public ulong EnemiesKilled;
@@ -380,6 +383,7 @@ namespace DefaultNamespace.Data
 			CurrentBannerSubCharacterId2 = saveFile.CurrentBannerSubCharacterId2;
 			CurrentBannerSubCharacterId3 = saveFile.CurrentBannerSubCharacterId3;
 			LastBannerChangeDate = saveFile.NextBannerChangeDate;
+			CameraMode = saveFile.CameraMode;
 		}
 
 	}

@@ -21,9 +21,12 @@ using UnityEngine.Serialization;
 
 public class MultiplayerPlayer : NetworkBehaviour
 {
-    public GameObject cameraRoot;
+    public GameObject firstPersonCameraRoot;
+    public GameObject thirdPersonCameraRoot;
+    public GameObject topDownPersonCameraRoot;
     public PlayerInput playerInput;
     public FirstPersonController firstPersonController;
+    public ThirdPersonController thirdPersonController;
     public StarterAssetsInputs starterAssetsInputs;
     public SpriteRenderer spriteRenderer;
     private CharactersEnum localCharacterId;
@@ -57,13 +60,21 @@ public class MultiplayerPlayer : NetworkBehaviour
             stage.Value = GameData.GetCurrentStage().id;
         }
 
-        if (IsOwner && cameraRoot != null)
-            SetCameraTarget(cameraRoot.transform);
+        if (IsOwner && GetRootCamera() != null)
+            SetCameraTarget(GetRootCamera().transform);
         
         GameData.SetCurrentDifficultyData(difficultyContainer.GetData(difficulty.Value));
         GameData.SetCurrentStage(stageContainer.GetData(stage.Value));
         playerInput.enabled = IsOwner;
-        firstPersonController.enabled = IsOwner;
+        firstPersonController.enabled = SaveFile.Instance.CameraMode == 0 && IsOwner;
+        thirdPersonController.enabled = SaveFile.Instance.CameraMode is 1 or 2 && IsOwner;
+        if (SaveFile.Instance.CameraMode == 2 && IsOwner)
+        {
+            //thirdPersonController.LockCameraPosition = true;
+            thirdPersonController.TopClamp = 50;
+            thirdPersonController.BottomClamp = 50;
+        }
+        
         starterAssetsInputs.enabled = IsOwner;
         base.OnNetworkSpawn();
         
@@ -83,12 +94,24 @@ public class MultiplayerPlayer : NetworkBehaviour
 
     public void SetCameraTarget(Transform targetTransform)
     {
-        FindFirstObjectByType<CinemachineVirtualCamera>().Follow = targetTransform;
+        GameManager.instance.GetCameraInstance().Follow = targetTransform;
+        GameManager.instance.GetCameraInstance().LookAt = targetTransform;
     }
 
     public void ResetCameraFollow()
     {
-        SetCameraTarget(cameraRoot.transform);
+        SetCameraTarget(GetRootCamera().transform);
+    }
+
+    public GameObject GetRootCamera()
+    {
+        return SaveFile.Instance.CameraMode switch
+        {
+            0 => firstPersonCameraRoot,
+            1 => thirdPersonCameraRoot,
+            2 => thirdPersonCameraRoot,
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 
     public void Update()

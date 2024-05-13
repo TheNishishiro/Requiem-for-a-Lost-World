@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cinemachine;
 using Data.Difficulty;
 using DefaultNamespace;
 using DefaultNamespace.Data;
@@ -39,6 +40,8 @@ namespace Managers
 		[SerializeField] public PlayerStatsComponent playerStatsComponent;
 		[SerializeField] private SpecialBarManager specialBarManager;
 		[SerializeField] public StatusEffectManager statusEffectManager;
+		[SerializeField] private CinemachineVirtualCamera firstPersonVirtualCamera;
+		[SerializeField] private CinemachineVirtualCamera thirdPersonVirtualCamera;
 		[HideInInspector] public SaveFile saveFile;
 		[HideInInspector] public bool IsPlayerSprinting;
 
@@ -55,6 +58,18 @@ namespace Managers
 		private void Initialize()
 		{
 			saveFile = FindFirstObjectByType<SaveFile>();
+			firstPersonVirtualCamera.gameObject.SetActive(saveFile.CameraMode == 0);
+			thirdPersonVirtualCamera.gameObject.SetActive(saveFile.CameraMode is 1 or 2);
+			if (saveFile.CameraMode == 2)
+			{
+				var componentBase = thirdPersonVirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
+				if (componentBase is Cinemachine3rdPersonFollow)
+				{
+					Debug.Log("componentBase = " + componentBase);
+					(componentBase as Cinemachine3rdPersonFollow).CameraDistance = 7;
+				}
+			}
+			
 			playerStatsComponent.Set(GameData.GetPlayerStartingStats());
             if (GameData.GetPlayerCharacterData()?.UseSpecialBar == true)
 	            specialBarManager.gameObject.SetActive(true);
@@ -99,6 +114,11 @@ namespace Managers
 			NetworkManager.Singleton.Shutdown(true);
 			NetworkingContainer.IsHostPlayer = true;
 			SceneManager.LoadScene("Scenes/Main Menu");
+		}
+
+		public CinemachineVirtualCamera GetCameraInstance()
+		{
+			return SaveFile.Instance.CameraMode == 0 ? firstPersonVirtualCamera : thirdPersonVirtualCamera;
 		}
 	}
 }

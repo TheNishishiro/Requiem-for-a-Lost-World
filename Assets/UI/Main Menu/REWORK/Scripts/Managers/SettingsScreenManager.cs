@@ -50,6 +50,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryCoopNickname;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryCoopDisplayProjectiles;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryVolume;
+        [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryCameraMode;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryAbilityKeyBind;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryMoveUpKeyBind;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryMoveDownKeyBind;
@@ -297,6 +298,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             entryCoopNickname.SetText(configuration.Username);
             entryCoopDisplayProjectiles.SetSelection(configuration.RenderCoopProjectiles ? 1 : 0);
             entryVolume.SetSliderValue(configuration.Volume);
+            entryCameraMode.SetSelection(_saveFile.CameraMode);
             var abilityKeyBind = _saveFile.GetKeybinding(KeyAction.Ability);
             entryAbilityKeyBind.SetLabelValue(abilityKeyBind.ToString(), (int)abilityKeyBind);
             var moveUpKeyBind = _saveFile.GetKeybinding(KeyAction.MoveUp);
@@ -338,6 +340,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             configuration.RenderCoopProjectiles = entryCoopDisplayProjectiles.GetSelectedOption() == 1;
             configuration.Username = entryCoopNickname.GetText();
             configuration.Volume = entryVolume.GetSliderValue();
+            _saveFile.CameraMode = entryCameraMode.GetSelectedOption();
             _saveFile.Keybindings[KeyAction.Ability] = (KeyCode)entryAbilityKeyBind.GetLabelValue();
             _saveFile.Keybindings[KeyAction.MoveUp] = (KeyCode)entryMoveUpKeyBind.GetLabelValue();
             _saveFile.Keybindings[KeyAction.MoveDown] = (KeyCode)entryMoveDownKeyBind.GetLabelValue();
