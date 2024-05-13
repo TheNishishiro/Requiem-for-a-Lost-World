@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyType: 7
   enemyName: Elemental Bird
   sprite: {fileID: 21300000, guid: 7869e562f92bc4b42a8930d5caef9647, type: 3}
+  spriteSheet: {fileID: 21300000, guid: 86b7b0029fbcdb344ad42dccb84f0654, type: 3}
   animatedPrefab: {fileID: 1208006046057053584, guid: 0c220771c4f41704b9bc84d2ec6fd1b1,
     type: 3}
   stats:
@@ -22,7 +23,8 @@ MonoBehaviour:
     damage: 5
     speed: 2
     elementStats: []
-  allowFlying: 1
-  groundOffset: 0
+  allowFlying: 0
+  groundOffset: 0.4
+  scaleOffset: 0.01
   isBossEnemy: 0
   ExpDrop: 150

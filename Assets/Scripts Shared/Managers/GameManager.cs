@@ -38,6 +38,7 @@ namespace Managers
 		[HideInInspector] public PlayerVfxComponent playerVfxComponent;
 		[SerializeField] public PlayerStatsComponent playerStatsComponent;
 		[SerializeField] private SpecialBarManager specialBarManager;
+		[SerializeField] public StatusEffectManager statusEffectManager;
 		[HideInInspector] public SaveFile saveFile;
 		[HideInInspector] public bool IsPlayerSprinting;
 

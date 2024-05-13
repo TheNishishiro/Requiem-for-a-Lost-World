@@ -23,6 +23,10 @@
         ShadowMan = 18,
         Slime = 19,
         SpiralMeat = 20,
-        Zombie = 21
+        Zombie = 21,
+        DemonBoss = 22,
+        DemonLordBoss = 23,
+        Plant1Boss = 24,
+        DarkPunisherBoss = 25
     }
 }

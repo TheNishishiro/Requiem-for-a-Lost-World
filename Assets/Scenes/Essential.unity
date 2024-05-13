@@ -1452,7 +1452,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 365635e37df601b48832fd6a1ff56837,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28934,7 +28934,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1786.8999, y: -252.6}
+  m_AnchoredPosition: {x: 1786.8999, y: -252.59998}
   m_SizeDelta: {x: 60.1018, y: 52.2848}
   m_Pivot: {x: 0.5000003, y: 0.49999976}
 --- !u!114 &1355956269
@@ -32797,6 +32797,7 @@ MonoBehaviour:
   playerVfxComponent: {fileID: 0}
   playerStatsComponent: {fileID: 1966883624}
   specialBarManager: {fileID: 5496318769822865013}
+  statusEffectManager: {fileID: 1557294572}
   saveFile: {fileID: 0}
   IsPlayerSprinting: 0
 --- !u!114 &1557294569
@@ -32998,6 +32999,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: decfafe60a5af70458628b1df29a4305, type: 2}
   - {fileID: 11400000, guid: c26b8117867a20847a69d64818423ea4, type: 2}
   - {fileID: 11400000, guid: cc71d43b843bc144da25a508b0b1fde9, type: 2}
+  - {fileID: 11400000, guid: 0b8276fda7556a54995b5acba469f475, type: 2}
+  - {fileID: 11400000, guid: c87296ca442af684c8a0b9204f02d565, type: 2}
+  - {fileID: 11400000, guid: 077154d38733f9244aca5229911a3263, type: 2}
+  - {fileID: 11400000, guid: 96f95dba73e458042b9f28b898b830eb, type: 2}
   spawnArea: {x: 10, y: 10}
   spawnTimer: 2
   _playerStatsComponent: {fileID: 1966883624}

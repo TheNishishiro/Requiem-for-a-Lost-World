@@ -220,7 +220,7 @@ public class EnemyManager : NetworkBehaviour
 
 	public Sprite GetSpriteByEnemy(EnemyTypeEnum enemyType)
 	{
-		return possibleEnemies.FirstOrDefault(x => x.enemyType == enemyType)?.sprite;
+		return possibleEnemies.FirstOrDefault(x => x.enemyType == enemyType)?.spriteSheet;
 	}
 
 	public void AddEnemy(Enemy networkBehaviour)

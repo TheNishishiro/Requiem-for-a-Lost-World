@@ -5,6 +5,7 @@ using System.Linq;
 using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Settings;
+using DefaultNamespace.Data.Statuses;
 using Interfaces;
 using Managers;
 using Objects.Abilities;
@@ -248,6 +249,7 @@ namespace Objects.Players.Scripts
 			
 			var skillDuration = 5f;
 			var cdrIncrease = 0.5f;
+			GameManager.instance.statusEffectManager.AddTemporaryEffect(StatusEffectType.TruziSkillCdReduction, skillDuration);
 			playerStatsComponent.TemporaryStatBoost(StatEnum.CooldownReductionPercentage, cdrIncrease, skillDuration);
 			abilityDurationBar.StartTick(skillDuration);
 		}
@@ -322,6 +324,7 @@ namespace Objects.Players.Scripts
 			var skillDuration = rank >= CharacterRank.E2 ? 10f : 5f;
 
 			playerStatsComponent.IncreaseCooldownReductionPercentage(cooldownReduction);
+			GameManager.instance.statusEffectManager.AddTemporaryEffect(StatusEffectType.AliceSkillCdReduction, skillDuration);
 			abilityDurationBar.StartTick(skillDuration);
 			yield return new WaitForSeconds(skillDuration);
 			playerStatsComponent.IncreaseCooldownReductionPercentage(-cooldownReduction);
@@ -385,6 +388,7 @@ namespace Objects.Players.Scripts
 			if (GameData.IsCharacterRank(CharacterRank.E5))
 				playerStatsComponent.TemporaryStatBoost(StatEnum.CritRate, 1, skillDuration);
 			playerStatsComponent.TemporaryStatBoost(StatEnum.DamagePercentageIncrease, damageIncreasePercentage, skillDuration);
+			GameManager.instance.statusEffectManager.AddTemporaryEffect(StatusEffectType.ElizaSkillDamageIncrease, skillDuration);
 			abilityDurationBar.StartTick(skillDuration);
 		}
 		

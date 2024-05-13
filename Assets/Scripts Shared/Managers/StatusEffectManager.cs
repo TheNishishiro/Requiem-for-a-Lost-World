@@ -1,4 +1,6 @@
-﻿using DefaultNamespace.Data.Statuses;
+﻿using System.Collections;
+using System.Collections.Generic;
+using DefaultNamespace.Data.Statuses;
 using UI.Labels.InGame.Status_Icon_Bar;
 using UnityEngine;
 
@@ -8,6 +10,7 @@ namespace Managers
     {
         [SerializeField] private StatusIconContainer statusIconContainer;
         public static StatusEffectManager instance;
+        private Dictionary<StatusEffectType, int> _activeTempEffects;
         
         private void Awake()
         {
@@ -33,6 +36,37 @@ namespace Managers
                 AddEffect(statusEffect, stackCount);
             else
                 RemoveEffect(statusEffect);
+        }
+
+        public void AddUniqueTemporaryEffect(StatusEffectType statusEffect, float duration)
+        {
+            _activeTempEffects ??= new Dictionary<StatusEffectType, int>();
+            if (_activeTempEffects.ContainsKey(statusEffect)) return;
+
+            _activeTempEffects.Add(statusEffect, 1);
+            StartCoroutine(TempEffectProcess(statusEffect, duration));
+        }
+
+        public void AddTemporaryEffect(StatusEffectType statusEffect, float duration)
+        {
+            _activeTempEffects ??= new Dictionary<StatusEffectType, int>();
+            if (!_activeTempEffects.TryAdd(statusEffect, 1))
+            {
+                _activeTempEffects[statusEffect]++;
+            }
+            StartCoroutine(TempEffectProcess(statusEffect, duration));
+        }
+        
+        private IEnumerator TempEffectProcess(StatusEffectType statEnum, float duration)
+        {
+            AddEffect(statEnum, _activeTempEffects[statEnum]);
+            yield return new WaitForSeconds(duration);
+            _activeTempEffects[statEnum] -= 1;
+            if (_activeTempEffects[statEnum] <= 0)
+            {
+                _activeTempEffects.Remove(statEnum);
+                RemoveEffect(statEnum);
+            }
         }
     }
 }
