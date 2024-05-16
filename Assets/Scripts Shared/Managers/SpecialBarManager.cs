@@ -24,11 +24,12 @@ namespace Managers
 			}
             
 			ResetBar();
-			SetMaxValue(PlayerStatsScaler.GetScaler().GetSpecialMaxValue());
+			SetMaxValue();
 		}
-		public void SetMaxValue(float maxValue)
+		
+		public void SetMaxValue()
 		{
-			specialBar.SetMax(maxValue);
+			specialBar.SetMax(PlayerStatsScaler.GetScaler().GetSpecialMaxValue());
 		}
 
 		public void ResetBar()
@@ -43,16 +44,25 @@ namespace Managers
 
 		public void Increment()
 		{
-			specialBar.Increment(PlayerStatsScaler.GetScaler().GetSpecialIncrementAmount());
+			PlayerStatsScaler.GetScaler().IncrementSpecial();
+			UpdateValue();
 		}
 
 		public void Increment(float amount)
 		{
-			specialBar.Increment(amount);
+			PlayerStatsScaler.GetScaler().IncrementSpecial(amount);
+			UpdateValue();
+		}
+
+		public void UpdateValue()
+		{
+			SetMaxValue();
+			specialBar.SetValue(PlayerStatsScaler.GetScaler().GetSpecialValue());
 		}
 
 		private void Update()
 		{
+			UpdateValue();
 			if (IsFull())
 				SpecialBarFilledEvent.Invoke();
 		}

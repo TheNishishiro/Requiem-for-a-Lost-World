@@ -123,7 +123,7 @@ namespace Weapons
 				yield return new WaitForSeconds(WeaponStatsStrategy.GetDuplicateSpawnDelay());
 			}
 			OnAttackEnd();
-		}
+		} 
 
 		protected virtual int GetAttackCount()
 		{

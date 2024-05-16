@@ -3254,7 +3254,10 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u2022 Added animations to enemies\n\u2022 Improved Dark Orb's VFX\n\u2022
-    Added free 3rd person and top-down cameras (can be changed in settings)"
+    Added free 3rd person, top-down, and 1st person cameras (can be changed in settings)\n\u2022
+    Fixed potential issue with final boss sometimes becoming immortal\n\u2022 Increased
+    HP regeneration from <b>Blessing of Light</b> ticks\n\u2022 Increased healing
+    buff provided by <b>Shiny Necklace</b>  15% \u2192 25% per item level"
 --- !u!222 &43235426
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -99366,7 +99369,7 @@ PrefabInstance:
     - target: {fileID: 2366826127762626087, guid: 1f24cb488748c754bbea9df5bcece0dd,
         type: 3}
       propertyPath: _options.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2366826127762626087, guid: 1f24cb488748c754bbea9df5bcece0dd,
         type: 3}
@@ -99386,7 +99389,7 @@ PrefabInstance:
     - target: {fileID: 2366826127762626087, guid: 1f24cb488748c754bbea9df5bcece0dd,
         type: 3}
       propertyPath: '_options.Array.data[3]'
-      value: 240
+      value: 1st person
       objectReference: {fileID: 0}
     - target: {fileID: 2366826127762626087, guid: 1f24cb488748c754bbea9df5bcece0dd,
         type: 3}
@@ -99414,7 +99417,14 @@ PrefabInstance:
 
         This
         is similar to a typical 2D camera view, where the camera is positioned overhead,
-        providing a top-down view of the player.'
+        providing a top-down view of the player.
+
+
+        <b>1st Person</b>
+
+        This
+        mode provides a first-person view, placing the camera right in the eyes of
+        the player.'
       objectReference: {fileID: 0}
     - target: {fileID: 5513683361809682694, guid: 1f24cb488748c754bbea9df5bcece0dd,
         type: 3}

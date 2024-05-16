@@ -25,6 +25,7 @@ namespace Objects.Abilities.Time_Blade
 
         protected override IEnumerator AttackProcess()
         {
+            OnAttackStart();
             for (var i = 0; i < GetAttackCount(); i++)
             {
                 for (var j = 0; j < 2; j++)
@@ -33,6 +34,7 @@ namespace Objects.Abilities.Time_Blade
                 }
                 yield return new WaitForSeconds(WeaponStatsStrategy.GetDuplicateSpawnDelay());
             }
+            OnAttackEnd();
         }
 
         protected override void OnLevelUp()

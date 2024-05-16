@@ -38,6 +38,11 @@ namespace Objects.Characters
 
 		    return damageResult;
 	    }
+
+	    public virtual void TakeDamage(float amount, bool isPreventDeath = false)
+	    {
+		    GameManager.instance.playerStatsComponent.TakeDamage(amount, isPreventDeath);
+	    }
         
         public virtual float GetHealth()
         {
@@ -341,6 +346,36 @@ namespace Objects.Characters
 		public float GetArmor()
 		{
 			return PlayerStats?.Armor ?? 0;
+		}
+
+		public virtual void IncrementSpecial()
+		{
+			PlayerStats.SpecialValue += PlayerStats.SpecialIncrease;
+			ClampSpecial();
+		}
+
+		public virtual void IncrementSpecial(float amount)
+		{
+			PlayerStats.SpecialValue += amount;
+			ClampSpecial();
+		}
+
+		protected void ClampSpecial()
+		{
+			if (PlayerStats.SpecialValue > PlayerStats.SpecialMax)
+				PlayerStats.SpecialValue = PlayerStats.SpecialMax;
+			if (PlayerStats.SpecialValue < 0)
+				PlayerStats.SpecialValue = 0;
+		}
+
+		public virtual float GetSpecialValue()
+		{
+			return PlayerStats.SpecialValue;
+		}
+
+		public virtual float GetPassiveWeaponFlatDamageIncrease()
+		{
+			return 0;
 		}
     }
 }

@@ -22,6 +22,7 @@ namespace Objects.Players
 	{
 		public float Health;
 		public float HealthMax;
+		public float SpecialValue;
 		public float SpecialMax;
 		public float SpecialIncrease;
 		public float MagnetSize;
@@ -142,6 +143,7 @@ namespace Objects.Players
 			EarthDamageIncrease = 0;
 			DashCount = 2;
 			Stamina = 2;
+			SpecialValue = 0;
 		}
 
 		public void Sum(ItemStats item, int rarity)

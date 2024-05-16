@@ -14,6 +14,7 @@ namespace Weapons
 	    protected int currentPassedEnemies;
 	    protected bool isDamageCooldownExpired;
 	    protected float ProjectileDamageIncreasePercentage;
+	    protected float ProjectileDamageIncrease;
 	    protected bool IsDead;
 	    
         public void TickDamageCooldown()
@@ -54,7 +55,7 @@ namespace Weapons
 			if (damageable.IsDestroyed())
 				return;
 
-			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage);
+			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage, ProjectileDamageIncrease);
 			damageable.TakeDamage(damage, ParentWeapon, isFollowUp);
 
 			if (isLimitedUsage && currentPassedEnemies-- <= 0)
@@ -66,7 +67,7 @@ namespace Weapons
 			if (damageable == null)
 				return;
 
-			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage);
+			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage, ProjectileDamageIncrease);
 			damageable.TakeDamage(damage, ParentWeapon, isFollowUp);
 			if (damageable.IsDestroyed())
 				return;
@@ -82,7 +83,7 @@ namespace Weapons
 				return;
 			
 			damageable = other.GetComponent<IDamageable>();
-			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage);
+			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage, ProjectileDamageIncrease);
 			damageable?.TakeDamageWithCooldown(damage, gameObject, WeaponStatsStrategy.GetDamageCooldown(), ParentWeapon);
 		}
 

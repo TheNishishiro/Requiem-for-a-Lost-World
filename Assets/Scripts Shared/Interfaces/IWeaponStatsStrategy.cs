@@ -4,7 +4,7 @@ namespace Interfaces
 {
     public interface IWeaponStatsStrategy
     {
-        DamageResult GetDamageDealt(float damageIncrease = 0);
+        DamageResult GetDamageDealt(float damageIncrease = 0, float flatDamageIncrease = 0);
         float GetTotalCooldown();
         float GetDuplicateSpawnDelay();
         int GetAttackCount();

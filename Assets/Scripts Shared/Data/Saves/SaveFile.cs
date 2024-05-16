@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Data.Difficulty;
 using DefaultNamespace.Data.Achievements;
+using DefaultNamespace.Data.Cameras;
 using DefaultNamespace.Data.Settings;
 using DefaultNamespace.Extensions;
 using JetBrains.Annotations;
@@ -61,7 +62,7 @@ namespace DefaultNamespace.Data
 		
 		public static SaveFile Instance { get; private set; }
 		public double DistanceTraveled { get; set; }
-		public int CameraMode;
+		public CameraModes CameraMode;
 
 		private void Awake()
 		{
@@ -320,7 +321,7 @@ namespace DefaultNamespace.Data
 		public List<ServerData> Servers;
 		public List<CharactersEnum> BannerHistory;
 		public ConfigurationFile ConfigurationFile;
-		public int CameraMode;
+		public CameraModes CameraMode;
 		public ulong Gold;
 		public ulong Gems;
 		public ulong EnemiesKilled;

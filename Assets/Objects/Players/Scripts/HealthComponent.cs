@@ -2,6 +2,8 @@
 using System.Linq;
 using Events.Scripts;
 using Managers;
+using Objects.Characters;
+using Objects.Stage;
 using UI.In_Game.GUI.Scripts.Managers;
 using UI.Labels.InGame;
 using Unity.Netcode;
@@ -44,7 +46,7 @@ namespace Objects.Players.Scripts
 				AchievementManager.instance.OnHealing(amount);
 			}
 			
-			playerStatsComponent.TakeDamage(amount, isPreventDeath);
+			PlayerStatsScaler.GetScaler().TakeDamage(amount, isPreventDeath);
 			DamageTakenEvent.Invoke(amount);
 			UpdateHealthBar();
 			
@@ -65,7 +67,7 @@ namespace Objects.Players.Scripts
 		private void Regen()
 		{
 			if (playerStatsComponent.IsDead()) return;
-			if (playerStatsComponent.IsFullHealth()) return;
+			if (playerStatsComponent.IsFullHealth() && !GameData.IsCharacter(CharactersEnum.Amelisana_BoN)) return;
 
 			Damage(-PlayerStatsScaler.GetScaler().GetHealthRegeneration());
 		}

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using Data.Difficulty;
 using DefaultNamespace.Data;
+using DefaultNamespace.Data.Cameras;
 using DefaultNamespace.Data.Stages;
 using Managers;
 using Objects;
@@ -23,7 +24,6 @@ public class MultiplayerPlayer : NetworkBehaviour
 {
     public GameObject firstPersonCameraRoot;
     public GameObject thirdPersonCameraRoot;
-    public GameObject topDownPersonCameraRoot;
     public PlayerInput playerInput;
     public FirstPersonController firstPersonController;
     public ThirdPersonController thirdPersonController;
@@ -66,13 +66,17 @@ public class MultiplayerPlayer : NetworkBehaviour
         GameData.SetCurrentDifficultyData(difficultyContainer.GetData(difficulty.Value));
         GameData.SetCurrentStage(stageContainer.GetData(stage.Value));
         playerInput.enabled = IsOwner;
-        firstPersonController.enabled = SaveFile.Instance.CameraMode == 0 && IsOwner;
-        thirdPersonController.enabled = SaveFile.Instance.CameraMode is 1 or 2 && IsOwner;
-        if (SaveFile.Instance.CameraMode == 2 && IsOwner)
+        firstPersonController.enabled = SaveFile.Instance.CameraMode is CameraModes.StaticThirdPerson or CameraModes.FirstPerson && IsOwner;
+        thirdPersonController.enabled = SaveFile.Instance.CameraMode is CameraModes.FreeThirdPerson or CameraModes.TopDown && IsOwner;
+        if (SaveFile.Instance.CameraMode == CameraModes.TopDown && IsOwner)
         {
-            //thirdPersonController.LockCameraPosition = true;
             thirdPersonController.TopClamp = 50;
             thirdPersonController.BottomClamp = 50;
+        }
+        if (SaveFile.Instance.CameraMode == CameraModes.FirstPerson && IsOwner)
+        {
+            firstPersonController.TopClamp = 30;
+            firstPersonController.BottomClamp = -30;
         }
         
         starterAssetsInputs.enabled = IsOwner;
@@ -107,9 +111,10 @@ public class MultiplayerPlayer : NetworkBehaviour
     {
         return SaveFile.Instance.CameraMode switch
         {
-            0 => firstPersonCameraRoot,
-            1 => thirdPersonCameraRoot,
-            2 => thirdPersonCameraRoot,
+            CameraModes.StaticThirdPerson => firstPersonCameraRoot,
+            CameraModes.FreeThirdPerson => thirdPersonCameraRoot,
+            CameraModes.TopDown => thirdPersonCameraRoot,
+            CameraModes.FirstPerson => firstPersonCameraRoot,
             _ => throw new ArgumentOutOfRangeException()
         };
     }

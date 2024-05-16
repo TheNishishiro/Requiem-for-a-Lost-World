@@ -25,6 +25,7 @@ namespace Objects.Abilities.KeyOfDespair
 
         protected override IEnumerator AttackProcess()
         {
+            OnAttackStart();
             if (_slashProjectile == null)
             {
                 RpcManager.instance.FireProjectileRpc(WeaponId, transform.position, NetworkManager.Singleton.LocalClientId);
@@ -38,6 +39,7 @@ namespace Objects.Abilities.KeyOfDespair
             projectile.gameObject.SetActive(true);
             projectile.SetNextStage();
             yield return new WaitForSeconds(WeaponStatsStrategy.GetDuplicateSpawnDelay());
+            OnAttackEnd();
         }
     }
 }

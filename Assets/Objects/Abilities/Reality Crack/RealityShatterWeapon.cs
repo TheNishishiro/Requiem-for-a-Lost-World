@@ -19,11 +19,10 @@ namespace Objects.Abilities.Reality_Crack
 			projectileComponent.SetParentWeapon(this);
 			//projectileComponent.SetStats();
 		}
-		
-		protected override IEnumerator AttackProcess()
+
+		protected override int GetAttackCount()
 		{
-			Attack();
-			yield break;
+			return 1;
 		}
 
 		protected override void OnLevelUp()

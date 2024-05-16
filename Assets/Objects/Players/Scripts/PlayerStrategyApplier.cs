@@ -39,6 +39,7 @@ namespace Objects.Players.Scripts
 			{ CharactersEnum.Alice_BoL, new AliceStrategy() },
 			{ CharactersEnum.Truzi_BoT, new TruziStrategy() },
 			{ CharactersEnum.Nishi_HoF, new NishiHofStrategy() },
+			{ CharactersEnum.Amelisana_BoN, new AmelisanaStrategy() },
 		};
 
 		public void ApplyRankStrategy(CharactersEnum characterId, CharacterRank characterRank, PlayerStats playerStats)

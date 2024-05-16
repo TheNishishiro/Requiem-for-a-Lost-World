@@ -15,22 +15,19 @@ namespace Objects.Abilities.BindingField
 		public double ChanceToBind { get; private set; } = 0.5f;
 		public bool IsBurstDamage { get; private set; }
 
-		protected override bool ProjectileSpawn(BindingFieldProjectile projectile)
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
 			var randomEnemy = EnemyManager.instance.GetRandomEnemy();
-			if (randomEnemy == null)
-				return false;
+			if (randomEnemy is null)
+			{
+				networkProjectile.Despawn(WeaponId);
+				return;
+			}
 
-			var pointOnSurface = Utilities.GetPointOnColliderSurface(new Vector3(randomEnemy.transform.position.x, 0, randomEnemy.transform.position.z), transform);
-			projectile.transform.position = pointOnSurface;
-			projectile.SetParentWeapon(this);
-			return true;
-		}
-
-		protected override IEnumerator AttackProcess()
-		{
-			Attack();
-			yield break;
+			var pointOnSurface = Utilities.GetPointOnColliderSurface(randomEnemy.transform.position, transform);
+        
+			networkProjectile.Initialize(this, pointOnSurface);
+			networkProjectile.projectile.gameObject.SetActive(true);
 		}
 
 		protected override void OnLevelUp()

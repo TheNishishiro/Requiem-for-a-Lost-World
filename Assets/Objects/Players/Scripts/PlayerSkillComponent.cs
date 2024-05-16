@@ -235,7 +235,17 @@ namespace Objects.Players.Scripts
 				case CharactersEnum.Truzi_BoT:
 					TruziSkill();
 					break;
+				case CharactersEnum.Amelisana_BoN:
+					StartCoroutine(AmelisanaSkill());
+					break;
 			}
+		}
+
+		private IEnumerator AmelisanaSkill()
+		{
+			var scaler = PlayerStatsScaler.GetScaler();
+			scaler.IncrementSpecial(scaler.GetSpecialMaxValue() * 0.5f);
+			yield break;
 		}
 
 		private void TruziSkill()

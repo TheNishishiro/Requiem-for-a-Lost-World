@@ -5,6 +5,7 @@ using Cinemachine;
 using Data.Difficulty;
 using DefaultNamespace;
 using DefaultNamespace.Data;
+using DefaultNamespace.Data.Cameras;
 using Managers.StageEvents;
 using Objects.Characters;
 using Objects.Players.PermUpgrades;
@@ -58,18 +59,8 @@ namespace Managers
 		private void Initialize()
 		{
 			saveFile = FindFirstObjectByType<SaveFile>();
-			firstPersonVirtualCamera.gameObject.SetActive(saveFile.CameraMode == 0);
-			thirdPersonVirtualCamera.gameObject.SetActive(saveFile.CameraMode is 1 or 2);
-			if (saveFile.CameraMode == 2)
-			{
-				var componentBase = thirdPersonVirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
-				if (componentBase is Cinemachine3rdPersonFollow)
-				{
-					Debug.Log("componentBase = " + componentBase);
-					(componentBase as Cinemachine3rdPersonFollow).CameraDistance = 7;
-				}
-			}
-			
+			SetupPlayerCamera();
+
 			playerStatsComponent.Set(GameData.GetPlayerStartingStats());
             if (GameData.GetPlayerCharacterData()?.UseSpecialBar == true)
 	            specialBarManager.gameObject.SetActive(true);
@@ -81,6 +72,36 @@ namespace Managers
 				if (permUpgrade != null)
 				{
 					playerStatsComponent.ApplyPermanent(permUpgrade, permUpgradesSaveData.Value);
+				}
+			}
+		}
+
+		private void SetupPlayerCamera()
+		{
+			firstPersonVirtualCamera.gameObject.SetActive(saveFile.CameraMode is CameraModes.StaticThirdPerson or CameraModes.FirstPerson);
+			thirdPersonVirtualCamera.gameObject.SetActive(saveFile.CameraMode is CameraModes.FreeThirdPerson or CameraModes.TopDown);
+			switch (saveFile.CameraMode)
+			{
+				case CameraModes.TopDown:
+				{
+					var componentBase = thirdPersonVirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
+					if (componentBase is Cinemachine3rdPersonFollow follow)
+					{
+						follow.CameraDistance = 7;
+					}
+
+					break;
+				}
+				case CameraModes.FirstPerson:
+				{
+					firstPersonVirtualCamera.m_Lens.FieldOfView = 80;
+					var componentBase = firstPersonVirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
+					if (componentBase is Cinemachine3rdPersonFollow follow)
+					{
+						follow.CameraDistance = 0;
+					}
+
+					break;
 				}
 			}
 		}
@@ -118,7 +139,14 @@ namespace Managers
 
 		public CinemachineVirtualCamera GetCameraInstance()
 		{
-			return SaveFile.Instance.CameraMode == 0 ? firstPersonVirtualCamera : thirdPersonVirtualCamera;
+			return SaveFile.Instance.CameraMode switch
+			{
+				CameraModes.StaticThirdPerson => firstPersonVirtualCamera,
+				CameraModes.FreeThirdPerson => thirdPersonVirtualCamera,
+				CameraModes.TopDown => thirdPersonVirtualCamera,
+				CameraModes.FirstPerson => firstPersonVirtualCamera,
+				_ => throw new ArgumentOutOfRangeException()
+			};
 		}
 	}
 }

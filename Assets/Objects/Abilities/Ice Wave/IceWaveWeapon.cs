@@ -50,6 +50,7 @@ namespace Objects.Abilities.Ice_Wave
 
 		protected override IEnumerator AttackProcess()
 		{
+			OnAttackStart();
 			_rotationStep = GetRotationByAttackCount();
 			_rotateOffset = 0;
 			_startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -63,6 +64,7 @@ namespace Objects.Abilities.Ice_Wave
 				
 				yield return new WaitForSeconds(0.25f);
 			}
+			OnAttackEnd();
 		}
 
 		protected override int GetAttackCount()

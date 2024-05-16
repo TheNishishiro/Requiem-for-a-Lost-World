@@ -18,14 +18,14 @@ namespace Objects.Abilities
             _weaponElement = elementField;
         }
         
-        public virtual DamageResult GetDamageDealt(float damageIncrease = 0)
+        public virtual DamageResult GetDamageDealt(float damageIncrease = 0, float flatDamageIncrease = 0)
         {
             var damageResult = new DamageResult
             {
                 IsCriticalHit = IsCrit()
             };
 
-            var nonCritDamage = GetDamage() * GetElementalDamageIncrease() * (GetDamageIncreasePercentage() + damageIncrease);
+            var nonCritDamage = (GetDamage() + flatDamageIncrease) * GetElementalDamageIncrease() * (GetDamageIncreasePercentage() + damageIncrease);
             damageResult.Damage = damageResult.IsCriticalHit ? nonCritDamage * GetCritDamage()  : nonCritDamage;
 
             return damageResult;

@@ -2,6 +2,7 @@
 using Interfaces;
 using NaughtyAttributes;
 using Objects.Abilities;
+using Objects.Players.Scripts;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -101,6 +102,8 @@ namespace Weapons
                 ParticleSystem.Play();
             }
 
+            ProjectileDamageIncrease = PlayerStatsScaler.GetScaler().GetPassiveWeaponFlatDamageIncrease();
+            
             StopAllStages();
 
             State = ProjectileState.Unspecified;

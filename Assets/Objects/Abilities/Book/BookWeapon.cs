@@ -73,6 +73,7 @@ namespace Objects.Abilities.Book
 
 		protected override IEnumerator AttackProcess()
 		{
+			OnAttackStart();
 			_rotationStep = GetRotationByAttackCount();
 			_rotateOffset = 0;
 			
@@ -81,6 +82,7 @@ namespace Objects.Abilities.Book
 				Attack();
 			}
 
+			OnAttackEnd();
 			yield break;
 		}
 

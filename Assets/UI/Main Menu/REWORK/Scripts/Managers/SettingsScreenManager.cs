@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace.Data;
+using DefaultNamespace.Data.Cameras;
 using DefaultNamespace.Data.Environment;
 using DefaultNamespace.Data.Settings;
 using Interfaces;
@@ -298,7 +299,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             entryCoopNickname.SetText(configuration.Username);
             entryCoopDisplayProjectiles.SetSelection(configuration.RenderCoopProjectiles ? 1 : 0);
             entryVolume.SetSliderValue(configuration.Volume);
-            entryCameraMode.SetSelection(_saveFile.CameraMode);
+            entryCameraMode.SetSelection((int)_saveFile.CameraMode);
             var abilityKeyBind = _saveFile.GetKeybinding(KeyAction.Ability);
             entryAbilityKeyBind.SetLabelValue(abilityKeyBind.ToString(), (int)abilityKeyBind);
             var moveUpKeyBind = _saveFile.GetKeybinding(KeyAction.MoveUp);
@@ -340,7 +341,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             configuration.RenderCoopProjectiles = entryCoopDisplayProjectiles.GetSelectedOption() == 1;
             configuration.Username = entryCoopNickname.GetText();
             configuration.Volume = entryVolume.GetSliderValue();
-            _saveFile.CameraMode = entryCameraMode.GetSelectedOption();
+            _saveFile.CameraMode = (CameraModes)entryCameraMode.GetSelectedOption();
             _saveFile.Keybindings[KeyAction.Ability] = (KeyCode)entryAbilityKeyBind.GetLabelValue();
             _saveFile.Keybindings[KeyAction.MoveUp] = (KeyCode)entryMoveUpKeyBind.GetLabelValue();
             _saveFile.Keybindings[KeyAction.MoveDown] = (KeyCode)entryMoveDownKeyBind.GetLabelValue();
