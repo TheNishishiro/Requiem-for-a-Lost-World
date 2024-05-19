@@ -4,6 +4,7 @@
     {
         None,
         Nishi_HoF_Flame_State,
-        Nishi_HoF_Void_State
+        Nishi_HoF_Void_State,
+        Amelisana_Ultimate
     }
 }

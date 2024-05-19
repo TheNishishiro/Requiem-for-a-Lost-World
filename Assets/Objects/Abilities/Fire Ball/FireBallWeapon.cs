@@ -33,7 +33,14 @@ public class FireBallWeapon : PoolableWeapon<FireBallProjectile>
         networkProjectile.GetProjectile<FireBallProjectile>().SetDirection(position.x, position.y, position.z);
         networkProjectile.projectile.gameObject.SetActive(true);
     }
-    
+
+    protected override int GetAttackCount()
+    {
+        if (GameData.IsCharacter(CharactersEnum.Chitose))
+            return base.GetAttackCount() + 2;
+        return base.GetAttackCount();
+    }
+
     public override void OnEnemyKilled()
     {
         if (!GameData.IsCharacterWithRank(CharactersEnum.Chitose, CharacterRank.E2)) return;

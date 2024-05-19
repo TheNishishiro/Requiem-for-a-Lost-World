@@ -11,6 +11,7 @@ using Managers;
 using Objects.Abilities;
 using Objects.Abilities.Laser_Gun;
 using Objects.Characters;
+using Objects.Characters.Amelia_Alter.Skill;
 using Objects.Characters.Chronastra.Skill;
 using Objects.Characters.Nishi.Skill;
 using Objects.Enemies;
@@ -34,6 +35,7 @@ namespace Objects.Players.Scripts
 		[SerializeField] private SpecialBar specialBar;
 		[SerializeField] private AbilityDurationBar abilityDurationBar;
 		[SerializeField] private WeaponManager _weaponManager;
+		
 		private Transform _abilityContainer;
 		private AmeliaGlassShield _ameliaGlassShield;
 		private float _currentSkillCooldown = 0f;
@@ -238,16 +240,15 @@ namespace Objects.Players.Scripts
 					TruziSkill();
 					break;
 				case CharactersEnum.Amelisana_BoN:
-					StartCoroutine(AmelisanaSkill());
+					AmelisanaSkill();
 					break;
 			}
 		}
 
-		private IEnumerator AmelisanaSkill()
+		private void AmelisanaSkill()
 		{
-			var scaler = PlayerStatsScaler.GetScaler();
-			scaler.IncrementSpecial(scaler.GetSpecialMaxValue() * 0.5f);
-			yield break;
+			FindAnyObjectByType<AmelisanaSkill>(FindObjectsInactive.Include).gameObject.SetActive(true);
+			abilityDurationBar.StartTick(15f);
 		}
 
 		private void TruziSkill()

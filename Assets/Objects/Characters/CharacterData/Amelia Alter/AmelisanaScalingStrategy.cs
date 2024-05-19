@@ -1,4 +1,6 @@
 ﻿using System;
+using Managers;
+using Objects.Players.Scripts;
 using Objects.Stage;
 using UnityEngine;
 
@@ -28,6 +30,15 @@ namespace Objects.Characters.Amelia_Alter
             base.TakeDamage(damageToTake * shieldPercentage, isPreventDeath);
             PlayerStats.SpecialValue = isShieldInsufficient ? 0 : PlayerStats.SpecialValue - amountToShield;
             accumulationPauseTimer = DateTime.Now.AddSeconds(3);
+        }
+
+        public override float GetDamage()
+        {
+            if (!GameManager.IsCharacterState(PlayerCharacterState.Amelisana_Ultimate))
+                return base.GetDamage();
+
+            var conversionPercentage = GameData.IsCharacterRank(CharacterRank.E2) ? 0.5f : 0.25f;
+            return base.GetDamage() + GetSpecialValue() * conversionPercentage;
         }
 
         public override float GetSpecialMaxValue()

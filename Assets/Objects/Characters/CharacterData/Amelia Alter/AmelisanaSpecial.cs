@@ -14,7 +14,7 @@ namespace Objects.Characters.Amelia_Alter
         public void Update()
         {
             _timeUntilBindConsume -= Time.deltaTime;
-            if (_timeUntilBindConsume > 0) return;
+            if (_timeUntilBindConsume > 0 || GameManager.IsCharacterState(PlayerCharacterState.Amelisana_Ultimate)) return;
 
             var consumePercentage = GameData.IsCharacterRank(CharacterRank.E5) ? 0.15f : 0.1f;
             var specialConsumeAmount = PlayerStatsScaler.GetScaler().GetSpecialValue() * consumePercentage;

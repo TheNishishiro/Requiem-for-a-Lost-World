@@ -88,6 +88,8 @@ namespace Objects.Players.Scripts
 		public void SetHealth(float health)
 		{
 			playerStats.Health = health;
+			if (playerStats.Health > playerStats.HealthMax)
+				playerStats.Health = playerStats.HealthMax;
 		}
 
 		public bool IsFullHealth()

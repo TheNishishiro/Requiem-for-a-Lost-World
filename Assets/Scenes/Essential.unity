@@ -9362,6 +9362,7 @@ GameObject:
   - component: {fileID: 365080460}
   - component: {fileID: 365080462}
   - component: {fileID: 365080461}
+  - component: {fileID: 365080463}
   m_Layer: 5
   m_Name: Amelisana FullScreen Effect
   m_TagString: Untagged
@@ -9426,6 +9427,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365080459}
   m_CullTransparentMesh: 1
+--- !u!114 &365080463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365080459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27e4a18e397a480fbc14a9a19c24b434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skyboxMaterial: {fileID: 2100000, guid: d780533d4d242dd4191aee970976656c, type: 2}
+  atmosphericColor: {r: 0.6509434, g: 0, b: 0, a: 0}
 --- !u!1 &365659625
 GameObject:
   m_ObjectHideFlags: 0
