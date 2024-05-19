@@ -7,6 +7,7 @@ namespace Objects.Players.Scripts
     {
         [SerializeField] private GameObject nishiVoidTransformVfx;
         [SerializeField] private GameObject nishiFlameTransformVfx;
+        [SerializeField] private GameObject amelisanaConsumeBindingVfx;
 
         public void PlayVoidTransform()
         {
@@ -16,6 +17,11 @@ namespace Objects.Players.Scripts
         public void PlayFlameTransform()
         {
             StartCoroutine(PlayVfx(nishiFlameTransformVfx, 1f));
+        }
+
+        public void PlayConsumeBindingTransform()
+        {
+            StartCoroutine(PlayVfx(amelisanaConsumeBindingVfx, 3f));
         }
 
         private IEnumerator PlayVfx(GameObject go, float time)
