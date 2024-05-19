@@ -22,7 +22,8 @@ namespace Objects.Characters.Amelia_Alter
 
             var buffDuration = GameData.IsCharacterRank(CharacterRank.E3) ? 7f : 5f;
             GameManager.instance.playerStatsComponent.TemporaryStatBoost(StatEnum.Damage, specialConsumeAmount*0.5f,  buffDuration);
-            StartCoroutine(RecoverSpecialWithDelay(buffDuration));
+            if (GameData.IsCharacterRank(CharacterRank.E5))
+                StartCoroutine(RecoverSpecialWithDelay(buffDuration));
             _timeUntilBindConsume = 10f;
         }
 
