@@ -24,6 +24,7 @@ namespace Objects.Characters.Amelia_Alter.Skill
             var originalColor = sceneLight.color;
             var originalMaterial = RenderSettings.skybox;
             var originalFogColor = RenderSettings.fogColor;
+            var originalFogDensity = RenderSettings.fogDensity;
 
             RenderSettings.skybox = skyboxMaterial;
             var time = 0f;
@@ -34,6 +35,7 @@ namespace Objects.Characters.Amelia_Alter.Skill
                 var color = Color.Lerp(originalColor, atmosphericColor, time);
                 sceneLight.color = color;
                 RenderSettings.fogColor = color;
+                RenderSettings.fogDensity = Mathf.Lerp(originalFogDensity, 0.1f, time);
                 yield return new WaitForSeconds(step);
             }
             
@@ -45,12 +47,14 @@ namespace Objects.Characters.Amelia_Alter.Skill
                 var color = Color.Lerp(originalColor, atmosphericColor, time);
                 sceneLight.color = color;
                 RenderSettings.fogColor = color;
+                RenderSettings.fogDensity = Mathf.Lerp(originalFogDensity, 0.1f, time);
                 yield return new WaitForSeconds(step);
             }
             
             sceneLight.color = originalColor;
             RenderSettings.skybox = originalMaterial;
             RenderSettings.fogColor = originalFogColor;
+            RenderSettings.fogDensity = originalFogDensity;
             
             GameManager.instance.playerComponent.SetCharacterState(PlayerCharacterState.None);
             var characterScaler = PlayerStatsScaler.GetScaler();
