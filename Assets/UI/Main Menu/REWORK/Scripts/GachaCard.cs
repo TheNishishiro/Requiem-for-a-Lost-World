@@ -101,7 +101,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             {
                 SetCharacterCommonDisplayProperties(character);
         
-                var fragmentReward = Random.Range(1, 6);
+                var fragmentReward = Random.Range(1, 50);
                 textDescription.text = $"Fragments +{fragmentReward}";
                 characterSaveData.AddFragments(fragmentReward);
             }
