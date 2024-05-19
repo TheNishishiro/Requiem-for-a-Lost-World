@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Interfaces;
 using Objects.Characters;
-using Objects.Characters.Amelia_BoD;
+using Objects.Characters.Amelia_Alter;
 using Objects.Characters.David;
 using Objects.Characters.Nishi_HoF;
 using Objects.Characters.Truzi;

@@ -1,5 +1,7 @@
 ﻿using System;
 using DefaultNamespace;
+using Objects.Characters;
+using Objects.Stage;
 using UnityEngine;
 using Weapons;
 using Random = UnityEngine.Random;
@@ -17,7 +19,7 @@ namespace Objects.Abilities.BindingField
 			
 			if (chaseComponent != null && Random.value < BindingFieldWeapon.ChanceToBind)
 			{
-				if (BindingFieldWeapon.IsBurstDamage)
+				if (BindingFieldWeapon.IsBurstDamage && TimeAlive <= 0.25f)
 				{
 					ProjectileDamageIncreasePercentage = 20;
 					SimpleDamage(other, false);
@@ -26,12 +28,16 @@ namespace Objects.Abilities.BindingField
 
 				damageable?.SetVulnerable(CurrentTimeToLive, WeaponStatsStrategy.GetWeakness());
 				chaseComponent.SetImmobile(CurrentTimeToLive);
+				if (GameData.IsCharacterWithRank(CharactersEnum.Amelisana_BoN, CharacterRank.E3))
+				{
+					chaseComponent.SetSlow(CurrentTimeToLive, 0.3f);
+				}
 			}
 		}
 
 		private void OnTriggerStay(Collider other)
 		{
-			DamageArea(other, out _);
+			DamageArea(other, out var damageable);
 		}
 	}
 }

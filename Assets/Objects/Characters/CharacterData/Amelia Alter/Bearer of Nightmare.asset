@@ -24,17 +24,21 @@ MonoBehaviour:
   nameAnnouncer: {fileID: 8300000, guid: aabb7866c1480e2478afd1a65cda1e11, type: 3}
   PassiveDescription: "Cannot regenerate health. \r\nInstead accumulates <color=red>Binding</color>
     equal to 100% of regenerated health. \r\n<color=red>Bind</color> cannot exceed
-    500% of her <color=#FFC300>max health</color>.\r\nEvery time she attacks consume
-    8.5% of <color=red>Bind</color> to increase the base damage dealt by that attack
-    by a 100% of remaining <color=red>Bind</color> value.\n<color=red>Binding</color>
-    cannot be consumed for 5 seconds after being obtained."
+    300% of her <color=#FFC300>max health</color> and provides a shield that absorbs
+    50% of incoming damage, depleting acumulated <color=red>Binding</color> by the
+    amount of damage shielded.\r\nEvery 10 seconds, convert 10% of the current <color=red>Binding</color>
+    into a damage buff for 5 seconds, increasing base damage by 50% of the converted
+    <color=red>Binding</color> value.\r\n<color=red>Binding</color> accumulation
+    is paused for 3 seconds after taking damage."
   AbilityName: Nightmare Bind
-  AbilityDescription: "Plunge the world into darkness for 15 seconds. \nDuring this
-    period, <color=red>Binding</color> value remains static, and enemy movement slows
-    by 50%. \nUpon its conclusion, instantly dispel all <color=red>Binding</color>,
+  AbilityDescription: "Plunge the world into darkness for 15 seconds. \r\nDuring
+    this period, <color=red>Binding</color> value remains static and all damage dealt
+    is increased by 25% of current <color=red>Binding</color> value and enemy movement
+    slows by 50%. \r\nUpon its conclusion, instantly dispel all <color=red>Binding</color>,
     healing for the total amount consumed."
   AbilityCooldown: 0
-  SpecialPrefab: {fileID: 0}
+  SpecialPrefab: {fileID: 3616877857323750879, guid: 9dec668890eb98141a5d0b8d5fabdcb9,
+    type: 3}
   AbilityPrefab: {fileID: 0}
   AbilityIcon: {fileID: 21300000, guid: 12493fb2884f3b843b4469e1330aee00, type: 3}
   ColorTheme: {r: 0.58431375, g: 0.38823533, b: 0.24705884, a: 1}
@@ -78,7 +82,7 @@ MonoBehaviour:
     ProjectileLifeTimeIncreasePercentage: 0
     DodgeChance: 0
     DamageTakenIncreasePercentage: 0
-    HealingIncreasePercentage: 2.5
+    HealingIncreasePercentage: 0
     Luck: 0
     DamageOverTime: 0
     Rerolls: 0
@@ -113,8 +117,7 @@ MonoBehaviour:
     EidolonDescription: 
     WeaponUpgradeDescription: 
     SkillUpgradeDescription: 
-    PassiveUpgradeDescription: "Increase <color=red>Bind</color> obtained from healing
-      by <color=green>300%</color>\r"
+    PassiveUpgradeDescription: Increase damage absorbtion of Binding by another 10%
     EidolonQuote: 'As the eternal darkness of a black hole eclipses the sun, casting
       a crimson red glow over the heavens, I alone remain. The girl who once danced
       among the stars is no more; her light extinguished by the void.
@@ -129,9 +132,9 @@ MonoBehaviour:
     EidolonName: Dreams of Despair
     EidolonDescription: 
     WeaponUpgradeDescription: 
-    SkillUpgradeDescription: Casting <color=#9EFFF3>Nightmare Bind</color> will increase
-      <color=red>Bind</color> by up to 50%
-    PassiveUpgradeDescription: Increase damage dealt by the % of missing <color=red>Bind</color>
+    SkillUpgradeDescription: During ultimate's duration increase base damage by another
+      25% of current Bind value
+    PassiveUpgradeDescription: Every level increase healing recieved by 0.5%
     EidolonQuote: 'Dreams give meaning to life, or so they say. But what of the dreams
       of a bird with broken wings, yearning to soar back into the skies? Those dreams
       become shackles that bind it down, slowly leading it to its ultimate demise.
@@ -146,11 +149,9 @@ MonoBehaviour:
   - EidolonTexture: {fileID: 0}
     EidolonName: Torture and Ecstasy
     EidolonDescription: 
-    WeaponUpgradeDescription: Increase duration of <color=orange>Binding Field</color>
-      by 50%
+    WeaponUpgradeDescription: 'Enemies within Binding Field will be slowed by 30% '
     SkillUpgradeDescription: 
-    PassiveUpgradeDescription: Increase <color=#FFC300>healing recieved</color> by
-      2.5% per level
+    PassiveUpgradeDescription: Increase the damage buff duration to 7 seconds
     EidolonQuote: 'That weak girl wouldn''t know true pleasure! Bind them down, rip
       them apart, show them their worst nightmares. Watch their life drain away as
       the final spark in their eyes dims out into nothingness... Just as mine once
@@ -166,8 +167,8 @@ MonoBehaviour:
     EidolonDescription: 
     WeaponUpgradeDescription: 
     SkillUpgradeDescription: 
-    PassiveUpgradeDescription: "\rAllow Amelisana to regenerate health by <color=green>20%</color>
-      of original healing income"
+    PassiveUpgradeDescription: Allow Amelisana to regenrate health by 15% of original
+      healing income
     EidolonQuote: 'Each step I take reverberates with the sound of countless bodies
       laying dormant beneath the rubble of what "she" once called home. As the day
       of judgment beckons, what are you thinking, my dearest darling?
@@ -183,8 +184,8 @@ MonoBehaviour:
     EidolonDescription: 
     WeaponUpgradeDescription: 
     SkillUpgradeDescription: 
-    PassiveUpgradeDescription: Reduce <color=red>Bind</color> consumed per attack
-      by 50%
+    PassiveUpgradeDescription: Increase Binding consumed every 10 seconds by 5%.
+      At the end of the buff recover Bind equal to 10% of max health
     EidolonQuote: 'In the end, all the promises that "she" made were for naught.
       Doesn''t that just prove my point? Dreaming is worthless. In the end, even
       the stars themselves cannot resist the void''s crushing weight.

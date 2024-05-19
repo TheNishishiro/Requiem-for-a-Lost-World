@@ -5,6 +5,7 @@ using Objects.Characters;
 using Objects.Characters.Adam;
 using Objects.Characters.Alice;
 using Objects.Characters.Amelia;
+using Objects.Characters.Amelia_Alter;
 using Objects.Characters.Amelia_BoD;
 using Objects.Characters.Arika;
 using Objects.Characters.Chitose;

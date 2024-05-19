@@ -174,6 +174,8 @@ namespace Objects.Players.Scripts
 				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Adam_OBoV && GameData.GetPlayerCharacterRank() >= CharacterRank.E5)
 				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Amelisana_BoN)
+				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
 		}
 
 		private void UseSkill(CharactersEnum activeCharacterId)

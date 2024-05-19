@@ -34,7 +34,7 @@ namespace Managers
 
 		public void ResetBar()
 		{
-			specialBar.SetValue(0);
+			PlayerStatsScaler.GetScaler().ResetSpecialBar();
 		}
 		
 		public bool IsFull()

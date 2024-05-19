@@ -362,8 +362,8 @@ namespace Objects.Characters
 
 		protected void ClampSpecial()
 		{
-			if (PlayerStats.SpecialValue > PlayerStats.SpecialMax)
-				PlayerStats.SpecialValue = PlayerStats.SpecialMax;
+			if (PlayerStats.SpecialValue > GetSpecialMaxValue())
+				PlayerStats.SpecialValue = GetSpecialMaxValue();
 			if (PlayerStats.SpecialValue < 0)
 				PlayerStats.SpecialValue = 0;
 		}
@@ -376,6 +376,11 @@ namespace Objects.Characters
 		public virtual float GetPassiveWeaponFlatDamageIncrease()
 		{
 			return 0;
+		}
+
+		public void ResetSpecialBar()
+		{
+			PlayerStats.SpecialValue = 0;
 		}
     }
 }

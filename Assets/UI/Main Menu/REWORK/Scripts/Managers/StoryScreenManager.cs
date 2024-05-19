@@ -11,7 +11,7 @@ namespace UI.Main_Menu.REWORK.Scripts
     {
         public static StoryScreenManager instance;
         [Space] 
-        [BoxGroup("Chapter")] [SerializeField] private List<GameObject> chapterContainers;
+        [BoxGroup("Chapter")] [SerializeField] private List<StoryChapter> chapterContainers;
         [Space] 
         [BoxGroup("Panels")] [SerializeField] private StoryReader storyReader;
         [Space] 
@@ -47,8 +47,8 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         public void OpenChapter(int id)
         {
-            chapterContainers.ForEach(x => x.SetActive(false));
-            chapterContainers[id - 1].SetActive(true);
+            chapterContainers.ForEach(x => x.gameObject.SetActive(false));
+            chapterContainers[id - 1].Activate();
             animator.SetTrigger("Open Chapter");
         }
         
