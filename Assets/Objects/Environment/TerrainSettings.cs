@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Environment;
+using Events.Handlers;
+using Events.Scripts;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Objects.Environment
 {
-	public class TerrainSettings : MonoBehaviour
+	public class TerrainSettings : MonoBehaviour, ISettingsChangedHandler
 	{
 		[SerializeField] private Terrain terrain;
 		private int treePrototypeIndex = 0;
@@ -20,6 +23,16 @@ namespace Objects.Environment
 		private float _treeDensity;
 
 		private void Start()
+		{
+			ApplyTerrainSettings();
+		}
+
+		public void OnSettingsChanged()
+		{
+			ApplyTerrainSettings();
+		}
+
+		private void ApplyTerrainSettings()
 		{
 			var saveFile = FindFirstObjectByType<SaveFile>();
 			if (saveFile == null)
@@ -155,6 +168,16 @@ namespace Objects.Environment
 				};
 				terrain.AddTreeInstance(tree);
 			}
+		}
+
+		private void OnEnable()
+		{
+			SettingsChangedEvent.Register(this);
+		}
+
+		private void OnDisable()
+		{
+			SettingsChangedEvent.Unregister(this);
 		}
 	}
 }

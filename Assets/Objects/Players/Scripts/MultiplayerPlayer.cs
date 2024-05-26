@@ -6,6 +6,8 @@ using Data.Difficulty;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Cameras;
 using DefaultNamespace.Data.Stages;
+using Events.Handlers;
+using Events.Scripts;
 using Managers;
 using Objects;
 using Objects.Characters;
@@ -20,7 +22,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-public class MultiplayerPlayer : NetworkBehaviour
+public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
 {
     public GameObject firstPersonCameraRoot;
     public GameObject thirdPersonCameraRoot;
@@ -60,24 +62,11 @@ public class MultiplayerPlayer : NetworkBehaviour
             stage.Value = GameData.GetCurrentStage().id;
         }
 
-        if (IsOwner && GetRootCamera() != null)
-            SetCameraTarget(GetRootCamera().transform);
+        SetupCamera();
         
         GameData.SetCurrentDifficultyData(difficultyContainer.GetData(difficulty.Value));
         GameData.SetCurrentStage(stageContainer.GetData(stage.Value));
         playerInput.enabled = IsOwner;
-        firstPersonController.enabled = SaveFile.Instance.CameraMode is CameraModes.StaticThirdPerson or CameraModes.FirstPerson && IsOwner;
-        thirdPersonController.enabled = SaveFile.Instance.CameraMode is CameraModes.FreeThirdPerson or CameraModes.TopDown && IsOwner;
-        if (SaveFile.Instance.CameraMode == CameraModes.TopDown && IsOwner)
-        {
-            thirdPersonController.TopClamp = 50;
-            thirdPersonController.BottomClamp = 50;
-        }
-        if (SaveFile.Instance.CameraMode == CameraModes.FirstPerson && IsOwner)
-        {
-            firstPersonController.TopClamp = 30;
-            firstPersonController.BottomClamp = -30;
-        }
         
         starterAssetsInputs.enabled = IsOwner;
         base.OnNetworkSpawn();
@@ -93,6 +82,36 @@ public class MultiplayerPlayer : NetworkBehaviour
             StartCoroutine(WaitForRpcManager());
 
             currentCharacterId.Value = GameData.GetPlayerCharacterId();
+        }
+    }
+
+    private void SetupCamera()
+    {
+        if (IsOwner && GetRootCamera() != null)
+            SetCameraTarget(GetRootCamera().transform);
+        
+        firstPersonController.enabled = SaveFile.Instance.CameraMode is CameraModes.StaticThirdPerson or CameraModes.FirstPerson && IsOwner;
+        thirdPersonController.enabled = SaveFile.Instance.CameraMode is CameraModes.FreeThirdPerson or CameraModes.TopDown && IsOwner;
+        switch (SaveFile.Instance.CameraMode)
+        {
+            case CameraModes.TopDown when IsOwner:
+                thirdPersonController.TopClamp = 50;
+                thirdPersonController.BottomClamp = 50;
+                break;
+            case CameraModes.FirstPerson when IsOwner:
+                firstPersonController.TopClamp = 30;
+                firstPersonController.BottomClamp = -30;
+                break;
+            case CameraModes.StaticThirdPerson when IsOwner:
+                firstPersonController.TopClamp = 8;
+                firstPersonController.BottomClamp = 8;
+                break;
+            case CameraModes.FreeThirdPerson when IsOwner:
+                thirdPersonController.TopClamp = 40;
+                thirdPersonController.BottomClamp = -30;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
@@ -273,5 +292,21 @@ public class MultiplayerPlayer : NetworkBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    public void OnSettingsChanged()
+    {
+        if (!IsOwner) return;
+        SetupCamera();
+    }
+
+    private void OnEnable()
+    {
+        SettingsChangedEvent.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        SettingsChangedEvent.Unregister(this);
     }
 }

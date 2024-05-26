@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e487028e64448f849be4a1c193b2c6, type: 3}
   m_Name: Binding Field Upgrade 5
   m_EditorClassIdentifier: 
-  Name: Bonus Damage (I)
-  Description: Adds a burst of damage to enemies as they are initially bound by the
-    field
+  Name: Fissure of Fetters (I)
+  Description: On successful binding, deal a burst of damage equal to 2000% of this
+    weapon's damage
   WeaponStats:
     Damage: 0
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0
     Speed: 0
     TimeToLive: 0
@@ -29,3 +30,9 @@ MonoBehaviour:
     CritRate: 0
     CritDamage: 0
     Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
+    LifeSteal: 0

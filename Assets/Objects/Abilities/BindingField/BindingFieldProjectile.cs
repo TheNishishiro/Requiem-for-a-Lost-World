@@ -17,6 +17,11 @@ namespace Objects.Abilities.BindingField
 			var chaseComponent = other.GetComponentInParent<ChaseComponent>();
 			var damageable = other.GetComponent<Damageable>();
 			
+			if (GameData.IsCharacterWithRank(CharactersEnum.Amelisana_BoN, CharacterRank.E3))
+			{
+				chaseComponent.SetSlow(CurrentTimeToLive, 0.3f);
+			}
+			
 			if (chaseComponent != null && Random.value < BindingFieldWeapon.ChanceToBind)
 			{
 				if (BindingFieldWeapon.IsBurstDamage && TimeAlive <= 0.25f)
@@ -28,10 +33,6 @@ namespace Objects.Abilities.BindingField
 
 				damageable?.SetVulnerable(CurrentTimeToLive, WeaponStatsStrategy.GetWeakness());
 				chaseComponent.SetImmobile(CurrentTimeToLive);
-				if (GameData.IsCharacterWithRank(CharactersEnum.Amelisana_BoN, CharacterRank.E3))
-				{
-					chaseComponent.SetSlow(CurrentTimeToLive, 0.3f);
-				}
 			}
 		}
 

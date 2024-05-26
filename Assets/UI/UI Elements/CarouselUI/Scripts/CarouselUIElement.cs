@@ -28,7 +28,7 @@ namespace CarouselUI
         public event InputDetected InputEvent = delegate { };
 
         private bool _isProcessing = false; //HERE TO DELAY REFIRES
-        private WaitForSeconds _resetDelay; //WORKS WITH DELAY COROUTINE
+        private WaitForSecondsRealtime _resetDelay; //WORKS WITH DELAY COROUTINE
 
         private void Start()
         {
@@ -40,7 +40,7 @@ namespace CarouselUI
             if (_options.Length == 0 || _options == null)
                 return;
 
-            _resetDelay = new WaitForSeconds(_resetDuration);
+            _resetDelay = new WaitForSecondsRealtime(_resetDuration);
             UpdateUI();
         }
 

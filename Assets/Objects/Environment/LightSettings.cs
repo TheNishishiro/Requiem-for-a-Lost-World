@@ -1,12 +1,24 @@
 ﻿using DefaultNamespace.Data;
+using Events.Handlers;
+using Events.Scripts;
 using UnityEngine;
 
 namespace Objects.Environment
 {
     [RequireComponent(typeof(Light))]
-    public class LightSettings : MonoBehaviour
+    public class LightSettings : MonoBehaviour, ISettingsChangedHandler
     {
         private void Start()
+        {
+            ApplyLightSettings();
+        }
+
+        public void OnSettingsChanged()
+        {
+            ApplyLightSettings();
+        }
+
+        private void ApplyLightSettings()
         {
             var saveFile = FindObjectOfType<SaveFile>();
             if (saveFile == null)
@@ -23,10 +35,15 @@ namespace Objects.Environment
                 _ => lightComponent.shadows
             };
         }
-
-        private void Update()
+        
+        private void OnEnable()
         {
+            SettingsChangedEvent.Register(this);
+        }
 
+        private void OnDisable()
+        {
+            SettingsChangedEvent.Unregister(this);
         }
     }
 }

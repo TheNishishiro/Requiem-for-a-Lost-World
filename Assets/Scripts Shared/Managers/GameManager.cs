@@ -6,6 +6,8 @@ using Data.Difficulty;
 using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Cameras;
+using Events.Handlers;
+using Events.Scripts;
 using Managers.StageEvents;
 using Objects.Characters;
 using Objects.Players.PermUpgrades;
@@ -19,7 +21,7 @@ using UnityEngine.SceneManagement;
 using UnityTemplateProjects;
 
 namespace Managers
-{	public class GameManager : MonoBehaviour
+{	public class GameManager : MonoBehaviour, ISettingsChangedHandler
 	{		
 		public static GameManager instance;
 		[HideInInspector] public MultiplayerPlayer playerMpComponent;
@@ -76,6 +78,21 @@ namespace Managers
 			}
 		}
 
+		public void OnSettingsChanged()
+		{
+			SetupPlayerCamera();
+		}
+
+		private void OnEnable()
+		{
+			SettingsChangedEvent.Register(this);
+		}
+
+		private void OnDisable()
+		{
+			SettingsChangedEvent.Unregister(this);
+		}
+
 		private void SetupPlayerCamera()
 		{
 			firstPersonVirtualCamera.gameObject.SetActive(saveFile.CameraMode is CameraModes.StaticThirdPerson or CameraModes.FirstPerson);
@@ -103,6 +120,30 @@ namespace Managers
 
 					break;
 				}
+				case CameraModes.StaticThirdPerson:
+				{
+					firstPersonVirtualCamera.m_Lens.FieldOfView = 50;
+					var componentBase = firstPersonVirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
+					if (componentBase is Cinemachine3rdPersonFollow follow)
+					{
+						follow.CameraDistance = 3;
+					}
+
+					break;
+				}
+				case CameraModes.FreeThirdPerson:
+				{
+					thirdPersonVirtualCamera.m_Lens.FieldOfView = 40;
+					var componentBase = thirdPersonVirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
+					if (componentBase is Cinemachine3rdPersonFollow follow)
+					{
+						follow.CameraDistance = 4;
+					}
+
+					break;
+				}
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
 		}
 

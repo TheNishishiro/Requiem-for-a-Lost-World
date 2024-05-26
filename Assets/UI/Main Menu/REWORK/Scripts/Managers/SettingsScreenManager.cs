@@ -6,6 +6,7 @@ using DefaultNamespace.Data;
 using DefaultNamespace.Data.Cameras;
 using DefaultNamespace.Data.Environment;
 using DefaultNamespace.Data.Settings;
+using Events.Scripts;
 using Interfaces;
 using Managers;
 using NaughtyAttributes;
@@ -352,6 +353,8 @@ namespace UI.Main_Menu.REWORK.Scripts
             
             SaveManager.instance.ApplySettings();
             SaveManager.instance.SaveGame();
+            
+            SettingsChangedEvent.Invoke();
         }
         
         private int GetResolutionIndex(int width, int height, uint refreshRate)
