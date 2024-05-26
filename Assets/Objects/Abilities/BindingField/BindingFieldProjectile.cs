@@ -15,8 +15,10 @@ namespace Objects.Abilities.BindingField
 		private void OnTriggerEnter(Collider other)
 		{
 			var chaseComponent = other.GetComponentInParent<ChaseComponent>();
-			var damageable = other.GetComponent<Damageable>();
+			if (chaseComponent == null)
+				return;
 			
+			var damageable = other.GetComponent<Damageable>();
 			if (GameData.IsCharacterWithRank(CharactersEnum.Amelisana_BoN, CharacterRank.E3))
 			{
 				chaseComponent.SetSlow(CurrentTimeToLive, 0.3f);
