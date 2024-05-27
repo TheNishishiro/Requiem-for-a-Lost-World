@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
+using Events.Scripts;
 using Interfaces;
 using Objects.Abilities.Back_Hole;
 using Unity.Netcode;
@@ -115,7 +116,10 @@ public class ChaseComponent : NetworkBehaviour
     public void SetImmobile(float time)
     {
         if (_immobileTimer < time)
+        {
+            EnemyImmobileEvent.Invoke(time);
             _immobileTimer = time;
+        }
     }
 
     public void SetSlow(float time, float amount)

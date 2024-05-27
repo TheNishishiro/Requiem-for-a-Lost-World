@@ -33,6 +33,7 @@ namespace Objects.Characters
 		public float AbilityCooldown;
 		public CharacterSkillBase SpecialPrefab;
 		public CharacterSkillBase AbilityPrefab;
+		public CharacterAchievementListener AchievementListenerPrefab;
 		public Sprite AbilityIcon;
 		public Color ColorTheme;
 		public CharacterAlignment Alignment;

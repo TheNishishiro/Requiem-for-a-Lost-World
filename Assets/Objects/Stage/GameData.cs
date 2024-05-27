@@ -93,6 +93,11 @@ namespace Objects.Stage
 		{
 			return CharacterListManager.instance?.GetActiveCharacter()?.SpecialPrefab;
 		}
+		
+		public static CharacterAchievementListener GetAchievementListenerPrefab()
+		{
+			return CharacterListManager.instance?.GetActiveCharacter()?.AchievementListenerPrefab;
+		}
 
 		public static Sprite GetPlayerSprite()
 		{

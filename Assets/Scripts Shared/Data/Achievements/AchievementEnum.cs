@@ -4,7 +4,7 @@ using Objects.Characters;
 
 namespace DefaultNamespace.Data.Achievements
 {
-	public enum AchievementEnum // 95
+	public enum AchievementEnum // 99
 	{
 		[AchievementValue("Jack of all trades", "Obtain 6 weapons in a single game", AchievementSection.Misc, Rarity.Common)]
 		Hold6Weapons = 0,
@@ -58,6 +58,17 @@ namespace DefaultNamespace.Data.Achievements
 		WalkAThousandSteps = 94,
 		[AchievementValue("Decide already", "Be indecisive for too long", AchievementSection.Misc, Rarity.Legendary)]
 		ScrollCharactersTooManyTimes = 95,
+		
+		#region Character specific achievements
+		[AchievementValue("Bound by fate", "Bind enemies for 1 hour in total in a single game using Amelisana", AchievementSection.Character, Rarity.Common, CharactersEnum.Amelisana_BoN, RequirementType.None, 1)]
+		Amelisana_EnemyBindTime = 96,
+		[AchievementValue("Power of Nightmare", "Increase damage by at least 30 upon consuming <color=red>Bind</color>", AchievementSection.Character, Rarity.Legendary, CharactersEnum.Amelisana_BoN, RequirementType.None, 1)]
+		Amelisana_ConsumeBinding = 97,
+		[AchievementValue("Defy reason", "Finish a game without using your ultimate as Amelisana", AchievementSection.Character, Rarity.Mythic, CharactersEnum.Amelisana_BoN, RequirementType.None, 1)]
+		Amelisana_FinishWithoutUsingUltimate = 98,
+		[AchievementValue("Inner struggle", "As Amelisana gather inventory of conflicting forces", AchievementSection.Character, Rarity.Rare, CharactersEnum.Amelisana_BoN, RequirementType.None, 1)]
+		Amelisana_LightAndCosmicOnly = 99,
+		#endregion
 		
 		#region Survive with characters
 

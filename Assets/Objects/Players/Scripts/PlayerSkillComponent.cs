@@ -6,6 +6,7 @@ using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Settings;
 using DefaultNamespace.Data.Statuses;
+using Events.Scripts;
 using Interfaces;
 using Managers;
 using Objects.Abilities;
@@ -75,6 +76,9 @@ namespace Objects.Players.Scripts
 			_abilityContainer = abilityContainerTransform;
 			DashStacks = PlayerStatsScaler.GetScaler().GetDashCount();
 			ApplySpecial();
+			var listenerPrefab = GameData.GetAchievementListenerPrefab();
+			if (listenerPrefab != null)
+				Instantiate(listenerPrefab, _abilityContainer);
 		}
 		
 		public void Update()
@@ -188,6 +192,7 @@ namespace Objects.Players.Scripts
 			if (playerStatsComponent.IsDead())
 				return;
 
+			SkillUsedEvent.Invoke();
 			_currentSkillCooldown = _skillCooldown * PlayerStatsScaler.GetScaler().GetSkillCooldownReductionPercentage();
 			switch (activeCharacterId)
 			{

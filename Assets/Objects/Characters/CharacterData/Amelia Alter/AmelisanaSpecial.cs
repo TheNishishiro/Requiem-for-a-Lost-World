@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using DefaultNamespace.Data;
+using DefaultNamespace.Data.Achievements;
 using Managers;
 using Objects.Players.PermUpgrades;
 using Objects.Players.Scripts;
@@ -21,7 +23,11 @@ namespace Objects.Characters.Amelia_Alter
             PlayerStatsScaler.GetScaler().IncrementSpecial(-specialConsumeAmount);
 
             var buffDuration = GameData.IsCharacterRank(CharacterRank.E3) ? 7f : 5f;
-            GameManager.instance.playerStatsComponent.TemporaryStatBoost(StatEnum.Damage, specialConsumeAmount*0.5f,  buffDuration);
+            var damageIncrease = specialConsumeAmount * 0.5f;
+            if (damageIncrease >= 30)
+                SaveFile.Instance.UnlockAchievement(AchievementEnum.Amelisana_ConsumeBinding);
+                
+            GameManager.instance.playerStatsComponent.TemporaryStatBoost(StatEnum.Damage, damageIncrease,  buffDuration);
             if (GameData.IsCharacterRank(CharacterRank.E5))
                 StartCoroutine(RecoverSpecialWithDelay(buffDuration));
             

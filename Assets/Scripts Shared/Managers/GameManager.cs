@@ -154,6 +154,7 @@ namespace Managers
 
 		public void BackToMainMenu()
 		{
+			GameFinishedEvent.Invoke(GameResultData.IsWin);
 			BackToMainMenu(GameResultData.IsWin);
 		}
 

@@ -4,6 +4,8 @@ using System.Linq;
 using Data.ToggleableEntries;
 using DefaultNamespace.BaseClasses;
 using DefaultNamespace.Data;
+using Events.Handlers;
+using Events.Scripts;
 using Interfaces;
 using Managers;
 using Objects;
@@ -80,6 +82,7 @@ public class WeaponManager : NetworkBehaviour
         availableWeapons.RemoveAll(x => x.weaponBase == weapon);
         _unlockedWeapons.Add(weaponGameObject);
         weaponGameObject.ActivateWeapon();
+        WeaponUnlockedEvent.Invoke(weapon, rarity);
         AchievementManager.instance.OnWeaponUnlocked(weapon, _unlockedWeapons.Count, rarity);
         GuiManager.instance.UpdateItems();
     }
@@ -91,6 +94,7 @@ public class WeaponManager : NetworkBehaviour
         itemGameObject.ApplyRarity(rarity);
         _playerStatsComponent.Apply(itemGameObject.ItemStats, 1);
         _unlockedItems.Add(itemGameObject);
+        ItemUnlockedEvent.Invoke(item, rarity);
         AchievementManager.instance.OnItemUnlocked(item, _unlockedItems.Count, rarity);
         GuiManager.instance.UpdateItems();
     }
