@@ -247,7 +247,15 @@ namespace Objects.Players.Scripts
 				case CharactersEnum.Amelisana_BoN:
 					AmelisanaSkill();
 					break;
+				case CharactersEnum.Chornastra_BoR:
+					ChronastraSkill();
+					break;
 			}
+		}
+
+		private void ChronastraSkill()
+		{
+			Instantiate(GameData.GetSkillPrefab(), _abilityContainer);
 		}
 
 		private void AmelisanaSkill()

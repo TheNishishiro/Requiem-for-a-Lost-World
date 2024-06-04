@@ -18,8 +18,8 @@ MonoBehaviour:
   CharacterCard: {fileID: 21300000, guid: 3fd7ad9b413de5b40ace9c7030847d76, type: 3}
   GatchaArt: {fileID: 21300000, guid: 28317fe1af787eb47bc811e4cdc62195, type: 3}
   GachaSubArtOffset: {x: 20, y: -15}
-  Avatar: {fileID: 0}
-  CharacterSprite: {fileID: 21300000, guid: 643214c9e9c36aa49a5c2d046522ee84, type: 3}
+  Avatar: {fileID: 21300000, guid: be9f279c4cc367741a72fca2b40d7641, type: 3}
+  CharacterSprite: {fileID: 21300000, guid: ba49fbf638fcf6f478b04d8ba9f1a37d, type: 3}
   signet: {fileID: 21300000, guid: a065fec491803cb4db1aa9d92ba02682, type: 3}
   nameAnnouncer: {fileID: 8300000, guid: 9fbd28549ed29f64daa7613540d827a8, type: 3}
   PassiveDescription: "Unleash periodic bursts of energy that halve the health of
@@ -34,9 +34,11 @@ MonoBehaviour:
     enemy movements.\nRecast this ability up to 3 times to perform devastating attacks
     targetting all enemies. \nEach enemy killed this way will provide a stack of
     <color=purple>Cosmic Revelation</color>."
-  AbilityCooldown: 0
+  AbilityCooldown: 1
   SpecialPrefab: {fileID: 0}
-  AbilityPrefab: {fileID: 0}
+  AbilityPrefab: {fileID: -5508581114432704136, guid: ab6e3f477fe99684aa284fc052ba782e,
+    type: 3}
+  AchievementListenerPrefab: {fileID: 0}
   AbilityIcon: {fileID: 21300000, guid: 5327a4b9f29a7104eae87a467b1bf1e9, type: 3}
   ColorTheme: {r: 0, g: 1, b: 0.9372549, a: 1}
   Alignment: 0
@@ -49,6 +51,7 @@ MonoBehaviour:
   Stats:
     Health: 100
     HealthMax: 100
+    SpecialValue: 0
     SpecialMax: 0
     SpecialIncrease: 0
     MagnetSize: 1
