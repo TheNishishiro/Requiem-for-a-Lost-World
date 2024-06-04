@@ -15,6 +15,11 @@ namespace Objects.Abilities.BindingField
 		public double ChanceToBind { get; private set; } = 0.5f;
 		public bool IsBurstDamage { get; private set; }
 
+		protected override void SetWeaponStatsStrategy()
+		{
+			WeaponStatsStrategy = new BindingFieldStrategy(this);
+		}
+        
 		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
 			var randomEnemy = EnemyManager.instance.GetRandomEnemy();

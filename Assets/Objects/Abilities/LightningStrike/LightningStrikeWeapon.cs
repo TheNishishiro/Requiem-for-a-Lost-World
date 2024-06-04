@@ -78,6 +78,9 @@ namespace Objects.Abilities.LightningStrike
 		protected override int GetAttackCount()
 		{
 			var attackCount = base.GetAttackCount();
+			if (GameData.IsCharacter(CharactersEnum.Alice_BoL))
+				attackCount += 2;
+			
 			if (GameData.IsCharacterWithRank(CharactersEnum.Alice_BoL, CharacterRank.E1))
 				attackCount += 4;
 			

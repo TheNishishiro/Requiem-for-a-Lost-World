@@ -26,9 +26,10 @@ MonoBehaviour:
     m/s</color>.
   AbilityName: Quick step
   AbilityDescription: Dash a short distance forward, passing through enemies
-  AbilityCooldown: 15
+  AbilityCooldown: 12
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 0}
+  AchievementListenerPrefab: {fileID: 0}
   AbilityIcon: {fileID: 21300000, guid: db3f1d42c7f40084b943b0e5f4b005dd, type: 3}
   ColorTheme: {r: 0.93333334, g: 0.09411765, b: 0.16470589, a: 1}
   Alignment: 1
@@ -41,6 +42,7 @@ MonoBehaviour:
   Stats:
     Health: 80
     HealthMax: 80
+    SpecialValue: 0
     SpecialMax: 0
     SpecialIncrease: 0
     MagnetSize: 0.5

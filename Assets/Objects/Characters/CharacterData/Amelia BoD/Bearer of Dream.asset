@@ -15,8 +15,8 @@ MonoBehaviour:
   Id: 3
   Name: Amelia
   Title: Saviour of Hope
-  CharacterCard: {fileID: 21300000, guid: 2fdc685f78fb4a84db45769a0e4d6855, type: 3}
-  GatchaArt: {fileID: 21300000, guid: bed4eb995c1ac4d448a257603bc74db7, type: 3}
+  CharacterCard: {fileID: 21300000, guid: bf2dc1e164de4594cb8ab0a6170166b3, type: 3}
+  GatchaArt: {fileID: 21300000, guid: 77401e8d9aa545b4082d2e7c8dac4f5f, type: 3}
   GachaSubArtOffset: {x: -35, y: -45}
   Avatar: {fileID: 21300000, guid: f4e99714ae989d7469e4e60107d4236b, type: 3}
   CharacterSprite: {fileID: 21300000, guid: 53619c832865ba44da24695e80eb76ac, type: 3}
@@ -32,6 +32,7 @@ MonoBehaviour:
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 4238375383337323453, guid: 7197088e9865c2d498b163f4bd80c079,
     type: 3}
+  AchievementListenerPrefab: {fileID: 0}
   AbilityIcon: {fileID: 21300000, guid: f5bfd293820e2024fa2621a98df70e80, type: 3}
   ColorTheme: {r: 1, g: 0.9098039, b: 0, a: 1}
   Alignment: 1
@@ -44,6 +45,7 @@ MonoBehaviour:
   Stats:
     Health: 50
     HealthMax: 50
+    SpecialValue: 0
     SpecialMax: 0
     SpecialIncrease: 0
     MagnetSize: 1
@@ -55,7 +57,7 @@ MonoBehaviour:
     Speed: 0
     TimeToLive: 0
     DetectionRange: 0
-    DamagePercentageIncrease: -0.5
+    DamagePercentageIncrease: 0
     ExperienceIncreasePercentage: 0
     MovementSpeed: 1.6
     SkillCooldownReductionPercentage: 0

@@ -45,6 +45,7 @@ namespace Managers
 		[SerializeField] public StatusEffectManager statusEffectManager;
 		[SerializeField] private CinemachineVirtualCamera firstPersonVirtualCamera;
 		[SerializeField] private CinemachineVirtualCamera thirdPersonVirtualCamera;
+		private StageTime _stageTime;
 		[HideInInspector] public SaveFile saveFile;
 		[HideInInspector] public bool IsPlayerSprinting;
 
@@ -60,6 +61,7 @@ namespace Managers
 		
 		private void Initialize()
 		{
+			_stageTime = FindFirstObjectByType<StageTime>();
 			saveFile = FindFirstObjectByType<SaveFile>();
 			SetupPlayerCamera();
 
@@ -76,6 +78,11 @@ namespace Managers
 					playerStatsComponent.ApplyPermanent(permUpgrade, permUpgradesSaveData.Value);
 				}
 			}
+		}
+
+		public float GetGameTimeInMinutes()
+		{
+			return Utilities.GetTimeSpan(_stageTime.time.Value).Minutes;
 		}
 
 		public void OnSettingsChanged()

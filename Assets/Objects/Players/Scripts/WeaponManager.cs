@@ -139,7 +139,7 @@ public class WeaponManager : NetworkBehaviour
         {
             Weapon = unlockedWeapon,
             Upgrade = unlockedWeapon.GetAvailableUpgrades().FirstOrDefault(),
-            ChanceOfAppearance = unlockedWeapon.chanceToAppear
+            ChanceOfAppearance = 1
         }).Where(x => x.Upgrade != null);
     }
     
@@ -155,7 +155,7 @@ public class WeaponManager : NetworkBehaviour
             {
                 ItemUpgrade = nextUpgrade,
                 Item = unlockedItem,
-                ChanceOfAppearance = unlockedItem.chanceToAppear
+                ChanceOfAppearance = 1
             };
         }).Where(x => x != null);
     }

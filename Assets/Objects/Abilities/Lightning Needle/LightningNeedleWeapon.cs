@@ -9,6 +9,11 @@ namespace Objects.Abilities.Lightning_Needle
         private float _offsetStep;
         public bool StormSurge { get; set; }
         
+        protected override void SetWeaponStatsStrategy()
+        {
+            WeaponStatsStrategy = new LightningNeedleStrategy(this);
+        }
+        
         public override void SetupProjectile(NetworkProjectile networkProjectile)
         {
             var position = Utilities.GetRandomInAreaFreezeParameter(transform.position, 0.2f, isFreezeZ: true);

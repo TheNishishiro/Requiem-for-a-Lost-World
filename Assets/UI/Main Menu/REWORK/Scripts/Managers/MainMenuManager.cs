@@ -126,6 +126,11 @@ namespace UI.Main_Menu.REWORK.Scripts
             Application.Quit();
         }
 
+        public void SendFeedback()
+        {
+            Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSdzO5BpmXWrK3dqmVdqyPdwWRdF3BqajBuwa2-dCZzA7VohlQ/viewform");
+        }
+
         public bool IsInFocus { get; set; }
         public void SetActive(bool isActive)
         {

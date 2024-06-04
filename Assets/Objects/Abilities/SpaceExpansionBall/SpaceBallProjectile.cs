@@ -40,7 +40,7 @@ namespace Objects.Abilities.SpaceExpansionBall
 			{
 				state = State.Exploding;
 				transformCache.localScale *= WeaponStatsStrategy.GetScale();
-				ProjectileDamageIncreasePercentage = 0.7f;
+				ProjectileDamageIncreasePercentage = 0.5f;
 				StartCoroutine(Enlarge());
 			}
 		}
@@ -67,8 +67,6 @@ namespace Objects.Abilities.SpaceExpansionBall
 				transformCache.localPosition.Scale(new Vector3(0,1.1f,0));
 				yield return new WaitForSeconds(0.1f);
 			}
-			
-			ProjectileDamageIncreasePercentage = -0.75f;
 		}
 
 		private IEnumerator Collapse()

@@ -49,7 +49,8 @@ MonoBehaviour:
     type: 3}
   WeaponId: 20
   Name: Magic Ball
-  Description: Send a fast moving magic projectile towards nearest target
+  Description: Send a fast moving magic projectile towards nearest target that pierces
+    up to 3 enemies in it's way
   chanceToAppear: 1
   Icon: {fileID: 21300000, guid: 2586aab1e1ffb49419c90fa9725a76d2, type: 3}
   unlockOnAchievement: 0
@@ -63,7 +64,7 @@ MonoBehaviour:
     Speed: 5
     TimeToLive: 2
     AttackCount: 1
-    PassThroughCount: 0
+    PassThroughCount: 3
     DamageCooldown: 0
     DuplicateSpawnDelay: 0.2
     DetectionRange: 0
@@ -77,9 +78,9 @@ MonoBehaviour:
     DamageOverTimeFrequency: 0
     LifeSteal: 0
   availableUpgrades:
-  - {fileID: 11400000, guid: 2b8ffaf34ce43fc48ab806ee4cd0415b, type: 2}
-  - {fileID: 11400000, guid: 8e1e644a8c210924991f509f2fbade9c, type: 2}
   - {fileID: 11400000, guid: b599ec3b89211c242b89ca67e2be2456, type: 2}
+  - {fileID: 11400000, guid: 8e1e644a8c210924991f509f2fbade9c, type: 2}
+  - {fileID: 11400000, guid: 2b8ffaf34ce43fc48ab806ee4cd0415b, type: 2}
   - {fileID: 11400000, guid: cb04481e1c798ef428d3eecf11ba6294, type: 2}
   - {fileID: 11400000, guid: f6bb9901af417174393c1a93c435b00f, type: 2}
   - {fileID: 11400000, guid: a54c32848435b414f8c0352515e59147, type: 2}
