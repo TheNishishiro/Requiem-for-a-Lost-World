@@ -15,6 +15,7 @@ using Objects.Characters;
 using Objects.Characters.Amelia_Alter.Skill;
 using Objects.Characters.Chronastra.Skill;
 using Objects.Characters.Nishi.Skill;
+using Objects.Characters.Yami_no_Tokiya.Skill;
 using Objects.Enemies;
 using Objects.Players.Containers;
 using Objects.Players.PermUpgrades;
@@ -255,6 +256,9 @@ namespace Objects.Players.Scripts
 
 		private void ChronastraSkill()
 		{
+			if (FindAnyObjectByType<YamiSkill>() != null)
+				return;
+			
 			Instantiate(GameData.GetSkillPrefab(), _abilityContainer);
 		}
 

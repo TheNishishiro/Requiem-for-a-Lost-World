@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Data.Elements;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
+using DefaultNamespace.Data.Game;
 using Interfaces;
 using Managers;
 using NaughtyAttributes;
@@ -106,7 +107,7 @@ namespace Weapons
 		public virtual void Update()
 		{
 			_timer -= Time.deltaTime;
-			if (_timer >= 0f) return;
+			if (_timer >= 0f || PauseManager.instance.IsPauseStateSet(GamePauseStates.PauseWeaponAttacks)) return;
 
 			_timer = WeaponStatsStrategy.GetTotalCooldown();
 			if (GameManager.instance.playerStatsComponent.IsDead()) return;

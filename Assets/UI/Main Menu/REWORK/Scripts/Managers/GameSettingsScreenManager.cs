@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Data.Difficulty;
+using DefaultNamespace.Attributes;
 using Interfaces;
 using Managers;
 using NaughtyAttributes;
@@ -132,7 +133,7 @@ public class GameSettingsScreenManager : MonoBehaviour, IStackableWindow
 
         NetworkingContainer.IsHostPlayer = true;
         AudioManager.instance.PlayButtonConfirmClick();
-        SceneManager.LoadScene("Scenes/Main Level", LoadSceneMode.Single);
+        SceneManager.LoadScene(currentStage.GetStringValue(), LoadSceneMode.Single);
         SceneManager.LoadScene("Scenes/Essential", LoadSceneMode.Additive);
 			
         yield break;

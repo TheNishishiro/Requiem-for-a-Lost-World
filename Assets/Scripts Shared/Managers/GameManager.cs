@@ -6,6 +6,7 @@ using Data.Difficulty;
 using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Cameras;
+using DefaultNamespace.Data.Game;
 using Events.Handlers;
 using Events.Scripts;
 using Managers.StageEvents;
@@ -37,7 +38,6 @@ namespace Managers
 		}
 
 		private bool _isExiting;
-		
 		[SerializeField] public Player playerComponent;
 		[HideInInspector] public PlayerVfxComponent playerVfxComponent;
 		[SerializeField] public PlayerStatsComponent playerStatsComponent;

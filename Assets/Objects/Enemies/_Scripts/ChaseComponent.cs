@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
+using DefaultNamespace.Data.Game;
 using Events.Scripts;
 using Interfaces;
+using Managers;
 using Objects.Abilities.Back_Hole;
 using Unity.Netcode;
 using Unity.Netcode.Components;
@@ -66,6 +68,9 @@ public class ChaseComponent : NetworkBehaviour
         if (!IsHost)
             return;
 
+        if (PauseManager.instance.IsPauseStateSet(GamePauseStates.PauseEnemyMovement))
+            return;
+        
         if (_isMovementDisabled)
             return;
         

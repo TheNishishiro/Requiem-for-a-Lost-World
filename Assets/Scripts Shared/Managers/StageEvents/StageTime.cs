@@ -1,4 +1,5 @@
-﻿using Objects.Stage;
+﻿using DefaultNamespace.Data.Game;
+using Objects.Stage;
 using UI.Labels.InGame;
 using Unity.Netcode;
 using UnityEngine;
@@ -23,6 +24,7 @@ namespace Managers.StageEvents
 		private void Update()
 		{
 			if (!_isInit) return;
+			if (PauseManager.instance.IsPauseStateSet(GamePauseStates.PauseTimer)) return;
 			
 			_deltaTimeCache = Time.deltaTime;
 			if (IsHost)

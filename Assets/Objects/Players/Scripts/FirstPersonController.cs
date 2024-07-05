@@ -1,4 +1,5 @@
 ﻿using DefaultNamespace.Data;
+using DefaultNamespace.Data.Game;
 using DefaultNamespace.Data.Settings;
 using Managers;
 using Objects.Players.Scripts;
@@ -121,6 +122,9 @@ namespace StarterAssets
 
 		private void Update()
 		{
+			if (PauseManager.instance.IsPauseStateSet(GamePauseStates.PausePlayerMovement))
+				return;
+			
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
@@ -129,6 +133,9 @@ namespace StarterAssets
 
 		private void LateUpdate()
 		{
+			if (PauseManager.instance.IsPauseStateSet(GamePauseStates.PausePlayerMovement))
+				return;
+			
 			CameraRotation();
 		}
 

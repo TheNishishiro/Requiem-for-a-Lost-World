@@ -45,6 +45,11 @@ namespace Managers
 			audioSource.PlayOneShot(audioClip, volumeScale);
 		}
 		
+		public void PlaySound(AudioClip audioClip)
+		{
+			audioSource.PlayOneShot(audioClip);
+		}
+		
 		public void PlayButtonSimpleClick()
 		{
 			audioSource.PlayOneShot(buttonSimpleClick);

@@ -21,7 +21,6 @@ public class StageSelectionManager : MonoBehaviour, IStackableWindow
     [SerializeField] private Animator animatorChangeStage;
     private bool IsLockedByAnimation => !animatorChangeStage.GetCurrentAnimatorStateInfo(0).IsName("Idle");
     
-    private StageDefinition _selectedStage;
     private int _selectedIndex;
     private const float KeyHoldDelay = 0.4f;
     private float _keyNextActionTime = 0f;
@@ -112,7 +111,6 @@ public class StageSelectionManager : MonoBehaviour, IStackableWindow
     
     public void Open()
     {
-        _selectedStage = stageContainer.GetData(_selectedIndex);
         UpdateListDisplay();
         StackableWindowManager.instance.OpenWindow(this);
     }
@@ -129,7 +127,7 @@ public class StageSelectionManager : MonoBehaviour, IStackableWindow
         if (IsLockedByAnimation) 
             return;
         
-        GameData.SetCurrentStage(_selectedStage);
+        GameData.SetCurrentStage(stageContainer.GetData(_selectedIndex));
         characterSelectionScreenManager.Open(false);
     }
 

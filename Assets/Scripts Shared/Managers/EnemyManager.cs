@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
 using DefaultNamespace.BaseClasses;
+using DefaultNamespace.Data.Game;
 using Managers;
 using Objects.Enemies;
 using Objects.Players.Scripts;
@@ -45,7 +46,7 @@ public class EnemyManager : NetworkBehaviour
 	
 	private void Update()
 	{
-		if (Time.timeScale == 0) return;
+		if (Time.timeScale == 0 || PauseManager.instance.IsPauseStateSet(GamePauseStates.PauseEnemySpawner)) return;
 		_timer -= Time.deltaTime;
 
 		if (_timer <= 0 || currentEnemyCount < enemyMinCount)

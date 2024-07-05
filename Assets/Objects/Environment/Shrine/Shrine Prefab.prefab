@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2153216924
+  GlobalObjectIdHash: 2004448084
   InScenePlacedSourceGlobalObjectIdHash: 2153216924
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 2559395115067054952}
   - component: {fileID: 2944276630028772515}
   - component: {fileID: 6357453098043690972}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: glow (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,6 +186,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -222,7 +223,7 @@ GameObject:
   - component: {fileID: 4348621473217259725}
   - component: {fileID: 5014768646636219512}
   - component: {fileID: 3669101157721150656}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: glow (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,6 +273,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -308,7 +310,7 @@ GameObject:
   - component: {fileID: 3855345059696766645}
   - component: {fileID: 111971059435941059}
   - component: {fileID: 7205933308734077401}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,6 +360,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -451,6 +454,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: shrine
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2d53d6990aab816428031387187730da,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3547909826799864281, guid: 2d53d6990aab816428031387187730da,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4689623670612504100, guid: 2d53d6990aab816428031387187730da,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 2d53d6990aab816428031387187730da,
         type: 3}
       propertyPath: m_LODs.Array.data[0].screenRelativeHeight
@@ -460,6 +478,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LODs.Array.data[1].screenRelativeHeight
       value: 0.1917424
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420518397326389170, guid: 2d53d6990aab816428031387187730da,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5471691974039519146, guid: 2d53d6990aab816428031387187730da,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
