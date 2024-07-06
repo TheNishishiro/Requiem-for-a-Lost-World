@@ -47,13 +47,10 @@ namespace Objects.Abilities.Reality_Crack
 		
 		private void Explode()
 		{
-			foreach (Transform child in transform)
+			foreach (var childRigidBody in GetComponentsInChildren<Rigidbody>())
 			{
-				if (child.TryGetComponent<Rigidbody>(out var childRigidBody))
-				{
-					childRigidBody.useGravity = true;
-					childRigidBody.AddExplosionForce(100f, weaponCenter, 10f);
-				}
+				childRigidBody.useGravity = true;
+				childRigidBody.AddExplosionForce(5f, weaponCenter, 5f, 2f, ForceMode.Impulse);
 			}
 			
 			if (RealityShatterWeapon.IsGlobalDamage)
@@ -69,7 +66,7 @@ namespace Objects.Abilities.Reality_Crack
 			{
 				if (WeaponStatsStrategy.GetWeakness() > 0)
 					damageable.SetVulnerable(WeaponStatsStrategy.GetWeakness(), 5);
-				damageable.TakeDamageWithCooldown(WeaponStatsStrategy.GetDamage(), gameObject, 0.25f, ParentWeapon);
+				damageable.TakeDamageWithCooldown(WeaponStatsStrategy.GetDamage(), gameObject, 0.2f, ParentWeapon);
 			}
 		}
 	}

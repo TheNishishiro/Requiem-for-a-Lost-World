@@ -19,8 +19,9 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Section Labels")] [SerializeField] private GameObject containerRarities;
         [BoxGroup("Section Labels")] [SerializeField] private GameObject containerElementalReactions;
         [BoxGroup("Section Labels")] [SerializeField] private GameObject containerCoop;
+        [BoxGroup("Section Labels")] [SerializeField] private GameObject containerCredits;
         [Space]
-        [BoxGroup("Buttons")] [SerializeField] private List<Button> buttonSections;
+        [BoxGroup("Buttons")] [SerializeField] private List<TutorialFilterButton> buttonSections;
         [Space]
         [BoxGroup("Styling")] [SerializeField] private Material materialSelectedText;
         [BoxGroup("Styling")] [SerializeField] private Material materialIdleText;
@@ -64,17 +65,25 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         public void FilterSection(int sectionId)
         {
+            var selectedButton = buttonSections[sectionId];
+            var section = selectedButton.tutorialSection;
             _currentSectionId = sectionId;
-            var section = (TutorialSection)sectionId;
+            
             containerWelcome.SetActive(section is TutorialSection.Welcome);
             containerRarities.SetActive(section is TutorialSection.Rarities);
             containerElementalReactions.SetActive(section is TutorialSection.Reactions);
             containerCoop.SetActive(section is TutorialSection.Coop);
+            containerCredits.SetActive(section is TutorialSection.Credits);
             
             buttonSections.ForEach(x => x.GetComponent<Image>().color = Color.clear);
             buttonSections.ForEach(x => x.GetComponentInChildren<TextMeshProUGUI>().fontSharedMaterial = materialIdleText);
             buttonSections[sectionId].GetComponent<Image>().color = colorHighlight;
             buttonSections[sectionId].GetComponentInChildren<TextMeshProUGUI>().fontSharedMaterial = materialSelectedText;
+        }
+
+        public void FilterSection(TutorialFilterButton button)
+        {
+            FilterSection(buttonSections.FindIndex(x => x == button));
         }
         
         public void Open()

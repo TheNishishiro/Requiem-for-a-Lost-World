@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5436654511863108158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 627302254069203786}
+  - component: {fileID: 2698039277224291335}
+  m_Layer: 0
+  m_Name: Geode Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &627302254069203786
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436654511863108158}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2698039277224291335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436654511863108158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0615a6dcf93468fbf924aad9ef07ced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useNetworkPool: 1
+  spawnPrefab: {fileID: 5573693727200811346, guid: 1d276b354f6f8c4459037483c40f3140,
+    type: 3}
+  WeaponId: 30
+  Name: Geode
+  Description: Summon a stone pillar that emits waves of damage in an area
+  chanceToAppear: 1
+  Icon: {fileID: 0}
+  unlockOnAchievement: 1
+  requiredAchievement: 100
+  element: 9
+  weaponStats:
+    Damage: 10
+    Cooldown: 5
+    CooldownReduction: 0
+    Scale: 1
+    Speed: 0
+    TimeToLive: 3
+    AttackCount: 1
+    PassThroughCount: 0
+    DamageCooldown: 0
+    DuplicateSpawnDelay: 0.2
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
+    LifeSteal: 0
+  availableUpgrades: []
+  isSkill: 0
+  capacity: 10
+  maxCapacity: 10

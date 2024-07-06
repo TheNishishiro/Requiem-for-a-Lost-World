@@ -32,6 +32,7 @@ namespace Objects
         ThrowingKnife = 26,
         TimeBlade = 27,
         Tornado = 28,
-        WindShear = 29
+        WindShear = 29,
+        GeodeRock = 30
     }
 }

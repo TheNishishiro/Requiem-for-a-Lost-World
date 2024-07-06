@@ -5,6 +5,7 @@
         Welcome = 0,
         Rarities = 1,
         Reactions = 2,
-        Coop = 3
+        Coop = 3,
+        Credits = 4
     }
 }

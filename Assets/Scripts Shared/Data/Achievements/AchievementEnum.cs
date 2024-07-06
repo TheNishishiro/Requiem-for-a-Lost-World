@@ -4,7 +4,7 @@ using Objects.Characters;
 
 namespace DefaultNamespace.Data.Achievements
 {
-	public enum AchievementEnum // 99
+	public enum AchievementEnum // 100
 	{
 		[AchievementValue("Jack of all trades", "Obtain 6 weapons in a single game", AchievementSection.Misc, Rarity.Common)]
 		Hold6Weapons = 0,
@@ -40,7 +40,7 @@ namespace DefaultNamespace.Data.Achievements
 		Take1000DamageInOneGame = 15,
 		[AchievementValue("And he welcomed her as his old friend", "Have your expedition end prematurely 20 times", AchievementSection.Combat, Rarity.Common, RequirementType.Deaths, 20)]
 		Die20Times = 16,
-		[AchievementValue("Blessed by the wind", "Find a wind orb in the Capital Outskirts", AchievementSection.Environment, Rarity.Rare)]
+		[AchievementValue("Blessed by the wind", "Find a wind orb in the Capital Outskirts", AchievementSection.Environment, Rarity.Legendary)]
 		UnlockWindShear = 17,
 		[AchievementValue("Witness Octi's ugliness", "Survive 30 minutes with a light aligned character", AchievementSection.Combat, Rarity.Rare, RequirementType.TimeSpendWithLightCharacter, 30)]
 		Survive30MinutesWithLightCharacter = 84,
@@ -58,6 +58,8 @@ namespace DefaultNamespace.Data.Achievements
 		WalkAThousandSteps = 94,
 		[AchievementValue("Decide already", "Be indecisive for too long", AchievementSection.Misc, Rarity.Legendary)]
 		ScrollCharactersTooManyTimes = 95,
+		[AchievementValue("Is this Stonehenge?", "Visit Stonehenge in the Capital Outskirts", AchievementSection.Environment, Rarity.Legendary)]
+		VisitStonehenge = 100,
 		
 		#region Character specific achievements
 		[AchievementValue("Bound by fate", "Bind enemies for 1 hour in total in a single game using Amelisana", AchievementSection.Character, Rarity.Common, CharactersEnum.Amelisana_BoN, RequirementType.None, 1)]

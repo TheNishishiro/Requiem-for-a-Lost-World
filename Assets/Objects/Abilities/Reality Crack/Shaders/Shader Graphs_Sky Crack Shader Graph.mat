@@ -3,7 +3,7 @@
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 32
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -17,7 +17,7 @@ Material:
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3022
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
@@ -41,15 +41,15 @@ Material:
     m_Floats:
     - _Distortion: 0
     - _Float: 0.39
-    - _Fresnel: 10
+    - _Fresnel: 0
     - _NoiseScale: 0.01
     - _NormalStr: 1
-    - _QueueControl: 1
-    - _QueueOffset: 22
-    - _ReflectionStr: 0.2
-    - _Smoothness: 0.038
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReflectionStr: 0
+    - _Smoothness: 0
     m_Colors:
-    - _Color: {r: 16.39211, g: 0, b: 7.4935365, a: 0}
+    - _Color: {r: 60.11873, g: 19.211954, b: 90.509636, a: 0}
     - _GlassColor: {r: 0.790987, g: 0, b: 1, a: 0.0627451}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
