@@ -1,4 +1,5 @@
-﻿using DefaultNamespace;
+﻿using System;
+using DefaultNamespace;
 using UnityEngine;
 
 namespace Objects.Abilities.Reality_Crack
@@ -6,7 +7,7 @@ namespace Objects.Abilities.Reality_Crack
     public class ShatterSlash : MonoBehaviour
     {
         [SerializeField] private RealityShatterProjectile logicNode;
-        
+
         private void OnParticleCollision(GameObject other)
         {
             if (!logicNode.gameObject.activeSelf) return;
