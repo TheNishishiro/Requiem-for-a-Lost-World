@@ -33,6 +33,8 @@ namespace Objects
         TimeBlade = 27,
         Tornado = 28,
         WindShear = 29,
-        GeodeRock = 30
+        GeodeRock = 30,
+        RealityShatter = 31,
+        MagicArrow = 32
     }
 }

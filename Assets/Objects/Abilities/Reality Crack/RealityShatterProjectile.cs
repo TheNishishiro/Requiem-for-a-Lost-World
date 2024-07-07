@@ -10,34 +10,29 @@ using Weapons;
 
 namespace Objects.Abilities.Reality_Crack
 {
-	public class RealityShatterProjectile : ProjectileBase
+	public class RealityShatterProjectile : PoolableProjectile<RealityShatterProjectile>
 	{
 		private Vector3 weaponCenter;
-		private EnemyManager enemyManager;
 		private RealityShatterWeapon RealityShatterWeapon => (RealityShatterWeapon) ParentWeapon;
 		[SerializeField] private GameObject slashPrefab;
-		[SerializeField] private Collider collider;
-		
-		private void Start()
+
+		private void OnEnable()
 		{
-			enemyManager = FindObjectOfType<EnemyManager>();
+			StartCoroutine(AnimateAttack());
 			var position = ParentWeapon.transform.position;
 			weaponCenter = new Vector3(position.x, position.y, position.z);
-			StartCoroutine(AnimateAttack());
 		}
 
 		private IEnumerator AnimateAttack()
 		{
-			collider.enabled = true;
-			enemyManager.SetTimeStop(true);
+			EnemyManager.instance.SetTimeStop(true);
 			yield return new WaitForSeconds(0.5f);
 			SpawnSlash();
 			yield return new WaitForSeconds(0.5f);
-			enemyManager.SetTimeStop(false);
+			EnemyManager.instance.SetTimeStop(false);
 			Explode();
-			collider.enabled = false;
 			yield return new WaitForSeconds(1f);
-			Destroy(gameObject);
+			Destroy();
 		}
 
 		private void SpawnSlash()
@@ -54,20 +49,16 @@ namespace Objects.Abilities.Reality_Crack
 			}
 			
 			if (RealityShatterWeapon.IsGlobalDamage)
-				enemyManager.GlobalDamage(WeaponStatsStrategy.GetDamage() / 2, ParentWeapon);
+				EnemyManager.instance.GlobalDamage(WeaponStatsStrategy.GetDamage() / 2, ParentWeapon);
 			if (RealityShatterWeapon.IsSelfBuff)
 				RealityShatterWeapon.IncreaseDamage();
 		}
-		
-		public void OnTriggerStay(Collider other)
+
+		public void OnEnemyHit(Damageable damageable)
 		{
-			var damageable = other.GetComponent<IDamageable>();
-			if (damageable != null)
-			{
-				if (WeaponStatsStrategy.GetWeakness() > 0)
-					damageable.SetVulnerable(WeaponStatsStrategy.GetWeakness(), 5);
-				damageable.TakeDamageWithCooldown(WeaponStatsStrategy.GetDamage(), gameObject, 0.2f, ParentWeapon);
-			}
+			if (WeaponStatsStrategy.GetWeakness() > 0)
+				damageable.SetVulnerable(WeaponStatsStrategy.GetWeakness(), 5);
+			SimpleDamage(damageable, false, false);
 		}
 	}
 }

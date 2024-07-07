@@ -6,20 +6,18 @@ using Weapons;
 
 namespace Objects.Abilities.Reality_Crack
 {
-	public class RealityShatterWeapon : WeaponBase
+	public class RealityShatterWeapon : PoolableWeapon<RealityShatterProjectile>
 	{
 		public bool IsGlobalDamage;
 		public bool IsSelfBuff;
 		
-		public override void Attack()
+		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
-			var shatterDome = SpawnManager.instance.SpawnObject(transform.position, spawnPrefab);
-			var projectileComponent = shatterDome.GetComponent<RealityShatterProjectile>();
-
-			projectileComponent.SetParentWeapon(this);
-			//projectileComponent.SetStats();
+			var transform1 = transform;
+			var slashPosition = transform1.position + transform1.forward/2;
+			networkProjectile.Initialize(this, transform.position);
 		}
-
+		
 		protected override int GetAttackCount()
 		{
 			return 1;
