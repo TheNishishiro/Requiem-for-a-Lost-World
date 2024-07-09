@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Data.Difficulty;
 using Objects.Stage;
 using UnityEngine;
@@ -23,7 +24,7 @@ namespace DefaultNamespace.Data.Stages
 
         public int Count()
         {
-            return stageDefinitions?.Count ?? 0;
+            return stageDefinitions?.Where(x => x.isEnabled).Count() ?? 0;
         }
     }
 }

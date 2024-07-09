@@ -110,8 +110,6 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
                 thirdPersonController.TopClamp = 40;
                 thirdPersonController.BottomClamp = -30;
                 break;
-            default:
-                throw new ArgumentOutOfRangeException();
         }
     }
 

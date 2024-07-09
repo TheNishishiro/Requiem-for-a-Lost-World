@@ -35,6 +35,7 @@ namespace Objects
         WindShear = 29,
         GeodeRock = 30,
         RealityShatter = 31,
-        MagicArrow = 32
+        MagicArrow = 32,
+        RockRain = 33
     }
 }

@@ -15,7 +15,7 @@ namespace Objects.Abilities.Lightning_Needle
         protected override float GetDamageOverTime()
         {
             var damageIncrease = _lightningNeedleWeapon.StormSurge ? 1 - GetCooldownReductionPercentage() : 0;
-            return GetDamageOverTime() * (1 + damageIncrease);
+            return base.GetDamageOverTime() * (1 + damageIncrease);
         }
     }
 }

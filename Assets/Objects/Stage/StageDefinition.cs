@@ -11,5 +11,6 @@ namespace Objects.Stage
         public Sprite background;
         public Sprite backgroundBlur;
         public string title;
+        public bool isEnabled;
     }
 }

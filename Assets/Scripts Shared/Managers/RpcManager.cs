@@ -7,6 +7,7 @@ using Events.Scripts;
 using Objects;
 using Objects.Abilities;
 using Objects.Enemies;
+using Objects.Players.PermUpgrades;
 using Objects.Players.Scripts;
 using Objects.Stage;
 using UI.Labels.InGame.MP_List;
@@ -240,6 +241,18 @@ namespace Managers
             GameManager.instance.playerStatsComponent.ChangeDeathState(false);
             GameManager.instance.playerMpComponent.ResetCameraFollow();
             GameManager.instance.playerMpComponent.SetCollider(true);
+        }
+
+        public void TempStatIncrease(StatEnum statEnum, float buffAmount, float buffTime, string buffId, ulong clientId)
+        {
+            TempStatIncreaseRpc(statEnum, buffAmount, buffTime, buffId, RpcTarget.Single(clientId, RpcTargetUse.Temp));
+        }
+        
+        [Rpc(SendTo.SpecifiedInParams)]
+        public void TempStatIncreaseRpc(StatEnum statEnum, float buffAmount, float buffTime, string buffId, RpcParams rpcParams)
+        {
+            Debug.Log($"Buff: {buffId}");
+            GameManager.instance.playerStatsComponent.TemporaryStatBoost(buffId, statEnum, buffAmount, buffTime);
         }
     }
 }

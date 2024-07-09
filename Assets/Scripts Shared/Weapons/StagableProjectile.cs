@@ -282,5 +282,10 @@ namespace Weapons
 	    {
 		    return isAnticipation ? Vector3.Lerp(minTarget, calculatedScale, TimeAlive / expandTime) : Vector3.Lerp(minTarget, calculatedScale, CurrentTimeToLive / expandTime);
 	    }
+
+	    public virtual void SubProjectileTrigger(SimpleSubProjectile simpleSubProjectile, Collider other)
+	    {
+		    
+	    }
     }
 }
