@@ -34,6 +34,10 @@
 		[StatType(true)]
 		Luck = 18,
 		Reroll = 19,
-		Skip = 20
+		Skip = 20,
+		[StatType(true)]
+		ElementalReactionEffectIncreasePercentage = 21,
+		[StatType(true)]
+		FollowUpDamageIncrease
 	}
 }

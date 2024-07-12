@@ -9,6 +9,7 @@ using Interfaces;
 using Managers;
 using NaughtyAttributes;
 using Objects.Characters;
+using Objects.Players.Scripts;
 using Objects.Stage;
 using Unity.Netcode;
 using Unity.VisualScripting;
@@ -319,41 +320,42 @@ namespace DefaultNamespace
 				_elementVfxMap[reactionResult.removedA].gameObject.SetActive(false);
 			if (_elementVfxMap.ContainsKey(reactionResult.removedB))
 				_elementVfxMap[reactionResult.removedB].gameObject.SetActive(false);
-			
+
+			var elementalReactionEffectIncrease = PlayerStatsScaler.GetScaler().GetElementalReactionEffectIncreasePercentage();
 			switch (reactionResult.reaction)
 			{
 				case ElementalReaction.None:
 					return;
 				case ElementalReaction.Melt:
-					SetVulnerable(2, 0.5f);
+					SetVulnerable(2, 0.5f * elementalReactionEffectIncrease);
 					break;
 				case ElementalReaction.Explosion:
-					TakeDamage(new DamageResult{Damage = damage * 0.35f});
+					TakeDamage(new DamageResult{Damage = damage * (0.35f * elementalReactionEffectIncrease)});
 					break;
 				case ElementalReaction.Annihilation :
 					if (Random.value >= 0.5f)
-						TakeDamage(new DamageResult{Damage = damage});
+						TakeDamage(new DamageResult{Damage = damage * elementalReactionEffectIncrease});
 					break;
 				case ElementalReaction.Swirl:
 				{
-					ReduceElementalDefence(reactionResult.removedA == Element.Wind ? reactionResult.removedB : reactionResult.removedA, 0.1f);
+					ReduceElementalDefence(reactionResult.removedA == Element.Wind ? reactionResult.removedB : reactionResult.removedA, 0.1f * elementalReactionEffectIncrease);
 					break;
 				}
 				case ElementalReaction.Collapse:
 				{
 					foreach (var resistance in resistances)
 					{
-						resistance.damageReduction *= 0.1f;
+						resistance.damageReduction *= 0.1f * elementalReactionEffectIncrease;
 					}
 
 					break;
 				}
 				case ElementalReaction.Erode:
-					SetVulnerable(1, 0.1f);
-					TakeDamage(new DamageResult{Damage = Health * 0.05f});
+					SetVulnerable(1, 0.1f * elementalReactionEffectIncrease);
+					TakeDamage(new DamageResult{Damage = Health * (0.05f * elementalReactionEffectIncrease)});
 					break;
 				case ElementalReaction.Shock:
-					chaseComponent.SetImmobile(0.5f);
+					chaseComponent.SetImmobile(0.5f * elementalReactionEffectIncrease);
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();

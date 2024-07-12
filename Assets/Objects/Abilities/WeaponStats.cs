@@ -36,6 +36,7 @@ namespace Objects.Abilities
 		public float DamageOverTimeDuration;
 		public float DamageOverTimeFrequency;
 		public float LifeSteal;
+		public float FollowUpDamageIncrease;
 
 		public void AssignPlayerStatsComponent(PlayerStatsComponent playerStatsComponent)
 		{
@@ -65,6 +66,7 @@ namespace Objects.Abilities
              DamageOverTimeDuration *= rarityFactor;
              DamageOverTimeFrequency *= 2 - rarityFactor;
              LifeSteal *= rarityFactor;
+             FollowUpDamageIncrease *= rarityFactor;
          }
 		
 		public void Sum(WeaponStats weaponStats, int rarity)
@@ -91,6 +93,7 @@ namespace Objects.Abilities
             DamageOverTimeDuration += weaponStats.DamageOverTimeDuration * rarityFactor;      
             DamageOverTimeFrequency += weaponStats.DamageOverTimeFrequency * (2 - rarityFactor);    
             LifeSteal += weaponStats.LifeSteal * rarityFactor;        
+            FollowUpDamageIncrease += weaponStats.FollowUpDamageIncrease * rarityFactor;        
         }
 
 		public string GetDescription(string description, int rarity)
@@ -118,36 +121,9 @@ namespace Objects.Abilities
 				.Replace("{DamageOverTime}", Utilities.StatToString(DamageOverTime, rarityFactor))
 				.Replace("{DamageOverTimeDuration}", Utilities.StatToString(DamageOverTimeDuration, rarityFactor))
 				.Replace("{DamageOverTimeFrequency}", Utilities.StatToString(DamageOverTimeFrequency, rarityFactor, false, true))
+				.Replace("{FollowUpDamageIncrease}", Utilities.StatToString(FollowUpDamageIncrease, rarityFactor, true))
 				;
 		}
-
-		public ICollection<StatsDisplayData> GetStatsDisplayData()
-        {
-            var stats = new List<StatsDisplayData>
-            {
-	            new("Damage", Damage),
-	            new("Damage%", DamageIncreasePercentage, isPercentage: true),
-	            new("Cooldown", Cooldown),
-	            new("Cooldown%", CooldownReduction, isPercentage: true),
-	            new("Scale", Scale),
-	            new("Speed", Speed),
-	            new("Projectile time", TimeToLive),
-	            new("Pierce", PassThroughCount),
-	            new("Damage delay", DamageCooldown),
-	            new("Attack delay", DuplicateSpawnDelay, baseValue:0.2f),
-	            new("Critical rate", CritRate, isPercentage: true),
-	            new("Critical damage", CritDamage, isPercentage: true),
-	            new("Weakness", Weakness, isPercentage: true),
-	            new("Attack count", AttackCount),
-	            new("Regen per hit", HealPerHit),
-	            new("Life steal", LifeSteal),
-	            new("Damage over time", DamageOverTime),
-	            new("DoT duration", DamageOverTimeDuration),
-	            new("DoT frequency", DamageOverTimeFrequency)
-            };
-        
-            return stats;
-        }
 		
 		private float GetRarityFactor(float rarity)
 		{

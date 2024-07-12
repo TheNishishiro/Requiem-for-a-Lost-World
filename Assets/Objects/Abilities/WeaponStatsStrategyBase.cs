@@ -18,15 +18,31 @@ namespace Objects.Abilities
             _weaponElement = elementField;
         }
         
-        public virtual DamageResult GetDamageDealt(float damageIncrease = 0, float flatDamageIncrease = 0)
+        public virtual DamageResult GetDamageDealt(float damageIncrease = 0, float flatDamageIncrease = 0, bool isFollowUp = false)
         {
+            if (isFollowUp)
+                return GetFollowUpDamageDealt(damageIncrease, flatDamageIncrease);
+            
             var damageResult = new DamageResult
             {
                 IsCriticalHit = IsCrit()
             };
-
+            
             var nonCritDamage = (GetDamage() + flatDamageIncrease) * GetElementalDamageIncrease() * (GetDamageIncreasePercentage() + damageIncrease);
             damageResult.Damage = damageResult.IsCriticalHit ? nonCritDamage * GetCritDamage()  : nonCritDamage;
+
+            return damageResult;
+        }        
+        
+        protected virtual DamageResult GetFollowUpDamageDealt(float damageIncrease = 0, float flatDamageIncrease = 0)
+        {
+            var damageResult = new DamageResult
+            {
+                IsCriticalHit = Random.value < 0.5f
+            };
+            
+            var nonCritDamage = (GetDamage() + flatDamageIncrease) * GetElementalDamageIncrease() * (1f + damageIncrease) * GetFollowUpAttackDamageIncrease();
+            damageResult.Damage = damageResult.IsCriticalHit ? nonCritDamage * (GetCritDamage()/2f)  : nonCritDamage;
 
             return damageResult;
         }
@@ -203,6 +219,13 @@ namespace Objects.Abilities
             var weaponCritRate = _weaponStats.CritRate;
             var playerCritRate = (float)PlayerStatsScaler.GetScaler().GetCritRate();
             return weaponCritRate + playerCritRate;
+        }
+
+        protected virtual float GetFollowUpAttackDamageIncrease()
+        {
+            var weaponDamage = _weaponStats.FollowUpDamageIncrease;
+            var playerDamage = PlayerStatsScaler.GetScaler().GetFollowUpAttackDamageIncrease();
+            return weaponDamage + playerDamage;
         }
     }
 }

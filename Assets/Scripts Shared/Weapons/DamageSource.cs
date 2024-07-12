@@ -55,7 +55,7 @@ namespace Weapons
 			if (damageable.IsDestroyed())
 				return;
 
-			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage, ProjectileDamageIncrease);
+			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage, ProjectileDamageIncrease, isFollowUp);
 			damageable.TakeDamage(damage, ParentWeapon, isFollowUp);
 
 			if (isLimitedUsage && currentPassedEnemies-- <= 0)
@@ -67,7 +67,7 @@ namespace Weapons
 			if (damageable == null)
 				return;
 
-			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage, ProjectileDamageIncrease);
+			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage, ProjectileDamageIncrease, isFollowUp);
 			damageable.TakeDamage(damage, ParentWeapon, isFollowUp);
 			if (damageable.IsDestroyed())
 				return;

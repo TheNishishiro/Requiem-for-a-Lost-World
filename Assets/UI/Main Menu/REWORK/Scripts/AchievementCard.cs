@@ -137,6 +137,9 @@ namespace UI.Main_Menu.REWORK.Scripts
                 case RequirementType.DistanceTraveled:
                     fillAmount = (float)(saveFile.DistanceTraveled / requirementValue);
                     break;
+                case RequirementType.Shrines:
+                    fillAmount = saveFile.ShrinesVisited / requirementValue;
+                    break;
                 case RequirementType.None:
                     break;
                 default:

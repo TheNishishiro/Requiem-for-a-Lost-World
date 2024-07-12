@@ -62,6 +62,8 @@ namespace DefaultNamespace.Data
 		
 		public static SaveFile Instance { get; private set; }
 		public double DistanceTraveled { get; set; }
+		public ulong ShrinesVisited { get; set; }
+
 		public CameraModes CameraMode;
 
 		private void Awake()
@@ -142,6 +144,7 @@ namespace DefaultNamespace.Data
 			SelectedCharacterId = saveData.SelectedCharacterId;
 			DistanceTraveled = saveData.DistanceTraveled;
 			CameraMode = saveData.CameraMode;
+			ShrinesVisited = saveData.ShrinesVisited;
 			BannerHistory = saveData.BannerHistory ?? new List<CharactersEnum>();
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
@@ -336,6 +339,7 @@ namespace DefaultNamespace.Data
 		public ulong TotalAmountHealed;
 		public ulong DamageTakeInOneGame;
 		public ulong TotalDamageTaken;
+		public ulong ShrinesVisited;
 		public double DistanceTraveled;
 		public bool IsFirstTutorialCompleted;
 		public int Pity;
@@ -371,6 +375,7 @@ namespace DefaultNamespace.Data
 			ReadStoryEntries = saveFile.ReadStoryEntries;
 			SelectedCharacterId = saveFile.SelectedCharacterId;
 			TimePlayed = saveFile.TimePlayed;
+			ShrinesVisited = saveFile.ShrinesVisited;
 			BossKills = saveFile.BossKills;
 			SelectedDifficulty = saveFile.SelectedDifficulty;
 			TotalLegendaryItemsObtained = saveFile.TotalLegendaryItemsObtained;

@@ -45,7 +45,7 @@ namespace Objects.Abilities.Reality_Crack
 		public void OnEnemyHit(Damageable damageable)
 		{
 			if (WeaponStatsStrategy.GetWeakness() > 0)
-				damageable.SetVulnerable(WeaponStatsStrategy.GetWeakness(), 5);
+				damageable.SetVulnerable(5, WeaponStatsStrategy.GetWeakness());
 			SimpleDamage(damageable, false, false);
 		}
 	}

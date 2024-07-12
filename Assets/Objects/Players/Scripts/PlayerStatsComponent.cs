@@ -70,11 +70,6 @@ namespace Objects.Players.Scripts
 			return playerStats;
 		}
 
-		public IEnumerable<StatsDisplayData> GetStatsDisplayData()
-		{
-			return playerStats.GetStatsList();
-		}
-
 		public void SetInvincible(bool isInvincible)
 		{
 			IsInvincible = isInvincible;

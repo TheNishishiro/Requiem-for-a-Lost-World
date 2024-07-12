@@ -15,7 +15,6 @@ namespace Interfaces
 		Sprite IconField { get; }
 		int LevelField { get; }
 		Element ElementField { get; }
-		ICollection<StatsDisplayData> GetStatsData();
 		bool IsItem { get; }
 		AchievementEnum? RequiredAchievementField { get; }
 		bool IsUnlocked(SaveFile saveFile);

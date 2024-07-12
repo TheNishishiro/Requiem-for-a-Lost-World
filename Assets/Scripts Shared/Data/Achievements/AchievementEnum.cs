@@ -4,7 +4,7 @@ using Objects.Characters;
 
 namespace DefaultNamespace.Data.Achievements
 {
-	public enum AchievementEnum // 100
+	public enum AchievementEnum // 102
 	{
 		[AchievementValue("Jack of all trades", "Obtain 6 weapons in a single game", AchievementSection.Misc, Rarity.Common)]
 		Hold6Weapons = 0,
@@ -60,6 +60,10 @@ namespace DefaultNamespace.Data.Achievements
 		ScrollCharactersTooManyTimes = 95,
 		[AchievementValue("Is this Stonehenge?", "Visit Stonehenge in the Capital Outskirts", AchievementSection.Environment, Rarity.Legendary)]
 		VisitStonehenge = 100,
+		[AchievementValue("Earth Bender", "Obtain at least 2 earth type weapons of rare quality or higher in a single game", AchievementSection.Misc, Rarity.Legendary)]
+		HoldHighRarityEarthWeapons = 101,
+		[AchievementValue("Secret Arcana", "Visit 100 shrines in your journey", AchievementSection.Environment, Rarity.Rare, RequirementType.Shrines, 100)]
+		Visit100Shrines = 102,
 		
 		#region Character specific achievements
 		[AchievementValue("Bound by fate", "Bind enemies for 1 hour in total in a single game using Amelisana", AchievementSection.Character, Rarity.Common, CharactersEnum.Amelisana_BoN, RequirementType.None, 1)]

@@ -47,11 +47,6 @@ namespace Objects.Characters
 		public List<EidolonData> Eidolons;
 		private string BonusSeparator => "\n\n" + new string('\u2500', 5) + "» Bonus stats «" + new string('\u2500', 5);
 
-		public IEnumerable<StatsDisplayData> GetStatsList()
-		{
-			return Stats.GetStatsList();
-		}
-
 		public string GetWeaponDescription(int maxUnlockedEidolon)
 		{
 			var sb = new StringBuilder(StartingWeapon.GetDescription(1));

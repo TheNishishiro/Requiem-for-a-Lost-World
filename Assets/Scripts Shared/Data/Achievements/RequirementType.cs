@@ -16,6 +16,7 @@
         PlayTime = 11,
         EnemyBossKills = 12,
         HealAndDamageInSingleGame = 13,
-        DistanceTraveled = 14
+        DistanceTraveled = 14,
+        Shrines = 15
     }
 }

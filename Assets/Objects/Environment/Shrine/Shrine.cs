@@ -38,13 +38,18 @@ public class Shrine : NetworkBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!IsPlayer(other)) return;
+        AchievementManager.instance.OnShrineEnter(GetInstanceID());
+
+        if (!GameManager.instance.playerComponent.HasPlayerCard()) return;
         isLoadingRevive = true;
         GuiManager.instance.SetReviveTimerVisible(true);
+        AchievementManager.instance.OnShrineEnter(GetInstanceID());
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!IsPlayer(other)) return;
+        if (!GameManager.instance.playerComponent.HasPlayerCard()) return;
         GuiManager.instance.SetReviveTimerVisible(false);
         isLoadingRevive = false;
         reviveTimer = 0;
@@ -55,7 +60,6 @@ public class Shrine : NetworkBehaviour
         if (!other.CompareTag("Player")) return false;
         if (GameManager.instance.playerStatsComponent.IsDead()) return false;
         if (other.GetComponent<NetworkObject>()?.IsOwner != true) return false;
-        if (!GameManager.instance.playerComponent.HasPlayerCard()) return false;
 
         return true;
     }

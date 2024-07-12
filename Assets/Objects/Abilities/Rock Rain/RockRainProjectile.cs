@@ -29,7 +29,9 @@ namespace Objects.Abilities.Rock_Rain
 
         private void OnTriggerEnter(Collider other)
         {
-            SimpleDamage(other, false);
+            SimpleDamage(other, false, false, out var damageable);
+            if (WeaponStatsStrategy.GetWeakness() > 0)
+                damageable.SetVulnerable(2, WeaponStatsStrategy.GetWeakness());
         }
     }
 }

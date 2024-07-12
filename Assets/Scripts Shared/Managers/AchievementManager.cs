@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Data.Elements;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using Objects.Characters;
@@ -23,6 +25,8 @@ namespace Managers
 		private float _healAmountInOneGame;
 		private float _damageTakenInOneGame;
 		private float _distanceTraveled;
+		private int _earthWeaponsHeld;
+		private HashSet<int> _visitedShrines = new ();
         
 		public void Awake()
 		{
@@ -39,6 +43,8 @@ namespace Managers
 			_healAmountInOneGame = 0;
 			_damageTakenInOneGame = 0;
 			_menuScrolls = 0;
+			_earthWeaponsHeld = 0;
+			_visitedShrines = new HashSet<int>();
 		}
 
 		public void OnStageTimeUpdated(float time)
@@ -73,6 +79,13 @@ namespace Managers
 			
 			if (unlockedCount == 6)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Hold6Weapons);
+
+			if (weapon.ElementField == Element.Earth && rarity > 3)
+			{
+				_earthWeaponsHeld++;
+				if (_earthWeaponsHeld >= 2)
+					SaveFile.Instance.UnlockAchievement(AchievementEnum.HoldHighRarityEarthWeapons);
+			}
 		}
 		public void OnItemUnlocked(ItemBase item, int unlockedCount, int rarity)
 		{
@@ -201,6 +214,16 @@ namespace Managers
 			_menuScrolls++;
 			if (_menuScrolls >= 69)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.ScrollCharactersTooManyTimes);
+		}
+
+		public void OnShrineEnter(int instanceId)
+		{
+			if (_visitedShrines.Contains(instanceId)) 
+				return;
+			
+			SaveFile.Instance.ShrinesVisited++;
+			if (SaveFile.Instance.ShrinesVisited == 100)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.Visit100Shrines);
 		}
 	}
 }

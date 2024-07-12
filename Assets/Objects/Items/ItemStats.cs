@@ -55,6 +55,8 @@ namespace Objects.Items
 		public float EarthDamageIncrease;
 		public int DashCount;
 		public float Stamina;
+		public float ElementalReactionEffectIncreasePercentage;
+		public float FollowUpDamageIncrease { get; set; }
 
 		public void ApplyRarity(int rarity)
 		{
@@ -104,6 +106,8 @@ namespace Objects.Items
 			Rerolls = Rerolls != 0 ? Rerolls + (rarity - 1) : Rerolls;
 			Skips = Skips != 0 ? Skips + (rarity - 1) : Skips;
 			Stamina *= rarityFactor;
+			ElementalReactionEffectIncreasePercentage *= rarityFactor;
+			FollowUpDamageIncrease *= rarityFactor;
 		}
 		
 		public void Apply(ItemStats itemUpgradeItemStats, int rarity)
@@ -157,6 +161,8 @@ namespace Objects.Items
             Rerolls += itemUpgradeItemStats.Rerolls == 0 ? 0 : itemUpgradeItemStats.Rerolls + (rarity - 1);
             Skips += itemUpgradeItemStats.Skips == 0 ? 0 : itemUpgradeItemStats.Skips + (rarity - 1);
             Stamina += itemUpgradeItemStats.Stamina * rarityFactor;
+            ElementalReactionEffectIncreasePercentage += itemUpgradeItemStats.ElementalReactionEffectIncreasePercentage * rarityFactor;
+            FollowUpDamageIncrease += itemUpgradeItemStats.FollowUpDamageIncrease * rarityFactor;
         }
 
 		public string GetDescription(string description, int rarity)
@@ -211,51 +217,9 @@ namespace Objects.Items
 				.Replace("{DashCount}", DashCount.ToString())
 				.Replace("{Rerolls}", (Rerolls == 0 ? 0 : Rerolls + (rarity - 1)).ToString())
 				.Replace("{Skips}", (Skips == 0 ? 0 : Skips + (rarity - 1)).ToString())
+				.Replace("{ElementalReactionEffectIncreasePercentage}", Utilities.StatToString(ElementalReactionEffectIncreasePercentage, rarityFactor, true))
+				.Replace("{FollowUpDamageIncrease}", Utilities.StatToString(FollowUpDamageIncrease, rarityFactor, true))
 				;
-		}
-		
-		public ICollection<StatsDisplayData> GetStatsDisplayData()
-		{
-			var stats = new List<StatsDisplayData>
-			{
-				new("Health", HealthMax),
-				new("Health regen", HealthRegen),
-				new("Projectiles", AttackCount),
-				new("CDR", CooldownReduction),
-				new("CDR%", CooldownReductionPercentage, isPercentage: true),
-				new("Damage", Damage),
-				new("Damage%", DamagePercentageIncrease, isPercentage: true),
-				new("DamageOverTime", DamageOverTime),
-				new("DoT frequency", DamageOverTimeFrequencyReductionPercentage, isPercentage: true),
-				new("DoT duration", DamageOverTimeDurationIncreasePercentage, isPercentage: true),
-				new("Crit rate", CritRate, isPercentage: true),
-				new("Crit damage", CritDamage, isPercentage: true),
-				new("Magnet", MagnetSize),
-				new("Projectile size", Scale, isPercentage: true),
-				new("Projectile speed", Speed),
-				new("Attack duration", TimeToLive),
-				new("Weapon range", DetectionRange),
-				new("EXP%", ExperienceIncreasePercentage, isPercentage: true),
-				new("Movement speed", MovementSpeed),
-				new("Skill CDR%", SkillCooldownReductionPercentage, isPercentage: true),
-				new("Pass through", PassThroughCount),
-				new("Damage reduction", Armor, isPercentage: true),
-				new("Enemy speed%", EnemySpeedIncreasePercentage, isPercentage: true, isInvertedColor: true),
-				new("Enemy spawn rate%", EnemySpawnRateIncreasePercentage, isPercentage: true, isInvertedColor: true),
-				new("Enemy health%", EnemyHealthIncreasePercentage, isPercentage: true, isInvertedColor: true),
-				new("Enemy count%", EnemyMaxCountIncreasePercentage, isPercentage: true, isInvertedColor: true),
-				new("Reward increase", ItemRewardIncrease, isPercentage: true),
-				new("Revives", Revives),
-				new("Weapon duration%", ProjectileLifeTimeIncreasePercentage, isPercentage: true),
-				new("Dodge chance%", DodgeChance, isPercentage: true),
-				new("Damage increase%", DamageTakenIncreasePercentage, isPercentage: true),
-				new("Life steal%", LifeSteal, isPercentage: true),
-				new("Heal increase%", HealingReceivedIncreasePercentage, isPercentage: true),
-				new("Luck%", Luck, isPercentage: true),
-				new("Rerolls", Rerolls),
-				new("Skips", Skips),
-			};
-			return stats;
 		}
 		
 		private float GetRarityFactor(float rarity)

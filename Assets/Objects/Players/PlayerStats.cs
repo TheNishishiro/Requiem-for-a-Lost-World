@@ -70,6 +70,8 @@ namespace Objects.Players
 		public float EarthDamageIncrease;
 		public int DashCount;
 		public float Stamina;
+		public float ElementalReactionEffectIncreasePercentage;
+		public float FollowUpDamageIncrease;
 
 		public int RevivesField
 		{
@@ -82,7 +84,7 @@ namespace Objects.Players
 					StatusEffectManager.instance.AddOrRemoveEffect(StatusEffectType.Revive, Revives);
 			}
 		}
-        
+		
 		public PlayerStats()
 		{
 			ApplyDefaultStats();
@@ -144,6 +146,8 @@ namespace Objects.Players
 			DashCount = 2;
 			Stamina = 2;
 			SpecialValue = 0;
+			ElementalReactionEffectIncreasePercentage = 0;
+			FollowUpDamageIncrease = 0;
 		}
 
 		public void Sum(ItemStats item, int rarity)
@@ -197,6 +201,8 @@ namespace Objects.Players
 			CosmicDamageIncrease += item.CosmicDamageIncrease * rarityFactor;
 			EarthDamageIncrease += item.EarthDamageIncrease * rarityFactor;
 			Stamina += item.Stamina * rarityFactor;
+			ElementalReactionEffectIncreasePercentage += item.ElementalReactionEffectIncreasePercentage * rarityFactor;
+			FollowUpDamageIncrease += item.FollowUpDamageIncrease * rarityFactor;
         }
 
 		public void Set(PlayerStats playerStats)
@@ -207,7 +213,6 @@ namespace Objects.Players
         
             var playerStatsUpdater = new PlayerStrategyApplier();
             playerStatsUpdater.ApplyRankStrategy(characterId, GameData.GetPlayerCharacterRank(), this);
-            //playerStatsUpdater.ApplySkillTreeStrategy(characterId, GameData.GetUnlockedSkillTreeNodeIds(), this);
             foreach (var characterRune in SaveFile.Instance.GetCharacterSaveData(characterId).GetCharacterRunes())
             {
 	            Add(characterRune.statType, GameData.ScaleRune(characterRune));
@@ -224,50 +229,6 @@ namespace Objects.Players
 		            property.SetValue(this, property.GetValue(playerStats));
 		        }
 		    }
-		}
-		
-		public IEnumerable<StatsDisplayData> GetStatsList()
-		{
-			var stats = new List<StatsDisplayData>
-			{
-				new("Health", HealthMax, "Max health the character can have. Defines the amount of damage the player can take.", baseValue: 80),
-				new("Health regen", HealthRegen, "Amount of health character regenerates per second"),
-				new("Heal increase%", HealingIncreasePercentage, "The increase of healing received by the player from any source", true),
-				new("Life steal%", LifeSteal, "Amount of damage converted into healing", true),
-				new("CDR", CooldownReduction, "Flat reduction of weapon attack cooldown in seconds"),
-				new("CDR%", CooldownReductionPercentage, "Reduces weapon attack cooldown by given percentage", true),
-				new("Skill CDR%", SkillCooldownReductionPercentage, "Percentage of character skill cooldown reduction", true),
-				new("Projectiles", AttackCount, "The amount of times each weapon is allowed to attack"),
-				new("Damage", Damage, "Flat damage increase of a weapon attack"),
-				new("Damage%", DamagePercentageIncrease, "Increases weapon damage dealt by given percentage", true),
-				new("Crit rate", CritRate, "The chance of any weapon hit to critically strike, each hit deals additional damage based on crit damage", true),
-				new("Crit damage", CritDamage, "Percentage damage increase during critical strikes", true),
-				new("DamageOverTime", DamageOverTime, "Flat damage over time applied to enemies (with applicable weapons)"),
-				new("DoT frequency", DamageOverTimeFrequencyReductionPercentage, "Cooldown reduction between applying another DoT effect", true),
-				new("DoT duration", DamageOverTimeDurationIncreasePercentage, "Duration increase for every DoT effect", true),
-				new("Magnet", MagnetSize, "Defines the distance from which pickups will automatically get pulled towards player", baseValue: 0.6f),
-				new("Projectile size", Scale, "Percentage of weapon size increase. Dictates how big AoE effects can be", true),
-				new("Projectile speed", Speed, "Percentage of weapon speed increase. Dictates how fast projectiles travels", true),
-				new("Attack duration", TimeToLive, "How long the projectile will stay on the screen before disappearing"),
-				new("Attack duration%", ProjectileLifeTimeIncreasePercentage, "Percentage increase of projectile life time on screen", true),
-				new("Weapon range", DetectionRange, "How far the weapon can detect enemies (with applicable weapons)"),
-				new("EXP%", ExperienceIncreasePercentage, "Character in game experience gain increase per EXP shard pickup", true),
-				new("Movement speed", MovementSpeed, "Flat character movement speed increase", baseValue: 1.6f),
-				new("Pass through", PassThroughCount, "How many times a projectile can pass through enemies before disappearing (with applicable weapons)"),
-				new("Armor", Armor, "Flat damage reduction from enemy attacks"),
-				new("Enemy speed%", EnemySpeedIncreasePercentage, "Increases enemy speed by given percentage. The higher the faster enemies will move towards player", true, true),
-				new("Enemy spawn rate%", EnemySpawnRateIncreasePercentage, "Increase the rate at which enemies can spawn up until the max amount possible per wave", true, true),
-				new("Enemy health%", EnemyHealthIncreasePercentage, "Increases enemy max health by given percentage", true, true),
-				new("Enemy count%", EnemyMaxCountIncreasePercentage, "Increases the max amount of enemies that can spawn each wave by given percentage", true, true),
-				new("Reward increase", ItemRewardIncrease, "Increases the amount of gold or gems rewarded per pickup", true),
-				new("Revives", Revives, "The amount of times the player can be revived after dying. Revival brings player back to life with 50% health"),
-				new("Dodge chance%", DodgeChance, "The chance to avoid taking damage after colliding with an enemy", true),
-				new("Damage taken%", DamageTakenIncreasePercentage, "The increase of damage taken by the player from any source", true, true),
-				new("Luck%", Luck, "Increase the chance of high rarity items appearing in chests of after leveling up. Also increases the chance of enemies dropping gold coins and gems upon death", true),
-				new("Rerolls", Rerolls, "The amount of times each set of upgrades to pick from level ups can be rerolled"),
-				new("Skips", Skips, "The amount of times each level up choice can be skipped")
-			};
-			return stats;
 		}
 
 		public void Add(PermUpgradeType permUpgradeType, float value)
@@ -336,6 +297,12 @@ namespace Objects.Players
 					break;
 				case PermUpgradeType.Skip:
 					Skips += (int) value;
+					break;
+				case PermUpgradeType.ElementalReactionEffectIncreasePercentage:
+					ElementalReactionEffectIncreasePercentage += value;
+					break;
+				case PermUpgradeType.FollowUpDamageIncrease:
+					FollowUpDamageIncrease += value;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(permUpgradeType), permUpgradeType, null);
@@ -489,6 +456,12 @@ namespace Objects.Players
 					break;
 				case StatEnum.StaminaIncrease:
 					Stamina += value;
+					break;
+				case StatEnum.ElementalReactionEffectIncreasePercentage:
+					ElementalReactionEffectIncreasePercentage += value;
+					break;
+				case StatEnum.FollowUpDamageIncrease:
+					FollowUpDamageIncrease += value;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(stat), stat, null);

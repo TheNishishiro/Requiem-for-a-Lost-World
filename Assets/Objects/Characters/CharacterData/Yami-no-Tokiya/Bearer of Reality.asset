@@ -15,10 +15,10 @@ MonoBehaviour:
   Id: 8
   Name: Yami-no-Tokiya
   Title: The Final Answer
-  CharacterCard: {fileID: 21300000, guid: 3fd7ad9b413de5b40ace9c7030847d76, type: 3}
-  GatchaArt: {fileID: 21300000, guid: 28317fe1af787eb47bc811e4cdc62195, type: 3}
+  CharacterCard: {fileID: 21300000, guid: d5f0472a33d00ba4294427962149d309, type: 3}
+  GatchaArt: {fileID: 21300000, guid: f5ea3fb74135aff4c9403b33ded7d5a1, type: 3}
   GachaSubArtOffset: {x: 20, y: -15}
-  Avatar: {fileID: 21300000, guid: be9f279c4cc367741a72fca2b40d7641, type: 3}
+  Avatar: {fileID: 21300000, guid: e2eada17c32f7a749aca00a7d1a7bf67, type: 3}
   CharacterSprite: {fileID: 21300000, guid: ba49fbf638fcf6f478b04d8ba9f1a37d, type: 3}
   signet: {fileID: 21300000, guid: a065fec491803cb4db1aa9d92ba02682, type: 3}
   nameAnnouncer: {fileID: 8300000, guid: 9fbd28549ed29f64daa7613540d827a8, type: 3}
@@ -45,7 +45,7 @@ MonoBehaviour:
   StarRating: 6
   StartingWeapon: {fileID: -8352096363931468654, guid: b50d1017fbc0007489b6af65b6aec4b5,
     type: 3}
-  IsPullable: 0
+  IsPullable: 1
   UseSpecialBar: 0
   PickWeaponOnStart: 0
   Stats:
@@ -99,6 +99,8 @@ MonoBehaviour:
     EarthDamageIncrease: 0
     DashCount: 2
     Stamina: 2
+    ElementalReactionEffectIncreasePercentage: 0
+    FollowUpDamageIncrease: 0
   skillNodes:
   - {fileID: 11400000, guid: ec5b7111586339c42a0d5deaca3618a6, type: 2}
   - {fileID: 11400000, guid: 2c0e081f69955ef4a99bf6bedc38c1cb, type: 2}
@@ -111,35 +113,35 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2c7140d0989a10a4694fa6715d67d715, type: 2}
   - {fileID: 11400000, guid: 9b2131e0f805fbf44ba9017755a6ef0d, type: 2}
   Eidolons:
-  - EidolonTexture: {fileID: 0}
+  - EidolonTexture: {fileID: 21300000, guid: 0e1385702edae4a4791e876e57fb84c3, type: 3}
     EidolonName: Testify
     EidolonDescription: 
     WeaponUpgradeDescription: 
     SkillUpgradeDescription: 
     PassiveUpgradeDescription: 
     EidolonQuote: 
-  - EidolonTexture: {fileID: 0}
+  - EidolonTexture: {fileID: 21300000, guid: db785d85e1c359b48813111d9b655300, type: 3}
     EidolonName: Arcana Eden
     EidolonDescription: 
     WeaponUpgradeDescription: 
     SkillUpgradeDescription: 
     PassiveUpgradeDescription: 
     EidolonQuote: 
-  - EidolonTexture: {fileID: 0}
+  - EidolonTexture: {fileID: 21300000, guid: 2c4434f01ad16254eba9a51ee5edd8e0, type: 3}
     EidolonName: Defection
     EidolonDescription: 
     WeaponUpgradeDescription: 
     SkillUpgradeDescription: 
     PassiveUpgradeDescription: 
     EidolonQuote: 
-  - EidolonTexture: {fileID: 0}
+  - EidolonTexture: {fileID: 21300000, guid: 3b755ed3b60b4aa4fb3e14d0ca3a0e1a, type: 3}
     EidolonName: World Ender
     EidolonDescription: 
     WeaponUpgradeDescription: 
     SkillUpgradeDescription: 
     PassiveUpgradeDescription: 
     EidolonQuote: 
-  - EidolonTexture: {fileID: 0}
+  - EidolonTexture: {fileID: 21300000, guid: aea04a385d6214d47aae2e056055a5e4, type: 3}
     EidolonName: Final Verdict
     EidolonDescription: 
     WeaponUpgradeDescription: 

@@ -46,11 +46,6 @@ namespace Weapons
 		public IWeaponStatsStrategy WeaponStatsStrategy { get; set; }
 
 		[HideInInspector] public bool isSkill;
-		
-		public ICollection<StatsDisplayData> GetStatsData()
-		{
-			return weaponStats.GetStatsDisplayData();
-		}
 
 		public bool IsItem => false;
 		public AchievementEnum? RequiredAchievementField => unlockOnAchievement ? requiredAchievement : null;

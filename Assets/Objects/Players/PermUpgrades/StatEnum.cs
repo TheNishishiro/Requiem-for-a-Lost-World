@@ -125,7 +125,11 @@
         [Stat(StatCategory.Offensive, "EDMG", "Earth damage")]
         [StatType(true)]
         EarthDamageIncrease,
-        [Stat(StatCategory.Offensive, "STM", "Stamina")]
-        StaminaIncrease
+        [Stat(StatCategory.Utility, "STM", "Stamina")]
+        StaminaIncrease,
+        [Stat(StatCategory.Offensive, "ERE", "Elemental reaction effect")]
+        ElementalReactionEffectIncreasePercentage,
+        [Stat(StatCategory.Offensive, "FUDI", "Follow up damage increase")]
+        FollowUpDamageIncrease
     }
 }

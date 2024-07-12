@@ -348,6 +348,16 @@ namespace Objects.Characters
 			return PlayerStats?.Armor ?? 0;
 		}
 
+		public float GetElementalReactionEffectIncreasePercentage()
+		{
+			return 1f + (PlayerStats?.ElementalReactionEffectIncreasePercentage ?? 0);
+		}
+
+		public float GetFollowUpAttackDamageIncrease()
+		{
+			return 1f + (PlayerStats?.FollowUpDamageIncrease ?? 0f);
+		}
+
 		public virtual void IncrementSpecial()
 		{
 			PlayerStats.SpecialValue += PlayerStats.SpecialIncrease;

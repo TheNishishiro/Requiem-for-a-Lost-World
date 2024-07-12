@@ -51,18 +51,18 @@ MonoBehaviour:
   Name: Rock Rain
   Description: Send rain of stones in front of the character
   chanceToAppear: 1
-  Icon: {fileID: 0}
-  unlockOnAchievement: 0
-  requiredAchievement: 0
+  Icon: {fileID: 21300000, guid: 36206b6927c30fa479b2c527fc44df77, type: 3}
+  unlockOnAchievement: 1
+  requiredAchievement: 101
   element: 9
   weaponStats:
     Damage: 5
     Cooldown: 2
     CooldownReduction: 0
-    Scale: 1
+    Scale: 0.5
     Speed: 10
     TimeToLive: 3
-    AttackCount: 8
+    AttackCount: 3
     PassThroughCount: 0
     DamageCooldown: 0
     DuplicateSpawnDelay: 0.05
@@ -76,7 +76,17 @@ MonoBehaviour:
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
     LifeSteal: 0
-  availableUpgrades: []
+    FollowUpDamageIncrease: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: ee900227e0e904b4c8401d24cb89881e, type: 2}
+  - {fileID: 11400000, guid: 8bbbf27ffc63ad5459005220870a5060, type: 2}
+  - {fileID: 11400000, guid: 453e4460e11c7b84ba3c7f33ea6ccf49, type: 2}
+  - {fileID: 11400000, guid: e1bdef84e4177ac4d8602bf355fe72c7, type: 2}
+  - {fileID: 11400000, guid: e336dbfa21e3f1d4e89ea1e57cb19282, type: 2}
+  - {fileID: 11400000, guid: f6f30a6e569d0f24086ae7aa793fcfc7, type: 2}
+  - {fileID: 11400000, guid: 570663200f71acd4ba11bea6189abdb9, type: 2}
+  - {fileID: 11400000, guid: 6a5b18bf63017f74d9af40093c14b54a, type: 2}
+  - {fileID: 11400000, guid: 991f829a623e8c34585651ca4310e1d2, type: 2}
   isSkill: 0
   capacity: 25
   maxCapacity: 25
