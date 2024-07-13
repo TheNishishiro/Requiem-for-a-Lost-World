@@ -3,6 +3,7 @@
     public enum ShopSection
     {
         Upgrades = 0,
-        Exchange = 1
+        Exchange = 1,
+        Shards = 2
     }
 }

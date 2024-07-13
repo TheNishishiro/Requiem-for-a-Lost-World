@@ -1,4 +1,5 @@
 ﻿using DefaultNamespace.Data;
+using Objects.Characters;
 using Objects.Players.PermUpgrades;
 using TMPro;
 using UnityEngine;
@@ -61,6 +62,11 @@ namespace UI.Main_Menu.REWORK.Scripts
             {
                 SaveFile.Instance.ExchangeGoldForGems();
             }
+        }
+        
+        public void BuyFragments(int characterId)
+        {
+            SaveFile.Instance.ExchangeGemsForFragments((CharactersEnum)characterId);
         }
     }
 }

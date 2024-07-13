@@ -301,6 +301,15 @@ namespace DefaultNamespace.Data
 			Save();
 		}
 
+		public void ExchangeGemsForFragments(CharactersEnum characterId)
+		{
+			if (Gems < 250) return;
+
+			Gems -= 250;
+			GetCharacterSaveData(characterId).AddFragments(1);
+			Save();
+		}
+
 		public void DiscardRune(RuneSaveData runeSaveData)
 		{
 			Runes.Remove(runeSaveData);

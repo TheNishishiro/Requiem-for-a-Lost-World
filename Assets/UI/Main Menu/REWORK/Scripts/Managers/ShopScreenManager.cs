@@ -22,6 +22,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [Space]
         [BoxGroup("Settings Entries")] [SerializeField] private GameObject containerUpgrades;
         [BoxGroup("Settings Entries")] [SerializeField] private GameObject containerExchange;
+        [BoxGroup("Settings Entries")] [SerializeField] private GameObject containerFragments;
         [Space]
         [BoxGroup("Styling")] [SerializeField] private Material materialSelectedText;
         [BoxGroup("Styling")] [SerializeField] private Material materialIdleText;
@@ -72,6 +73,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             var section = (ShopSection)sectionId;
             containerUpgrades.SetActive(section is ShopSection.Upgrades);
             containerExchange.SetActive(section is ShopSection.Exchange);
+            containerFragments.SetActive(section is ShopSection.Shards);
             
             buttonSections.ForEach(x => x.GetComponent<Image>().color = Color.clear);
             buttonSections.ForEach(x => x.GetComponentInChildren<TextMeshProUGUI>().fontSharedMaterial = materialIdleText);
