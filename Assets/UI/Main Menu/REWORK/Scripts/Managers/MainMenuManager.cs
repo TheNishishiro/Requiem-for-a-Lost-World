@@ -129,6 +129,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         public void SendFeedback()
         {
             Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSdzO5BpmXWrK3dqmVdqyPdwWRdF3BqajBuwa2-dCZzA7VohlQ/viewform");
+            SaveManager.instance.GetSaveFile().MarkOpened(OpenedLinks.Feedback);
         }
 
         public bool IsInFocus { get; set; }

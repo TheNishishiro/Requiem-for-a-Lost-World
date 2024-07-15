@@ -48,6 +48,7 @@ MonoBehaviour:
   spawnPrefab: {fileID: 1270610944524131206, guid: d4bb4b7bbcc928a48b4abd4e53f6672b,
     type: 3}
   WeaponId: 25
+  attackType: 2
   Name: Bubble Universe
   Description: Spawn bubble universe traveling in a random direction that expands
     after traveling a certain distance
@@ -77,6 +78,7 @@ MonoBehaviour:
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
     LifeSteal: 0
+    FollowUpDamageIncrease: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 88f5f7e47025a7b42bc0f561b13692d4, type: 2}
   - {fileID: 11400000, guid: 39b8157c3bd30214d8726146c3cc8165, type: 2}

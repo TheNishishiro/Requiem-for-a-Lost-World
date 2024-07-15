@@ -38,7 +38,7 @@ namespace Objects.Abilities
         {
             var damageResult = new DamageResult
             {
-                IsCriticalHit = Random.value < 0.5f
+                IsCriticalHit = Random.value < (GetCritRate() / 2f)
             };
             
             var nonCritDamage = (GetDamage() + flatDamageIncrease) * GetElementalDamageIncrease() * (1f + damageIncrease) * GetFollowUpAttackDamageIncrease();

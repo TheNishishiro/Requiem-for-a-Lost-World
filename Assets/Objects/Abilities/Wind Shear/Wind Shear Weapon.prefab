@@ -48,6 +48,7 @@ MonoBehaviour:
   spawnPrefab: {fileID: 294136379413056507, guid: 8b53c1d3e3b8ee342a77a3edac5f3534,
     type: 3}
   WeaponId: 29
+  attackType: 5
   Name: Wind Shear
   Description: Summon a ball of wind at random enemies location and apply DoT to
     enemies hit
@@ -77,6 +78,7 @@ MonoBehaviour:
     DamageOverTimeDuration: 5
     DamageOverTimeFrequency: 0.5
     LifeSteal: 0
+    FollowUpDamageIncrease: 0
   availableUpgrades:
   - {fileID: 11400000, guid: b49b3b911dba95b43bf756660bef66c5, type: 2}
   - {fileID: 11400000, guid: 73260711a08069146946bcd8dac82342, type: 2}

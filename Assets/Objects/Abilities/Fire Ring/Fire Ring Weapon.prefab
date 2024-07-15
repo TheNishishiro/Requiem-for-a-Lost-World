@@ -48,6 +48,7 @@ MonoBehaviour:
   spawnPrefab: {fileID: 5175148044090452481, guid: 6697cdcec8e1d2c4889f88affd1e0dfa,
     type: 3}
   WeaponId: 9
+  attackType: 5
   Name: Ring of Flames
   Description: Summon expanding ring of flames that applies burn to enemies hit,
     causing them to take fire damage over time
@@ -77,6 +78,7 @@ MonoBehaviour:
     DamageOverTimeDuration: 3
     DamageOverTimeFrequency: 0.75
     LifeSteal: 0
+    FollowUpDamageIncrease: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 076c728a4fc418e4695b58871ba3d016, type: 2}
   - {fileID: 11400000, guid: 9c318fb7cedfc4540a9e28b15d8206f7, type: 2}

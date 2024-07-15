@@ -56,7 +56,7 @@ namespace Objects.Items
 		public int DashCount;
 		public float Stamina;
 		public float ElementalReactionEffectIncreasePercentage;
-		public float FollowUpDamageIncrease { get; set; }
+		public float FollowUpDamageIncrease;
 
 		public void ApplyRarity(int rarity)
 		{

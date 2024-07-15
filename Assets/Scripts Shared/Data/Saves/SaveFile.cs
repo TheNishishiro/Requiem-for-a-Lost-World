@@ -5,6 +5,7 @@ using System.Linq;
 using Data.Difficulty;
 using DefaultNamespace.Data.Achievements;
 using DefaultNamespace.Data.Cameras;
+using DefaultNamespace.Data.Modals;
 using DefaultNamespace.Data.Settings;
 using DefaultNamespace.Extensions;
 using JetBrains.Annotations;
@@ -13,6 +14,7 @@ using Newtonsoft.Json;
 using Objects.Characters;
 using Objects.Players.PermUpgrades;
 using Objects.Stage;
+using UI.Main_Menu.REWORK.Scripts;
 using UI.Shared;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -55,6 +57,10 @@ namespace DefaultNamespace.Data
 		public ulong DamageTakeInOneGame;
 		public ulong TotalDamageTaken;
 		public bool IsFirstTutorialCompleted;
+		public bool IsTwitterVisited;
+		public bool IsDiscordVisited;
+		public bool IsItchIoVisited;
+		public bool IsFeedbackLeft;
 		public int Pity;
 		public DifficultyEnum SelectedDifficulty;
 		public UnityEvent<AchievementEnum> AchievementUnlocked;
@@ -145,6 +151,10 @@ namespace DefaultNamespace.Data
 			DistanceTraveled = saveData.DistanceTraveled;
 			CameraMode = saveData.CameraMode;
 			ShrinesVisited = saveData.ShrinesVisited;
+			IsTwitterVisited = saveData.IsTwitterVisited;
+			IsDiscordVisited = saveData.IsDiscordVisited;
+			IsItchIoVisited = saveData.IsItchIoVisited;
+			IsFeedbackLeft = saveData.IsFeedbackLeft;
 			BannerHistory = saveData.BannerHistory ?? new List<CharactersEnum>();
 			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
 			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
@@ -319,6 +329,35 @@ namespace DefaultNamespace.Data
 		{
 			Runes.Add(rune);
 		}
+
+		public void MarkOpened(OpenedLinks openedLinks)
+		{
+			switch (openedLinks)
+			{
+				case OpenedLinks.Twitter when !IsTwitterVisited:
+					ModalManager.instance.Open(ButtonCombination.Yes, "Rewards", $"Thanks for visiting our twitter page, here is your reward of 1000 gems", "Ok!");
+					Gems += 1000;
+					IsTwitterVisited = true;
+					break;
+				case OpenedLinks.Discord when !IsDiscordVisited:
+					ModalManager.instance.Open(ButtonCombination.Yes, "Rewards", $"Thanks for visiting our discord server, here is your reward of 1000 gems", "Ok!");
+					Gems += 1000;
+					IsDiscordVisited = true;
+					break;
+				case OpenedLinks.ItchIo when !IsItchIoVisited:
+					ModalManager.instance.Open(ButtonCombination.Yes, "Rewards", $"Thanks for visiting our itch.io page, here is your reward of 1000 gems", "Ok!");
+					Gems += 1000;
+					IsItchIoVisited = true;
+					break;
+				case OpenedLinks.Feedback when !IsFeedbackLeft:
+					ModalManager.instance.Open(ButtonCombination.Yes, "Rewards", $"Thank you for leaving feedback, here is your reward of 2000 gems", "Ok!");
+					Gems += 2000;
+					IsFeedbackLeft = true;
+					break;
+			}
+			
+			Save();
+		}
 	}
 	
 	[Serializable]
@@ -351,6 +390,10 @@ namespace DefaultNamespace.Data
 		public ulong ShrinesVisited;
 		public double DistanceTraveled;
 		public bool IsFirstTutorialCompleted;
+		public bool IsTwitterVisited;
+		public bool IsDiscordVisited;
+		public bool IsItchIoVisited;
+		public bool IsFeedbackLeft;
 		public int Pity;
 		public DifficultyEnum SelectedDifficulty;
 		public CharactersEnum? SelectedCharacterId;
@@ -399,6 +442,10 @@ namespace DefaultNamespace.Data
 			CurrentBannerSubCharacterId3 = saveFile.CurrentBannerSubCharacterId3;
 			LastBannerChangeDate = saveFile.NextBannerChangeDate;
 			CameraMode = saveFile.CameraMode;
+			IsTwitterVisited = saveFile.IsTwitterVisited;
+			IsDiscordVisited = saveFile.IsDiscordVisited;
+			IsItchIoVisited = saveFile.IsItchIoVisited;
+			IsFeedbackLeft = saveFile.IsFeedbackLeft;
 		}
 
 	}

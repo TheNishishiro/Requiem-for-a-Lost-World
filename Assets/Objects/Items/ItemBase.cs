@@ -15,6 +15,7 @@ namespace Objects.Items
 	{
 		[SerializeField] public string Name;
 		[SerializeField] public string Description;
+		[SerializeField] public SupportType supportType;
 		[SerializeField] public float chanceToAppear;
 		[SerializeField] public Sprite Icon;
 		[SerializeField] public bool unlockOnAchievement;
@@ -66,6 +67,11 @@ namespace Objects.Items
 		public string GetDescription(int rarity)
 		{
 			return ItemStats.GetDescription(Description, rarity);
+		}
+
+		public SupportType GetSupportType()
+		{
+			return supportType;
 		}
 	}
 }

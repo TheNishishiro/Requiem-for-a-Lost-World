@@ -305,6 +305,11 @@ namespace DefaultNamespace
 			yield return new WaitForSeconds(time);
 			vfx.gameObject.SetActive(false);
 		}
+
+		public Vector3 GetTargetPosition()
+		{
+			return _targetTransformCache.position;
+		}
 		
 		private void OnElementInflict(Element element, float damage)
 		{

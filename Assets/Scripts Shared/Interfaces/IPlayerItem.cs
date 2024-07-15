@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Data.Elements;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
+using DefaultNamespace.Data.Weapons;
 using Objects.Items;
 using UnityEngine;
 

@@ -5,6 +5,7 @@ using Data.Elements;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using DefaultNamespace.Data.Game;
+using DefaultNamespace.Data.Weapons;
 using Interfaces;
 using Managers;
 using NaughtyAttributes;
@@ -24,6 +25,7 @@ namespace Weapons
 		[SerializeField] public bool useNetworkPool;
 		[SerializeField] public GameObject spawnPrefab;
 		[SerializeField] public WeaponEnum WeaponId;
+		[SerializeField] public AttackType attackType;
 		[SerializeField] public string Name;
 		[SerializeField][TextArea] public string Description;
 		[SerializeField] public float chanceToAppear;
@@ -53,6 +55,11 @@ namespace Weapons
 		public string GetDescription(int rarity)
 		{
 			return weaponStats.GetDescription(Description, rarity);
+		}
+
+		public AttackType GetAttackType()
+		{
+			return attackType;
 		}
 
 		protected virtual void SetWeaponStatsStrategy()
@@ -106,7 +113,7 @@ namespace Weapons
 
 			_timer = WeaponStatsStrategy.GetTotalCooldown();
 			if (GameManager.instance.playerStatsComponent.IsDead()) return;
-			
+			CustomUpdate();
 			StartCoroutine(AttackProcess());
 		}
 
@@ -138,6 +145,8 @@ namespace Weapons
 		protected virtual void OnAttackStart() {}
 		
 		protected virtual void OnAttackEnd() {}
+		
+		protected virtual void CustomUpdate() {}
 
 		public void ReduceCooldown(float reductionPercentage)
 		{

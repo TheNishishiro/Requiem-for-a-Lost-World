@@ -18,6 +18,7 @@ namespace UI.Labels.InGame.LevelUpScreen
 		[SerializeField] private ParticleSystem particlesRarity;
 		[SerializeField] private Image backgroundElement;
 		[SerializeField] private TextMeshProUGUI textElement;
+		[SerializeField] private TextMeshProUGUI textType;
 		[SerializeField] private TextMeshProUGUI textUpgradeName;
 		[SerializeField] private TextMeshProUGUI textUpgradeDescription;
 		private UpgradePanelManager _upgradePanelManager;
@@ -37,6 +38,7 @@ namespace UI.Labels.InGame.LevelUpScreen
 			backgroundRarity.color = flashRarity.color = _upgradeEntry.GetUpgradeColor();
 			p.startColor = new ParticleSystem.MinMaxGradient(_upgradeEntry.GetUpgradeColor());
 			textRarity.text = _upgradeEntry.GetRarityName();
+			textType.text = _upgradeEntry.GetTypeName();
 
 			var element = _upgradeEntry.GetElement();
 			if (element != Element.Disabled)

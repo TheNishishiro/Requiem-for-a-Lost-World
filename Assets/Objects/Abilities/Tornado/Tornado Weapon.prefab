@@ -48,6 +48,7 @@ MonoBehaviour:
   spawnPrefab: {fileID: 6690290332192192340, guid: 80b17ffb0144cf14c97dea5e458c7c96,
     type: 3}
   WeaponId: 28
+  attackType: 4
   Name: Tornado
   Description: Summon a tornado at random location that travels around the field
   chanceToAppear: 0.8
@@ -76,6 +77,7 @@ MonoBehaviour:
     DamageOverTimeDuration: 1
     DamageOverTimeFrequency: 1
     LifeSteal: 0
+    FollowUpDamageIncrease: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 315f6da1fc2b92b4886fd77b60ad0011, type: 2}
   - {fileID: 11400000, guid: e08b79527e76f6d4aab7550b211928ca, type: 2}

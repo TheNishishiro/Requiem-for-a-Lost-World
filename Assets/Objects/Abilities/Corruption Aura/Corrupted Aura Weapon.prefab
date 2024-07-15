@@ -48,6 +48,7 @@ MonoBehaviour:
   spawnPrefab: {fileID: 3784353684354310052, guid: 854e4c73af69cdf48b15666e9a9e9c19,
     type: 3}
   WeaponId: 7
+  attackType: 4
   Name: Corruption Aura
   Description: Creates area around you that constantly damages nearby foes
   chanceToAppear: 1
@@ -76,6 +77,7 @@ MonoBehaviour:
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
     LifeSteal: 0
+    FollowUpDamageIncrease: 0
   availableUpgrades:
   - {fileID: 11400000, guid: 99300c34d66687244b812c1bc7930e64, type: 2}
   - {fileID: 11400000, guid: 3a12bb02086424340b08a32b4fff2035, type: 2}

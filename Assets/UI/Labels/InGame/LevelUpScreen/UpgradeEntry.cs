@@ -1,5 +1,6 @@
 ﻿using System;
 using Data.Elements;
+using DefaultNamespace.Attributes;
 using Objects.Abilities;
 using Objects.Items;
 using Objects.Players.Scripts;
@@ -104,6 +105,15 @@ namespace UI.Labels.InGame.LevelUpScreen
 				return Weapon.Icon;
 			if (IsItemUnlock || IsItemUpgrade)
 				return Item.Icon;
+			return null;
+		}
+
+		public string GetTypeName()
+		{
+			if (IsWeaponUpgrade || IsWeaponUnlock)
+				return Weapon.GetAttackType().GetStringValue();
+			if (IsItemUnlock || IsItemUpgrade)
+				return Item.GetSupportType().GetStringValue();
 			return null;
 		}
 		
