@@ -18,6 +18,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Section Labels")] [SerializeField] private GameObject containerWelcome;
         [BoxGroup("Section Labels")] [SerializeField] private GameObject containerRarities;
         [BoxGroup("Section Labels")] [SerializeField] private GameObject containerElementalReactions;
+        [BoxGroup("Section Labels")] [SerializeField] private GameObject containerWeaponTypes;
         [BoxGroup("Section Labels")] [SerializeField] private GameObject containerCoop;
         [BoxGroup("Section Labels")] [SerializeField] private GameObject containerCredits;
         [Space]
@@ -74,6 +75,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             containerElementalReactions.SetActive(section is TutorialSection.Reactions);
             containerCoop.SetActive(section is TutorialSection.Coop);
             containerCredits.SetActive(section is TutorialSection.Credits);
+            containerWeaponTypes.SetActive(section is TutorialSection.WeaponTypes);
             
             buttonSections.ForEach(x => x.GetComponent<Image>().color = Color.clear);
             buttonSections.ForEach(x => x.GetComponentInChildren<TextMeshProUGUI>().fontSharedMaterial = materialIdleText);

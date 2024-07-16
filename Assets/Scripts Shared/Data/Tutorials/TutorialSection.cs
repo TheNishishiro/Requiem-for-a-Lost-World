@@ -6,6 +6,7 @@
         Rarities = 1,
         Reactions = 2,
         Coop = 3,
-        Credits = 4
+        Credits = 4,
+        WeaponTypes = 5
     }
 }

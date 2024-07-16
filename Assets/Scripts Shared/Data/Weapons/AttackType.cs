@@ -6,13 +6,13 @@ namespace DefaultNamespace.Data.Weapons
     {
         [StringValue("Unknown")]
         None = 0,
-        [StringValue("Instance Damage")]
+        [StringValue("Instant Damage")]
         Simple = 1,
         [StringValue("Pierce")]
         Pierce = 2,
-        [StringValue("Follow up")]
+        [StringValue("Follow-Up")]
         FollowUp = 3,
-        [StringValue("AoE")]
+        [StringValue("Area of Effect")]
         AreaOfEffect = 4,
         [StringValue("DoT")]
         DoT = 5,

@@ -1,14 +1,27 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!21 &2100000
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 32
+--- !u!114 &-6392022051444425711
+MonoBehaviour:
+  m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Square Edge Glow
-  m_Shader: {fileID: -6465566751694194690, guid: df96bc33a26938a43a02714a192f443b,
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Energy Wing Material
+  m_Shader: {fileID: -6465566751694194690, guid: 214b64b20c210df41afe13f3c9dd857d,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -25,12 +38,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _SampleTexture2D_b681137f4fa6447cb8128f591f525a81_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 181302a8e29d87d428d2f6239fa007bc, type: 3}
+    - _MainTex:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: bd6e4e47af290a642834b54f0c24fbbf, type: 3}
+    - _Outer_Wing_Border:
+        m_Texture: {fileID: 2800000, guid: 705d0c1bb3cc7c5418be5814842fc8ad, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -47,25 +60,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _GlowPower: 0.97
-    - _NoiseStrength: 0.05
+    - _Outer_Wing_Noise_Scale: 20.57
+    - _Outer_Wing_Noise_Speed: 0.2
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Color: {r: 2.2901957, g: 3.3332727, b: 7.592157, a: 1}
-    - _Noise_Color: {r: 0.6039216, g: 0, b: 0.28955668, a: 0}
+    - _Outer_Wing_Color: {r: 0, g: 0.34203535, b: 5.992157, a: 1}
+    - _Wing_Color: {r: 0.40986222, g: 0.49493217, b: 0.7555721, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &6850067993144709611
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 9
