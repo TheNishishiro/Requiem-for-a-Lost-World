@@ -342,6 +342,7 @@ namespace Objects.Enemies
 				return;
 
 			_currentDamageCooldown = DamageCooldown;
+			EnemyAttackEvent.Invoke(this);
 			player.TakeDamage(damage.Value * (1 + Math.Max(_damageReduction, -1)));
 		}
 

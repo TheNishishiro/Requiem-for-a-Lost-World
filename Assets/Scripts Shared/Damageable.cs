@@ -366,6 +366,7 @@ namespace DefaultNamespace
 					throw new ArgumentOutOfRangeException();
 			}
 			
+			ReactionTriggeredEvent.Invoke(reactionResult.reaction, this);
 			MessageManager.instance.PostMessage(reactionResult.reaction.ToString(), _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(element));
 		}
 	}
