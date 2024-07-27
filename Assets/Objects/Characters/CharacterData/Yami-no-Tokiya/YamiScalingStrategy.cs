@@ -1,4 +1,5 @@
 ﻿using Managers;
+using Objects.Stage;
 
 namespace Objects.Characters.Yami_no_Tokiya
 {
@@ -6,9 +7,18 @@ namespace Objects.Characters.Yami_no_Tokiya
     {
         public override float GetFollowUpAttackDamageIncrease()
         {
-            return base.GetFollowUpAttackDamageIncrease() + SpecialBarManager.instance.GetPercentageFulfillment();
+            var increase = GameData.IsCharacterRank(CharacterRank.E5) ? 2 : 1f;
+            return base.GetFollowUpAttackDamageIncrease() + SpecialBarManager.instance.GetPercentageFulfillment() * increase;
         }
-        
+
+        public override float GetDamageIncreasePercentage()
+        {
+            if (GameData.IsCharacterRank(CharacterRank.E5))
+                return base.GetDamageIncreasePercentage() + SpecialBarManager.instance.GetPercentageFulfillment();
+            
+            return base.GetDamageIncreasePercentage();
+        }
+
         public override void TakeDamage(float amount, bool isPreventDeath = false)
         {
             var isShieldInsufficient = GetSpecialValue() < amount;

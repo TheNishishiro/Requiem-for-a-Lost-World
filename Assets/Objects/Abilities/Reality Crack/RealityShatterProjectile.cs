@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
+using DefaultNamespace.Data.Game;
 using Interfaces;
 using Managers;
+using Objects.Characters;
+using Objects.Stage;
 using UnityEngine;
 using Weapons;
 
@@ -36,6 +39,8 @@ namespace Objects.Abilities.Reality_Crack
 				childRigidBody.AddExplosionForce(5f, transform.position, 5f, 2f, ForceMode.Impulse);
 			}
 			
+			if (GameData.IsCharacterWithRank(CharactersEnum.Chornastra_BoR, CharacterRank.E3))
+				EnemyManager.instance.SetTimeStop(false);
 			if (RealityShatterWeapon.IsGlobalDamage)
 				EnemyManager.instance.GlobalDamage(WeaponStatsStrategy.GetDamage() / 2, ParentWeapon);
 			if (RealityShatterWeapon.IsSelfBuff)
@@ -47,6 +52,14 @@ namespace Objects.Abilities.Reality_Crack
 			if (WeaponStatsStrategy.GetWeakness() > 0)
 				damageable.SetVulnerable(5, WeaponStatsStrategy.GetWeakness());
 			SimpleDamage(damageable, false, false);
+		}
+
+		protected override void OnStateChanged(ProjectileState state)
+		{
+			if (!GameData.IsCharacterWithRank(CharactersEnum.Chornastra_BoR, CharacterRank.E3))
+				return;
+			if (state == ProjectileState.Flying)
+				EnemyManager.instance.SetTimeStop(true);
 		}
 	}
 }

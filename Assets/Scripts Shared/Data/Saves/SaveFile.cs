@@ -33,15 +33,21 @@ namespace DefaultNamespace.Data
 		public Dictionary<KeyAction, KeyCode> Keybindings;
 		public Dictionary<int, List<int>> ReadStoryEntries { get; set; }
 		public List<ServerData> Servers;
-		public List<CharactersEnum> BannerHistory;
 		public List<RuneSaveData> Runes;
 		public ConfigurationFile ConfigurationFile;
+		public bool IsFirstTutorialCompleted;
+		public DifficultyEnum SelectedDifficulty;
+		#region Recollection
+		public List<CharactersEnum> BannerHistory;
 		public CharactersEnum? SelectedCharacterId;
 		public CharactersEnum CurrentBannerCharacterId;
 		public CharactersEnum CurrentBannerSubCharacterId1;
 		public CharactersEnum CurrentBannerSubCharacterId2;
 		public CharactersEnum CurrentBannerSubCharacterId3;
 		public DateTime? NextBannerChangeDate;
+		public int Pity;
+		#endregion
+		#region Game Stats
 		public ulong Gold;
 		public ulong Gems;
 		public ulong EnemiesKilled;
@@ -56,13 +62,17 @@ namespace DefaultNamespace.Data
 		public ulong TotalAmountHealed;
 		public ulong DamageTakeInOneGame;
 		public ulong TotalDamageTaken;
-		public bool IsFirstTutorialCompleted;
+		#endregion
+		#region Rewards
 		public bool IsTwitterVisited;
 		public bool IsDiscordVisited;
 		public bool IsItchIoVisited;
 		public bool IsFeedbackLeft;
-		public int Pity;
-		public DifficultyEnum SelectedDifficulty;
+		#endregion
+		#region Game Settings
+		public bool IsCoopAllowed;
+		public bool IsShortPlayTime;
+		#endregion
 		public UnityEvent<AchievementEnum> AchievementUnlocked;
 		public UnityEvent<CharactersEnum, CharacterRank> OnCharacterUnlocked;
 		
@@ -119,51 +129,16 @@ namespace DefaultNamespace.Data
 					args.ErrorContext.Handled = true;
 				}
 			};
-			var loadedData = JsonConvert.DeserializeObject<SaveData>(json, settings);
-			Apply(loadedData);
-		}
-		
-		public void Apply(SaveData saveData)
-		{
-			Gold = saveData.Gold;
-			Gems = saveData.Gems;
-			Deaths = saveData.Deaths;
-			StoryPoints = saveData.StoryPoints;
-			EnemiesKilled = saveData.EnemiesKilled;
-			PickupsCollected = saveData.PickupsCollected;
-			PullsPerformed = saveData.PullsPerformed;
-			TimePlayed = saveData.TimePlayed;
-			BossKills = saveData.BossKills;
-			TotalLegendaryItemsObtained = saveData.TotalLegendaryItemsObtained;
-			HealAmountInOneGame = saveData.HealAmountInOneGame;
-			TotalAmountHealed = saveData.TotalAmountHealed;
-			DamageTakeInOneGame = saveData.DamageTakeInOneGame;
-			TotalDamageTaken = saveData.TotalDamageTaken;
-			IsFirstTutorialCompleted = saveData.IsFirstTutorialCompleted;
-			Pity = saveData.Pity;
-			CurrentBannerCharacterId = saveData.CurrentBannerCharacterId;    
-			CurrentBannerSubCharacterId1 = saveData.CurrentBannerSubCharacterId1;
-			CurrentBannerSubCharacterId2 = saveData.CurrentBannerSubCharacterId2;
-			CurrentBannerSubCharacterId3 = saveData.CurrentBannerSubCharacterId3;
-			NextBannerChangeDate = saveData.LastBannerChangeDate;
-			SelectedDifficulty = saveData.SelectedDifficulty;
-			SelectedCharacterId = saveData.SelectedCharacterId;
-			DistanceTraveled = saveData.DistanceTraveled;
-			CameraMode = saveData.CameraMode;
-			ShrinesVisited = saveData.ShrinesVisited;
-			IsTwitterVisited = saveData.IsTwitterVisited;
-			IsDiscordVisited = saveData.IsDiscordVisited;
-			IsItchIoVisited = saveData.IsItchIoVisited;
-			IsFeedbackLeft = saveData.IsFeedbackLeft;
-			BannerHistory = saveData.BannerHistory ?? new List<CharactersEnum>();
-			CharacterSaveData = saveData.CharacterSaveData ?? new Dictionary<CharactersEnum, CharacterSaveData>();
-			PermUpgradeSaveData = saveData.PermUpgradeSaveData ?? new Dictionary<PermUpgradeType, int>();
-			Servers = saveData.Servers ?? new List<ServerData>();
-			Runes = saveData.Runes ?? new List<RuneSaveData>();
-			AchievementSaveData = saveData.AchievementSaveData ?? new Dictionary<AchievementEnum, bool>();
-			Keybindings = saveData.Keybindings ?? DefaultKeyBinds();
-			ConfigurationFile = (saveData.ConfigurationFile ?? new ConfigurationFile().Default()).Update();
-			ReadStoryEntries = saveData.ReadStoryEntries ?? new Dictionary<int, List<int>>();
+			JsonConvert.PopulateObject(json, this, settings);
+			BannerHistory ??= new List<CharactersEnum>();
+			CharacterSaveData ??= new Dictionary<CharactersEnum, CharacterSaveData>();
+			PermUpgradeSaveData ??= new Dictionary<PermUpgradeType, int>();
+			Servers ??= new List<ServerData>();
+			Runes ??= new List<RuneSaveData>();
+			AchievementSaveData ??= new Dictionary<AchievementEnum, bool>();
+			Keybindings ??= DefaultKeyBinds();
+			ConfigurationFile = (ConfigurationFile ?? new ConfigurationFile().Default()).Update();
+			ReadStoryEntries ??= new Dictionary<int, List<int>>();
 		}
 
 		private Dictionary<KeyAction, KeyCode> DefaultKeyBinds()
@@ -396,6 +371,8 @@ namespace DefaultNamespace.Data
 		public bool IsFeedbackLeft;
 		public int Pity;
 		public DifficultyEnum SelectedDifficulty;
+		public bool IsCoopAllowed;
+		public bool IsShortPlayTime;
 		public CharactersEnum? SelectedCharacterId;
 		public CharactersEnum CurrentBannerCharacterId;
 		public CharactersEnum CurrentBannerSubCharacterId1;
@@ -446,6 +423,8 @@ namespace DefaultNamespace.Data
 			IsDiscordVisited = saveFile.IsDiscordVisited;
 			IsItchIoVisited = saveFile.IsItchIoVisited;
 			IsFeedbackLeft = saveFile.IsFeedbackLeft;
+			IsCoopAllowed = saveFile.IsCoopAllowed;
+			IsShortPlayTime = saveFile.IsShortPlayTime;
 		}
 
 	}

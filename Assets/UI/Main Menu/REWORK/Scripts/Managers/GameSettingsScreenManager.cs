@@ -72,6 +72,7 @@ public class GameSettingsScreenManager : MonoBehaviour, IStackableWindow
 
     public void SetCoopPreference(bool isAllow)
     {
+        SaveManager.instance.GetSaveFile().IsCoopAllowed = isAllow;
         labelCoopPlayAllow.fontSharedMaterial = isAllow ? materialSelectionPositive : materialNeutral;
         labelCoopPlayDeny.fontSharedMaterial = !isAllow ? materialSelectionNegative : materialNeutral;
         svgCoop.gameObject.SetActive(isAllow);
@@ -82,6 +83,7 @@ public class GameSettingsScreenManager : MonoBehaviour, IStackableWindow
     public void ToggleShortPlayTime()
     {
         GameSettings.IsShortPlayTime = !GameSettings.IsShortPlayTime;
+        SaveManager.instance.GetSaveFile().IsShortPlayTime = GameSettings.IsShortPlayTime;
         labelShortPlayTime.fontSharedMaterial = GameSettings.IsShortPlayTime ? materialSelectionPositive : materialNeutral;
     }
 
@@ -95,9 +97,11 @@ public class GameSettingsScreenManager : MonoBehaviour, IStackableWindow
 
         var stage = GameData.GetCurrentStage();
         imageBackground.sprite = stage.backgroundBlur;
-
-        SetCoopPreference(true);
-        SetDifficulty((int)SaveManager.instance.GetSaveFile().SelectedDifficulty);
+        var saveFile = SaveManager.instance.GetSaveFile();
+        if (saveFile.IsShortPlayTime != GameSettings.IsShortPlayTime)
+            ToggleShortPlayTime();
+        SetCoopPreference(saveFile.IsCoopAllowed);
+        SetDifficulty((int)saveFile.SelectedDifficulty);
         labelShortPlayTime.fontSharedMaterial = GameSettings.IsShortPlayTime ? materialSelectionPositive : materialNeutral;
         
         StackableWindowManager.instance.OpenWindow(this);
