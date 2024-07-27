@@ -24,6 +24,11 @@ namespace Managers
 		public List<CharacterData> GetCharacters()
 		{
 			return characters;
+		}		
+		
+		public List<CharacterSaveData> GetOwnedCharacters()
+		{
+			return _saveFile.CharacterSaveData.Where(x => x.Value.IsUnlocked).Select(x => x.Value).ToList();
 		}
 
 		public CharacterData GetActiveCharacter()

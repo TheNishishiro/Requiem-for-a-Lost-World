@@ -23,10 +23,10 @@ MonoBehaviour:
   signet: {fileID: 21300000, guid: a065fec491803cb4db1aa9d92ba02682, type: 3}
   nameAnnouncer: {fileID: 8300000, guid: 9fbd28549ed29f64daa7613540d827a8, type: 3}
   PassiveDescription: "Causing any kind of elemental reaction will spawn a single
-    <color=purple>Abyss Flower</color>. \r\n<color=purple>Abyss Flowers</color> explode
-    after 3 seconds, dealing <color=#D499FF>True damage</color> in an area. Damage
-    dealt is considered as <color=#FFDFC1>Follow-Up</color> damage.\r\nWhen picked
-    up, it will instead grant a set charge of <color=purple>Cosmic Revelation</color>.
+    <color=purple>Abyss Flower</color>, which can be triggsered every 0.5s. \r\n<color=purple>Abyss
+    Flowers</color> explode after 5 seconds, dealing <color=#D499FF>True damage</color>
+    in an area. Damage dealt is considered as <color=#FFDFC1>Follow-Up</color> damage.\r\nWhen
+    picked up, it will instead grant a set charge of <color=purple>Cosmic Revelation</color>.
     \r\n\r\n<color=purple>Cosmic Revelation</color> - Yami-No-Tokiya's special. Each
     point counts as a damage shield. <color=#FFDFC1>Follow-Up</color> damage is also
     increased by a percentage of shield provided by this passive"
@@ -34,8 +34,7 @@ MonoBehaviour:
   AbilityDescription: "With a snap of her fingers transform the battlefield into
     a starry expansion. \nDuring this state pause all timers, weapon attacks and
     enemy movements.\nRecast this ability up to 4 times to perform devastating attacks
-    targetting all enemies. \nEach enemy killed this way will provide a stack of
-    <color=purple>Cosmic Revelation</color>."
+    targetting all enemies. "
   AbilityCooldown: 30
   SpecialPrefab: {fileID: -7587667090553189674, guid: bf4cc6e85e4156e4c9e31d07a15a27d9,
     type: 3}
@@ -55,8 +54,8 @@ MonoBehaviour:
     Health: 100
     HealthMax: 100
     SpecialValue: 0
-    SpecialMax: 0
-    SpecialIncrease: 0
+    SpecialMax: 100
+    SpecialIncrease: 5
     MagnetSize: 1
     CooldownReduction: 0
     CooldownReductionPercentage: 0
@@ -68,7 +67,7 @@ MonoBehaviour:
     DetectionRange: 0
     DamagePercentageIncrease: 0
     ExperienceIncreasePercentage: 0
-    MovementSpeed: 1
+    MovementSpeed: 1.6
     SkillCooldownReductionPercentage: 0
     HealthRegen: 0
     CritRate: 0
@@ -101,26 +100,28 @@ MonoBehaviour:
     CosmicDamageIncrease: 0
     EarthDamageIncrease: 0
     DashCount: 2
-    Stamina: 2
+    Stamina: 4
     ElementalReactionEffectIncreasePercentage: 0
     FollowUpDamageIncrease: 0
   skillNodes:
-  - {fileID: 11400000, guid: ec5b7111586339c42a0d5deaca3618a6, type: 2}
-  - {fileID: 11400000, guid: 2c0e081f69955ef4a99bf6bedc38c1cb, type: 2}
-  - {fileID: 11400000, guid: 9fc17ab7b7f14484eb4e1b860c11118b, type: 2}
-  - {fileID: 11400000, guid: d6c27aa6264be7f41a02a59ec28a955c, type: 2}
-  - {fileID: 11400000, guid: c08ddef3461c22843a0d108eed404ea3, type: 2}
-  - {fileID: 11400000, guid: 5afadca2968c7e840bbafd3ddff7ba2e, type: 2}
-  - {fileID: 11400000, guid: cda6ea7978830d241b23bd36fd66fe7e, type: 2}
-  - {fileID: 11400000, guid: da10d2cd16bb01f438d1fc1dc71f9655, type: 2}
-  - {fileID: 11400000, guid: 2c7140d0989a10a4694fa6715d67d715, type: 2}
-  - {fileID: 11400000, guid: 9b2131e0f805fbf44ba9017755a6ef0d, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Eidolons:
   - EidolonTexture: {fileID: 21300000, guid: f55ac1325b52c4c46a94181f4d5d6c6b, type: 3}
     EidolonName: Testify
     EidolonDescription: 
     WeaponUpgradeDescription: 
-    SkillUpgradeDescription: 
+    SkillUpgradeDescription: After <color=#9EFFF3>Void Sunder</color>'s last attack,
+      create one <color=purple>Abyss Flower</color> for every character owned. <color=purple>Abyss
+      Flowers</color> created that way will apear in random location around the character.
     PassiveUpgradeDescription: 
     EidolonQuote: 
   - EidolonTexture: {fileID: 21300000, guid: 3e59859369891984c80ad4564c5dc563, type: 3}

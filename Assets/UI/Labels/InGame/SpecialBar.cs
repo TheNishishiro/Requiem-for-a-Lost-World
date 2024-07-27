@@ -31,5 +31,10 @@ namespace UI.Labels.InGame
 		{
 			return Math.Abs(slider.value - slider.maxValue) < 0.01f && slider.maxValue != 0;
 		}
+		
+		public float GetPercentage()
+		{
+			return slider.value / slider.maxValue;
+		}
 	}
 }

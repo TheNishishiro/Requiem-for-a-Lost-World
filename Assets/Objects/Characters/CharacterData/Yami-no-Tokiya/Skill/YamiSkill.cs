@@ -3,7 +3,9 @@ using DefaultNamespace.Data;
 using DefaultNamespace.Data.Game;
 using DefaultNamespace.Data.Settings;
 using Managers;
+using Objects.Characters.Special;
 using Objects.Players.Scripts;
+using Objects.Stage;
 using UnityEngine;
 
 namespace Objects.Characters.Yami_no_Tokiya.Skill
@@ -18,7 +20,7 @@ namespace Objects.Characters.Yami_no_Tokiya.Skill
         private ElementalWeapon _elementalWeapon;
         private int _cullingMask;
         private Material _originalSkybox;
-        private float _damage = 20f;
+        private const float Damage = 50f;
 
         protected override void Awake()
         {
@@ -71,7 +73,7 @@ namespace Objects.Characters.Yami_no_Tokiya.Skill
 
         public void DealDamage()
         {
-            EnemyManager.instance.GlobalDamage(PlayerStatsScaler.GetScaler().GetScaledDamageDealt(_damage).Damage, _elementalWeapon);
+            EnemyManager.instance.GlobalDamage(PlayerStatsScaler.GetScaler().GetScaledDamageDealt(Damage).Damage, _elementalWeapon);
         }
 
         protected override void OnDestroy()
@@ -79,6 +81,8 @@ namespace Objects.Characters.Yami_no_Tokiya.Skill
             Camera.main.cullingMask = _cullingMask;
             RenderSettings.skybox = _originalSkybox;
             PauseManager.instance.ClearFullPause();
+            if (GameData.IsCharacterRank(CharacterRank.E1))
+                FindAnyObjectByType<YamiSpecial>().SpawnFlowers(CharacterListManager.instance.GetOwnedCharacters().Count);
             base.OnDestroy();
         }
     }

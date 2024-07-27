@@ -5,6 +5,7 @@ using Objects.Characters.Amelia_Alter;
 using Objects.Characters.David;
 using Objects.Characters.Nishi_HoF;
 using Objects.Characters.Truzi;
+using Objects.Characters.Yami_no_Tokiya;
 using Objects.Stage;
 
 namespace Objects.Players.Scripts
@@ -16,7 +17,8 @@ namespace Objects.Players.Scripts
             { CharactersEnum.David_BoF, new DavidScalingStrategy() },
             { CharactersEnum.Truzi_BoT, new TruziScalingStrategy() },
             { CharactersEnum.Nishi_HoF, new NishiHofScalingStrategy() },
-            { CharactersEnum.Amelisana_BoN, new AmelisanaScalingStrategy() }
+            { CharactersEnum.Amelisana_BoN, new AmelisanaScalingStrategy() },
+            { CharactersEnum.Chornastra_BoR, new YamiScalingStrategy() }
         };
 
         private static CharacterScalingStrategyBase _defaultScaler = new ();

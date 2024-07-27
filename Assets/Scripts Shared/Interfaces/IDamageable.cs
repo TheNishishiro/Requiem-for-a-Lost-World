@@ -12,8 +12,8 @@ namespace Interfaces
 		void SetHealth(float health);
 		bool IsDestroyed();
 		void ReduceElementalDefence(Element element, float amount);
-		void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase);
-		void TakeDamageWithCooldown(DamageResult damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase);
+		void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase, bool isRecursion = false);
+		void TakeDamageWithCooldown(DamageResult damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase, bool isRecursion = false);
 		void SetVulnerable(float time, float percentage);
 		void ApplyDamageOverTime(float damage, float damageFrequency, float damageDuration, WeaponBase weaponBase);
 	}

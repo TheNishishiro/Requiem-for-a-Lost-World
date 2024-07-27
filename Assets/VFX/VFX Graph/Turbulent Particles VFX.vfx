@@ -56,6 +56,22 @@ MonoBehaviour:
   m_UIInfos: {fileID: 114340500867371532}
   m_CustomAttributes: []
   m_ParameterInfo:
+  - name: Effect Duration
+    path: Effect Duration
+    tooltip: 
+    space: -1
+    spaceable: 0
+    sheetType: m_Float
+    realType: Single
+    defaultValue:
+      m_Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 0.5
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 0
   - name: Particle Count
     path: Particle Count
     tooltip: 
@@ -2719,7 +2735,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 570, y: 1333}
+  m_UIPosition: {x: 570, y: 1310}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -3107,7 +3123,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 604, y: 1192}
+  m_UIPosition: {x: 570, y: 1165}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -3965,7 +3981,7 @@ MonoBehaviour:
   m_OutputSlots:
   - {fileID: 8926484042661614757}
   m_ExposedName: Effect Duration
-  m_Exposed: 0
+  m_Exposed: 1
   m_Order: 0
   m_Category: 
   m_Min:

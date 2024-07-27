@@ -41,6 +41,11 @@ namespace Managers
 		{
 			return specialBar.IsFull();
 		}
+		
+		public float GetPercentageFulfillment()
+		{
+			return specialBar.GetPercentage();
+		}
 
 		public void Increment()
 		{

@@ -17,6 +17,10 @@ namespace Objects.Characters.Special
 {
     public class YamiSpecial : CharacterSkillBase, IReactionTriggeredEvent
     {
+        [SerializeField] private float flowerLifeTime;
+        [SerializeField] private float flowerBaseDamage;
+        [SerializeField] private float flowerSpawnCooldown;
+        private float _currentSpawnCooldown = 0;
         private ObjectPool<AbyssFlowerProjectile> _objectPool;
         [SerializeField] private GameObject abyssFlowerPrefab; 
         private WeaponBase _followUpWeapon;
@@ -27,11 +31,12 @@ namespace Objects.Characters.Special
             _followUpWeapon = new ElementalWeapon(Element.Cosmic);
             _followUpWeapon.weaponStats = new WeaponStats()
             {
-                Damage = 15,
+                Damage = flowerBaseDamage,
                 Scale = 1,
-                TimeToLive = 5f,
+                TimeToLive = flowerLifeTime,
+                DamageCooldown = 0.2f
             };
-            _followUpWeapon.WeaponStatsStrategy = new WeaponStatsStrategyBase(_followUpWeapon.weaponStats, Element.Cosmic);
+            _followUpWeapon.WeaponStatsStrategy = new AbyssFlowerStrategy(_followUpWeapon);
             _objectPool = new ObjectPool<AbyssFlowerProjectile>(
                 () =>
                 {
@@ -50,6 +55,12 @@ namespace Objects.Characters.Special
                 true, 75);
         }
 
+        protected override void Update()
+        {
+            if (_currentSpawnCooldown > 0f)
+                _currentSpawnCooldown -= Time.deltaTime;
+        }
+
         private void OnEnable()
         {
             ReactionTriggeredEvent.Register(this);
@@ -62,8 +73,20 @@ namespace Objects.Characters.Special
 
         public void OnReactionTriggered(ElementalReaction reaction, Damageable damageable)
         {
+            if (_currentSpawnCooldown > 0f) return;
+            _currentSpawnCooldown = flowerSpawnCooldown;
             _targetPosition = damageable.GetTargetPosition();
             _objectPool.Get();
+        }
+
+        public void SpawnFlowers(int count)
+        {
+            var t = transform;
+            for (var i = 0; i < count; i++)
+            {
+                _targetPosition = Utilities.GetPointOnColliderSurface(Utilities.GetRandomInArea(t.position, 6f), t, 0.2f);
+                _objectPool.Get();
+            }
         }
     }
 }

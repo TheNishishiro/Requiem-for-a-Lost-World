@@ -1,6 +1,7 @@
 ﻿using System;
 using Data.Elements;
 using Interfaces;
+using Managers;
 using Objects.Enemies;
 using Objects.Stage;
 using UnityEngine;
@@ -12,11 +13,23 @@ namespace Objects.Characters.Yami_no_Tokiya.Special
 {
     public class AbyssFlowerProjectile :  PoolableProjectile<AbyssFlowerProjectile>
     {
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
+            if (other.CompareTag("Player") && TimeAlive < 5)
+            {
+                Pickup();
+            }
+            
+            if (TimeAlive < 5) return;
             if (!other.CompareTag("Enemy")) return;
             
-            SimpleDamage(other, false, true, out _);
+            DamageArea(other, out _, true);
+        }
+
+        public void Pickup()
+        {
+            SpecialBarManager.instance.Increment();
+            Destroy();
         }
     }
 }

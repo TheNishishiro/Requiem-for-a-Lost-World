@@ -148,7 +148,7 @@ namespace Weapons
             return WeaponStatsStrategy.GetTotalTimeToLive();
         }
         
-        private void Update()
+        protected virtual void Update()
     	{
     	    switch (State)
     	    {

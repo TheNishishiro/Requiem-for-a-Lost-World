@@ -76,7 +76,7 @@ namespace Weapons
 				OnLifeTimeEnd();
 		}
 
-		protected void DamageArea(Collider other, out IDamageable damageable)
+		protected void DamageArea(Collider other, out IDamageable damageable, bool isFollowUp = false)
 		{
 			damageable = null;
 			if (!other.CompareTag("Enemy") && !other.CompareTag("Destructible"))
@@ -84,7 +84,7 @@ namespace Weapons
 			
 			damageable = other.GetComponent<IDamageable>();
 			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage, ProjectileDamageIncrease);
-			damageable?.TakeDamageWithCooldown(damage, gameObject, WeaponStatsStrategy.GetDamageCooldown(), ParentWeapon);
+			damageable?.TakeDamageWithCooldown(damage, gameObject, WeaponStatsStrategy.GetDamageCooldown(), ParentWeapon, isFollowUp);
 		}
 
 		protected void DamageOverTime(Collider other, bool isLimitedUsage = false)

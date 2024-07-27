@@ -222,17 +222,17 @@ namespace DefaultNamespace
 			elementStat.damageReduction -= amount;
 		}
 
-		public void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase)
+		public void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase, bool isRecursion = false)
 		{
-			TakeDamageWithCooldown(new DamageResult() { Damage = damage }, damageSource, damageCooldown, weaponBase);
+			TakeDamageWithCooldown(new DamageResult() { Damage = damage }, damageSource, damageCooldown, weaponBase, isRecursion);
 		}
 
-		public void TakeDamageWithCooldown(DamageResult damageResult, GameObject damageSource, float damageCooldown, WeaponBase weaponBase)
+		public void TakeDamageWithCooldown(DamageResult damageResult, GameObject damageSource, float damageCooldown, WeaponBase weaponBase, bool isRecursion = false)
 		{
 			if (!sourceDamageCooldown.ContainsKey(damageSource))
 			{
 				sourceDamageCooldown.Add(damageSource, damageCooldown);
-				TakeDamage(damageResult, weaponBase);
+				TakeDamage(damageResult, weaponBase, isRecursion);
 				return;
 			}
 			
@@ -241,7 +241,7 @@ namespace DefaultNamespace
 			if (sourceDamageCooldown[damageSource] > 0) 
 				return;
 			
-			TakeDamage(damageResult, weaponBase);
+			TakeDamage(damageResult, weaponBase, isRecursion);
 			sourceDamageCooldown[damageSource] = damageCooldown;
 		}
 

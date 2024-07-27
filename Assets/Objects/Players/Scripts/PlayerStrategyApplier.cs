@@ -18,6 +18,7 @@ using Objects.Characters.Nishi;
 using Objects.Characters.Oana;
 using Objects.Characters.Summer;
 using Objects.Characters.Truzi;
+using Objects.Characters.Yami_no_Tokiya;
 
 namespace Objects.Players.Scripts
 {
@@ -41,6 +42,7 @@ namespace Objects.Players.Scripts
 			{ CharactersEnum.Truzi_BoT, new TruziStrategy() },
 			{ CharactersEnum.Nishi_HoF, new NishiHofStrategy() },
 			{ CharactersEnum.Amelisana_BoN, new AmelisanaStrategy() },
+			{ CharactersEnum.Chornastra_BoR, new YamiStrategy() },
 		};
 
 		public void ApplyRankStrategy(CharactersEnum characterId, CharacterRank characterRank, PlayerStats playerStats)

@@ -353,7 +353,7 @@ namespace Objects.Characters
 			return 1f + (PlayerStats?.ElementalReactionEffectIncreasePercentage ?? 0);
 		}
 
-		public float GetFollowUpAttackDamageIncrease()
+		public virtual float GetFollowUpAttackDamageIncrease()
 		{
 			return 1f + (PlayerStats?.FollowUpDamageIncrease ?? 0f);
 		}

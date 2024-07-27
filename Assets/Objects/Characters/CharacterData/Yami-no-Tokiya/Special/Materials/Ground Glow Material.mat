@@ -3,18 +3,18 @@
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 32
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Space Shader
-  m_Shader: {fileID: -6465566751694194690, guid: 5e1b9089744f0094a9760e483d5cb8fc,
+  m_Name: Ground Glow Material
+  m_Shader: {fileID: -6465566751694194690, guid: 2a0907b7ed92b3d46ab8163fdeb1712c,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -39,17 +39,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FresnelPower: 6
-    - _NoiseScale: 100
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ScrollSpeed: 0.02
+    - _VoroniDissolve: 1.46
+    - _VoronoiScale: 5
+    - _VoronoiSpeed: 1
     m_Colors:
-    - _InnerColor: {r: 0.41568628, g: 0.12941177, b: 0.7607843, a: 0}
-    - _OuterColor: {r: 0.79861474, g: 0, b: 8.47419, a: 0}
+    - _Color: {r: 7.4470463, g: 0, b: 67.793495, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &6155692726005818468
+--- !u!114 &8080314811995050757
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
