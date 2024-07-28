@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: RealityShatter Upgrade 5
   m_EditorClassIdentifier: 
   Name: this.localScale
-  Description: Increase size of the ability by 20%
+  Description: Increase size of the ability by {Scale}%
   WeaponStats:
     Damage: 0
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0.2
     Speed: 0
     TimeToLive: 0
@@ -29,3 +30,9 @@ MonoBehaviour:
     CritDamage: 0
     Weakness: 0
     DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
+    LifeSteal: 0
+    FollowUpDamageIncrease: 0

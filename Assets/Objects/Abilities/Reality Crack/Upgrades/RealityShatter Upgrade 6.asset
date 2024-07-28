@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e487028e64448f849be4a1c193b2c6, type: 3}
   m_Name: RealityShatter Upgrade 6
   m_EditorClassIdentifier: 
-  Name: Dimension.fracture()
-  Description: Increase damage by 20%
+  Name: Screen.fracture()
+  Description: Increase damage by {DamageIncreasePercentage}%
   WeaponStats:
     Damage: 0
     Cooldown: 0
@@ -34,3 +34,5 @@ MonoBehaviour:
     DamageOverTime: 0
     DamageOverTimeDuration: 0
     DamageOverTimeFrequency: 0
+    LifeSteal: 0
+    FollowUpDamageIncrease: 0

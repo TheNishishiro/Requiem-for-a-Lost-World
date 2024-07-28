@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: RealityShatter Upgrade 4
   m_EditorClassIdentifier: 
   Name: Time.accelerate()
-  Description: Decrease cooldown by 1.5s
+  Description: Decrease cooldown by {CooldownReduction}%
   WeaponStats:
     Damage: 0
-    Cooldown: -1.5
+    Cooldown: 0
+    CooldownReduction: 0.25
     Scale: 0
     Speed: 0
     TimeToLive: 0
@@ -29,3 +30,9 @@ MonoBehaviour:
     CritDamage: 0
     Weakness: 0
     DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
+    LifeSteal: 0
+    FollowUpDamageIncrease: 0

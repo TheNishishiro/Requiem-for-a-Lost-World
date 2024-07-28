@@ -233,4 +233,9 @@ public class EnemyManager : NetworkBehaviour
 	{
 		_enemies.Remove(networkBehaviour);
 	}
+
+	public void ChangeEnemySpawnRange(float spawnRange)
+	{
+		spawnArea = new Vector2(spawnRange, spawnRange);
+	}
 }

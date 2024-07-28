@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: RealityShatter Upgrade 10
   m_EditorClassIdentifier: 
   Name: Destroy(World);
-  Description: Increase damage by 50%, crit rate by 25% and crit damage by 50%
+  Description: Increase damage by {DamageIncreasePercentage}%, crit rate by {CritRate}%
+    and crit damage by {CritDamage}%
   WeaponStats:
     Damage: 0
     Cooldown: 0
+    CooldownReduction: 0
     Scale: 0
     Speed: 0
     TimeToLive: 0
@@ -29,3 +31,9 @@ MonoBehaviour:
     CritDamage: 0.5
     Weakness: 0
     DamageIncreasePercentage: 0.5
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
+    LifeSteal: 0
+    FollowUpDamageIncrease: 0

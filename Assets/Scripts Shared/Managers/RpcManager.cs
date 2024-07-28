@@ -251,7 +251,6 @@ namespace Managers
         [Rpc(SendTo.SpecifiedInParams)]
         public void TempStatIncreaseRpc(StatEnum statEnum, float buffAmount, float buffTime, string buffId, RpcParams rpcParams)
         {
-            Debug.Log($"Buff: {buffId}");
             GameManager.instance.playerStatsComponent.TemporaryStatBoost(buffId, statEnum, buffAmount, buffTime);
         }
     }

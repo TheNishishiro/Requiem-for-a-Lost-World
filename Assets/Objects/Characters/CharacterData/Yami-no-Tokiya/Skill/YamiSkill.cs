@@ -4,6 +4,7 @@ using DefaultNamespace.Data.Game;
 using DefaultNamespace.Data.Settings;
 using Managers;
 using Objects.Characters.Special;
+using Objects.Players.PermUpgrades;
 using Objects.Players.Scripts;
 using Objects.Stage;
 using UnityEngine;
@@ -83,6 +84,11 @@ namespace Objects.Characters.Yami_no_Tokiya.Skill
             PauseManager.instance.ClearFullPause();
             if (GameData.IsCharacterRank(CharacterRank.E1))
                 FindAnyObjectByType<YamiSpecial>().SpawnFlowers(CharacterListManager.instance.GetOwnedCharacters().Count);
+            if (GameData.IsCharacterRank(CharacterRank.E5))
+            {
+                GameManager.instance.playerStatsComponent.TemporaryStatBoost(StatEnum.CritRate, 1f, 10f);
+                GameManager.instance.playerStatsComponent.TemporaryStatBoost(StatEnum.DamagePercentageIncrease, 2f, 10f);
+            }
             base.OnDestroy();
         }
     }

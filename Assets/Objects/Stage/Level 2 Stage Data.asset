@@ -1,0 +1,381 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a9369e75704decb939fcf44f44a38f, type: 3}
+  m_Name: Level 2 Stage Data
+  m_EditorClassIdentifier: 
+  stageEvents:
+  - enemies:
+    - {fileID: 11400000, guid: decfafe60a5af70458628b1df29a4305, type: 2}
+    bossEnemy: {fileID: 0}
+    triggerTime: 0
+    spawnRate: 1
+    speedMultiplier: 0.5
+    minCount: 10
+    healthMultiplier: 0.8
+    spawnRange: 5
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: decfafe60a5af70458628b1df29a4305, type: 2}
+    - {fileID: 11400000, guid: 55ff53bb5b079f148be5b15ab01ada73, type: 2}
+    bossEnemy: {fileID: 11400000, guid: 467a9594db5e1484b9563d1fd5772520, type: 2}
+    triggerTime: 60
+    spawnRate: 1
+    speedMultiplier: 0.6
+    minCount: 30
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: decfafe60a5af70458628b1df29a4305, type: 2}
+    bossEnemy: {fileID: 0}
+    triggerTime: 120
+    spawnRate: 0.5
+    speedMultiplier: 0.7
+    minCount: 50
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: cc71d43b843bc144da25a508b0b1fde9, type: 2}
+    bossEnemy: {fileID: 11400000, guid: 467a9594db5e1484b9563d1fd5772520, type: 2}
+    triggerTime: 180
+    spawnRate: 0.25
+    speedMultiplier: 0.8
+    minCount: 40
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: cc71d43b843bc144da25a508b0b1fde9, type: 2}
+    - {fileID: 11400000, guid: edba2e9722fb5b244a12e7c3948a5ed6, type: 2}
+    bossEnemy: {fileID: 0}
+    triggerTime: 240
+    spawnRate: 1
+    speedMultiplier: 0
+    minCount: 30
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 0d0384ab3f248c34eb1bbaa503cdf9a5, type: 2}
+    bossEnemy: {fileID: 11400000, guid: c87296ca442af684c8a0b9204f02d565, type: 2}
+    triggerTime: 300
+    spawnRate: 1
+    speedMultiplier: 0
+    minCount: 10
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 0d0384ab3f248c34eb1bbaa503cdf9a5, type: 2}
+    - {fileID: 11400000, guid: 55ff53bb5b079f148be5b15ab01ada73, type: 2}
+    bossEnemy: {fileID: 0}
+    triggerTime: 360
+    spawnRate: 0.5
+    speedMultiplier: 0
+    minCount: 20
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: b05633c186b6f5a4c94a8aeabb8b3de4, type: 2}
+    - {fileID: 11400000, guid: decfafe60a5af70458628b1df29a4305, type: 2}
+    bossEnemy: {fileID: 11400000, guid: 7c41674072e870d4a9c8fc441ff01f7d, type: 2}
+    triggerTime: 420
+    spawnRate: 0.5
+    speedMultiplier: 0
+    minCount: 80
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 55ff53bb5b079f148be5b15ab01ada73, type: 2}
+    bossEnemy: {fileID: 11400000, guid: f14007e4b8ff7894b848fc73999a80da, type: 2}
+    triggerTime: 480
+    spawnRate: 1.5
+    speedMultiplier: 0
+    minCount: 100
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 7ad98cf0f386df84487d6b165ec239f2, type: 2}
+    - {fileID: 11400000, guid: f14007e4b8ff7894b848fc73999a80da, type: 2}
+    bossEnemy: {fileID: 11400000, guid: c26b8117867a20847a69d64818423ea4, type: 2}
+    triggerTime: 540
+    spawnRate: 0.5
+    speedMultiplier: 0
+    minCount: 30
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: b05633c186b6f5a4c94a8aeabb8b3de4, type: 2}
+    - {fileID: 11400000, guid: 0d0384ab3f248c34eb1bbaa503cdf9a5, type: 2}
+    bossEnemy: {fileID: 11400000, guid: c87296ca442af684c8a0b9204f02d565, type: 2}
+    triggerTime: 600
+    spawnRate: 0.5
+    speedMultiplier: 0
+    minCount: 10
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: cc71d43b843bc144da25a508b0b1fde9, type: 2}
+    bossEnemy: {fileID: 11400000, guid: 467a9594db5e1484b9563d1fd5772520, type: 2}
+    triggerTime: 660
+    spawnRate: 0.1
+    speedMultiplier: 0
+    minCount: 300
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: edba2e9722fb5b244a12e7c3948a5ed6, type: 2}
+    - {fileID: 11400000, guid: cc71d43b843bc144da25a508b0b1fde9, type: 2}
+    - {fileID: 11400000, guid: e8e0c53781de2514aa9bd8d96fec1781, type: 2}
+    bossEnemy: {fileID: 11400000, guid: 467a9594db5e1484b9563d1fd5772520, type: 2}
+    triggerTime: 720
+    spawnRate: 0.25
+    speedMultiplier: 0
+    minCount: 20
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: edba2e9722fb5b244a12e7c3948a5ed6, type: 2}
+    - {fileID: 11400000, guid: e8e0c53781de2514aa9bd8d96fec1781, type: 2}
+    bossEnemy: {fileID: 11400000, guid: 467a9594db5e1484b9563d1fd5772520, type: 2}
+    triggerTime: 780
+    spawnRate: 0.5
+    speedMultiplier: 0
+    minCount: 150
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: f14007e4b8ff7894b848fc73999a80da, type: 2}
+    - {fileID: 11400000, guid: e8e0c53781de2514aa9bd8d96fec1781, type: 2}
+    bossEnemy: {fileID: 11400000, guid: c26b8117867a20847a69d64818423ea4, type: 2}
+    triggerTime: 840
+    spawnRate: 0.1
+    speedMultiplier: 0
+    minCount: 20
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: f14007e4b8ff7894b848fc73999a80da, type: 2}
+    - {fileID: 11400000, guid: e8e0c53781de2514aa9bd8d96fec1781, type: 2}
+    - {fileID: 11400000, guid: 9e86cb4da8342b44fbaf17cef9dce91d, type: 2}
+    bossEnemy: {fileID: 11400000, guid: 96f95dba73e458042b9f28b898b830eb, type: 2}
+    triggerTime: 900
+    spawnRate: 0.1
+    speedMultiplier: 0
+    minCount: 100
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: b05633c186b6f5a4c94a8aeabb8b3de4, type: 2}
+    - {fileID: 11400000, guid: 0d0384ab3f248c34eb1bbaa503cdf9a5, type: 2}
+    - {fileID: 11400000, guid: 9c97b13113d513d49b74e8f3e9b1be52, type: 2}
+    bossEnemy: {fileID: 11400000, guid: 467a9594db5e1484b9563d1fd5772520, type: 2}
+    triggerTime: 960
+    spawnRate: 0.1
+    speedMultiplier: 0
+    minCount: 100
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 24800cf55d5b127468589f9e270ba184, type: 2}
+    bossEnemy: {fileID: 0}
+    triggerTime: 1020
+    spawnRate: 1
+    speedMultiplier: 0
+    minCount: 20
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 24800cf55d5b127468589f9e270ba184, type: 2}
+    - {fileID: 11400000, guid: b05633c186b6f5a4c94a8aeabb8b3de4, type: 2}
+    bossEnemy: {fileID: 11400000, guid: c26b8117867a20847a69d64818423ea4, type: 2}
+    triggerTime: 1080
+    spawnRate: 0.5
+    speedMultiplier: 0
+    minCount: 60
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 24800cf55d5b127468589f9e270ba184, type: 2}
+    - {fileID: 11400000, guid: b05633c186b6f5a4c94a8aeabb8b3de4, type: 2}
+    bossEnemy: {fileID: 0}
+    triggerTime: 1140
+    spawnRate: 0.5
+    speedMultiplier: 0
+    minCount: 100
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 24800cf55d5b127468589f9e270ba184, type: 2}
+    - {fileID: 11400000, guid: 9e86cb4da8342b44fbaf17cef9dce91d, type: 2}
+    - {fileID: 11400000, guid: 3f4e9d196b84eed4d88492651d67374d, type: 2}
+    bossEnemy: {fileID: 11400000, guid: 077154d38733f9244aca5229911a3263, type: 2}
+    triggerTime: 1200
+    spawnRate: 0.1
+    speedMultiplier: 0.9
+    minCount: 100
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 2bff21d33dac5af43a1c0117c6f17c65, type: 2}
+    bossEnemy: {fileID: 11400000, guid: 0b8276fda7556a54995b5acba469f475, type: 2}
+    triggerTime: 1260
+    spawnRate: 0.1
+    speedMultiplier: 0
+    minCount: 300
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 2bff21d33dac5af43a1c0117c6f17c65, type: 2}
+    - {fileID: 11400000, guid: 24800cf55d5b127468589f9e270ba184, type: 2}
+    bossEnemy: {fileID: 11400000, guid: 467a9594db5e1484b9563d1fd5772520, type: 2}
+    triggerTime: 1320
+    spawnRate: 0.1
+    speedMultiplier: 0
+    minCount: 200
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 2bff21d33dac5af43a1c0117c6f17c65, type: 2}
+    - {fileID: 11400000, guid: 24800cf55d5b127468589f9e270ba184, type: 2}
+    bossEnemy: {fileID: 11400000, guid: c26b8117867a20847a69d64818423ea4, type: 2}
+    triggerTime: 1380
+    spawnRate: 0.1
+    speedMultiplier: 0
+    minCount: 300
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 2bff21d33dac5af43a1c0117c6f17c65, type: 2}
+    - {fileID: 11400000, guid: 24800cf55d5b127468589f9e270ba184, type: 2}
+    bossEnemy: {fileID: 11400000, guid: 0b8276fda7556a54995b5acba469f475, type: 2}
+    triggerTime: 1440
+    spawnRate: 0.1
+    speedMultiplier: 0
+    minCount: 300
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 9c97b13113d513d49b74e8f3e9b1be52, type: 2}
+    bossEnemy: {fileID: 11400000, guid: 5f5f9fbd35790404f818b2b499d1300d, type: 2}
+    triggerTime: 1500
+    spawnRate: 0.1
+    speedMultiplier: 0
+    minCount: 100
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 9c97b13113d513d49b74e8f3e9b1be52, type: 2}
+    - {fileID: 11400000, guid: 2bff21d33dac5af43a1c0117c6f17c65, type: 2}
+    bossEnemy: {fileID: 0}
+    triggerTime: 1560
+    spawnRate: 0.1
+    speedMultiplier: 0
+    minCount: 300
+    healthMultiplier: 1.75
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 24800cf55d5b127468589f9e270ba184, type: 2}
+    - {fileID: 11400000, guid: 3f4e9d196b84eed4d88492651d67374d, type: 2}
+    - {fileID: 11400000, guid: 0d0384ab3f248c34eb1bbaa503cdf9a5, type: 2}
+    - {fileID: 11400000, guid: b05633c186b6f5a4c94a8aeabb8b3de4, type: 2}
+    bossEnemy: {fileID: 11400000, guid: c87296ca442af684c8a0b9204f02d565, type: 2}
+    triggerTime: 1620
+    spawnRate: 0.1
+    speedMultiplier: 0
+    minCount: 300
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies: []
+    bossEnemy: {fileID: 11400000, guid: c87296ca442af684c8a0b9204f02d565, type: 2}
+    triggerTime: 1680
+    spawnRate: 0.1
+    speedMultiplier: 0
+    minCount: 300
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies:
+    - {fileID: 11400000, guid: 2bff21d33dac5af43a1c0117c6f17c65, type: 2}
+    - {fileID: 11400000, guid: 24800cf55d5b127468589f9e270ba184, type: 2}
+    - {fileID: 11400000, guid: 9c97b13113d513d49b74e8f3e9b1be52, type: 2}
+    bossEnemy: {fileID: 0}
+    triggerTime: 1740
+    spawnRate: 0.1
+    speedMultiplier: 0
+    minCount: 300
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 0
+  - enemies: []
+    bossEnemy: {fileID: 11400000, guid: d9cb7afb069220f4fa8e2d73948f9e5d, type: 2}
+    triggerTime: 1800
+    spawnRate: 999999
+    speedMultiplier: 1
+    minCount: 0.1
+    healthMultiplier: 0
+    spawnRange: 0
+    burstSpawnCount: 0
+    EraseEnemies: 1

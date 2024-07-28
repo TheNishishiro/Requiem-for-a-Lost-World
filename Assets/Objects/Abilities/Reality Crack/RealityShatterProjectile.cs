@@ -42,7 +42,7 @@ namespace Objects.Abilities.Reality_Crack
 			if (GameData.IsCharacterWithRank(CharactersEnum.Chornastra_BoR, CharacterRank.E3))
 				EnemyManager.instance.SetTimeStop(false);
 			if (RealityShatterWeapon.IsGlobalDamage)
-				EnemyManager.instance.GlobalDamage(WeaponStatsStrategy.GetDamage() / 2, ParentWeapon);
+				EnemyManager.instance.GlobalDamage(WeaponStatsStrategy.GetDamageDealt().Damage / 2, ParentWeapon);
 			if (RealityShatterWeapon.IsSelfBuff)
 				RealityShatterWeapon.IncreaseDamage();
 		}

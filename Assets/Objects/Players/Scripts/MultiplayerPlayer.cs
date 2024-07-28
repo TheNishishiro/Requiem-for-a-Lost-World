@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using Data.Difficulty;
+using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Cameras;
 using DefaultNamespace.Data.Stages;
@@ -51,7 +52,7 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
     public void Start()
     {
         tag = "Player";
-        transform.position = new Vector3(0, 6, 0);
+        transform.position = FindFirstObjectByType<SpawnPoint>().transform.position;
     }
 
     public override void OnNetworkSpawn()

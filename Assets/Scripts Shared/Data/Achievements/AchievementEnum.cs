@@ -4,7 +4,7 @@ using Objects.Characters;
 
 namespace DefaultNamespace.Data.Achievements
 {
-	public enum AchievementEnum // 102
+	public enum AchievementEnum // 104
 	{
 		[AchievementValue("Jack of all trades", "Obtain 6 weapons in a single game", AchievementSection.Misc, Rarity.Common)]
 		Hold6Weapons = 0,
@@ -74,6 +74,10 @@ namespace DefaultNamespace.Data.Achievements
 		Amelisana_FinishWithoutUsingUltimate = 98,
 		[AchievementValue("Inner struggle", "As Amelisana gather inventory of conflicting forces", AchievementSection.Character, Rarity.Rare, CharactersEnum.Amelisana_BoN, RequirementType.None, 1)]
 		Amelisana_LightAndCosmicOnly = 99,
+		[AchievementValue("Transcendence", "As Yami-no-Tokiya deal a total of 20 milion damage in a single game", AchievementSection.Character, Rarity.Rare, CharactersEnum.Chornastra_BoR, RequirementType.None, 1)]
+		Chronastra_DamageDealt = 103,
+		[AchievementValue("Purge", "As Yami-no-Tokiya reduce everything to none", AchievementSection.Character, Rarity.Rare, CharactersEnum.Chornastra_BoR, RequirementType.None, 1)]
+		Chronastra_EnemyKills = 104,
 		#endregion
 		
 		#region Survive with characters
@@ -181,9 +185,9 @@ namespace DefaultNamespace.Data.Achievements
 		ObtainAmelisana_E0 = 63,
 		[AchievementValue("All shall suffer as I did", "Unlock final shard of Amelisana", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Amelisana_BoN, RequirementType.Shards, 5)]
 		ObtainAmelisana_E5 = 64,
-		[AchievementValue("The end is nigh", "Obtain Chronastra", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Chornastra_BoR, RequirementType.Shards, 0)]
+		[AchievementValue("The end is nigh", "Obtain Yami-no-Tokiya", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Chornastra_BoR, RequirementType.Shards, 0)]
 		ObtainChornastra_E0 = 65,
-		[AchievementValue("Requiem for a Lost World", "Unlock final shard of Chronastra", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Chornastra_BoR, RequirementType.Shards, 5)]
+		[AchievementValue("Requiem for a Lost World", "Unlock final shard of Yami-no-Tokiya", AchievementSection.Collection, Rarity.Legendary, CharactersEnum.Chornastra_BoR, RequirementType.Shards, 5)]
 		ObtainChornastra_E5 = 66,
 		[AchievementValue("Time waits for nobody", "Obtain Truzi", AchievementSection.Collection, Rarity.Rare, CharactersEnum.Truzi_BoT, RequirementType.Shards, 0)]
 		ObtainTruzi_E0 = 67,

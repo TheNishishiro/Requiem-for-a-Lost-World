@@ -66,6 +66,11 @@ namespace Managers.StageEvents
 				_enemyManager.EraseAllEnemies();
 			}
 
+			if (stageEvent.spawnRange > 0)
+			{
+				_enemyManager.ChangeEnemySpawnRange(stageEvent.spawnRange);
+			}
+
 			if (stageEvent.bossEnemy != null)
 			{
 				_enemyManager.SpawnEnemy(stageEvent.bossEnemy);
