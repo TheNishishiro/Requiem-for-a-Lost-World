@@ -124,6 +124,7 @@ namespace DefaultNamespace.Data
 			var settings = new JsonSerializerSettings
 			{
 				MissingMemberHandling = MissingMemberHandling.Ignore,
+				ObjectCreationHandling = ObjectCreationHandling.Replace,
 				Error = delegate(object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args)
 				{
 					args.ErrorContext.Handled = true;
