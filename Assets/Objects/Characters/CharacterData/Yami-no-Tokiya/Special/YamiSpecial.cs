@@ -9,13 +9,14 @@ using Objects.Characters.Nishi_HoF.Skill;
 using Objects.Characters.Yami_no_Tokiya.Special;
 using Objects.Enemies;
 using Objects.Players.Scripts;
+using Objects.Stage;
 using UnityEngine;
 using UnityEngine.Pool;
 using Weapons;
 
 namespace Objects.Characters.Special
 {
-    public class YamiSpecial : CharacterSkillBase, IReactionTriggeredEvent
+    public class YamiSpecial : CharacterSkillBase, IReactionTriggeredEvent, IDamageDealtHandler
     {
         [SerializeField] private float flowerLifeTime;
         [SerializeField] private float flowerBaseDamage;
@@ -64,11 +65,13 @@ namespace Objects.Characters.Special
         private void OnEnable()
         {
             ReactionTriggeredEvent.Register(this);
+            DamageDealtEvent.Register(this);
         }
 
         private void OnDisable()
         {
             ReactionTriggeredEvent.Unregister(this);
+            DamageDealtEvent.Unregister(this);
         }
 
         public void OnReactionTriggered(ElementalReaction reaction, Damageable damageable)
@@ -87,6 +90,14 @@ namespace Objects.Characters.Special
                 _targetPosition = Utilities.GetPointOnColliderSurface(Utilities.GetRandomInArea(t.position, 6f), t, 0.2f);
                 _objectPool.Get();
             }
+        }
+
+        public void OnDamageDealt(Damageable damageable, float damage, bool isRecursion)
+        {
+            if (isRecursion || !GameData.IsCharacterRank(CharacterRank.E1)) return;
+            var baseDamage = damage * 0.5f;
+            var modifiedDamage = baseDamage * PlayerStatsScaler.GetScaler().GetFollowUpAttackDamageIncrease();
+            damageable.TakeDamage(modifiedDamage, null, true);
         }
     }
 }

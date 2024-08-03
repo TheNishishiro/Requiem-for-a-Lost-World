@@ -22,14 +22,7 @@ namespace Objects.Characters.Yami_no_Tokiya
 
         public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)
         {
-            if (rank >= CharacterRank.E4)
-            {
-                var statToUpgrade = Enum.GetValues(typeof(StatEnum)).Cast<StatEnum>().Except(new[]
-                {
-                    StatEnum.AttackCount, StatEnum.Revives, StatEnum.Rerolls, StatEnum.Skips, StatEnum.CooldownReduction
-                }).Where(x => x.IsPercent()).OrderBy(_ => Random.value).FirstOrDefault();
-                playerStatsComponent.Add(statToUpgrade, 0.01f);
-            }
+            
         }
     }
 }

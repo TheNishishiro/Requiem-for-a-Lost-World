@@ -82,8 +82,6 @@ namespace Objects.Characters.Yami_no_Tokiya.Skill
             Camera.main.cullingMask = _cullingMask;
             RenderSettings.skybox = _originalSkybox;
             PauseManager.instance.ClearFullPause();
-            if (GameData.IsCharacterRank(CharacterRank.E1))
-                FindAnyObjectByType<YamiSpecial>().SpawnFlowers(CharacterListManager.instance.GetOwnedCharacters().Count);
             if (GameData.IsCharacterRank(CharacterRank.E5))
             {
                 GameManager.instance.playerStatsComponent.TemporaryStatBoost(StatEnum.CritRate, 1f, 10f);

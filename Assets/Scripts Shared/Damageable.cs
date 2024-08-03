@@ -143,7 +143,11 @@ namespace DefaultNamespace
 
 		private float GetResistance(Element element)
 		{
-			return resistances.FirstOrDefault(x => x.element == element)?.damageReduction ?? 0;
+			var resistance = resistances.FirstOrDefault(x => x.element == element)?.damageReduction ?? 0;
+			if (GameData.IsCharacterWithRank(CharactersEnum.Chornastra_BoR, CharacterRank.E4))
+				return resistance < 0 ? resistance : 0;
+
+			return resistance;
 		}
 
 		public void TakeDamage(float damage, WeaponBase weaponBase = null, bool isRecursion = false)

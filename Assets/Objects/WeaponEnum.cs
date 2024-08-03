@@ -37,6 +37,7 @@ namespace Objects
         RealityShatter = 31,
         MagicArrow = 32,
         RockRain = 33,
-        LowPressure = 34
+        LowPressure = 34,
+        WindProjectile = 35,
     }
 }

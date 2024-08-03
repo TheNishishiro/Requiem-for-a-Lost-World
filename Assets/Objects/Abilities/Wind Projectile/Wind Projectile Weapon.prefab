@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7710054758650493616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9193631227803857608}
+  - component: {fileID: 6987295203502224694}
+  m_Layer: 0
+  m_Name: Wind Projectile Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9193631227803857608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7710054758650493616}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6987295203502224694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7710054758650493616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40104f4c94ff4bf19af4987c6ca04a2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useNetworkPool: 1
+  spawnPrefab: {fileID: 1701135520514003166, guid: 1a60a9190b886c042bafcc0b1b94d446,
+    type: 3}
+  WeaponId: 35
+  attackType: 2
+  Name: Piercing Wind
+  Description: Send forward a projectile of condensed wind
+  chanceToAppear: 1
+  Icon: {fileID: 0}
+  unlockOnAchievement: 0
+  requiredAchievement: 0
+  element: 6
+  weaponStats:
+    Damage: 5
+    Cooldown: 1.5
+    CooldownReduction: 0
+    Scale: 1
+    Speed: 5
+    TimeToLive: 1
+    AttackCount: 1
+    PassThroughCount: 0
+    DamageCooldown: 0
+    DuplicateSpawnDelay: 0.2
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 2
+    DamageOverTimeDuration: 1
+    DamageOverTimeFrequency: 0.5
+    LifeSteal: 0
+    FollowUpDamageIncrease: 0
+  availableUpgrades: []
+  isSkill: 0
+  capacity: 50
+  maxCapacity: 50
