@@ -71,6 +71,16 @@ namespace Managers.StageEvents
 				_enemyManager.ChangeEnemySpawnRange(stageEvent.spawnRange);
 			}
 
+			if (stageEvent.despawnDistance > 0)
+			{
+				_enemyManager.ChangeEnemyDespawnDistance(stageEvent.despawnDistance);
+			}
+
+			if (stageEvent.enemyRespawnMode > 0)
+			{
+				_enemyManager.ChangeEnemyRespawnMode(stageEvent.enemyRespawnMode);
+			}
+
 			if (stageEvent.bossEnemy != null)
 			{
 				_enemyManager.SpawnEnemy(stageEvent.bossEnemy);

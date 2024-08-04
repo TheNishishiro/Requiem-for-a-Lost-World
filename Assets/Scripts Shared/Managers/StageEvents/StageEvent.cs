@@ -18,4 +18,6 @@ public class StageEvent
 	public float spawnRange;
 	public int burstSpawnCount;
 	public bool EraseEnemies;
+	public float despawnDistance;
+	public int enemyRespawnMode;
 }

@@ -98,6 +98,15 @@ namespace DefaultNamespace
 			pointSurface.y += heightOffset;
 			return isFound ? pointSurface : point;
 		}
+
+		public static Vector3 GetRandomPointOnCollider(Collider collider)
+		{
+			var colliderBounds = collider.bounds;
+			var minBounds = new Vector3(colliderBounds.min.x, colliderBounds.min.y, colliderBounds.min.z);
+			var maxBounds = new Vector3(colliderBounds.max.x, colliderBounds.max.y, colliderBounds.max.z);
+
+			return new Vector3(Random.Range(minBounds.x, maxBounds.x), Random.Range(minBounds.y, maxBounds.y), Random.Range(minBounds.z, maxBounds.z));
+		}
 		
 		public static bool GetPointOnColliderSurface(Vector3 point, float surfaceHigh, Transform transform, out Vector3 pointSurface)
 		{

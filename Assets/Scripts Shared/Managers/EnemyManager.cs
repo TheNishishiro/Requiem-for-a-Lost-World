@@ -27,11 +27,13 @@ public class EnemyManager : NetworkBehaviour
 	public int currentEnemyCount => _enemies.Count;
 	private int enemyMinCount;
 	private int enemyMaxCount = 300;
+	private float _enemyDespawnDistance;
 	private float _timer;
 	private bool _isTimeStop;
 	private float _healthMultiplier = 1.0f;
 	private EnemyData _currentEnemySpawning;
 	private float _enemySpeedMultiplier = 1;
+	private int _enemyRespawnMode;
 	public bool IsDisableEnemySpawn = true;
 
 	public void Awake()
@@ -237,5 +239,30 @@ public class EnemyManager : NetworkBehaviour
 	public void ChangeEnemySpawnRange(float spawnRange)
 	{
 		spawnArea = new Vector2(spawnRange, spawnRange);
+	}
+
+	public void ChangeEnemyDespawnDistance(float despawnDistance)
+	{
+		_enemyDespawnDistance = despawnDistance;
+	}
+
+	public void ChangeEnemyRespawnMode(int enemyRespawnMode)
+	{
+		_enemyRespawnMode = enemyRespawnMode;
+	}
+
+	public Vector2 GetSpawnArea()
+	{
+		return spawnArea;
+	}
+
+	public float GetEnemyDespawnDistance()
+	{
+		return _enemyDespawnDistance;
+	}
+
+	public bool IsEnclosedSpaceRespawnMode()
+	{
+		return _enemyRespawnMode == 2;
 	}
 }

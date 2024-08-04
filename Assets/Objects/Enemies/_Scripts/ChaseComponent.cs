@@ -11,6 +11,7 @@ using Objects.Abilities.Back_Hole;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ChaseComponent : NetworkBehaviour
 {
@@ -107,9 +108,10 @@ public class ChaseComponent : NetworkBehaviour
             _slowTimer -= Time.deltaTime;
         }
 
-        if (!isTempTarget && !_isPlayerControlled && Vector3.Distance(currentPosition, destination) > 12f)
+        if (!isTempTarget && !_isPlayerControlled && Vector3.Distance(currentPosition, destination) > EnemyManager.instance.GetEnemyDespawnDistance())
         {
-            currentPosition = Utilities.GetPointOnColliderSurface(destination - Utilities.GenerateRandomPositionOnEdge(new Vector2(8, 8)), transformCache, GetComponent<CapsuleCollider>().height);
+            var availableColliders = Physics.OverlapSphere(destination, EnemyManager.instance.GetSpawnArea().x, LayerMask.GetMask("FloorLayer"))?.OrderBy(_ => Random.value).FirstOrDefault();
+            currentPosition = EnemyManager.instance.IsEnclosedSpaceRespawnMode() ? Utilities.GetRandomPointOnCollider(availableColliders) : Utilities.GetPointOnColliderSurface(destination - Utilities.GenerateRandomPositionOnEdge(EnemyManager.instance.GetSpawnArea()), transformCache, GetComponent<CapsuleCollider>().height);
             networkTransport.Teleport(currentPosition, Quaternion.identity, transformCache.localScale);
             return;
         }
