@@ -85,6 +85,7 @@ namespace Objects.Players.Scripts
 		public void Update()
 		{
 			_transform = GameManager.instance.PlayerTransform;
+			Debug.DrawRay(GameManager.instance.PlayerTransform.position, GameManager.instance.PlayerTransform.TransformDirection(Vector3.forward) * 10, Color.green);
 			if (_transform == null) return;
 			
 			if (_currentSkillCooldown > 0f)
@@ -139,7 +140,10 @@ namespace Objects.Players.Scripts
 			DashStacks--;
 			_currentDashCooldown = _dashCooldown;
 			_dashDuration = 0.2f;
-			_dashDistance = 10;
+
+			var layerMask = ~LayerMask.NameToLayer("FloorLayer");
+			var isRayHit = Physics.Raycast(GameManager.instance.PlayerTransform.position, GameManager.instance.PlayerTransform.TransformDirection(Vector3.forward), out var hitInfo, 3, layerMask);
+			_dashDistance = isRayHit ? hitInfo.distance*3 : 10;
 			StartCoroutine(IFrames(0.2f));
 		}
 
