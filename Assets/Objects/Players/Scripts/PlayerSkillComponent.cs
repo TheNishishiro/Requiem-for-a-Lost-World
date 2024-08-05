@@ -141,7 +141,7 @@ namespace Objects.Players.Scripts
 			_currentDashCooldown = _dashCooldown;
 			_dashDuration = 0.2f;
 
-			var layerMask = ~LayerMask.NameToLayer("FloorLayer");
+			var layerMask = ~LayerMask.NameToLayer("FurnitureLayer");
 			var isRayHit = Physics.Raycast(GameManager.instance.PlayerTransform.position, GameManager.instance.PlayerTransform.TransformDirection(Vector3.forward), out var hitInfo, 3, layerMask);
 			_dashDistance = isRayHit ? hitInfo.distance*3 : 10;
 			StartCoroutine(IFrames(0.2f));

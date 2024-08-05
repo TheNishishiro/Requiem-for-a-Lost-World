@@ -29,6 +29,7 @@ public class ChaseComponent : NetworkBehaviour
     private float _tempTargetTimer;
     private bool _isPlayerControlled;
     private Transform transformCache;
+    private Collider[] _colliders = new Collider[6];
     
     private void Awake()
     {
@@ -110,8 +111,16 @@ public class ChaseComponent : NetworkBehaviour
 
         if (!isTempTarget && !_isPlayerControlled && Vector3.Distance(currentPosition, destination) > EnemyManager.instance.GetEnemyDespawnDistance())
         {
-            var availableColliders = Physics.OverlapSphere(destination, EnemyManager.instance.GetSpawnArea().x, LayerMask.GetMask("FloorLayer"))?.OrderBy(_ => Random.value).FirstOrDefault();
-            currentPosition = EnemyManager.instance.IsEnclosedSpaceRespawnMode() ? Utilities.GetRandomPointOnCollider(availableColliders) : Utilities.GetPointOnColliderSurface(destination - Utilities.GenerateRandomPositionOnEdge(EnemyManager.instance.GetSpawnArea()), transformCache, GetComponent<CapsuleCollider>().height);
+            if (EnemyManager.instance.IsEnclosedSpaceRespawnMode())
+            {
+                var collidersCount = Physics.OverlapSphereNonAlloc(destination, EnemyManager.instance.GetSpawnArea().x, _colliders, LayerMask.GetMask("FloorLayer"))
+                var resultCollider = _colliders.Take(collidersCount).OrderBy(_ => Random.value).FirstOrDefault();
+                currentPosition = Utilities.GetRandomPointOnCollider(resultCollider);
+            }
+            else
+            {
+                currentPosition = Utilities.GetPointOnColliderSurface(destination - Utilities.GenerateRandomPositionOnEdge(EnemyManager.instance.GetSpawnArea()), transformCache, GetComponent<CapsuleCollider>().height);
+            }
             networkTransport.Teleport(currentPosition, Quaternion.identity, transformCache.localScale);
             return;
         }

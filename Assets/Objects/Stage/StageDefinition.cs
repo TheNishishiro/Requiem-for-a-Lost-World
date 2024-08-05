@@ -11,6 +11,8 @@ namespace Objects.Stage
         public Sprite background;
         public Sprite backgroundBlur;
         public string title;
+        public float despawnDistance;
+        public int enemyRespawnMode;
         public bool isEnabled;
     }
 }
