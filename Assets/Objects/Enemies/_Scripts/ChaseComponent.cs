@@ -113,7 +113,7 @@ public class ChaseComponent : NetworkBehaviour
         {
             if (EnemyManager.instance.IsEnclosedSpaceRespawnMode())
             {
-                var collidersCount = Physics.OverlapSphereNonAlloc(destination, EnemyManager.instance.GetSpawnArea().x, _colliders, LayerMask.GetMask("FloorLayer"))
+                var collidersCount = Physics.OverlapSphereNonAlloc(destination, EnemyManager.instance.GetSpawnArea().x, _colliders, LayerMask.GetMask("FloorLayer"));
                 var resultCollider = _colliders.Take(collidersCount).OrderBy(_ => Random.value).FirstOrDefault();
                 currentPosition = Utilities.GetRandomPointOnCollider(resultCollider);
             }
