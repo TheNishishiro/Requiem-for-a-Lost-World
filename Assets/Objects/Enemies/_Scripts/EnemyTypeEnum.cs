@@ -27,6 +27,19 @@
         DemonBoss = 22,
         DemonLordBoss = 23,
         Plant1Boss = 24,
-        DarkPunisherBoss = 25
+        DarkPunisherBoss = 25,
+        Abomination3 = 26,
+        BigHead = 27,
+        BurningSinner = 28,
+        DemonLizard = 29,
+        DungeonCrawler = 30,
+        FloatingAlien = 31,
+        LesserOcti = 32,
+        MeltedDemon = 33,
+        StoneDemon = 34,
+        StoneLizard = 35,
+        ToothShroom = 36,
+        TurtleOcti = 37,
+        Sludge = 38
     }
 }
