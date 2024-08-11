@@ -173,6 +173,11 @@ namespace DefaultNamespace
 		public void TakeDamage(DamageResult damageResult, WeaponBase weaponBase = null, bool isRecursion = false)
 		{
 			var elementalReactionEffectIncreasePercentage = PlayerStatsScaler.GetScaler().GetElementalReactionEffectIncreasePercentage();
+			if (!_hitSoundPlayedThisFrame)
+			{
+				AudioSource.PlayClipAtPoint(takeDamageSound, _transformCache.position, 0.5f);
+				_hitSoundPlayedThisFrame = true;
+			}
 			RpcManager.instance.DealDamageToEnemyRpc(this, damageResult.Damage, damageResult.IsCriticalHit, weaponBase?.element ?? Element.None, weaponBase?.WeaponId ?? WeaponEnum.Scythe, elementalReactionEffectIncreasePercentage, isRecursion, NetworkManager.Singleton.LocalClientId);
 		}
 		
@@ -193,13 +198,6 @@ namespace DefaultNamespace
 			if (calculatedDamage < 0)
 				calculatedDamage = 0;
 
-			var position = _transformCache.position;
-			if (!_hitSoundPlayedThisFrame)
-			{
-				AudioSource.PlayClipAtPoint(takeDamageSound, position, 0.5f);
-				_hitSoundPlayedThisFrame = true;
-			}
-
 			if (!isRecursion && additionalDamageTimer > 0)
 			{
 				TakeDamage(new DamageResult{Damage = baseDamage * additionalDamageModifier, IsCriticalHit = isCriticalHit}, additionalDamageType, true);
@@ -213,7 +211,9 @@ namespace DefaultNamespace
 				damageMessage += "!";
 			Health -= calculatedDamage;
 			MessageManager.instance.PostMessageRpc(damageMessage, _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(weaponElement));
-			RpcManager.instance.InvokeDamageDealtEventRpc(this, calculatedDamage, isRecursion, weaponId, RpcTarget.Single(clientId, RpcTargetUse.Temp));
+			
+			if (weaponId != WeaponEnum.Unset)
+				RpcManager.instance.InvokeDamageDealtEventRpc(this, calculatedDamage, isRecursion, weaponId, RpcTarget.Single(clientId, RpcTargetUse.Temp));
 
 			//
 			//	weaponBase?.OnEnemyKilled();
