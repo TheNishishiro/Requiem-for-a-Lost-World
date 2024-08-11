@@ -18,12 +18,7 @@ namespace Objects.Enemies
 			hp = enemyStats.hp;
 			damage = enemyStats.damage;
 			speed = enemyStats.speed;
-			elementStats ??= new List<ElementStats>();
-			elementStats.Clear();
-			enemyStats.elementStats.ForEach(x =>
-			{
-				elementStats?.Add(new ElementStats(x));
-			});
+			elementStats = enemyStats.elementStats?.ToList() ?? new List<ElementStats>();
 		}
 
 		public void Copy(EnemyNetworkStats enemyStats)
@@ -31,7 +26,7 @@ namespace Objects.Enemies
 			hp = enemyStats.hp;
 			damage = enemyStats.damage;
 			speed = enemyStats.speed;
-			elementStats ??= new List<ElementStats>();
+			elementStats = enemyStats.elementStats.ToList();
 		}
 	}
 }

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6773012bce094f4281e59656a4cb2572, type: 3}
+  m_Name: Demon
+  m_EditorClassIdentifier: 
+  enemyType: 3
+  enemyName: Demon Boss
+  sprite: {fileID: 21300000, guid: ceb172e94a6783a4baa47c1ccafac436, type: 3}
+  spriteSheet: {fileID: 21300000, guid: 8c8ad93d5a29253478a251f2aeb4e27e, type: 3}
+  animatedPrefab: {fileID: 7575595257561399096, guid: b34c8ce5b0d6b99409a1ea8cabe6fd61,
+    type: 3}
+  stats:
+    hp: 200
+    damage: 10
+    speed: 1.45
+    elementStats:
+    - element: 2
+      damageReduction: 0.4
+  allowFlying: 0
+  groundOffset: 0
+  isBossEnemy: 0
+  ExpDrop: 250

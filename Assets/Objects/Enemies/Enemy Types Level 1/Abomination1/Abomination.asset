@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6773012bce094f4281e59656a4cb2572, type: 3}
+  m_Name: Abomination
+  m_EditorClassIdentifier: 
+  enemyType: 0
+  enemyName: Abomination
+  sprite: {fileID: 21300000, guid: eab3b97152f5d4848832a6b1c369d28e, type: 3}
+  spriteSheet: {fileID: 21300000, guid: 64e0a578841e85a47ace42adfcf5cea1, type: 3}
+  animatedPrefab: {fileID: 4327967563572665152, guid: ff0678542c6a9ea40bde50019ca8ec7b,
+    type: 3}
+  stats:
+    hp: 160
+    damage: 10
+    speed: 1.45
+    elementStats:
+    - element: 2
+      damageReduction: 0.5
+  allowFlying: 0
+  groundOffset: 0.04
+  isBossEnemy: 0
+  ExpDrop: 250

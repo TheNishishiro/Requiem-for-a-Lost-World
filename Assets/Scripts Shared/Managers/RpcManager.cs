@@ -274,6 +274,9 @@ namespace Managers
         [Rpc(SendTo.SpecifiedInParams)]
         public void InvokeDamageDealtEventRpc(NetworkBehaviourReference damageable, float calculatedDamage, bool isRecursion, WeaponEnum weaponId, RpcParams rpcParams)
         {
+            if (weaponId == WeaponEnum.Unset)
+                return;
+            
             if (damageable.TryGet(out Damageable damageableComponent))
             {
                 DamageDealtEvent.Invoke(damageableComponent, calculatedDamage, isRecursion, weaponId);

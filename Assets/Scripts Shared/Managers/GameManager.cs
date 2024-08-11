@@ -10,6 +10,7 @@ using DefaultNamespace.Data.Game;
 using Events.Handlers;
 using Events.Scripts;
 using Managers.StageEvents;
+using Objects;
 using Objects.Characters;
 using Objects.Players.PermUpgrades;
 using Objects.Players.Scripts;
@@ -22,7 +23,7 @@ using UnityEngine.SceneManagement;
 using UnityTemplateProjects;
 
 namespace Managers
-{	public class GameManager : MonoBehaviour, ISettingsChangedHandler
+{	public class GameManager : MonoBehaviour, ISettingsChangedHandler, IDamageDealtHandler
 	{		
 		public static GameManager instance;
 		[HideInInspector] public MultiplayerPlayer playerMpComponent;
@@ -196,6 +197,11 @@ namespace Managers
 				CameraModes.FirstPerson => firstPersonVirtualCamera,
 				_ => throw new ArgumentOutOfRangeException()
 			};
+		}
+
+		public void OnDamageDealt(Damageable damageable, float damage, bool isRecursion, WeaponEnum weaponId)
+		{
+			GameResultData.AddDamage(damage, WeaponManager.instance.GetUnlockedWeapon(weaponId));
 		}
 	}
 }

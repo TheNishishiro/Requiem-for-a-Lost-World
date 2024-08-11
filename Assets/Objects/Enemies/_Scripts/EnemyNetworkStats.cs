@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Data.Elements;
 using Unity.Netcode;
 
@@ -16,7 +17,7 @@ namespace Objects.Enemies
         public bool isBossEnemy;
         public int expDrop;
         public EnemyTypeEnum enemyType;
-        public NetworkList<ElementStatsSimple> elementStats = new ();
+        public List<ElementStats> elementStats = new ();
 
         public EnemyNetworkStats()
         {
@@ -32,14 +33,7 @@ namespace Objects.Enemies
             isBossEnemy = enemyData.isBossEnemy;
             expDrop = enemyData.ExpDrop;
             enemyType = enemyData.enemyType;
-            foreach (var elementStat in enemyData.stats.elementStats)
-            {
-                elementStats.Add(new ElementStatsSimple()
-                {
-                    element = elementStat.element,
-                    damageReduction = elementStat.damageReduction
-                });
-            }
+            elementStats = enemyData.stats.elementStats?.ToList() ?? new List<ElementStats>();
         }
         
         public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter

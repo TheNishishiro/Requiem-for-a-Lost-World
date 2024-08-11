@@ -42,6 +42,11 @@
         TurtleOcti = 37,
         Sludge = 38,
         TheWatcher = 39,
-        Hellborn = 40
+        Hellborn = 40,
+        InfernoEye = 41,
+        HopGoblin = 42,
+        FlameDig = 43,
+        FirstFlame = 44,
+        LizardBrute = 45
     }
 }

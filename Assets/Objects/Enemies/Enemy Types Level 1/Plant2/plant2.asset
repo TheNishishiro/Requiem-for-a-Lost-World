@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6773012bce094f4281e59656a4cb2572, type: 3}
+  m_Name: plant2
+  m_EditorClassIdentifier: 
+  enemyType: 16
+  enemyName: Giant Plant
+  sprite: {fileID: 21300000, guid: e28899b26dc107a4d9b2361176252225, type: 3}
+  spriteSheet: {fileID: 21300000, guid: 26b51fbbad38a604f88f2598d67643f9, type: 3}
+  animatedPrefab: {fileID: 2196058944099639947, guid: b318c3f84a988ee438e1f898528bc08c,
+    type: 3}
+  stats:
+    hp: 200
+    damage: 30
+    speed: 1.6
+    elementStats:
+    - element: 9
+      damageReduction: 1
+    - element: 6
+      damageReduction: 1
+  allowFlying: 0
+  groundOffset: 1
+  isBossEnemy: 1
+  ExpDrop: 5000

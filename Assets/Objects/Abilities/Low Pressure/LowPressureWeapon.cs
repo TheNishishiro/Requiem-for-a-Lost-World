@@ -30,7 +30,7 @@ namespace Objects.Abilities.Low_Pressure
             _canAttack = true;
         }
 
-        public void OnDamageDealt(Damageable damageable, float damage, bool isRecursion, WeaponEnum? weaponId)
+        public void OnDamageDealt(Damageable damageable, float damage, bool isRecursion, WeaponEnum weaponId)
         {
             if (!_canAttack || isRecursion)
                 return;

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6773012bce094f4281e59656a4cb2572, type: 3}
+  m_Name: Golem
+  m_EditorClassIdentifier: 
+  enemyType: 10
+  enemyName: Golem
+  sprite: {fileID: 21300000, guid: be324adc0789723468f061319a71dcc8, type: 3}
+  spriteSheet: {fileID: 21300000, guid: 138a4c4c4416f7840ad48992f220e6da, type: 3}
+  animatedPrefab: {fileID: 7768972349798204719, guid: 4927429318033a44288c1d4cb864cabe,
+    type: 3}
+  stats:
+    hp: 150
+    damage: 10
+    speed: 1.4
+    elementStats:
+    - element: 9
+      damageReduction: 0.85
+  allowFlying: 0
+  groundOffset: 0.14
+  isBossEnemy: 0
+  ExpDrop: 250

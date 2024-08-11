@@ -89,7 +89,7 @@ namespace Objects.Characters.Nishi_HoF.Skill
                 SpecialBarManager.Increment();
         }
 
-        public void OnDamageDealt(Damageable damageable, float damage, bool isRecursion, WeaponEnum? weaponId)
+        public void OnDamageDealt(Damageable damageable, float damage, bool isRecursion, WeaponEnum weaponId)
         {
             if (isRecursion || !GameData.IsCharacterRank(CharacterRank.E2)) return;
             if (!GameManager.IsCharacterState(PlayerCharacterState.Nishi_HoF_Void_State)) return;
