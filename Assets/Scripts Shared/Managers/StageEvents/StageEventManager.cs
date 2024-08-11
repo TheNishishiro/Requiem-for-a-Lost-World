@@ -55,6 +55,11 @@ namespace Managers.StageEvents
 			{
 				_enemyManager.ChangeHealthMultiplier(stageEvent.healthMultiplier);
 			}
+
+			if (stageEvent.damageMultiplier > 0)
+			{
+				_enemyManager.ChangeEnemyDamageMultiplier(stageEvent.damageMultiplier);
+			}
 			
 			if (stageEvent.burstSpawnCount > 0)
 			{

@@ -85,7 +85,6 @@ namespace Objects.Players.Scripts
 		public void Update()
 		{
 			_transform = GameManager.instance.PlayerTransform;
-			Debug.DrawRay(GameManager.instance.PlayerTransform.position, GameManager.instance.PlayerTransform.TransformDirection(Vector3.forward) * 10, Color.green);
 			if (_transform == null) return;
 			
 			if (_currentSkillCooldown > 0f)

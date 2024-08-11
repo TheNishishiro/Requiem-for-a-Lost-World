@@ -30,6 +30,7 @@ public class EnemyManager : NetworkBehaviour
 	private float _timer;
 	private bool _isTimeStop;
 	private float _healthMultiplier = 1.0f;
+	private float _damageMultiplier = 1.0f;
 	private EnemyData _currentEnemySpawning;
 	private float _enemySpeedMultiplier = 1;
 	public bool IsDisableEnemySpawn = true;
@@ -100,7 +101,7 @@ public class EnemyManager : NetworkBehaviour
 		
 		var expIncrease = playerCount <= 1 ? 1 : Mathf.Pow(0.85f, playerCount);
 		expIncrease *= GameSettings.ExpDropModifier;
-		var damageIncrease = playerCount <= 1 ? 1 : playerCount * 0.25f;
+		var damageIncrease = (playerCount <= 1 ? 1 : playerCount * 0.25f) * _damageMultiplier;
 		
 		enemyComponent.SetPlayerTarget(targetClient);
 		enemyComponent.Setup(new EnemyNetworkStats(_currentEnemySpawning), _healthMultiplier * (1 + increasePerClient*0.5f), _enemySpeedMultiplier, expIncrease, damageIncrease);
@@ -217,6 +218,11 @@ public class EnemyManager : NetworkBehaviour
 	public void ChangeSpeedMultiplier(float speedMultiplier)
 	{
 		_enemySpeedMultiplier = speedMultiplier;
+	}
+
+	public void ChangeEnemyDamageMultiplier(float damageMultiplier)
+	{
+		_damageMultiplier = damageMultiplier;
 	}
 
 	public Sprite GetSpriteByEnemy(EnemyTypeEnum enemyType)

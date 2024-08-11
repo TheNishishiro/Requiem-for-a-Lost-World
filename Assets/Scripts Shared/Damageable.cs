@@ -8,6 +8,7 @@ using Events.Scripts;
 using Interfaces;
 using Managers;
 using NaughtyAttributes;
+using Objects;
 using Objects.Characters;
 using Objects.Players.Scripts;
 using Objects.Stage;
@@ -58,7 +59,7 @@ namespace DefaultNamespace
 		public float additionalDamageTimer;
 		public float additionalDamageModifier;
 		public ElementalWeapon additionalDamageType;
-		private List<ElementStats> resistances = new ();
+		private Dictionary<Element, float> resistances = new ();
 		private List<Element> inflictedElements = new ();
 		private Transform _transformCache;
 		private Transform _targetTransformCache;
@@ -138,12 +139,26 @@ namespace DefaultNamespace
 
 		public void SetResistances(List<ElementStats> statsElementStats)
 		{
-			resistances = statsElementStats;
+			resistances = new Dictionary<Element, float>();
+			foreach (var statsElement in statsElementStats)
+			{
+				if (resistances.ContainsKey(statsElement.element))
+					resistances[statsElement.element] += statsElement.damageReduction;
+				else
+					resistances.Add(statsElement.element, statsElement.damageReduction);
+			}
+		}
+
+		public void SetResistances(ElementStats elementStat)
+		{
+			resistances.TryAdd(elementStat.element, 0);
+			resistances[elementStat.element] = elementStat.damageReduction;
 		}
 
 		private float GetResistance(Element element)
 		{
-			var resistance = resistances.FirstOrDefault(x => x.element == element)?.damageReduction ?? 0;
+			resistances.TryAdd(element, 0);
+			var resistance = resistances[element];
 			if (GameData.IsCharacterWithRank(CharactersEnum.Chornastra_BoR, CharacterRank.E4))
 				return resistance < 0 ? resistance : 0;
 
@@ -154,15 +169,24 @@ namespace DefaultNamespace
 		{
 			TakeDamage(new DamageResult() { Damage = damage }, weaponBase, isRecursion);
 		}
-        
+
 		public void TakeDamage(DamageResult damageResult, WeaponBase weaponBase = null, bool isRecursion = false)
 		{
-			var calculatedDamage = damageResult.Damage;
-			var isWeaponSpecified = weaponBase != null;
+			var elementalReactionEffectIncreasePercentage = PlayerStatsScaler.GetScaler().GetElementalReactionEffectIncreasePercentage();
+			RpcManager.instance.DealDamageToEnemyRpc(this, damageResult.Damage, damageResult.IsCriticalHit, weaponBase?.element ?? Element.None, weaponBase?.WeaponId ?? WeaponEnum.Scythe, elementalReactionEffectIncreasePercentage, isRecursion, NetworkManager.Singleton.LocalClientId);
+		}
+		
+		public void TakeDamageServer(float baseDamage, bool isCriticalHit, Element weaponElement, WeaponEnum weaponId, float elementalReactionEffectIncreasePercentage, bool isRecursion, ulong clientId)
+		{
+			if (IsDestroyed())
+				return;
+			
+			var calculatedDamage = baseDamage;
+			var isWeaponSpecified = weaponElement != Element.None;
 			if (isWeaponSpecified)
 			{
-				calculatedDamage *= 1 - GetResistance(weaponBase.element);
-				OnElementInflict(weaponBase.element, damageResult.Damage);
+				calculatedDamage *= 1 - GetResistance(weaponElement);
+				OnElementInflict(weaponElement, baseDamage, elementalReactionEffectIncreasePercentage, clientId);
 			}
 
 			calculatedDamage = vulnerabilityTimer > 0 ? calculatedDamage * (1 + vulnerabilityPercentage) : calculatedDamage;
@@ -178,32 +202,21 @@ namespace DefaultNamespace
 
 			if (!isRecursion && additionalDamageTimer > 0)
 			{
-				TakeDamage(new DamageResult{Damage = damageResult.Damage * additionalDamageModifier, IsCriticalHit = damageResult.IsCriticalHit}, additionalDamageType, true);
+				TakeDamage(new DamageResult{Damage = baseDamage * additionalDamageModifier, IsCriticalHit = isCriticalHit}, additionalDamageType, true);
 			}
-
-			if (isWeaponSpecified && weaponBase.WeaponStatsStrategy != null)
-			{
-				var lifeSteal = weaponBase.WeaponStatsStrategy.GetLifeSteal();
-				if (lifeSteal != 0)
-					GameManager.instance.playerComponent.TakeDamage(-calculatedDamage * lifeSteal, true, true);
-
-				var healPerHit = weaponBase.WeaponStatsStrategy.GetHealPerHit(false);
-				if (healPerHit != 0)
-					GameManager.instance.playerComponent.TakeDamage(-healPerHit, true, true);
-			}
-
-			GameResultData.AddDamage(calculatedDamage, weaponBase);
+			
+			if (isWeaponSpecified && weaponId != WeaponEnum.Unset)
+				RpcManager.instance.TriggerLifeStealRpc(calculatedDamage, weaponId, RpcTarget.Single(clientId, RpcTargetUse.Temp));
+			
 			var damageMessage = calculatedDamage.ToString("0");
-			if (damageResult.IsCriticalHit)
+			if (isCriticalHit)
 				damageMessage += "!";
-			if (IsHost || !IsSpawned)
-				Health -= calculatedDamage;
-			else
-				RpcManager.instance.DealDamageToEnemyRpc(this, calculatedDamage);
-			MessageManager.instance.PostMessageRpc(damageMessage, _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(weaponBase?.element));
-			DamageDealtEvent.Invoke(this, calculatedDamage, isRecursion);
-			if (IsDestroyed())
-				weaponBase?.OnEnemyKilled();
+			Health -= calculatedDamage;
+			MessageManager.instance.PostMessageRpc(damageMessage, _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(weaponElement));
+			RpcManager.instance.InvokeDamageDealtEventRpc(this, calculatedDamage, isRecursion, weaponId, RpcTarget.Single(clientId, RpcTargetUse.Temp));
+
+			//
+			//	weaponBase?.OnEnemyKilled();
 		}
 
 		private void LateUpdate()
@@ -213,17 +226,8 @@ namespace DefaultNamespace
 
 		public void ReduceElementalDefence(Element element, float amount)
 		{
-			var elementStat = resistances.FirstOrDefault(x => x.element == element);
-			if (elementStat == null)
-			{
-				elementStat = new ElementStats()
-				{
-					element = element,
-				};
-				resistances.Add(elementStat);
-			}
-
-			elementStat.damageReduction -= amount;
+			resistances.TryAdd(element, 0);
+			resistances[element] -= amount;
 		}
 
 		public void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase, bool isRecursion = false)
@@ -233,9 +237,8 @@ namespace DefaultNamespace
 
 		public void TakeDamageWithCooldown(DamageResult damageResult, GameObject damageSource, float damageCooldown, WeaponBase weaponBase, bool isRecursion = false)
 		{
-			if (!sourceDamageCooldown.ContainsKey(damageSource))
+			if (sourceDamageCooldown.TryAdd(damageSource, damageCooldown))
 			{
-				sourceDamageCooldown.Add(damageSource, damageCooldown);
 				TakeDamage(damageResult, weaponBase, isRecursion);
 				return;
 			}
@@ -315,7 +318,7 @@ namespace DefaultNamespace
 			return _targetTransformCache.position;
 		}
 		
-		private void OnElementInflict(Element element, float damage)
+		private void OnElementInflict(Element element, float damage, float elementalReactionEffectIncrease, ulong clientId)
 		{
 			if (!canBeAfflictedWithElements || element == Element.None || element == Element.Physical || inflictedElements.Contains(element) || (element == Element.Wind && inflictedElements.Count == 0))
 				return;
@@ -330,7 +333,6 @@ namespace DefaultNamespace
 			if (_elementVfxMap.ContainsKey(reactionResult.removedB))
 				_elementVfxMap[reactionResult.removedB].gameObject.SetActive(false);
 
-			var elementalReactionEffectIncrease = PlayerStatsScaler.GetScaler().GetElementalReactionEffectIncreasePercentage();
 			switch (reactionResult.reaction)
 			{
 				case ElementalReaction.None:
@@ -354,7 +356,7 @@ namespace DefaultNamespace
 				{
 					foreach (var resistance in resistances)
 					{
-						resistance.damageReduction *= 0.1f * elementalReactionEffectIncrease;
+						resistances[resistance.Key] *= 0.1f * elementalReactionEffectIncrease;
 					}
 
 					break;
@@ -369,9 +371,9 @@ namespace DefaultNamespace
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
-			
-			ReactionTriggeredEvent.Invoke(reactionResult.reaction, this);
-			MessageManager.instance.PostMessage(reactionResult.reaction.ToString(), _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(element));
+
+			RpcManager.instance.InvokeReactionTriggeredEventRpc(this, reactionResult.reaction, RpcTarget.Single(clientId, RpcTargetUse.Temp));
+			MessageManager.instance.PostMessageRpc(reactionResult.reaction.ToString(), _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(element));
 		}
 	}
 }

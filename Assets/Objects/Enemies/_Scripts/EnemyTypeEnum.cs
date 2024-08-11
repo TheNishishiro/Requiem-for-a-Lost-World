@@ -40,6 +40,8 @@
         StoneLizard = 35,
         ToothShroom = 36,
         TurtleOcti = 37,
-        Sludge = 38
+        Sludge = 38,
+        TheWatcher = 39,
+        Hellborn = 40
     }
 }

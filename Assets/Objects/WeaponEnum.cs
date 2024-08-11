@@ -4,6 +4,7 @@ namespace Objects
 {
     public enum WeaponEnum
     {
+        Unset = 0,
         ArrowRain = 1,
         BindingField = 2,
         BlackHole = 3,

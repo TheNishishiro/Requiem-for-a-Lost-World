@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
+using Data.Elements;
 using DefaultNamespace;
 using Events.Scripts;
 using Objects;
@@ -45,12 +46,28 @@ namespace Managers
         }
         
         [Rpc(SendTo.Server)]
-        public void DealDamageToEnemyRpc(NetworkBehaviourReference  target, float damage)
+        public void DealDamageToEnemyRpc(NetworkBehaviourReference target, float baseDamage, bool isCriticalHit, Element weaponElement, WeaponEnum weaponId, float elementalReactionEffectIncreasePercentage,
+            bool isRecursion, ulong clientId)
         {
             if (target.TryGet(out Damageable damageableComponent))
             {
-                damageableComponent.Health -= damage;
+                damageableComponent.TakeDamageServer(baseDamage, isCriticalHit, weaponElement, weaponId, elementalReactionEffectIncreasePercentage, isRecursion, clientId);
             }
+        }
+        
+        [Rpc(SendTo.SpecifiedInParams)]
+        public void TriggerLifeStealRpc(float calculatedDamage, WeaponEnum weaponId, RpcParams rpcParams)
+        {
+            var weapon = WeaponManager.instance.GetUnlockedWeapon(weaponId);
+            if (weapon.WeaponStatsStrategy == null) return;
+            
+            var lifeSteal = weapon.WeaponStatsStrategy.GetLifeSteal();
+            if (lifeSteal != 0)
+                GameManager.instance.playerComponent.TakeDamage(-calculatedDamage * lifeSteal, true, true);
+
+            var healPerHit = weapon.WeaponStatsStrategy.GetHealPerHit(false);
+            if (healPerHit != 0)
+                GameManager.instance.playerComponent.TakeDamage(-healPerHit, true, true);
         }
 
         [Rpc(SendTo.Everyone)]
@@ -252,6 +269,24 @@ namespace Managers
         public void TempStatIncreaseRpc(StatEnum statEnum, float buffAmount, float buffTime, string buffId, RpcParams rpcParams)
         {
             GameManager.instance.playerStatsComponent.TemporaryStatBoost(buffId, statEnum, buffAmount, buffTime);
+        }
+        
+        [Rpc(SendTo.SpecifiedInParams)]
+        public void InvokeDamageDealtEventRpc(NetworkBehaviourReference damageable, float calculatedDamage, bool isRecursion, WeaponEnum weaponId, RpcParams rpcParams)
+        {
+            if (damageable.TryGet(out Damageable damageableComponent))
+            {
+                DamageDealtEvent.Invoke(damageableComponent, calculatedDamage, isRecursion, weaponId);
+            }
+        }
+        
+        [Rpc(SendTo.SpecifiedInParams)]
+        public void InvokeReactionTriggeredEventRpc(NetworkBehaviourReference damageable, ElementalReaction reactionResultReaction, RpcParams rpcParams)
+        {
+            if (damageable.TryGet(out Damageable damageableComponent))
+            {
+                ReactionTriggeredEvent.Invoke(reactionResultReaction, damageableComponent);
+            }
         }
     }
 }

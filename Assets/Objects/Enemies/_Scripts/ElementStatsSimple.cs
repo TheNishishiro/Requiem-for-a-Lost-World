@@ -4,7 +4,7 @@ using Unity.Netcode;
 
 namespace Objects.Enemies
 {
-    [System.Serializable]
+    [Serializable]
     public struct ElementStatsSimple : INetworkSerializeByMemcpy, IEquatable<ElementStatsSimple>
     {
         public Element element;

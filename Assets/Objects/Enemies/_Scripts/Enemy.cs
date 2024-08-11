@@ -72,6 +72,7 @@ namespace Objects.Enemies
 		public override void OnNetworkDespawn()
 		{
 			enemyType.OnValueChanged -= OnTypeChange;
+			isGrandOcti.OnValueChanged -= OnBossChanged;
 		}
 
 		private void OnTypeChange(EnemyTypeEnum oldType, EnemyTypeEnum newType)

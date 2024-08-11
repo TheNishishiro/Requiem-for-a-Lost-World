@@ -92,7 +92,7 @@ namespace Objects.Characters.Special
             }
         }
 
-        public void OnDamageDealt(Damageable damageable, float damage, bool isRecursion)
+        public void OnDamageDealt(Damageable damageable, float damage, bool isRecursion, WeaponEnum? weaponId)
         {
             if (isRecursion || !GameData.IsCharacterRank(CharacterRank.E1)) return;
             var baseDamage = damage * 0.5f;
