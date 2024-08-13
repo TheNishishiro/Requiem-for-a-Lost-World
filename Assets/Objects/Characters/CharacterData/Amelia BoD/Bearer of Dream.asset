@@ -29,7 +29,8 @@ MonoBehaviour:
   AbilityDescription: Shoot a projectile ahead that travels a certain distance and
     explodes causing damage in a huge area
   AbilityCooldown: 30
-  SpecialPrefab: {fileID: 0}
+  SpecialPrefab: {fileID: 8464646911310204931, guid: 9e49daf32ecb0c94e9e3aabed95285d6,
+    type: 3}
   AbilityPrefab: {fileID: 4238375383337323453, guid: 7197088e9865c2d498b163f4bd80c079,
     type: 3}
   AchievementListenerPrefab: {fileID: 0}
@@ -46,8 +47,8 @@ MonoBehaviour:
     Health: 50
     HealthMax: 50
     SpecialValue: 0
-    SpecialMax: 0
-    SpecialIncrease: 0
+    SpecialMax: 100
+    SpecialIncrease: 1
     MagnetSize: 1
     CooldownReduction: 0
     CooldownReductionPercentage: 0
@@ -93,6 +94,8 @@ MonoBehaviour:
     EarthDamageIncrease: 0
     DashCount: 2
     Stamina: 2
+    ElementalReactionEffectIncreasePercentage: 0
+    FollowUpDamageIncrease: 0
   skillNodes:
   - {fileID: 11400000, guid: 7362ee93671c0f741af3c3b925fbb41c, type: 2}
   - {fileID: 11400000, guid: 8cca5293e003f9e49819e9f959579c71, type: 2}

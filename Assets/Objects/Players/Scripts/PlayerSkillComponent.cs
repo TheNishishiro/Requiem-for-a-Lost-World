@@ -188,6 +188,8 @@ namespace Objects.Players.Scripts
 				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Chornastra_BoR)
 				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
+			if (GameData.GetPlayerCharacterId() == CharactersEnum.Amelia_BoD)
+				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
 		}
 
 		private void UseSkill(CharactersEnum activeCharacterId)

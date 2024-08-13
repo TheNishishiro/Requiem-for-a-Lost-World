@@ -31,7 +31,7 @@ public class WeaponManager : NetworkBehaviour
     public Dictionary<WeaponEnum, GameObject> weaponProjectilePrefabs;
     private List<WeaponToggleableEntry> availableWeapons;
     private List<ItemToggleableEntry> availableItems;
-    private List<WeaponBase> _unlockedWeapons;
+    private Dictionary<WeaponEnum, WeaponBase> _unlockedWeapons;
     private List<ItemBase> _unlockedItems;
     public int maxWeaponCount = 6;
     public int maxItemCount = 6;
@@ -55,7 +55,7 @@ public class WeaponManager : NetworkBehaviour
         if (_isInitialized) return;
         _isInitialized = true;
         _saveFile = FindAnyObjectByType<SaveFile>();
-        _unlockedWeapons = new List<WeaponBase>();
+        _unlockedWeapons = new Dictionary<WeaponEnum, WeaponBase>();
         _unlockedItems = new List<ItemBase>();
         weaponProjectilePrefabs = new Dictionary<WeaponEnum, GameObject>();
 
@@ -80,7 +80,7 @@ public class WeaponManager : NetworkBehaviour
         var weaponGameObject = Instantiate(weapon, _weaponContainer);
         weaponGameObject.ApplyRarity(rarity);
         availableWeapons.RemoveAll(x => x.weaponBase == weapon);
-        _unlockedWeapons.Add(weaponGameObject);
+        _unlockedWeapons.TryAdd(weaponGameObject.WeaponId, weaponGameObject);
         weaponGameObject.ActivateWeapon();
         WeaponUnlockedEvent.Invoke(weapon, rarity);
         AchievementManager.instance.OnWeaponUnlocked(weapon, _unlockedWeapons.Count, rarity);
@@ -115,7 +115,7 @@ public class WeaponManager : NetworkBehaviour
     
     public List<IPlayerItem> GetUnlockedWeaponsAsInterface()
     {
-        return _unlockedWeapons.Cast<IPlayerItem>().ToList();
+        return _unlockedWeapons.Select(x => x.Value).Cast<IPlayerItem>().ToList();
     }
     
     public List<IPlayerItem> GetUnlockedItemsAsInterface()
@@ -137,8 +137,8 @@ public class WeaponManager : NetworkBehaviour
     {
         return _unlockedWeapons.Select(unlockedWeapon => new UpgradeEntry()
         {
-            Weapon = unlockedWeapon,
-            Upgrade = unlockedWeapon.GetAvailableUpgrades().FirstOrDefault(),
+            Weapon = unlockedWeapon.Value,
+            Upgrade = unlockedWeapon.Value.GetAvailableUpgrades().FirstOrDefault(),
             ChanceOfAppearance = 1
         }).Where(x => x.Upgrade != null);
     }
@@ -188,12 +188,12 @@ public class WeaponManager : NetworkBehaviour
     {
         foreach (var weapon in _unlockedWeapons)
         {
-            weapon.ReduceCooldown(reductionPercentage);
+            weapon.Value.ReduceCooldown(reductionPercentage);
         }
     }
 
     public WeaponBase GetUnlockedWeapon(WeaponEnum weaponId)
     {
-        return _unlockedWeapons.FirstOrDefault(x => x.WeaponId == weaponId);
+        return _unlockedWeapons[weaponId];
     }
 }

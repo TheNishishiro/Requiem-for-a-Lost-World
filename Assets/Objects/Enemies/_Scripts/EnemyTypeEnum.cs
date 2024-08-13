@@ -47,6 +47,7 @@
         HopGoblin = 42,
         FlameDig = 43,
         FirstFlame = 44,
-        LizardBrute = 45
+        LizardBrute = 45,
+        MudDemon = 46
     }
 }

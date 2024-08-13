@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 521073760144872126}
   - component: {fileID: 7675444499631553220}
   - component: {fileID: 8352175131217296486}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4775,6 +4775,9 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4843,7 +4846,7 @@ GameObject:
   - component: {fileID: 8928920536633518920}
   - component: {fileID: -4520040666531008762}
   - component: {fileID: 8635417654957174770}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BoF Skill Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4878,9 +4881,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e5c466000041ccb23acd65264f767c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  State: 0
+  networkProjectile: {fileID: 0}
+  transformCache: {fileID: 0}
   UseParticles: 0
   ParticleSystem: {fileID: 0}
+  disableHitbox: 0
   hitbox: {fileID: 8635417654957174770}
   spawningStage:
     stageObject: {fileID: 0}
@@ -4902,6 +4907,7 @@ MonoBehaviour:
   reduceSizeBeforeTime: 0
   targetMinSize: {x: 0, y: 0, z: 0}
   multiplyTargetByScale: 0
+  dontTickLifeTime: 0
   LifeTime: 5
 --- !u!135 &8635417654957174770
 SphereCollider:
@@ -4935,7 +4941,7 @@ GameObject:
   - component: {fileID: 6700255238667511422}
   - component: {fileID: 6375348096481224185}
   - component: {fileID: 7983958632822303330}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4975,6 +4981,9 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
