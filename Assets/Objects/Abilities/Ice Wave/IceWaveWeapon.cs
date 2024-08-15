@@ -29,12 +29,6 @@ namespace Objects.Abilities.Ice_Wave
 				waveCount += 1;
 		}
 
-		protected override bool ProjectileSpawn(IceWaveProjectile projectile)
-		{
-			
-			return true;
-		}
-
 		public override void SetupProjectile(NetworkProjectile networkProjectile)
 		{
 			var currentScaleModifier = WeaponStatsStrategy.GetScale() * (scaleChangePerWave * _currentWaveIndex);

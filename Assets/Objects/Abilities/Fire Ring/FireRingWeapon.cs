@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DefaultNamespace.Data.Weapons;
+using UnityEngine;
 using Weapons;
 
 namespace Objects.Abilities.Fire_Ring
@@ -10,7 +11,7 @@ namespace Objects.Abilities.Fire_Ring
         public bool IsInfernoTrail   { get; set; }
         private int _enemiesKilled = 0;
 
-        public override void SetupProjectile(NetworkProjectile networkProjectile)
+        public override void SetupProjectile(NetworkProjectile networkProjectile, WeaponPoolEnum weaponPoolId)
         {
             networkProjectile.Initialize(this, transform.position);
         }

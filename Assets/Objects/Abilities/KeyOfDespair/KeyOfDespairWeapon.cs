@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using DefaultNamespace.Data.Weapons;
 using Managers;
 using Objects.Abilities.Boomerang;
 using Objects.Characters;
@@ -28,7 +29,7 @@ namespace Objects.Abilities.KeyOfDespair
             OnAttackStart();
             if (_slashProjectile == null)
             {
-                RpcManager.instance.FireProjectileRpc(WeaponId, transform.position, NetworkManager.Singleton.LocalClientId);
+                RpcManager.instance.FireProjectileRpc(WeaponId, transform.position, NetworkManager.Singleton.LocalClientId, WeaponPoolEnum.Main);
                 yield return new WaitForSeconds(WeaponStatsStrategy.GetDuplicateSpawnDelay());
             }
             var projectile = _slashProjectile.GetProjectile<SlashProjectile>();

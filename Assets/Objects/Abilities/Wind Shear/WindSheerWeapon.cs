@@ -15,17 +15,6 @@ namespace Objects.Abilities.Wind_Shear
     {
         public bool IsHurricaneWrath;
 
-        protected override bool ProjectileSpawn(WindShearProjectile projectile)
-        {
-            var enemy = EnemyManager.instance.GetRandomEnemy();
-            if (enemy == null)
-                return false;
-
-            projectile.transform.position = enemy.TargetPoint.position;
-            projectile.SetParentWeapon(this);
-            return true;
-        }
-
         public override void SetupProjectile(NetworkProjectile networkProjectile)
         {
             var enemy = EnemyManager.instance.GetRandomEnemy();

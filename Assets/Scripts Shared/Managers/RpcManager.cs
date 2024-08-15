@@ -4,6 +4,7 @@ using System.Linq;
 using Cinemachine;
 using Data.Elements;
 using DefaultNamespace;
+using DefaultNamespace.Data.Weapons;
 using Events.Scripts;
 using Objects;
 using Objects.Abilities;
@@ -155,31 +156,32 @@ namespace Managers
         }
         
         [Rpc(SendTo.Server)]
-        public void FireProjectileRpc(WeaponEnum weaponId, Vector3 spawnPosition, ulong clientId)
+        public void FireProjectileRpc(WeaponEnum weaponId, Vector3 spawnPosition, ulong clientId, WeaponPoolEnum weaponPoolId)
         {
-            var projectile = NetworkObjectPool.Singleton.GetNetworkObject(WeaponManager.instance.weaponProjectilePrefabs[weaponId], spawnPosition, Quaternion.identity);
+            var prefab = WeaponManager.instance.GetWeapon(weaponId).GetProjectile(weaponPoolId);
+            var projectile = NetworkObjectPool.Singleton.GetNetworkObject(prefab, spawnPosition, Quaternion.identity);
             var netObj = projectile.GetComponent<NetworkObject>();
             netObj.SpawnWithOwnership(clientId);
-            
-            FireProjectileRpc(weaponId, netObj.GetComponent<NetworkProjectile>(), RpcTarget.Single(clientId, RpcTargetUse.Temp));
+            FireProjectileRpc(weaponId, weaponPoolId, netObj.GetComponent<NetworkProjectile>(), RpcTarget.Single(clientId, RpcTargetUse.Temp));
         }        
         
         [Rpc(SendTo.SpecifiedInParams)]
-        public void FireProjectileRpc(WeaponEnum weaponId, NetworkBehaviourReference objectReference, RpcParams rpcParams)
+        public void FireProjectileRpc(WeaponEnum weaponId, WeaponPoolEnum weaponPoolId, NetworkBehaviourReference objectReference, RpcParams rpcParams)
         {
             if (objectReference.TryGet(out NetworkProjectile networkProjectile))
             {
                 var unlockedWeapon = WeaponManager.instance.GetUnlockedWeapon(weaponId);
-                unlockedWeapon.SetupProjectile(networkProjectile);
+                unlockedWeapon.SetupProjectile(networkProjectile, weaponPoolId);
             }
         }
         
         [Rpc(SendTo.Server)]
-        public void DespawnProjectileRpc(NetworkObjectReference networkObjectReference, WeaponEnum weaponId)
+        public void DespawnProjectileRpc(NetworkObjectReference networkObjectReference, WeaponEnum weaponId, WeaponPoolEnum weaponPoolId)
         {
             if (networkObjectReference.TryGet(out var networkObject))
             {
-                NetworkObjectPool.Singleton.ReturnNetworkObject(networkObject, WeaponManager.instance.weaponProjectilePrefabs[weaponId]);
+                var prefab = WeaponManager.instance.GetWeapon(weaponId).GetProjectile(weaponPoolId);
+                NetworkObjectPool.Singleton.ReturnNetworkObject(networkObject, prefab);
                 networkObject.Despawn(false);
             }
         }   

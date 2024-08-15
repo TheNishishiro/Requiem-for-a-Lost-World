@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Data.Elements;
@@ -9,6 +10,7 @@ using DefaultNamespace.Data.Weapons;
 using Interfaces;
 using Managers;
 using NaughtyAttributes;
+using NUnit.Framework;
 using Objects;
 using Objects.Abilities;
 using Objects.Items;
@@ -24,6 +26,7 @@ namespace Weapons
 	{
 		[SerializeField] public bool useNetworkPool;
 		[SerializeField] public GameObject spawnPrefab;
+		[SerializeField] public GameObject spawnSubPrefab;
 		[SerializeField] public WeaponEnum WeaponId;
 		[SerializeField] public AttackType attackType;
 		[SerializeField] public string Name;
@@ -167,9 +170,37 @@ namespace Weapons
 		{
 		}
 
+		[Obsolete("Use override with pool id instead")]
 		public virtual void SetupProjectile(NetworkProjectile networkProjectile)
 		{
 			
+		}
+
+		public virtual void SetupProjectile(NetworkProjectile networkProjectile, WeaponPoolEnum weaponPoolId)
+		{
+			if (weaponPoolId == WeaponPoolEnum.Main)
+				SetupProjectile(networkProjectile);
+		}
+
+		public virtual GameObject GetProjectile(WeaponPoolEnum weaponPoolEnum)
+		{
+			return weaponPoolEnum == WeaponPoolEnum.Main ? spawnPrefab : spawnSubPrefab;
+		}
+
+		private void OnValidate()
+		{
+			if (spawnPrefab != null)
+			{
+				var networkProjectile = spawnPrefab.GetComponent<NetworkProjectile>();
+				Assert.IsNotNull(networkProjectile, $"Weapon {NameField}: spawn prefab \"{spawnPrefab.name}\" has no {nameof(NetworkProjectile)} component.");
+				Assert.IsTrue(networkProjectile.DesignedPoolId == WeaponPoolEnum.Main, $"Weapon {NameField}: spawn prefab \"{spawnPrefab.name}\" must have weapon type set to MAIN");
+			}
+			if (spawnSubPrefab != null)
+			{
+				var networkProjectile = spawnSubPrefab.GetComponent<NetworkProjectile>();
+				Assert.IsNotNull(networkProjectile, $"Weapon {NameField}: spawn prefab \"{spawnSubPrefab.name}\" has no {nameof(NetworkProjectile)} component.");
+				Assert.IsTrue(networkProjectile.DesignedPoolId == WeaponPoolEnum.Sub, $"Weapon {NameField}: spawn prefab \"{spawnSubPrefab.name}\" must have weapon type set to SUB");
+			}
 		}
 	}
 }

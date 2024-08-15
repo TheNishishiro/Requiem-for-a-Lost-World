@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
+using DefaultNamespace.Data.Weapons;
 using Managers;
 using Objects.Abilities;
 using Objects.Abilities.Magic_Ball;
@@ -18,7 +19,7 @@ public class FireBallWeapon : PoolableWeapon<FireBallProjectile>
     [SerializeField] private AudioClip fireballSpawnSound;
     private int enemiesKilled = 0;
 
-    public override void SetupProjectile(NetworkProjectile networkProjectile)
+    public override void SetupProjectile(NetworkProjectile networkProjectile, WeaponPoolEnum weaponPoolId)
     {
         var closestTarget = Utilities.FindClosestEnemy(transform.position, EnemyManager.instance.GetActiveEnemies(), out var distanceToClosest);
         if (closestTarget is null)

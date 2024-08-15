@@ -28,7 +28,6 @@ public class WeaponManager : NetworkBehaviour
     [SerializeField] private ItemContainer items;
     [SerializeField] private PlayerStatsComponent _playerStatsComponent;
     private Transform _weaponContainer;
-    public Dictionary<WeaponEnum, GameObject> weaponProjectilePrefabs;
     private List<WeaponToggleableEntry> availableWeapons;
     private List<ItemToggleableEntry> availableItems;
     private Dictionary<WeaponEnum, WeaponBase> _unlockedWeapons;
@@ -57,13 +56,8 @@ public class WeaponManager : NetworkBehaviour
         _saveFile = FindAnyObjectByType<SaveFile>();
         _unlockedWeapons = new Dictionary<WeaponEnum, WeaponBase>();
         _unlockedItems = new List<ItemBase>();
-        weaponProjectilePrefabs = new Dictionary<WeaponEnum, GameObject>();
 
         availableWeapons = weapons.GetWeapons();
-        foreach (var availableWeapon in availableWeapons)
-        {
-            weaponProjectilePrefabs.TryAdd(availableWeapon.weaponBase.WeaponId, availableWeapon.weaponBase.spawnPrefab);
-        }
         
         availableItems = items.GetItems();
     }
@@ -195,5 +189,10 @@ public class WeaponManager : NetworkBehaviour
     public WeaponBase GetUnlockedWeapon(WeaponEnum weaponId)
     {
         return _unlockedWeapons[weaponId];
+    }
+
+    public WeaponBase GetWeapon(WeaponEnum weaponId)
+    {
+        return weapons.GetWeapon(weaponId);
     }
 }

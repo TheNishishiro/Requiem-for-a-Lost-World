@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Objects.Abilities;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -13,9 +14,9 @@ public class NetworkObjectPool : NetworkBehaviour
     [SerializeField]
     List<PoolConfigObject> PooledPrefabsList;
 
-    HashSet<GameObject> m_Prefabs = new HashSet<GameObject>();
+    HashSet<GameObject> m_Prefabs = new ();
 
-    Dictionary<GameObject, ObjectPool<NetworkObject>> m_PooledObjects = new Dictionary<GameObject, ObjectPool<NetworkObject>>();
+    Dictionary<GameObject, ObjectPool<NetworkObject>> m_PooledObjects = new ();
 
     public void Awake()
     {

@@ -2,6 +2,7 @@
 using Data.Elements;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
+using DefaultNamespace.Data.Weapons;
 using Interfaces;
 using Managers;
 using Objects.Characters;
@@ -30,7 +31,7 @@ namespace Objects.Abilities.Corruption_Aura
 		{
 			if (!isProjectileSpawned)
 			{
-				RpcManager.instance.FireProjectileRpc(WeaponId, transform.position, NetworkManager.Singleton.LocalClientId);
+				RpcManager.instance.FireProjectileRpc(WeaponId, transform.position, NetworkManager.Singleton.LocalClientId, WeaponPoolEnum.Main);
 			}
 		}
 	}

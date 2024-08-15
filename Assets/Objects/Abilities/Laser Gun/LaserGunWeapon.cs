@@ -2,6 +2,7 @@
 using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
+using DefaultNamespace.Data.Weapons;
 using Managers;
 using Objects.Characters;
 using Objects.Players.Scripts;
@@ -33,7 +34,7 @@ namespace Objects.Abilities.Laser_Gun
 			}
 		}
 
-		public override void SetupProjectile(NetworkProjectile networkProjectile)
+		public override void SetupProjectile(NetworkProjectile networkProjectile, WeaponPoolEnum weaponPoolId)
 		{
 			var position = transform.position;
 			var worldPosition = new Vector3(

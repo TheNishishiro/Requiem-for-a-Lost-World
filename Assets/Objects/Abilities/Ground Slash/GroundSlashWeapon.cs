@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using DefaultNamespace;
+using DefaultNamespace.Data.Weapons;
 using Managers;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -24,7 +25,7 @@ namespace Objects.Abilities.Ground_Slash
 			}
 		}
 
-		public override void SetupProjectile(NetworkProjectile networkProjectile)
+		public override void SetupProjectile(NetworkProjectile networkProjectile, WeaponPoolEnum weaponPoolId)
 		{
 			var playerTransform = GameManager.instance.PlayerTransform;
 			var playerPosition = transform.position;

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using DefaultNamespace;
+using DefaultNamespace.Data.Weapons;
 using Managers;
 using Objects.Abilities.SpaceExpansionBall;
 using UnityEngine;
@@ -60,7 +61,7 @@ namespace Objects.Abilities.Bouncer
 			_subProjectilePool.Get();
 		}
 		
-		public override void SetupProjectile(NetworkProjectile networkProjectile)
+		public override void SetupProjectile(NetworkProjectile networkProjectile, WeaponPoolEnum weaponPoolEnum)
 		{
 			var currentPosition = transform.position;
 			var target = EnemyManager.instance.GetRandomEnemy().GetDamagableComponent();

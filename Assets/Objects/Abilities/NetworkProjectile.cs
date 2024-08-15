@@ -1,4 +1,5 @@
-﻿using Managers;
+﻿using DefaultNamespace.Data.Weapons;
+using Managers;
 using Objects.Abilities.Katana;
 using Unity.Mathematics;
 using Unity.Netcode;
@@ -15,6 +16,7 @@ namespace Objects.Abilities
         [SerializeField] public StagableProjectile projectile;
         [SerializeField] public NetworkObject networkObject;
         [SerializeField] private NetworkTransform networkTransport;
+        public WeaponPoolEnum DesignedPoolId => projectile.projectileTypeId;
         private NetworkVariable<ProjectileState> networkProjectileState = new (ProjectileState.Unspecified, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         public override void OnNetworkSpawn()
@@ -43,7 +45,7 @@ namespace Objects.Abilities
 
         public void Despawn(WeaponEnum weaponId)
         {
-            RpcManager.instance.DespawnProjectileRpc(networkObject, weaponId);
+            RpcManager.instance.DespawnProjectileRpc(networkObject, weaponId, DesignedPoolId);
         }
 
         public void Initialize(WeaponBase weapon, Vector3 position, bool activateLast = true)

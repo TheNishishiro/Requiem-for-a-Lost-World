@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using DefaultNamespace;
+using DefaultNamespace.Data.Weapons;
 using Events.Handlers;
 using Events.Scripts;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Objects.Abilities.Low_Pressure
         private Vector3 _targetPosition;
         private bool _canAttack;
         
-        public override void SetupProjectile(NetworkProjectile networkProjectile)
+        public override void SetupProjectile(NetworkProjectile networkProjectile, WeaponPoolEnum weaponPoolId)
         {
             if (_targetPosition == Vector3.zero)
                 return;

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using DefaultNamespace;
+using DefaultNamespace.Data.Weapons;
 using Managers;
 using Objects.Abilities.Magic_Ball;
 using Objects.Abilities.SpaceExpansionBall;
@@ -59,7 +60,7 @@ namespace Objects.Abilities.Book
 			_subProjectilePool.Get();
 		}
 
-		public override void SetupProjectile(NetworkProjectile networkProjectile)
+		public override void SetupProjectile(NetworkProjectile networkProjectile, WeaponPoolEnum weaponPoolId)
 		{
 			var position = transform.position + new Vector3(WeaponStatsStrategy.GetScale(),0,0);
 			networkProjectile.Initialize(this, position);

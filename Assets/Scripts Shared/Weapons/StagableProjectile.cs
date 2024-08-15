@@ -1,4 +1,5 @@
 ﻿using DefaultNamespace.Data.VFX_Stages;
+using DefaultNamespace.Data.Weapons;
 using Interfaces;
 using NaughtyAttributes;
 using Objects.Abilities;
@@ -51,6 +52,7 @@ namespace Weapons
         [ShowIf("isChangeSizeOverLife")]
         [SerializeField] public bool multiplyTargetByScale;
         [SerializeField] private bool dontTickLifeTime;
+        [SerializeField] public WeaponPoolEnum projectileTypeId = WeaponPoolEnum.Main;
         private Vector3 calculatedAnimationTargetSize;
         private bool _isInitialized;
         

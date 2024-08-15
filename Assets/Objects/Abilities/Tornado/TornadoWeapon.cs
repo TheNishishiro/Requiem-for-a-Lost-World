@@ -1,6 +1,7 @@
 ﻿using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
+using DefaultNamespace.Data.Weapons;
 using Managers;
 using Managers.StageEvents;
 using Objects.Abilities.Lightning_Chain;

@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5073014423543598328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2139085337900254397}
+  - component: {fileID: 6506375473384971604}
+  m_Layer: 0
+  m_Name: Portal Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2139085337900254397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5073014423543598328}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.8534384, y: -0.71259135, z: -0.17382379}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6506375473384971604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5073014423543598328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e1374aba6a4779901c20da6016f22d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useNetworkPool: 1
+  spawnPrefab: {fileID: 2317291404711181935, guid: cc94f28b168ef3a4ebc8ddba90ec1664,
+    type: 3}
+  spawnSubPrefab: {fileID: 4567262743867813928, guid: d9826329f29cbf540a995f047bd207b6,
+    type: 3}
+  WeaponId: 36
+  attackType: 3
+  Name: Flame From Beyond
+  Description: Upon dealing damage to enemies summon a portal that shoots a beam
+    of fire at the damaged enemy
+  chanceToAppear: 0.8
+  Icon: {fileID: 0}
+  unlockOnAchievement: 0
+  requiredAchievement: 0
+  element: 2
+  weaponStats:
+    Damage: 5
+    Cooldown: 0
+    CooldownReduction: 0
+    Scale: 1
+    Speed: 20
+    TimeToLive: 0.5
+    AttackCount: 1
+    PassThroughCount: 0
+    DamageCooldown: 0
+    DuplicateSpawnDelay: 0.15
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
+    LifeSteal: 0
+    FollowUpDamageIncrease: 0
+  availableUpgrades: []
+  isSkill: 0
