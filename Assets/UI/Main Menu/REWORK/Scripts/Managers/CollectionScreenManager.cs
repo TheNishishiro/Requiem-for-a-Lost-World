@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Data.Elements;
+using DefaultNamespace.Attributes;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using DefaultNamespace.Data.Collection;
+using DefaultNamespace.Data.Weapons;
 using Interfaces;
 using Managers;
 using NaughtyAttributes;
@@ -44,9 +47,12 @@ namespace UI.Main_Menu.REWORK.Scripts
         [Space]
         [BoxGroup("Side Panel")] [SerializeField] private GameObject sidePanel;
         [BoxGroup("Side Panel")] [SerializeField] private TextMeshProUGUI labelTitle;
+        [BoxGroup("Side Panel")] [SerializeField] private TextMeshProUGUI labelWeaponTypeTitle;
+        [BoxGroup("Side Panel")] [SerializeField] private TextMeshProUGUI labelWeaponElementTitle;
         [BoxGroup("Side Panel")] [SerializeField] private TextMeshProUGUI labelDescription;
         [BoxGroup("Side Panel")] [SerializeField] private TextMeshProUGUI labelUnlock;
         [BoxGroup("Side Panel")] [SerializeField] private TextMeshProUGUI labelUnlockDescription;
+        [BoxGroup("Side Panel")] [SerializeField] private Image imageWeaponElement;
         
         private List<CollectionEntry> _collectionEntries;
         private int _currentSectionId;
@@ -130,11 +136,26 @@ namespace UI.Main_Menu.REWORK.Scripts
             _collectionEntries.ForEach(x => x.VisibleState(state));
         }
 
-        public void Display(string title, string description, string achievementRequirements, bool isUnlocked)
+        public void Display(string title, string description, string achievementRequirements, bool isUnlocked, Element weaponElement = Element.Disabled, AttackType attackType = AttackType.None)
         {
             sidePanel.SetActive(true);
             labelTitle.text = isUnlocked ? title : "???";
             labelDescription.text = description;
+
+            var isElementSelected = weaponElement != Element.Disabled;
+            var isAttackTypeSelected = attackType != AttackType.None;
+            imageWeaponElement.gameObject.SetActive(isElementSelected);
+            labelWeaponTypeTitle.gameObject.SetActive(isAttackTypeSelected);
+            if (isElementSelected)
+            {
+                labelWeaponElementTitle.text = weaponElement.ToString();
+                imageWeaponElement.color = ElementService.ElementToColor(weaponElement);
+            }
+
+            if (isAttackTypeSelected)
+            {
+                labelWeaponTypeTitle.text = attackType.GetStringValue();
+            }
 
             labelUnlock.gameObject.SetActive(!isUnlocked);
             labelUnlockDescription.gameObject.SetActive(!isUnlocked);

@@ -72,7 +72,9 @@ namespace UI.Main_Menu.REWORK.Scripts
                 _currentItem.NameField,
                 _currentItem.GetDescription(1),
                 _currentItem.RequiredAchievementField?.GetDescription(),
-                _currentItem.IsUnlocked(SaveFile.Instance));
+                _currentItem.IsUnlocked(SaveFile.Instance),
+                _currentItem.ElementField,
+                _currentItem.AttackTypeField);
         }
         
         private void ShowShardDetails()

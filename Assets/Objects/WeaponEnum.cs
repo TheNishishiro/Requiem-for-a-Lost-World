@@ -40,6 +40,7 @@ namespace Objects
         RockRain = 33,
         LowPressure = 34,
         WindProjectile = 35,
-        Portal = 36
+        Portal = 36,
+        WindSucc = 37
     }
 }

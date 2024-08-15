@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Data.Difficulty;
 using DefaultNamespace.Attributes;
+using DefaultNamespace.Data.Modals;
 using Interfaces;
 using Managers;
 using NaughtyAttributes;
 using Objects.Stage;
 using TMPro;
+using UI.Main_Menu.REWORK.Scripts;
 using Unity.Netcode;
 using Unity.VectorGraphics;
 using UnityEngine;
@@ -130,17 +132,25 @@ public class GameSettingsScreenManager : MonoBehaviour, IStackableWindow
 
     private IEnumerator StartLevelCoroutine(StageEnum currentStage)
     {
-        if (!NetworkManager.Singleton.ShutdownInProgress)
-            NetworkManager.Singleton.Shutdown();
+        try
+        {
+            ModalManager.instance.Open(ButtonCombination.None, "Loading", "Loading the level...", modalState: ModalState.Info);
+            if (!NetworkManager.Singleton.ShutdownInProgress)
+                NetworkManager.Singleton.Shutdown();
 
-        while (NetworkManager.Singleton.ShutdownInProgress);
+            while (NetworkManager.Singleton.ShutdownInProgress);
 
-        NetworkingContainer.IsHostPlayer = true;
-        AudioManager.instance.PlayButtonConfirmClick();
-        SceneManager.LoadScene(currentStage.GetStringValue(), LoadSceneMode.Single);
-        SceneManager.LoadScene("Scenes/Essential", LoadSceneMode.Additive);
+            NetworkingContainer.IsHostPlayer = true;
+            AudioManager.instance.PlayButtonConfirmClick();
+            SceneManager.LoadScene(currentStage.GetStringValue(), LoadSceneMode.Single);
+            SceneManager.LoadScene("Scenes/Essential", LoadSceneMode.Additive);
 			
-        yield break;
+            yield break;
+        }
+        catch (Exception e)
+        {
+            ModalManager.instance.Open(ButtonCombination.None, "Loading", $"Failed to load the game: {e.Message}", modalState: ModalState.Error);
+        }
     }
     
     public bool IsInFocus { get; set; }

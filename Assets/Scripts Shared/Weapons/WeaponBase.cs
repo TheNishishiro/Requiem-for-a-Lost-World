@@ -48,6 +48,7 @@ namespace Weapons
 		public Sprite IconField => Icon;
 		public int LevelField { get; private set; } = 1;
 		public Element ElementField => element;
+		public AttackType AttackTypeField => attackType;
 		public IWeaponStatsStrategy WeaponStatsStrategy { get; set; }
 
 		[HideInInspector] public bool isSkill;

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Data.Elements;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
+using DefaultNamespace.Data.Weapons;
 using Interfaces;
 using NaughtyAttributes;
 using UnityEngine;
@@ -29,6 +30,7 @@ namespace Objects.Items
 		public Sprite IconField => Icon;
 		public int LevelField { get; private set; } = 1;
 		public Element ElementField => Element.Disabled;
+		public AttackType AttackTypeField => AttackType.None;
 
 		public bool IsItem => true;
 		public AchievementEnum? RequiredAchievementField => unlockOnAchievement ? requiredAchievement : null;
