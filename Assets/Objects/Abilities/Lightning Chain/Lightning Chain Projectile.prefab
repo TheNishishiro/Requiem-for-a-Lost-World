@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5262493808618134761}
   - component: {fileID: 7856564117222183924}
+  - component: {fileID: 1584574086717268976}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -50,10 +51,13 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 19ce592e80d400f45a00807b604eaab1, type: 2}
+  - {fileID: 2100000, guid: 7c81069940a1382469deace3d30fbe18, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,18 +101,18 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0.4669811, g: 0.7052721, b: 1, a: 1}
+      key1: {r: 0.6179246, g: 0.78873485, b: 1, a: 1}
+      key2: {r: 0.6497419, g: 0.7520812, b: 0.8773585, a: 0}
+      key3: {r: 0.33490568, g: 0.6322422, b: 1, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
-      ctime2: 0
-      ctime3: 0
+      ctime1: 21974
+      ctime2: 42405
+      ctime3: 65535
       ctime4: 0
       ctime5: 0
       ctime6: 0
@@ -122,13 +126,13 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
-      m_NumColorKeys: 2
+      m_ColorSpace: 0
+      m_NumColorKeys: 4
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 2
+    textureMode: 1
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
@@ -136,6 +140,18 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 0
+--- !u!114 &1584574086717268976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469331175773109920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c5dbbb1030d96d438905b0e01caa8d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6496525642434034257
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,21 +198,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e87b3e3a5c6a4109baaf2bb043dd9261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  networkProjectile: {fileID: 0}
+  transformCache: {fileID: 0}
   UseParticles: 0
   ParticleSystem: {fileID: 0}
+  disableHitbox: 0
   hitbox: {fileID: 19568055010760131}
   spawningStage:
     stageObject: {fileID: 0}
     stageDuration: 0
+    particleSystems: []
   flyingStage:
     stageObject: {fileID: 469331175773109920}
     stageDuration: 0
+    particleSystems: []
   dissipationStage:
     stageObject: {fileID: 0}
     stageDuration: 0
+    particleSystems: []
   isLimitedHitBox: 0
   hitBoxDuration: 0
   hitBoxStart: 0
+  isChangeSizeOverLife: 0
+  increaseSizeUntilTime: 0
+  reduceSizeBeforeTime: 0
+  targetMinSize: {x: 0, y: 0, z: 0}
+  multiplyTargetByScale: 0
+  dontTickLifeTime: 0
+  projectileTypeId: 0
   lineRenderer: {fileID: 7856564117222183924}
 --- !u!65 &19568055010760131
 BoxCollider:

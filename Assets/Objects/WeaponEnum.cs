@@ -41,6 +41,7 @@ namespace Objects
         LowPressure = 34,
         WindProjectile = 35,
         Portal = 36,
-        WindSucc = 37
+        WindSucc = 37,
+        Claw = 38
     }
 }
