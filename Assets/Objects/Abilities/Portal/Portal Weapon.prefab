@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5073014423543598328}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.8534384, y: -0.71259135, z: -0.17382379}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -69,7 +69,7 @@ MonoBehaviour:
     AttackCount: 1
     PassThroughCount: 0
     DamageCooldown: 0
-    DuplicateSpawnDelay: 0.15
+    DuplicateSpawnDelay: 1
     DetectionRange: 0
     CritRate: 0
     CritDamage: 0
@@ -81,5 +81,14 @@ MonoBehaviour:
     DamageOverTimeFrequency: 0
     LifeSteal: 0
     FollowUpDamageIncrease: 0
-  availableUpgrades: []
+  availableUpgrades:
+  - {fileID: 11400000, guid: 2fbcacc6569563741843a6e66dee83f1, type: 2}
+  - {fileID: 11400000, guid: 723f0c2144aa5bd4e97f40634609db73, type: 2}
+  - {fileID: 11400000, guid: 684d609a04b48c9469f851d1764feb9b, type: 2}
+  - {fileID: 11400000, guid: 989a50b3633cdb5409b1c1db75ea1fd4, type: 2}
+  - {fileID: 11400000, guid: 847e8e0eedcd251439813de69297a2b4, type: 2}
+  - {fileID: 11400000, guid: f4fa3384de4394042b622474b25fd8c6, type: 2}
+  - {fileID: 11400000, guid: cc81774bdba998a499e8b3e7d7e48ad9, type: 2}
+  - {fileID: 11400000, guid: 227c738129e49dc48850a730a9dd80c1, type: 2}
+  - {fileID: 11400000, guid: 79aa4195ca308644d93dd9a8ff8ec401, type: 2}
   isSkill: 0

@@ -47,6 +47,14 @@ namespace Objects.Abilities
             return damageResult;
         }
 
+        public virtual float GetDamageOverTime(float damageIncrease = 0)
+        {
+            var nonCritDamage = GetDamageOverTime() * (damageIncrease + GetDamageIncreasePercentage());
+            if (PlayerStatsScaler.GetScaler().CanDotCrit())
+                return nonCritDamage;
+            return IsCrit() ? nonCritDamage * GetCritDamage() : nonCritDamage;
+        }
+
         public virtual float GetTotalCooldown()
         {
             var cooldownValue = GetCooldownReductionPercentage();
@@ -69,11 +77,6 @@ namespace Objects.Abilities
         public virtual float GetDamageCooldown()
         {
             return _weaponStats.DamageCooldown;
-        }
-
-        public virtual float GetDamageOverTime(float damageIncrease = 0)
-        {
-            return GetDamageOverTime() * (damageIncrease + GetDamageIncreasePercentage());
         }
 
         protected virtual float GetDamageOverTime()

@@ -8,6 +8,7 @@
         DavidHpLossBuff = 3,
         TruziSkillCdReduction = 4,
         AliceSkillCdReduction = 5,
-        ElizaSkillDamageIncrease = 6
+        ElizaSkillDamageIncrease = 6,
+        IceFuaWeaponStacks = 7
     }
 }

@@ -72,6 +72,8 @@ namespace Objects.Players
 		public float Stamina;
 		public float ElementalReactionEffectIncreasePercentage;
 		public float FollowUpDamageIncrease;
+		public float HealthIncreasePercentage;
+		public bool CanDotCrit;
 
 		public int RevivesField
 		{
@@ -148,6 +150,8 @@ namespace Objects.Players
 			SpecialValue = 0;
 			ElementalReactionEffectIncreasePercentage = 0;
 			FollowUpDamageIncrease = 0;
+			HealthIncreasePercentage = 0;
+			CanDotCrit = false;
 		}
 
 		public void Sum(ItemStats item, int rarity)
@@ -203,6 +207,8 @@ namespace Objects.Players
 			Stamina += item.Stamina * rarityFactor;
 			ElementalReactionEffectIncreasePercentage += item.ElementalReactionEffectIncreasePercentage * rarityFactor;
 			FollowUpDamageIncrease += item.FollowUpDamageIncrease * rarityFactor;
+			HealthIncreasePercentage += item.HealthIncreasePercentage * rarityFactor;
+			if (item.CanDotCrit) CanDotCrit = true;
         }
 
 		public void Set(PlayerStats playerStats)
@@ -462,6 +468,9 @@ namespace Objects.Players
 					break;
 				case StatEnum.FollowUpDamageIncrease:
 					FollowUpDamageIncrease += value;
+					break;
+				case StatEnum.HealthIncreasePercentage:
+					HealthIncreasePercentage += value;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(stat), stat, null);

@@ -25,6 +25,7 @@ namespace DefaultNamespace
 	public class Damageable : NetworkBehaviour, IDamageable
 	{
 		[SerializeField] public float Health;
+		[SerializeField] public bool isNetworkObject;
 		[SerializeField] public GameObject targetPoint;
 		[SerializeField] private AudioClip takeDamageSound;
 		[SerializeField] private bool canBeAfflictedWithElements;
@@ -178,7 +179,15 @@ namespace DefaultNamespace
 				AudioSource.PlayClipAtPoint(takeDamageSound, _transformCache.position, 0.5f);
 				_hitSoundPlayedThisFrame = true;
 			}
-			RpcManager.instance.DealDamageToEnemyRpc(this, damageResult.Damage, damageResult.IsCriticalHit, weaponBase?.element ?? Element.None, weaponBase?.WeaponId ?? WeaponEnum.Scythe, elementalReactionEffectIncreasePercentage, isRecursion, NetworkManager.Singleton.LocalClientId);
+
+			if (isNetworkObject)
+				RpcManager.instance.DealDamageToEnemyRpc(this, damageResult.Damage, damageResult.IsCriticalHit,
+					weaponBase?.element ?? Element.None, weaponBase?.WeaponId ?? WeaponEnum.Scythe,
+					elementalReactionEffectIncreasePercentage, isRecursion, NetworkManager.Singleton.LocalClientId);
+			else
+				TakeDamageServer(damageResult.Damage, damageResult.IsCriticalHit, weaponBase?.element ?? Element.None,
+					weaponBase?.WeaponId ?? WeaponEnum.Scythe, elementalReactionEffectIncreasePercentage, 
+					isRecursion, NetworkManager.Singleton.LocalClientId);
 		}
 		
 		public void TakeDamageServer(float baseDamage, bool isCriticalHit, Element weaponElement, WeaponEnum weaponId, float elementalReactionEffectIncreasePercentage, bool isRecursion, ulong clientId)
@@ -212,7 +221,7 @@ namespace DefaultNamespace
 			Health -= calculatedDamage;
 			MessageManager.instance.PostMessageRpc(damageMessage, _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(weaponElement));
 			
-			if (weaponId != WeaponEnum.Unset)
+			if (weaponId != WeaponEnum.Unset && isNetworkObject)
 				RpcManager.instance.InvokeDamageDealtEventRpc(this, calculatedDamage, isRecursion, weaponId, RpcTarget.Single(clientId, RpcTargetUse.Temp));
 
 			//

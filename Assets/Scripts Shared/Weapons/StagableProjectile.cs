@@ -140,7 +140,9 @@ namespace Weapons
         {
 	        dissipationStage.Update();
 	        if (!dissipationStage.IsFinished()) return;
+	        if (IsDead) return;
 	        
+	        IsDead = true;
 	        dissipationStage.Stop();
 	        Destroy();
         }

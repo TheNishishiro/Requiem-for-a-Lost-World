@@ -57,6 +57,8 @@ namespace Objects.Items
 		public float Stamina;
 		public float ElementalReactionEffectIncreasePercentage;
 		public float FollowUpDamageIncrease;
+		public float HealthIncreasePercentage;
+		public bool CanDotCrit;
 
 		public void ApplyRarity(int rarity)
 		{
@@ -108,6 +110,7 @@ namespace Objects.Items
 			Stamina *= rarityFactor;
 			ElementalReactionEffectIncreasePercentage *= rarityFactor;
 			FollowUpDamageIncrease *= rarityFactor;
+			HealthIncreasePercentage *= rarityFactor;
 		}
 		
 		public void Apply(ItemStats itemUpgradeItemStats, int rarity)
@@ -163,6 +166,7 @@ namespace Objects.Items
             Stamina += itemUpgradeItemStats.Stamina * rarityFactor;
             ElementalReactionEffectIncreasePercentage += itemUpgradeItemStats.ElementalReactionEffectIncreasePercentage * rarityFactor;
             FollowUpDamageIncrease += itemUpgradeItemStats.FollowUpDamageIncrease * rarityFactor;
+            HealthIncreasePercentage += itemUpgradeItemStats.HealthIncreasePercentage * rarityFactor;
         }
 
 		public string GetDescription(string description, int rarity)
@@ -172,6 +176,7 @@ namespace Objects.Items
 			return description
 				.Replace("{Health}", Utilities.StatToString(Health, rarityFactor))
 				.Replace("{HealthMax}", Utilities.StatToString(HealthMax, rarityFactor))
+				.Replace("{HealthIncreasePercentage}", Utilities.StatToString(HealthIncreasePercentage, rarityFactor, true))
 				.Replace("{MagnetSize}", Utilities.StatToString(MagnetSize, rarityFactor))
 				.Replace("{CooldownReduction}", Utilities.StatToString(CooldownReduction, rarityFactor))
 				.Replace("{CooldownReductionPercentage}", Utilities.StatToString(CooldownReductionPercentage, rarityFactor, true))

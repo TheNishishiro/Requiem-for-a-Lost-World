@@ -42,6 +42,7 @@ namespace Objects
         WindProjectile = 35,
         Portal = 36,
         WindSucc = 37,
-        Claw = 38
+        Claw = 38,
+        IceFua = 39
     }
 }

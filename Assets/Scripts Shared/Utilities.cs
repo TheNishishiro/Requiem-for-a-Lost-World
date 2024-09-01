@@ -26,8 +26,9 @@ namespace DefaultNamespace
 			return $"{damage:0.##} {suffixes[suffixIndex]}";
 		}
 
-		public static string StatToString(float number, float rarityFactor = 0, bool isPercent = false, bool isInvertFactor = false)
+		public static string StatToString(float number, float rarityFactor = 0, bool isPercent = false, bool isInvertFactor = false, bool allowNegatives = false)
 		{
+			number = allowNegatives ? number : Math.Abs(number);
 			string value;
 			if (rarityFactor == 0 || Math.Abs(rarityFactor - 1) < 0.0001)
 			{
@@ -161,6 +162,14 @@ namespace DefaultNamespace
 			}
 
 			return enemiesInArea;
+		}
+
+		private static readonly Collider[] EnemiesDetected = new Collider[30];
+		public static IEnumerable<Enemy> GetEnemiesInAreaNonAlloc(Vector3 position, float radius)
+		{
+			var layer = LayerMask.GetMask("EnemyLayer");
+			var size = Physics.OverlapSphereNonAlloc(position, radius, EnemiesDetected, layer);
+			return EnemiesDetected.Take(size).Select(x => x.GetComponent<Enemy>()).ToList();
 		}
 
 		public static Damageable FindClosestUniqueDamageable(Vector3 position, IEnumerable<Damageable> enemies, List<Damageable> foundDamagables, out float distanceToClosest)

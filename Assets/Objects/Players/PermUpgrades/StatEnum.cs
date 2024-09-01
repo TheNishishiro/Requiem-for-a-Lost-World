@@ -130,6 +130,8 @@
         [Stat(StatCategory.Offensive, "ERE", "Elemental reaction effect")]
         ElementalReactionEffectIncreasePercentage,
         [Stat(StatCategory.Offensive, "FUDI", "Follow up damage increase")]
-        FollowUpDamageIncrease
+        FollowUpDamageIncrease,
+        [Stat(StatCategory.Offensive, "HPP", "Health increase")]
+        HealthIncreasePercentage
     }
 }

@@ -51,7 +51,13 @@ namespace Objects.Characters
 
         public virtual float GetMaxHealth()
         {
-            return PlayerStats?.HealthMax ?? 0;
+            var health = (PlayerStats?.HealthMax ?? 0) * GetMaxHealthIncreasePercentage();
+            return health <= 0 ? 1f : health;
+        }
+
+        public virtual float GetMaxHealthIncreasePercentage()
+        {
+	        return 1 + PlayerStats?.HealthIncreasePercentage ?? 0;
         }
 		
         public virtual float GetEnemyHealthIncrease()
@@ -197,6 +203,11 @@ namespace Objects.Characters
 		public virtual float GetDamageOverTime()
 		{
 			return PlayerStats?.DamageOverTime ?? 0;
+		}
+
+		public virtual bool CanDotCrit()
+		{
+			return PlayerStats?.CanDotCrit ?? false;
 		}
 
 		public virtual float GetLifeSteal()

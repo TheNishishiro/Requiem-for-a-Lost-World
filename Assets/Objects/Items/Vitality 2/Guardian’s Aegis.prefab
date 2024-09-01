@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8701237550941229032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1898424170886637610}
+  - component: {fileID: 6203031225689082248}
+  m_Layer: 0
+  m_Name: "Guardian\u2019s Aegis"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1898424170886637610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701237550941229032}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6203031225689082248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701237550941229032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: "Guardian\u2019s Aegis"
+  Description: Increase max health by {HealthMax} but reduce damage dealt by {DamagePercentageIncrease}%
+  supportType: 3
+  chanceToAppear: 0.7
+  Icon: {fileID: 21300000, guid: 9827946d858a3394686ce1852c9c41fc, type: 3}
+  unlockOnAchievement: 0
+  requiredAchievement: 0
+  ItemUpgrades:
+  - {fileID: 11400000, guid: 91d6260946c18864d8503a909eb2d0b2, type: 2}
+  - {fileID: 11400000, guid: e3621c5c94f457749b98932cd96cc2eb, type: 2}
+  - {fileID: 11400000, guid: 6e8dc42ffc4fe3a499fa6bbd5b4814b0, type: 2}
+  - {fileID: 11400000, guid: 71e317a829b5aa449b44b1828238d059, type: 2}
+  - {fileID: 11400000, guid: b7fcd3d0625ce2745b4e63341484076e, type: 2}
+  ItemStats:
+    Health: 0
+    HealthMax: 40
+    MagnetSize: 0
+    CooldownReduction: 0
+    CooldownReductionPercentage: 0
+    AttackCount: 0
+    Damage: 0
+    Scale: 0
+    Speed: 0
+    TimeToLive: 0
+    DetectionRange: 0
+    DamagePercentageIncrease: -0.1
+    ExperienceIncreasePercentage: 0
+    MovementSpeed: 0
+    SkillCooldownReductionPercentage: 0
+    HealthRegen: 0
+    CritRate: 0
+    CritDamage: 0
+    PassThroughCount: 0
+    Armor: 0
+    EnemySpeedIncreasePercentage: 0
+    EnemySpawnRateIncreasePercentage: 0
+    EnemyHealthIncreasePercentage: 0
+    EnemyMaxCountIncreasePercentage: 0
+    ItemRewardIncrease: 0
+    Revives: 0
+    ProjectileLifeTimeIncreasePercentage: 0
+    DodgeChance: 0
+    DamageTakenIncreasePercentage: 0
+    HealingReceivedIncreasePercentage: 0
+    Luck: 0
+    DamageOverTime: 0
+    Rerolls: 0
+    Skips: 0
+    DamageOverTimeFrequencyReductionPercentage: 0
+    DamageOverTimeDurationIncreasePercentage: 0
+    LifeSteal: 0
+    FireDamageIncrease: 0
+    LightningDamageIncrease: 0
+    IceDamageIncrease: 0
+    PhysicalDamageIncrease: 0
+    WindDamageIncrease: 0
+    LightDamageIncrease: 0
+    CosmicDamageIncrease: 0
+    EarthDamageIncrease: 0
+    DashCount: 0
+    Stamina: 0
+    ElementalReactionEffectIncreasePercentage: 0
+    FollowUpDamageIncrease: 0

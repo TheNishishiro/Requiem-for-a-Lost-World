@@ -82,19 +82,21 @@ namespace Objects.Players.Scripts
 
 		public void SetHealth(float health)
 		{
+			var scaler = PlayerStatsScaler.GetScaler();
+			
 			playerStats.Health = health;
-			if (playerStats.Health > playerStats.HealthMax)
-				playerStats.Health = playerStats.HealthMax;
+			if (scaler.GetHealth() > scaler.GetMaxHealth())
+				playerStats.Health = scaler.GetMaxHealth();
 		}
 
 		public bool IsFullHealth()
 		{
-			return Math.Abs((playerStats?.Health - playerStats?.HealthMax).GetValueOrDefault()) < 0.01f;
+			return Math.Abs(PlayerStatsScaler.GetScaler().GetHealth() - PlayerStatsScaler.GetScaler().GetMaxHealth()) < 0.01f;
 		}
 
 		public bool CanDie()
 		{
-			return playerStats?.Health <= 0 && !IsInvincible;
+			return PlayerStatsScaler.GetScaler().GetHealth() <= 0 && !IsInvincible;
 		}
 
 		public void ChangeDeathState(bool isDead)
@@ -106,11 +108,6 @@ namespace Objects.Players.Scripts
 		public bool IsDead()
 		{
 			return _isDead;
-		}
-
-		public void ApplyRegeneration()
-		{
-			TakeDamage(-playerStats.HealthRegen);
 		}
 
 		public void IncreaseSpeed(float value)

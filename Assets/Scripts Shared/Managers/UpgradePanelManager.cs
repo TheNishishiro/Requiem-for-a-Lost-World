@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
+using DefaultNamespace.Data.Weapons;
 using Interfaces;
 using Objects.Players.Scripts;
 using Objects.Stage;
@@ -93,7 +94,8 @@ namespace Managers
 			var chanceOfAppearance = Random.value;
 			var upgradesToPick = Random.Range(3, 5);
 
-			var upgradeEntries = (_isWeaponOnly ? WeaponManager.instance.GetWeaponUnlocks() : WeaponManager.instance.GetUpgrades())
+			var upgradeEntries = (_isWeaponOnly ? 
+					WeaponManager.instance.GetWeaponUnlocks().Where(x => x.Weapon.AttackTypeField != AttackType.FollowUp) : WeaponManager.instance.GetUpgrades())
 				.OrderByDescending(x => x.ChanceOfAppearance >= 1 - chanceOfAppearance)
 				.ThenBy(_ => Random.value)
 				.Take(upgradesToPick)
