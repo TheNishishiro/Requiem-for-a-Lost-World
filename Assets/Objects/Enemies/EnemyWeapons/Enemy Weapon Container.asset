@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 379b9054c4544f9a90831550db6dd851, type: 3}
+  m_Name: Enemy Weapon Container
+  m_EditorClassIdentifier: 
+  WeaponDefinitions:
+  - spawnPrefab: {fileID: 2719637055104635280, guid: 42cf7825601f9d54bbff39da3078b1ee,
+      type: 3}
+    weaponId: 1
+    weaponStats:
+      Damage: 10
+      Cooldown: 3.5
+      CooldownReduction: 0
+      Scale: 1
+      Speed: 2.5
+      TimeToLive: 2
+      AttackCount: 1
+      PassThroughCount: 0
+      DamageCooldown: 0
+      DuplicateSpawnDelay: 0
+      DetectionRange: 0
+      CritRate: 0
+      CritDamage: 0
+      Weakness: 0
+      DamageIncreasePercentage: 0
+      HealPerHit: 0
+      DamageOverTime: 0
+      DamageOverTimeDuration: 0
+      DamageOverTimeFrequency: 0
+      LifeSteal: 0
+      FollowUpDamageIncrease: 0

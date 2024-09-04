@@ -9,6 +9,7 @@ using Events.Scripts;
 using Objects;
 using Objects.Abilities;
 using Objects.Enemies;
+using Objects.Enemies.EnemyWeapons;
 using Objects.Players.PermUpgrades;
 using Objects.Players.Scripts;
 using Objects.Stage;
@@ -231,6 +232,12 @@ namespace Managers
             GameManager.instance.playerComponent.TakeDamage(-amount);
         }
         
+        [Rpc(SendTo.SpecifiedInParams)]
+        public void AttackPlayerRpc(float damage, RpcParams rpcParams)
+        {
+            GameManager.instance.playerComponent.TakeDamage(damage);
+        }
+        
         [Rpc(SendTo.Server)]
         public void RevivePlayerServerRpc(NetworkObjectReference shrine, Vector3 respawnPointPosition, ulong clientId)
         {
@@ -240,6 +247,12 @@ namespace Managers
             {
                 MarkShrineUsedClientRpc(oNetworkBehaviour.GetComponent<Shrine>());
             }
+        }
+
+        [Rpc(SendTo.Server)]
+        public void AttackPlayerRpc(ulong clientId, float damage)
+        {
+            AttackPlayerRpc(damage, RpcTarget.Single(clientId, RpcTargetUse.Temp));
         }
         
         [Rpc(SendTo.Everyone)]

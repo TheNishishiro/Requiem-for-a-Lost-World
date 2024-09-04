@@ -11,6 +11,7 @@ using Managers;
 using Objects.Characters;
 using Objects.Drops;
 using Objects.Drops.ChestDrop;
+using Objects.Enemies.EnemyWeapons;
 using Objects.Players.Scripts;
 using Objects.Stage;
 using Unity.Netcode;
@@ -29,6 +30,7 @@ namespace Objects.Enemies
 		[SerializeField] private SpriteRenderer spriteRenderer;
 		[SerializeField] private CapsuleCollider capsuleCollider;
 		[SerializeField] private DropOnDestroy dropOnDestroyComponent;
+		[SerializeField] private EnemyWeaponComponent weaponComponent;
 		[SerializeField] private DissolveController dissolveController;
 		[SerializeField] private Pickup chestDrop;
 		[SerializeField] private Pickup expDrop;
@@ -255,8 +257,10 @@ namespace Objects.Enemies
 		private void Die()
 		{
 			if (_isDying.Value) return;
+			
 			networkTransport.Interpolate = false;
 			capsuleCollider.enabled = false;
+			weaponComponent.enabled = false;
 			chaseComponent.SetMovementState(true);
 			_isDying.Value = true;
 			RpcManager.instance.AddEnemyKillRpc(IsBoss());
@@ -396,6 +400,23 @@ namespace Objects.Enemies
 		public bool IsDying()
 		{
 			return _isDying.Value;
+		}
+
+		public void InitializeWeapon(EnemyWeaponId[] enemyWeapons)
+		{
+			weaponComponent.Clear();
+			if (enemyWeapons?.Any() != true)
+			{
+				weaponComponent.enabled = false;
+				return;
+			}
+
+			foreach (var enemyWeapon in enemyWeapons)
+			{
+				var weapon = EnemyWeaponManager.instance.GetWeapon(enemyWeapon);
+				weaponComponent.SetWeapon(weapon);
+			}
+			weaponComponent.enabled = true;
 		}
 	}
 }

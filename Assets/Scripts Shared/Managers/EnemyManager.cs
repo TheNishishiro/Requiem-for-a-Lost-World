@@ -4,11 +4,13 @@ using System.Linq;
 using DefaultNamespace;
 using DefaultNamespace.BaseClasses;
 using DefaultNamespace.Data.Game;
+using Interfaces;
 using Managers;
 using Objects.Enemies;
 using Objects.Players.Scripts;
 using Objects.Stage;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 using Weapons;
@@ -105,6 +107,7 @@ public class EnemyManager : NetworkBehaviour
 		
 		enemyComponent.SetPlayerTarget(targetClient);
 		enemyComponent.Setup(new EnemyNetworkStats(_currentEnemySpawning), _healthMultiplier * (1 + increasePerClient*0.5f), _enemySpeedMultiplier, expIncrease, damageIncrease);
+		enemyComponent.InitializeWeapon(_currentEnemySpawning.enemyWeapons);
 		enemyComponent.gameObject.SetActive(true);
 		if (_currentEnemySpawning.enemyName == "grand octi")
 			enemyComponent.SetupBoss();
@@ -178,7 +181,7 @@ public class EnemyManager : NetworkBehaviour
 		return _isTimeStop;
 	}
 
-	public void GlobalDamage(float damage, WeaponBase weapon)
+	public void GlobalDamage(float damage, IWeapon weapon)
 	{
 		var enemies = FindObjectsByType<Damageable>(FindObjectsSortMode.None);
 		foreach (var enemy in enemies)

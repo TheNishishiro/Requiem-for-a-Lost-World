@@ -1,4 +1,5 @@
 ﻿using System;
+using Objects.Enemies.EnemyWeapons;
 using UnityEngine;
 
 namespace Objects.Enemies
@@ -7,6 +8,7 @@ namespace Objects.Enemies
 	public class EnemyData : ScriptableObject
 	{
 		public EnemyTypeEnum enemyType;
+		public EnemyWeaponId[] enemyWeapons;
 		public string enemyName;
 		public Sprite sprite;
 		public Sprite spriteSheet;

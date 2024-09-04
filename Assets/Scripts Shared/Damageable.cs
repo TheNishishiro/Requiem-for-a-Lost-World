@@ -166,12 +166,12 @@ namespace DefaultNamespace
 			return resistance;
 		}
 
-		public void TakeDamage(float damage, WeaponBase weaponBase = null, bool isRecursion = false)
+		public void TakeDamage(float damage, IWeapon weaponBase = null, bool isRecursion = false)
 		{
 			TakeDamage(new DamageResult() { Damage = damage }, weaponBase, isRecursion);
 		}
 
-		public void TakeDamage(DamageResult damageResult, WeaponBase weaponBase = null, bool isRecursion = false)
+		public void TakeDamage(DamageResult damageResult, IWeapon weaponBase = null, bool isRecursion = false)
 		{
 			var elementalReactionEffectIncreasePercentage = PlayerStatsScaler.GetScaler().GetElementalReactionEffectIncreasePercentage();
 			if (!_hitSoundPlayedThisFrame)
@@ -182,11 +182,11 @@ namespace DefaultNamespace
 
 			if (isNetworkObject)
 				RpcManager.instance.DealDamageToEnemyRpc(this, damageResult.Damage, damageResult.IsCriticalHit,
-					weaponBase?.element ?? Element.None, weaponBase?.WeaponId ?? WeaponEnum.Scythe,
+					weaponBase?.GetElement() ?? Element.None, (WeaponEnum?)weaponBase?.GetId() ?? WeaponEnum.Scythe,
 					elementalReactionEffectIncreasePercentage, isRecursion, NetworkManager.Singleton.LocalClientId);
 			else
-				TakeDamageServer(damageResult.Damage, damageResult.IsCriticalHit, weaponBase?.element ?? Element.None,
-					weaponBase?.WeaponId ?? WeaponEnum.Scythe, elementalReactionEffectIncreasePercentage, 
+				TakeDamageServer(damageResult.Damage, damageResult.IsCriticalHit, weaponBase?.GetElement() ?? Element.None,
+					(WeaponEnum?)weaponBase?.GetId() ?? WeaponEnum.Scythe, elementalReactionEffectIncreasePercentage, 
 					isRecursion, NetworkManager.Singleton.LocalClientId);
 		}
 		
@@ -239,12 +239,12 @@ namespace DefaultNamespace
 			resistances[element] -= amount;
 		}
 
-		public void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase, bool isRecursion = false)
+		public void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, IWeapon weaponBase, bool isRecursion = false)
 		{
 			TakeDamageWithCooldown(new DamageResult() { Damage = damage }, damageSource, damageCooldown, weaponBase, isRecursion);
 		}
 
-		public void TakeDamageWithCooldown(DamageResult damageResult, GameObject damageSource, float damageCooldown, WeaponBase weaponBase, bool isRecursion = false)
+		public void TakeDamageWithCooldown(DamageResult damageResult, GameObject damageSource, float damageCooldown, IWeapon weaponBase, bool isRecursion = false)
 		{
 			if (sourceDamageCooldown.TryAdd(damageSource, damageCooldown))
 			{
@@ -261,7 +261,7 @@ namespace DefaultNamespace
 			sourceDamageCooldown[damageSource] = damageCooldown;
 		}
 
-		public void ApplyDamageOverTime(float damage, float damageFrequency, float damageDuration, WeaponBase weaponBase)
+		public void ApplyDamageOverTime(float damage, float damageFrequency, float damageDuration, IWeapon weaponBase)
 		{
 			if (_activeDots.ContainsKey(weaponBase.GetInstanceID())) return;
 			
@@ -269,7 +269,7 @@ namespace DefaultNamespace
 			_activeDots[weaponBase.GetInstanceID()] = StartCoroutine(DamageOverTime(damage, damageFrequency, damageDuration, weaponBase));
 		}
 
-		private IEnumerator DamageOverTime(float damage, float damageFrequency, float damageDuration, WeaponBase weaponBase)
+		private IEnumerator DamageOverTime(float damage, float damageFrequency, float damageDuration, IWeapon weaponBase)
 		{
 			var timer = damageDuration;
 			var waitTimer = new WaitForSeconds(damageFrequency);

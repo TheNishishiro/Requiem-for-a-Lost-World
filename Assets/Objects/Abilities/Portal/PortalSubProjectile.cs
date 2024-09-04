@@ -20,7 +20,7 @@ namespace Objects.Abilities.Portal
         private void OnTriggerEnter(Collider other)
         {
             SimpleFollowUpDamage(other);
-            if (ParentWeapon.WeaponStatsStrategy.GetDamageOverTime() > 0)
+            if (ParentWeapon.GetWeaponStrategy().GetDamageOverTime() > 0)
                 DamageOverTime(other);
         }
     }

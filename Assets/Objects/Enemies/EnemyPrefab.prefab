@@ -5326,6 +5326,7 @@ GameObject:
   - component: {fileID: 1412954185048979437}
   - component: {fileID: 2075695049437756266}
   - component: {fileID: 4635495247598908059}
+  - component: {fileID: 7183692620476636510}
   - component: {fileID: 445137977363883629}
   - component: {fileID: 2022141020912838401}
   - component: {fileID: 1621128170779005758}
@@ -5395,6 +5396,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 4270798925278745973}
   capsuleCollider: {fileID: 445137977363883629}
   dropOnDestroyComponent: {fileID: 2075695049437756266}
+  weaponComponent: {fileID: 7183692620476636510}
   dissolveController: {fileID: 5319297187496111779}
   chestDrop: {fileID: -5662689963410785615, guid: fe977e56248c07446a7574ed737f311e,
     type: 3}
@@ -5469,6 +5471,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 2022141020912838401}
   networkTransport: {fileID: 1621128170779005758}
+--- !u!114 &7183692620476636510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5541245172042377187}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32841d64727349df94edcdcc655edc25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseComponent: {fileID: 4635495247598908059}
+  ownerEnemy: {fileID: 4204432481279239788}
 --- !u!136 &445137977363883629
 CapsuleCollider:
   m_ObjectHideFlags: 0

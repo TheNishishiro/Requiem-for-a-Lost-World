@@ -9,7 +9,7 @@ namespace Weapons
     public class DamageSource : MonoBehaviour
     {
 	    protected IWeaponStatsStrategy WeaponStatsStrategy;
-	    protected WeaponBase ParentWeapon;
+	    protected IWeapon ParentWeapon;
 	    protected float damageCooldown;
 	    protected int currentPassedEnemies;
 	    protected bool isDamageCooldownExpired;
@@ -56,7 +56,7 @@ namespace Weapons
 				return;
 
 			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage, ProjectileDamageIncrease, isFollowUp);
-			damageable.TakeDamage(damage, ParentWeapon, isFollowUp);
+			damageable.TakeDamage(damage, (WeaponBase)ParentWeapon, isFollowUp);
 
 			if (isLimitedUsage && currentPassedEnemies-- <= 0)
 				OnLifeTimeEnd();

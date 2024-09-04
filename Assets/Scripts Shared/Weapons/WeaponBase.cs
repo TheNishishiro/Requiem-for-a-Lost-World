@@ -22,7 +22,7 @@ using UnityEngine.Serialization;
 
 namespace Weapons
 {
-	public abstract class WeaponBase : MonoBehaviour, IPlayerItem
+	public abstract class WeaponBase : MonoBehaviour, IPlayerItem, IWeapon
 	{
 		[SerializeField] public bool useNetworkPool;
 		[SerializeField] public GameObject spawnPrefab;
@@ -41,6 +41,7 @@ namespace Weapons
 		[SerializeField] List<UpgradeData> availableUpgrades;
 		protected PlayerStatsComponent _playerStatsComponent;
 		protected float _timer;
+		private Transform _transformCache;
 		
 		
 		public string NameField => Name;
@@ -76,7 +77,8 @@ namespace Weapons
 			_playerStatsComponent = GetComponentInParent<PlayerStatsComponent>();
 			weaponStats.AssignPlayerStatsComponent(_playerStatsComponent);
 			SetWeaponStatsStrategy();
-			
+
+			_transformCache = transform;
 			_timer = WeaponStatsStrategy.GetTotalCooldown();
 			InitPool();
 		}
@@ -202,6 +204,36 @@ namespace Weapons
 				Assert.IsNotNull(networkProjectile, $"Weapon {NameField}: spawn prefab \"{spawnSubPrefab.name}\" has no {nameof(NetworkProjectile)} component.");
 				Assert.IsTrue(networkProjectile.DesignedPoolId == WeaponPoolEnum.Sub, $"Weapon {NameField}: spawn prefab \"{spawnSubPrefab.name}\" must have weapon type set to SUB");
 			}
+		}
+
+		public IWeaponStatsStrategy GetWeaponStrategy()
+		{
+			return WeaponStatsStrategy;
+		}
+
+		public Transform GetTransform()
+		{
+			return _transformCache;
+		}
+
+		public bool IsUseNetworkPool()
+		{
+			return useNetworkPool;
+		}
+
+		public int GetId()
+		{
+			return (int)WeaponId;
+		}
+
+		public Element GetElement()
+		{
+			return ElementField;
+		}
+
+		public GameObject GetProjectile()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

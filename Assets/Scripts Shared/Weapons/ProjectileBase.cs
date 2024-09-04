@@ -28,10 +28,10 @@ namespace Weapons
 			baseScale = new Vector3(localScale.x,localScale.y,localScale.z);
 		}
 
-		public virtual void SetParentWeapon(WeaponBase parentWeapon)
+		public virtual void SetParentWeapon(IWeapon parentWeapon)
 		{
 			ParentWeapon = parentWeapon;
-			SetStats(ParentWeapon.WeaponStatsStrategy);
+			SetStats(ParentWeapon.GetWeaponStrategy());
 		}
 		
 		private void SetStats(IWeaponStatsStrategy weaponStatsStrategy)

@@ -44,6 +44,7 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
     public NetworkVariable<DifficultyEnum> difficulty = new ();
     public NetworkVariable<StageEnum> stage = new ();
     private bool _keepAlive = true;
+    [SerializeField] private Transform targetPoint;
     [SerializeField] private Collider boxCollider;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private DifficultyContainer difficultyContainer;
@@ -172,6 +173,11 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
     {
         boxCollider.enabled = isEnabled;
         characterController.enabled = isEnabled;
+    }
+
+    public Transform GetTargetPoint()
+    {
+        return targetPoint;
     }
 
     public override void OnNetworkDespawn()

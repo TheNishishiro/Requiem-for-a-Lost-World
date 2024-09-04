@@ -18,6 +18,7 @@ public class ChaseComponent : NetworkBehaviour
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private NetworkTransform networkTransport;
     private Transform targetDestination;
+    private Transform targetPoint;
     private GameObject tempTarget;
     private float movementSpeed;
     private float tempSpeed;
@@ -51,6 +52,8 @@ public class ChaseComponent : NetworkBehaviour
     {
         if (target == null) return;
         targetDestination = target.transform;
+        if (target.CompareTag("Player"))
+            targetPoint = target.GetComponent<MultiplayerPlayer>().GetTargetPoint();
     }
 
     public void SetTemporaryTarget(GameObject target, float? tempSpeed = null, float tempTargetCooldown = 0.2f)
@@ -127,6 +130,11 @@ public class ChaseComponent : NetworkBehaviour
 
         var speed = (isTempTarget ? tempSpeed : movementSpeed) * (_slowTimer > 0 ? _slowAmount : 1.0f) * (_isPlayerControlled ? 1.3f : 1.0f );
         transformCache.position = Vector3.MoveTowards(currentPosition, destination, speed * Time.deltaTime);
+    }
+
+    public Vector3 GetDestination()
+    {
+        return targetPoint.position;
     }
 
     public void SetImmobile(float time)

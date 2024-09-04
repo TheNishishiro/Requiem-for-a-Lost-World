@@ -149,7 +149,7 @@ public class GameSettingsScreenManager : MonoBehaviour, IStackableWindow
         }
         catch (Exception e)
         {
-            ModalManager.instance.Open(ButtonCombination.None, "Loading", $"Failed to load the game: {e.Message}", modalState: ModalState.Error);
+            ModalManager.instance.Open(ButtonCombination.Yes, "Loading", $"Failed to load the game: {e.Message}", modalState: ModalState.Error, textYes: "Close");
         }
     }
     
