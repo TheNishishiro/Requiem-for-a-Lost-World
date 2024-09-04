@@ -10,23 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6773012bce094f4281e59656a4cb2572, type: 3}
-  m_Name: Tooth Shroom
+  m_Name: First Flame
   m_EditorClassIdentifier: 
-  enemyType: 36
-  enemyWeapons: 
-  enemyName: Tooth Shroom
-  sprite: {fileID: 0}
-  spriteSheet: {fileID: 21300000, guid: c1f036f93dd6fa64f8a9bce8b103ec2a, type: 3}
-  animatedPrefab: {fileID: 4327967563572665152, guid: ff0678542c6a9ea40bde50019ca8ec7b,
-    type: 3}
+  enemyType: 44
+  enemyWeapons: 01000000
+  enemyName: First Flame
+  spriteSheet: {fileID: 21300000, guid: 4afbbdcd7d04b2f4290b6e8c6f8f2e52, type: 3}
   stats:
-    hp: 25
-    damage: 20
-    speed: 1.3
+    hp: 30
+    damage: 40
+    speed: 1.35
     elementStats:
-    - element: 9
-      damageReduction: 0.2
+    - element: 2
+      damageReduction: 5
   allowFlying: 0
   groundOffset: 0
   isBossEnemy: 0
-  ExpDrop: 100
+  ExpDrop: 200

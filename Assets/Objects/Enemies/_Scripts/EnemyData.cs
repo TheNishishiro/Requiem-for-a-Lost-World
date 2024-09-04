@@ -10,9 +10,7 @@ namespace Objects.Enemies
 		public EnemyTypeEnum enemyType;
 		public EnemyWeaponId[] enemyWeapons;
 		public string enemyName;
-		public Sprite sprite;
 		public Sprite spriteSheet;
-		public GameObject animatedPrefab;
 		public EnemyStats stats;
 		public bool allowFlying;
 		public float groundOffset;

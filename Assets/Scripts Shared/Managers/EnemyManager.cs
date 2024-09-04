@@ -20,7 +20,7 @@ public class EnemyManager : NetworkBehaviour
 {
 	public static EnemyManager instance;
 	[SerializeField] public GameObject enemyGameObject;
-	[SerializeField] private List<EnemyData> possibleEnemies;
+	[SerializeField] private EnemyContainer enemyContainer;
 	[SerializeField] private Vector2 spawnArea;
 	[SerializeField] private float spawnTimer;
 	[SerializeField] private PlayerStatsComponent _playerStatsComponent;
@@ -231,7 +231,7 @@ public class EnemyManager : NetworkBehaviour
 
 	public Sprite GetSpriteByEnemy(EnemyTypeEnum enemyType)
 	{
-		return possibleEnemies.FirstOrDefault(x => x.enemyType == enemyType)?.spriteSheet;
+		return enemyContainer.possibleEnemies.FirstOrDefault(x => x.enemyType == enemyType)?.spriteSheet;
 	}
 
 	public void AddEnemy(Enemy networkBehaviour)
