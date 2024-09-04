@@ -6,6 +6,7 @@ using DefaultNamespace.BaseClasses;
 using DefaultNamespace.Data.Game;
 using Interfaces;
 using Managers;
+using Managers.StageEvents;
 using Objects.Enemies;
 using Objects.Players.Scripts;
 using Objects.Stage;
@@ -19,11 +20,11 @@ public class EnemyManager : NetworkBehaviour
 {
 	public static EnemyManager instance;
 	[SerializeField] public GameObject enemyGameObject;
-	[SerializeField] private List<EnemyData> defaultSpawns;
 	[SerializeField] private List<EnemyData> possibleEnemies;
 	[SerializeField] private Vector2 spawnArea;
 	[SerializeField] private float spawnTimer;
 	[SerializeField] private PlayerStatsComponent _playerStatsComponent;
+	private List<EnemySpawnData> defaultSpawns;
 	private static Transform PlayerTransform => GameManager.instance.PlayerTransform;
 	private List<Enemy> _enemies = new ();
 	public int currentEnemyCount => _enemies.Count;
@@ -44,7 +45,7 @@ public class EnemyManager : NetworkBehaviour
 			instance = this;
 		}
 		
-		defaultSpawns = new List<EnemyData>();
+		defaultSpawns = new List<EnemySpawnData>();
 	}
 	
 	private void Update()
@@ -63,8 +64,8 @@ public class EnemyManager : NetworkBehaviour
 		
 		_timer = spawnTimer * PlayerStatsScaler.GetScaler().GetEnemySpawnRateIncrease() * GameData.GetCurrentDifficulty().EnemySpawnRateModifier * GameSettings.EnemySpawnRateModifier;
 		
-		var randomSpawn = defaultSpawns[Random.Range(0, defaultSpawns.Count)];
-		SpawnEnemy(randomSpawn);
+		var randomSpawn = defaultSpawns.Where(x => x.probability > Random.value).OrderBy(_ => Random.value).First();
+		SpawnEnemy(randomSpawn.enemy);
 	}
 
 	public void SpawnEnemy(EnemyData enemyToSpawn)
@@ -115,7 +116,7 @@ public class EnemyManager : NetworkBehaviour
 		RpcManager.instance.AddEnemyRpc(enemyComponent);
 	}
 
-	public void ChangeDefaultSpawn(List<EnemyData> enemyData)
+	public void ChangeDefaultSpawn(List<EnemySpawnData> enemyData)
 	{
 		defaultSpawns = enemyData;
 	}
@@ -130,17 +131,17 @@ public class EnemyManager : NetworkBehaviour
 		_healthMultiplier = healthMultiplier;
 	}
 
-	public void BurstSpawn(List<EnemyData> stageEventEnemies, float stageEventCount)
+	public void BurstSpawn(List<EnemySpawnData> stageEventEnemies, float stageEventCount)
 	{
 		StartCoroutine(BurtSpawnCoroutine(stageEventEnemies, stageEventCount));
 	}
 	
-	private IEnumerator BurtSpawnCoroutine(List<EnemyData> stageEventEnemies, float stageEventCount)
+	private IEnumerator BurtSpawnCoroutine(List<EnemySpawnData> stageEventEnemies, float stageEventCount)
 	{
 		for (var i = 0; i < stageEventCount; i++)
 		{
-			var randomEnemy = stageEventEnemies[Random.Range(0, stageEventEnemies.Count)];
-			SpawnEnemy(randomEnemy);
+			var randomEnemy = stageEventEnemies.Where(x => x.probability > Random.value).OrderBy(_ => Random.value).First();
+			SpawnEnemy(randomEnemy.enemy);
 		}
 
 		yield break;

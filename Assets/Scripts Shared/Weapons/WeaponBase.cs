@@ -25,8 +25,8 @@ namespace Weapons
 	public abstract class WeaponBase : MonoBehaviour, IPlayerItem, IWeapon
 	{
 		[SerializeField] public bool useNetworkPool;
-		[SerializeField] public GameObject spawnPrefab;
-		[SerializeField] public GameObject spawnSubPrefab;
+		[SerializeField][ShowAssetPreview] public GameObject spawnPrefab;
+		[SerializeField][ShowAssetPreview] public GameObject spawnSubPrefab;
 		[SerializeField] public WeaponEnum WeaponId;
 		[SerializeField] public AttackType attackType;
 		[SerializeField] public string Name;

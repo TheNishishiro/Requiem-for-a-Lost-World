@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using Managers;
+using Managers.StageEvents;
 using Objects.Stage;
 using Unity.Netcode;
 using UnityEngine;
@@ -19,7 +20,7 @@ namespace Objects.Enemies.Peace_Ender
 		[SerializeField] private float lightPillarAttackDelay;
 		[SerializeField] private float lightPillarAttackArea;
 		[SerializeField] private float attackCooldown;
-		[SerializeField] public List<EnemyData> spawnableEnemies;
+		[SerializeField] public List<EnemySpawnData> enemySummons;
 		[SerializeField] private int enemySpawnCountMin;
 		[SerializeField] private int enemySpawnCountMax;
 		private float _currentCooldown;
@@ -63,7 +64,7 @@ namespace Objects.Enemies.Peace_Ender
 
 		private void SpawnEnemies()
 		{
-			EnemyManager.instance.BurstSpawn(spawnableEnemies, Random.Range(enemySpawnCountMin, enemySpawnCountMax));
+			EnemyManager.instance.BurstSpawn(enemySummons, Random.Range(enemySpawnCountMin, enemySpawnCountMax));
 		}
 	}
 }
