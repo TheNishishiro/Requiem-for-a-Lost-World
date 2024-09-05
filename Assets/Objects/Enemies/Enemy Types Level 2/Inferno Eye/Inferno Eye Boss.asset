@@ -13,11 +13,9 @@ MonoBehaviour:
   m_Name: Inferno Eye Boss
   m_EditorClassIdentifier: 
   enemyType: 41
-  enemyWeapons: 01000000
+  enemyWeapons: 02000000
   enemyName: Inferno Eye Boss
-  sprite: {fileID: 0}
   spriteSheet: {fileID: 21300000, guid: 7a47c775f04ce3840a662a4877a9e941, type: 3}
-  animatedPrefab: {fileID: 0}
   stats:
     hp: 100
     damage: 35
@@ -27,6 +25,8 @@ MonoBehaviour:
       damageReduction: 0.5
     - element: 9
       damageReduction: 0.25
+    - element: 4
+      damageReduction: -0.25
   allowFlying: 0
   groundOffset: 0
   isBossEnemy: 1

@@ -17,15 +17,20 @@ MonoBehaviour:
   enemyName: Melted Demon
   spriteSheet: {fileID: 21300000, guid: 6c367b9a94243ab49b6c5c766504d58b, type: 3}
   stats:
-    hp: 150
+    hp: 60
     damage: 20
     speed: 1
     elementStats:
     - element: 4
-      damageReduction: 0.1
+      damageReduction: 0.25
     - element: 5
       damageReduction: 0.35
+    - element: 2
+      damageReduction: -0.3
+    - element: 3
+      damageReduction: -0.5
   allowFlying: 0
   groundOffset: 0
   isBossEnemy: 0
   ExpDrop: 225
+  isLevelBoss: 0

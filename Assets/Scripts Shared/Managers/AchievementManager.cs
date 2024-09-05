@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Data.Elements;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
+using DefaultNamespace.Data.Weapons;
 using Objects.Characters;
 using Objects.Drops;
 using Objects.Enemies;
@@ -26,6 +27,7 @@ namespace Managers
 		private float _damageTakenInOneGame;
 		private float _distanceTraveled;
 		private int _earthWeaponsHeld;
+		private int _followUpWeaponsHeld;
 		private HashSet<int> _visitedShrines = new ();
         
 		public void Awake()
@@ -44,6 +46,7 @@ namespace Managers
 			_damageTakenInOneGame = 0;
 			_menuScrolls = 0;
 			_earthWeaponsHeld = 0;
+			_followUpWeaponsHeld = 0;
 			_visitedShrines = new HashSet<int>();
 		}
 
@@ -51,11 +54,11 @@ namespace Managers
 		{
 			var minutes = Mathf.FloorToInt(time / 60);
 			var activeCharacterName = GameData.GetPlayerCharacterData().Id.GetName();
-			var activeCharacterAlignment = GameData.GetPlayerCharacterData().Alignment;
 			switch (minutes)
 			{
 				case >= 30:
 					SaveFile.Instance.UnlockAchievement($"Survive30MinutesWith{activeCharacterName}");
+					var activeCharacterAlignment = GameData.GetPlayerCharacterData().Alignment;
 					if (activeCharacterAlignment == CharacterAlignment.Light)
 						SaveFile.Instance.UnlockAchievement(AchievementEnum.Survive30MinutesWithLightCharacter);
 					else if (activeCharacterAlignment == CharacterAlignment.Dark)
@@ -66,11 +69,18 @@ namespace Managers
 					break;
 			}
 		}
-		public void OnWeaponUnlocked(WeaponBase weapon, int unlockedCount, int rarity)
+		public void OnWeaponUnlocked(WeaponBase weapon, int unlockedCount, int rarity, AttackType weaponAttackTypeField)
 		{
 			if (rarity >= 3)
 				SaveFile.Instance.TotalLegendaryItemsObtained++;
-			
+
+			if (weaponAttackTypeField == AttackType.FollowUp)
+			{
+				_followUpWeaponsHeld++;
+				if (_followUpWeaponsHeld >= 3)
+					SaveFile.Instance.UnlockAchievement(AchievementEnum.Own3FollowUpWeapons);
+			}
+
 			if (SaveFile.Instance.TotalLegendaryItemsObtained > 20)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Obtain10HighRarityItems);
 			
@@ -101,7 +111,7 @@ namespace Managers
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Hold6Items);
 		}
 		
-		public void OnEnemyKilled(bool isBoss)
+		public void OnEnemyKilled(bool isBoss, EnemyTypeEnum enemyTypeValue)
 		{
 			_enemiesKilled++;
 			SaveFile.Instance.EnemiesKilled++;
@@ -113,6 +123,11 @@ namespace Managers
 				SaveFile.Instance.BossKills++;
 			if (SaveFile.Instance.BossKills > 50)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Kill500BossEnemies);
+
+			if (enemyTypeValue == EnemyTypeEnum.TheWatcher)
+			{
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.BanishEvil);
+			}
 		}
 
 		public void OnDeath()
@@ -224,6 +239,11 @@ namespace Managers
 			SaveFile.Instance.ShrinesVisited++;
 			if (SaveFile.Instance.ShrinesVisited == 100)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Visit100Shrines);
+		}
+
+		public void UnlockAchievement(AchievementEnum achievementId)
+		{
+			SaveFile.Instance.UnlockAchievement(achievementId);
 		}
 	}
 }

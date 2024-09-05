@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using DefaultNamespace.Data;
 using Objects.Characters;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using ShadowQuality = UnityEngine.ShadowQuality;
 using ShadowResolution = UnityEngine.ShadowResolution;
@@ -61,8 +63,15 @@ namespace Managers
 
 			AudioListener.volume = settings.Volume;
 			var renderPipeline = (UniversalRenderPipelineAsset)QualitySettings.renderPipeline;
+			var rendererData = (UniversalRendererData)renderPipeline.rendererDataList[0];
+			var ssao = (ScreenSpaceAmbientOcclusion)rendererData.rendererFeatures.FirstOrDefault(x => x.GetType() == typeof(ScreenSpaceAmbientOcclusion));
+			ssao.SetActive(settings.SSAO);
+			
+			renderPipeline.gpuResidentDrawerMode = Application.platform == RuntimePlatform.Android
+				? GPUResidentDrawerMode.Disabled
+				: GPUResidentDrawerMode.InstancedDrawing;
 			QualitySettings.vSyncCount = settings.Vsync ? 1 : 0;
-
+				
 			switch (settings.FpsLimit)
 			{
 				case 0:
@@ -231,6 +240,8 @@ namespace Managers
 					renderPipeline.msaaSampleCount = 0;
 					break;
 			}
+			
+			
 
 			if (Application.platform == RuntimePlatform.Android) return;
 			

@@ -4,7 +4,7 @@ using Objects.Characters;
 
 namespace DefaultNamespace.Data.Achievements
 {
-	public enum AchievementEnum // 104
+	public enum AchievementEnum // 118
 	{
 		[AchievementValue("Jack of all trades", "Obtain 6 weapons in a single game", AchievementSection.Misc, Rarity.Common)]
 		Hold6Weapons = 0,
@@ -64,6 +64,34 @@ namespace DefaultNamespace.Data.Achievements
 		HoldHighRarityEarthWeapons = 101,
 		[AchievementValue("Secret Arcana", "Visit 100 shrines in your journey", AchievementSection.Environment, Rarity.Rare, RequirementType.Shrines, 100)]
 		Visit100Shrines = 102,
+		[AchievementValue("Chamber of Secrets", "Find a hidden room in the Capital Undergrounds", AchievementSection.Environment, Rarity.Mythic)]
+		FindSecretRoom = 105,
+		[AchievementValue("Leap of Faith", "Survive an unfortunate fall", AchievementSection.Environment, Rarity.Rare)]
+		PerformLeapOfFaith = 106,
+		[AchievementValue("Banish Evil", "Defeat The Watcher in the Capital Undergrounds", AchievementSection.Environment, Rarity.Legendary)]
+		BanishEvil = 107,
+		[AchievementValue("Dead End", "Enter the dark corridor with no way forward", AchievementSection.Environment, Rarity.Common)]
+		DeadEnd = 108,
+		[AchievementValue("Enter the Dungeon", "Visit Capital Undergrounds for the first time", AchievementSection.Environment, Rarity.Common)]
+		EnterTheDungeon = 109,
+		[AchievementValue("Is this the way out?", "Find a potential exist from the undergrounds", AchievementSection.Environment, Rarity.Rare)]
+		IsThisTheWayOut = 110,
+		[AchievementValue("Not-so-hidden treasure", "Loot a chest in the Capital Undergrounds", AchievementSection.Environment, Rarity.Common)]
+		PortalPickUp = 111,
+		[AchievementValue("Master of strategy", "In a single game obtain 3 follow-up type weapons", AchievementSection.Misc, Rarity.Rare)]
+		Own3FollowUpWeapons = 112,
+		[AchievementValue("Ever-frost seed", "Keep a seed from defrosting", AchievementSection.Combat, Rarity.Mythic)]
+		KeepFrostSeedUpFor30Seconds = 113,
+		[AchievementValue("Anosmia", "Expose yourself to smell for 5 minutes", AchievementSection.Combat, Rarity.Legendary)]
+		StayInSewerFor5Minutes = 114,
+		[AchievementValue("My precious gift", "Retrieve the scarf belonging to Sev's friend", AchievementSection.Environment, Rarity.Mythic)]
+		UnlockBloodThornScarf = 115,
+		[AchievementValue("Brute Force", "Find a talisman belonging to a captured criminal", AchievementSection.Combat, Rarity.Legendary)]
+		UnlockBruteTalisman = 116,
+		[AchievementValue("Finally, a quiet place", "Read inscription left by a scholar", AchievementSection.Environment, Rarity.Legendary)]
+		UnlockLowPressure = 117,
+		[AchievementValue("I see no god up here", "Climb the peak of Capital Outskirts", AchievementSection.Environment, Rarity.Rare)]
+		PeakofPeaks = 118,
 		
 		#region Character specific achievements
 		[AchievementValue("Bound by fate", "Bind enemies for 1 hour in total in a single game using Amelisana", AchievementSection.Character, Rarity.Common, CharactersEnum.Amelisana_BoN, RequirementType.None, 1)]

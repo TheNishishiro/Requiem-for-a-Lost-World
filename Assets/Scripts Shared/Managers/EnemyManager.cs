@@ -110,8 +110,7 @@ public class EnemyManager : NetworkBehaviour
 		enemyComponent.Setup(new EnemyNetworkStats(_currentEnemySpawning), _healthMultiplier * (1 + increasePerClient*0.5f), _enemySpeedMultiplier, expIncrease, damageIncrease);
 		enemyComponent.InitializeWeapon(_currentEnemySpawning.enemyWeapons);
 		enemyComponent.gameObject.SetActive(true);
-		if (_currentEnemySpawning.enemyName == "grand octi")
-			enemyComponent.SetupBoss();
+		enemyComponent.SetupBoss();
 		
 		RpcManager.instance.AddEnemyRpc(enemyComponent);
 	}

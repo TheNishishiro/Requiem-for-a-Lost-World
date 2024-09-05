@@ -73,11 +73,11 @@ namespace Managers
         }
 
         [Rpc(SendTo.Everyone)]
-        public void AddEnemyKillRpc(bool isBoss)
+        public void AddEnemyKillRpc(bool isBoss, EnemyTypeEnum enemyTypeValue)
         {
             GameResultData.MonstersKilled++;
             EnemyDiedEvent.Invoke();
-            AchievementManager.instance.OnEnemyKilled(isBoss);
+            AchievementManager.instance.OnEnemyKilled(isBoss, enemyTypeValue);
         }
 
         public void TriggerWin()

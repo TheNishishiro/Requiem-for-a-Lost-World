@@ -137,28 +137,27 @@ namespace DefaultNamespace.Data
 			Servers ??= new List<ServerData>();
 			Runes ??= new List<RuneSaveData>();
 			AchievementSaveData ??= new Dictionary<AchievementEnum, bool>();
-			Keybindings ??= DefaultKeyBinds();
+			Keybindings = DefaultKeyBinds();
 			ConfigurationFile = (ConfigurationFile ?? new ConfigurationFile().Default()).Update();
 			ReadStoryEntries ??= new Dictionary<int, List<int>>();
 		}
 
 		private Dictionary<KeyAction, KeyCode> DefaultKeyBinds()
 		{
-			if (Keybindings?.Any() == true)
-				return Keybindings;
+			if (Keybindings is null)
+				Keybindings = new Dictionary<KeyAction, KeyCode>();
 
-			var keybindings = new Dictionary<KeyAction, KeyCode>
-			{
-				{ KeyAction.Ability, KeyCode.Space },
-				{ KeyAction.MoveDown, KeyCode.S },
-				{ KeyAction.MoveUp, KeyCode.W },
-				{ KeyAction.MoveLeft, KeyCode.A },
-				{ KeyAction.MoveRight, KeyCode.R },
-				{ KeyAction.Accept, KeyCode.Return },
-				{ KeyAction.Dash, KeyCode.LeftShift },
-				{ KeyAction.Sprint, KeyCode.LeftControl }
-			};
-			return keybindings;
+			Keybindings.TryAdd(KeyAction.Ability, KeyCode.Space);
+			Keybindings.TryAdd(KeyAction.MoveDown, KeyCode.S);
+			Keybindings.TryAdd(KeyAction.MoveUp, KeyCode.W);
+			Keybindings.TryAdd(KeyAction.MoveLeft, KeyCode.A);
+			Keybindings.TryAdd(KeyAction.MoveRight, KeyCode.R);
+			Keybindings.TryAdd(KeyAction.Accept, KeyCode.Return);
+			Keybindings.TryAdd(KeyAction.Dash, KeyCode.LeftShift);
+			Keybindings.TryAdd(KeyAction.Sprint, KeyCode.LeftControl);
+			Keybindings.TryAdd(KeyAction.Interact, KeyCode.F);
+			
+			return Keybindings;
 		}
 
 		public KeyCode GetKeybinding(KeyAction action)

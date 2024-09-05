@@ -77,7 +77,7 @@ public class WeaponManager : NetworkBehaviour
         _unlockedWeapons.TryAdd(weaponGameObject.WeaponId, weaponGameObject);
         weaponGameObject.ActivateWeapon();
         WeaponUnlockedEvent.Invoke(weapon, rarity);
-        AchievementManager.instance.OnWeaponUnlocked(weapon, _unlockedWeapons.Count, rarity);
+        AchievementManager.instance.OnWeaponUnlocked(weapon, _unlockedWeapons.Count, rarity, weapon.AttackTypeField);
         GuiManager.instance.UpdateItems();
     }
 

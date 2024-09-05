@@ -102,6 +102,9 @@ namespace DefaultNamespace
 
 		public static Vector3 GetRandomPointOnCollider(Collider collider)
 		{
+			if (collider == null)
+				return Vector3.zero;
+			
 			var colliderBounds = collider.bounds;
 			var minBounds = new Vector3(colliderBounds.min.x, colliderBounds.min.y, colliderBounds.min.z);
 			var maxBounds = new Vector3(colliderBounds.max.x, colliderBounds.max.y, colliderBounds.max.z);

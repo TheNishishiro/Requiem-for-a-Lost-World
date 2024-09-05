@@ -48,6 +48,10 @@
         FlameDig = 43,
         FirstFlame = 44,
         LizardBrute = 45,
-        MudDemon = 46
+        MudDemon = 46,
+        StoneDemonBoss = 47,
+        BigHeadBoss = 48,
+        FrogmonBoss = 49,
+        LizardBruteBoss = 50
     }
 }

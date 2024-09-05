@@ -16,6 +16,7 @@ namespace Objects.Enemies
         public float groundOffset;
         public bool isBossEnemy;
         public int expDrop;
+        public bool isFinalBoss;
         public EnemyTypeEnum enemyType;
         public List<ElementStats> elementStats = new ();
 
@@ -33,6 +34,7 @@ namespace Objects.Enemies
             isBossEnemy = enemyData.isBossEnemy;
             expDrop = enemyData.ExpDrop;
             enemyType = enemyData.enemyType;
+            isFinalBoss = enemyData.isLevelBoss;
             elementStats = enemyData.stats.elementStats?.ToList() ?? new List<ElementStats>();
         }
         
@@ -46,6 +48,7 @@ namespace Objects.Enemies
             serializer.SerializeValue(ref isBossEnemy);
             serializer.SerializeValue(ref expDrop);
             serializer.SerializeValue(ref enemyType);
+            serializer.SerializeValue(ref isFinalBoss);
         }
     }
 }

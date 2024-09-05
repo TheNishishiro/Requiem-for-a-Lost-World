@@ -4842,6 +4842,50 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &3077833224351555474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 797270489209631619}
+  - component: {fileID: 532392019565980781}
+  m_Layer: 0
+  m_Name: WinOnDeath
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &797270489209631619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3077833224351555474}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4269599194107777413}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &532392019565980781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3077833224351555474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105a326d5fbf4dacbd32ba7d108d9f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3340518683762797325
 GameObject:
   m_ObjectHideFlags: 0
@@ -5356,6 +5400,7 @@ Transform:
   - {fileID: 4816001019930219044}
   - {fileID: 5267542465842052107}
   - {fileID: 8108023086146954262}
+  - {fileID: 797270489209631619}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6706937362632168498
@@ -5398,6 +5443,7 @@ MonoBehaviour:
   dropOnDestroyComponent: {fileID: 2075695049437756266}
   weaponComponent: {fileID: 7183692620476636510}
   dissolveController: {fileID: 5319297187496111779}
+  winOnDeathComponent: {fileID: 532392019565980781}
   chestDrop: {fileID: -5662689963410785615, guid: fe977e56248c07446a7574ed737f311e,
     type: 3}
   expDrop: {fileID: 3634895298855100167, guid: d099174199599234c807f1eee918c770, type: 3}
@@ -11100,7 +11146,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4816001019930219044}
   - component: {fileID: 8922557848048840621}
-  - component: {fileID: 289075912729814655}
   m_Layer: 0
   m_Name: GrandOcti
   m_TagString: Untagged
@@ -11143,10 +11188,6 @@ MonoBehaviour:
   lightPillarAttackDelay: 1
   lightPillarAttackArea: 7
   attackCooldown: 3
-  spawnableEnemies:
-  - {fileID: 11400000, guid: c2a805eede02d8f43875a5a9daeb79d4, type: 2}
-  - {fileID: 11400000, guid: 75246ff61684c704aafb28d258294e18, type: 2}
-  - {fileID: 11400000, guid: 2bff21d33dac5af43a1c0117c6f17c65, type: 2}
   enemySummons:
   - enemy: {fileID: 11400000, guid: c2a805eede02d8f43875a5a9daeb79d4, type: 2}
     probability: 1
@@ -11156,15 +11197,3 @@ MonoBehaviour:
     probability: 1
   enemySpawnCountMin: 10
   enemySpawnCountMax: 20
---- !u!114 &289075912729814655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9215985800514479204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 105a326d5fbf4dacbd32ba7d108d9f02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

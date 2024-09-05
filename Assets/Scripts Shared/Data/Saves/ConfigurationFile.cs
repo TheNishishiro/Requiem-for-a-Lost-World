@@ -31,6 +31,7 @@ namespace DefaultNamespace.Data
 		public bool RenderCoopProjectiles { get; set; }
 		public int UpscalingMethod { get; set; }
 		public int FpsLimit { get; set; }
+		public bool SSAO { get; set; }
 
 		public ConfigurationFile Default()
 		{
@@ -54,7 +55,8 @@ namespace DefaultNamespace.Data
 				RenderCoopProjectiles = true;
 				UpscalingMethod = 0;
 				FpsLimit = 0;
-				ConfigurationVersion = 9;
+				ConfigurationVersion = 10;
+				SSAO = false;
 			}
 			else
 			{
@@ -81,7 +83,8 @@ namespace DefaultNamespace.Data
 				ResolutionWidth = Screen.currentResolution.width;
 				ResolutionHeight = Screen.currentResolution.height;
 				RefreshRate = Screen.currentResolution.refreshRateRatio.numerator;
-				ConfigurationVersion = 9;
+				ConfigurationVersion = 10;
+				SSAO = true;
 			}
 
 			return Update();
@@ -150,6 +153,10 @@ namespace DefaultNamespace.Data
 				if (AntiAliasing > 3)
 					AntiAliasing = 3;
 				ConfigurationVersion = 9;
+			}
+			if (ConfigurationVersion == 9)
+			{
+				SSAO = true;
 			}
 
 			return this;

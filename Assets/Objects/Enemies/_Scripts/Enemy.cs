@@ -32,6 +32,7 @@ namespace Objects.Enemies
 		[SerializeField] private DropOnDestroy dropOnDestroyComponent;
 		[SerializeField] private EnemyWeaponComponent weaponComponent;
 		[SerializeField] private DissolveController dissolveController;
+		[SerializeField] private EnemyWinOnDeath winOnDeathComponent;
 		[SerializeField] private Pickup chestDrop;
 		[SerializeField] private Pickup expDrop;
 		[SerializeField] private Pickup goldDrop;
@@ -52,6 +53,7 @@ namespace Objects.Enemies
 		private NetworkVariable<float> removeCollisionsTimer = new ();
 		private NetworkVariable<bool> isRemoveCollisions = new ();
 		private NetworkVariable<bool> isGrandOcti = new ();
+		private NetworkVariable<bool> isFinalBoss = new ();
 		private float _damageReduction;
 		private NetworkVariable<bool> _isDying= new ();
 		private bool _isPlayerControlled;
@@ -69,12 +71,14 @@ namespace Objects.Enemies
 			spriteRenderer.sprite = EnemyManager.instance.GetSpriteByEnemy(enemyType.Value);
 			enemyType.OnValueChanged += OnTypeChange;
 			isGrandOcti.OnValueChanged += OnBossChanged;
+			isFinalBoss.OnValueChanged += OnBossChanged;
 		}
 
 		public override void OnNetworkDespawn()
 		{
 			enemyType.OnValueChanged -= OnTypeChange;
 			isGrandOcti.OnValueChanged -= OnBossChanged;
+			isFinalBoss.OnValueChanged -= OnBossChanged;
 		}
 
 		private void OnTypeChange(EnemyTypeEnum oldType, EnemyTypeEnum newType)
@@ -109,6 +113,7 @@ namespace Objects.Enemies
 			curseParticleSystem.gameObject.SetActive(false);
 
 			enemyType.Value = newStats.enemyType;
+			isFinalBoss.Value = newStats.isFinalBoss;
 			spriteRenderer.transform.localPosition = new Vector3(0, newStats.groundOffset, 0);
 			grandOctiBoss.SetActive(false);
 			stats ??= new EnemyStats();
@@ -191,8 +196,12 @@ namespace Objects.Enemies
 
 		public void SetupBoss()
 		{
-			if (IsHost) isGrandOcti.Value = true;
-			grandOctiBoss.SetActive(true);
+			if (IsHost)
+			{
+				isGrandOcti.Value = enemyType.Value == EnemyTypeEnum.PeaceEnder;
+			}
+			grandOctiBoss.SetActive(isGrandOcti.Value);
+			winOnDeathComponent.gameObject.SetActive(isFinalBoss.Value);
 		}
 
 		public bool IsBoss()
@@ -263,7 +272,7 @@ namespace Objects.Enemies
 			weaponComponent.enabled = false;
 			chaseComponent.SetMovementState(true);
 			_isDying.Value = true;
-			RpcManager.instance.AddEnemyKillRpc(IsBoss());
+			RpcManager.instance.AddEnemyKillRpc(IsBoss(), enemyType.Value);
 			dropOnDestroyComponent.CheckDrop();
 			StartCoroutine(DieAnimation());
 		}

@@ -16,5 +16,6 @@ namespace Objects.Enemies
 		public float groundOffset;
 		public bool isBossEnemy;
 		public int ExpDrop;
+		public bool isLevelBoss;
 	}
 }

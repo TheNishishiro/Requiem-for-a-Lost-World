@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using DefaultNamespace;
+using DefaultNamespace.Data.Achievements;
 using Events.Handlers;
 using Events.Scripts;
+using Managers;
 using UnityEngine;
 using Weapons;
 
@@ -35,6 +37,9 @@ namespace Objects.Abilities.Ice_FuA
 
                 _fireRate = 0.75f;
             }
+            
+            if (TimeAlive > 30)
+                AchievementManager.instance.UnlockAchievement(AchievementEnum.KeepFrostSeedUpFor30Seconds);
         }
 
         public void OnExpPickedUp(float amount)

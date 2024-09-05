@@ -28,6 +28,8 @@ namespace Objects.Enemies.EnemyWeapons
             {
                 case EnemyWeaponId.Fireball:
                     return new EnemyFireballWeapon(definition.spawnPrefab, definition.weaponStats, definition.weaponId);
+                case EnemyWeaponId.FireballBoss:
+                    return new EnemyFireballWeapon(definition.spawnPrefab, definition.weaponStats, definition.weaponId);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(weaponId));
             }

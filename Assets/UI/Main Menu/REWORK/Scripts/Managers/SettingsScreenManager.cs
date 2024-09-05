@@ -44,6 +44,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryLod;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryRenderDistance;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryShadows;
+        [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entrySSAO;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryAntialiasing;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entry3dGrass;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryGrassDensity;
@@ -60,6 +61,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryMoveRightKeyBind;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryDashKeyBind;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entrySprintKeyBind;
+        [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryInteractKeyBind;
         [Space]
         [BoxGroup("Description")] [SerializeField] private Image imageExample;
         [BoxGroup("Description")] [SerializeField] private TextMeshProUGUI textDescription;
@@ -202,6 +204,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 					entryLod.SetSelection(0);
 					entryRenderDistance.SetSelection(0);
 					entry3dGrass.SetSelection(0);
+					entrySSAO.SetSelection(0);
 					break;
 				case 1:
 					entryVSync.SetSelection(0);
@@ -215,6 +218,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 					entryLod.SetSelection(1);
 					entryRenderDistance.SetSelection(0);
 					entry3dGrass.SetSelection(0);
+					entrySSAO.SetSelection(0);
 					break;
 				case 2:
 					entryVSync.SetSelection(1);
@@ -228,6 +232,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 					entryLod.SetSelection(1);
 					entryRenderDistance.SetSelection(1);
 					entry3dGrass.SetSelection(0);
+					entrySSAO.SetSelection(1);
 					break;
 				case 3:
 					entryVSync.SetSelection(1);
@@ -241,6 +246,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 					entryLod.SetSelection(3);
 					entryRenderDistance.SetSelection(1);
 					entry3dGrass.SetSelection(0);
+					entrySSAO.SetSelection(1);
 					break;
 				case 4:
 					entryVSync.SetSelection(1);
@@ -254,6 +260,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 					entryLod.SetSelection(3);
 					entryRenderDistance.SetSelection(2);
 					entry3dGrass.SetSelection(1);
+					entrySSAO.SetSelection(1);
 					break;
 				case 5:
 					entryVSync.SetSelection(1);
@@ -267,6 +274,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 					entryLod.SetSelection(4);
 					entryRenderDistance.SetSelection(3);
 					entry3dGrass.SetSelection(1);
+					entrySSAO.SetSelection(1);
 					break;
 			}
         }
@@ -292,6 +300,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             entryLod.SetSelection(configuration.LodLevel);
             entryRenderDistance.SetSelection(configuration.RenderDistance);
             entryShadows.SetSelection(configuration.ShadowQuality);
+            entrySSAO.SetSelection(configuration.SSAO ? 1 : 0);
             entryAntialiasing.SetSelection(configuration.AntiAliasing);
             entry3dGrass.SetSelection((int)configuration.GrassType);
             entryGrassDensity.SetSelection(configuration.GrassDensity);
@@ -315,6 +324,8 @@ namespace UI.Main_Menu.REWORK.Scripts
             entryDashKeyBind.SetLabelValue(dashKeyBind.ToString(), (int)dashKeyBind);
             var sprintKeyBind = _saveFile.GetKeybinding(KeyAction.Sprint);
             entrySprintKeyBind.SetLabelValue(sprintKeyBind.ToString(), (int)sprintKeyBind);
+            var interactKeyBind = _saveFile.GetKeybinding(KeyAction.Interact);
+            entryInteractKeyBind.SetLabelValue(interactKeyBind.ToString(), (int)interactKeyBind);
         }
 
         private void SaveSettings()
@@ -334,6 +345,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             configuration.LodLevel = entryLod.GetSelectedOption();
             configuration.RenderDistance = entryRenderDistance.GetSelectedOption();
             configuration.ShadowQuality = entryShadows.GetSelectedOption();
+            configuration.SSAO = entrySSAO.GetSelectedOption() == 1;
             configuration.AntiAliasing = entryAntialiasing.GetSelectedOption();
             configuration.GrassType = (GrassType)entry3dGrass.GetSelectedOption();
             configuration.GrassDensity = entryGrassDensity.GetSelectedOption();
@@ -350,6 +362,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             _saveFile.Keybindings[KeyAction.MoveRight] = (KeyCode)entryMoveRightKeyBind.GetLabelValue();
             _saveFile.Keybindings[KeyAction.Dash] = (KeyCode)entryDashKeyBind.GetLabelValue();
             _saveFile.Keybindings[KeyAction.Sprint] = (KeyCode)entrySprintKeyBind.GetLabelValue();
+            _saveFile.Keybindings[KeyAction.Interact] = (KeyCode)entryInteractKeyBind.GetLabelValue();
             
             SaveManager.instance.ApplySettings();
             SaveManager.instance.SaveGame();
