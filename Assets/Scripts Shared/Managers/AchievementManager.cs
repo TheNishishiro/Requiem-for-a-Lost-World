@@ -13,6 +13,7 @@ using Objects.Stage;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Weapons;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -124,6 +125,11 @@ namespace Managers
 			if (SaveFile.Instance.BossKills > 50)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Kill500BossEnemies);
 
+			if (enemyTypeValue == EnemyTypeEnum.DungeonCrawler && Random.value < 0.025f)
+			{
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.UnlockBruteTalisman);
+			}
+			
 			if (enemyTypeValue == EnemyTypeEnum.TheWatcher)
 			{
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.BanishEvil);
