@@ -64090,7 +64090,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 210.9, y: -29.848}
+  m_AnchoredPosition: {x: 210.9, y: -29.848022}
   m_SizeDelta: {x: 421.8, y: 59.696}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1096399090
@@ -93262,10 +93262,15 @@ MonoBehaviour:
     position of 1st person camera\n\u2022 Disabled camera damping when met with obstacles\n\u2022
     Added resistances to enemies in Capital Outskirts \n\u2022 Enemies can now shoot
     projectiles\n\u2022 Added option to disable screen space ambient occlusion\n\u2022
-    Added 14 new achievements\n\nCO-OP:\n\u2022 Moved damage calculations to host\n\u2022
-    Damage calculation now takes enemy resistances into consideration\n\u2022 Elemental
-    application and reactions are now shared between players\n\nAdjustments:\n\u2022
-    Changed some enemy spawn probabilities on <b>Capital Outskirts</b>"
+    Added 14 new achievements\n\u2022 Vulnerabilities applied by weapons will now
+    stack between different weapons\n\nCO-OP:\n\u2022 Moved damage calculations to
+    host\n\u2022 Damage calculation now takes enemy resistances into consideration\n\u2022
+    Elemental application and reactions are now shared between players\n\u2022 Vulnerabilities
+    applied to enemies can now apply in multiplayer\n\u2022 Elemental damage modifications
+    caused by weapons are now shared between players\n\u2022 Arika's field will now
+    properly apply the follow-up damage when casted by client\n\u2022 Weapon kill
+    effects will now properly apply in CO-OP\n\nAdjustments:\n\u2022 Changed some
+    enemy spawn probabilities on <b>Capital Outskirts</b>"
 --- !u!222 &1451941363
 CanvasRenderer:
   m_ObjectHideFlags: 0

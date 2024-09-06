@@ -57,6 +57,33 @@ namespace Managers
             }
         }
         
+        [Rpc(SendTo.Server)]
+        public void ReduceEnemyResistanceRpc(NetworkBehaviourReference target, Element element, float amount)
+        {
+            if (target.TryGet(out Damageable damageableComponent))
+            {
+                damageableComponent.ReduceElementalDefenceServer(element, amount);
+            }
+        }
+        
+        [Rpc(SendTo.Server)]
+        public void EnemyTakeAdditionalDamageAsFollowUpRpc(NetworkBehaviourReference target, Element weaponElement, float duration, float modifier)
+        {
+            if (target.TryGet(out Damageable damageableComponent))
+            {
+                damageableComponent.SetTakeAdditionalDamageFromAllSourcesServer(weaponElement, duration, modifier);
+            }
+        }
+        
+        [Rpc(SendTo.Server)]
+        public void SetEnemyVulnerableRpc(NetworkBehaviourReference target, WeaponEnum weaponId, float time, float percentage)
+        {
+            if (target.TryGet(out Damageable damageableComponent))
+            {
+                damageableComponent.SetVulnerableServer(weaponId, time, percentage);
+            }
+        }
+        
         [Rpc(SendTo.SpecifiedInParams)]
         public void TriggerLifeStealRpc(float calculatedDamage, WeaponEnum weaponId, RpcParams rpcParams)
         {
@@ -296,6 +323,14 @@ namespace Managers
             {
                 DamageDealtEvent.Invoke(damageableComponent, calculatedDamage, isRecursion, weaponId);
             }
+        }
+        
+        [Rpc(SendTo.SpecifiedInParams)]
+        public void WeaponKilledEnemyRpc(WeaponEnum weaponId, RpcParams rpcParams)
+        {
+            if (weaponId == WeaponEnum.Unset)
+                return;
+            WeaponManager.instance.GetUnlockedWeapon(weaponId).OnEnemyKilled();
         }
         
         [Rpc(SendTo.SpecifiedInParams)]

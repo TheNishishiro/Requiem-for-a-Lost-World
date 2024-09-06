@@ -31,7 +31,7 @@ namespace Objects.Abilities.Scythe
 			if (ScytheWeapon.IsBloodEmbrace && Random.value <= 0.2)
 				DamageOverTime(damageable, other);
 			if (ScytheWeapon.IsCursedStrikes && Random.value <= 0.1 && damageable != null)
-				damageable.SetVulnerable(2, 1);
+				damageable.SetVulnerable((WeaponEnum)ParentWeapon.GetId(), 2, 1);
 			if (ScytheWeapon.IsSoulHarvest && Random.value <= 0.1)
 				_healthComponent.IncreaseMaxHealth(0.001f);
 		}

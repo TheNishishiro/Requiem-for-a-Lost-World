@@ -12,7 +12,7 @@ namespace Objects.Abilities.Low_Pressure
     public class LowPressureWeapon : PoolableWeapon<LowPressureProjectile>, IDamageDealtHandler
     {
         private Vector3 _targetPosition;
-        private bool _canAttack;
+        private float _innerCooldown;
         
         public override void SetupProjectile(NetworkProjectile networkProjectile, WeaponPoolEnum weaponPoolId)
         {
@@ -28,17 +28,18 @@ namespace Objects.Abilities.Low_Pressure
 
         protected override void CustomUpdate()
         {
-            _canAttack = true;
+            if (_innerCooldown > 0)
+                _innerCooldown -= Time.deltaTime;
         }
 
         public void OnDamageDealt(Damageable damageable, float damage, bool isRecursion, WeaponEnum weaponId)
         {
-            if (!_canAttack || isRecursion)
+            if (_innerCooldown > 0 || isRecursion)
                 return;
             
             _targetPosition = damageable.GetTargetPosition();
+            _innerCooldown = WeaponStatsStrategy.GetDuplicateSpawnDelay();
             Attack();
-            _canAttack = false;
         }
 
         private void OnEnable()

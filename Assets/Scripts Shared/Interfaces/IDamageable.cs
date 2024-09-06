@@ -1,5 +1,6 @@
 ﻿using Data.Elements;
 using DefaultNamespace.Data.Weapons;
+using Objects;
 using UnityEngine;
 using Weapons;
 
@@ -14,7 +15,7 @@ namespace Interfaces
 		void ReduceElementalDefence(Element element, float amount);
 		void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, IWeapon weaponBase, bool isRecursion = false);
 		void TakeDamageWithCooldown(DamageResult damage, GameObject damageSource, float damageCooldown, IWeapon weaponBase, bool isRecursion = false);
-		void SetVulnerable(float time, float percentage);
+		void SetVulnerable(WeaponEnum weaponId, float time, float percentage);
 		void ApplyDamageOverTime(float damage, float damageFrequency, float damageDuration, IWeapon weaponBase);
 	}
 }

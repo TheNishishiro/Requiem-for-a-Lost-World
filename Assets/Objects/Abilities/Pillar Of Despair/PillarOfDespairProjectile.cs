@@ -15,7 +15,7 @@ namespace Objects.Abilities.Pillar_Of_Despair
             if (damageable == null || damageable.IsDestroyed()) return;
             
             if (WeaponStatsStrategy.GetWeakness() > 0)
-                damageable?.SetVulnerable(2f, WeaponStatsStrategy.GetWeakness());
+                damageable?.SetVulnerable((WeaponEnum)ParentWeapon.GetId(), 2f, WeaponStatsStrategy.GetWeakness());
             if (WeaponStatsStrategy.GetDamageOverTime() > 0)
                 damageable.ApplyDamageOverTime(WeaponStatsStrategy.GetDamageOverTime(), WeaponStatsStrategy.GetDamageOverTimeFrequency(), WeaponStatsStrategy.GetDamageOverTimeDuration(), ParentWeapon);
         }

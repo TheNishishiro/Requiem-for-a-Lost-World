@@ -23,7 +23,7 @@ namespace Objects.Abilities.Back_Hole
 			if (!networkProjectile.IsOwner) return;
 			
 			DamageArea(other, out var damageable);
-			damageable?.SetVulnerable(1f, WeaponStatsStrategy.GetWeakness() + _weaknessIncrease);
+			damageable?.SetVulnerable((WeaponEnum)ParentWeapon.GetId(), 1f, WeaponStatsStrategy.GetWeakness() + _weaknessIncrease);
 		}
 	}
 }
