@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Data.Elements;
+using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
 using DefaultNamespace.Data.Weapons;
+using Events.Handlers;
+using Events.Scripts;
+using Objects;
 using Objects.Characters;
 using Objects.Drops;
 using Objects.Enemies;
@@ -17,7 +21,7 @@ using Random = UnityEngine.Random;
 
 namespace Managers
 {
-	public class AchievementManager : MonoBehaviour
+	public class AchievementManager : MonoBehaviour, IReactionTriggeredEvent, IDamageDealtHandler
 	{
 		public static AchievementManager instance;
 		private int _enemiesKilled;
@@ -29,7 +33,9 @@ namespace Managers
 		private float _distanceTraveled;
 		private int _earthWeaponsHeld;
 		private int _followUpWeaponsHeld;
+		private float _yamiDamageDealt;
 		private HashSet<int> _visitedShrines = new ();
+		private Dictionary<Element, int> _elementWeaponCount = new ();
         
 		public void Awake()
 		{
@@ -38,7 +44,19 @@ namespace Managers
 				instance = this;
 			}
 		}
-		
+
+		private void OnEnable()
+		{
+			ReactionTriggeredEvent.Register(this);
+			DamageDealtEvent.Register(this);
+		}
+
+		private void OnDisable()
+		{
+			ReactionTriggeredEvent.Unregister(this);
+			DamageDealtEvent.Unregister(this);
+		}
+
 		public void ClearPerGameStats()
 		{
 			_enemiesKilled = 0;
@@ -48,7 +66,9 @@ namespace Managers
 			_menuScrolls = 0;
 			_earthWeaponsHeld = 0;
 			_followUpWeaponsHeld = 0;
+			_yamiDamageDealt = 0;
 			_visitedShrines = new HashSet<int>();
+			_elementWeaponCount.Clear();
 		}
 
 		public void OnStageTimeUpdated(float time)
@@ -96,6 +116,36 @@ namespace Managers
 				_earthWeaponsHeld++;
 				if (_earthWeaponsHeld >= 2)
 					SaveFile.Instance.UnlockAchievement(AchievementEnum.HoldHighRarityEarthWeapons);
+			}
+
+			_elementWeaponCount.TryAdd(weapon.ElementField, 0);
+			_elementWeaponCount[weapon.ElementField]++;
+			if (_elementWeaponCount[weapon.ElementField] >= 4)
+			{
+				switch (weapon.ElementField)
+				{
+					case Element.Fire:
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.FireMastery);
+						break;
+					case Element.Lightning:
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.LightMastery);
+						break;
+					case Element.Ice:
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.IceMastery);
+						break;
+					case Element.Wind:
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.WindMastery);
+						break;
+					case Element.Light:
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.LightMastery);
+						break;
+					case Element.Cosmic:
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.CosmicMastery);
+						break;
+					case Element.Earth:
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.EarthMastery);
+						break;
+				}
 			}
 		}
 		public void OnItemUnlocked(ItemBase item, int unlockedCount, int rarity)
@@ -250,6 +300,32 @@ namespace Managers
 		public void UnlockAchievement(AchievementEnum achievementId)
 		{
 			SaveFile.Instance.UnlockAchievement(achievementId);
+		}
+
+		public void OnReactionTriggered(ElementalReaction reaction, Damageable damageable)
+		{
+			SaveFile.Instance.ReactionsTriggered++;
+			if (SaveFile.Instance.ReactionsTriggered == 10000)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.MasterOfElements);
+				
+		}
+
+		public void OnDamageDealt(Damageable damageable, float damage, bool isRecursion, WeaponEnum weaponId)
+		{
+			if (GameData.IsCharacter(CharactersEnum.Chornastra_BoR))
+			{
+				_yamiDamageDealt += damage;
+				if (_yamiDamageDealt > 20_000_000)
+					SaveFile.Instance.UnlockAchievement(AchievementEnum.Chronastra_DamageDealt);
+			}
+		}
+
+		public void YamiFlowerPickedUp()
+		{
+			SaveFile.Instance.YamiFlowerPickup++;
+			if (SaveFile.Instance.YamiFlowerPickup > 1000)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.Chronastra_FlowersPickup);
+			
 		}
 	}
 }

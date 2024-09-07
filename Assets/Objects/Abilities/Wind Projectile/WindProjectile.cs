@@ -21,7 +21,6 @@ namespace Objects.Abilities.Wind_Projectile
         private void OnTriggerEnter(Collider other)
         {
             SimpleDamage(other, true,false, out var damageable);
-            DamageOverTime(damageable, other);
         }
     }
 }

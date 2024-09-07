@@ -5,11 +5,14 @@ namespace Objects.Abilities.Claws
 {
     public class ClawProjectile : StagableProjectile
     {
+        private ClawWeapon ClawWeapon => (ClawWeapon)ParentWeapon;
+        public bool IsLastStage => stageId == 2;
         private int stageId = 0;
 
         public void SetNextStage()
         {
             stageId++;
+            ProjectileDamageIncreasePercentage = IsLastStage && ClawWeapon.BeastsWrath ? 1.5f : 0;
             if (stageId > 2)
                 stageId = 0;
         }
@@ -32,7 +35,9 @@ namespace Objects.Abilities.Claws
 
         public void OnTriggerEnter(Collider other)
         {
-            DamageOverTime(other);
+            SimpleDamage(other, false, false, out var damageable);
+            DamageOverTime(damageable, other);
+            ApplyVulnerability(damageable, other, 2);
         }
     }
 }

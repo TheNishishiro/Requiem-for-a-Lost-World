@@ -114,7 +114,7 @@ namespace DefaultNamespace
 
 		private void Update()
 		{
-			if (IsServer && _vulnerability.Count > 0)
+			if (IsHost && _vulnerability.Count > 0)
 				vulnerabilityTimer += Time.deltaTime;
 			
 			if (additionalDamageTimer > 0)
@@ -122,7 +122,7 @@ namespace DefaultNamespace
 			
 			if (Time.frameCount % 60 != 0) return;
 
-			if (IsServer)
+			if (IsHost)
 			{
 				var vulnerabilitySources = _vulnerability.Keys.ToList();
 				foreach (var vulnerabilitySource in vulnerabilitySources)
@@ -164,14 +164,14 @@ namespace DefaultNamespace
 			}
 		}
 
-		private float GetResistance(Element element)
+		private float GetResistance(Element element, CharactersEnum characterId, CharacterRank characterRank)
 		{
-			if (!IsServer)
+			if (!IsHost)
 				throw new Exception("Resistances can only be obtained by the server");
 			
 			resistances.TryAdd(element, 0);
 			var resistance = resistances[element];
-			if (GameData.IsCharacterWithRank(CharactersEnum.Chornastra_BoR, CharacterRank.E4))
+			if (characterId == CharactersEnum.Chornastra_BoR && characterRank == CharacterRank.E4)
 				return resistance < 0 ? resistance : 0;
 
 			return resistance;
@@ -194,14 +194,15 @@ namespace DefaultNamespace
 			if (isNetworkObject)
 				RpcManager.instance.DealDamageToEnemyRpc(this, damageResult.Damage, damageResult.IsCriticalHit,
 					weaponBase?.GetElement() ?? Element.None, (WeaponEnum?)weaponBase?.GetId() ?? WeaponEnum.Scythe,
-					elementalReactionEffectIncreasePercentage, isRecursion, NetworkManager.Singleton.LocalClientId);
+					elementalReactionEffectIncreasePercentage, GameData.GetPlayerCharacterId(), GameData.GetPlayerCharacterRank(), isRecursion, NetworkManager.Singleton.LocalClientId);
 			else
 				TakeDamageServer(damageResult.Damage, damageResult.IsCriticalHit, weaponBase?.GetElement() ?? Element.None,
 					(WeaponEnum?)weaponBase?.GetId() ?? WeaponEnum.Scythe, elementalReactionEffectIncreasePercentage, 
+					GameData.GetPlayerCharacterId(), GameData.GetPlayerCharacterRank(),
 					isRecursion, NetworkManager.Singleton.LocalClientId);
 		}
 		
-		public void TakeDamageServer(float baseDamage, bool isCriticalHit, Element weaponElement, WeaponEnum weaponId, float elementalReactionEffectIncreasePercentage, bool isRecursion, ulong clientId)
+		public void TakeDamageServer(float baseDamage, bool isCriticalHit, Element weaponElement, WeaponEnum weaponId, float elementalReactionEffectIncreasePercentage, CharactersEnum characterId, CharacterRank characterRank, bool isRecursion, ulong clientId)
 		{
 			if (IsDestroyed())
 				return;
@@ -210,7 +211,7 @@ namespace DefaultNamespace
 			var isWeaponSpecified = weaponElement != Element.None;
 			if (isWeaponSpecified)
 			{
-				calculatedDamage *= 1 - GetResistance(weaponElement);
+				calculatedDamage *= 1 - GetResistance(weaponElement, characterId, characterRank);
 				OnElementInflict(weaponElement, baseDamage, elementalReactionEffectIncreasePercentage, clientId);
 			}
 
@@ -220,7 +221,7 @@ namespace DefaultNamespace
 
 			if (!isRecursion && additionalDamageTimer > 0)
 			{
-				TakeDamageServer(baseDamage * additionalDamageModifier, isCriticalHit, additionalDamageType, WeaponEnum.Unset, elementalReactionEffectIncreasePercentage, true, clientId);
+				TakeDamageServer(baseDamage * additionalDamageModifier, isCriticalHit, additionalDamageType, WeaponEnum.Unset, elementalReactionEffectIncreasePercentage, characterId, characterRank, true, clientId);
 			}
 			
 			if (isWeaponSpecified && weaponId != WeaponEnum.Unset)
@@ -314,7 +315,7 @@ namespace DefaultNamespace
 
 		public void ReduceElementalDefenceServer(Element element, float amount)
 		{
-			if (!IsServer)
+			if (!IsHost)
 				throw new Exception("ReduceElementalDefence called outside of a server");
 			
 			resistances.TryAdd(element, 0);
@@ -345,7 +346,7 @@ namespace DefaultNamespace
 
 		public void SetTakeAdditionalDamageFromAllSourcesServer(Element element, float duration, float modifier)
 		{
-			if (!IsServer)
+			if (!IsHost)
 				throw new Exception("SetTakeAdditionalDamageFromAllSources called outside of a server");
 			
 			additionalDamageType = element;

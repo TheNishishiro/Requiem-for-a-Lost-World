@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
 using Data.Difficulty;
+using Data.Elements;
 using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Cameras;
@@ -94,11 +95,13 @@ namespace Managers
 		private void OnEnable()
 		{
 			SettingsChangedEvent.Register(this);
+			DamageDealtEvent.Register(this);
 		}
 
 		private void OnDisable()
 		{
 			SettingsChangedEvent.Unregister(this);
+			DamageDealtEvent.Unregister(this);
 		}
 
 		private void SetupPlayerCamera()

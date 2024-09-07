@@ -140,6 +140,12 @@ namespace UI.Main_Menu.REWORK.Scripts
                 case RequirementType.Shrines:
                     fillAmount = saveFile.ShrinesVisited / requirementValue;
                     break;
+                case RequirementType.Reactions:
+                    fillAmount = saveFile.ReactionsTriggered / requirementValue;
+                    break;
+                case RequirementType.AbyssFlowers:
+                    fillAmount = saveFile.YamiFlowerPickup / requirementValue;
+                    break;
                 case RequirementType.None:
                     break;
                 default:

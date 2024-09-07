@@ -53,8 +53,9 @@ MonoBehaviour:
   attackType: 3
   Name: Seed of Frost
   Description: Spawn a frost seed after picking up 50 shards. Seeds shoot homing
-    projectiles at nearby enemies. Picking up shards while Seed is active extends
-    it's duration.
+    projectiles at nearby enemies every {DuplicateSpawnDelay}s. Picking up shards
+    while Seed is active extends it's duration. Multiple Seeds can be present at
+    the field.
   chanceToAppear: 1
   Icon: {fileID: 21300000, guid: 4d0229bea15baab419be1487678e6c26, type: 3}
   unlockOnAchievement: 1
@@ -70,7 +71,7 @@ MonoBehaviour:
     AttackCount: 1
     PassThroughCount: 1
     DamageCooldown: 0
-    DuplicateSpawnDelay: 0.2
+    DuplicateSpawnDelay: 0.75
     DetectionRange: 0
     CritRate: 0
     CritDamage: 0
@@ -82,5 +83,14 @@ MonoBehaviour:
     DamageOverTimeFrequency: 0
     LifeSteal: 0
     FollowUpDamageIncrease: 0
-  availableUpgrades: []
+  availableUpgrades:
+  - {fileID: 11400000, guid: 486b616d6d086ee468656a5ee451c7ac, type: 2}
+  - {fileID: 11400000, guid: d4f34ca926e5a564dbb9d737ca0f6bfb, type: 2}
+  - {fileID: 11400000, guid: 746d07e3108aa3645ad853425a86f8c4, type: 2}
+  - {fileID: 11400000, guid: 7c75283414e2b1f40925948e452f80ff, type: 2}
+  - {fileID: 11400000, guid: d13c25bfcc35df54090037ecd2e92e8e, type: 2}
+  - {fileID: 11400000, guid: 6dfe4d84bc02acb408a0a8ec997a8d46, type: 2}
+  - {fileID: 11400000, guid: c8098f3349221e0428ce8ce2295b6fae, type: 2}
+  - {fileID: 11400000, guid: 01f4e081c0fe26a45bab01a8570b4c29, type: 2}
+  - {fileID: 11400000, guid: c48279577c2f22d4aa15e2c07b366794, type: 2}
   isSkill: 0

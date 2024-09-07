@@ -49,9 +49,9 @@ MonoBehaviour:
     physical damage by {PhysicalDamageIncrease}%
   supportType: 1
   chanceToAppear: 0.5
-  Icon: {fileID: 0}
-  unlockOnAchievement: 0
-  requiredAchievement: 0
+  Icon: {fileID: 21300000, guid: bdeb4c1694502964d8cb42228f262bcb, type: 3}
+  unlockOnAchievement: 1
+  requiredAchievement: 123
   ItemUpgrades:
   - {fileID: 11400000, guid: 37c1db694046b4b468173d2f91ef94b9, type: 2}
   - {fileID: 11400000, guid: df81a63b044d0544f84a59f87ceff63f, type: 2}
@@ -107,3 +107,5 @@ MonoBehaviour:
     Stamina: 0
     ElementalReactionEffectIncreasePercentage: 0
     FollowUpDamageIncrease: 0
+    HealthIncreasePercentage: 0
+    CanDotCrit: 0

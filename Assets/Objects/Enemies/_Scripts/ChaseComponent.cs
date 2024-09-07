@@ -148,6 +148,13 @@ public class ChaseComponent : NetworkBehaviour
 
     public void SetSlow(float time, float amount)
     {
+        RpcManager.instance.SetEnemySlowRpc(this, time, amount);
+    }
+    public void SetSlowServer(float time, float amount)
+    {
+        if (!IsHost)
+            throw new Exception("SetSlow called from the client");
+        
         if (_slowTimer < time)
         {
             _slowTimer = time;

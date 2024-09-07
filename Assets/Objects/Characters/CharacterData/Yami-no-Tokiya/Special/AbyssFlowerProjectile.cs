@@ -15,7 +15,7 @@ namespace Objects.Characters.Yami_no_Tokiya.Special
     {
         private void OnTriggerStay(Collider other)
         {
-            if (other.CompareTag("Player") && TimeAlive < 5)
+            if (other.CompareTag("Player") && TimeAlive < 5 && GameData.IsCharacter(CharactersEnum.Chornastra_BoR))
             {
                 Pickup();
             }
@@ -29,6 +29,7 @@ namespace Objects.Characters.Yami_no_Tokiya.Special
         public void Pickup()
         {
             SpecialBarManager.instance.Increment();
+            AchievementManager.instance.YamiFlowerPickedUp();
             Destroy();
         }
     }

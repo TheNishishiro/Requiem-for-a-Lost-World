@@ -4,7 +4,7 @@ using Objects.Characters;
 
 namespace DefaultNamespace.Data.Achievements
 {
-	public enum AchievementEnum // 118
+	public enum AchievementEnum // 126
 	{
 		[AchievementValue("Jack of all trades", "Obtain 6 weapons in a single game", AchievementSection.Misc, Rarity.Common)]
 		Hold6Weapons = 0,
@@ -92,6 +92,22 @@ namespace DefaultNamespace.Data.Achievements
 		UnlockLowPressure = 117,
 		[AchievementValue("I see no god up here", "Climb the peak of Capital Outskirts", AchievementSection.Environment, Rarity.Rare)]
 		PeakofPeaks = 118,
+		[AchievementValue("Master of Elements", "Trigger a total of 10000 reactions", AchievementSection.Environment, Rarity.Rare, RequirementType.Reactions, 10000)]
+		MasterOfElements = 119,
+		[AchievementValue("Ice Mastery", "Own at least 4 ice weapons in a single game", AchievementSection.Misc, Rarity.Rare)]
+		IceMastery = 120,
+		[AchievementValue("Fire Mastery", "Own at least 4 fire weapons in a single game", AchievementSection.Misc, Rarity.Rare)]
+		FireMastery = 121,
+		[AchievementValue("Earth Mastery", "Own at least 4 earth weapons in a single game", AchievementSection.Misc, Rarity.Rare)]
+		EarthMastery = 122,
+		[AchievementValue("Lightning Mastery", "Own at least 4 lightning weapons in a single game", AchievementSection.Misc, Rarity.Rare)]
+		LightningMastery = 123,
+		[AchievementValue("Wind Mastery", "Own at least 4 wind weapons in a single game", AchievementSection.Misc, Rarity.Rare)]
+		WindMastery = 124,
+		[AchievementValue("Cosmic Mastery", "Own at least 4 cosmic weapons in a single game", AchievementSection.Misc, Rarity.Rare)]
+		CosmicMastery = 125,
+		[AchievementValue("Light Mastery", "Own at least 4 light weapons in a single game", AchievementSection.Misc, Rarity.Rare)]
+		LightMastery = 126,
 		
 		#region Character specific achievements
 		[AchievementValue("Bound by fate", "Bind enemies for 1 hour in total in a single game using Amelisana", AchievementSection.Character, Rarity.Common, CharactersEnum.Amelisana_BoN, RequirementType.None, 1)]
@@ -102,10 +118,10 @@ namespace DefaultNamespace.Data.Achievements
 		Amelisana_FinishWithoutUsingUltimate = 98,
 		[AchievementValue("Inner struggle", "As Amelisana gather inventory of conflicting forces", AchievementSection.Character, Rarity.Rare, CharactersEnum.Amelisana_BoN, RequirementType.None, 1)]
 		Amelisana_LightAndCosmicOnly = 99,
-		[AchievementValue("Transcendence", "As Yami-no-Tokiya deal a total of 20 milion damage in a single game", AchievementSection.Character, Rarity.Rare, CharactersEnum.Chornastra_BoR, RequirementType.None, 1)]
+		[AchievementValue("Transcendence", "As Yami-no-Tokiya deal a total of 20 million damage in a single game", AchievementSection.Character, Rarity.Rare, CharactersEnum.Chornastra_BoR, RequirementType.None, 1)]
 		Chronastra_DamageDealt = 103,
-		[AchievementValue("Purge", "As Yami-no-Tokiya reduce everything to none", AchievementSection.Character, Rarity.Rare, CharactersEnum.Chornastra_BoR, RequirementType.None, 1)]
-		Chronastra_EnemyKills = 104,
+		[AchievementValue("Field of paper flowers", "As Yami-no-Tokiya pick up a 1000 Abyss Flowers", AchievementSection.Character, Rarity.Rare, CharactersEnum.Chornastra_BoR, RequirementType.AbyssFlowers, 1000)]
+		Chronastra_FlowersPickup = 104,
 		#endregion
 		
 		#region Survive with characters

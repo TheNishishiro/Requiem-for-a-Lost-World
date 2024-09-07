@@ -11,6 +11,7 @@ namespace Objects.Abilities.Claws
 {
     public class ClawWeapon : PoolableWeapon<BoomerangProjectile>
     {
+        public bool BeastsWrath;
         private NetworkProjectile _slashProjectile;
 
         public override void SetupProjectile(NetworkProjectile networkProjectile, WeaponPoolEnum weaponPoolId)
@@ -37,6 +38,12 @@ namespace Objects.Abilities.Claws
             projectile.SetNextStage();
             yield return new WaitForSeconds(WeaponStatsStrategy.GetDuplicateSpawnDelay());
             OnAttackEnd();
+        }
+
+        protected override void OnLevelUp()
+        {
+            if (LevelField == 10)
+                BeastsWrath = true;
         }
     }
 }

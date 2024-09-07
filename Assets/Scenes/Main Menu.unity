@@ -93254,23 +93254,24 @@ MonoBehaviour:
     new sections\n\u2022 Added a loading notification when loading into the level\n\u2022
     Added display of weapon type and element to details in the collection menu\n\u2022
     Character shard stories can now be scrolled\n\u2022 Collection items description
-    can now be scrolled\n\nSystem:\n\u2022 Added rewards for visitting twitter/discord/itch.io
-    pages and additional rewards for sending feedback\n\u2022 Added character fragments
-    to the shop\n\u2022 Changed follow up attack damage calculation: FuA benefit
-    from half of character crit rate / crit damage and does not scale with damage
-    increase % \n\u2022 Selected game settings will now be remembered\n\u2022 Adjusted
-    position of 1st person camera\n\u2022 Disabled camera damping when met with obstacles\n\u2022
-    Added resistances to enemies in Capital Outskirts \n\u2022 Enemies can now shoot
-    projectiles\n\u2022 Added option to disable screen space ambient occlusion\n\u2022
-    Added 14 new achievements\n\u2022 Vulnerabilities applied by weapons will now
-    stack between different weapons\n\nCO-OP:\n\u2022 Moved damage calculations to
-    host\n\u2022 Damage calculation now takes enemy resistances into consideration\n\u2022
-    Elemental application and reactions are now shared between players\n\u2022 Vulnerabilities
-    applied to enemies can now apply in multiplayer\n\u2022 Elemental damage modifications
-    caused by weapons are now shared between players\n\u2022 Arika's field will now
-    properly apply the follow-up damage when casted by client\n\u2022 Weapon kill
-    effects will now properly apply in CO-OP\n\nAdjustments:\n\u2022 Changed some
-    enemy spawn probabilities on <b>Capital Outskirts</b>"
+    can now be scrolled\n\u2022 Fix description of <b>Armor</b> missing '%' sign\n\nSystem:\n\u2022
+    Added rewards for visitting twitter/discord/itch.io pages and additional rewards
+    for sending feedback\n\u2022 Added character fragments to the shop\n\u2022 Changed
+    follow up attack damage calculation: FuA benefit from half of character crit
+    rate / crit damage and does not scale with damage increase % \n\u2022 Selected
+    game settings will now be remembered\n\u2022 Adjusted position of 1st person
+    camera\n\u2022 Disabled camera damping when met with obstacles\n\u2022 Added
+    resistances to enemies in Capital Outskirts \n\u2022 Enemies can now shoot projectiles\n\u2022
+    Added option to disable screen space ambient occlusion\n\u2022 Added 14 new achievements\n\u2022
+    Vulnerabilities applied by weapons will now stack between different weapons\n\nCO-OP:\n\u2022
+    Moved damage calculations to host\n\u2022 Damage calculation now takes enemy
+    resistances into consideration\n\u2022 Elemental application and reactions are
+    now sync between players\n\u2022 Vulnerabilities applied to enemies will now
+    sync between players\n\u2022 Elemental damage modifications caused by weapons
+    will now sync between players\n\u2022 Arika's field will now properly apply the
+    follow-up damage when casted by client\n\u2022 Weapon kill effects will now properly
+    apply in CO-OP\n\u2022 Slowing effects can now be applied by clients\n\nAdjustments:\n\u2022
+    Changed some enemy spawn probabilities on <b>Capital Outskirts</b>"
 --- !u!222 &1451941363
 CanvasRenderer:
   m_ObjectHideFlags: 0

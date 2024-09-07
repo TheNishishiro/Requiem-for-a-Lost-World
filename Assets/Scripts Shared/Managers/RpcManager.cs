@@ -8,6 +8,7 @@ using DefaultNamespace.Data.Weapons;
 using Events.Scripts;
 using Objects;
 using Objects.Abilities;
+using Objects.Characters;
 using Objects.Enemies;
 using Objects.Enemies.EnemyWeapons;
 using Objects.Players.PermUpgrades;
@@ -49,11 +50,11 @@ namespace Managers
         
         [Rpc(SendTo.Server)]
         public void DealDamageToEnemyRpc(NetworkBehaviourReference target, float baseDamage, bool isCriticalHit, Element weaponElement, WeaponEnum weaponId, float elementalReactionEffectIncreasePercentage,
-            bool isRecursion, ulong clientId)
+            CharactersEnum characterId, CharacterRank characterRank, bool isRecursion, ulong clientId)
         {
             if (target.TryGet(out Damageable damageableComponent))
             {
-                damageableComponent.TakeDamageServer(baseDamage, isCriticalHit, weaponElement, weaponId, elementalReactionEffectIncreasePercentage, isRecursion, clientId);
+                damageableComponent.TakeDamageServer(baseDamage, isCriticalHit, weaponElement, weaponId, elementalReactionEffectIncreasePercentage, characterId, characterRank, isRecursion, clientId);
             }
         }
         
@@ -81,6 +82,15 @@ namespace Managers
             if (target.TryGet(out Damageable damageableComponent))
             {
                 damageableComponent.SetVulnerableServer(weaponId, time, percentage);
+            }
+        }
+        
+        [Rpc(SendTo.Server)]
+        public void SetEnemySlowRpc(NetworkBehaviourReference target, float slowTime, float slowAmount)
+        {
+            if (target.TryGet(out ChaseComponent chaseComponent))
+            {
+                chaseComponent.SetSlowServer(slowTime, slowAmount);
             }
         }
         

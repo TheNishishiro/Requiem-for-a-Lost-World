@@ -35,7 +35,7 @@ namespace Objects.Abilities.Ice_FuA
                 if (target)
                     IceFuaWeapon.SpawnSubProjectile(transformCache.position, target);
 
-                _fireRate = 0.75f;
+                _fireRate = WeaponStatsStrategy.GetDuplicateSpawnDelay();
             }
             
             if (TimeAlive > 30)

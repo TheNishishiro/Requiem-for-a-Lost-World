@@ -1,5 +1,6 @@
 ﻿using DefaultNamespace;
 using Interfaces;
+using Objects;
 using Objects.Abilities;
 using Unity.Netcode;
 using UnityEngine;
@@ -42,6 +43,11 @@ namespace Weapons
 			SimpleDamage(other, false, true, out _);
 		}
 
+		protected void SimpleFollowUpDamage(IDamageable damageable)
+		{
+			SimpleDamage(damageable, false, true);
+		}
+
 		protected void SimpleDamage(Collider other, bool isLimitedUsage, bool isFollowUp, out IDamageable damageable)
 		{
 			damageable = null;
@@ -49,29 +55,19 @@ namespace Weapons
 				return;
 			
 			damageable = other.GetComponent<IDamageable>();
+			SimpleDamage(damageable, isLimitedUsage, isFollowUp);
+		}
+
+		protected void SimpleDamage(IDamageable damageable, bool isLimitedUsage, bool isFollowUp)
+		{
 			if (damageable == null)
 				return;
-
 			if (damageable.IsDestroyed())
 				return;
 
 			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage, ProjectileDamageIncrease, isFollowUp);
 			damageable.TakeDamage(damage, (WeaponBase)ParentWeapon, isFollowUp);
 
-			if (isLimitedUsage && currentPassedEnemies-- <= 0)
-				OnLifeTimeEnd();
-		}
-
-		protected void SimpleDamage(Damageable damageable, bool isLimitedUsage, bool isFollowUp)
-		{
-			if (damageable == null)
-				return;
-
-			var damage = WeaponStatsStrategy.GetDamageDealt(ProjectileDamageIncreasePercentage, ProjectileDamageIncrease, isFollowUp);
-			damageable.TakeDamage(damage, ParentWeapon, isFollowUp);
-			if (damageable.IsDestroyed())
-				return;
-			
 			if (isLimitedUsage && currentPassedEnemies-- <= 0)
 				OnLifeTimeEnd();
 		}
@@ -113,6 +109,18 @@ namespace Weapons
 				var dotDuration = WeaponStatsStrategy.GetDamageOverTimeDuration();
 				
 				damageable.ApplyDamageOverTime(dot, dotFrequency, dotDuration, ParentWeapon);
+			}
+		}
+
+		protected void ApplyVulnerability(IDamageable damageable, Collider other, float duration)
+		{
+			if (!other.CompareTag("Enemy"))
+				return;
+			
+			var weakness = WeaponStatsStrategy.GetWeakness();
+			if (weakness > 0 && duration > 0)
+			{
+				damageable.SetVulnerable((WeaponEnum)ParentWeapon.GetId(), duration, weakness);
 			}
 		}
 

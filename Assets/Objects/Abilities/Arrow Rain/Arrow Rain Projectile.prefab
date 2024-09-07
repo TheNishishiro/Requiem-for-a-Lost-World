@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2922154144296807961}
   - component: {fileID: 6015736762456784678}
   - component: {fileID: 6898409984210790506}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Logic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,6 +92,8 @@ MonoBehaviour:
   reduceSizeBeforeTime: 0
   targetMinSize: {x: 0, y: 0, z: 0}
   multiplyTargetByScale: 0
+  dontTickLifeTime: 0
+  projectileTypeId: 0
 --- !u!1 &5000459491395547195
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +105,7 @@ GameObject:
   - component: {fileID: 3206129587893255519}
   - component: {fileID: 3711745559688718468}
   - component: {fileID: 864475544790997432}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,6 +148,7 @@ ParticleSystemRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4020,7 +4023,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 512
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -5001,7 +5004,7 @@ GameObject:
   - component: {fileID: 1158469065424394102}
   - component: {fileID: 281825087460874241}
   - component: {fileID: 1140489610545819177}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9824,6 +9827,7 @@ ParticleSystemRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9892,7 +9896,7 @@ GameObject:
   - component: {fileID: 3248696869294461770}
   - component: {fileID: 2731906442395085800}
   - component: {fileID: 7106396702237737788}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Arrow Rain Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

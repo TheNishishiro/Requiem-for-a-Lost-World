@@ -17,7 +17,8 @@ namespace Objects.Abilities.Ice_FuA
         private int _expShardPickedUp;
         private Vector3 _startPosition;
         private Enemy _target;
-        
+        private int _shardsRequired = 50;
+
         private void OnEnable()
         {
             ExpPickedUpEvent.Register(this);
@@ -31,7 +32,7 @@ namespace Objects.Abilities.Ice_FuA
         public void OnExpPickedUp(float amount)
         {
             _expShardPickedUp++;
-            if (_expShardPickedUp > 50)
+            if (_expShardPickedUp > _shardsRequired)
             {
                 Attack();
                 _expShardPickedUp = 0;
@@ -64,6 +65,12 @@ namespace Objects.Abilities.Ice_FuA
                     networkProjectile.GetProjectile<IceFuaProjectile>().SetTarget(_target);
                     break;
             }
+        }
+
+        protected override void OnLevelUp()
+        {
+            if (LevelField == 5)
+                _shardsRequired = 40;
         }
 
         protected override IEnumerator AttackProcess()

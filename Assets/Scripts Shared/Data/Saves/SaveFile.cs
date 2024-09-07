@@ -62,6 +62,12 @@ namespace DefaultNamespace.Data
 		public ulong TotalAmountHealed;
 		public ulong DamageTakeInOneGame;
 		public ulong TotalDamageTaken;
+		public double DistanceTraveled;
+		public ulong ShrinesVisited;
+		public ulong ReactionsTriggered;
+		#endregion
+		#region Character Stats
+		public ulong YamiFlowerPickup;
 		#endregion
 		#region Rewards
 		public bool IsTwitterVisited;
@@ -77,8 +83,6 @@ namespace DefaultNamespace.Data
 		public UnityEvent<CharactersEnum, CharacterRank> OnCharacterUnlocked;
 		
 		public static SaveFile Instance { get; private set; }
-		public double DistanceTraveled { get; set; }
-		public ulong ShrinesVisited { get; set; }
 
 		public CameraModes CameraMode;
 
@@ -363,6 +367,8 @@ namespace DefaultNamespace.Data
 		public ulong DamageTakeInOneGame;
 		public ulong TotalDamageTaken;
 		public ulong ShrinesVisited;
+		public ulong ReactionsTriggered;
+		public ulong YamiFlowerPickup;
 		public double DistanceTraveled;
 		public bool IsFirstTutorialCompleted;
 		public bool IsTwitterVisited;
@@ -405,6 +411,8 @@ namespace DefaultNamespace.Data
 			SelectedCharacterId = saveFile.SelectedCharacterId;
 			TimePlayed = saveFile.TimePlayed;
 			ShrinesVisited = saveFile.ShrinesVisited;
+			ReactionsTriggered = saveFile.ReactionsTriggered;
+			YamiFlowerPickup = saveFile.YamiFlowerPickup;
 			BossKills = saveFile.BossKills;
 			SelectedDifficulty = saveFile.SelectedDifficulty;
 			TotalLegendaryItemsObtained = saveFile.TotalLegendaryItemsObtained;

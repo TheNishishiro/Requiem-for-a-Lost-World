@@ -11,6 +11,8 @@ namespace Objects.Abilities.Low_Pressure
 {
     public class LowPressureWeapon : PoolableWeapon<LowPressureProjectile>, IDamageDealtHandler
     {
+        public bool IsSlowOnHit;
+        public bool IsReduceWindResOnHit;
         private Vector3 _targetPosition;
         private float _innerCooldown;
         
@@ -40,6 +42,14 @@ namespace Objects.Abilities.Low_Pressure
             _targetPosition = damageable.GetTargetPosition();
             _innerCooldown = WeaponStatsStrategy.GetDuplicateSpawnDelay();
             Attack();
+        }
+
+        protected override void OnLevelUp()
+        {
+            if (LevelField == 6)
+                IsSlowOnHit = true;
+            if (LevelField == 7)
+                IsReduceWindResOnHit = true;
         }
 
         private void OnEnable()
