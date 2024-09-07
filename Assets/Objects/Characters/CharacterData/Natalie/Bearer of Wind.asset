@@ -29,13 +29,14 @@ MonoBehaviour:
     Increases all damage over time by <color=green>5</color>
     per second'
   AbilityName: Monsoon
-  AbilityDescription: Send wave of wind outwards pushing enemies away reducing thier
+  AbilityDescription: Send wave of wind outwards pushing enemies away reducing their
     wind defence by 50% and applying wind damage over time equal to Natalie's DoT
   AbilityCooldown: 18
   SpecialPrefab: {fileID: 589977681743759464, guid: ea412cda1b7018849a508861fb6607f7,
     type: 3}
   AbilityPrefab: {fileID: -6151377061064853923, guid: 328e447a0e02aa649adea30cc671114e,
     type: 3}
+  AchievementListenerPrefab: {fileID: 0}
   AbilityIcon: {fileID: 21300000, guid: 23bc9044e733ab14f8f8fe60cd7e2736, type: 3}
   ColorTheme: {r: 0.3019608, g: 1, b: 0.27058825, a: 1}
   Alignment: 1
@@ -48,6 +49,7 @@ MonoBehaviour:
   Stats:
     Health: 50
     HealthMax: 50
+    SpecialValue: 0
     SpecialMax: 0
     SpecialIncrease: 0
     MagnetSize: 0.6
@@ -95,6 +97,10 @@ MonoBehaviour:
     EarthDamageIncrease: 0
     DashCount: 2
     Stamina: 2
+    ElementalReactionEffectIncreasePercentage: 0
+    FollowUpDamageIncrease: 0
+    HealthIncreasePercentage: 0
+    CanDotCrit: 0
   skillNodes:
   - {fileID: 11400000, guid: e222e7c0df65d244190ce3ad145a4084, type: 2}
   - {fileID: 11400000, guid: 55673078510933e44a8c31a86ba6a1d1, type: 2}

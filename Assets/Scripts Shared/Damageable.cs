@@ -114,7 +114,7 @@ namespace DefaultNamespace
 
 		private void Update()
 		{
-			if (IsHost && _vulnerability.Count > 0)
+			if (this.IsServer() && _vulnerability.Count > 0)
 				vulnerabilityTimer += Time.deltaTime;
 			
 			if (additionalDamageTimer > 0)
@@ -122,7 +122,7 @@ namespace DefaultNamespace
 			
 			if (Time.frameCount % 60 != 0) return;
 
-			if (IsHost)
+			if (this.IsServer())
 			{
 				var vulnerabilitySources = _vulnerability.Keys.ToList();
 				foreach (var vulnerabilitySource in vulnerabilitySources)
@@ -166,7 +166,7 @@ namespace DefaultNamespace
 
 		private float GetResistance(Element element, CharactersEnum characterId, CharacterRank characterRank)
 		{
-			if (!IsHost)
+			if (!this.IsServer())
 				throw new Exception("Resistances can only be obtained by the server");
 			
 			resistances.TryAdd(element, 0);
@@ -305,7 +305,7 @@ namespace DefaultNamespace
 
 		public bool IsDestroyed()
 		{
-			return (IsHost || !IsSpawned) && Health <= 0;
+			return (this.IsServer()) && Health <= 0;
 		}
 
 		public void ReduceElementalDefence(Element element, float amount)
@@ -315,7 +315,7 @@ namespace DefaultNamespace
 
 		public void ReduceElementalDefenceServer(Element element, float amount)
 		{
-			if (!IsHost)
+			if (!this.IsServer())
 				throw new Exception("ReduceElementalDefence called outside of a server");
 			
 			resistances.TryAdd(element, 0);
@@ -329,7 +329,7 @@ namespace DefaultNamespace
 		
 		public void SetVulnerableServer(WeaponEnum weaponId, float time, float percentage)
 		{
-			if (!IsServer)
+			if (!this.IsServer())
 				throw new Exception("SetVulnerable called outside of a server");
 			
 			_vulnerability.TryAdd(weaponId, new VulnerabilityData()
@@ -346,7 +346,7 @@ namespace DefaultNamespace
 
 		public void SetTakeAdditionalDamageFromAllSourcesServer(Element element, float duration, float modifier)
 		{
-			if (!IsHost)
+			if (!this.IsServer())
 				throw new Exception("SetTakeAdditionalDamageFromAllSources called outside of a server");
 			
 			additionalDamageType = element;

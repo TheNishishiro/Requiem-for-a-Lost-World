@@ -32,6 +32,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<AchievementEnum, bool> AchievementSaveData;
 		public Dictionary<KeyAction, KeyCode> Keybindings;
 		public Dictionary<int, List<int>> ReadStoryEntries { get; set; }
+
 		public List<ServerData> Servers;
 		public List<RuneSaveData> Runes;
 		public ConfigurationFile ConfigurationFile;
@@ -44,7 +45,7 @@ namespace DefaultNamespace.Data
 		public CharactersEnum CurrentBannerSubCharacterId1;
 		public CharactersEnum CurrentBannerSubCharacterId2;
 		public CharactersEnum CurrentBannerSubCharacterId3;
-		public DateTime? NextBannerChangeDate;
+		public DateTime? LastBannerChangeDate;
 		public int Pity;
 		#endregion
 		#region Game Stats
@@ -78,6 +79,7 @@ namespace DefaultNamespace.Data
 		#region Game Settings
 		public bool IsCoopAllowed;
 		public bool IsShortPlayTime;
+		public bool IsRandomLevelUp;
 		#endregion
 		public UnityEvent<AchievementEnum> AchievementUnlocked;
 		public UnityEvent<CharactersEnum, CharacterRank> OnCharacterUnlocked;
@@ -187,6 +189,18 @@ namespace DefaultNamespace.Data
 			{
 				PermUpgradeSaveData[permUpgradeType]++;
 			}
+			Save();
+		}
+
+		public void RemoveUpgradeLevel(PermUpgradeType permUpgradeType)
+		{
+			PermUpgradeSaveData ??= new Dictionary<PermUpgradeType, int>();
+			
+			if (!PermUpgradeSaveData.TryAdd(permUpgradeType, 1))
+			{
+				PermUpgradeSaveData[permUpgradeType]--;
+			}
+			Save();
 		}
 
 		public CharacterSaveData GetCharacterSaveData(CharactersEnum characterId)
@@ -379,6 +393,7 @@ namespace DefaultNamespace.Data
 		public DifficultyEnum SelectedDifficulty;
 		public bool IsCoopAllowed;
 		public bool IsShortPlayTime;
+		public bool IsRandomLevelUp;
 		public CharactersEnum? SelectedCharacterId;
 		public CharactersEnum CurrentBannerCharacterId;
 		public CharactersEnum CurrentBannerSubCharacterId1;
@@ -425,7 +440,7 @@ namespace DefaultNamespace.Data
 			CurrentBannerSubCharacterId1 = saveFile.CurrentBannerSubCharacterId1;
 			CurrentBannerSubCharacterId2 = saveFile.CurrentBannerSubCharacterId2;
 			CurrentBannerSubCharacterId3 = saveFile.CurrentBannerSubCharacterId3;
-			LastBannerChangeDate = saveFile.NextBannerChangeDate;
+			LastBannerChangeDate = saveFile.LastBannerChangeDate;
 			CameraMode = saveFile.CameraMode;
 			IsTwitterVisited = saveFile.IsTwitterVisited;
 			IsDiscordVisited = saveFile.IsDiscordVisited;
@@ -433,6 +448,7 @@ namespace DefaultNamespace.Data
 			IsFeedbackLeft = saveFile.IsFeedbackLeft;
 			IsCoopAllowed = saveFile.IsCoopAllowed;
 			IsShortPlayTime = saveFile.IsShortPlayTime;
+			IsRandomLevelUp = saveFile.IsRandomLevelUp;
 		}
 
 	}

@@ -14,6 +14,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [SerializeField] private TextMeshProUGUI labelRating;
         [SerializeField] private TextMeshProUGUI labelPrice;
         [SerializeField] private TextMeshProUGUI labelUpgrade;
+        [SerializeField] private Button buttonSell;
         [SerializeField] private Image imageIcon;
         private PermUpgrade _permUpgrade;
 
@@ -35,7 +36,9 @@ namespace UI.Main_Menu.REWORK.Scripts
             var isMaxLevel = savedUpgradeLevel >= upgradeMaxLevel;
             labelPrice.text = isMaxLevel ? "---" : cost.ToString("0") + " gold";
             labelUpgrade.text = isMaxLevel ? "Maxed" : "Upgrade";
-                
+            
+            var canRefund = savedUpgradeLevel > 0;
+            buttonSell.gameObject.SetActive(canRefund);
             
             var filledStars = new string('\u25c8', savedUpgradeLevel);
             var emptyStars = new string('\u25c7', upgradeMaxLevel - savedUpgradeLevel);
@@ -52,6 +55,18 @@ namespace UI.Main_Menu.REWORK.Scripts
             {
                 SaveFile.Instance.Gold -= (ulong)cost;
                 SaveFile.Instance.AddUpgradeLevel(_permUpgrade.type);
+                Refresh();
+            }
+        }
+
+        public void Sell()
+        {
+            SaveFile.Instance.PermUpgradeSaveData.TryGetValue(_permUpgrade.type, out var savedUpgradeLevel);
+            var refundAmount = _permUpgrade.basePrice + _permUpgrade.costPerLevel * (savedUpgradeLevel - 1);
+            if (savedUpgradeLevel > 0)
+            {
+                SaveFile.Instance.Gold += (ulong)refundAmount;
+                SaveFile.Instance.RemoveUpgradeLevel(_permUpgrade.type);
                 Refresh();
             }
         }

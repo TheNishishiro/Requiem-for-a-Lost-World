@@ -30,7 +30,7 @@ namespace DefaultNamespace.Data.Achievements
 		HaveFirst5StarWeapon = 10,
 		[AchievementValue("Lucky draw (II)", "Have your first item be of legendary rarity", AchievementSection.Misc, Rarity.Rare)]
 		HaveFirst5StarItem = 11,
-		[AchievementValue("Who needs a lucky clover?", "Obtain 20 items of legendary rarity", AchievementSection.Misc, Rarity.Rare, RequirementType.LegendaryItems, 10)]
+		[AchievementValue("Who needs a lucky clover?", "Obtain 20 items of legendary rarity", AchievementSection.Misc, Rarity.Rare, RequirementType.LegendaryItems, 20)]
 		Obtain10HighRarityItems = 12,
 		[AchievementValue("Sometimes death is just the beginning", "Fall during an expedition once", AchievementSection.Combat, Rarity.Common)]
 		DieOnce = 13,

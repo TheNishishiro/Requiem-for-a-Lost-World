@@ -10,9 +10,9 @@ namespace Objects.Abilities.Rock_Rain
         
         public override void SetupProjectile(NetworkProjectile networkProjectile)
         {
-            var position = transform.position + (transform.forward * (IsHailstorm ? 3f : 2f));
+            var position = transform.position;
             var spawnPosition = new Vector3(position.x, position.y + 5.0f, position.z);
-            var targetPosition = Utilities.GetPointOnColliderSurface(Utilities.GetRandomInArea(position, 2f), transform);
+            var targetPosition = Utilities.GetPointOnColliderSurface(Utilities.GetRandomInArea(position, IsHailstorm ? 3f : 2f), transform);
             networkProjectile.Initialize(this, spawnPosition);
             networkProjectile.GetProjectile<RockRainProjectile>().SetDirection(targetPosition.x, targetPosition.y, targetPosition.z);
         }

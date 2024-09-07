@@ -111,7 +111,7 @@ namespace Managers
 			if (unlockedCount == 6)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Hold6Weapons);
 
-			if (weapon.ElementField == Element.Earth && rarity > 3)
+			if (weapon.ElementField == Element.Earth && rarity >= 3)
 			{
 				_earthWeaponsHeld++;
 				if (_earthWeaponsHeld >= 2)

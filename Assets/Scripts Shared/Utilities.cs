@@ -283,5 +283,10 @@ namespace DefaultNamespace
 				_ => throw new ArgumentOutOfRangeException()
 			};
 		}
+
+		public static bool IsServer(this NetworkBehaviour networkBehaviour)
+		{
+			return networkBehaviour.IsHost || !networkBehaviour.IsSpawned;
+		}
 	}
 }

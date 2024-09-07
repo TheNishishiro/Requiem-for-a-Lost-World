@@ -106,6 +106,12 @@ namespace Managers
 				return;
 			}
 
+			if (GameSettings.IsRandomLevelUp)
+			{
+				Upgrade(upgradeEntries.OrderBy(_ => Random.value).First(), true);
+				return;
+			}
+			
 			Clean();
 			panel.SetActive(true);
 			
@@ -116,9 +122,9 @@ namespace Managers
 			}
 		}
 
-		public void Upgrade(UpgradeEntry upgradeEntry)
+		public void Upgrade(UpgradeEntry upgradeEntry, bool ignoreWaitTime = false)
 		{
-			if (_timeOpened < 1.5f) return;
+			if (_timeOpened < 1.5f && !ignoreWaitTime) return;
 			
 			upgradeEntry.LevelUp(WeaponManager.instance);
 			ClosePanel();

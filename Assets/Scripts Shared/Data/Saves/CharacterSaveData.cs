@@ -81,7 +81,7 @@ namespace DefaultNamespace.Data
 		public void AddFragments(int fragmentReward)
 		{
 			Fragments += fragmentReward;
-			if (Fragments > 50)
+			if (Fragments >= 50)
 			{
 				Unlock();
 				Fragments = 0;
