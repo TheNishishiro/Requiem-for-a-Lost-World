@@ -32,6 +32,15 @@ namespace DefaultNamespace.Data
 		public int UpscalingMethod { get; set; }
 		public int FpsLimit { get; set; }
 		public bool SSAO { get; set; }
+		public bool TwitchEnabled { get; set; }
+		public bool TwitchPickItems { get; set; }
+		public bool TwitchRemoveItems { get; set; }
+		public bool TwitchControlBuffs { get; set; }
+		public bool TwitchStageRules { get; set; }
+		public bool TwitchSpawnEnemies { get; set; }
+		public bool TwitchBanItems { get; set; }
+		public string TwitchChannel { get; set; }
+		public int TwitchPollDuration { get; set; }
 
 		public ConfigurationFile Default()
 		{
@@ -55,8 +64,9 @@ namespace DefaultNamespace.Data
 				RenderCoopProjectiles = true;
 				UpscalingMethod = 0;
 				FpsLimit = 0;
-				ConfigurationVersion = 10;
+				ConfigurationVersion = 11;
 				SSAO = false;
+				TwitchPollDuration = 15;
 			}
 			else
 			{
@@ -83,8 +93,9 @@ namespace DefaultNamespace.Data
 				ResolutionWidth = Screen.currentResolution.width;
 				ResolutionHeight = Screen.currentResolution.height;
 				RefreshRate = Screen.currentResolution.refreshRateRatio.numerator;
-				ConfigurationVersion = 10;
+				ConfigurationVersion = 11;
 				SSAO = true;
+				TwitchPollDuration = 15;
 			}
 
 			return Update();
@@ -157,6 +168,10 @@ namespace DefaultNamespace.Data
 			if (ConfigurationVersion == 9)
 			{
 				SSAO = true;
+			}
+			if (ConfigurationVersion == 10)
+			{
+				TwitchPollDuration = 15;
 			}
 
 			return this;

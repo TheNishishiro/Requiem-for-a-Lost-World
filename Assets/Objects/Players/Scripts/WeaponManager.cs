@@ -79,6 +79,7 @@ public class WeaponManager : NetworkBehaviour
         WeaponUnlockedEvent.Invoke(weapon, rarity);
         AchievementManager.instance.OnWeaponUnlocked(weapon, _unlockedWeapons.Count, rarity, weapon.AttackTypeField);
         GuiManager.instance.UpdateItems();
+        RpcManager.instance.AddWeaponToCoopPlayerListRpc(NetworkManager.Singleton.LocalClientId, weapon.WeaponId);
     }
 
     public void AddItem(ItemBase item, int rarity)
@@ -91,12 +92,14 @@ public class WeaponManager : NetworkBehaviour
         ItemUnlockedEvent.Invoke(item, rarity);
         AchievementManager.instance.OnItemUnlocked(item, _unlockedItems.Count, rarity);
         GuiManager.instance.UpdateItems();
+        RpcManager.instance.AddItemToCoopPlayerListRpc(NetworkManager.Singleton.LocalClientId, item.NameField);
     }
 
     public void UpgradeWeapon(WeaponBase weapon, UpgradeData upgradeData, int rarity)
     {
         weapon.Upgrade(upgradeData, rarity);
         GuiManager.instance.UpdateItems();
+        RpcManager.instance.AddWeaponToCoopPlayerListRpc(NetworkManager.Singleton.LocalClientId, weapon.WeaponId);
     }
 
     public void UpgradeItem(ItemBase itemBase, ItemUpgrade itemUpgrade, int rarity)
@@ -105,6 +108,7 @@ public class WeaponManager : NetworkBehaviour
         itemBase.ApplyUpgrade(itemUpgrade, rarity);
         _playerStatsComponent.Apply(itemUpgrade.ItemStats, rarity);
         GuiManager.instance.UpdateItems();
+        RpcManager.instance.AddItemToCoopPlayerListRpc(NetworkManager.Singleton.LocalClientId, itemBase.NameField);
     }
     
     public List<IPlayerItem> GetUnlockedWeaponsAsInterface()
@@ -115,6 +119,29 @@ public class WeaponManager : NetworkBehaviour
     public List<IPlayerItem> GetUnlockedItemsAsInterface()
     {
         return _unlockedItems.Cast<IPlayerItem>().ToList();
+    }
+
+    public List<IPlayerItem> GetAvailableWeaponsAsInterface()
+    {
+        return availableWeapons.Select(x => x.weaponBase).Cast<IPlayerItem>().ToList();
+    }
+
+    public List<IPlayerItem> GetAvailableItemsAsInterface()
+    {
+        return availableItems.Select(x => x.itemBase).Cast<IPlayerItem>().ToList();
+    }
+
+    public void BanItem(IPlayerItem item)
+    {
+        switch (item)
+        {
+            case WeaponBase weaponBase:
+                availableWeapons.RemoveAll(x => x.weaponBase == weaponBase);
+                break;
+            case ItemBase itemBase:
+                availableItems.RemoveAll(x => x.itemBase == itemBase);
+                break;
+        }
     }
 
     public IEnumerable<UpgradeEntry> GetUpgrades()
@@ -194,5 +221,10 @@ public class WeaponManager : NetworkBehaviour
     public WeaponBase GetWeapon(WeaponEnum weaponId)
     {
         return weapons.GetWeapon(weaponId);
+    }
+
+    public ItemBase GetItem(string itemName)
+    {
+        return items.GetItemByName(itemName);
     }
 }

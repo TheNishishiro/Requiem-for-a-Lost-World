@@ -51,6 +51,17 @@ namespace DefaultNamespace
 			return Random.value < 0.5f ? Random.Range(min1, max1) : Random.Range(min2, max2);
 		}
 		
+		public static T RandomEnumValue<T> ()
+		{
+			var v = Enum.GetValues (typeof (T));
+			return (T) v.GetValue (Random.Range(0,v.Length));
+		}
+		
+		public static List<T> RandomEnumValues<T> (int takeAmount)
+		{
+			return Enum.GetValues(typeof(T)).Cast<T>().OrderBy(_ => Random.value).Take(takeAmount).ToList();
+		}
+		
 		public static Color HexToColor(string hexColor)
 		{
 			// Remove the '#' character from the start if it exists

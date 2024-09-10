@@ -8,6 +8,7 @@ using DefaultNamespace.Data.Environment;
 using DefaultNamespace.Data.Settings;
 using Events.Scripts;
 using Interfaces;
+using Lexone.UnityTwitchChat;
 using Managers;
 using NaughtyAttributes;
 using TMPro;
@@ -63,6 +64,17 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entrySprintKeyBind;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryInteractKeyBind;
         [Space]
+        [BoxGroup("Twitch Settings")] [SerializeField] private TextMeshProUGUI textTwitchConnectionState;
+        [BoxGroup("Twitch Settings")] [SerializeField] private SettingsEntry entryTwitchEnabled;
+        [BoxGroup("Twitch Settings")] [SerializeField] private SettingsEntry entryTwitchChannel;
+        [BoxGroup("Twitch Settings")] [SerializeField] private SettingsEntry entryTwitchPollDuration;
+        [BoxGroup("Twitch Settings")] [SerializeField] private SettingsEntry entryTwitchPickItems;
+        [BoxGroup("Twitch Settings")] [SerializeField] private SettingsEntry entryTwitchRemoveItems;
+        [BoxGroup("Twitch Settings")] [SerializeField] private SettingsEntry entryTwitchControlBuffs;
+        [BoxGroup("Twitch Settings")] [SerializeField] private SettingsEntry entryTwitchStageRules;
+        [BoxGroup("Twitch Settings")] [SerializeField] private SettingsEntry entryTwitchSpawnEnemies;
+        [BoxGroup("Twitch Settings")] [SerializeField] private SettingsEntry entryTwitchBanItems;
+        [Space]
         [BoxGroup("Description")] [SerializeField] private Image imageExample;
         [BoxGroup("Description")] [SerializeField] private TextMeshProUGUI textDescription;
         
@@ -106,7 +118,12 @@ namespace UI.Main_Menu.REWORK.Scripts
                 _currentSectionId++;
                 if (_currentSectionId >= buttonSections.Count) _currentSectionId = 0;
                 FilterSection(_currentSectionId);
-            }   
+            }
+            
+            var connectionText = TwitchIntegrationManager.instance.IsConnected()
+	            ? "<color=green>Connected</color>"
+	            : "<color=red>Disconnected</color>";
+            textTwitchConnectionState.text = $"Connection state: {connectionText}";
         }
 
         public void FilterSection(int sectionId)
@@ -137,10 +154,10 @@ namespace UI.Main_Menu.REWORK.Scripts
         public void Open()
         {
             _saveFile = SaveManager.instance.GetSaveFile();
+            StackableWindowManager.instance.OpenWindow(this);
             LoadSettings();
             FilterSection(0);
             OpenDescription(null, null);
-            StackableWindowManager.instance.OpenWindow(this);
         }
 
         public void Close()
@@ -326,6 +343,16 @@ namespace UI.Main_Menu.REWORK.Scripts
             entrySprintKeyBind.SetLabelValue(sprintKeyBind.ToString(), (int)sprintKeyBind);
             var interactKeyBind = _saveFile.GetKeybinding(KeyAction.Interact);
             entryInteractKeyBind.SetLabelValue(interactKeyBind.ToString(), (int)interactKeyBind);
+            
+            entryTwitchChannel.SetText(configuration.TwitchChannel);
+            entryTwitchEnabled.SetSelection(configuration.TwitchEnabled ? 1 : 0);
+            entryTwitchPollDuration.SetSelection((configuration.TwitchPollDuration - 10)/5);
+            entryTwitchPickItems.SetSelection(configuration.TwitchPickItems ? 1 : 0);
+            entryTwitchRemoveItems.SetSelection(configuration.TwitchRemoveItems ? 1 : 0);
+            entryTwitchControlBuffs.SetSelection(configuration.TwitchControlBuffs ? 1 : 0);
+            entryTwitchStageRules.SetSelection(configuration.TwitchStageRules ? 1 : 0);
+            entryTwitchSpawnEnemies.SetSelection(configuration.TwitchSpawnEnemies ? 1 : 0);
+            entryTwitchBanItems.SetSelection(configuration.TwitchBanItems ? 1 : 0);
         }
 
         private void SaveSettings()
@@ -363,6 +390,16 @@ namespace UI.Main_Menu.REWORK.Scripts
             _saveFile.Keybindings[KeyAction.Dash] = (KeyCode)entryDashKeyBind.GetLabelValue();
             _saveFile.Keybindings[KeyAction.Sprint] = (KeyCode)entrySprintKeyBind.GetLabelValue();
             _saveFile.Keybindings[KeyAction.Interact] = (KeyCode)entryInteractKeyBind.GetLabelValue();
+            
+            configuration.TwitchChannel = entryTwitchChannel.GetText();
+            configuration.TwitchEnabled = entryTwitchEnabled.GetSelectedOption() == 1;
+            configuration.TwitchPollDuration = entryTwitchPollDuration.GetSelectedOption() * 5 + 10;
+            configuration.TwitchPickItems = entryTwitchPickItems.GetSelectedOption() == 1;
+            configuration.TwitchRemoveItems = entryTwitchRemoveItems.GetSelectedOption() == 1;
+            configuration.TwitchControlBuffs = entryTwitchControlBuffs.GetSelectedOption() == 1;
+            configuration.TwitchStageRules = entryTwitchStageRules.GetSelectedOption() == 1;
+            configuration.TwitchSpawnEnemies = entryTwitchSpawnEnemies.GetSelectedOption() == 1;
+            configuration.TwitchBanItems = entryTwitchBanItems.GetSelectedOption() == 1;
             
             SaveManager.instance.ApplySettings();
             SaveManager.instance.SaveGame();
@@ -405,6 +442,12 @@ namespace UI.Main_Menu.REWORK.Scripts
             // If we found a matching resolution with best available refresh rate, return that index
             // Otherwise return highest resolution available
             return hasMatchingResolution ? bestMatchIndex : _availableResolutions.Count - 1;   
+        }
+
+        public void ConnectToTwitch()
+        {
+	        SaveSettings();
+	        TwitchIntegrationManager.instance.Connect();
         }
         
         public bool IsInFocus { get; set; }

@@ -51,6 +51,7 @@ namespace Managers
                 
                 ModalManager.instance.Open(ButtonCombination.None, "CO-OP", "Connecting to the server...", modalState: ModalState.Info, textYes: "Close");
                 NetworkManager.Singleton.GetComponent<UnityTransport>().MaxConnectAttempts = 10;
+                NetworkingContainer.IsAllowJoins = true;
                 var result = NetworkManager.Singleton.StartClient();
                 NetworkingContainer.IsHostPlayer = false;
                 yield break;

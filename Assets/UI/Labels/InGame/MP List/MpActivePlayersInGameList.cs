@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Interfaces;
+using Objects;
+using Objects.Stage;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -50,6 +53,32 @@ namespace UI.Labels.InGame.MP_List
                 Destroy(activeList[clientId].gameObject);
                 activeList.Remove(clientId);
             }
+        }
+
+        public void UpdatePlayerItems(ulong clientId, string itemName, WeaponEnum weaponId)
+        {
+            if (clientId == NetworkManager.Singleton.LocalClientId) 
+                return;
+            if (!activeList.ContainsKey(clientId))
+                UpdateEntryAvatar(clientId, GameData.GetPlayerCharacterAvatar());
+            
+            var isWeapon = weaponId != WeaponEnum.Unset;
+            var isItem = !string.IsNullOrWhiteSpace(itemName);
+            
+            if (!isWeapon && !isItem)
+                return;
+
+            IPlayerItem playerItem;
+            if (isWeapon)
+            {
+                playerItem = WeaponManager.instance.GetWeapon(weaponId);
+            }
+            else
+            {
+                playerItem = WeaponManager.instance.GetItem(itemName);
+            }
+            
+            activeList[clientId].AddOrUpdateItem(playerItem, isItem, isWeapon);
         }
     }
 }

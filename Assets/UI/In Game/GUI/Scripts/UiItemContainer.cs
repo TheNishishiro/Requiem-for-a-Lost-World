@@ -16,5 +16,12 @@ namespace UI.In_Game.GUI.Scripts
             imageIcon.sprite = item.IconField;
             gameObject.SetActive(true);
         }
+        
+        public void Setup(Sprite image, int itemLevel)
+        {
+            textLevel.text = itemLevel.ToString();
+            imageIcon.sprite = image;
+            gameObject.SetActive(true);
+        }
     }
 }

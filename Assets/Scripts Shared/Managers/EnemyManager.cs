@@ -93,7 +93,7 @@ public class EnemyManager : NetworkBehaviour
 			.FirstOrDefault().Value.PlayerObject.transform;
 		var position = targetClient.position - Utilities.GenerateRandomPositionOnEdge(spawnArea);
 		var pointFound = Utilities.GetPointOnColliderSurface(position, 100f, targetClient, out var pointOnSurface);
-		if (!pointFound || Utilities.IsPositionOccupied(pointOnSurface, 0.3f))
+		if (!pointFound)
 			return;
 		
 		position = pointOnSurface;
@@ -231,6 +231,11 @@ public class EnemyManager : NetworkBehaviour
 	public Sprite GetSpriteByEnemy(EnemyTypeEnum enemyType)
 	{
 		return enemyContainer.possibleEnemies.FirstOrDefault(x => x.enemyType == enemyType)?.spriteSheet;
+	}
+
+	public List<EnemyData> GetPossibleEnemies()
+	{
+		return enemyContainer.possibleEnemies.ToList();
 	}
 
 	public void AddEnemy(Enemy networkBehaviour)

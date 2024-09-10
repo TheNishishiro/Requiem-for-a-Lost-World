@@ -22,6 +22,7 @@ namespace UI.Labels.InGame.PauseMenu
 		[SerializeField] private CharacterStatsEntry statEntryRegen;
 		[SerializeField] private CharacterStatsEntry statEntryArmor;
 		[SerializeField] private CharacterStatsEntry statEntryLuck;
+		[SerializeField] private CharacterStatsEntry statEntryResPen;
 		[SerializeField] private CharacterStatsEntry statsEntryAttackCount;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
 
@@ -72,6 +73,7 @@ namespace UI.Labels.InGame.PauseMenu
 			statEntryLuck.Set($"{statsScaler.GetLuck()*100:N0}%");
 			statEntryRegen.Set($"{statsScaler.GetHealthRegeneration()} /s");
 			statsEntryAttackCount.Set($"{statsScaler.GetAttackCount()}");
+			statEntryResPen.Set($"{statsScaler.GetResPen()*100:N0}%");
 			
 			panel.SetActive(true);
 		}

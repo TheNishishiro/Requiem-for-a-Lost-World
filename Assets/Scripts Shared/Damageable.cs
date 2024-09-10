@@ -13,6 +13,7 @@ using Objects;
 using Objects.Characters;
 using Objects.Players.Scripts;
 using Objects.Stage;
+using Unity.Mathematics;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -164,17 +165,14 @@ namespace DefaultNamespace
 			}
 		}
 
-		private float GetResistance(Element element, CharactersEnum characterId, CharacterRank characterRank)
+		private float GetResistance(Element element)
 		{
 			if (!this.IsServer())
 				throw new Exception("Resistances can only be obtained by the server");
 			
 			resistances.TryAdd(element, 0);
 			var resistance = resistances[element];
-			if (characterId == CharactersEnum.Chornastra_BoR && characterRank == CharacterRank.E4)
-				return resistance < 0 ? resistance : 0;
-
-			return resistance;
+			return math.clamp(resistance, -1f, 1f);
 		}
 
 		public void TakeDamage(float damage, IWeapon weaponBase = null, bool isRecursion = false)
@@ -185,6 +183,7 @@ namespace DefaultNamespace
 		public void TakeDamage(DamageResult damageResult, IWeapon weaponBase = null, bool isRecursion = false)
 		{
 			var elementalReactionEffectIncreasePercentage = PlayerStatsScaler.GetScaler().GetElementalReactionEffectIncreasePercentage();
+			var resPen = PlayerStatsScaler.GetScaler().GetResPen();
 			if (!_hitSoundPlayedThisFrame)
 			{
 				AudioSource.PlayClipAtPoint(takeDamageSound, _transformCache.position, 0.5f);
@@ -194,15 +193,14 @@ namespace DefaultNamespace
 			if (isNetworkObject)
 				RpcManager.instance.DealDamageToEnemyRpc(this, damageResult.Damage, damageResult.IsCriticalHit,
 					weaponBase?.GetElement() ?? Element.None, (WeaponEnum?)weaponBase?.GetId() ?? WeaponEnum.Scythe,
-					elementalReactionEffectIncreasePercentage, GameData.GetPlayerCharacterId(), GameData.GetPlayerCharacterRank(), isRecursion, NetworkManager.Singleton.LocalClientId);
+					elementalReactionEffectIncreasePercentage, resPen, isRecursion, NetworkManager.Singleton.LocalClientId);
 			else
 				TakeDamageServer(damageResult.Damage, damageResult.IsCriticalHit, weaponBase?.GetElement() ?? Element.None,
 					(WeaponEnum?)weaponBase?.GetId() ?? WeaponEnum.Scythe, elementalReactionEffectIncreasePercentage, 
-					GameData.GetPlayerCharacterId(), GameData.GetPlayerCharacterRank(),
-					isRecursion, NetworkManager.Singleton.LocalClientId);
+					resPen, isRecursion, NetworkManager.Singleton.LocalClientId);
 		}
 		
-		public void TakeDamageServer(float baseDamage, bool isCriticalHit, Element weaponElement, WeaponEnum weaponId, float elementalReactionEffectIncreasePercentage, CharactersEnum characterId, CharacterRank characterRank, bool isRecursion, ulong clientId)
+		public void TakeDamageServer(float baseDamage, bool isCriticalHit, Element weaponElement, WeaponEnum weaponId, float elementalReactionEffectIncreasePercentage, float resPen, bool isRecursion, ulong clientId)
 		{
 			if (IsDestroyed())
 				return;
@@ -211,7 +209,7 @@ namespace DefaultNamespace
 			var isWeaponSpecified = weaponElement != Element.None;
 			if (isWeaponSpecified)
 			{
-				calculatedDamage *= 1 - GetResistance(weaponElement, characterId, characterRank);
+				calculatedDamage *= 1 - (GetResistance(weaponElement) - resPen);
 				OnElementInflict(weaponElement, baseDamage, elementalReactionEffectIncreasePercentage, clientId);
 			}
 
@@ -221,7 +219,7 @@ namespace DefaultNamespace
 
 			if (!isRecursion && additionalDamageTimer > 0)
 			{
-				TakeDamageServer(baseDamage * additionalDamageModifier, isCriticalHit, additionalDamageType, WeaponEnum.Unset, elementalReactionEffectIncreasePercentage, characterId, characterRank, true, clientId);
+				TakeDamageServer(baseDamage * additionalDamageModifier, isCriticalHit, additionalDamageType, WeaponEnum.Unset, elementalReactionEffectIncreasePercentage, resPen, true, clientId);
 			}
 			
 			if (isWeaponSpecified && weaponId != WeaponEnum.Unset)
@@ -381,6 +379,7 @@ namespace DefaultNamespace
 			if (_elementVfxMap.ContainsKey(reactionResult.removedB))
 				_elementVfxMap[reactionResult.removedB].gameObject.SetActive(false);
 
+			var swirlElement = Element.None;
 			switch (reactionResult.reaction)
 			{
 				case ElementalReaction.None:
@@ -397,7 +396,10 @@ namespace DefaultNamespace
 					break;
 				case ElementalReaction.Swirl:
 				{
-					ReduceElementalDefence(reactionResult.removedA == Element.Wind ? reactionResult.removedB : reactionResult.removedA, 0.1f * elementalReactionEffectIncrease);
+					swirlElement = reactionResult.removedA == Element.Wind
+						? reactionResult.removedB
+						: reactionResult.removedA;
+					ReduceElementalDefence(swirlElement, 0.1f * elementalReactionEffectIncrease);
 					break;
 				}
 				case ElementalReaction.Collapse:
@@ -422,7 +424,9 @@ namespace DefaultNamespace
 			}
 
 			RpcManager.instance.InvokeReactionTriggeredEventRpc(this, reactionResult.reaction, RpcTarget.Single(clientId, RpcTargetUse.Temp));
-			MessageManager.instance.PostMessageRpc(reactionResult.reaction.ToString(), _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(element));
+
+			var textElement = reactionResult.reaction == ElementalReaction.Swirl ? swirlElement : element; 
+			MessageManager.instance.PostMessageRpc(reactionResult.reaction.ToString(), _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(textElement));
 		}
 	}
 }

@@ -157,7 +157,7 @@ namespace DefaultNamespace.Data
 			Keybindings.TryAdd(KeyAction.MoveDown, KeyCode.S);
 			Keybindings.TryAdd(KeyAction.MoveUp, KeyCode.W);
 			Keybindings.TryAdd(KeyAction.MoveLeft, KeyCode.A);
-			Keybindings.TryAdd(KeyAction.MoveRight, KeyCode.R);
+			Keybindings.TryAdd(KeyAction.MoveRight, KeyCode.D);
 			Keybindings.TryAdd(KeyAction.Accept, KeyCode.Return);
 			Keybindings.TryAdd(KeyAction.Dash, KeyCode.LeftShift);
 			Keybindings.TryAdd(KeyAction.Sprint, KeyCode.LeftControl);

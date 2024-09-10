@@ -11,6 +11,7 @@ using Objects.Abilities;
 using Objects.Characters;
 using Objects.Enemies;
 using Objects.Enemies.EnemyWeapons;
+using Objects.Items;
 using Objects.Players.PermUpgrades;
 using Objects.Players.Scripts;
 using Objects.Stage;
@@ -48,13 +49,13 @@ namespace Managers
             }
         }
         
-        [Rpc(SendTo.Server)]
+        [Rpc(SendTo.Server, Delivery = RpcDelivery.Reliable)]
         public void DealDamageToEnemyRpc(NetworkBehaviourReference target, float baseDamage, bool isCriticalHit, Element weaponElement, WeaponEnum weaponId, float elementalReactionEffectIncreasePercentage,
-            CharactersEnum characterId, CharacterRank characterRank, bool isRecursion, ulong clientId)
+            float resPen, bool isRecursion, ulong clientId)
         {
             if (target.TryGet(out Damageable damageableComponent))
             {
-                damageableComponent.TakeDamageServer(baseDamage, isCriticalHit, weaponElement, weaponId, elementalReactionEffectIncreasePercentage, characterId, characterRank, isRecursion, clientId);
+                damageableComponent.TakeDamageServer(baseDamage, isCriticalHit, weaponElement, weaponId, elementalReactionEffectIncreasePercentage, resPen, isRecursion, clientId);
             }
         }
         
@@ -350,6 +351,24 @@ namespace Managers
             {
                 ReactionTriggeredEvent.Invoke(reactionResultReaction, damageableComponent);
             }
+        }
+        
+        [Rpc(SendTo.Server)]
+        public void AddItemToCoopPlayerListRpc(ulong clientId, string itemName)
+        {
+            PropagateItemToOnlinePlayerListRpc(clientId, itemName, WeaponEnum.Unset);
+        }
+        
+        [Rpc(SendTo.Server)]
+        public void AddWeaponToCoopPlayerListRpc(ulong clientId, WeaponEnum weaponId)
+        {
+            PropagateItemToOnlinePlayerListRpc(clientId, null, weaponId);
+        }
+        
+        [Rpc(SendTo.Everyone)]
+        public void PropagateItemToOnlinePlayerListRpc(ulong clientId, string itemName, WeaponEnum weaponId)
+        {
+            MpActivePlayersInGameList.instance.UpdatePlayerItems(clientId, itemName, weaponId);
         }
     }
 }

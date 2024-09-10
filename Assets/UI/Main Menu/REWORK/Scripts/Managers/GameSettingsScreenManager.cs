@@ -146,6 +146,7 @@ public class GameSettingsScreenManager : MonoBehaviour, IStackableWindow
     {
         try
         {
+            TwitchIntegrationManager.instance.Connect();
             ModalManager.instance.Open(ButtonCombination.None, "Loading", "Loading the level...", modalState: ModalState.Info);
             if (!NetworkManager.Singleton.ShutdownInProgress)
                 NetworkManager.Singleton.Shutdown();

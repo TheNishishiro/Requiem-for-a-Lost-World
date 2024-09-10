@@ -17,7 +17,7 @@ public class StageDataEditor : Editor
         reorderableList = new ReorderableList(serializedObject, itemsProperty, true, true, true, true);
 
         reorderableList.drawHeaderCallback = (rect) => {
-            EditorGUI.LabelField(rect, "Events:");
+            EditorGUI.LabelField(rect, "TwitchEvent:");
         };
 
         reorderableList.drawElementCallback = (rect, index, isActive, isFocused) => 

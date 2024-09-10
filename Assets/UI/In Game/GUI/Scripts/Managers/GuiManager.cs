@@ -8,6 +8,7 @@ using NaughtyAttributes;
 using Objects.Stage;
 using TMPro;
 using UI.Labels.InGame;
+using Unity.Netcode;
 using Unity.VectorGraphics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -79,6 +80,9 @@ namespace UI.In_Game.GUI.Scripts.Managers
         [BoxGroup("Icons Theme")] [SerializeField] private SVGImage svgPause;
         [BoxGroup("Icons Theme")] [SerializeField] private SVGImage svgDash;
         [BoxGroup("Icons Theme")] [SerializeField] private SVGImage svgSprint;
+        [Space]
+        [BoxGroup("Networking")] [SerializeField] private TextMeshProUGUI pingDisplay;
+        
         
         public void Awake()
         {
@@ -138,6 +142,14 @@ namespace UI.In_Game.GUI.Scripts.Managers
                 infoEntryGold.SetText(GameResultData.Gold);
                 infoEntryGem.SetText(GameResultData.Gems);
                 infoEntryKills.SetText(GameResultData.MonstersKilled);
+
+                var displayMs = NetworkManager.Singleton != null && NetworkManager.Singleton.IsConnectedClient && !NetworkManager.Singleton.IsHost;
+                pingDisplay.gameObject.SetActive(displayMs);
+                if(displayMs)
+                {
+                    float pingInMilliseconds = NetworkManager.Singleton.NetworkConfig.NetworkTransport.GetCurrentRtt(NetworkManager.Singleton.NetworkConfig.NetworkTransport.ServerClientId);
+                    pingDisplay.text = $"{pingInMilliseconds:0} ms";
+                }
             }
         }
 

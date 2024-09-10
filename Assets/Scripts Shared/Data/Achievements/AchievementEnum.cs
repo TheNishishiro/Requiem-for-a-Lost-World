@@ -108,6 +108,8 @@ namespace DefaultNamespace.Data.Achievements
 		CosmicMastery = 125,
 		[AchievementValue("Light Mastery", "Own at least 4 light weapons in a single game", AchievementSection.Misc, Rarity.Rare)]
 		LightMastery = 126,
+		[AchievementValue("Illuminate my way", "Follow the light", AchievementSection.Environment, Rarity.Legendary)]
+		FollowThePhantom = 127,
 		
 		#region Character specific achievements
 		[AchievementValue("Bound by fate", "Bind enemies for 1 hour in total in a single game using Amelisana", AchievementSection.Character, Rarity.Common, CharactersEnum.Amelisana_BoN, RequirementType.None, 1)]
