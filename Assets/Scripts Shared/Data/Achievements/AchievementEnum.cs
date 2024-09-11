@@ -50,7 +50,7 @@ namespace DefaultNamespace.Data.Achievements
 		PlayFor5Hours = 86,		
 		[AchievementValue("David and Goliath", "Defeat 500 boss enemies", AchievementSection.Combat, Rarity.Rare, RequirementType.EnemyBossKills, 500)]
 		Kill500BossEnemies = 87,
-		[AchievementValue("The Path of Pain", "Take and heal 10000 damage in a single game", AchievementSection.Combat, Rarity.Common, RequirementType.HealAndDamageInSingleGame, 6000)]
+		[AchievementValue("The Path of Pain", "Take and heal 1500 damage in a single game", AchievementSection.Combat, Rarity.Common, RequirementType.HealAndDamageInSingleGame, 1500)]
 		HealAndTake6000Damage = 88,
 		[AchievementValue("Haste", "Have over 55% cooldown reduction upon leveling up", AchievementSection.Combat, Rarity.Rare)]
 		Reach55PercentCdr = 89,

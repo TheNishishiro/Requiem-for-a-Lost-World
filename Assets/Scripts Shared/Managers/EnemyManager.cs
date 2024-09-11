@@ -74,11 +74,8 @@ public class EnemyManager : NetworkBehaviour
 		if (PlayerTransform == null) return;
 
 		var playerCount = NetworkManager.Singleton.ConnectedClients.Count;
-		var increasePerClient = playerCount <= 1 ? 0 : playerCount * 0.5f;
-		
-		var maxEnemyCount = 
-			enemyMaxCount * PlayerStatsScaler.GetScaler().GetEnemyCountIncrease() * GameData.GetCurrentDifficulty().EnemyCapacityModifier
-			* (1 + increasePerClient);
+		var enemyCountIncrease = playerCount <= 1 ? 1 : (1 + 0.25f * (playerCount-1));
+		var maxEnemyCount = enemyMaxCount * PlayerStatsScaler.GetScaler().GetEnemyCountIncrease() * GameData.GetCurrentDifficulty().EnemyCapacityModifier * enemyCountIncrease;
 		if (currentEnemyCount >= maxEnemyCount && !enemyToSpawn.isBossEnemy)
 			return;
 		if (IsDisableEnemySpawn)
@@ -86,7 +83,6 @@ public class EnemyManager : NetworkBehaviour
 		
 		_currentEnemySpawning = enemyToSpawn;
 
-		
 		var targetClient = NetworkManager.Singleton.ConnectedClients
 			.Where(x => !x.Value.PlayerObject.GetComponent<MultiplayerPlayer>().isPlayerDead.Value)
 			.OrderBy(x => Random.value)
@@ -102,12 +98,11 @@ public class EnemyManager : NetworkBehaviour
 		var enemyComponent = enemy.GetComponent<Enemy>();
 		enemy.Spawn();
 		
-		var expIncrease = playerCount <= 1 ? 1 : Mathf.Pow(0.85f, playerCount);
-		expIncrease *= GameSettings.ExpDropModifier;
-		var damageIncrease = (playerCount <= 1 ? 1 : playerCount * 0.25f) * _damageMultiplier;
+		var expIncrease = GameSettings.ExpDropModifier * playerCount <= 1 ? 1 : Mathf.Pow(0.9f, playerCount);
+		var healthIncrease = _healthMultiplier * playerCount <= 1 ? 1 : Mathf.Pow(1.075f, playerCount);
 		
 		enemyComponent.SetPlayerTarget(targetClient);
-		enemyComponent.Setup(new EnemyNetworkStats(_currentEnemySpawning), _healthMultiplier * (1 + increasePerClient*0.5f), _enemySpeedMultiplier, expIncrease, damageIncrease);
+		enemyComponent.Setup(new EnemyNetworkStats(_currentEnemySpawning), healthIncrease, _enemySpeedMultiplier, expIncrease, _damageMultiplier);
 		enemyComponent.InitializeWeapon(_currentEnemySpawning.enemyWeapons);
 		enemyComponent.gameObject.SetActive(true);
 		enemyComponent.SetupBoss();

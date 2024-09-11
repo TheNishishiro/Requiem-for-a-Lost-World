@@ -13,21 +13,20 @@ MonoBehaviour:
   m_Name: plant2
   m_EditorClassIdentifier: 
   enemyType: 16
+  enemyWeapons: 
   enemyName: Giant Plant
-  sprite: {fileID: 21300000, guid: e28899b26dc107a4d9b2361176252225, type: 3}
   spriteSheet: {fileID: 21300000, guid: 26b51fbbad38a604f88f2598d67643f9, type: 3}
-  animatedPrefab: {fileID: 2196058944099639947, guid: b318c3f84a988ee438e1f898528bc08c,
-    type: 3}
   stats:
     hp: 200
     damage: 30
     speed: 1.6
     elementStats:
     - element: 9
-      damageReduction: 1
+      damageReduction: 0.6
     - element: 6
-      damageReduction: 1
+      damageReduction: 0.5
   allowFlying: 0
   groundOffset: 1
   isBossEnemy: 1
   ExpDrop: 5000
+  isLevelBoss: 0

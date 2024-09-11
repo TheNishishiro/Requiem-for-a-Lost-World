@@ -172,7 +172,7 @@ namespace DefaultNamespace
 			
 			resistances.TryAdd(element, 0);
 			var resistance = resistances[element];
-			return math.clamp(resistance, -1f, 1f);
+			return math.clamp(resistance, -1f, 0.8f);
 		}
 
 		public void TakeDamage(float damage, IWeapon weaponBase = null, bool isRecursion = false)

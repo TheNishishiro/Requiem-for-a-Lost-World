@@ -20,7 +20,7 @@ namespace Objects.Characters.Yami_no_Tokiya
             }
             if (characterRank >= CharacterRank.E4)
             {
-                stats.ResPen += 0.35f;
+                stats.ResPen += 0.5f;
             }
         }
 

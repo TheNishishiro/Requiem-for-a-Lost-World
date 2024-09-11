@@ -13,19 +13,18 @@ MonoBehaviour:
   m_Name: Shadowman
   m_EditorClassIdentifier: 
   enemyType: 18
+  enemyWeapons: 
   enemyName: Shadowman
-  sprite: {fileID: 21300000, guid: 4d9906af0818dec418cd32b2bbc8c6df, type: 3}
   spriteSheet: {fileID: 21300000, guid: 84476a7b1c40e67418a483524683d57f, type: 3}
-  animatedPrefab: {fileID: 1634473974572335667, guid: a82988aab3b66fb409f5b32f052a6318,
-    type: 3}
   stats:
     hp: 280
     damage: 20
     speed: 1.55
     elementStats:
     - element: 8
-      damageReduction: 9999
+      damageReduction: 0.7
   allowFlying: 0
   groundOffset: 0.25
   isBossEnemy: 0
   ExpDrop: 300
+  isLevelBoss: 0

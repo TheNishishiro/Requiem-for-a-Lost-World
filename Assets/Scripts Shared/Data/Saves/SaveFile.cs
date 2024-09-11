@@ -307,9 +307,13 @@ namespace DefaultNamespace.Data
 		public void ExchangeGemsForFragments(CharactersEnum characterId)
 		{
 			if (Gems < 250) return;
-
+			
+			var characterSaveData = GetCharacterSaveData(characterId);
+			if (characterSaveData.GetRankEnum() >= CharacterRank.E5)
+				return;
+			
 			Gems -= 250;
-			GetCharacterSaveData(characterId).AddFragments(1);
+			characterSaveData.AddFragments(characterId, 1);
 			Save();
 		}
 

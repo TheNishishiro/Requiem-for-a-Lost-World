@@ -13,11 +13,9 @@ MonoBehaviour:
   m_Name: Dark Punisher
   m_EditorClassIdentifier: 
   enemyType: 2
+  enemyWeapons: 
   enemyName: Dark Punisher Boss
-  sprite: {fileID: 21300000, guid: d50f2fab0b875174386b6e0b6e909827, type: 3}
   spriteSheet: {fileID: 21300000, guid: d16e1ed30dc12bf4d9768181604f6ea0, type: 3}
-  animatedPrefab: {fileID: 3727642815712276997, guid: fb7ccac77684a0849a7167aa2fc0fdde,
-    type: 3}
   stats:
     hp: 250
     damage: 50
@@ -27,7 +25,10 @@ MonoBehaviour:
       damageReduction: 0.6
     - element: 5
       damageReduction: 0.25
+    - element: 7
+      damageReduction: -1
   allowFlying: 0
   groundOffset: 0
   isBossEnemy: 0
   ExpDrop: 200
+  isLevelBoss: 0

@@ -203,7 +203,7 @@ namespace Managers
 			if (_healAmountInOneGame >= 1000)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Heal1000HealthInOneGame);
 			
-			if (_healAmountInOneGame > 10000 && _damageTakenInOneGame > 10000)
+			if (_healAmountInOneGame > 1500 && _damageTakenInOneGame > 1500)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.HealAndTake6000Damage);
 		}
 

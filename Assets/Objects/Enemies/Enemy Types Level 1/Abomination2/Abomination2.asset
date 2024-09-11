@@ -13,19 +13,18 @@ MonoBehaviour:
   m_Name: Abomination2
   m_EditorClassIdentifier: 
   enemyType: 1
+  enemyWeapons: 
   enemyName: Abomination2
-  sprite: {fileID: 21300000, guid: 732b3a19b98ffdd4789fda0ec92e3252, type: 3}
   spriteSheet: {fileID: 21300000, guid: 29770f3f27a271d4cb78d3760d9065e2, type: 3}
-  animatedPrefab: {fileID: 2875098751208357440, guid: 0e3e952f1cf7cdf42a372eda46a383c4,
-    type: 3}
   stats:
     hp: 500
     damage: 1
     speed: 0.5
     elementStats:
     - element: 2
-      damageReduction: 0.65
+      damageReduction: 0.4
   allowFlying: 0
   groundOffset: 0
   isBossEnemy: 0
   ExpDrop: 200
+  isLevelBoss: 0

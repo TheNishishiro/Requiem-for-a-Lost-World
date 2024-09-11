@@ -1,4 +1,6 @@
-﻿using DefaultNamespace.Data;
+﻿using System;
+using DefaultNamespace.Attributes;
+using DefaultNamespace.Data;
 using Objects.Characters;
 using Objects.Players.PermUpgrades;
 using TMPro;
@@ -9,6 +11,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 {
     public class UpgradeEntry : MonoBehaviour
     {
+        // TODO: Extract character fragments buying to it's own class
         [SerializeField] private TextMeshProUGUI labelTitle;
         [SerializeField] private TextMeshProUGUI labelDescription;
         [SerializeField] private TextMeshProUGUI labelRating;
@@ -16,12 +19,20 @@ namespace UI.Main_Menu.REWORK.Scripts
         [SerializeField] private TextMeshProUGUI labelUpgrade;
         [SerializeField] private Button buttonSell;
         [SerializeField] private Image imageIcon;
+        [SerializeField] private CharactersEnum characterId;
+        [SerializeField] private bool useCharacterFragments;
         private PermUpgrade _permUpgrade;
 
         public void Setup(PermUpgrade permUpgrade)
         {
             _permUpgrade = permUpgrade;
             Refresh();
+        }
+
+        private void OnEnable()
+        {
+            if (characterId != CharactersEnum.Unknown)
+                SetFragmentsOnTitle(characterId);
         }
 
         public void Refresh()
@@ -81,7 +92,30 @@ namespace UI.Main_Menu.REWORK.Scripts
         
         public void BuyFragments(int characterId)
         {
-            SaveFile.Instance.ExchangeGemsForFragments((CharactersEnum)characterId);
+            var characterEnum = (CharactersEnum)characterId;
+            SaveFile.Instance.ExchangeGemsForFragments(characterEnum);
+            SetFragmentsOnTitle(characterEnum);
+        }
+
+        private void SetFragmentsOnTitle(CharactersEnum characterId)
+        {
+            if (useCharacterFragments)
+            {
+                var characterSaveData = SaveFile.Instance.GetCharacterSaveData(characterId);
+                var characterRank = characterSaveData.GetRankEnum();
+                var characterRankText = $"<color=yellow>{characterRank.GetStringValue()}</color>";
+                var isMaxRank = characterRank == CharacterRank.E5;
+                if (!characterSaveData.IsUnlocked)
+                    characterRankText = "<color=black>Locked</color>";
+                var fragmentsText = isMaxRank
+                    ? ""
+                    : $", {characterSaveData.Fragments}/50";
+                
+                labelTitle.text = labelTitle.text.Split("<size=")[0] + $"<size=75%>  ({characterRankText}{fragmentsText})</size>";
+                
+                labelPrice.text = isMaxRank ? "---" : "250 gold";
+                labelUpgrade.text = isMaxRank ? "Maxed" : "Buy";
+            }
         }
     }
 }

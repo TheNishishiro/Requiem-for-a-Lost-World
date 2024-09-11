@@ -105,7 +105,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         
                 var fragmentReward = Random.Range(1, 50);
                 textDescription.text = $"Fragments +{fragmentReward}";
-                characterSaveData.AddFragments(fragmentReward);
+                characterSaveData.AddFragments(character.Id, fragmentReward);
             }
         }
         
