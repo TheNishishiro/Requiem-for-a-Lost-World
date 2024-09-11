@@ -78489,7 +78489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Padding: {x: -10, y: 0, z: 10, w: 0}
   m_Softness: {x: 0, y: 0}
 --- !u!1 &1359626159
 GameObject:
@@ -93663,8 +93663,9 @@ MonoBehaviour:
     can now be scrolled\n\u2022 Collection items description can now be scrolled\n\u2022
     Fix description of <b>Armor</b> missing '%' sign\n\u2022 Fixed shop's scaling
     on ultra wide resolutions\n\u2022 Fixed incorrect layering in the collection
-    menu\n\u2022 Added damage number size setting\n\nSystem:\n\u2022 <b>Added Twitch
-    integration</b>!\n\u2022 Added rewards for visitting twitter/discord/itch.io
+    menu\n\u2022 Added damage number size setting\n\u2022 Fixed value display for
+    runes providing benefits with negative percentage \n\nSystem:\n\u2022 <b>Added
+    Twitch integration</b>!\n\u2022 Added rewards for visitting twitter/discord/itch.io
     pages and additional rewards for sending feedback\n\u2022 Added character fragments
     to the shop\n\u2022 Changed follow up attack damage calculation: FuA benefit
     from half of character crit rate / crit damage and does not scale with damage
@@ -132120,7 +132121,7 @@ PrefabInstance:
     - target: {fileID: 973412962094920702, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -127.31645
+      value: -127.31647
       objectReference: {fileID: 0}
     - target: {fileID: 1057437717101005228, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
@@ -132490,7 +132491,7 @@ PrefabInstance:
     - target: {fileID: 3118256036537312055, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -29.848
+      value: -29.848022
       objectReference: {fileID: 0}
     - target: {fileID: 3200650183588482493, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
@@ -132955,7 +132956,7 @@ PrefabInstance:
     - target: {fileID: 5519701154415467702, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -172.39674
+      value: -172.39673
       objectReference: {fileID: 0}
     - target: {fileID: 5590932369435394412, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
@@ -133030,7 +133031,7 @@ PrefabInstance:
     - target: {fileID: 5620872598092346998, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -262.55734
+      value: -262.55737
       objectReference: {fileID: 0}
     - target: {fileID: 5664040530680820839, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
@@ -133170,7 +133171,7 @@ PrefabInstance:
     - target: {fileID: 6477922061724025083, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -217.47704
+      value: -217.47705
       objectReference: {fileID: 0}
     - target: {fileID: 6574651393547208622, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}

@@ -11,10 +11,14 @@ public class StageObjectSpawner : MonoBehaviour
     [SerializeField] private float shrineSpawnRange = 250;
     [SerializeField] private float shrineMinDistance = 40;
     [SerializeField] private Vector3 mapCenter = new (0, 6, 0);
+    [SerializeField] private bool useNetworkSpawn = true;
 
     private void Start()
     {
-        StartCoroutine(WaitForNetworkPool());
+        if (useNetworkSpawn)
+            StartCoroutine(WaitForNetworkPool());
+        else
+            SpawnLocal();
     }
 
     private IEnumerator WaitForNetworkPool()
@@ -35,6 +39,15 @@ public class StageObjectSpawner : MonoBehaviour
             }
 
             yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    private void SpawnLocal()
+    {
+        var spawnedPositions = Utilities.GetPositionsOnSurfaceWithMinDistance(shrineAmount, mapCenter, shrineSpawnRange, shrineMinDistance, transform, 100);
+        foreach (var position in spawnedPositions)
+        {
+            Instantiate(shrinePrefab, position, Quaternion.identity);
         }
     }
 }
