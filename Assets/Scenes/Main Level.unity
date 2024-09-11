@@ -360,6 +360,7 @@ GameObject:
   - component: {fileID: 198728844}
   - component: {fileID: 198728843}
   - component: {fileID: 198728845}
+  - component: {fileID: 198728847}
   m_Layer: 0
   m_Name: -----STAGE-----
   m_TagString: Untagged
@@ -455,6 +456,24 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &198728847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198728841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dcb51dad14050d43bc33519d1308cab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shrinePrefab: {fileID: 1251064517173344552, guid: d9c63fa5d8a03244b88ddee44e943996,
+    type: 3}
+  shrineAmount: 35
+  shrineSpawnRange: 250
+  shrineMinDistance: 40
+  mapCenter: {x: 0, y: 6, z: 0}
 --- !u!1 &275195009
 GameObject:
   m_ObjectHideFlags: 0

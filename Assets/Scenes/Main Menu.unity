@@ -93663,30 +93663,31 @@ MonoBehaviour:
     can now be scrolled\n\u2022 Collection items description can now be scrolled\n\u2022
     Fix description of <b>Armor</b> missing '%' sign\n\u2022 Fixed shop's scaling
     on ultra wide resolutions\n\u2022 Fixed incorrect layering in the collection
-    menu\n\nSystem:\n\u2022 <b>Added Twitch integration</b>!\n\u2022 Added rewards
-    for visitting twitter/discord/itch.io pages and additional rewards for sending
-    feedback\n\u2022 Added character fragments to the shop\n\u2022 Changed follow
-    up attack damage calculation: FuA benefit from half of character crit rate /
-    crit damage and does not scale with damage increase % \n\u2022 Selected game
-    settings will now be remembered\n\u2022 Adjusted position of 1st person camera\n\u2022
-    Disabled camera damping when met with obstacles\n\u2022 Added resistances to
-    enemies in Capital Outskirts \n\u2022 Enemies can now shoot projectiles\n\u2022
-    Added option to disable screen space ambient occlusion\n\u2022 Added 14 new achievements\n\u2022
-    Vulnerabilities applied by weapons will now stack between different weapons\n\u2022
-    Added new game rule: random item on level up\n\u2022 Upgrades bought in the shop
-    can now be refunded\n\u2022 Reduced the max level of Greed upgrade from 25 to
-    20 and changed the bonus from 5% per level to 6% per level\n\u2022 Fixed character/shard
-    unlocking with fragments that required 51 fragments for unlock instead of displayed
-    50\n\u2022 Added a RES PEN stat to characters that allows them to ignore a certain
-    percentage of enemy resistances\n\nCO-OP:\n\u2022 Moved damage calculations to
-    host\n\u2022 Damage calculation now takes enemy resistances into consideration\n\u2022
-    Elemental application and reactions are now sync between players\n\u2022 Vulnerabilities
-    applied to enemies will now sync between players\n\u2022 Elemental damage modifications
-    caused by weapons will now sync between players\n\u2022 Arika's field will now
-    properly apply the follow-up damage when casted by client\n\u2022 Weapon kill
-    effects will now properly apply in CO-OP\n\u2022 Slowing effects can now be applied
-    by clients\n\nAdjustments:\n\u2022 Changed some enemy spawn probabilities on
-    <b>Capital Outskirts</b>\n\u2022 Reduced glow on <b>Time Blade</b>'s attacks"
+    menu\n\u2022 Added damage number size setting\n\nSystem:\n\u2022 <b>Added Twitch
+    integration</b>!\n\u2022 Added rewards for visitting twitter/discord/itch.io
+    pages and additional rewards for sending feedback\n\u2022 Added character fragments
+    to the shop\n\u2022 Changed follow up attack damage calculation: FuA benefit
+    from half of character crit rate / crit damage and does not scale with damage
+    increase % \n\u2022 Selected game settings will now be remembered\n\u2022 Adjusted
+    position of 1st person camera\n\u2022 Disabled camera damping when met with obstacles\n\u2022
+    Added resistances to enemies in Capital Outskirts \n\u2022 Enemies can now shoot
+    projectiles\n\u2022 Added option to disable screen space ambient occlusion\n\u2022
+    Added 14 new achievements\n\u2022 Vulnerabilities applied by weapons will now
+    stack between different weapons\n\u2022 Added new game rule: random item on level
+    up\n\u2022 Upgrades bought in the shop can now be refunded\n\u2022 Reduced the
+    max level of Greed upgrade from 25 to 20 and changed the bonus from 5% per level
+    to 6% per level\n\u2022 Fixed character/shard unlocking with fragments that required
+    51 fragments for unlock instead of displayed 50\n\u2022 Added a RES PEN stat
+    to characters that allows them to ignore a certain percentage of enemy resistances\n\nCO-OP:\n\u2022
+    Moved damage calculations to host\n\u2022 Damage calculation now takes enemy
+    resistances into consideration\n\u2022 Elemental application and reactions are
+    now sync between players\n\u2022 Vulnerabilities applied to enemies will now
+    sync between players\n\u2022 Elemental damage modifications caused by weapons
+    will now sync between players\n\u2022 Arika's field will now properly apply the
+    follow-up damage when casted by client\n\u2022 Weapon kill effects will now properly
+    apply in CO-OP\n\u2022 Slowing effects can now be applied by clients\n\nAdjustments:\n\u2022
+    Changed some enemy spawn probabilities on <b>Capital Outskirts</b>\n\u2022 Reduced
+    glow on <b>Time Blade</b>'s attacks"
 --- !u!222 &1451941363
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -132119,7 +132120,7 @@ PrefabInstance:
     - target: {fileID: 973412962094920702, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -262.55734
+      value: -127.31645
       objectReference: {fileID: 0}
     - target: {fileID: 1057437717101005228, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
@@ -132354,7 +132355,7 @@ PrefabInstance:
     - target: {fileID: 2669720443093729090, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -217.47704
+      value: -307.63763
       objectReference: {fileID: 0}
     - target: {fileID: 2944544708899438825, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
@@ -132594,7 +132595,7 @@ PrefabInstance:
     - target: {fileID: 3459996759727896033, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -309.46698
+      value: -309.46704
       objectReference: {fileID: 0}
     - target: {fileID: 3780957245799127789, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
@@ -132630,6 +132631,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995254872347485997, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995254872347485997, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 976.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995254872347485997, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1066.8748
+      objectReference: {fileID: 0}
+    - target: {fileID: 3995254872347485997, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -543.4375
       objectReference: {fileID: 0}
     - target: {fileID: 4077505971995509227, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
@@ -132664,7 +132685,7 @@ PrefabInstance:
     - target: {fileID: 4077505971995509227, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -137.159
+      value: -137.15894
       objectReference: {fileID: 0}
     - target: {fileID: 4244039929874430655, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
@@ -132699,7 +132720,7 @@ PrefabInstance:
     - target: {fileID: 4244039929874430655, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -223.313
+      value: -223.31299
       objectReference: {fileID: 0}
     - target: {fileID: 4406501769491412854, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
@@ -132906,6 +132927,36 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1255.0529
       objectReference: {fileID: 0}
+    - target: {fileID: 5519701154415467702, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5519701154415467702, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5519701154415467702, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5519701154415467702, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5519701154415467702, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 210.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5519701154415467702, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -172.39674
+      objectReference: {fileID: 0}
     - target: {fileID: 5590932369435394412, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_Pivot.y
@@ -132979,7 +133030,7 @@ PrefabInstance:
     - target: {fileID: 5620872598092346998, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -172.39674
+      value: -262.55734
       objectReference: {fileID: 0}
     - target: {fileID: 5664040530680820839, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
@@ -133089,7 +133140,7 @@ PrefabInstance:
     - target: {fileID: 6388622632150722587, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -51.005
+      value: -51.005005
       objectReference: {fileID: 0}
     - target: {fileID: 6477922061724025083, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
@@ -133119,7 +133170,7 @@ PrefabInstance:
     - target: {fileID: 6477922061724025083, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -127.31645
+      value: -217.47704
       objectReference: {fileID: 0}
     - target: {fileID: 6574651393547208622, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
@@ -133269,7 +133320,7 @@ PrefabInstance:
     - target: {fileID: 6906206114939235032, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -379.76498
+      value: -379.765
       objectReference: {fileID: 0}
     - target: {fileID: 6941744322964625471, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
@@ -133624,7 +133675,7 @@ PrefabInstance:
     - target: {fileID: 8602264261614315412, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -520.361
+      value: -520.3611
       objectReference: {fileID: 0}
     - target: {fileID: 8675158659314960077, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}

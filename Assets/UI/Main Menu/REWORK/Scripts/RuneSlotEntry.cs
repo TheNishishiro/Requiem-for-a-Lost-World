@@ -29,8 +29,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         {
             _runeSaveData = runeSaveData;
 
-            var value = RuneListManager.instance.GetScaledValue(runeSaveData);
-            textStats.text = $"{runeSaveData.statType.GetShortName()} " + (runeSaveData.statType.IsPercent() ? $"{value*100:0.##}%" : $"{value:0.##}");
+            textStats.text = RuneListManager.instance.GetDisplay(runeSaveData, false);
             textStats.fontSharedMaterial = runeSaveData.rarity switch
             {
                 Rarity.None => materialCommon,

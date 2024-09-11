@@ -32,6 +32,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Section Containers")] [SerializeField] private GameObject containerIntegrationSettings;
         [BoxGroup("Section Containers")] [SerializeField] private GameObject containerMultiplayerSettings;
         [BoxGroup("Section Containers")] [SerializeField] private GameObject containerControlsSettings;
+        [BoxGroup("Section Containers")] [SerializeField] private GameObject containerGameSettings;
         [Space]
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryPreset;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryResolution;
@@ -63,6 +64,7 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryDashKeyBind;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entrySprintKeyBind;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryInteractKeyBind;
+        [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryDamageNumbers;
         [Space]
         [BoxGroup("Twitch Settings")] [SerializeField] private TextMeshProUGUI textTwitchConnectionState;
         [BoxGroup("Twitch Settings")] [SerializeField] private SettingsEntry entryTwitchEnabled;
@@ -135,6 +137,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             containerIntegrationSettings.SetActive(section is SettingsSection.Integration);
             containerMultiplayerSettings.SetActive(section is SettingsSection.Multiplayer);
             containerControlsSettings.SetActive(section is SettingsSection.Controls);
+            containerGameSettings.SetActive(section is SettingsSection.Game);
             
             buttonSections.ForEach(x => x.GetComponent<Image>().color = Color.clear);
             buttonSections.ForEach(x => x.GetComponentInChildren<TextMeshProUGUI>().fontSharedMaterial = materialIdleText);
@@ -327,6 +330,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             entryCoopDisplayProjectiles.SetSelection(configuration.RenderCoopProjectiles ? 1 : 0);
             entryVolume.SetSliderValue(configuration.Volume);
             entryCameraMode.SetSelection((int)_saveFile.CameraMode);
+            entryDamageNumbers.SetSelection(configuration.DamageNumbers);
             var abilityKeyBind = _saveFile.GetKeybinding(KeyAction.Ability);
             entryAbilityKeyBind.SetLabelValue(abilityKeyBind.ToString(), (int)abilityKeyBind);
             var moveUpKeyBind = _saveFile.GetKeybinding(KeyAction.MoveUp);
@@ -381,6 +385,8 @@ namespace UI.Main_Menu.REWORK.Scripts
             configuration.RenderCoopProjectiles = entryCoopDisplayProjectiles.GetSelectedOption() == 1;
             configuration.Username = entryCoopNickname.GetText();
             configuration.Volume = entryVolume.GetSliderValue();
+            configuration.DamageNumbers = entryDamageNumbers.GetSelectedOption();
+           
             _saveFile.CameraMode = (CameraModes)entryCameraMode.GetSelectedOption();
             _saveFile.Keybindings[KeyAction.Ability] = (KeyCode)entryAbilityKeyBind.GetLabelValue();
             _saveFile.Keybindings[KeyAction.MoveUp] = (KeyCode)entryMoveUpKeyBind.GetLabelValue();

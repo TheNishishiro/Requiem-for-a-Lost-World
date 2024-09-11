@@ -81,7 +81,6 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
             StartCoroutine(WaitForGameManager());
             StartCoroutine(WaitForPlayerSkillComponent());
             StartCoroutine(WaitScreenControlsManager());
-            StartCoroutine(WaitForRpcManager());
 
             currentCharacterId.Value = GameData.GetPlayerCharacterId();
         }
@@ -228,20 +227,6 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
             if (PlayerSkillComponent.instance != null)
             {
                 PlayerSkillComponent.instance.Init(GetComponentInChildren<PlayerAbilityContainer>().transform);
-                yield break;
-            }
-
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
-
-    private IEnumerator WaitForRpcManager()
-    {
-        while (true)
-        {
-            if (RpcManager.instance != null)
-            {
-                RpcManager.instance.SpawnShrinesRpc(35, new Vector3(0, 6, 0), 250, 40);
                 yield break;
             }
 

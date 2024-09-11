@@ -1,4 +1,5 @@
-﻿using DefaultNamespace;
+﻿using System;
+using DefaultNamespace;
 using DefaultNamespace.Data;
 using Managers;
 using Objects.Characters;
@@ -7,6 +8,7 @@ using TMPro;
 using UI.Shared;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace UI.Main_Menu.REWORK.Scripts
 {
@@ -134,12 +136,9 @@ namespace UI.Main_Menu.REWORK.Scripts
         {
             var runeData = RuneListManager.instance.GetRandomRune();
             var runeSaveData = runeData.ResolveRune();
-            var runeValue = runeData.GetScaledValue(runeSaveData);
-            var displayValue = runeSaveData.statType.IsPercent() ? $"{runeValue*100:0.##}%" : $"{runeValue:0.##}";
-            
             imageCharacter.sprite = spriteRune;
             textRewardTitle.text = title;
-            textDescription.text = $"{runeData.statType.GetLongName()} +{displayValue}" ;
+            textDescription.text = RuneListManager.instance.GetDisplay(runeSaveData, true);
             textDescription.color = Utilities.RarityToColor(runeSaveData.rarity);
             SaveFile.Instance.AddRune(runeSaveData);
         }

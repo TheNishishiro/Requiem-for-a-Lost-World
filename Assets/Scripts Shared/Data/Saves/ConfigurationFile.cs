@@ -41,6 +41,7 @@ namespace DefaultNamespace.Data
 		public bool TwitchBanItems { get; set; }
 		public string TwitchChannel { get; set; }
 		public int TwitchPollDuration { get; set; }
+		public int DamageNumbers { get; set; }
 
 		public ConfigurationFile Default()
 		{
@@ -64,9 +65,10 @@ namespace DefaultNamespace.Data
 				RenderCoopProjectiles = true;
 				UpscalingMethod = 0;
 				FpsLimit = 0;
-				ConfigurationVersion = 11;
+				ConfigurationVersion = 12;
 				SSAO = false;
 				TwitchPollDuration = 15;
+				DamageNumbers = 2;
 			}
 			else
 			{
@@ -93,9 +95,10 @@ namespace DefaultNamespace.Data
 				ResolutionWidth = Screen.currentResolution.width;
 				ResolutionHeight = Screen.currentResolution.height;
 				RefreshRate = Screen.currentResolution.refreshRateRatio.numerator;
-				ConfigurationVersion = 11;
+				ConfigurationVersion = 12;
 				SSAO = true;
 				TwitchPollDuration = 15;
+				DamageNumbers = 2;
 			}
 
 			return Update();
@@ -172,6 +175,10 @@ namespace DefaultNamespace.Data
 			if (ConfigurationVersion == 10)
 			{
 				TwitchPollDuration = 15;
+			}
+			if (ConfigurationVersion == 11)
+			{
+				DamageNumbers = 2;
 			}
 
 			return this;

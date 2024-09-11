@@ -29,7 +29,6 @@ namespace Managers
     public class RpcManager : NetworkBehaviour
     {
         public static RpcManager instance;
-        [SerializeField] private GameObject shrinePrefab;
 
         public override void OnNetworkSpawn()
         {
@@ -37,16 +36,6 @@ namespace Managers
                 instance = this;
             
             base.OnNetworkSpawn();
-        }
-        
-        [Rpc(SendTo.Server)]
-        public void SpawnShrinesRpc(int amount, Vector3 mapCenter, float spawnRange, float minDistance)
-        {
-            var spawnedPositions = Utilities.GetPositionsOnSurfaceWithMinDistance(amount, mapCenter, spawnRange, minDistance, transform, 100);
-            foreach (var position in spawnedPositions)
-            {
-                NetworkObjectPool.Singleton.GetNetworkObject(shrinePrefab, position, Quaternion.identity).Spawn();
-            }
         }
         
         [Rpc(SendTo.Server, Delivery = RpcDelivery.Reliable)]
