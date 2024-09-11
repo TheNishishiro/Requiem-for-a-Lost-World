@@ -404,7 +404,7 @@ namespace DefaultNamespace
 				}
 				case ElementalReaction.Collapse:
 				{
-					var keys = resistances.Select(x => x.Key);
+					var keys = resistances.Select(x => x.Key).ToList();
 					foreach (var resistance in keys)
 					{
 						resistances[resistance] *= 0.1f * elementalReactionEffectIncrease;
