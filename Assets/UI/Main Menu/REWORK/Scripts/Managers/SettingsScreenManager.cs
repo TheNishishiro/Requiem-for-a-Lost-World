@@ -56,6 +56,8 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryCoopDisplayProjectiles;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryVolume;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryCameraMode;
+        [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryCameraDistance;
+        [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryCameraFov;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryAbilityKeyBind;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryMoveUpKeyBind;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryMoveDownKeyBind;
@@ -330,6 +332,8 @@ namespace UI.Main_Menu.REWORK.Scripts
             entryCoopDisplayProjectiles.SetSelection(configuration.RenderCoopProjectiles ? 1 : 0);
             entryVolume.SetSliderValue(configuration.Volume);
             entryCameraMode.SetSelection((int)_saveFile.CameraMode);
+            entryCameraDistance.SetSelection(configuration.CameraDistance);
+            entryCameraFov.SetSelection(configuration.CameraFOV);
             entryDamageNumbers.SetSelection(configuration.DamageNumbers);
             var abilityKeyBind = _saveFile.GetKeybinding(KeyAction.Ability);
             entryAbilityKeyBind.SetLabelValue(abilityKeyBind.ToString(), (int)abilityKeyBind);
@@ -386,6 +390,8 @@ namespace UI.Main_Menu.REWORK.Scripts
             configuration.Username = entryCoopNickname.GetText();
             configuration.Volume = entryVolume.GetSliderValue();
             configuration.DamageNumbers = entryDamageNumbers.GetSelectedOption();
+            configuration.CameraDistance = entryCameraDistance.GetSelectedOption();
+            configuration.CameraFOV = entryCameraFov.GetSelectedOption();
            
             _saveFile.CameraMode = (CameraModes)entryCameraMode.GetSelectedOption();
             _saveFile.Keybindings[KeyAction.Ability] = (KeyCode)entryAbilityKeyBind.GetLabelValue();

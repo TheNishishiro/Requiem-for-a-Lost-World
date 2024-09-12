@@ -128,7 +128,7 @@ namespace Managers
 						SaveFile.Instance.UnlockAchievement(AchievementEnum.FireMastery);
 						break;
 					case Element.Lightning:
-						SaveFile.Instance.UnlockAchievement(AchievementEnum.LightMastery);
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.LightningMastery);
 						break;
 					case Element.Ice:
 						SaveFile.Instance.UnlockAchievement(AchievementEnum.IceMastery);

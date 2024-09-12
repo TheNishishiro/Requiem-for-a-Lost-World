@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8976984631995608671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1021739664405865086}
+  - component: {fileID: 7762737393338010720}
+  m_Layer: 0
+  m_Name: Lightning Orb Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1021739664405865086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8976984631995608671}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7762737393338010720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8976984631995608671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50087ee9df77ab145a6d5d4116398ac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useNetworkPool: 1
+  spawnPrefab: {fileID: 6678588679366763109, guid: 5a1fcc847833e1c4e977a1a7e0f50ce7,
+    type: 3}
+  spawnSubPrefab: {fileID: 0}
+  WeaponId: 40
+  attackType: 4
+  Name: Lightning Orb
+  Description: Summon ball of electricity in a circle around the player that stays
+    in place and deals damage in an area
+  chanceToAppear: 1
+  Icon: {fileID: 21300000, guid: a668919e105f07448909d1ef561060bd, type: 3}
+  unlockOnAchievement: 1
+  requiredAchievement: 128
+  element: 3
+  weaponStats:
+    Damage: 6
+    Cooldown: 3
+    CooldownReduction: 0
+    Scale: 1
+    Speed: 0
+    TimeToLive: 2
+    AttackCount: 1
+    PassThroughCount: 0
+    DamageCooldown: 0.3
+    DuplicateSpawnDelay: 0.1
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
+    LifeSteal: 0
+    FollowUpDamageIncrease: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: 97af43ba2299c5346a46993759b361e6, type: 2}
+  - {fileID: 11400000, guid: c8740968db58ea445aac86b43d9dd10d, type: 2}
+  - {fileID: 11400000, guid: 0dd2194382c597f4b9e8eb271de66fbc, type: 2}
+  - {fileID: 11400000, guid: 3accba1b905055449b3f5e4515ef2c42, type: 2}
+  - {fileID: 11400000, guid: 2230845ea2cd4ab4f93accb470ec899d, type: 2}
+  - {fileID: 11400000, guid: dd56cbd982aebf84981e54c058120c70, type: 2}
+  - {fileID: 11400000, guid: 2e9ad0a9a7aaec94690290779b6acffd, type: 2}
+  - {fileID: 11400000, guid: 2a935897485afdb47800fd04979bda88, type: 2}
+  - {fileID: 11400000, guid: ede0284c2b35084479804bf396577371, type: 2}
+  isSkill: 0

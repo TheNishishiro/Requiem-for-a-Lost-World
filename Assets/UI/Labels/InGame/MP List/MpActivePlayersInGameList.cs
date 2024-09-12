@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Interfaces;
 using Objects;
+using Objects.Items;
 using Objects.Stage;
 using Unity.Netcode;
 using UnityEngine;
@@ -55,7 +56,7 @@ namespace UI.Labels.InGame.MP_List
             }
         }
 
-        public void UpdatePlayerItems(ulong clientId, string itemName, WeaponEnum weaponId)
+        public void UpdatePlayerItems(ulong clientId, ItemEnum itemId, WeaponEnum weaponId)
         {
             if (clientId == NetworkManager.Singleton.LocalClientId) 
                 return;
@@ -63,7 +64,7 @@ namespace UI.Labels.InGame.MP_List
                 UpdateEntryAvatar(clientId, GameData.GetPlayerCharacterAvatar());
             
             var isWeapon = weaponId != WeaponEnum.Unset;
-            var isItem = !string.IsNullOrWhiteSpace(itemName);
+            var isItem = itemId != ItemEnum.Unset;
             
             if (!isWeapon && !isItem)
                 return;
@@ -75,7 +76,7 @@ namespace UI.Labels.InGame.MP_List
             }
             else
             {
-                playerItem = WeaponManager.instance.GetItem(itemName);
+                playerItem = WeaponManager.instance.GetItem(itemId);
             }
             
             activeList[clientId].AddOrUpdateItem(playerItem, isItem, isWeapon);

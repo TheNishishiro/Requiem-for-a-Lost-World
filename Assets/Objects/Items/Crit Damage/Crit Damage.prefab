@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemId: 5
   Name: Heavy Hit
   Description: Increase critical strike damage by {CritDamage}%
   supportType: 1
   chanceToAppear: 0.8
-  Icon: {fileID: 21300000, guid: f849b70c13767b749b239aaa586840eb, type: 3}
+  Icon: {fileID: 21300000, guid: 592abba5d35d39440b590188b82acf71, type: 3}
   unlockOnAchievement: 0
   requiredAchievement: 0
   ItemUpgrades:
@@ -107,3 +108,6 @@ MonoBehaviour:
     Stamina: 0
     ElementalReactionEffectIncreasePercentage: 0
     FollowUpDamageIncrease: 0
+    HealthIncreasePercentage: 0
+    ResPen: 0
+    CanDotCrit: 0

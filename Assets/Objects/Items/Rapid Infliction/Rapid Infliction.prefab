@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Rapid Infliction
+  ItemId: 28
+  Name: Poisoned Knife
   Description: Reduce time between ticks of damage caused over time by {DamageOverTimeFrequencyReduction}%
   supportType: 1
   chanceToAppear: 0.7
-  Icon: {fileID: 21300000, guid: 38b0e0b2c8f1fc84ea467758257992dc, type: 3}
+  Icon: {fileID: 21300000, guid: b58daea79eef9b24da776dfa585b3cca, type: 3}
   unlockOnAchievement: 1
   requiredAchievement: 89
   ItemUpgrades:
@@ -107,3 +108,6 @@ MonoBehaviour:
     Stamina: 0
     ElementalReactionEffectIncreasePercentage: 0
     FollowUpDamageIncrease: 0
+    HealthIncreasePercentage: 0
+    ResPen: 0
+    CanDotCrit: 0

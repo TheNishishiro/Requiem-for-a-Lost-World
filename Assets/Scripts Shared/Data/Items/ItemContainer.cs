@@ -18,9 +18,9 @@ namespace DefaultNamespace.Data
 			return availableItems.ToList();
 		}		
 		
-		public ItemBase GetItemByName(string itemName)
+		public ItemBase GetItem(ItemEnum itemId)
 		{
-			return availableItems.FirstOrDefault(x => x.itemBase.NameField == itemName)?.itemBase;
+			return availableItems.FirstOrDefault(x => x.itemBase.ItemId == itemId)?.itemBase;
 		}
 
 		public IPlayerItem GetItemByAchievement(AchievementEnum achievementEnum)

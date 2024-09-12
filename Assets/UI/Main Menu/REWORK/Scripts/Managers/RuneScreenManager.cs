@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace.Data;
+using DefaultNamespace.Data.Achievements;
 using Interfaces;
 using Managers;
 using NaughtyAttributes;
@@ -117,9 +118,12 @@ namespace UI.Main_Menu.REWORK.Scripts
 
         public void Equip(RuneSaveData runeSaveData, RuneEquipmentEntry runeEquipmentEntry)
         {
-            if (!HasEmptySlots(runeSaveData.statType.GetStatType())) 
+            if (!HasEmptySlots(runeSaveData.statType.GetStatType()))
+            {
+                AchievementManager.instance.UnlockAchievement(AchievementEnum.FillUpRunePage);
                 return;
-            
+            }
+
             _openedCharacterSaveData.EquipRune(runeSaveData);
             InsertRuneIntoSlot(runeSaveData.statType.GetStatType(), new[] { runeSaveData }, false);
             Discard(runeSaveData, runeEquipmentEntry);

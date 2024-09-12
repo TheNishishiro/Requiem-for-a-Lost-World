@@ -49,6 +49,7 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
     [SerializeField] private CharacterController characterController;
     [SerializeField] private DifficultyContainer difficultyContainer;
     [SerializeField] private StageContainer stageContainer;
+    [SerializeField] private PlayerDashComponent playerDashComponent;
     
     public void Start()
     {
@@ -69,6 +70,7 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
         GameData.SetCurrentDifficultyData(difficultyContainer.GetData(difficulty.Value));
         GameData.SetCurrentStage(stageContainer.GetData(stage.Value));
         playerInput.enabled = IsOwner;
+        playerDashComponent.enabled = IsOwner;
         
         starterAssetsInputs.enabled = IsOwner;
         base.OnNetworkSpawn();
@@ -104,8 +106,8 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
                 firstPersonController.BottomClamp = -30;
                 break;
             case CameraModes.StaticThirdPerson when IsOwner:
-                firstPersonController.TopClamp = 8;
-                firstPersonController.BottomClamp = 8;
+                firstPersonController.TopClamp = 30;
+                firstPersonController.BottomClamp = -30;
                 break;
             case CameraModes.FreeThirdPerson when IsOwner:
                 thirdPersonController.TopClamp = 40;

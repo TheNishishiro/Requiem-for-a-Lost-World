@@ -108,21 +108,25 @@ namespace Managers
 		{
 			firstPersonVirtualCamera.gameObject.SetActive(saveFile.CameraMode is CameraModes.StaticThirdPerson or CameraModes.FirstPerson);
 			thirdPersonVirtualCamera.gameObject.SetActive(saveFile.CameraMode is CameraModes.FreeThirdPerson or CameraModes.TopDown);
+			var cameraDistance = saveFile.ConfigurationFile.CameraDistance - 1;
+			var cameraFov = saveFile.ConfigurationFile.GetCameraFovValue(); 
+			
 			switch (saveFile.CameraMode)
 			{
 				case CameraModes.TopDown:
 				{
+					thirdPersonVirtualCamera.m_Lens.FieldOfView = cameraFov;
 					var componentBase = thirdPersonVirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
 					if (componentBase is Cinemachine3rdPersonFollow follow)
 					{
-						follow.CameraDistance = 7;
+						follow.CameraDistance = 7 + cameraDistance;
 					}
 
 					break;
 				}
 				case CameraModes.FirstPerson:
 				{
-					firstPersonVirtualCamera.m_Lens.FieldOfView = 80;
+					firstPersonVirtualCamera.m_Lens.FieldOfView = cameraFov;
 					var componentBase = firstPersonVirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
 					if (componentBase is Cinemachine3rdPersonFollow follow)
 					{
@@ -133,22 +137,22 @@ namespace Managers
 				}
 				case CameraModes.StaticThirdPerson:
 				{
-					firstPersonVirtualCamera.m_Lens.FieldOfView = 50;
+					firstPersonVirtualCamera.m_Lens.FieldOfView = cameraFov;
 					var componentBase = firstPersonVirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
 					if (componentBase is Cinemachine3rdPersonFollow follow)
 					{
-						follow.CameraDistance = 3;
+						follow.CameraDistance = 3 + cameraDistance;
 					}
 
 					break;
 				}
 				case CameraModes.FreeThirdPerson:
 				{
-					thirdPersonVirtualCamera.m_Lens.FieldOfView = 40;
+					thirdPersonVirtualCamera.m_Lens.FieldOfView = cameraFov;
 					var componentBase = thirdPersonVirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
 					if (componentBase is Cinemachine3rdPersonFollow follow)
 					{
-						follow.CameraDistance = 4;
+						follow.CameraDistance = 4 + cameraDistance;
 					}
 
 					break;

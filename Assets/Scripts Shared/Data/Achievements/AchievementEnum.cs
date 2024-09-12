@@ -4,7 +4,7 @@ using Objects.Characters;
 
 namespace DefaultNamespace.Data.Achievements
 {
-	public enum AchievementEnum // 126
+	public enum AchievementEnum // 128
 	{
 		[AchievementValue("Jack of all trades", "Obtain 6 weapons in a single game", AchievementSection.Misc, Rarity.Common)]
 		Hold6Weapons = 0,
@@ -110,6 +110,8 @@ namespace DefaultNamespace.Data.Achievements
 		LightMastery = 126,
 		[AchievementValue("Illuminate my way", "Follow the light", AchievementSection.Environment, Rarity.Legendary)]
 		FollowThePhantom = 127,
+		[AchievementValue("Full Page", "Fill up one character rune page", AchievementSection.Misc, Rarity.Common)]
+		FillUpRunePage = 128,
 		
 		#region Character specific achievements
 		[AchievementValue("Bound by fate", "Bind enemies for 1 hour in total in a single game using Amelisana", AchievementSection.Character, Rarity.Common, CharactersEnum.Amelisana_BoN, RequirementType.None, 1)]

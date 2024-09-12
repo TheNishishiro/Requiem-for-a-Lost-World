@@ -343,21 +343,21 @@ namespace Managers
         }
         
         [Rpc(SendTo.Server)]
-        public void AddItemToCoopPlayerListRpc(ulong clientId, string itemName)
+        public void AddItemToCoopPlayerListRpc(ulong clientId, ItemEnum itemId)
         {
-            PropagateItemToOnlinePlayerListRpc(clientId, itemName, WeaponEnum.Unset);
+            PropagateItemToOnlinePlayerListRpc(clientId, itemId, WeaponEnum.Unset);
         }
         
         [Rpc(SendTo.Server)]
         public void AddWeaponToCoopPlayerListRpc(ulong clientId, WeaponEnum weaponId)
         {
-            PropagateItemToOnlinePlayerListRpc(clientId, null, weaponId);
+            PropagateItemToOnlinePlayerListRpc(clientId, ItemEnum.Unset, weaponId);
         }
         
         [Rpc(SendTo.Everyone)]
-        public void PropagateItemToOnlinePlayerListRpc(ulong clientId, string itemName, WeaponEnum weaponId)
+        public void PropagateItemToOnlinePlayerListRpc(ulong clientId, ItemEnum itemId, WeaponEnum weaponId)
         {
-            MpActivePlayersInGameList.instance.UpdatePlayerItems(clientId, itemName, weaponId);
+            MpActivePlayersInGameList.instance.UpdatePlayerItems(clientId, itemId, weaponId);
         }
     }
 }

@@ -7,6 +7,7 @@ using Managers;
 using Managers.StageEvents;
 using Objects.Abilities.SpaceExpansionBall;
 using Objects.Characters;
+using Objects.Items;
 using Objects.Stage;
 using UnityEngine;
 using Weapons;
@@ -19,6 +20,7 @@ namespace Objects.Abilities.Arrow_Rain
 		private Damageable _target;
 		public bool HailOfArrows;
 		private StageTime _stageTime;
+		private bool _cdReduced;
 		
 		public override void Awake()
 		{
@@ -55,6 +57,7 @@ namespace Objects.Abilities.Arrow_Rain
 
 		protected override void OnAttackStart()
 		{
+			_cdReduced = false;
 			_target = EnemyManager.instance.GetActiveEnemies()
 				.Select(x => x.GetDamagableComponent())
 				.OrderByDescending(x => x.Health)
@@ -65,6 +68,13 @@ namespace Objects.Abilities.Arrow_Rain
 		{
 			if (LevelField == 9)
 				HailOfArrows = true;
+		}
+		
+		public override void OnEnemyKilled()
+		{
+			if (_cdReduced && WeaponManager.instance.GetItem(ItemEnum.Duplicator) && LevelField >= 5) return;
+			_cdReduced = true;
+			ReduceCooldown(0.5f);
 		}
 	}
 }

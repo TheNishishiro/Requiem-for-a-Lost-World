@@ -42,6 +42,8 @@ namespace DefaultNamespace.Data
 		public string TwitchChannel { get; set; }
 		public int TwitchPollDuration { get; set; }
 		public int DamageNumbers { get; set; }
+		public int CameraDistance { get; set; }
+		public int CameraFOV { get; set; }
 
 		public ConfigurationFile Default()
 		{
@@ -69,6 +71,8 @@ namespace DefaultNamespace.Data
 				SSAO = false;
 				TwitchPollDuration = 15;
 				DamageNumbers = 2;
+				CameraDistance = 1;
+				CameraFOV = 0;
 			}
 			else
 			{
@@ -99,6 +103,8 @@ namespace DefaultNamespace.Data
 				SSAO = true;
 				TwitchPollDuration = 15;
 				DamageNumbers = 2;
+				CameraDistance = 1;
+				CameraFOV = 0;
 			}
 
 			return Update();
@@ -182,6 +188,18 @@ namespace DefaultNamespace.Data
 			}
 
 			return this;
+		}
+
+		public float GetCameraFovValue()
+		{
+			return CameraFOV switch
+			{
+				0 => 50,
+				1 => 70,
+				2 => 85,
+				3 => 100,
+				_ => 50
+			};
 		}
 	}
 }

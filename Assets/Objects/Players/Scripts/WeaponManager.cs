@@ -92,7 +92,7 @@ public class WeaponManager : NetworkBehaviour
         ItemUnlockedEvent.Invoke(item, rarity);
         AchievementManager.instance.OnItemUnlocked(item, _unlockedItems.Count, rarity);
         GuiManager.instance.UpdateItems();
-        RpcManager.instance.AddItemToCoopPlayerListRpc(NetworkManager.Singleton.LocalClientId, item.NameField);
+        RpcManager.instance.AddItemToCoopPlayerListRpc(NetworkManager.Singleton.LocalClientId, item.ItemId);
     }
 
     public void UpgradeWeapon(WeaponBase weapon, UpgradeData upgradeData, int rarity)
@@ -108,7 +108,7 @@ public class WeaponManager : NetworkBehaviour
         itemBase.ApplyUpgrade(itemUpgrade, rarity);
         _playerStatsComponent.Apply(itemUpgrade.ItemStats, rarity);
         GuiManager.instance.UpdateItems();
-        RpcManager.instance.AddItemToCoopPlayerListRpc(NetworkManager.Singleton.LocalClientId, itemBase.NameField);
+        RpcManager.instance.AddItemToCoopPlayerListRpc(NetworkManager.Singleton.LocalClientId, itemBase.ItemId);
     }
     
     public List<IPlayerItem> GetUnlockedWeaponsAsInterface()
@@ -223,8 +223,8 @@ public class WeaponManager : NetworkBehaviour
         return weapons.GetWeapon(weaponId);
     }
 
-    public ItemBase GetItem(string itemName)
+    public ItemBase GetItem(ItemEnum itemId)
     {
-        return items.GetItemByName(itemName);
+        return items.GetItem(itemId);
     }
 }

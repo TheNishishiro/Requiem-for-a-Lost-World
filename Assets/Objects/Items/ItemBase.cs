@@ -14,6 +14,7 @@ namespace Objects.Items
 {
 	public class ItemBase : MonoBehaviour, IPlayerItem
 	{
+		[SerializeField] public ItemEnum ItemId;
 		[SerializeField] public string Name;
 		[SerializeField] public string Description;
 		[SerializeField] public SupportType supportType;

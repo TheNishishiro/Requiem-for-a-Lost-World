@@ -43,6 +43,7 @@ namespace Objects
         Portal = 36,
         WindSucc = 37,
         Claw = 38,
-        IceFua = 39
+        IceFua = 39,
+        LightningOrb = 40
     }
 }
