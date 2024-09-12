@@ -140,8 +140,6 @@ namespace Objects.Players.Scripts
 				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Natalie_BoW && GameData.GetPlayerCharacterRank() >= CharacterRank.E3)
 				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
-			if (GameData.GetPlayerCharacterId() == CharactersEnum.Adam_OBoV && GameData.GetPlayerCharacterRank() >= CharacterRank.E5)
-				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Amelisana_BoN)
 				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Chornastra_BoR)
