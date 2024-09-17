@@ -111,5 +111,15 @@ namespace Objects.Enemies.EnemyWeapons
         {
             return _weaponStats.LifeSteal;
         }
+
+        public float GetResPen()
+        {
+            return _weaponStats.ResPen;
+        }
+
+        public DamageResult GetSplitDamageDealt(float damageIncrease = 0, float flatDamageIncrease = 0)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

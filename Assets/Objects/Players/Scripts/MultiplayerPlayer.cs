@@ -50,6 +50,7 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
     [SerializeField] private DifficultyContainer difficultyContainer;
     [SerializeField] private StageContainer stageContainer;
     [SerializeField] private PlayerDashComponent playerDashComponent;
+    [SerializeField] private PlayerWeaponContainer playerWeaponContainer;
     
     public void Start()
     {
@@ -198,12 +199,12 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f);
-            if (WeaponManager.instance != null)
+            if (WeaponManager.instance != null && WeaponManager.instance.isInitialized && RpcManager.instance != null)
             {
-                WeaponManager.instance.AddStartingWeapon(GetComponentInChildren<PlayerWeaponContainer>().transform);
+                WeaponManager.instance.AddStartingWeapon(playerWeaponContainer.transform);
                 yield break;
             }
+            yield return new WaitForSeconds(0.1f);
         }
     }
 

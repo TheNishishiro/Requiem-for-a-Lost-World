@@ -13,7 +13,7 @@ namespace Objects.Abilities.Wind_Shear
         [SerializeField] private float windInnerMaxDissolve;
         [SerializeField] private ParticleSystem particles;
         [SerializeField] private float dissolveTime;
-        private static readonly int Dissolve = Shader.PropertyToID("_Dissolve");
+        private static readonly int Dissolve = Shader.PropertyToID("_AlphaFadeAmount");
 
         private void OnTriggerEnter(Collider other)
         {
@@ -42,20 +42,19 @@ namespace Objects.Abilities.Wind_Shear
 
         private void SetDissolveValues(bool isAnticipation)
         {
-            SetRendererDissolve(windOuterRenderer, windOuterMaxDissolve, GetDissolveValue(windOuterMaxDissolve, isAnticipation));
-            SetRendererDissolve(windInnerRenderer, windInnerMaxDissolve, GetDissolveValue(windInnerMaxDissolve, isAnticipation));
+            SetRendererDissolve(windOuterRenderer, GetDissolveValue(windOuterMaxDissolve, isAnticipation));
+            SetRendererDissolve(windInnerRenderer, GetDissolveValue(windInnerMaxDissolve, isAnticipation));
         }
 
         private float GetDissolveValue(float max, bool isAnticipation)
         {
-            return isAnticipation ? Mathf.Lerp(0f, max, TimeAlive/dissolveTime) : Mathf.Lerp(0f, max, CurrentTimeToLive/dissolveTime);
+            return isAnticipation ? Mathf.Lerp(1f, max, TimeAlive/dissolveTime) : Mathf.Lerp(1f, max, CurrentTimeToLive/dissolveTime);
         }
 
-        private void SetRendererDissolve(MeshRenderer renderer, float maxDissolve, float dissolveValue)
+        private void SetRendererDissolve(MeshRenderer renderer, float dissolveValue)
         {
             var material = renderer.materials[0];
-            var clampedDissolve = Mathf.Clamp(dissolveValue, 0f, maxDissolve);
-            material.SetFloat(Dissolve, clampedDissolve);
+            material.SetFloat(Dissolve, dissolveValue);
         }
     }
 }

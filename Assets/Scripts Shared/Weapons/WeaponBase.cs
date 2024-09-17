@@ -59,7 +59,7 @@ namespace Weapons
 
 		public string GetDescription(int rarity)
 		{
-			return weaponStats.GetDescription(Description, rarity);
+			return weaponStats.GetDescription(Description, rarity, true);
 		}
 
 		public AttackType GetAttackType()

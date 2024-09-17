@@ -19,6 +19,7 @@ using UI.Labels.InGame.LevelUpScreen;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Weapons;
 
 public class WeaponManager : NetworkBehaviour
@@ -37,7 +38,7 @@ public class WeaponManager : NetworkBehaviour
     private int _weaponsUpgraded;
     private int _itemsUpgraded;
     private SaveFile _saveFile;
-    private bool _isInitialized;
+    public bool isInitialized;
 
     public void Start()
     {
@@ -51,8 +52,8 @@ public class WeaponManager : NetworkBehaviour
 
     public void Init()
     {
-        if (_isInitialized) return;
-        _isInitialized = true;
+        if (isInitialized) return;
+        isInitialized = true;
         _saveFile = FindAnyObjectByType<SaveFile>();
         _unlockedWeapons = new Dictionary<WeaponEnum, WeaponBase>();
         _unlockedItems = new List<ItemBase>();

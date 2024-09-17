@@ -45,6 +45,11 @@ namespace DefaultNamespace
 			
 			return value.Replace(",", ".").TrimEnd('0').TrimEnd('.');
 		}
+
+		public static float AdjustForRarity(float value, float rarityFactor)
+		{
+			return value > 0 ? value * (2 - rarityFactor) : value * rarityFactor;
+		}
 		
 		public static float RandomDoubleRange(float min1, float max1, float min2, float max2)
 		{

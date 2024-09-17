@@ -146,6 +146,9 @@ namespace UI.Main_Menu.REWORK.Scripts
                 case RequirementType.AbyssFlowers:
                     fillAmount = saveFile.YamiFlowerPickup / requirementValue;
                     break;
+                case RequirementType.CharactersOwned:
+                    fillAmount = (float)saveFile.CharacterSaveData.Count(x => x.Value.IsUnlocked) / (float)CharacterListManager.instance.GetCharactersCount();
+                    break;
                 case RequirementType.None:
                     break;
                 default:

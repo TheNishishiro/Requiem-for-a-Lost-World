@@ -3,7 +3,8 @@ using DefaultNamespace.Data.Weapons;
 using Interfaces;
 using Managers;
 using Objects.Players.Scripts;
-using UnityEngine;
+using Unity.Mathematics;
+using Random = UnityEngine.Random;
 
 namespace Objects.Abilities
 {
@@ -45,6 +46,26 @@ namespace Objects.Abilities
             damageResult.Damage = damageResult.IsCriticalHit ? nonCritDamage * (GetCritDamage()/2f)  : nonCritDamage;
 
             return damageResult;
+        }
+
+        public virtual DamageResult GetSplitDamageDealt(float damageIncrease = 0, float flatDamageIncrease = 0)
+        {
+            var baseDamage = ((GetDamage() + flatDamageIncrease) * (1f + damageIncrease) * GetElementalDamageIncrease()) / 2;
+            var followUpDamage = baseDamage * GetFollowUpAttackDamageIncrease();
+            var fuaCrit = Random.value < (GetCritRate() / 2f);
+            if (fuaCrit)
+                followUpDamage *= GetCritDamage() / 2f;
+            
+            var normalDamage = baseDamage * GetDamageIncreasePercentage();
+            var normalCrit = IsCrit();
+            if (normalCrit)
+                normalDamage *= GetCritDamage();
+
+            return new DamageResult()
+            {
+                Damage = normalDamage + followUpDamage,
+                IsCriticalHit = fuaCrit || normalCrit
+            };
         }
 
         public virtual float GetDamageOverTime(float damageIncrease = 0)
@@ -92,7 +113,7 @@ namespace Objects.Abilities
             var weaponDoTFrequency = _weaponStats.DamageOverTimeFrequency;
             var playerDoTFrequencyReduction = PlayerStatsScaler.GetScaler().GetDamageOverTimeFrequencyReductionPercentage();
 
-            return weaponDoTFrequency * playerDoTFrequencyReduction;
+            return math.clamp(weaponDoTFrequency * playerDoTFrequencyReduction, 0.1f, float.MaxValue);
         }
 
         public virtual float GetDamageOverTimeDuration()
@@ -183,6 +204,13 @@ namespace Objects.Abilities
             var playerLifeSteal = PlayerStatsScaler.GetScaler().GetLifeSteal();
 
             return weaponLifeSteal + playerLifeSteal;
+        }
+
+        public float GetResPen()
+        {
+            var weaponResPen = _weaponStats.ResPen;
+            var playerResPen = PlayerStatsScaler.GetScaler().GetResPen();
+            return weaponResPen + playerResPen;
         }
 
         protected virtual float GetTimeToLive()

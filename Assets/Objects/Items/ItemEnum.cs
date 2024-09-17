@@ -41,5 +41,6 @@
         Vitality = 36,
         Vitality2 = 37,
         Wisdom = 38,
+        ArrowOfArcana = 39,
     }
 }

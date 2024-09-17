@@ -44,6 +44,8 @@ namespace Objects
         WindSucc = 37,
         Claw = 38,
         IceFua = 39,
-        LightningOrb = 40
+        LightningOrb = 40,
+        SandStorm = 41,
+        DigitalArrow = 42,
     }
 }

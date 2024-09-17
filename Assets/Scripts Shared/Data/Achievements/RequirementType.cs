@@ -20,5 +20,6 @@
         Shrines = 15,
         Reactions = 16,
         AbyssFlowers = 17,
+        CharactersOwned = 18,
     }
 }

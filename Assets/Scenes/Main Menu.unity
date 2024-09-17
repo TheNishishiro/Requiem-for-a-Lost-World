@@ -39505,7 +39505,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 175973948}
-  - {fileID: 1451941361}
+  - {fileID: 1484608780}
   m_Father: {fileID: 711485034}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -93676,202 +93676,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!1 &1451941360
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1451941361}
-  - component: {fileID: 1451941363}
-  - component: {fileID: 1451941364}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1451941361
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1451941360}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 720093927}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &1451941363
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1451941360}
-  m_CullTransparentMesh: 1
---- !u!114 &1451941364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1451941360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: "Discord server is now a thing, go join it using the icon at the bottom!\n\nCharacters\n\u2022
-    New character: <b>Yami-no-Tokiya</b>\n\u2022 Fixed camera view during David's
-    skill duration\n\u2022 Fixed Adam's 4\u2726 rank up applying only once 5\u2726
-    is unlocked\n\u2022 Increased Adam's passive damage (0.1% \u2192 0.25%) and damage
-    taken (0.1% \u2192 0.25%)\n\nWeapons:\n\u2022 New: <b>Reality Shatter</b> (Cosmic)\n\u2022
-    New: <b>Magic Arrow</b> (Ice)\n\u2022 New: <b>Meteor Shower</b> (Earth)\n\u2022
-    New: <b>Geode Resonance</b> (Earth)\n\u2022 New: <b>Low Pressure Strike</b> (Wind)\n\u2022
-    New: <b>Piercing Wind</b> (Wind)\n\u2022 New: <b>Flame From Beyond</b> (Fire)\n\u2022
-    New: <b>Wind Vortex</b> (Wind)\n\u2022 New: <b>Claw</b> (Physical)\n\u2022 New:
-    <b>Seed of Frost</b> (Ice)\n\nItems\n\u2022 New: <b>Energy Amplifier</b> (Reactions)\n\u2022
-    New: <b>Combative Flow</B> (Follow-Up)\n\u2022 New: <b>Guardian\u2019s Aegis</b>
-    (Health)\n\u2022 New: <b>Brute's Talisman</b> (Crit rate/damage)\n\u2022 New:
-    <b>Bloodthorn Scarf</b> (Healing)\n\u2022 New: <b>elemental affinities</b> (Elemental
-    damage boost)\n\u2022 New: <b>Cursed Thorn</b> (DoT cirt)\n\u2022 New: <b>Phantom
-    Crown</b> (Res PEN)\n\nMaps:\n\u2022 New map: <b>Capital Undergrounds</b>\n\u2022
-    Added new locations to the <b>Capital outskirts</b>\n\nRunes:\n\u2022 New: Rune
-    of Penetration (Res PEN)\n\u2022 New: Rune of Assistance (Follow-Up)\n\u2022
-    New: Rune of Harmony (Elemental Reactions)\n\nUI:\n\u2022 Added weapon attack
-    type display to level up screen\n\u2022 Added item support type diplay to level
-    up screen\n\u2022 Expanded tutorial with new sections\n\u2022 Added a loading
-    notification when loading into the level\n\u2022 Added display of weapon type
-    and element to details in the collection menu\n\u2022 Character shard stories
-    can now be scrolled\n\u2022 Collection items description can now be scrolled\n\u2022
-    Fix description of <b>Armor</b> missing '%' sign\n\u2022 Fixed shop's scaling
-    on ultra wide resolutions\n\u2022 Fixed incorrect layering in the collection
-    menu\n\u2022 Added settings for damage number size, camera distance and camera
-    FOV \n\u2022 Fixed value display for runes providing benefits with negative percentage\n\u2022
-    Improved most of item and weapon icons and renamed a few of them\n\nSystem:\n\u2022
-    <b>Added Twitch integration</b>!\n\u2022 Added rewards for visitting twitter/discord/itch.io
-    pages and additional rewards for sending feedback\n\u2022 Added character fragments
-    to the shop\n\u2022 Changed follow up attack damage calculation: FuA benefit
-    from half of character crit rate / crit damage and does not scale with damage
-    increase % \n\u2022 Selected game settings will now be remembered\n\u2022 Adjusted
-    position of 1st person camera\n\u2022 Disabled camera damping when met with obstacles\n\u2022
-    Added resistances to enemies in Capital Outskirts \n\u2022 Enemies can now shoot
-    projectiles\n\u2022 Added option to disable screen space ambient occlusion\n\u2022
-    Added 14 new achievements\n\u2022 Vulnerabilities applied by weapons will now
-    stack between different weapons\n\u2022 Added new game rule: random item on level
-    up\n\u2022 Upgrades bought in the shop can now be refunded\n\u2022 Reduced the
-    max level of Greed upgrade from 25 to 20 and changed the bonus from 5% per level
-    to 6% per level\n\u2022 Fixed character/shard unlocking with fragments that required
-    51 fragments for unlock instead of displayed 50\n\u2022 Added a RES PEN stat
-    to characters that allows them to ignore a certain percentage of enemy resistances\n\u2022
-    Reduced the requirement for achievement: <b>The Path of Pain</b> from 10000 damage
-    healed and taken to 1500\n\u2022 Static 3rd person camera now allow sfor up and
-    down movement\n\u2022 Fixed inconsistant and stuttery dashing\n\nShort play mode:\n\u2022
-    Reduced enemy damage buff from +100% to +25%\n\u2022 Increased EXP gain from
-    +40% to +50%\n\nCO-OP:\n\u2022 Moved damage calculations to host\n\u2022 Damage
-    calculation now takes enemy resistances into consideration\n\u2022 Elemental
-    application and reactions are now sync between players\n\u2022 Vulnerabilities
-    applied to enemies will now sync between players\n\u2022 Elemental damage modifications
-    caused by weapons will now sync between players\n\u2022 Arika's field will now
-    properly apply the follow-up damage when casted by client\n\u2022 Weapon kill
-    effects will now properly apply in CO-OP\n\u2022 Slowing effects can now be applied
-    by clients\n\u2022 Reduced per player enemy count penalty\n\u2022 Reduced per
-    player enemy HP penalty\n\u2022 Reduced per player EXP drop penalty\n\u2022 Fixed
-    enemy damage increase per player penalty\n\u2022 Reduce time it takes to revive
-    player from 6.5 s. to 3.5s.\n\nAdjustments:\n\u2022 Changed some enemy spawn
-    probabilities on <b>Capital Outskirts</b>\n\u2022 Reduced glow on <b>Time Blade</b>'s
-    attacks"
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 25983c1630b32e14e86d65feaee7cefd, type: 2}
-  m_sharedMaterial: {fileID: -6965006553420979026, guid: 25983c1630b32e14e86d65feaee7cefd,
-    type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 1
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1001 &1452312470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -95589,6 +95393,150 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1482701220}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1484608779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1484608780}
+  - component: {fileID: 1484608782}
+  - component: {fileID: 1484608781}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1484608780
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484608779}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 720093927}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1484608781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484608779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 02a6fcbfe08cfb3478a378abbff08106, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "If you want to have an access to the latests builds, take part in testing
+    or chat with a community you can do so via discord!\n\nCharacters\n\u2022 New
+    character: <b>Yami-no-Tokiya</b>\n\u2022 Fixed camera view during David's skill
+    duration\n\u2022 Fixed Adam's 4\u2726 rank up applying only once 5\u2726 is unlocked\n\u2022
+    Increased Adam's passive damage (0.1% \u2192 0.25%) and damage taken (0.1% \u2192
+    0.25%)\n\nWeapons:\n\u2022 New: <b>Reality Shatter</b> (Cosmic)\n\u2022 New:
+    <b>Magic Arrow</b> (Ice)\n\u2022 New: <b>Meteor Shower</b> (Earth)\n\u2022 New:
+    <b>Geode Resonance</b> (Earth)\n\u2022 New: <b>Low Pressure Strike</b> (Wind)\n\u2022
+    New: <b>Piercing Wind</b> (Wind)\n\u2022 New: <b>Flame From Beyond</b> (Fire)\n\u2022
+    New: <b>Wind Vortex</b> (Wind)\n\u2022 New: <b>Claw</b> (Physical)\n\u2022 New:
+    <b>Seed of Frost</b> (Ice)\n\u2022 New: <b>Lightning Orb</b> (Lightning)\n\u2022
+    New: <b>Sand Storm</b> (Earth)\n\u2022 New: <b>Digital Arrow</b> (Unstable)\n\u2022
+    Increased the benefits from obtaining higher rarity weapon versions: Initial
+    unlock (2.5% per rarity level \u2192 5% per rarity level), upgrades (2.5% per
+    rarity level \u2192 10% per rarity level) \n\nItems\n\u2022 New: <b>Energy Amplifier</b>
+    (Reactions)\n\u2022 New: <b>Combative Flow</B> (Follow-Up)\n\u2022 New: <b>Guardian\u2019s
+    Aegis</b> (Health)\n\u2022 New: <b>Brute's Talisman</b> (Crit rate/damage)\n\u2022
+    New: <b>Bloodthorn Scarf</b> (Healing)\n\u2022 New: <b>elemental affinities</b>
+    (Elemental damage boost)\n\u2022 New: <b>Cursed Thorn</b> (DoT cirt)\n\u2022
+    New: <b>Phantom Crown</b> (Res PEN)\n\u2022 New: <b>Arrow of Arcana</b> (Pierce)\n\u2022
+    Fixed Lightning Needle's upgrade (Swift Voltage (I)) reducing the DoT frequency\n\nMaps:\n\u2022
+    New map: <b>Capital Undergrounds</b>\n\u2022 Added new locations to the <b>Capital
+    outskirts</b>\n\nRunes:\n\u2022 New: Rune of Penetration (Res PEN)\n\u2022 New:
+    Rune of Assistance (Follow-Up)\n\u2022 New: Rune of Harmony (Elemental Reactions)\n\nUI:\n\u2022
+    Added weapon attack type display to level up screen\n\u2022 Added item support
+    type diplay to level up screen\n\u2022 Expanded tutorial with new sections\n\u2022
+    Added a loading notification when loading into the level\n\u2022 Added display
+    of weapon type and element to details in the collection menu\n\u2022 Character
+    shard stories can now be scrolled\n\u2022 Collection items description can now
+    be scrolled\n\u2022 Fix description of <b>Armor</b> missing '%' sign\n\u2022
+    Fixed shop's scaling on ultra wide resolutions\n\u2022 Fixed incorrect layering
+    in the collection menu\n\u2022 Added settings for damage number size, camera
+    distance and camera FOV \n\u2022 Fixed value display for runes providing benefits
+    with negative percentage\n\u2022 Improved most of item and weapon icons and renamed
+    a few of them\n\nSystem:\n\u2022 <b>Added Twitch integration</b>!\n\u2022 Added
+    rewards for visitting twitter/discord/itch.io pages and additional rewards for
+    sending feedback\n\u2022 Added character fragments to the shop\n\u2022 Changed
+    follow up attack damage calculation: FuA benefit from half of character crit
+    rate / crit damage and does not scale with damage increase % \n\u2022 Selected
+    game settings will now be remembered\n\u2022 Adjusted position of 1st person
+    camera\n\u2022 Disabled camera damping when met with obstacles\n\u2022 Added
+    resistances to enemies in Capital Outskirts \n\u2022 Enemies can now shoot projectiles\n\u2022
+    Added option to disable screen space ambient occlusion\n\u2022 Added 28 new achievements\n\u2022
+    Vulnerabilities applied by weapons will now stack between different weapons\n\u2022
+    Added new game rule: random item on level up\n\u2022 Upgrades bought in the shop
+    can now be refunded\n\u2022 Reduced the max level of Greed upgrade from 25 to
+    20 and changed the bonus from 5% per level to 6% per level\n\u2022 Fixed character/shard
+    unlocking with fragments that required 51 fragments for unlock instead of displayed
+    50\n\u2022 Added a RES PEN stat to characters that allows them to ignore a certain
+    percentage of enemy resistances\n\u2022 Reduced the requirement for achievement:
+    <b>The Path of Pain</b> from 10000 damage healed and taken to 1500\n\u2022 Static
+    3rd person camera now allow sfor up and down movement\n\u2022 Fixed inconsistant
+    and stuttery dashing\n\nShort play mode:\n\u2022 Reduced enemy damage buff from
+    +100% to +25%\n\u2022 Increased EXP gain from +40% to +50%\n\nCO-OP:\n\u2022
+    Moved damage calculations to host\n\u2022 Damage calculation now takes enemy
+    resistances into consideration\n\u2022 Elemental application and reactions are
+    now sync between players\n\u2022 Vulnerabilities applied to enemies will now
+    sync between players\n\u2022 Elemental damage modifications caused by weapons
+    will now sync between players\n\u2022 Arika's field will now properly apply the
+    follow-up damage when casted by client\n\u2022 Weapon kill effects will now properly
+    apply in CO-OP\n\u2022 Slowing effects can now be applied by clients\n\u2022
+    Reduced per player enemy count penalty\n\u2022 Reduced per player enemy HP penalty\n\u2022
+    Reduced per player EXP drop penalty\n\u2022 Fixed enemy damage increase per player
+    penalty\n\u2022 Reduce time it takes to revive player from 6.5 s. to 3.5s.\n\nAdjustments:\n\u2022
+    Changed some enemy spawn probabilities on <b>Capital Outskirts</b>\n\u2022 Reduced
+    glow on <b>Time Blade</b>'s attacks"
+--- !u!222 &1484608782
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484608779}
+  m_CullTransparentMesh: 1
 --- !u!1 &1484659245
 GameObject:
   m_ObjectHideFlags: 0
@@ -133248,7 +133196,7 @@ PrefabInstance:
     - target: {fileID: 3118256036537312055, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -29.848022
+      value: -29.848145
       objectReference: {fileID: 0}
     - target: {fileID: 3200650183588482493, guid: a6ac9ad7aa7009e47a0f730d9f8d6bc3,
         type: 3}

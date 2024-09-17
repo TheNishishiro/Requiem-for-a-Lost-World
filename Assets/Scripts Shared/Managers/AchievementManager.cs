@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Data.Elements;
 using DefaultNamespace;
 using DefaultNamespace.Data;
@@ -231,6 +232,8 @@ namespace Managers
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.PerformGacha100Times);
 			
 			SaveFile.Instance.UnlockAchievement(AchievementEnum.PerformGacha);
+			if (SaveFile.Instance.CharacterSaveData.All(x => x.Value.IsUnlocked))
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.OwnAllCharacters);
 		}
 		
 		public void OnPickupCollected(PickupEnum pickup)

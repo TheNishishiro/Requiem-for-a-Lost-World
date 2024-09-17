@@ -67,7 +67,7 @@ namespace DefaultNamespace.Data
 				RenderCoopProjectiles = true;
 				UpscalingMethod = 0;
 				FpsLimit = 0;
-				ConfigurationVersion = 12;
+				ConfigurationVersion = 13;
 				SSAO = false;
 				TwitchPollDuration = 15;
 				DamageNumbers = 2;
@@ -99,7 +99,7 @@ namespace DefaultNamespace.Data
 				ResolutionWidth = Screen.currentResolution.width;
 				ResolutionHeight = Screen.currentResolution.height;
 				RefreshRate = Screen.currentResolution.refreshRateRatio.numerator;
-				ConfigurationVersion = 12;
+				ConfigurationVersion = 13;
 				SSAO = true;
 				TwitchPollDuration = 15;
 				DamageNumbers = 2;
@@ -177,14 +177,23 @@ namespace DefaultNamespace.Data
 			if (ConfigurationVersion == 9)
 			{
 				SSAO = true;
+				ConfigurationVersion = 10;
 			}
 			if (ConfigurationVersion == 10)
 			{
 				TwitchPollDuration = 15;
+				ConfigurationVersion = 11;
 			}
 			if (ConfigurationVersion == 11)
 			{
 				DamageNumbers = 2;
+				ConfigurationVersion = 12;
+			}
+			if (ConfigurationVersion == 12)
+			{
+				CameraFOV = 0;
+				CameraDistance = 1;
+				ConfigurationVersion = 13;
 			}
 
 			return this;

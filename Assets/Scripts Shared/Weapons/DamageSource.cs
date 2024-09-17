@@ -72,6 +72,25 @@ namespace Weapons
 				OnLifeTimeEnd();
 		}
 
+		protected void SplitDamage(Collider other, bool isLimitedUsage)
+		{
+			if (!other.CompareTag("Enemy") && !other.CompareTag("Destructible"))
+				return;
+			
+			var damageable = other.GetComponent<IDamageable>();
+			
+			if (damageable == null)
+				return;
+			if (damageable.IsDestroyed())
+				return;
+
+			var damage = WeaponStatsStrategy.GetSplitDamageDealt(ProjectileDamageIncreasePercentage, ProjectileDamageIncrease);
+			damageable.TakeDamage(damage, (WeaponBase)ParentWeapon);
+
+			if (isLimitedUsage && currentPassedEnemies-- <= 0)
+				OnLifeTimeEnd();
+		}
+
 		protected void DamageArea(Collider other, out IDamageable damageable, bool isFollowUp = false)
 		{
 			damageable = null;

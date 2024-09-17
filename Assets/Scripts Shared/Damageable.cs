@@ -183,7 +183,7 @@ namespace DefaultNamespace
 		public void TakeDamage(DamageResult damageResult, IWeapon weaponBase = null, bool isRecursion = false)
 		{
 			var elementalReactionEffectIncreasePercentage = PlayerStatsScaler.GetScaler().GetElementalReactionEffectIncreasePercentage();
-			var resPen = PlayerStatsScaler.GetScaler().GetResPen();
+			var resPen = weaponBase?.GetWeaponStrategy()?.GetResPen() ?? PlayerStatsScaler.GetScaler().GetResPen();
 			if (!_hitSoundPlayedThisFrame)
 			{
 				AudioSource.PlayClipAtPoint(takeDamageSound, _transformCache.position, 0.5f);
@@ -192,11 +192,11 @@ namespace DefaultNamespace
 
 			if (isNetworkObject)
 				RpcManager.instance.DealDamageToEnemyRpc(this, damageResult.Damage, damageResult.IsCriticalHit,
-					weaponBase?.GetElement() ?? Element.None, (WeaponEnum?)weaponBase?.GetId() ?? WeaponEnum.Scythe,
+					weaponBase?.GetElement() ?? Element.Disabled, (WeaponEnum?)weaponBase?.GetId() ?? WeaponEnum.Unset,
 					elementalReactionEffectIncreasePercentage, resPen, isRecursion, NetworkManager.Singleton.LocalClientId);
 			else
-				TakeDamageServer(damageResult.Damage, damageResult.IsCriticalHit, weaponBase?.GetElement() ?? Element.None,
-					(WeaponEnum?)weaponBase?.GetId() ?? WeaponEnum.Scythe, elementalReactionEffectIncreasePercentage, 
+				TakeDamageServer(damageResult.Damage, damageResult.IsCriticalHit, weaponBase?.GetElement() ?? Element.Disabled,
+					(WeaponEnum?)weaponBase?.GetId() ?? WeaponEnum.Unset, elementalReactionEffectIncreasePercentage, 
 					resPen, isRecursion, NetworkManager.Singleton.LocalClientId);
 		}
 		
@@ -204,9 +204,12 @@ namespace DefaultNamespace
 		{
 			if (IsDestroyed())
 				return;
+
+			if (weaponElement == Element.Unstable)
+				weaponElement = Utilities.RandomEnumValue<Element>();
 			
 			var calculatedDamage = baseDamage;
-			var isWeaponSpecified = weaponElement != Element.None;
+			var isWeaponSpecified = weaponElement != Element.Disabled;
 			if (isWeaponSpecified)
 			{
 				calculatedDamage *= 1 - (GetResistance(weaponElement) - resPen);
@@ -277,7 +280,7 @@ namespace DefaultNamespace
 		{
 			var timer = damageDuration;
 			var waitTimer = new WaitForSeconds(damageFrequency);
-			var tempWeapon = new ElementalWeapon(Element.None);
+			var tempWeapon = new ElementalWeapon(Element.Disabled);
 			while (timer > 0)
 			{
 				if (!_activeDots.ContainsKey(weaponBase.GetInstanceID())) yield break;
@@ -366,7 +369,7 @@ namespace DefaultNamespace
 		
 		private void OnElementInflict(Element element, float damage, float elementalReactionEffectIncrease, ulong clientId)
 		{
-			if (!canBeAfflictedWithElements || element == Element.None || element == Element.Physical || inflictedElements.Contains(element) || (element == Element.Wind && inflictedElements.Count == 0))
+			if (!canBeAfflictedWithElements || element == Element.Unstable || element == Element.Disabled || element == Element.Physical || inflictedElements.Contains(element) || (element == Element.Wind && inflictedElements.Count == 0))
 				return;
 			
 			inflictedElements.Add(element);
@@ -379,7 +382,7 @@ namespace DefaultNamespace
 			if (_elementVfxMap.ContainsKey(reactionResult.removedB))
 				_elementVfxMap[reactionResult.removedB].gameObject.SetActive(false);
 
-			var swirlElement = Element.None;
+			var swirlElement = Element.Disabled;
 			switch (reactionResult.reaction)
 			{
 				case ElementalReaction.None:
