@@ -8,6 +8,7 @@ using Objects.Stage;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace Objects.Drops
 {
@@ -24,10 +25,12 @@ namespace Objects.Drops
 		[ShowIf("canExpire")]
 		[SerializeField] private float lifeTime;
 		protected float _currentLifeTime;
+		protected int updateEveryFrameCount;
 
 		protected void Init()
 		{
 			_cachedTransform = transform;
+			updateEveryFrameCount = Random.Range(2, 15);
 		}
 
 		public void Reset()
@@ -41,11 +44,10 @@ namespace Objects.Drops
 			if (isStationary)
 				return;
 			
-			if (Time.frameCount % 2 != 0)
-				return;
-		
 			if (!IsFollowingPlayer)
 			{
+				if (Time.frameCount % updateEveryFrameCount != 0)
+					return;
 				var distance = Vector3.Distance(GameManager.instance.PlayerTransform.position, _cachedTransform.position);
 				if (distance < PlayerStatsScaler.GetScaler().GetMagnetSize() * GameData.GetCurrentDifficulty().ItemAttractionModifier)
 					IsFollowingPlayer = true;

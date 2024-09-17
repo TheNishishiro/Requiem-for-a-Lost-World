@@ -27,7 +27,7 @@ namespace Objects.Abilities.Boomerang
 		private IEnumerator FlyCoroutine()
 		{
 			yield return new WaitForSeconds(WeaponStatsStrategy.GetTotalTimeToLive()*0.25f);
-			SetDirectionInternal(ParentWeapon.transform.position);
+			SetDirectionInternal(ParentWeapon.GetTransform().position);
 		}
 		
 		protected override void CustomUpdate()

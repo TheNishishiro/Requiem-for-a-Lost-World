@@ -45,10 +45,26 @@ namespace DefaultNamespace
 			
 			return value.Replace(",", ".").TrimEnd('0').TrimEnd('.');
 		}
+
+		public static float AdjustForRarity(float value, float rarityFactor)
+		{
+			return value > 0 ? value * (2 - rarityFactor) : value * rarityFactor;
+		}
 		
 		public static float RandomDoubleRange(float min1, float max1, float min2, float max2)
 		{
 			return Random.value < 0.5f ? Random.Range(min1, max1) : Random.Range(min2, max2);
+		}
+		
+		public static T RandomEnumValue<T> ()
+		{
+			var v = Enum.GetValues (typeof (T));
+			return (T) v.GetValue (Random.Range(0,v.Length));
+		}
+		
+		public static List<T> RandomEnumValues<T> (int takeAmount)
+		{
+			return Enum.GetValues(typeof(T)).Cast<T>().OrderBy(_ => Random.value).Take(takeAmount).ToList();
 		}
 		
 		public static Color HexToColor(string hexColor)
@@ -102,6 +118,9 @@ namespace DefaultNamespace
 
 		public static Vector3 GetRandomPointOnCollider(Collider collider)
 		{
+			if (collider == null)
+				return Vector3.zero;
+			
 			var colliderBounds = collider.bounds;
 			var minBounds = new Vector3(colliderBounds.min.x, colliderBounds.min.y, colliderBounds.min.z);
 			var maxBounds = new Vector3(colliderBounds.max.x, colliderBounds.max.y, colliderBounds.max.z);
@@ -279,6 +298,11 @@ namespace DefaultNamespace
 				Rarity.Mythic => Color.red,
 				_ => throw new ArgumentOutOfRangeException()
 			};
+		}
+
+		public static bool IsServer(this NetworkBehaviour networkBehaviour)
+		{
+			return networkBehaviour.IsHost || !networkBehaviour.IsSpawned;
 		}
 	}
 }

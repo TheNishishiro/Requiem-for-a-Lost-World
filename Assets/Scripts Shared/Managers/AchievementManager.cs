@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Data.Elements;
+using DefaultNamespace;
 using DefaultNamespace.Data;
 using DefaultNamespace.Data.Achievements;
+using DefaultNamespace.Data.Weapons;
+using Events.Handlers;
+using Events.Scripts;
+using Objects;
 using Objects.Characters;
 using Objects.Drops;
 using Objects.Enemies;
@@ -12,10 +18,11 @@ using Objects.Stage;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Weapons;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
-	public class AchievementManager : MonoBehaviour
+	public class AchievementManager : MonoBehaviour, IReactionTriggeredEvent, IDamageDealtHandler
 	{
 		public static AchievementManager instance;
 		private int _enemiesKilled;
@@ -26,7 +33,10 @@ namespace Managers
 		private float _damageTakenInOneGame;
 		private float _distanceTraveled;
 		private int _earthWeaponsHeld;
+		private int _followUpWeaponsHeld;
+		private float _yamiDamageDealt;
 		private HashSet<int> _visitedShrines = new ();
+		private Dictionary<Element, int> _elementWeaponCount = new ();
         
 		public void Awake()
 		{
@@ -35,7 +45,19 @@ namespace Managers
 				instance = this;
 			}
 		}
-		
+
+		private void OnEnable()
+		{
+			ReactionTriggeredEvent.Register(this);
+			DamageDealtEvent.Register(this);
+		}
+
+		private void OnDisable()
+		{
+			ReactionTriggeredEvent.Unregister(this);
+			DamageDealtEvent.Unregister(this);
+		}
+
 		public void ClearPerGameStats()
 		{
 			_enemiesKilled = 0;
@@ -44,18 +66,21 @@ namespace Managers
 			_damageTakenInOneGame = 0;
 			_menuScrolls = 0;
 			_earthWeaponsHeld = 0;
+			_followUpWeaponsHeld = 0;
+			_yamiDamageDealt = 0;
 			_visitedShrines = new HashSet<int>();
+			_elementWeaponCount.Clear();
 		}
 
 		public void OnStageTimeUpdated(float time)
 		{
 			var minutes = Mathf.FloorToInt(time / 60);
 			var activeCharacterName = GameData.GetPlayerCharacterData().Id.GetName();
-			var activeCharacterAlignment = GameData.GetPlayerCharacterData().Alignment;
 			switch (minutes)
 			{
 				case >= 30:
 					SaveFile.Instance.UnlockAchievement($"Survive30MinutesWith{activeCharacterName}");
+					var activeCharacterAlignment = GameData.GetPlayerCharacterData().Alignment;
 					if (activeCharacterAlignment == CharacterAlignment.Light)
 						SaveFile.Instance.UnlockAchievement(AchievementEnum.Survive30MinutesWithLightCharacter);
 					else if (activeCharacterAlignment == CharacterAlignment.Dark)
@@ -66,11 +91,18 @@ namespace Managers
 					break;
 			}
 		}
-		public void OnWeaponUnlocked(WeaponBase weapon, int unlockedCount, int rarity)
+		public void OnWeaponUnlocked(WeaponBase weapon, int unlockedCount, int rarity, AttackType weaponAttackTypeField)
 		{
 			if (rarity >= 3)
 				SaveFile.Instance.TotalLegendaryItemsObtained++;
-			
+
+			if (weaponAttackTypeField == AttackType.FollowUp)
+			{
+				_followUpWeaponsHeld++;
+				if (_followUpWeaponsHeld >= 3)
+					SaveFile.Instance.UnlockAchievement(AchievementEnum.Own3FollowUpWeapons);
+			}
+
 			if (SaveFile.Instance.TotalLegendaryItemsObtained > 20)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Obtain10HighRarityItems);
 			
@@ -80,11 +112,41 @@ namespace Managers
 			if (unlockedCount == 6)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Hold6Weapons);
 
-			if (weapon.ElementField == Element.Earth && rarity > 3)
+			if (weapon.ElementField == Element.Earth && rarity >= 3)
 			{
 				_earthWeaponsHeld++;
 				if (_earthWeaponsHeld >= 2)
 					SaveFile.Instance.UnlockAchievement(AchievementEnum.HoldHighRarityEarthWeapons);
+			}
+
+			_elementWeaponCount.TryAdd(weapon.ElementField, 0);
+			_elementWeaponCount[weapon.ElementField]++;
+			if (_elementWeaponCount[weapon.ElementField] >= 4)
+			{
+				switch (weapon.ElementField)
+				{
+					case Element.Fire:
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.FireMastery);
+						break;
+					case Element.Lightning:
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.LightningMastery);
+						break;
+					case Element.Ice:
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.IceMastery);
+						break;
+					case Element.Wind:
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.WindMastery);
+						break;
+					case Element.Light:
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.LightMastery);
+						break;
+					case Element.Cosmic:
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.CosmicMastery);
+						break;
+					case Element.Earth:
+						SaveFile.Instance.UnlockAchievement(AchievementEnum.EarthMastery);
+						break;
+				}
 			}
 		}
 		public void OnItemUnlocked(ItemBase item, int unlockedCount, int rarity)
@@ -101,7 +163,7 @@ namespace Managers
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Hold6Items);
 		}
 		
-		public void OnEnemyKilled(bool isBoss)
+		public void OnEnemyKilled(bool isBoss, EnemyTypeEnum enemyTypeValue)
 		{
 			_enemiesKilled++;
 			SaveFile.Instance.EnemiesKilled++;
@@ -113,6 +175,16 @@ namespace Managers
 				SaveFile.Instance.BossKills++;
 			if (SaveFile.Instance.BossKills > 50)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Kill500BossEnemies);
+
+			if (enemyTypeValue == EnemyTypeEnum.DungeonCrawler && Random.value < 0.025f)
+			{
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.UnlockBruteTalisman);
+			}
+			
+			if (enemyTypeValue == EnemyTypeEnum.TheWatcher)
+			{
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.BanishEvil);
+			}
 		}
 
 		public void OnDeath()
@@ -132,7 +204,7 @@ namespace Managers
 			if (_healAmountInOneGame >= 1000)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Heal1000HealthInOneGame);
 			
-			if (_healAmountInOneGame > 10000 && _damageTakenInOneGame > 10000)
+			if (_healAmountInOneGame > 1500 && _damageTakenInOneGame > 1500)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.HealAndTake6000Damage);
 		}
 
@@ -160,6 +232,8 @@ namespace Managers
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.PerformGacha100Times);
 			
 			SaveFile.Instance.UnlockAchievement(AchievementEnum.PerformGacha);
+			if (SaveFile.Instance.CharacterSaveData.All(x => x.Value.IsUnlocked))
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.OwnAllCharacters);
 		}
 		
 		public void OnPickupCollected(PickupEnum pickup)
@@ -224,6 +298,37 @@ namespace Managers
 			SaveFile.Instance.ShrinesVisited++;
 			if (SaveFile.Instance.ShrinesVisited == 100)
 				SaveFile.Instance.UnlockAchievement(AchievementEnum.Visit100Shrines);
+		}
+
+		public void UnlockAchievement(AchievementEnum achievementId)
+		{
+			SaveFile.Instance.UnlockAchievement(achievementId);
+		}
+
+		public void OnReactionTriggered(ElementalReaction reaction, Damageable damageable)
+		{
+			SaveFile.Instance.ReactionsTriggered++;
+			if (SaveFile.Instance.ReactionsTriggered == 10000)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.MasterOfElements);
+				
+		}
+
+		public void OnDamageDealt(Damageable damageable, float damage, bool isRecursion, WeaponEnum weaponId)
+		{
+			if (GameData.IsCharacter(CharactersEnum.Chornastra_BoR))
+			{
+				_yamiDamageDealt += damage;
+				if (_yamiDamageDealt > 20_000_000)
+					SaveFile.Instance.UnlockAchievement(AchievementEnum.Chronastra_DamageDealt);
+			}
+		}
+
+		public void YamiFlowerPickedUp()
+		{
+			SaveFile.Instance.YamiFlowerPickup++;
+			if (SaveFile.Instance.YamiFlowerPickup > 1000)
+				SaveFile.Instance.UnlockAchievement(AchievementEnum.Chronastra_FlowersPickup);
+			
 		}
 	}
 }

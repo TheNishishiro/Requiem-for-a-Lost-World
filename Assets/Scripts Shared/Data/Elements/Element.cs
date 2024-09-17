@@ -3,7 +3,7 @@
 	public enum Element
 	{
 		Disabled,
-		None,
+		Unstable,
 		Fire,
 		Lightning,
 		Ice,
@@ -11,6 +11,6 @@
 		Wind,
 		Light,
 		Cosmic,
-		Earth,
+		Earth
 	}
 }

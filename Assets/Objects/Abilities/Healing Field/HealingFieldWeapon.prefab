@@ -47,13 +47,14 @@ MonoBehaviour:
   useNetworkPool: 1
   spawnPrefab: {fileID: 5293197033241543336, guid: 3404c1578224906428f08dbdaa015e8d,
     type: 3}
+  spawnSubPrefab: {fileID: 0}
   WeaponId: 11
   attackType: 6
   Name: Blessing of Light
   Description: Create a healing emitter at current position that heals in an area
     around it for a set time
   chanceToAppear: 0.75
-  Icon: {fileID: 21300000, guid: 094230a82717225479bc9bd9a3693e23, type: 3}
+  Icon: {fileID: 21300000, guid: af5545b63efa4ed4ba7cf5920ae24b5b, type: 3}
   unlockOnAchievement: 1
   requiredAchievement: 22
   element: 7
@@ -91,8 +92,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: af4707ece8b8688408e7852175ca4d27, type: 2}
   - {fileID: 11400000, guid: 658da438d65aed74fb4deb13910c4cc0, type: 2}
   isSkill: 0
-  capacity: 50
-  maxCapacity: 50
   healingFieldPrefab: {fileID: 7752757187805214172, guid: f1366df1039657c429775f2903ae5573,
     type: 3}
   IsEmpowering: 1

@@ -50,7 +50,7 @@ namespace Objects.Abilities.Reality_Crack
 		public void OnEnemyHit(Damageable damageable)
 		{
 			if (WeaponStatsStrategy.GetWeakness() > 0)
-				damageable.SetVulnerable(5, WeaponStatsStrategy.GetWeakness());
+				damageable.SetVulnerable((WeaponEnum)ParentWeapon.GetId(), 5, WeaponStatsStrategy.GetWeakness());
 			SimpleDamage(damageable, false, false);
 		}
 

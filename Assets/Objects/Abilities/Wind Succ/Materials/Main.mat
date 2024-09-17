@@ -12,6 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - CAMDISTFADE_ON
   - MASK_ON
   - SHAPE1DISTORT_ON
   m_InvalidKeywords: []
@@ -102,9 +103,9 @@ Material:
     - _AlphaFadeSmooth: 0.075
     - _AlphaStepMax: 0.075
     - _AlphaStepMin: 0
-    - _CamDistFadeStepMax: 100
-    - _CamDistFadeStepMin: 0
-    - _CamDistProximityFade: 0
+    - _CamDistFadeStepMax: 2000
+    - _CamDistFadeStepMin: 1704.4164
+    - _CamDistProximityFade: 4
     - _ColorGradingMidPoint: 0.5
     - _ColorMask: 15
     - _ColorRampBlend: 1
@@ -148,7 +149,7 @@ Material:
     - _RandomSh1Mult: 1
     - _RandomSh2Mult: 1
     - _RandomSh3Mult: 1
-    - _RenderingMode: 0
+    - _RenderingMode: 3
     - _RimAddAmount: 1
     - _RimBias: 0
     - _RimErodesAlpha: 0

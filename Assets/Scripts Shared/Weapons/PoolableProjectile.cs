@@ -1,6 +1,7 @@
 ﻿using DefaultNamespace.Data.Weapons;
 using Interfaces;
 using Managers;
+using Objects;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -20,8 +21,8 @@ namespace Weapons
 
         protected override void Destroy()
         {
-            if (ParentWeapon.useNetworkPool)
-                RpcManager.instance.DespawnProjectileRpc(GetComponent<NetworkObject>(), ParentWeapon.WeaponId, projectileTypeId);
+            if (ParentWeapon.IsUseNetworkPool())
+                RpcManager.instance.DespawnProjectileRpc(networkProjectile.networkObject, (WeaponEnum)ParentWeapon.GetId(), projectileTypeId);
             else
                 ReturnToPool(_objectPool, _object);
         }

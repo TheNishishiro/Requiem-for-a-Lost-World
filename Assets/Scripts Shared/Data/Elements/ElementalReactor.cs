@@ -34,7 +34,7 @@ namespace Data.Elements
 		
 		public static (ElementalReaction reaction, Element removedA, Element removedB) GetReaction(List<Element> activeElements)
 		{
-			if (activeElements == null) return (ElementalReaction.None, Element.None, Element.None);
+			if (activeElements == null) return (ElementalReaction.None, Element.Unstable, Element.Unstable);
 
 			foreach (var a in activeElements)
 			{
@@ -49,7 +49,7 @@ namespace Data.Elements
 				}
 			}
 
-			return (ElementalReaction.None, Element.None, Element.None);
+			return (ElementalReaction.None, Element.Unstable, Element.Unstable);
 		}
 	}
 }

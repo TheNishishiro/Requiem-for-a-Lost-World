@@ -17,6 +17,9 @@
         EnemyBossKills = 12,
         HealAndDamageInSingleGame = 13,
         DistanceTraveled = 14,
-        Shrines = 15
+        Shrines = 15,
+        Reactions = 16,
+        AbyssFlowers = 17,
+        CharactersOwned = 18,
     }
 }

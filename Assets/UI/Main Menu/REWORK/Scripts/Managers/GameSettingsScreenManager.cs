@@ -48,6 +48,7 @@ public class GameSettingsScreenManager : MonoBehaviour, IStackableWindow
     [BoxGroup("Labels")] [SerializeField] private TextMeshProUGUI labelCoopPlayAllow;
     [BoxGroup("Labels")] [SerializeField] private TextMeshProUGUI labelCoopPlayDeny;
     [BoxGroup("Labels")] [SerializeField] private TextMeshProUGUI labelShortPlayTime;
+    [BoxGroup("Labels")] [SerializeField] private TextMeshProUGUI labelRandomItemOnLevelUp;
 
     public void SetDifficulty(int difficultyId)
     {
@@ -89,6 +90,13 @@ public class GameSettingsScreenManager : MonoBehaviour, IStackableWindow
         labelShortPlayTime.fontSharedMaterial = GameSettings.IsShortPlayTime ? materialSelectionPositive : materialNeutral;
     }
 
+    public void ToggleRandomLevelUps()
+    {
+        GameSettings.IsRandomLevelUp = !GameSettings.IsRandomLevelUp;
+        SaveManager.instance.GetSaveFile().IsRandomLevelUp = GameSettings.IsRandomLevelUp;
+        labelRandomItemOnLevelUp.fontSharedMaterial = GameSettings.IsRandomLevelUp ? materialSelectionNegative : materialNeutral;
+    }
+
     public void Open()
     {
         var character = CharacterListManager.instance.GetActiveCharacter();
@@ -96,15 +104,19 @@ public class GameSettingsScreenManager : MonoBehaviour, IStackableWindow
         imageSettingsLine.color = character.ColorTheme;
         imageEffectsLine.color = character.ColorTheme;
         imageGlowLine.color = character.ColorTheme;
+        
+        labelShortPlayTime.fontSharedMaterial = GameSettings.IsShortPlayTime ? materialSelectionPositive : materialNeutral;
+        labelRandomItemOnLevelUp.fontSharedMaterial = GameSettings.IsRandomLevelUp ? materialSelectionNegative : materialNeutral;
 
         var stage = GameData.GetCurrentStage();
         imageBackground.sprite = stage.backgroundBlur;
         var saveFile = SaveManager.instance.GetSaveFile();
         if (saveFile.IsShortPlayTime != GameSettings.IsShortPlayTime)
             ToggleShortPlayTime();
+        if (saveFile.IsRandomLevelUp != GameSettings.IsRandomLevelUp)
+            ToggleRandomLevelUps();
         SetCoopPreference(saveFile.IsCoopAllowed);
         SetDifficulty((int)saveFile.SelectedDifficulty);
-        labelShortPlayTime.fontSharedMaterial = GameSettings.IsShortPlayTime ? materialSelectionPositive : materialNeutral;
         
         StackableWindowManager.instance.OpenWindow(this);
     }
@@ -134,6 +146,7 @@ public class GameSettingsScreenManager : MonoBehaviour, IStackableWindow
     {
         try
         {
+            TwitchIntegrationManager.instance.Connect();
             ModalManager.instance.Open(ButtonCombination.None, "Loading", "Loading the level...", modalState: ModalState.Info);
             if (!NetworkManager.Singleton.ShutdownInProgress)
                 NetworkManager.Singleton.Shutdown();
@@ -149,7 +162,7 @@ public class GameSettingsScreenManager : MonoBehaviour, IStackableWindow
         }
         catch (Exception e)
         {
-            ModalManager.instance.Open(ButtonCombination.None, "Loading", $"Failed to load the game: {e.Message}", modalState: ModalState.Error);
+            ModalManager.instance.Open(ButtonCombination.Yes, "Loading", $"Failed to load the game: {e.Message}", modalState: ModalState.Error, textYes: "Close");
         }
     }
     

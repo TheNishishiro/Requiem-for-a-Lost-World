@@ -359,6 +359,11 @@ namespace Objects.Characters
 			return PlayerStats?.Armor ?? 0;
 		}
 
+		public virtual float GetResPen()
+		{
+			return PlayerStats?.ResPen ?? 0;
+		}
+
 		public float GetElementalReactionEffectIncreasePercentage()
 		{
 			return 1f + (PlayerStats?.ElementalReactionEffectIncreasePercentage ?? 0);

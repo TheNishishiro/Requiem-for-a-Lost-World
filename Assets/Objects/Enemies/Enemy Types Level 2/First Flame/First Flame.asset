@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6773012bce094f4281e59656a4cb2572, type: 3}
+  m_Name: First Flame
+  m_EditorClassIdentifier: 
+  enemyType: 44
+  enemyWeapons: 01000000
+  enemyName: First Flame
+  spriteSheet: {fileID: 21300000, guid: 4afbbdcd7d04b2f4290b6e8c6f8f2e52, type: 3}
+  stats:
+    hp: 30
+    damage: 40
+    speed: 1.35
+    elementStats:
+    - element: 2
+      damageReduction: 0.7
+  allowFlying: 0
+  groundOffset: 0
+  isBossEnemy: 0
+  ExpDrop: 200
+  isLevelBoss: 0

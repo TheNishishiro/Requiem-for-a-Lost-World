@@ -26,7 +26,7 @@ namespace Weapons
         protected Vector3 calculatedScale { get; private set; }
         protected float CurrentTimeToLive;
         protected float TimeAlive;
-        [SerializeField] private NetworkProjectile networkProjectile;
+        [SerializeField] protected NetworkProjectile networkProjectile;
         [SerializeField] protected Transform transformCache;
         [SerializeField] public bool UseParticles;
         [ShowIf("UseParticles")]
@@ -71,11 +71,11 @@ namespace Weapons
 	        baseScale = new Vector3(localScale.x,localScale.y,localScale.z);
         }
         
-        public virtual void SetParentWeapon(WeaponBase parentWeapon, bool initStats = true)
+        public virtual void SetParentWeapon(IWeapon parentWeapon, bool initStats = true)
         {
             ParentWeapon = parentWeapon;
             if (initStats)
-				SetStats(parentWeapon.WeaponStatsStrategy);
+				SetStats(parentWeapon.GetWeaponStrategy());
         }
 		
         public virtual void SetStats(IWeaponStatsStrategy weaponStatsStrategy)
@@ -280,6 +280,11 @@ namespace Weapons
 	    {
 		    if (hitbox.enabled)
 			    hitbox.enabled = false;
+	    }
+
+	    public IWeapon GetParentWeapon()
+	    {
+		    return ParentWeapon;
 	    }
         
 	    private Vector3 SetNewSize(Vector3 minTarget, bool isAnticipation, float expandTime)

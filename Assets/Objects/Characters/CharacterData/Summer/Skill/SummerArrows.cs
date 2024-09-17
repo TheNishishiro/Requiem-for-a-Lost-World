@@ -1,6 +1,7 @@
 ﻿using System;
 using Data.Elements;
 using DefaultNamespace;
+using Objects;
 using Objects.Abilities;
 using Objects.Characters;
 using Objects.Players.Scripts;
@@ -30,7 +31,7 @@ public class SummerArrows : MonoBehaviour
         if (!other.CompareTag("Enemy")) return;
         var damagable = other.GetComponent<Damageable>();
         if (GameData.IsCharacterRank(CharacterRank.E2))
-            damagable.SetVulnerable(2f, 1f);
+            damagable.SetVulnerable(WeaponEnum.Unset, 2f, 1f);
         damagable .TakeDamage(_elementalWeapon.WeaponStatsStrategy.GetDamageDealt(), _elementalWeapon);
     }
 }

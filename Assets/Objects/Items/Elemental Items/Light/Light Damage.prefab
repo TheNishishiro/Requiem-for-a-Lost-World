@@ -44,14 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemId: 17
   Name: Light Affinity
   Description: Increase light damage by {LightDamageIncrease}% but lower cosmic damage
     by {CosmicDamageIncrease}%
   supportType: 1
   chanceToAppear: 0.5
-  Icon: {fileID: 0}
-  unlockOnAchievement: 0
-  requiredAchievement: 0
+  Icon: {fileID: 21300000, guid: df3dfe2ca97226a4f88399b04cf7f142, type: 3}
+  unlockOnAchievement: 1
+  requiredAchievement: 126
   ItemUpgrades:
   - {fileID: 11400000, guid: 17e97f95711a6844b85a1439e947cb60, type: 2}
   - {fileID: 11400000, guid: 81b1b9b378db04e4f8683780a81898c0, type: 2}
@@ -107,3 +108,6 @@ MonoBehaviour:
     Stamina: 0
     ElementalReactionEffectIncreasePercentage: 0
     FollowUpDamageIncrease: 0
+    HealthIncreasePercentage: 0
+    ResPen: 0
+    CanDotCrit: 0

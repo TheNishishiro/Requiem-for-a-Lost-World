@@ -18,6 +18,10 @@ namespace Objects.Characters.Yami_no_Tokiya
                 stats.CosmicDamageIncrease += 1f;
                 stats.ElementalReactionEffectIncreasePercentage += 5f;
             }
+            if (characterRank >= CharacterRank.E4)
+            {
+                stats.ResPen += 0.5f;
+            }
         }
 
         public void ApplyLevelUp(CharacterRank rank, int currentLevel, PlayerStatsComponent playerStatsComponent)

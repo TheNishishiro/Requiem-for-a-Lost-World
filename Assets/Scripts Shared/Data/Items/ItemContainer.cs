@@ -16,6 +16,11 @@ namespace DefaultNamespace.Data
 		public List<ItemToggleableEntry> GetItems()
 		{
 			return availableItems.ToList();
+		}		
+		
+		public ItemBase GetItem(ItemEnum itemId)
+		{
+			return availableItems.FirstOrDefault(x => x.itemBase.ItemId == itemId)?.itemBase;
 		}
 
 		public IPlayerItem GetItemByAchievement(AchievementEnum achievementEnum)

@@ -44,14 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemId: 22
   Name: Ring of Flow
   Description: Increase follow up attack damage by {FollowUpDamageIncrease}%
   supportType: 1
   chanceToAppear: 1
   Icon: {fileID: 21300000, guid: e02fbc77ab5934848a9c33ca797c0d1f, type: 3}
-  unlockOnAchievement: 0
-  requiredAchievement: 0
-  ItemUpgrades: []
+  unlockOnAchievement: 1
+  requiredAchievement: 112
+  ItemUpgrades:
+  - {fileID: 11400000, guid: 88114e3758ccf11439ffd4301c65717f, type: 2}
+  - {fileID: 11400000, guid: cc1b0d9f9d0ff144da6f8b7d26d19a1f, type: 2}
+  - {fileID: 11400000, guid: 02c66e7c844d6014da5e8bed6259fbe8, type: 2}
+  - {fileID: 11400000, guid: 9f23a7341fa169f43a06e18eb5ab07c7, type: 2}
   ItemStats:
     Health: 0
     HealthMax: 0
@@ -101,4 +106,7 @@ MonoBehaviour:
     DashCount: 0
     Stamina: 0
     ElementalReactionEffectIncreasePercentage: 0
-    FollowUpDamageIncrease: 0.3
+    FollowUpDamageIncrease: 0.5
+    HealthIncreasePercentage: 0
+    ResPen: 0
+    CanDotCrit: 0

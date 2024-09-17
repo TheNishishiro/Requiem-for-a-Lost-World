@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Data.Elements;
+using DefaultNamespace.Data.Combat;
 using DefaultNamespace.Data.Weapons;
 using Events.Scripts;
 using Interfaces;
@@ -12,6 +13,7 @@ using Objects;
 using Objects.Characters;
 using Objects.Players.Scripts;
 using Objects.Stage;
+using Unity.Mathematics;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -54,12 +56,12 @@ namespace DefaultNamespace
 		[ShowIf("canBeAfflictedWithElements")]
 		[SerializeField] private VisualEffect erodeParticles;
 		public Dictionary<GameObject, float> sourceDamageCooldown = new ();
+		public Dictionary<WeaponEnum, VulnerabilityData> _vulnerability = new ();
 		private Dictionary<int, Coroutine> _activeDots = new();
-		public float vulnerabilityTimer;
-		public float vulnerabilityPercentage;
+		private float vulnerabilityTimer;
 		public float additionalDamageTimer;
 		public float additionalDamageModifier;
-		public ElementalWeapon additionalDamageType;
+		public Element additionalDamageType;
 		private Dictionary<Element, float> resistances = new ();
 		private List<Element> inflictedElements = new ();
 		private Transform _transformCache;
@@ -90,8 +92,7 @@ namespace DefaultNamespace
 		public void Clear()
 		{
 			sourceDamageCooldown.Clear();
-			vulnerabilityTimer = 0;
-			vulnerabilityPercentage = 0;
+			_vulnerability.Clear();
 			additionalDamageTimer = 0;
 			additionalDamageModifier = 0;
 			resistances.Clear();
@@ -114,13 +115,27 @@ namespace DefaultNamespace
 
 		private void Update()
 		{
-			if (vulnerabilityTimer > 0)
-				vulnerabilityTimer -= Time.deltaTime;
+			if (this.IsServer() && _vulnerability.Count > 0)
+				vulnerabilityTimer += Time.deltaTime;
 			
 			if (additionalDamageTimer > 0)
 				additionalDamageTimer -= Time.deltaTime;
 			
 			if (Time.frameCount % 60 != 0) return;
+
+			if (this.IsServer())
+			{
+				var vulnerabilitySources = _vulnerability.Keys.ToList();
+				foreach (var vulnerabilitySource in vulnerabilitySources)
+				{
+					var currentVulnerability = _vulnerability[vulnerabilitySource];
+					currentVulnerability.vulnerabilityDuration -= vulnerabilityTimer;
+					if (currentVulnerability.vulnerabilityDuration <= 0)
+						_vulnerability.Remove(vulnerabilitySource);
+				}
+
+				vulnerabilityTimer = 0;
+			}
 			
 			for (var i = 0; i < sourceDamageCooldown.Count; i++)
 			{
@@ -150,30 +165,25 @@ namespace DefaultNamespace
 			}
 		}
 
-		public void SetResistances(ElementStats elementStat)
-		{
-			resistances.TryAdd(elementStat.element, 0);
-			resistances[elementStat.element] = elementStat.damageReduction;
-		}
-
 		private float GetResistance(Element element)
 		{
+			if (!this.IsServer())
+				throw new Exception("Resistances can only be obtained by the server");
+			
 			resistances.TryAdd(element, 0);
 			var resistance = resistances[element];
-			if (GameData.IsCharacterWithRank(CharactersEnum.Chornastra_BoR, CharacterRank.E4))
-				return resistance < 0 ? resistance : 0;
-
-			return resistance;
+			return math.clamp(resistance, -1f, 0.8f);
 		}
 
-		public void TakeDamage(float damage, WeaponBase weaponBase = null, bool isRecursion = false)
+		public void TakeDamage(float damage, IWeapon weaponBase = null, bool isRecursion = false)
 		{
 			TakeDamage(new DamageResult() { Damage = damage }, weaponBase, isRecursion);
 		}
 
-		public void TakeDamage(DamageResult damageResult, WeaponBase weaponBase = null, bool isRecursion = false)
+		public void TakeDamage(DamageResult damageResult, IWeapon weaponBase = null, bool isRecursion = false)
 		{
 			var elementalReactionEffectIncreasePercentage = PlayerStatsScaler.GetScaler().GetElementalReactionEffectIncreasePercentage();
+			var resPen = weaponBase?.GetWeaponStrategy()?.GetResPen() ?? PlayerStatsScaler.GetScaler().GetResPen();
 			if (!_hitSoundPlayedThisFrame)
 			{
 				AudioSource.PlayClipAtPoint(takeDamageSound, _transformCache.position, 0.5f);
@@ -182,34 +192,37 @@ namespace DefaultNamespace
 
 			if (isNetworkObject)
 				RpcManager.instance.DealDamageToEnemyRpc(this, damageResult.Damage, damageResult.IsCriticalHit,
-					weaponBase?.element ?? Element.None, weaponBase?.WeaponId ?? WeaponEnum.Scythe,
-					elementalReactionEffectIncreasePercentage, isRecursion, NetworkManager.Singleton.LocalClientId);
+					weaponBase?.GetElement() ?? Element.Disabled, (WeaponEnum?)weaponBase?.GetId() ?? WeaponEnum.Unset,
+					elementalReactionEffectIncreasePercentage, resPen, isRecursion, NetworkManager.Singleton.LocalClientId);
 			else
-				TakeDamageServer(damageResult.Damage, damageResult.IsCriticalHit, weaponBase?.element ?? Element.None,
-					weaponBase?.WeaponId ?? WeaponEnum.Scythe, elementalReactionEffectIncreasePercentage, 
-					isRecursion, NetworkManager.Singleton.LocalClientId);
+				TakeDamageServer(damageResult.Damage, damageResult.IsCriticalHit, weaponBase?.GetElement() ?? Element.Disabled,
+					(WeaponEnum?)weaponBase?.GetId() ?? WeaponEnum.Unset, elementalReactionEffectIncreasePercentage, 
+					resPen, isRecursion, NetworkManager.Singleton.LocalClientId);
 		}
 		
-		public void TakeDamageServer(float baseDamage, bool isCriticalHit, Element weaponElement, WeaponEnum weaponId, float elementalReactionEffectIncreasePercentage, bool isRecursion, ulong clientId)
+		public void TakeDamageServer(float baseDamage, bool isCriticalHit, Element weaponElement, WeaponEnum weaponId, float elementalReactionEffectIncreasePercentage, float resPen, bool isRecursion, ulong clientId)
 		{
 			if (IsDestroyed())
 				return;
+
+			if (weaponElement == Element.Unstable)
+				weaponElement = Utilities.RandomEnumValue<Element>();
 			
 			var calculatedDamage = baseDamage;
-			var isWeaponSpecified = weaponElement != Element.None;
+			var isWeaponSpecified = weaponElement != Element.Disabled;
 			if (isWeaponSpecified)
 			{
-				calculatedDamage *= 1 - GetResistance(weaponElement);
+				calculatedDamage *= 1 - (GetResistance(weaponElement) - resPen);
 				OnElementInflict(weaponElement, baseDamage, elementalReactionEffectIncreasePercentage, clientId);
 			}
 
-			calculatedDamage = vulnerabilityTimer > 0 ? calculatedDamage * (1 + vulnerabilityPercentage) : calculatedDamage;
+			calculatedDamage = vulnerabilityTimer > 0 ? calculatedDamage * (1 + _vulnerability.Values.Sum(x => x.vulnerabilityAmount)) : calculatedDamage;
 			if (calculatedDamage < 0)
 				calculatedDamage = 0;
 
 			if (!isRecursion && additionalDamageTimer > 0)
 			{
-				TakeDamage(new DamageResult{Damage = baseDamage * additionalDamageModifier, IsCriticalHit = isCriticalHit}, additionalDamageType, true);
+				TakeDamageServer(baseDamage * additionalDamageModifier, isCriticalHit, additionalDamageType, WeaponEnum.Unset, elementalReactionEffectIncreasePercentage, resPen, true, clientId);
 			}
 			
 			if (isWeaponSpecified && weaponId != WeaponEnum.Unset)
@@ -224,8 +237,8 @@ namespace DefaultNamespace
 			if (weaponId != WeaponEnum.Unset && isNetworkObject)
 				RpcManager.instance.InvokeDamageDealtEventRpc(this, calculatedDamage, isRecursion, weaponId, RpcTarget.Single(clientId, RpcTargetUse.Temp));
 
-			//
-			//	weaponBase?.OnEnemyKilled();
+			if (IsDestroyed())
+				RpcManager.instance.WeaponKilledEnemyRpc(weaponId, RpcTarget.Single(clientId, RpcTargetUse.Temp));
 		}
 
 		private void LateUpdate()
@@ -233,18 +246,12 @@ namespace DefaultNamespace
 			_hitSoundPlayedThisFrame = false;
 		}
 
-		public void ReduceElementalDefence(Element element, float amount)
-		{
-			resistances.TryAdd(element, 0);
-			resistances[element] -= amount;
-		}
-
-		public void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, WeaponBase weaponBase, bool isRecursion = false)
+		public void TakeDamageWithCooldown(float damage, GameObject damageSource, float damageCooldown, IWeapon weaponBase, bool isRecursion = false)
 		{
 			TakeDamageWithCooldown(new DamageResult() { Damage = damage }, damageSource, damageCooldown, weaponBase, isRecursion);
 		}
 
-		public void TakeDamageWithCooldown(DamageResult damageResult, GameObject damageSource, float damageCooldown, WeaponBase weaponBase, bool isRecursion = false)
+		public void TakeDamageWithCooldown(DamageResult damageResult, GameObject damageSource, float damageCooldown, IWeapon weaponBase, bool isRecursion = false)
 		{
 			if (sourceDamageCooldown.TryAdd(damageSource, damageCooldown))
 			{
@@ -261,7 +268,7 @@ namespace DefaultNamespace
 			sourceDamageCooldown[damageSource] = damageCooldown;
 		}
 
-		public void ApplyDamageOverTime(float damage, float damageFrequency, float damageDuration, WeaponBase weaponBase)
+		public void ApplyDamageOverTime(float damage, float damageFrequency, float damageDuration, IWeapon weaponBase)
 		{
 			if (_activeDots.ContainsKey(weaponBase.GetInstanceID())) return;
 			
@@ -269,11 +276,11 @@ namespace DefaultNamespace
 			_activeDots[weaponBase.GetInstanceID()] = StartCoroutine(DamageOverTime(damage, damageFrequency, damageDuration, weaponBase));
 		}
 
-		private IEnumerator DamageOverTime(float damage, float damageFrequency, float damageDuration, WeaponBase weaponBase)
+		private IEnumerator DamageOverTime(float damage, float damageFrequency, float damageDuration, IWeapon weaponBase)
 		{
 			var timer = damageDuration;
 			var waitTimer = new WaitForSeconds(damageFrequency);
-			var tempWeapon = new ElementalWeapon(Element.None);
+			var tempWeapon = new ElementalWeapon(Element.Disabled);
 			while (timer > 0)
 			{
 				if (!_activeDots.ContainsKey(weaponBase.GetInstanceID())) yield break;
@@ -299,18 +306,51 @@ namespace DefaultNamespace
 
 		public bool IsDestroyed()
 		{
-			return (IsHost || !IsSpawned) && Health <= 0;
+			return (this.IsServer()) && Health <= 0;
+		}
+
+		public void ReduceElementalDefence(Element element, float amount)
+		{
+			RpcManager.instance.ReduceEnemyResistanceRpc(this, element, amount);
+		}
+
+		public void ReduceElementalDefenceServer(Element element, float amount)
+		{
+			if (!this.IsServer())
+				throw new Exception("ReduceElementalDefence called outside of a server");
+			
+			resistances.TryAdd(element, 0);
+			resistances[element] -= amount;
+		}
+
+		public void SetVulnerable(WeaponEnum weaponId, float time, float percentage)
+		{
+			RpcManager.instance.SetEnemyVulnerableRpc(this, weaponId, time, percentage);
 		}
 		
-		public void SetVulnerable(float time, float percentage)
+		public void SetVulnerableServer(WeaponEnum weaponId, float time, float percentage)
 		{
-			vulnerabilityTimer = time;
-			vulnerabilityPercentage = percentage;
+			if (!this.IsServer())
+				throw new Exception("SetVulnerable called outside of a server");
+			
+			_vulnerability.TryAdd(weaponId, new VulnerabilityData()
+			{
+				vulnerabilityAmount = percentage,
+				vulnerabilityDuration = time
+			});
 		}
 
 		public void SetTakeAdditionalDamageFromAllSources(ElementalWeapon weapon, float duration, float modifier)
 		{
-			additionalDamageType = weapon;
+			RpcManager.instance.EnemyTakeAdditionalDamageAsFollowUpRpc(this, weapon.element, duration, modifier);
+		}
+
+		public void SetTakeAdditionalDamageFromAllSourcesServer(Element element, float duration, float modifier)
+		{
+			if (!this.IsServer())
+				throw new Exception("SetTakeAdditionalDamageFromAllSources called outside of a server");
+			
+			additionalDamageType = element;
 			additionalDamageTimer = duration;
 			additionalDamageModifier = modifier;
 		}
@@ -329,7 +369,7 @@ namespace DefaultNamespace
 		
 		private void OnElementInflict(Element element, float damage, float elementalReactionEffectIncrease, ulong clientId)
 		{
-			if (!canBeAfflictedWithElements || element == Element.None || element == Element.Physical || inflictedElements.Contains(element) || (element == Element.Wind && inflictedElements.Count == 0))
+			if (!canBeAfflictedWithElements || element == Element.Unstable || element == Element.Disabled || element == Element.Physical || inflictedElements.Contains(element) || (element == Element.Wind && inflictedElements.Count == 0))
 				return;
 			
 			inflictedElements.Add(element);
@@ -342,12 +382,13 @@ namespace DefaultNamespace
 			if (_elementVfxMap.ContainsKey(reactionResult.removedB))
 				_elementVfxMap[reactionResult.removedB].gameObject.SetActive(false);
 
+			var swirlElement = Element.Disabled;
 			switch (reactionResult.reaction)
 			{
 				case ElementalReaction.None:
 					return;
 				case ElementalReaction.Melt:
-					SetVulnerable(2, 0.5f * elementalReactionEffectIncrease);
+					SetVulnerable(WeaponEnum.Unset, 2, 0.5f * elementalReactionEffectIncrease);
 					break;
 				case ElementalReaction.Explosion:
 					TakeDamage(new DamageResult{Damage = damage * (0.35f * elementalReactionEffectIncrease)});
@@ -358,20 +399,24 @@ namespace DefaultNamespace
 					break;
 				case ElementalReaction.Swirl:
 				{
-					ReduceElementalDefence(reactionResult.removedA == Element.Wind ? reactionResult.removedB : reactionResult.removedA, 0.1f * elementalReactionEffectIncrease);
+					swirlElement = reactionResult.removedA == Element.Wind
+						? reactionResult.removedB
+						: reactionResult.removedA;
+					ReduceElementalDefence(swirlElement, 0.1f * elementalReactionEffectIncrease);
 					break;
 				}
 				case ElementalReaction.Collapse:
 				{
-					foreach (var resistance in resistances)
+					var keys = resistances.Select(x => x.Key).ToList();
+					foreach (var resistance in keys)
 					{
-						resistances[resistance.Key] *= 0.1f * elementalReactionEffectIncrease;
+						resistances[resistance] *= 0.1f * elementalReactionEffectIncrease;
 					}
 
 					break;
 				}
 				case ElementalReaction.Erode:
-					SetVulnerable(1, 0.1f * elementalReactionEffectIncrease);
+					SetVulnerable(WeaponEnum.Unset, 1, 0.1f * elementalReactionEffectIncrease);
 					TakeDamage(new DamageResult{Damage = Health * (0.05f * elementalReactionEffectIncrease)});
 					break;
 				case ElementalReaction.Shock:
@@ -382,7 +427,9 @@ namespace DefaultNamespace
 			}
 
 			RpcManager.instance.InvokeReactionTriggeredEventRpc(this, reactionResult.reaction, RpcTarget.Single(clientId, RpcTargetUse.Temp));
-			MessageManager.instance.PostMessageRpc(reactionResult.reaction.ToString(), _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(element));
+
+			var textElement = reactionResult.reaction == ElementalReaction.Swirl ? swirlElement : element; 
+			MessageManager.instance.PostMessageRpc(reactionResult.reaction.ToString(), _targetTransformCache.position, _transformCache.localRotation, ElementService.ElementToColor(textElement));
 		}
 	}
 }

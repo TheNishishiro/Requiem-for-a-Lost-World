@@ -73,6 +73,7 @@ namespace Objects.Players
 		public float ElementalReactionEffectIncreasePercentage;
 		public float FollowUpDamageIncrease;
 		public float HealthIncreasePercentage;
+		public float ResPen;
 		public bool CanDotCrit;
 
 		public int RevivesField
@@ -86,7 +87,8 @@ namespace Objects.Players
 					StatusEffectManager.instance.AddOrRemoveEffect(StatusEffectType.Revive, Revives);
 			}
 		}
-		
+
+
 		public PlayerStats()
 		{
 			ApplyDefaultStats();
@@ -151,6 +153,7 @@ namespace Objects.Players
 			ElementalReactionEffectIncreasePercentage = 0;
 			FollowUpDamageIncrease = 0;
 			HealthIncreasePercentage = 0;
+			ResPen = 0;
 			CanDotCrit = false;
 		}
 
@@ -208,6 +211,7 @@ namespace Objects.Players
 			ElementalReactionEffectIncreasePercentage += item.ElementalReactionEffectIncreasePercentage * rarityFactor;
 			FollowUpDamageIncrease += item.FollowUpDamageIncrease * rarityFactor;
 			HealthIncreasePercentage += item.HealthIncreasePercentage * rarityFactor;
+			ResPen += item.ResPen * rarityFactor;
 			if (item.CanDotCrit) CanDotCrit = true;
         }
 
@@ -309,6 +313,9 @@ namespace Objects.Players
 					break;
 				case PermUpgradeType.FollowUpDamageIncrease:
 					FollowUpDamageIncrease += value;
+					break;
+				case PermUpgradeType.ResPen:
+					ResPen += value;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(permUpgradeType), permUpgradeType, null);
@@ -471,6 +478,9 @@ namespace Objects.Players
 					break;
 				case StatEnum.HealthIncreasePercentage:
 					HealthIncreasePercentage += value;
+					break;
+				case StatEnum.ResPen:
+					ResPen += value;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException(nameof(stat), stat, null);

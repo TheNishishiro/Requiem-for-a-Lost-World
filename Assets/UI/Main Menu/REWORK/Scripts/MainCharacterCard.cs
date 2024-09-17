@@ -56,6 +56,7 @@ public class MainCharacterCard : MonoBehaviour
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryCooldown;
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryCrit;
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statsEntryAttackCount;
+    [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statsEntryResPen;
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryDot;
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryArmor;
     [BoxGroup("Stats")] [SerializeField] private CharacterStatsEntry statEntryRegen;
@@ -142,6 +143,7 @@ public class MainCharacterCard : MonoBehaviour
             statEntryHealth.Set("???");
             statEntryArmor.Set("???");
             statEntryDamage.Set("???");
+            statsEntryResPen.Set("???");
             statEntryCooldown.Set("???");
             statEntryCrit.Set("???");
             statEntryDot.Set("???");
@@ -163,6 +165,7 @@ public class MainCharacterCard : MonoBehaviour
         statEntryLuck.Set($"{stats.Luck*100:N0}%");
         statEntryRegen.Set($"{stats.HealthRegen} /s");
         statsEntryAttackCount.Set($"{stats.AttackCount}");
+        statsEntryResPen.Set($"{stats.ResPen*100:N0}%");
         
         audioManager.PlaySound(character.nameAnnouncer, 2.5f);
     }

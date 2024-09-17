@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Projectile duration
-  Description: Increase duration by {ProjectileLifeTimeIncreasePercentage}%
+  ItemId: 12
+  Name: Grandpa's Watch
+  Description: Increase projectile duration by {ProjectileLifeTimeIncreasePercentage}%
   supportType: 2
   chanceToAppear: 1
-  Icon: {fileID: 21300000, guid: 7aee0ac81f84bb345ab3d60f1c090222, type: 3}
+  Icon: {fileID: 21300000, guid: 72179fc505059d04c9adb410e08f8e54, type: 3}
   unlockOnAchievement: 0
   requiredAchievement: 0
   ItemUpgrades: []
@@ -102,3 +103,6 @@ MonoBehaviour:
     Stamina: 0
     ElementalReactionEffectIncreasePercentage: 0
     FollowUpDamageIncrease: 0
+    HealthIncreasePercentage: 0
+    ResPen: 0
+    CanDotCrit: 0

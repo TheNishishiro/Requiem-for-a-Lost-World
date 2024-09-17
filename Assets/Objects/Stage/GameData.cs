@@ -2,7 +2,6 @@
 using Data.Difficulty;
 using DefaultNamespace.Data;
 using Managers;
-using NUnit.Framework;
 using Objects.Characters;
 using Objects.Players;
 using Objects.Players.PermUpgrades;

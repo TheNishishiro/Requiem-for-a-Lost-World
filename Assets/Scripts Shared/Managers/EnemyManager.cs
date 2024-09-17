@@ -4,11 +4,14 @@ using System.Linq;
 using DefaultNamespace;
 using DefaultNamespace.BaseClasses;
 using DefaultNamespace.Data.Game;
+using Interfaces;
 using Managers;
+using Managers.StageEvents;
 using Objects.Enemies;
 using Objects.Players.Scripts;
 using Objects.Stage;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 using Weapons;
@@ -17,11 +20,11 @@ public class EnemyManager : NetworkBehaviour
 {
 	public static EnemyManager instance;
 	[SerializeField] public GameObject enemyGameObject;
-	[SerializeField] private List<EnemyData> defaultSpawns;
-	[SerializeField] private List<EnemyData> possibleEnemies;
+	[SerializeField] private EnemyContainer enemyContainer;
 	[SerializeField] private Vector2 spawnArea;
 	[SerializeField] private float spawnTimer;
 	[SerializeField] private PlayerStatsComponent _playerStatsComponent;
+	private List<EnemySpawnData> defaultSpawns;
 	private static Transform PlayerTransform => GameManager.instance.PlayerTransform;
 	private List<Enemy> _enemies = new ();
 	public int currentEnemyCount => _enemies.Count;
@@ -42,7 +45,7 @@ public class EnemyManager : NetworkBehaviour
 			instance = this;
 		}
 		
-		defaultSpawns = new List<EnemyData>();
+		defaultSpawns = new List<EnemySpawnData>();
 	}
 	
 	private void Update()
@@ -61,8 +64,8 @@ public class EnemyManager : NetworkBehaviour
 		
 		_timer = spawnTimer * PlayerStatsScaler.GetScaler().GetEnemySpawnRateIncrease() * GameData.GetCurrentDifficulty().EnemySpawnRateModifier * GameSettings.EnemySpawnRateModifier;
 		
-		var randomSpawn = defaultSpawns[Random.Range(0, defaultSpawns.Count)];
-		SpawnEnemy(randomSpawn);
+		var randomSpawn = defaultSpawns.Where(x => x.probability > Random.value).OrderBy(_ => Random.value).First();
+		SpawnEnemy(randomSpawn.enemy);
 	}
 
 	public void SpawnEnemy(EnemyData enemyToSpawn)
@@ -71,11 +74,8 @@ public class EnemyManager : NetworkBehaviour
 		if (PlayerTransform == null) return;
 
 		var playerCount = NetworkManager.Singleton.ConnectedClients.Count;
-		var increasePerClient = playerCount <= 1 ? 0 : playerCount * 0.5f;
-		
-		var maxEnemyCount = 
-			enemyMaxCount * PlayerStatsScaler.GetScaler().GetEnemyCountIncrease() * GameData.GetCurrentDifficulty().EnemyCapacityModifier
-			* (1 + increasePerClient);
+		var enemyCountIncrease = playerCount <= 1 ? 1 : (1 + 0.25f * (playerCount-1));
+		var maxEnemyCount = enemyMaxCount * PlayerStatsScaler.GetScaler().GetEnemyCountIncrease() * GameData.GetCurrentDifficulty().EnemyCapacityModifier * enemyCountIncrease;
 		if (currentEnemyCount >= maxEnemyCount && !enemyToSpawn.isBossEnemy)
 			return;
 		if (IsDisableEnemySpawn)
@@ -83,14 +83,13 @@ public class EnemyManager : NetworkBehaviour
 		
 		_currentEnemySpawning = enemyToSpawn;
 
-		
 		var targetClient = NetworkManager.Singleton.ConnectedClients
 			.Where(x => !x.Value.PlayerObject.GetComponent<MultiplayerPlayer>().isPlayerDead.Value)
 			.OrderBy(x => Random.value)
 			.FirstOrDefault().Value.PlayerObject.transform;
 		var position = targetClient.position - Utilities.GenerateRandomPositionOnEdge(spawnArea);
 		var pointFound = Utilities.GetPointOnColliderSurface(position, 100f, targetClient, out var pointOnSurface);
-		if (!pointFound || Utilities.IsPositionOccupied(pointOnSurface, 0.3f))
+		if (!pointFound)
 			return;
 		
 		position = pointOnSurface;
@@ -99,20 +98,19 @@ public class EnemyManager : NetworkBehaviour
 		var enemyComponent = enemy.GetComponent<Enemy>();
 		enemy.Spawn();
 		
-		var expIncrease = playerCount <= 1 ? 1 : Mathf.Pow(0.85f, playerCount);
-		expIncrease *= GameSettings.ExpDropModifier;
-		var damageIncrease = (playerCount <= 1 ? 1 : playerCount * 0.25f) * _damageMultiplier;
+		var expIncrease = GameSettings.ExpDropModifier * playerCount <= 1 ? 1 : Mathf.Pow(0.9f, playerCount);
+		var healthIncrease = _healthMultiplier * playerCount <= 1 ? 1 : Mathf.Pow(1.075f, playerCount);
 		
 		enemyComponent.SetPlayerTarget(targetClient);
-		enemyComponent.Setup(new EnemyNetworkStats(_currentEnemySpawning), _healthMultiplier * (1 + increasePerClient*0.5f), _enemySpeedMultiplier, expIncrease, damageIncrease);
+		enemyComponent.Setup(new EnemyNetworkStats(_currentEnemySpawning), healthIncrease, _enemySpeedMultiplier, expIncrease, _damageMultiplier);
+		enemyComponent.InitializeWeapon(_currentEnemySpawning.enemyWeapons);
 		enemyComponent.gameObject.SetActive(true);
-		if (_currentEnemySpawning.enemyName == "grand octi")
-			enemyComponent.SetupBoss();
+		enemyComponent.SetupBoss();
 		
 		RpcManager.instance.AddEnemyRpc(enemyComponent);
 	}
 
-	public void ChangeDefaultSpawn(List<EnemyData> enemyData)
+	public void ChangeDefaultSpawn(List<EnemySpawnData> enemyData)
 	{
 		defaultSpawns = enemyData;
 	}
@@ -127,17 +125,17 @@ public class EnemyManager : NetworkBehaviour
 		_healthMultiplier = healthMultiplier;
 	}
 
-	public void BurstSpawn(List<EnemyData> stageEventEnemies, float stageEventCount)
+	public void BurstSpawn(List<EnemySpawnData> stageEventEnemies, float stageEventCount)
 	{
 		StartCoroutine(BurtSpawnCoroutine(stageEventEnemies, stageEventCount));
 	}
 	
-	private IEnumerator BurtSpawnCoroutine(List<EnemyData> stageEventEnemies, float stageEventCount)
+	private IEnumerator BurtSpawnCoroutine(List<EnemySpawnData> stageEventEnemies, float stageEventCount)
 	{
 		for (var i = 0; i < stageEventCount; i++)
 		{
-			var randomEnemy = stageEventEnemies[Random.Range(0, stageEventEnemies.Count)];
-			SpawnEnemy(randomEnemy);
+			var randomEnemy = stageEventEnemies.Where(x => x.probability > Random.value).OrderBy(_ => Random.value).First();
+			SpawnEnemy(randomEnemy.enemy);
 		}
 
 		yield break;
@@ -178,7 +176,7 @@ public class EnemyManager : NetworkBehaviour
 		return _isTimeStop;
 	}
 
-	public void GlobalDamage(float damage, WeaponBase weapon)
+	public void GlobalDamage(float damage, IWeapon weapon)
 	{
 		var enemies = FindObjectsByType<Damageable>(FindObjectsSortMode.None);
 		foreach (var enemy in enemies)
@@ -227,7 +225,12 @@ public class EnemyManager : NetworkBehaviour
 
 	public Sprite GetSpriteByEnemy(EnemyTypeEnum enemyType)
 	{
-		return possibleEnemies.FirstOrDefault(x => x.enemyType == enemyType)?.spriteSheet;
+		return enemyContainer.possibleEnemies.FirstOrDefault(x => x.enemyType == enemyType)?.spriteSheet;
+	}
+
+	public List<EnemyData> GetPossibleEnemies()
+	{
+		return enemyContainer.possibleEnemies.ToList();
 	}
 
 	public void AddEnemy(Enemy networkBehaviour)

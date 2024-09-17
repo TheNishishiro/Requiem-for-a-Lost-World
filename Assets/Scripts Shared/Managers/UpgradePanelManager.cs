@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
+using DefaultNamespace.Data;
 using DefaultNamespace.Data.Weapons;
 using Interfaces;
 using Objects.Players.Scripts;
@@ -24,6 +26,7 @@ namespace Managers
 		[SerializeField] private Button rerollButton;
 		[SerializeField] private PlayerStatsComponent playerStatsComponent;
 		private bool _isWeaponOnly;
+		private bool _waitingForPollResult;
 		private float _timeOpened;
 
 		private void Update()
@@ -62,12 +65,16 @@ namespace Managers
 
 		public void Reroll()
 		{
+			if (_waitingForPollResult) return;
+			
 			playerStatsComponent.IncreaseReroll(-1);
 			ReloadUpgrades();
 		}
 
 		public void Skip()
 		{
+			if (_waitingForPollResult) return;
+			
 			playerStatsComponent.IncreaseSkip(-1);
 			ClosePanel();
 		}
@@ -105,7 +112,20 @@ namespace Managers
 				ClosePanel();
 				return;
 			}
+			
+			if (GameSettings.IsRandomLevelUp)
+			{
+				Upgrade(upgradeEntries.OrderBy(_ => Random.value).First(), true);
+				return;
+			}
 
+			if (TwitchIntegrationManager.instance.IsChatPicksItemsEnabled() && !TwitchPollManager.instance.IsAnyPoolRunning())
+			{
+				var pollChoices = upgradeEntries.Select(x => x.GetUnlockName()).ToArray();
+				TwitchPollManager.instance.StartPoll("Pick upgrades", pollChoices, TwitchPollResult, upgradeEntries);
+				_waitingForPollResult = true;
+			}
+			
 			Clean();
 			panel.SetActive(true);
 			
@@ -116,9 +136,16 @@ namespace Managers
 			}
 		}
 
-		public void Upgrade(UpgradeEntry upgradeEntry)
+		private void TwitchPollResult(int result, List<UpgradeEntry> upgradeEntries)
 		{
-			if (_timeOpened < 1.5f) return;
+			_waitingForPollResult = false;
+			Upgrade(upgradeEntries[result], true);
+		}
+
+		public void Upgrade(UpgradeEntry upgradeEntry, bool ignoreWaitTime = false)
+		{
+			if (_waitingForPollResult) return;
+			if (_timeOpened < 1.5f && !ignoreWaitTime) return;
 			
 			upgradeEntry.LevelUp(WeaponManager.instance);
 			ClosePanel();

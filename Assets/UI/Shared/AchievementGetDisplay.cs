@@ -16,7 +16,7 @@ namespace UI.Shared
 			_displayTime = 5f;
 			gameObject.SetActive(true);
 			achievementText.text = achievement.GetTitle();
-		}
+		}		
 
 		private void Update()
 		{

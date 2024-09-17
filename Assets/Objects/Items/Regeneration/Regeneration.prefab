@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemId: 30
   Name: Core of Vitality
   Description: Increase health regen by {HealthRegen} per second
   supportType: 3
   chanceToAppear: 0.5
-  Icon: {fileID: 21300000, guid: 936cf08ef0afac84c9f0918b7e431d20, type: 3}
+  Icon: {fileID: 21300000, guid: 7e675b17c284e894fa336a5506da5560, type: 3}
   unlockOnAchievement: 1
   requiredAchievement: 14
   ItemUpgrades:
@@ -107,3 +108,6 @@ MonoBehaviour:
     Stamina: 0
     ElementalReactionEffectIncreasePercentage: 0
     FollowUpDamageIncrease: 0
+    HealthIncreasePercentage: 0
+    ResPen: 0
+    CanDotCrit: 0

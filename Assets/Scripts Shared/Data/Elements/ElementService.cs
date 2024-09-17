@@ -16,7 +16,7 @@ namespace Data.Elements
 				case Element.Disabled:
 					// remaining white
 					break;
-				case Element.None:
+				case Element.Unstable:
 					// remaining white
 					break;
 				case Element.Fire:

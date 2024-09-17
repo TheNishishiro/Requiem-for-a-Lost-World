@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemId: 11
   Name: Duplicator
   Description: Increase weapon attack count by {AttackCount}
   supportType: 1
   chanceToAppear: 0.6
-  Icon: {fileID: 21300000, guid: b0072690a8d2b4c4e8b42626e7d18fda, type: 3}
+  Icon: {fileID: 21300000, guid: b241ce530d903c64989c39091a9ead84, type: 3}
   unlockOnAchievement: 1
   requiredAchievement: 0
   ItemUpgrades:
@@ -103,3 +104,6 @@ MonoBehaviour:
     Stamina: 0
     ElementalReactionEffectIncreasePercentage: 0
     FollowUpDamageIncrease: 0
+    HealthIncreasePercentage: 0
+    ResPen: 0
+    CanDotCrit: 0

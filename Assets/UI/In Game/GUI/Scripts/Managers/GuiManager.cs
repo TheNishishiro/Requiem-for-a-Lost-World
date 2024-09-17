@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DefaultNamespace.Data;
+using DefaultNamespace.Data.Settings;
 using Interfaces;
 using NaughtyAttributes;
 using Objects.Stage;
 using TMPro;
 using UI.Labels.InGame;
+using Unity.Netcode;
 using Unity.VectorGraphics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -47,6 +50,8 @@ namespace UI.In_Game.GUI.Scripts.Managers
         [BoxGroup("Player Stats Color Theme")] [SerializeField] private UICircle circleExpFull;
         [BoxGroup("Player Stats Color Theme")] [SerializeField] private Image imageExpDetailLeft;
         [Space]
+        [BoxGroup("Interaction prompt")] [SerializeField] private TextMeshProUGUI textInteractionPrompt;
+        [Space]
         [BoxGroup("Movement Container")] [SerializeField] private Slider sliderStamina;
         [BoxGroup("Movement Container")] [SerializeField] private List<GameObject> dashIndicators;
         [Space]
@@ -75,6 +80,9 @@ namespace UI.In_Game.GUI.Scripts.Managers
         [BoxGroup("Icons Theme")] [SerializeField] private SVGImage svgPause;
         [BoxGroup("Icons Theme")] [SerializeField] private SVGImage svgDash;
         [BoxGroup("Icons Theme")] [SerializeField] private SVGImage svgSprint;
+        [Space]
+        [BoxGroup("Networking")] [SerializeField] private TextMeshProUGUI pingDisplay;
+        
         
         public void Awake()
         {
@@ -134,6 +142,14 @@ namespace UI.In_Game.GUI.Scripts.Managers
                 infoEntryGold.SetText(GameResultData.Gold);
                 infoEntryGem.SetText(GameResultData.Gems);
                 infoEntryKills.SetText(GameResultData.MonstersKilled);
+
+                var displayMs = NetworkManager.Singleton != null && NetworkManager.Singleton.IsConnectedClient && !NetworkManager.Singleton.IsHost;
+                pingDisplay.gameObject.SetActive(displayMs);
+                if(displayMs)
+                {
+                    float pingInMilliseconds = NetworkManager.Singleton.NetworkConfig.NetworkTransport.GetCurrentRtt(NetworkManager.Singleton.NetworkConfig.NetworkTransport.ServerClientId);
+                    pingDisplay.text = $"{pingInMilliseconds:0} ms";
+                }
             }
         }
 
@@ -203,6 +219,12 @@ namespace UI.In_Game.GUI.Scripts.Managers
         {
             slider.value = value;
             slider.maxValue = maxValue;
+        }
+
+        public void ToggleInteractionPrompt(bool enable = true, string text = "interact")
+        {
+            textInteractionPrompt.text = $"< Press <b>{SaveFile.Instance.GetKeybinding(KeyAction.Interact).ToString()}</b> to {text} >";
+            textInteractionPrompt.gameObject.SetActive(enable);
         }
     }
 }

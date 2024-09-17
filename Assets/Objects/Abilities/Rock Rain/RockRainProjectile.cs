@@ -31,7 +31,7 @@ namespace Objects.Abilities.Rock_Rain
         {
             SimpleDamage(other, false, false, out var damageable);
             if (WeaponStatsStrategy.GetWeakness() > 0)
-                damageable.SetVulnerable(2, WeaponStatsStrategy.GetWeakness());
+                damageable.SetVulnerable((WeaponEnum)ParentWeapon.GetId(), 2, WeaponStatsStrategy.GetWeakness());
         }
     }
 }

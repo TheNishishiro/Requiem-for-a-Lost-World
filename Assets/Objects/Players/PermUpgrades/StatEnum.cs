@@ -2,6 +2,7 @@
 {
     public enum StatEnum
     {
+        [Stat(StatCategory.Defensive, "CHP", "Current Health")]
         Health,
         [Stat(StatCategory.Defensive, "HP", "Health")]
         HealthMax,
@@ -132,6 +133,8 @@
         [Stat(StatCategory.Offensive, "FUDI", "Follow up damage increase")]
         FollowUpDamageIncrease,
         [Stat(StatCategory.Offensive, "HPP", "Health increase")]
-        HealthIncreasePercentage
+        HealthIncreasePercentage,
+        [Stat(StatCategory.Offensive, "PEN", "Resistance penetration")]
+        ResPen
     }
 }

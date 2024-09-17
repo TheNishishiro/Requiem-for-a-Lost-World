@@ -78,12 +78,12 @@ namespace DefaultNamespace.Data
 				AddExperience(500);
 		}
 
-		public void AddFragments(int fragmentReward)
+		public void AddFragments(CharactersEnum characterId, int fragmentReward)
 		{
 			Fragments += fragmentReward;
-			if (Fragments > 50)
+			if (Fragments >= 50)
 			{
-				Unlock();
+				SaveFile.Instance.UnlockCharacter(characterId);
 				Fragments = 0;
 			}
 		}

@@ -4,7 +4,7 @@ using Objects.Characters;
 
 namespace DefaultNamespace.Data.Achievements
 {
-	public enum AchievementEnum // 104
+	public enum AchievementEnum // 130
 	{
 		[AchievementValue("Jack of all trades", "Obtain 6 weapons in a single game", AchievementSection.Misc, Rarity.Common)]
 		Hold6Weapons = 0,
@@ -30,7 +30,7 @@ namespace DefaultNamespace.Data.Achievements
 		HaveFirst5StarWeapon = 10,
 		[AchievementValue("Lucky draw (II)", "Have your first item be of legendary rarity", AchievementSection.Misc, Rarity.Rare)]
 		HaveFirst5StarItem = 11,
-		[AchievementValue("Who needs a lucky clover?", "Obtain 20 items of legendary rarity", AchievementSection.Misc, Rarity.Rare, RequirementType.LegendaryItems, 10)]
+		[AchievementValue("Who needs a lucky clover?", "Obtain 20 items of legendary rarity", AchievementSection.Misc, Rarity.Rare, RequirementType.LegendaryItems, 20)]
 		Obtain10HighRarityItems = 12,
 		[AchievementValue("Sometimes death is just the beginning", "Fall during an expedition once", AchievementSection.Combat, Rarity.Common)]
 		DieOnce = 13,
@@ -50,7 +50,7 @@ namespace DefaultNamespace.Data.Achievements
 		PlayFor5Hours = 86,		
 		[AchievementValue("David and Goliath", "Defeat 500 boss enemies", AchievementSection.Combat, Rarity.Rare, RequirementType.EnemyBossKills, 500)]
 		Kill500BossEnemies = 87,
-		[AchievementValue("The Path of Pain", "Take and heal 10000 damage in a single game", AchievementSection.Combat, Rarity.Common, RequirementType.HealAndDamageInSingleGame, 6000)]
+		[AchievementValue("The Path of Pain", "Take and heal 1500 damage in a single game", AchievementSection.Combat, Rarity.Common, RequirementType.HealAndDamageInSingleGame, 1500)]
 		HealAndTake6000Damage = 88,
 		[AchievementValue("Haste", "Have over 55% cooldown reduction upon leveling up", AchievementSection.Combat, Rarity.Rare)]
 		Reach55PercentCdr = 89,
@@ -64,6 +64,58 @@ namespace DefaultNamespace.Data.Achievements
 		HoldHighRarityEarthWeapons = 101,
 		[AchievementValue("Secret Arcana", "Visit 100 shrines in your journey", AchievementSection.Environment, Rarity.Rare, RequirementType.Shrines, 100)]
 		Visit100Shrines = 102,
+		[AchievementValue("Chamber of Secrets", "Find a hidden room in the Capital Undergrounds", AchievementSection.Environment, Rarity.Mythic)]
+		FindSecretRoom = 105,
+		[AchievementValue("Leap of Faith", "Survive an unfortunate fall", AchievementSection.Environment, Rarity.Rare)]
+		PerformLeapOfFaith = 106,
+		[AchievementValue("Banish Evil", "Defeat The Watcher in the Capital Undergrounds", AchievementSection.Environment, Rarity.Legendary)]
+		BanishEvil = 107,
+		[AchievementValue("Dead End", "Enter the dark corridor with no way forward", AchievementSection.Environment, Rarity.Common)]
+		DeadEnd = 108,
+		[AchievementValue("Enter the Dungeon", "Visit Capital Undergrounds for the first time", AchievementSection.Environment, Rarity.Common)]
+		EnterTheDungeon = 109,
+		[AchievementValue("Is this the way out?", "Find a potential exist from the undergrounds", AchievementSection.Environment, Rarity.Rare)]
+		IsThisTheWayOut = 110,
+		[AchievementValue("Not-so-hidden treasure", "Loot a chest in the Capital Undergrounds", AchievementSection.Environment, Rarity.Common)]
+		PortalPickUp = 111,
+		[AchievementValue("Master of strategy", "In a single game obtain 3 follow-up type weapons", AchievementSection.Misc, Rarity.Rare)]
+		Own3FollowUpWeapons = 112,
+		[AchievementValue("Ever-frost seed", "Keep a seed from defrosting", AchievementSection.Combat, Rarity.Mythic)]
+		KeepFrostSeedUpFor30Seconds = 113,
+		[AchievementValue("Anosmia", "Expose yourself to smell for 5 minutes", AchievementSection.Combat, Rarity.Legendary)]
+		StayInSewerFor5Minutes = 114,
+		[AchievementValue("My precious gift", "Retrieve the scarf belonging to Sev's friend", AchievementSection.Environment, Rarity.Mythic)]
+		UnlockBloodThornScarf = 115,
+		[AchievementValue("Brute Force", "Find a talisman belonging to a captured criminal", AchievementSection.Combat, Rarity.Legendary)]
+		UnlockBruteTalisman = 116,
+		[AchievementValue("Finally, a quiet place", "Read inscription left by a scholar", AchievementSection.Environment, Rarity.Legendary)]
+		UnlockLowPressure = 117,
+		[AchievementValue("I see no god up here", "Climb the peak of Capital Outskirts", AchievementSection.Environment, Rarity.Rare)]
+		PeakofPeaks = 118,
+		[AchievementValue("Master of Elements", "Trigger a total of 10000 reactions", AchievementSection.Environment, Rarity.Rare, RequirementType.Reactions, 10000)]
+		MasterOfElements = 119,
+		[AchievementValue("Ice Mastery", "Own at least 4 ice weapons in a single game", AchievementSection.Misc, Rarity.Rare)]
+		IceMastery = 120,
+		[AchievementValue("Fire Mastery", "Own at least 4 fire weapons in a single game", AchievementSection.Misc, Rarity.Rare)]
+		FireMastery = 121,
+		[AchievementValue("Earth Mastery", "Own at least 4 earth weapons in a single game", AchievementSection.Misc, Rarity.Rare)]
+		EarthMastery = 122,
+		[AchievementValue("Lightning Mastery", "Own at least 4 lightning weapons in a single game", AchievementSection.Misc, Rarity.Rare)]
+		LightningMastery = 123,
+		[AchievementValue("Wind Mastery", "Own at least 4 wind weapons in a single game", AchievementSection.Misc, Rarity.Rare)]
+		WindMastery = 124,
+		[AchievementValue("Cosmic Mastery", "Own at least 4 cosmic weapons in a single game", AchievementSection.Misc, Rarity.Rare)]
+		CosmicMastery = 125,
+		[AchievementValue("Light Mastery", "Own at least 4 light weapons in a single game", AchievementSection.Misc, Rarity.Rare)]
+		LightMastery = 126,
+		[AchievementValue("Illuminate my way", "Follow the light", AchievementSection.Environment, Rarity.Legendary)]
+		FollowThePhantom = 127,
+		[AchievementValue("Full Page", "Fill up one character rune page", AchievementSection.Misc, Rarity.Common)]
+		FillUpRunePage = 128,
+		[AchievementValue("Catch'em all...?", "Obtain every character", AchievementSection.Collection, Rarity.Legendary, RequirementType.CharactersOwned, 1)] // 1 is a filler
+		OwnAllCharacters = 129,
+		[AchievementValue("Will of the desert", "Find sand orb within Capital Undergrounds", AchievementSection.Environment, Rarity.Rare)] // 1 is a filler
+		ObtainSandStorm = 130,
 		
 		#region Character specific achievements
 		[AchievementValue("Bound by fate", "Bind enemies for 1 hour in total in a single game using Amelisana", AchievementSection.Character, Rarity.Common, CharactersEnum.Amelisana_BoN, RequirementType.None, 1)]
@@ -74,10 +126,10 @@ namespace DefaultNamespace.Data.Achievements
 		Amelisana_FinishWithoutUsingUltimate = 98,
 		[AchievementValue("Inner struggle", "As Amelisana gather inventory of conflicting forces", AchievementSection.Character, Rarity.Rare, CharactersEnum.Amelisana_BoN, RequirementType.None, 1)]
 		Amelisana_LightAndCosmicOnly = 99,
-		[AchievementValue("Transcendence", "As Yami-no-Tokiya deal a total of 20 milion damage in a single game", AchievementSection.Character, Rarity.Rare, CharactersEnum.Chornastra_BoR, RequirementType.None, 1)]
+		[AchievementValue("Transcendence", "As Yami-no-Tokiya deal a total of 20 million damage in a single game", AchievementSection.Character, Rarity.Rare, CharactersEnum.Chornastra_BoR, RequirementType.None, 1)]
 		Chronastra_DamageDealt = 103,
-		[AchievementValue("Purge", "As Yami-no-Tokiya reduce everything to none", AchievementSection.Character, Rarity.Rare, CharactersEnum.Chornastra_BoR, RequirementType.None, 1)]
-		Chronastra_EnemyKills = 104,
+		[AchievementValue("Field of paper flowers", "As Yami-no-Tokiya pick up a 1000 Abyss Flowers", AchievementSection.Character, Rarity.Rare, CharactersEnum.Chornastra_BoR, RequirementType.AbyssFlowers, 1000)]
+		Chronastra_FlowersPickup = 104,
 		#endregion
 		
 		#region Survive with characters

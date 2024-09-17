@@ -1,4 +1,5 @@
 ﻿using DefaultNamespace.Data.Weapons;
+using Interfaces;
 using Managers;
 using Objects.Abilities.Katana;
 using Unity.Mathematics;
@@ -28,6 +29,11 @@ namespace Objects.Abilities
             base.OnNetworkSpawn();
         }
 
+        public IWeapon GetParentWeapon()
+        {
+            return projectile.GetParentWeapon();
+        }
+
         public override void OnNetworkDespawn()
         {
             networkProjectileState.OnValueChanged -= OnValueChanged;
@@ -48,7 +54,7 @@ namespace Objects.Abilities
             RpcManager.instance.DespawnProjectileRpc(networkObject, weaponId, DesignedPoolId);
         }
 
-        public void Initialize(WeaponBase weapon, Vector3 position, bool activateLast = true)
+        public void Initialize(IWeapon weapon, Vector3 position, bool activateLast = true)
         {
             transform.position = position;
             projectile.Init();

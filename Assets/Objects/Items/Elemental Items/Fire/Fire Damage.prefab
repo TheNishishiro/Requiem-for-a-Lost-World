@@ -44,14 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemId: 15
   Name: Fire Affinity
   Description: Increase fire damage by {FireDamageIncrease}% but lower ice damage
     by {IceDamageIncrease}%
   supportType: 1
   chanceToAppear: 0.5
-  Icon: {fileID: 0}
-  unlockOnAchievement: 0
-  requiredAchievement: 0
+  Icon: {fileID: 21300000, guid: b4aaebecdfe6b3e4c90ebdbaa4e774c5, type: 3}
+  unlockOnAchievement: 1
+  requiredAchievement: 121
   ItemUpgrades:
   - {fileID: 11400000, guid: a4fb19b15649fc343a442d02808d568f, type: 2}
   - {fileID: 11400000, guid: 55d6521077e225649b26e2e4d9ed35b1, type: 2}
@@ -107,3 +108,6 @@ MonoBehaviour:
     Stamina: 0
     ElementalReactionEffectIncreasePercentage: 0
     FollowUpDamageIncrease: 0
+    HealthIncreasePercentage: 0
+    ResPen: 0
+    CanDotCrit: 0

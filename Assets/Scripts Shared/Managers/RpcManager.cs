@@ -8,7 +8,10 @@ using DefaultNamespace.Data.Weapons;
 using Events.Scripts;
 using Objects;
 using Objects.Abilities;
+using Objects.Characters;
 using Objects.Enemies;
+using Objects.Enemies.EnemyWeapons;
+using Objects.Items;
 using Objects.Players.PermUpgrades;
 using Objects.Players.Scripts;
 using Objects.Stage;
@@ -26,7 +29,6 @@ namespace Managers
     public class RpcManager : NetworkBehaviour
     {
         public static RpcManager instance;
-        [SerializeField] private GameObject shrinePrefab;
 
         public override void OnNetworkSpawn()
         {
@@ -36,23 +38,49 @@ namespace Managers
             base.OnNetworkSpawn();
         }
         
-        [Rpc(SendTo.Server)]
-        public void SpawnShrinesRpc(int amount, Vector3 mapCenter, float spawnRange, float minDistance)
+        [Rpc(SendTo.Server, Delivery = RpcDelivery.Reliable)]
+        public void DealDamageToEnemyRpc(NetworkBehaviourReference target, float baseDamage, bool isCriticalHit, Element weaponElement, WeaponEnum weaponId, float elementalReactionEffectIncreasePercentage,
+            float resPen, bool isRecursion, ulong clientId)
         {
-            var spawnedPositions = Utilities.GetPositionsOnSurfaceWithMinDistance(amount, mapCenter, spawnRange, minDistance, transform, 100);
-            foreach (var position in spawnedPositions)
+            if (target.TryGet(out Damageable damageableComponent))
             {
-                NetworkObjectPool.Singleton.GetNetworkObject(shrinePrefab, position, Quaternion.identity).Spawn();
+                damageableComponent.TakeDamageServer(baseDamage, isCriticalHit, weaponElement, weaponId, elementalReactionEffectIncreasePercentage, resPen, isRecursion, clientId);
             }
         }
         
         [Rpc(SendTo.Server)]
-        public void DealDamageToEnemyRpc(NetworkBehaviourReference target, float baseDamage, bool isCriticalHit, Element weaponElement, WeaponEnum weaponId, float elementalReactionEffectIncreasePercentage,
-            bool isRecursion, ulong clientId)
+        public void ReduceEnemyResistanceRpc(NetworkBehaviourReference target, Element element, float amount)
         {
             if (target.TryGet(out Damageable damageableComponent))
             {
-                damageableComponent.TakeDamageServer(baseDamage, isCriticalHit, weaponElement, weaponId, elementalReactionEffectIncreasePercentage, isRecursion, clientId);
+                damageableComponent.ReduceElementalDefenceServer(element, amount);
+            }
+        }
+        
+        [Rpc(SendTo.Server)]
+        public void EnemyTakeAdditionalDamageAsFollowUpRpc(NetworkBehaviourReference target, Element weaponElement, float duration, float modifier)
+        {
+            if (target.TryGet(out Damageable damageableComponent))
+            {
+                damageableComponent.SetTakeAdditionalDamageFromAllSourcesServer(weaponElement, duration, modifier);
+            }
+        }
+        
+        [Rpc(SendTo.Server)]
+        public void SetEnemyVulnerableRpc(NetworkBehaviourReference target, WeaponEnum weaponId, float time, float percentage)
+        {
+            if (target.TryGet(out Damageable damageableComponent))
+            {
+                damageableComponent.SetVulnerableServer(weaponId, time, percentage);
+            }
+        }
+        
+        [Rpc(SendTo.Server)]
+        public void SetEnemySlowRpc(NetworkBehaviourReference target, float slowTime, float slowAmount)
+        {
+            if (target.TryGet(out ChaseComponent chaseComponent))
+            {
+                chaseComponent.SetSlowServer(slowTime, slowAmount);
             }
         }
         
@@ -72,11 +100,11 @@ namespace Managers
         }
 
         [Rpc(SendTo.Everyone)]
-        public void AddEnemyKillRpc(bool isBoss)
+        public void AddEnemyKillRpc(bool isBoss, EnemyTypeEnum enemyTypeValue)
         {
             GameResultData.MonstersKilled++;
             EnemyDiedEvent.Invoke();
-            AchievementManager.instance.OnEnemyKilled(isBoss);
+            AchievementManager.instance.OnEnemyKilled(isBoss, enemyTypeValue);
         }
 
         public void TriggerWin()
@@ -231,6 +259,12 @@ namespace Managers
             GameManager.instance.playerComponent.TakeDamage(-amount);
         }
         
+        [Rpc(SendTo.SpecifiedInParams)]
+        public void AttackPlayerRpc(float damage, RpcParams rpcParams)
+        {
+            GameManager.instance.playerComponent.TakeDamage(damage);
+        }
+        
         [Rpc(SendTo.Server)]
         public void RevivePlayerServerRpc(NetworkObjectReference shrine, Vector3 respawnPointPosition, ulong clientId)
         {
@@ -240,6 +274,12 @@ namespace Managers
             {
                 MarkShrineUsedClientRpc(oNetworkBehaviour.GetComponent<Shrine>());
             }
+        }
+
+        [Rpc(SendTo.Server)]
+        public void AttackPlayerRpc(ulong clientId, float damage)
+        {
+            AttackPlayerRpc(damage, RpcTarget.Single(clientId, RpcTargetUse.Temp));
         }
         
         [Rpc(SendTo.Everyone)]
@@ -286,12 +326,38 @@ namespace Managers
         }
         
         [Rpc(SendTo.SpecifiedInParams)]
+        public void WeaponKilledEnemyRpc(WeaponEnum weaponId, RpcParams rpcParams)
+        {
+            if (weaponId == WeaponEnum.Unset)
+                return;
+            WeaponManager.instance.GetUnlockedWeapon(weaponId).OnEnemyKilled();
+        }
+        
+        [Rpc(SendTo.SpecifiedInParams)]
         public void InvokeReactionTriggeredEventRpc(NetworkBehaviourReference damageable, ElementalReaction reactionResultReaction, RpcParams rpcParams)
         {
             if (damageable.TryGet(out Damageable damageableComponent))
             {
                 ReactionTriggeredEvent.Invoke(reactionResultReaction, damageableComponent);
             }
+        }
+        
+        [Rpc(SendTo.Server)]
+        public void AddItemToCoopPlayerListRpc(ulong clientId, ItemEnum itemId)
+        {
+            PropagateItemToOnlinePlayerListRpc(clientId, itemId, WeaponEnum.Unset);
+        }
+        
+        [Rpc(SendTo.Server)]
+        public void AddWeaponToCoopPlayerListRpc(ulong clientId, WeaponEnum weaponId)
+        {
+            PropagateItemToOnlinePlayerListRpc(clientId, ItemEnum.Unset, weaponId);
+        }
+        
+        [Rpc(SendTo.Everyone)]
+        public void PropagateItemToOnlinePlayerListRpc(ulong clientId, ItemEnum itemId, WeaponEnum weaponId)
+        {
+            MpActivePlayersInGameList.instance.UpdatePlayerItems(clientId, itemId, weaponId);
         }
     }
 }

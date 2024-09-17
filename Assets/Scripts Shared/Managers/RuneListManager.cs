@@ -38,6 +38,15 @@ namespace Managers
             return runeData.GetScaledValue(runeSaveData.rarity, runeSaveData.runeValue);
         }
 
+        public string GetDisplay(RuneSaveData runeSaveData, bool useLongName)
+        {
+            var runeValue = GetScaledValue(runeSaveData);
+            var sign = runeValue >= 0 ? '+' : '-';
+            var value = runeSaveData.statType.IsPercent() ? $"{runeValue*100:0.##}%" : $"{runeValue:0.##}";
+            var runeName = useLongName ? runeSaveData.statType.GetLongName() : runeSaveData.statType.GetShortName();
+            return $"{runeName} {sign}{value}";
+        }
+
         public Sprite GetIcon(StatEnum statEnum)
         {
             return statsUiDataContainer.GetIcon(statEnum);

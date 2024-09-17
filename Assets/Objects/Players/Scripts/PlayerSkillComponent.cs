@@ -41,27 +41,15 @@ namespace Objects.Players.Scripts
 		private Transform _abilityContainer;
 		private AmeliaGlassShield _ameliaGlassShield;
 		private float _currentSkillCooldown = 0f;
-		private float _currentDashCooldown = 0f;
 		private float _skillCooldown = 5f;
-		private float _dashCooldown = 10f;
-		private float _dashDuration = 0;
-		private float _dashDistance = 10;
-		private int _dashStacks = 2;
-
-		private int DashStacks
-		{
-			get => _dashStacks;
-			set
-			{
-				_dashStacks = value;
-				GuiManager.instance.UpdateDashes(_dashStacks);
-			}
-		}
+		
 		private Transform _transform;
 		private Vector3 _dashPosition;
 		private Queue<Vector3> _previousPositions = new ();
 		private float _positionRecordTimer;
 		private bool _applyQueuedPosition;
+		private float _dashDuration = 0;
+		private float _dashDistance = 10;
 
 		
 		public void Start()
@@ -75,7 +63,6 @@ namespace Objects.Players.Scripts
 		public void Init(Transform abilityContainerTransform)
 		{
 			_abilityContainer = abilityContainerTransform;
-			DashStacks = PlayerStatsScaler.GetScaler().GetDashCount();
 			ApplySpecial();
 			var listenerPrefab = GameData.GetAchievementListenerPrefab();
 			if (listenerPrefab != null)
@@ -91,16 +78,6 @@ namespace Objects.Players.Scripts
 			{
 				GuiManager.instance.UpdateAbilityCooldown(_currentSkillCooldown, _skillCooldown);
 				_currentSkillCooldown -= Time.deltaTime;
-			}
-			
-			if (_dashStacks < PlayerStatsScaler.GetScaler().GetDashCount())
-			{
-				_currentDashCooldown -= Time.deltaTime;
-				if (_currentDashCooldown <= 0f)
-                {
-	                DashStacks++;
-                    _currentDashCooldown = _dashCooldown;
-                }
 			}
 
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Truzi_BoT)
@@ -120,30 +97,11 @@ namespace Objects.Players.Scripts
 			{
 				UseSkill();
 			}
-			
-			if (Input.GetKeyDown(SaveFile.Instance.GetKeybinding(KeyAction.Dash)))
-			{
-				UseDash();
-			}
 		}
 
 		public void UseSkill()
 		{
 			UseSkill(GameData.GetPlayerCharacterId());
-		}
-
-		public void UseDash()
-		{
-			if (_dashStacks <= 0)
-				return;
-			DashStacks--;
-			_currentDashCooldown = _dashCooldown;
-			_dashDuration = 0.2f;
-
-			var layerMask = ~LayerMask.NameToLayer("FurnitureLayer");
-			var isRayHit = Physics.Raycast(GameManager.instance.PlayerTransform.position, GameManager.instance.PlayerTransform.TransformDirection(Vector3.forward), out var hitInfo, 3, layerMask);
-			_dashDistance = isRayHit ? hitInfo.distance*3 : 10;
-			StartCoroutine(IFrames(0.2f));
 		}
 
 		public void FixedUpdate()
@@ -181,8 +139,6 @@ namespace Objects.Players.Scripts
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Nishi_HoF)
 				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Natalie_BoW && GameData.GetPlayerCharacterRank() >= CharacterRank.E3)
-				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
-			if (GameData.GetPlayerCharacterId() == CharactersEnum.Adam_OBoV && GameData.GetPlayerCharacterRank() >= CharacterRank.E5)
 				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);
 			if (GameData.GetPlayerCharacterId() == CharactersEnum.Amelisana_BoN)
 				Instantiate(GameData.GetSpecialPrefab(), _abilityContainer);

@@ -23,7 +23,7 @@ MonoBehaviour:
   signet: {fileID: 21300000, guid: 7c06493d9dc44c1489f9507a7e688c0f, type: 3}
   nameAnnouncer: {fileID: 8300000, guid: 4b59872c597ac6b4d96a2f490756006b, type: 3}
   PassiveDescription: 'For each <color=#00B1FF>enemy</color> currently alive increase
-    both damage dealt and damage taken by <color=#79861B>0.1%</color>
+    both damage dealt and damage taken by <color=#79861B>0.25%</color>
 
 
     Starts
@@ -31,11 +31,11 @@ MonoBehaviour:
   AbilityName: Kneel!
   AbilityDescription: Summon a shadow hand to squeeze the enemies in front, dealing
     damage in massive area
-  AbilityCooldown: 20
-  SpecialPrefab: {fileID: 6209464661463438822, guid: 3be6f253fb49fef43a4d3e04c5b6dbfe,
-    type: 3}
+  AbilityCooldown: 10
+  SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 6364339625612323807, guid: 50308ae1a0aaef349a693f860df23abb,
     type: 3}
+  AchievementListenerPrefab: {fileID: 0}
   AbilityIcon: {fileID: 21300000, guid: 92ed25f6b33d2924fa0ff6770bb1847d, type: 3}
   ColorTheme: {r: 0.7607844, g: 0.6745098, b: 0.67058825, a: 1}
   Alignment: 2
@@ -48,6 +48,7 @@ MonoBehaviour:
   Stats:
     Health: 80
     HealthMax: 80
+    SpecialValue: 0
     SpecialMax: 0
     SpecialIncrease: 0
     MagnetSize: 0.4
@@ -95,6 +96,11 @@ MonoBehaviour:
     EarthDamageIncrease: 0
     DashCount: 2
     Stamina: 2
+    ElementalReactionEffectIncreasePercentage: 0
+    FollowUpDamageIncrease: 0
+    HealthIncreasePercentage: 0
+    ResPen: 0
+    CanDotCrit: 0
   skillNodes:
   - {fileID: 11400000, guid: 10ccfe9d8d31bbd4193a052a099d9b35, type: 2}
   - {fileID: 11400000, guid: dfdbe79c7ca7d354f9db39659cf930f6, type: 2}

@@ -58,6 +58,7 @@ namespace Objects.Items
 		public float ElementalReactionEffectIncreasePercentage;
 		public float FollowUpDamageIncrease;
 		public float HealthIncreasePercentage;
+		public float ResPen;
 		public bool CanDotCrit;
 
 		public void ApplyRarity(int rarity)
@@ -111,6 +112,7 @@ namespace Objects.Items
 			ElementalReactionEffectIncreasePercentage *= rarityFactor;
 			FollowUpDamageIncrease *= rarityFactor;
 			HealthIncreasePercentage *= rarityFactor;
+			ResPen *= rarityFactor;
 		}
 		
 		public void Apply(ItemStats itemUpgradeItemStats, int rarity)
@@ -167,6 +169,7 @@ namespace Objects.Items
             ElementalReactionEffectIncreasePercentage += itemUpgradeItemStats.ElementalReactionEffectIncreasePercentage * rarityFactor;
             FollowUpDamageIncrease += itemUpgradeItemStats.FollowUpDamageIncrease * rarityFactor;
             HealthIncreasePercentage += itemUpgradeItemStats.HealthIncreasePercentage * rarityFactor;
+            ResPen += itemUpgradeItemStats.ResPen * rarityFactor;
         }
 
 		public string GetDescription(string description, int rarity)
@@ -224,6 +227,7 @@ namespace Objects.Items
 				.Replace("{Skips}", (Skips == 0 ? 0 : Skips + (rarity - 1)).ToString())
 				.Replace("{ElementalReactionEffectIncreasePercentage}", Utilities.StatToString(ElementalReactionEffectIncreasePercentage, rarityFactor, true))
 				.Replace("{FollowUpDamageIncrease}", Utilities.StatToString(FollowUpDamageIncrease, rarityFactor, true))
+				.Replace("{ResPen}", Utilities.StatToString(ResPen, rarityFactor, true))
 				;
 		}
 		

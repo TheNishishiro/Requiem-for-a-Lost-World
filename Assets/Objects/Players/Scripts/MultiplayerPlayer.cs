@@ -44,10 +44,13 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
     public NetworkVariable<DifficultyEnum> difficulty = new ();
     public NetworkVariable<StageEnum> stage = new ();
     private bool _keepAlive = true;
+    [SerializeField] private Transform targetPoint;
     [SerializeField] private Collider boxCollider;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private DifficultyContainer difficultyContainer;
     [SerializeField] private StageContainer stageContainer;
+    [SerializeField] private PlayerDashComponent playerDashComponent;
+    [SerializeField] private PlayerWeaponContainer playerWeaponContainer;
     
     public void Start()
     {
@@ -68,6 +71,7 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
         GameData.SetCurrentDifficultyData(difficultyContainer.GetData(difficulty.Value));
         GameData.SetCurrentStage(stageContainer.GetData(stage.Value));
         playerInput.enabled = IsOwner;
+        playerDashComponent.enabled = IsOwner;
         
         starterAssetsInputs.enabled = IsOwner;
         base.OnNetworkSpawn();
@@ -80,7 +84,6 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
             StartCoroutine(WaitForGameManager());
             StartCoroutine(WaitForPlayerSkillComponent());
             StartCoroutine(WaitScreenControlsManager());
-            StartCoroutine(WaitForRpcManager());
 
             currentCharacterId.Value = GameData.GetPlayerCharacterId();
         }
@@ -104,8 +107,8 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
                 firstPersonController.BottomClamp = -30;
                 break;
             case CameraModes.StaticThirdPerson when IsOwner:
-                firstPersonController.TopClamp = 8;
-                firstPersonController.BottomClamp = 8;
+                firstPersonController.TopClamp = 30;
+                firstPersonController.BottomClamp = -30;
                 break;
             case CameraModes.FreeThirdPerson when IsOwner:
                 thirdPersonController.TopClamp = 40;
@@ -174,6 +177,11 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
         characterController.enabled = isEnabled;
     }
 
+    public Transform GetTargetPoint()
+    {
+        return targetPoint;
+    }
+
     public override void OnNetworkDespawn()
     {
         if (!IsOwner)
@@ -191,12 +199,12 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f);
-            if (WeaponManager.instance != null)
+            if (WeaponManager.instance != null && WeaponManager.instance.isInitialized && RpcManager.instance != null)
             {
-                WeaponManager.instance.AddStartingWeapon(GetComponentInChildren<PlayerWeaponContainer>().transform);
+                WeaponManager.instance.AddStartingWeapon(playerWeaponContainer.transform);
                 yield break;
             }
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -222,20 +230,6 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
             if (PlayerSkillComponent.instance != null)
             {
                 PlayerSkillComponent.instance.Init(GetComponentInChildren<PlayerAbilityContainer>().transform);
-                yield break;
-            }
-
-            yield return new WaitForSeconds(0.1f);
-        }
-    }
-
-    private IEnumerator WaitForRpcManager()
-    {
-        while (true)
-        {
-            if (RpcManager.instance != null)
-            {
-                RpcManager.instance.SpawnShrinesRpc(35, new Vector3(0, 6, 0), 250, 40);
                 yield break;
             }
 

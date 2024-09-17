@@ -38,6 +38,8 @@
 		[StatType(true)]
 		ElementalReactionEffectIncreasePercentage = 21,
 		[StatType(true)]
-		FollowUpDamageIncrease
+		FollowUpDamageIncrease = 22,
+		[StatType(true)]
+		ResPen = 23
 	}
 }

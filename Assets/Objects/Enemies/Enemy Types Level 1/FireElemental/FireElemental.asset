@@ -13,19 +13,18 @@ MonoBehaviour:
   m_Name: FireElemental
   m_EditorClassIdentifier: 
   enemyType: 8
+  enemyWeapons: 
   enemyName: Fire Elemental
-  sprite: {fileID: 21300000, guid: 555d403227be02b499f48afb3e06e331, type: 3}
   spriteSheet: {fileID: 21300000, guid: 174a74a8b1fdab7499d37742f58a2049, type: 3}
-  animatedPrefab: {fileID: 3840729533895689506, guid: 725bc5eaf990b1b46be8c9b364a48439,
-    type: 3}
   stats:
     hp: 10
     damage: 10
     speed: 1.4
     elementStats:
     - element: 2
-      damageReduction: 9999
+      damageReduction: 1
   allowFlying: 0
   groundOffset: -0.05
   isBossEnemy: 0
   ExpDrop: 100
+  isLevelBoss: 0

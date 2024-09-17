@@ -18,6 +18,7 @@ public class ChaseComponent : NetworkBehaviour
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private NetworkTransform networkTransport;
     private Transform targetDestination;
+    private Transform targetPoint;
     private GameObject tempTarget;
     private float movementSpeed;
     private float tempSpeed;
@@ -51,6 +52,8 @@ public class ChaseComponent : NetworkBehaviour
     {
         if (target == null) return;
         targetDestination = target.transform;
+        if (target.CompareTag("Player"))
+            targetPoint = target.GetComponent<MultiplayerPlayer>().GetTargetPoint();
     }
 
     public void SetTemporaryTarget(GameObject target, float? tempSpeed = null, float tempTargetCooldown = 0.2f)
@@ -129,6 +132,11 @@ public class ChaseComponent : NetworkBehaviour
         transformCache.position = Vector3.MoveTowards(currentPosition, destination, speed * Time.deltaTime);
     }
 
+    public Vector3 GetDestination()
+    {
+        return targetPoint.position;
+    }
+
     public void SetImmobile(float time)
     {
         if (_immobileTimer < time)
@@ -140,6 +148,13 @@ public class ChaseComponent : NetworkBehaviour
 
     public void SetSlow(float time, float amount)
     {
+        RpcManager.instance.SetEnemySlowRpc(this, time, amount);
+    }
+    public void SetSlowServer(float time, float amount)
+    {
+        if (!IsHost)
+            throw new Exception("SetSlow called from the client");
+        
         if (_slowTimer < time)
         {
             _slowTimer = time;

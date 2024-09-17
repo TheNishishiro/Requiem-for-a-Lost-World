@@ -13,7 +13,7 @@ namespace Objects.Abilities
 
 		public string GetDescription(int rarity)
 		{
-			return WeaponStats.GetDescription(Description, rarity);
+			return WeaponStats.GetDescription(Description, rarity, false);
 		}
 	}
 }

@@ -31,9 +31,9 @@ namespace Managers.StageEvents
 			var nextEventTime = GameSettings.IsShortPlayTime ? stageEvent.triggerTime / 2f : stageEvent.triggerTime;
 			if (_stageTime.time.Value < nextEventTime) return;
 
-			if (stageEvent.enemies?.Any() == true)
+			if (stageEvent.spawnableEnemies?.Any() == true)
 			{
-				_enemyManager.ChangeDefaultSpawn(stageEvent.enemies);
+				_enemyManager.ChangeDefaultSpawn(stageEvent.spawnableEnemies);
 			}
 			
 			if (stageEvent.spawnRate > 0)
@@ -63,7 +63,7 @@ namespace Managers.StageEvents
 			
 			if (stageEvent.burstSpawnCount > 0)
 			{
-				_enemyManager.BurstSpawn(stageEvent.enemies, stageEvent.burstSpawnCount);
+				_enemyManager.BurstSpawn(stageEvent.spawnableEnemies, stageEvent.burstSpawnCount);
 			}
 
 			if (stageEvent.EraseEnemies)

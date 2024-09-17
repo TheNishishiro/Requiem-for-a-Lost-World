@@ -13,9 +13,10 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - ADDITIVECONFIG_ON
+  - DISTORT_ON
   - FADE_ON
-  - PREMULTIPLYCOLOR_ON
-  - SHAPE1DISTORT_ON
+  - MASK_ON
+  - SHAPE1ROTATE_ON
   - SHAPE2_ON
   - SHAPEADD_ON
   m_InvalidKeywords: []
@@ -23,8 +24,7 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -43,7 +43,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DistortTex:
-        m_Texture: {fileID: 2800000, guid: fcb027caad6963b4a80539bbce0d10e9, type: 3}
+        m_Texture: {fileID: 2800000, guid: ecf500445ad81a64a80d6f52cac4f97c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FadeBurnTex:
@@ -59,11 +59,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e0727ee6769cb3b418c6d460483f53e4, type: 3}
+        m_Texture: {fileID: 2800000, guid: fac8dd8c97ac9ad40b983aa619536d69, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
-        m_Texture: {fileID: 2800000, guid: 2f6642b43dc405d498acba7e288c068c, type: 3}
+        m_Texture: {fileID: 2800000, guid: c894103bc99f8374d95c4bdea51a3583, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Shape1MaskTex:
@@ -127,13 +127,13 @@ Material:
     - _DistortionPower: 10
     - _DistortionScrollXSpeed: 0
     - _DistortionScrollYSpeed: 0
-    - _DstMode: 10
+    - _DstMode: 1
     - _EditorDrawers: 62
     - _FadeAmount: 0.471
     - _FadeBurnGlow: 5
     - _FadeBurnWidth: 0.01
     - _FadePower: 1
-    - _FadeScrollXSpeed: -2
+    - _FadeScrollXSpeed: 2
     - _FadeScrollYSpeed: 1
     - _FadeTransition: 0.075
     - _Glow: 0
@@ -144,7 +144,7 @@ Material:
     - _HsvSaturation: 1
     - _HsvShift: 180
     - _LightAmount: 0
-    - _MaskPow: 1
+    - _MaskPow: 0.46
     - _OffsetSh1: 1
     - _OffsetSh2: 1
     - _OffsetSh3: 1
@@ -153,7 +153,7 @@ Material:
     - _RandomSh1Mult: 1
     - _RandomSh2Mult: 1
     - _RandomSh3Mult: 1
-    - _RenderingMode: 3
+    - _RenderingMode: 1
     - _RimAddAmount: 1
     - _RimBias: 0
     - _RimErodesAlpha: 0
@@ -184,7 +184,7 @@ Material:
     - _Shape2DistortYSpeed: 0.1
     - _Shape2RotationOffset: 0
     - _Shape2RotationSpeed: 0
-    - _Shape2XSpeed: 1
+    - _Shape2XSpeed: -1
     - _Shape2YSpeed: 0
     - _Shape3AlphaWeight: 2
     - _Shape3Brightness: 0
@@ -202,11 +202,11 @@ Material:
     - _ShapeColorWeight: 1
     - _ShapeContrast: 1
     - _ShapeDistortAmount: 1.26
-    - _ShapeDistortXSpeed: 0.1
-    - _ShapeDistortYSpeed: 0.1
-    - _ShapeRotationOffset: 0
+    - _ShapeDistortXSpeed: 0
+    - _ShapeDistortYSpeed: 0
+    - _ShapeRotationOffset: 4.71
     - _ShapeRotationSpeed: 0
-    - _ShapeXSpeed: 3
+    - _ShapeXSpeed: 0
     - _ShapeYSpeed: 0
     - _SoftFactor: 0.5
     - _SrcMode: 1
@@ -231,7 +231,7 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _BackFaceTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.24056602, g: 0.77370507, b: 1, a: 1}
     - _ColorGradingDark: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingLight: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingMiddle: {r: 1, g: 1, b: 1, a: 1}

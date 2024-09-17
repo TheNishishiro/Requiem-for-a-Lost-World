@@ -47,6 +47,7 @@ MonoBehaviour:
   useNetworkPool: 1
   spawnPrefab: {fileID: 1830482525884650664, guid: 963b81b0adc1a6943906b78bbd68b163,
     type: 3}
+  spawnSubPrefab: {fileID: 0}
   WeaponId: 33
   attackType: 4
   Name: Meteor Shower
@@ -57,10 +58,10 @@ MonoBehaviour:
   requiredAchievement: 101
   element: 9
   weaponStats:
-    Damage: 5
+    Damage: 8
     Cooldown: 2
     CooldownReduction: 0
-    Scale: 0.5
+    Scale: 0.7
     Speed: 10
     TimeToLive: 3
     AttackCount: 3
@@ -89,5 +90,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6a5b18bf63017f74d9af40093c14b54a, type: 2}
   - {fileID: 11400000, guid: 991f829a623e8c34585651ca4310e1d2, type: 2}
   isSkill: 0
-  capacity: 25
-  maxCapacity: 25

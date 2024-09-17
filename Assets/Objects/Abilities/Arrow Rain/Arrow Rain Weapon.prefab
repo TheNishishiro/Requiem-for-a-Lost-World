@@ -47,12 +47,17 @@ MonoBehaviour:
   useNetworkPool: 1
   spawnPrefab: {fileID: 6692321715920914300, guid: 78dc00ba3187e9d4e9765aea71ddc7cc,
     type: 3}
+  spawnSubPrefab: {fileID: 0}
   WeaponId: 1
   attackType: 1
   Name: Make it rain!
-  Description: Rain arrows on a closest target, prioritizes high hp targets
+  Description: 'Rain arrows on a closest target, prioritizes high hp targets.
+
+    When
+    owning a <color=orange>Duplicator</color> reduce cooldown by 50% on enemy kill
+    once this weapon reaches level 5'
   chanceToAppear: 0.9
-  Icon: {fileID: 21300000, guid: 605b697d1cc4c97408ccccb6e2928ae0, type: 3}
+  Icon: {fileID: 21300000, guid: 29120874529344749b61e4c04a4b884e, type: 3}
   unlockOnAchievement: 1
   requiredAchievement: 50
   element: 5
@@ -90,6 +95,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 46d6a892d69af3a4e93b2f72eb4bcffa, type: 2}
   - {fileID: 11400000, guid: 54872acb2f32110489cdd48a5ce37bbd, type: 2}
   isSkill: 0
-  capacity: 50
-  maxCapacity: 50
   HailOfArrows: 0

@@ -58,7 +58,7 @@ namespace UI.Main_Menu.REWORK.Scripts
                 Close();
             
             var date1 = DateTime.Now;
-            var date2 = SaveFile.Instance.NextBannerChangeDate.GetValueOrDefault();
+            var date2 = SaveFile.Instance.LastBannerChangeDate.GetValueOrDefault();
             var difference = date2 - date1;
             var totalHoursLeft = (int)difference.TotalHours;
             var totalMinutesLeft = (int)difference.TotalMinutes;
@@ -189,8 +189,8 @@ namespace UI.Main_Menu.REWORK.Scripts
         public void Open()
         {
             var saveFile = SaveFile.Instance;
-            var isRefreshBanner = saveFile.NextBannerChangeDate is null ||
-                                  DateTime.Now > saveFile.NextBannerChangeDate;
+            var isRefreshBanner = saveFile.LastBannerChangeDate is null ||
+                                  DateTime.Now > saveFile.LastBannerChangeDate;
             if (isRefreshBanner)
             {
                 BuildBanner(saveFile);
@@ -265,13 +265,13 @@ namespace UI.Main_Menu.REWORK.Scripts
         
             var now = DateTime.Now;
             var diffInDays = 0;
-            if (saveFile.NextBannerChangeDate.HasValue)
+            if (saveFile.LastBannerChangeDate.HasValue)
             {
-                diffInDays = (int)(now - saveFile.NextBannerChangeDate.Value).TotalDays;
+                diffInDays = (int)(now - saveFile.LastBannerChangeDate.Value).TotalDays;
             }
 
             saveFile.Pity = 0;
-            saveFile.NextBannerChangeDate = saveFile.NextBannerChangeDate?.AddDays(diffInDays + 1) ?? now.AddHours(24);
+            saveFile.LastBannerChangeDate = saveFile.LastBannerChangeDate?.AddDays(diffInDays + 1) ?? now.AddHours(24);
             saveFile.Save();
         }
         

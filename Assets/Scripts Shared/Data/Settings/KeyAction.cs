@@ -10,5 +10,6 @@
         Dash = 5,
         Sprint = 6,
         Accept = 7,
+        Interact = 8
     }
 }

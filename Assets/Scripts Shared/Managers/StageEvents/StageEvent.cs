@@ -8,7 +8,7 @@ using UnityEngine;
 [Serializable]
 public class StageEvent
 {
-	public List<EnemyData> enemies;
+	public List<EnemySpawnData> spawnableEnemies;
 	public EnemyData bossEnemy;
 	public float triggerTime;
 	public float spawnRate;

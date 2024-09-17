@@ -33,7 +33,7 @@ namespace Objects.Abilities.BindingField
 					ProjectileDamageIncreasePercentage = 0;
 				}
 
-				damageable?.SetVulnerable(CurrentTimeToLive, WeaponStatsStrategy.GetWeakness());
+				damageable?.SetVulnerable((WeaponEnum)ParentWeapon.GetId(), CurrentTimeToLive, WeaponStatsStrategy.GetWeakness());
 				chaseComponent.SetImmobile(CurrentTimeToLive);
 			}
 		}

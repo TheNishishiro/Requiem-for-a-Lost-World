@@ -21,5 +21,7 @@ namespace Interfaces
         double GetDetectionRange();
         int GetPassThroughCount();
         float GetLifeSteal();
+        float GetResPen();
+        DamageResult GetSplitDamageDealt(float damageIncrease = 0, float flatDamageIncrease = 0);
     }
 }

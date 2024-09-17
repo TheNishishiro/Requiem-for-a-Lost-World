@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DefaultNamespace;
+using DefaultNamespace.Data;
 using TMPro;
 using UI.Labels.InGame;
 using Unity.Netcode;
@@ -37,7 +38,14 @@ namespace Managers
 
 		public void PostMessage(string text, Vector3 worldPosition, Quaternion rotation, Color color)
 		{
-			_messagePool[_count].gameObject.SetActive(true);
+			_messagePool[_count].gameObject.SetActive(SaveFile.Instance.ConfigurationFile.DamageNumbers != 0);
+			_messagePool[_count].fontSize = SaveFile.Instance.ConfigurationFile.DamageNumbers switch
+			{
+				1 => 0.5f,
+				2 => 1f,
+				3 => 2f,
+				_ => _messagePool[_count].fontSize
+			};
 			_messagePool[_count].color = color;
 			_messagePool[_count].transform.position = Utilities.GetRandomInArea(worldPosition, 0.2f);
 			_messagePool[_count].transform.localRotation = rotation;

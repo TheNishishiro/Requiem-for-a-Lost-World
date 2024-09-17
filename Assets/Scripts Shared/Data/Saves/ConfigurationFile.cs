@@ -31,6 +31,19 @@ namespace DefaultNamespace.Data
 		public bool RenderCoopProjectiles { get; set; }
 		public int UpscalingMethod { get; set; }
 		public int FpsLimit { get; set; }
+		public bool SSAO { get; set; }
+		public bool TwitchEnabled { get; set; }
+		public bool TwitchPickItems { get; set; }
+		public bool TwitchRemoveItems { get; set; }
+		public bool TwitchControlBuffs { get; set; }
+		public bool TwitchStageRules { get; set; }
+		public bool TwitchSpawnEnemies { get; set; }
+		public bool TwitchBanItems { get; set; }
+		public string TwitchChannel { get; set; }
+		public int TwitchPollDuration { get; set; }
+		public int DamageNumbers { get; set; }
+		public int CameraDistance { get; set; }
+		public int CameraFOV { get; set; }
 
 		public ConfigurationFile Default()
 		{
@@ -54,7 +67,12 @@ namespace DefaultNamespace.Data
 				RenderCoopProjectiles = true;
 				UpscalingMethod = 0;
 				FpsLimit = 0;
-				ConfigurationVersion = 9;
+				ConfigurationVersion = 13;
+				SSAO = false;
+				TwitchPollDuration = 15;
+				DamageNumbers = 2;
+				CameraDistance = 1;
+				CameraFOV = 0;
 			}
 			else
 			{
@@ -81,7 +99,12 @@ namespace DefaultNamespace.Data
 				ResolutionWidth = Screen.currentResolution.width;
 				ResolutionHeight = Screen.currentResolution.height;
 				RefreshRate = Screen.currentResolution.refreshRateRatio.numerator;
-				ConfigurationVersion = 9;
+				ConfigurationVersion = 13;
+				SSAO = true;
+				TwitchPollDuration = 15;
+				DamageNumbers = 2;
+				CameraDistance = 1;
+				CameraFOV = 0;
 			}
 
 			return Update();
@@ -151,8 +174,41 @@ namespace DefaultNamespace.Data
 					AntiAliasing = 3;
 				ConfigurationVersion = 9;
 			}
+			if (ConfigurationVersion == 9)
+			{
+				SSAO = true;
+				ConfigurationVersion = 10;
+			}
+			if (ConfigurationVersion == 10)
+			{
+				TwitchPollDuration = 15;
+				ConfigurationVersion = 11;
+			}
+			if (ConfigurationVersion == 11)
+			{
+				DamageNumbers = 2;
+				ConfigurationVersion = 12;
+			}
+			if (ConfigurationVersion == 12)
+			{
+				CameraFOV = 0;
+				CameraDistance = 1;
+				ConfigurationVersion = 13;
+			}
 
 			return this;
+		}
+
+		public float GetCameraFovValue()
+		{
+			return CameraFOV switch
+			{
+				0 => 50,
+				1 => 70,
+				2 => 85,
+				3 => 100,
+				_ => 50
+			};
 		}
 	}
 }

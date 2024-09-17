@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5556302506734257985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 268437592601447082}
+  - component: {fileID: 1626505854333849974}
+  m_Layer: 0
+  m_Name: Digital Arrow Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &268437592601447082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5556302506734257985}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1626505854333849974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5556302506734257985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d11164783b457e8a9673fc37f42aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useNetworkPool: 1
+  spawnPrefab: {fileID: 754167785374057081, guid: 67327afa754b1f940bc4e31f7fdda072,
+    type: 3}
+  spawnSubPrefab: {fileID: 0}
+  WeaponId: 42
+  attackType: 2
+  Name: Digital Arrow
+  Description: Send a projectile of unknown origin at nearby foes, deal 50% split
+    damage considered as Follow-Up damage
+  chanceToAppear: 0.8
+  Icon: {fileID: 21300000, guid: 41e484f35b4c766439be9cb42a31dd9b, type: 3}
+  unlockOnAchievement: 1
+  requiredAchievement: 129
+  element: 1
+  weaponStats:
+    Damage: 8
+    Cooldown: 2
+    CooldownReduction: 0
+    Scale: 1
+    Speed: 3
+    TimeToLive: 2
+    AttackCount: 1
+    PassThroughCount: 2
+    DamageCooldown: 0
+    DuplicateSpawnDelay: 0.5
+    DetectionRange: 0
+    CritRate: 0
+    CritDamage: 0
+    Weakness: 0
+    DamageIncreasePercentage: 0
+    HealPerHit: 0
+    DamageOverTime: 0
+    DamageOverTimeDuration: 0
+    DamageOverTimeFrequency: 0
+    LifeSteal: 0
+    FollowUpDamageIncrease: 0
+    ResPen: 0
+  availableUpgrades:
+  - {fileID: 11400000, guid: 900df3e2e021e72488977c46d3e840d2, type: 2}
+  - {fileID: 11400000, guid: d3b1e16368979514ba5cee4b98676c1a, type: 2}
+  - {fileID: 11400000, guid: 3f3c26601da24454f942137b7d7ecf58, type: 2}
+  - {fileID: 11400000, guid: 457d2a23b42d46440ae7473159faffea, type: 2}
+  - {fileID: 11400000, guid: 2592c9a20a3e091419c492778a6d2225, type: 2}
+  - {fileID: 11400000, guid: 15eabbfd60996bd43a9ba93aae7f9957, type: 2}
+  - {fileID: 11400000, guid: cb42e2b989b241f4392e4c89a6090e44, type: 2}
+  - {fileID: 11400000, guid: cfcffa3c8bf2c064687d14332fae449f, type: 2}
+  - {fileID: 11400000, guid: 26ac007fd360eff4a96e4682e90bb823, type: 2}
+  isSkill: 0
+  IsAlgorithmicCascade: 0

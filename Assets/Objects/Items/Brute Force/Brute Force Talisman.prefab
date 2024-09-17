@@ -44,14 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae50f31ba004a9089f0d873a6b8ee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemId: 4
   Name: Brute's Talisman
   Description: Reduce EXP gain by {ExperienceIncreasePercentage}% but increase crit
     rate by {CritRate}% and crit damage by {CritDamage}%
   supportType: 3
   chanceToAppear: 0.7
-  Icon: {fileID: 21300000, guid: 9827946d858a3394686ce1852c9c41fc, type: 3}
-  unlockOnAchievement: 0
-  requiredAchievement: 0
+  Icon: {fileID: 21300000, guid: b18b6cf18a969fc46803da85397ea3d8, type: 3}
+  unlockOnAchievement: 1
+  requiredAchievement: 116
   ItemUpgrades:
   - {fileID: 11400000, guid: 8a4cc1e683a7f3d4b86bd9a58b32ddef, type: 2}
   - {fileID: 11400000, guid: 867cf6ab4abf92145845ba4d95e7e99c, type: 2}
@@ -108,3 +109,6 @@ MonoBehaviour:
     Stamina: 0
     ElementalReactionEffectIncreasePercentage: 0
     FollowUpDamageIncrease: 0
+    HealthIncreasePercentage: 0
+    ResPen: 0
+    CanDotCrit: 0

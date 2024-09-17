@@ -32,6 +32,7 @@ namespace DefaultNamespace.Data
 		public Dictionary<AchievementEnum, bool> AchievementSaveData;
 		public Dictionary<KeyAction, KeyCode> Keybindings;
 		public Dictionary<int, List<int>> ReadStoryEntries { get; set; }
+
 		public List<ServerData> Servers;
 		public List<RuneSaveData> Runes;
 		public ConfigurationFile ConfigurationFile;
@@ -44,7 +45,7 @@ namespace DefaultNamespace.Data
 		public CharactersEnum CurrentBannerSubCharacterId1;
 		public CharactersEnum CurrentBannerSubCharacterId2;
 		public CharactersEnum CurrentBannerSubCharacterId3;
-		public DateTime? NextBannerChangeDate;
+		public DateTime? LastBannerChangeDate;
 		public int Pity;
 		#endregion
 		#region Game Stats
@@ -62,6 +63,12 @@ namespace DefaultNamespace.Data
 		public ulong TotalAmountHealed;
 		public ulong DamageTakeInOneGame;
 		public ulong TotalDamageTaken;
+		public double DistanceTraveled;
+		public ulong ShrinesVisited;
+		public ulong ReactionsTriggered;
+		#endregion
+		#region Character Stats
+		public ulong YamiFlowerPickup;
 		#endregion
 		#region Rewards
 		public bool IsTwitterVisited;
@@ -72,13 +79,12 @@ namespace DefaultNamespace.Data
 		#region Game Settings
 		public bool IsCoopAllowed;
 		public bool IsShortPlayTime;
+		public bool IsRandomLevelUp;
 		#endregion
 		public UnityEvent<AchievementEnum> AchievementUnlocked;
 		public UnityEvent<CharactersEnum, CharacterRank> OnCharacterUnlocked;
 		
 		public static SaveFile Instance { get; private set; }
-		public double DistanceTraveled { get; set; }
-		public ulong ShrinesVisited { get; set; }
 
 		public CameraModes CameraMode;
 
@@ -137,28 +143,27 @@ namespace DefaultNamespace.Data
 			Servers ??= new List<ServerData>();
 			Runes ??= new List<RuneSaveData>();
 			AchievementSaveData ??= new Dictionary<AchievementEnum, bool>();
-			Keybindings ??= DefaultKeyBinds();
+			Keybindings = DefaultKeyBinds();
 			ConfigurationFile = (ConfigurationFile ?? new ConfigurationFile().Default()).Update();
 			ReadStoryEntries ??= new Dictionary<int, List<int>>();
 		}
 
 		private Dictionary<KeyAction, KeyCode> DefaultKeyBinds()
 		{
-			if (Keybindings?.Any() == true)
-				return Keybindings;
+			if (Keybindings is null)
+				Keybindings = new Dictionary<KeyAction, KeyCode>();
 
-			var keybindings = new Dictionary<KeyAction, KeyCode>
-			{
-				{ KeyAction.Ability, KeyCode.Space },
-				{ KeyAction.MoveDown, KeyCode.S },
-				{ KeyAction.MoveUp, KeyCode.W },
-				{ KeyAction.MoveLeft, KeyCode.A },
-				{ KeyAction.MoveRight, KeyCode.R },
-				{ KeyAction.Accept, KeyCode.Return },
-				{ KeyAction.Dash, KeyCode.LeftShift },
-				{ KeyAction.Sprint, KeyCode.LeftControl }
-			};
-			return keybindings;
+			Keybindings.TryAdd(KeyAction.Ability, KeyCode.Space);
+			Keybindings.TryAdd(KeyAction.MoveDown, KeyCode.S);
+			Keybindings.TryAdd(KeyAction.MoveUp, KeyCode.W);
+			Keybindings.TryAdd(KeyAction.MoveLeft, KeyCode.A);
+			Keybindings.TryAdd(KeyAction.MoveRight, KeyCode.D);
+			Keybindings.TryAdd(KeyAction.Accept, KeyCode.Return);
+			Keybindings.TryAdd(KeyAction.Dash, KeyCode.LeftShift);
+			Keybindings.TryAdd(KeyAction.Sprint, KeyCode.LeftControl);
+			Keybindings.TryAdd(KeyAction.Interact, KeyCode.F);
+			
+			return Keybindings;
 		}
 
 		public KeyCode GetKeybinding(KeyAction action)
@@ -184,6 +189,18 @@ namespace DefaultNamespace.Data
 			{
 				PermUpgradeSaveData[permUpgradeType]++;
 			}
+			Save();
+		}
+
+		public void RemoveUpgradeLevel(PermUpgradeType permUpgradeType)
+		{
+			PermUpgradeSaveData ??= new Dictionary<PermUpgradeType, int>();
+			
+			if (!PermUpgradeSaveData.TryAdd(permUpgradeType, 1))
+			{
+				PermUpgradeSaveData[permUpgradeType]--;
+			}
+			Save();
 		}
 
 		public CharacterSaveData GetCharacterSaveData(CharactersEnum characterId)
@@ -290,9 +307,13 @@ namespace DefaultNamespace.Data
 		public void ExchangeGemsForFragments(CharactersEnum characterId)
 		{
 			if (Gems < 250) return;
-
+			
+			var characterSaveData = GetCharacterSaveData(characterId);
+			if (characterSaveData.GetRankEnum() >= CharacterRank.E5)
+				return;
+			
 			Gems -= 250;
-			GetCharacterSaveData(characterId).AddFragments(1);
+			characterSaveData.AddFragments(characterId, 1);
 			Save();
 		}
 
@@ -364,6 +385,8 @@ namespace DefaultNamespace.Data
 		public ulong DamageTakeInOneGame;
 		public ulong TotalDamageTaken;
 		public ulong ShrinesVisited;
+		public ulong ReactionsTriggered;
+		public ulong YamiFlowerPickup;
 		public double DistanceTraveled;
 		public bool IsFirstTutorialCompleted;
 		public bool IsTwitterVisited;
@@ -374,6 +397,7 @@ namespace DefaultNamespace.Data
 		public DifficultyEnum SelectedDifficulty;
 		public bool IsCoopAllowed;
 		public bool IsShortPlayTime;
+		public bool IsRandomLevelUp;
 		public CharactersEnum? SelectedCharacterId;
 		public CharactersEnum CurrentBannerCharacterId;
 		public CharactersEnum CurrentBannerSubCharacterId1;
@@ -406,6 +430,8 @@ namespace DefaultNamespace.Data
 			SelectedCharacterId = saveFile.SelectedCharacterId;
 			TimePlayed = saveFile.TimePlayed;
 			ShrinesVisited = saveFile.ShrinesVisited;
+			ReactionsTriggered = saveFile.ReactionsTriggered;
+			YamiFlowerPickup = saveFile.YamiFlowerPickup;
 			BossKills = saveFile.BossKills;
 			SelectedDifficulty = saveFile.SelectedDifficulty;
 			TotalLegendaryItemsObtained = saveFile.TotalLegendaryItemsObtained;
@@ -418,7 +444,7 @@ namespace DefaultNamespace.Data
 			CurrentBannerSubCharacterId1 = saveFile.CurrentBannerSubCharacterId1;
 			CurrentBannerSubCharacterId2 = saveFile.CurrentBannerSubCharacterId2;
 			CurrentBannerSubCharacterId3 = saveFile.CurrentBannerSubCharacterId3;
-			LastBannerChangeDate = saveFile.NextBannerChangeDate;
+			LastBannerChangeDate = saveFile.LastBannerChangeDate;
 			CameraMode = saveFile.CameraMode;
 			IsTwitterVisited = saveFile.IsTwitterVisited;
 			IsDiscordVisited = saveFile.IsDiscordVisited;
@@ -426,6 +452,7 @@ namespace DefaultNamespace.Data
 			IsFeedbackLeft = saveFile.IsFeedbackLeft;
 			IsCoopAllowed = saveFile.IsCoopAllowed;
 			IsShortPlayTime = saveFile.IsShortPlayTime;
+			IsRandomLevelUp = saveFile.IsRandomLevelUp;
 		}
 
 	}

@@ -6,8 +6,9 @@ namespace Objects.Stage
     {
         public static bool IsShortPlayTime { get; set; }
         public static float EnemyHealthModifier => IsShortPlayTime ? 1.25f : 1f;
-        public static float EnemyDamageModifier => IsShortPlayTime ? 2f : 1f;
+        public static float EnemyDamageModifier => IsShortPlayTime ? 1.25f : 1f;
         public static float EnemySpawnRateModifier => IsShortPlayTime ? 0.85f : 1f;
-        public static float ExpDropModifier => IsShortPlayTime ? 1.4f : 1f;
+        public static float ExpDropModifier => IsShortPlayTime ? 1.5f : 1f;
+        public static bool IsRandomLevelUp { get; set; }
     }
 }

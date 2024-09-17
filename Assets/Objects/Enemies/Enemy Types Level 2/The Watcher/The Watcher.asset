@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6773012bce094f4281e59656a4cb2572, type: 3}
+  m_Name: The Watcher
+  m_EditorClassIdentifier: 
+  enemyType: 39
+  enemyWeapons: 
+  enemyName: The Watcher
+  spriteSheet: {fileID: 21300000, guid: 075d3ca9ba216174399ccaae15f69e2d, type: 3}
+  stats:
+    hp: 5000
+    damage: 300
+    speed: 1.6
+    elementStats:
+    - element: 8
+      damageReduction: 1
+    - element: 7
+      damageReduction: -1
+    - element: 5
+      damageReduction: 0.5
+  allowFlying: 0
+  groundOffset: 0
+  isBossEnemy: 1
+  ExpDrop: 10000
+  isLevelBoss: 1
