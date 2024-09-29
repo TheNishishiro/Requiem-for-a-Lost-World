@@ -1,6 +1,8 @@
 ﻿using Events.Scripts;
 using Interfaces;
 using Managers;
+using Objects.Players.Scripts;
+using Objects.Stage;
 using UnityEngine;
 using UnityEngine.UI;
 using Image = UnityEngine.UIElements.Image;
@@ -16,7 +18,7 @@ namespace Objects.Drops.ExpDrop
 		public override void OnPickUp(Player player)
 		{
 			AudioManager.instance.PlayExperiencePickup();
-			player.AddExperience(expAmount);
+			RpcManager.instance.AddExperienceRpc(expAmount  * PlayerStatsScaler.GetScaler().GetExperienceIncrease() * GameData.GetCurrentDifficulty().ExperienceGainModifier);
 			ExpPickedUpEvent.Invoke(expAmount);
 		}
 

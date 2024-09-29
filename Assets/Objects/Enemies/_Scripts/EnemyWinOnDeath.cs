@@ -17,7 +17,7 @@ namespace Objects.Enemies
 			catch (Exception)
 			{
 				GameResultData.IsWin = true;
-				FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(true, true);
+				FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(true);
 			}
 		}
 	}

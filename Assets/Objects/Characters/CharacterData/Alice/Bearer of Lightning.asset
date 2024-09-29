@@ -24,14 +24,25 @@ MonoBehaviour:
   nameAnnouncer: {fileID: 8300000, guid: d399809531b0c374dade8d865f1b9d09, type: 3}
   PassiveDescription: Every 10 levels increase <color=#FFC300>cooldown reduction</color>
     by <color=green>1.5%</color>
+  Description:
+    englishText: Every 10 levels increase <color=#FFC300>cooldown reduction</color>
+      by <color=green>1.5%</color>
+    polishText: 
   AbilityName: Kaminari Kiretsu
+  SkillName:
+    englishText: 
+    polishText: 
   AbilityDescription: Perform a quick slash dealing lightning damage in a wide area
     in front, at the same time gain <color=green>10%</color> <color=#FFC300>cooldown
     reduction</color> for 5 seconds for each empty weapon slot (at least 10%)
+  SkillDescription:
+    englishText: 
+    polishText: 
   AbilityCooldown: 45
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 3587274077961109647, guid: d576beee47a482c40a305ed5a4005058,
     type: 3}
+  AchievementListenerPrefab: {fileID: 0}
   AbilityIcon: {fileID: 21300000, guid: 0320ad7659b54d34c9e5ca01a3466b9e, type: 3}
   ColorTheme: {r: 0.67058825, g: 0.5921569, b: 0.83137256, a: 1}
   Alignment: 1
@@ -44,6 +55,7 @@ MonoBehaviour:
   Stats:
     Health: 80
     HealthMax: 80
+    SpecialValue: 0
     SpecialMax: 0
     SpecialIncrease: 0
     MagnetSize: 1
@@ -91,6 +103,11 @@ MonoBehaviour:
     EarthDamageIncrease: 0
     DashCount: 2
     Stamina: 2
+    ElementalReactionEffectIncreasePercentage: 0
+    FollowUpDamageIncrease: 0
+    HealthIncreasePercentage: 0
+    ResPen: 0
+    CanDotCrit: 0
   skillNodes:
   - {fileID: 11400000, guid: 6b5653952d9ade942a7c0b21bea047ef, type: 2}
   - {fileID: 11400000, guid: 1eb8a78f365aa974f8d3e789bc07aec6, type: 2}

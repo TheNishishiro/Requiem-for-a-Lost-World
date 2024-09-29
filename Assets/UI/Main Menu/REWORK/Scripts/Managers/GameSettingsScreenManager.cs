@@ -139,31 +139,7 @@ public class GameSettingsScreenManager : MonoBehaviour, IStackableWindow
     
     public void StartLevel()
     {
-        StartCoroutine(StartLevelCoroutine(GameData.GetCurrentStage().id));
-    }
-
-    private IEnumerator StartLevelCoroutine(StageEnum currentStage)
-    {
-        try
-        {
-            TwitchIntegrationManager.instance.Connect();
-            ModalManager.instance.Open(ButtonCombination.None, "Loading", "Loading the level...", modalState: ModalState.Info);
-            if (!NetworkManager.Singleton.ShutdownInProgress)
-                NetworkManager.Singleton.Shutdown();
-
-            while (NetworkManager.Singleton.ShutdownInProgress);
-
-            NetworkingContainer.IsHostPlayer = true;
-            AudioManager.instance.PlayButtonConfirmClick();
-            SceneManager.LoadScene(currentStage.GetStringValue(), LoadSceneMode.Single);
-            SceneManager.LoadScene("Scenes/Essential", LoadSceneMode.Additive);
-			
-            yield break;
-        }
-        catch (Exception e)
-        {
-            ModalManager.instance.Open(ButtonCombination.Yes, "Loading", $"Failed to load the game: {e.Message}", modalState: ModalState.Error, textYes: "Close");
-        }
+        FindFirstObjectByType<MultiplayerManager>().StartServer();
     }
     
     public bool IsInFocus { get; set; }

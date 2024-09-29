@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using DefaultNamespace.Data.Environment;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace DefaultNamespace.Data
@@ -44,6 +45,18 @@ namespace DefaultNamespace.Data
 		public int DamageNumbers { get; set; }
 		public int CameraDistance { get; set; }
 		public int CameraFOV { get; set; }
+		public int CoopProvider { get; set; }
+		public bool UseCompactChestMenu { get; set; }
+		private float _mouseSensitivity;
+
+		public float MouseSensitivity
+		{
+			get => math.clamp(_mouseSensitivity, 0.1f, 2f);
+			set
+			{
+				_mouseSensitivity = value;
+			}
+		}
 
 		public ConfigurationFile Default()
 		{
@@ -73,6 +86,9 @@ namespace DefaultNamespace.Data
 				DamageNumbers = 2;
 				CameraDistance = 1;
 				CameraFOV = 0;
+				CoopProvider = 0;
+				UseCompactChestMenu = false;
+				MouseSensitivity = 1;
 			}
 			else
 			{
@@ -105,6 +121,9 @@ namespace DefaultNamespace.Data
 				DamageNumbers = 2;
 				CameraDistance = 1;
 				CameraFOV = 0;
+				CoopProvider = 0;
+				UseCompactChestMenu = false;
+				MouseSensitivity = 1;
 			}
 
 			return Update();
@@ -194,6 +213,11 @@ namespace DefaultNamespace.Data
 				CameraFOV = 0;
 				CameraDistance = 1;
 				ConfigurationVersion = 13;
+			}
+			if (ConfigurationVersion == 13)
+			{
+				MouseSensitivity = 1;
+				ConfigurationVersion = 14;
 			}
 
 			return this;

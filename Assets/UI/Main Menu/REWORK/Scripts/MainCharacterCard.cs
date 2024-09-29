@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using DefaultNamespace.Data;
+using DefaultNamespace.Data.Locale;
 using Managers;
 using NaughtyAttributes;
 using Objects.Characters;
@@ -81,7 +82,7 @@ public class MainCharacterCard : MonoBehaviour
         characterCardImage.sprite = character.CharacterCard;
         characterCardImage.material = null;
         labelName.text = character.Name;
-        labelTitle.text = character.Title;
+        labelTitle.text = character.Title.Translate();
         var fullStars = new string ('\u2726', characterSaveData.RankUpLevel);
         var missingStars = new string ('\u2727', 5 - characterSaveData.RankUpLevel);
         labelStarRating.text = fullStars + missingStars;
@@ -91,7 +92,7 @@ public class MainCharacterCard : MonoBehaviour
         fullStars = new string ('\u25c8', (int)characterSaveData.GetFinishedDifficulty(GameData.GetCurrentStage()?.id ?? StageEnum.CapitalOutskirts));
         missingStars = new string ('\u25c7', 4 - (int)characterSaveData.GetFinishedDifficulty(GameData.GetCurrentStage()?.id ?? StageEnum.CapitalOutskirts));
         labelFinishedDifficulty.text = fullStars + missingStars;
-        labelLevel.text = "lv. " + characterSaveData.Level;
+        labelLevel.text = "lv. ".Translate() + characterSaveData.Level;
         experienceSlider.SetValue(characterSaveData.Experience, characterSaveData.ExperienceNeeded);
 
         SetDescription(true);
@@ -119,8 +120,10 @@ public class MainCharacterCard : MonoBehaviour
         
         if (!characterSaveData.IsUnlocked)
         {
-            labelName.text = "Locked";
-            labelTitle.text = _currentCharacterData.IsPullable ? $"Fragments: {_currentCharacterSaveData.Fragments}/50" : "Coming soon";
+            labelName.text = "Locked".Translate();
+            labelTitle.text = _currentCharacterData.IsPullable ? 
+                "Fragments".Translate() + $": {_currentCharacterSaveData.Fragments}/50" : 
+                "Coming soon".Translate();
             labelStarRating.text = "";
             labelFinishedDifficulty.text = "";
             labelLevel.text = "";
@@ -174,7 +177,7 @@ public class MainCharacterCard : MonoBehaviour
     {
         if (isUltimate)
         {
-            labelWeaponDisplayType.text = "Ultimate";
+            labelWeaponDisplayType.text = "Ultimate".Translate();
             labelWeaponDescription.text = _currentCharacterData.GetAbilityDescription(_currentCharacterSaveData.RankUpLevel);
             labelWeaponName.text = _currentCharacterData.AbilityName;
             imageUltimateIcon.material = weaponIconHighlightMaterial;
@@ -182,7 +185,7 @@ public class MainCharacterCard : MonoBehaviour
         }
         else
         {
-            labelWeaponDisplayType.text = "Weapon";
+            labelWeaponDisplayType.text = "Weapon".Translate();
             labelWeaponDescription.text = _currentCharacterData.GetWeaponDescription(_currentCharacterSaveData.RankUpLevel);
             labelWeaponName.text = _currentCharacterData.StartingWeapon.Name;
             imageUltimateIcon.material = null;

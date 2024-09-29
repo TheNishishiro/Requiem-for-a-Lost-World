@@ -22,5 +22,11 @@ namespace UI.Main_Menu.REWORK.Scripts
             Application.OpenURL("https://discord.gg/RgcwZn9JTQ");
             SaveManager.instance.GetSaveFile().MarkOpened(OpenedLinks.Discord);
         }
+
+        public void OpenSteam()
+        {
+            Application.OpenURL("https://store.steampowered.com/app/3255660/Requiem_For_a_Lost_World/");
+            SaveManager.instance.GetSaveFile().MarkOpened(OpenedLinks.Steam);
+        }
     }
 }

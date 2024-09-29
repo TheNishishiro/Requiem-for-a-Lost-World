@@ -15,6 +15,7 @@ using Objects.Items;
 using Objects.Players.PermUpgrades;
 using Objects.Players.Scripts;
 using Objects.Stage;
+using UI.In_Game.GUI.Scripts.Managers;
 using UI.Labels.InGame.MP_List;
 using Unity.Mathematics;
 using Unity.Netcode;
@@ -120,17 +121,39 @@ namespace Managers
         }
 
         [Rpc(SendTo.Everyone)]
+        public void PauseRpc(bool isPlayerVote)
+        {
+            CursorManager.instance.ShowCursor();
+            if (isPlayerVote)
+                GameManager.instance.playerMpComponent.ResetVoteUnpause();
+            if (IsClient)
+                GuiManager.instance.ToggleWaitingForPlayers(true);
+            if (IsHost)
+                GuiManager.instance.ToggleWaitingForPlayers(NetworkManager.Singleton.ConnectedClients.Count > 1);
+            
+            Time.timeScale = 0;
+        }
+
+        [Rpc(SendTo.Everyone)]
+        public void UnPauseRpc()
+        {
+            CursorManager.instance.HideCursor();
+            GuiManager.instance.ToggleWaitingForPlayers(false);
+            Time.timeScale = 1;
+        }
+
+        [Rpc(SendTo.Everyone)]
         public void WinRpc()
         {
             GameResultData.IsWin = true;
-            FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(true, true);
+            FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(true);
         }
 
         [Rpc(SendTo.Everyone)]
         public void LoseRpc()
         {
             GameResultData.IsWin = false;
-            FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(false, true);
+            FindFirstObjectByType<GameOverScreenManager>()?.OpenPanel(false);
         }
         
         [Rpc(SendTo.Server)]
@@ -358,6 +381,12 @@ namespace Managers
         public void PropagateItemToOnlinePlayerListRpc(ulong clientId, ItemEnum itemId, WeaponEnum weaponId)
         {
             MpActivePlayersInGameList.instance.UpdatePlayerItems(clientId, itemId, weaponId);
+        }
+
+        [Rpc(SendTo.Everyone, Delivery = RpcDelivery.Reliable)]
+        public void AddExperienceRpc(float expAmount)
+        {
+            GameManager.instance.playerComponent.AddExperience(expAmount);
         }
     }
 }

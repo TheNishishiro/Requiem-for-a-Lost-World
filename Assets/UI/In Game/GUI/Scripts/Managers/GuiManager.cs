@@ -82,6 +82,8 @@ namespace UI.In_Game.GUI.Scripts.Managers
         [BoxGroup("Icons Theme")] [SerializeField] private SVGImage svgSprint;
         [Space]
         [BoxGroup("Networking")] [SerializeField] private TextMeshProUGUI pingDisplay;
+        [Space]
+        [BoxGroup("Notifications")] [SerializeField] private TextMeshProUGUI labelWaitingForPlayers;
         
         
         public void Awake()
@@ -225,6 +227,12 @@ namespace UI.In_Game.GUI.Scripts.Managers
         {
             textInteractionPrompt.text = $"< Press <b>{SaveFile.Instance.GetKeybinding(KeyAction.Interact).ToString()}</b> to {text} >";
             textInteractionPrompt.gameObject.SetActive(enable);
+        }
+
+        public void ToggleWaitingForPlayers(bool isVisible, string text = "Waiting for other players")
+        {
+            labelWaitingForPlayers.text = text;
+            labelWaitingForPlayers.gameObject.SetActive(isVisible);
         }
     }
 }

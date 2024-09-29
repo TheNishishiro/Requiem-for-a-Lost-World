@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DefaultNamespace.Data;
+using Netcode.Transports.Facepunch;
 using Objects.Characters;
+using Steamworks;
+using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -60,6 +64,21 @@ namespace Managers
 		public void ApplySettings()
 		{
 			var settings = SaveFile.Instance.ConfigurationFile;
+
+			if (NetworkManager.Singleton != null)
+			{
+				switch (settings.CoopProvider)
+				{
+					case 0 when SteamClient.IsValid:
+					case 2:
+						NetworkManager.Singleton.NetworkConfig.NetworkTransport = NetworkManager.Singleton.GetComponent<FacepunchTransport>();
+						break;
+					case 0 when !SteamClient.IsValid:
+					case 1:
+						NetworkManager.Singleton.NetworkConfig.NetworkTransport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+						break;
+				}
+			}
 
 			AudioListener.volume = settings.Volume;
 			var renderPipeline = (UniversalRenderPipelineAsset)QualitySettings.renderPipeline;

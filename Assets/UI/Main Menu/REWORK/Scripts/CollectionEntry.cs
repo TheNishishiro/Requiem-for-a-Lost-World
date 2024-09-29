@@ -81,8 +81,8 @@ namespace UI.Main_Menu.REWORK.Scripts
         {
             var isUnlocked = IsShardUnlocked();
             CollectionScreenManager.instance.Display(
-                _currentEidolon.EidolonName,
-                isUnlocked ? _currentEidolon.GetDescription() + $"<br><br><i><size=70%><color=#D8D8D8>{_currentEidolon.EidolonQuote}</color></size></i>" : _currentEidolon.GetDescription(),
+                _currentEidolon.GetEidolonName(),
+                isUnlocked ? _currentEidolon.GetDescription() + $"<br><br><i><size=70%><color=#D8D8D8>{_currentEidolon.GetEidolonQuote()}</color></size></i>" : _currentEidolon.GetDescription(),
                 $"Unlock by obtaining duplicates of {_currentCharacter.Name}",
                 isUnlocked);
         }
@@ -103,7 +103,7 @@ namespace UI.Main_Menu.REWORK.Scripts
             imageIcon.material = isUnlocked ? null : materialBlackAndWhite;
             imageIcon.sprite = _currentEidolon.EidolonTexture;
             imageIcon.color = isUnlocked ? Color.white : Color.gray;
-            labelName.text = isUnlocked ? _currentEidolon.EidolonName : "???";
+            labelName.text = isUnlocked ? _currentEidolon.GetEidolonName() : "???";
         }
 
         private void RefreshCharacter()

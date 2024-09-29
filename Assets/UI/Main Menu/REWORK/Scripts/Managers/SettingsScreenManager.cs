@@ -67,6 +67,9 @@ namespace UI.Main_Menu.REWORK.Scripts
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entrySprintKeyBind;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryInteractKeyBind;
         [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryDamageNumbers;
+        [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryCoopProvider;
+        [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryCompactChestMenu;
+        [BoxGroup("Settings Entries")] [SerializeField] private SettingsEntry entryMouseSensitivity;
         [Space]
         [BoxGroup("Twitch Settings")] [SerializeField] private TextMeshProUGUI textTwitchConnectionState;
         [BoxGroup("Twitch Settings")] [SerializeField] private SettingsEntry entryTwitchEnabled;
@@ -335,6 +338,9 @@ namespace UI.Main_Menu.REWORK.Scripts
             entryCameraDistance.SetSelection(configuration.CameraDistance);
             entryCameraFov.SetSelection(configuration.CameraFOV);
             entryDamageNumbers.SetSelection(configuration.DamageNumbers);
+            entryCoopProvider.SetSelection(configuration.CoopProvider);
+            entryCompactChestMenu.SetSelection(configuration.UseCompactChestMenu ? 1 : 0);
+            entryMouseSensitivity.SetSliderValue(configuration.MouseSensitivity);
             var abilityKeyBind = _saveFile.GetKeybinding(KeyAction.Ability);
             entryAbilityKeyBind.SetLabelValue(abilityKeyBind.ToString(), (int)abilityKeyBind);
             var moveUpKeyBind = _saveFile.GetKeybinding(KeyAction.MoveUp);
@@ -392,6 +398,9 @@ namespace UI.Main_Menu.REWORK.Scripts
             configuration.DamageNumbers = entryDamageNumbers.GetSelectedOption();
             configuration.CameraDistance = entryCameraDistance.GetSelectedOption();
             configuration.CameraFOV = entryCameraFov.GetSelectedOption();
+            configuration.CoopProvider = entryCoopProvider.GetSelectedOption();
+            configuration.UseCompactChestMenu = entryCoopProvider.GetSelectedOption() == 1;
+            configuration.MouseSensitivity = entryMouseSensitivity.GetSliderValue();
            
             _saveFile.CameraMode = (CameraModes)entryCameraMode.GetSelectedOption();
             _saveFile.Keybindings[KeyAction.Ability] = (KeyCode)entryAbilityKeyBind.GetLabelValue();

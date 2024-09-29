@@ -41,5 +41,11 @@
 		Summer = 18,
 		[Character("Nishi_HoF")]
 		Nishi_HoF = 19,
+		[Character("Madra")]
+		Madra = 20,
+		[Character("Mucha")]
+		Mucha = 21,
+		[Character("Rederith")]
+		Rederith = 22
 	}
 }

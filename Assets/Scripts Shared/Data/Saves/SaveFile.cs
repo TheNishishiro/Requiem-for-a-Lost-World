@@ -8,12 +8,15 @@ using DefaultNamespace.Data.Cameras;
 using DefaultNamespace.Data.Modals;
 using DefaultNamespace.Data.Settings;
 using DefaultNamespace.Extensions;
+using DefaultNamespace.Steam.Attributes;
 using JetBrains.Annotations;
 using Managers;
 using Newtonsoft.Json;
 using Objects.Characters;
 using Objects.Players.PermUpgrades;
 using Objects.Stage;
+using Steamworks;
+using Steamworks.Data;
 using UI.Main_Menu.REWORK.Scripts;
 using UI.Shared;
 using Unity.VisualScripting;
@@ -75,6 +78,7 @@ namespace DefaultNamespace.Data
 		public bool IsDiscordVisited;
 		public bool IsItchIoVisited;
 		public bool IsFeedbackLeft;
+		public bool IsSteamVisited;
 		#endregion
 		#region Game Settings
 		public bool IsCoopAllowed;
@@ -261,13 +265,22 @@ namespace DefaultNamespace.Data
 			        break;
 			}
 
-			
 			if (!AchievementSaveData.ContainsKey(achievementEnum))
 				AchievementSaveData.Add(achievementEnum, true);
 			else
 				AchievementSaveData[achievementEnum] = true;
 			
 			FindFirstObjectByType<AchievementGetDisplay>(FindObjectsInactive.Include).Display(achievementEnum);
+
+			if (SteamClient.IsValid)
+			{
+				var steamAchievementCode = achievementEnum.GetSteamCode();
+				if (string.IsNullOrWhiteSpace(steamAchievementCode))
+					return;
+				
+				var achievement = new Achievement(steamAchievementCode);
+				achievement.Trigger();
+			}
 		}
 
 		public bool IsAchievementUnlocked(AchievementEnum achievementEnum)
@@ -332,28 +345,38 @@ namespace DefaultNamespace.Data
 			switch (openedLinks)
 			{
 				case OpenedLinks.Twitter when !IsTwitterVisited:
-					ModalManager.instance.Open(ButtonCombination.Yes, "Rewards", $"Thanks for visiting our twitter page, here is your reward of 1000 gems", "Ok!");
+					ModalManager.instance.Open(ButtonCombination.Yes, "Rewards", "Thanks for visiting our twitter page, here is your reward of 1000 gems", "Ok!");
 					Gems += 1000;
 					IsTwitterVisited = true;
 					break;
 				case OpenedLinks.Discord when !IsDiscordVisited:
-					ModalManager.instance.Open(ButtonCombination.Yes, "Rewards", $"Thanks for visiting our discord server, here is your reward of 1000 gems", "Ok!");
+					ModalManager.instance.Open(ButtonCombination.Yes, "Rewards", "Thanks for visiting our discord server, here is your reward of 1000 gems", "Ok!");
 					Gems += 1000;
 					IsDiscordVisited = true;
 					break;
 				case OpenedLinks.ItchIo when !IsItchIoVisited:
-					ModalManager.instance.Open(ButtonCombination.Yes, "Rewards", $"Thanks for visiting our itch.io page, here is your reward of 1000 gems", "Ok!");
+					ModalManager.instance.Open(ButtonCombination.Yes, "Rewards", "Thanks for visiting our itch.io page, here is your reward of 1000 gems", "Ok!");
 					Gems += 1000;
 					IsItchIoVisited = true;
 					break;
+				case OpenedLinks.Steam when !IsSteamVisited:
+					ModalManager.instance.Open(ButtonCombination.Yes, "Rewards", "Thanks for visiting our Steam page, here is your reward of 1000 gems", "Ok!");
+					Gems += 1000;
+					IsSteamVisited = true;
+					break;
 				case OpenedLinks.Feedback when !IsFeedbackLeft:
-					ModalManager.instance.Open(ButtonCombination.Yes, "Rewards", $"Thank you for leaving feedback, here is your reward of 2000 gems", "Ok!");
+					ModalManager.instance.Open(ButtonCombination.Yes, "Rewards", "Thank you for leaving feedback, here is your reward of 2000 gems", "Ok!");
 					Gems += 2000;
 					IsFeedbackLeft = true;
 					break;
 			}
 			
 			Save();
+		}
+
+		public bool IsSteamCoop()
+		{
+			return SteamClient.IsValid && ConfigurationFile.CoopProvider is 2 or 0;
 		}
 	}
 	
@@ -393,6 +416,7 @@ namespace DefaultNamespace.Data
 		public bool IsDiscordVisited;
 		public bool IsItchIoVisited;
 		public bool IsFeedbackLeft;
+		public bool IsSteamVisited;
 		public int Pity;
 		public DifficultyEnum SelectedDifficulty;
 		public bool IsCoopAllowed;
@@ -450,6 +474,7 @@ namespace DefaultNamespace.Data
 			IsDiscordVisited = saveFile.IsDiscordVisited;
 			IsItchIoVisited = saveFile.IsItchIoVisited;
 			IsFeedbackLeft = saveFile.IsFeedbackLeft;
+			IsSteamVisited = saveFile.IsSteamVisited;
 			IsCoopAllowed = saveFile.IsCoopAllowed;
 			IsShortPlayTime = saveFile.IsShortPlayTime;
 			IsRandomLevelUp = saveFile.IsRandomLevelUp;

@@ -41,6 +41,7 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
     public NetworkVariable<FixedString128Bytes> currentPlayerName = new ("", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<ulong> currentPlayerId = new (0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<bool> isPlayerDead = new (false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> isVoteUnpause = new (false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public NetworkVariable<DifficultyEnum> difficulty = new ();
     public NetworkVariable<StageEnum> stage = new ();
     private bool _keepAlive = true;
@@ -55,7 +56,6 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
     public void Start()
     {
         tag = "Player";
-        transform.position = FindFirstObjectByType<SpawnPoint>().transform.position;
     }
 
     public override void OnNetworkSpawn()
@@ -65,8 +65,8 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
             difficulty.Value = GameData.GetCurrentDifficulty().Difficulty;
             stage.Value = GameData.GetCurrentStage().id;
         }
-
-        SetupCamera();
+        
+        SetupCamera(GetRootCamera().transform);
         
         GameData.SetCurrentDifficultyData(difficultyContainer.GetData(difficulty.Value));
         GameData.SetCurrentStage(stageContainer.GetData(stage.Value));
@@ -78,6 +78,7 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
         
         if (IsOwner)
         {
+            transform.position = FindFirstObjectByType<SpawnPoint>().transform.position;
             StartCoroutine(WaitForAddWeapon());
             StartCoroutine(WaitForCursorManager());
             StartCoroutine(WaitForEnemyManager());
@@ -89,10 +90,24 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
         }
     }
 
-    private void SetupCamera()
+    public void VoteUnpause()
+    {
+        if (!IsOwner) return;
+
+        isVoteUnpause.Value = true;
+    }
+
+    public void ResetVoteUnpause()
+    {
+        if (!IsOwner) return;
+
+        isVoteUnpause.Value = false;
+    }
+
+    private void SetupCamera(Transform targetTransform)
     {
         if (IsOwner && GetRootCamera() != null)
-            SetCameraTarget(GetRootCamera().transform);
+            SetCameraTarget(isPlayerDead.Value ? targetTransform : GetRootCamera().transform);
         
         firstPersonController.enabled = SaveFile.Instance.CameraMode is CameraModes.StaticThirdPerson or CameraModes.FirstPerson && IsOwner;
         thirdPersonController.enabled = SaveFile.Instance.CameraMode is CameraModes.FreeThirdPerson or CameraModes.TopDown && IsOwner;
@@ -256,10 +271,9 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
     {
         while (true)
         {
-            var cM = FindFirstObjectByType<CursorManager>();
-            if (cM != null && WeaponManager.instance != null)
+            if (CursorManager.instance != null && WeaponManager.instance != null)
             {
-                cM.Setup(GetComponentInChildren<StarterAssetsInputs>());
+                CursorManager.instance.Setup(GetComponentInChildren<StarterAssetsInputs>());
                 
                 var upgradePanelManager = FindFirstObjectByType<UpgradePanelManager>();
                     
@@ -290,7 +304,10 @@ public class MultiplayerPlayer : NetworkBehaviour, ISettingsChangedHandler
     public void OnSettingsChanged()
     {
         if (!IsOwner) return;
-        SetupCamera();
+        var followPoint = GameManager.instance.GetCameraInstance().Follow;
+        if (followPoint == null)
+            followPoint = GetRootCamera().transform;
+        SetupCamera(followPoint);
     }
 
     private void OnEnable()

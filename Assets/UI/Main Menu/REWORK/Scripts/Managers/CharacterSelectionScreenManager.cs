@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace.Data;
+using DefaultNamespace.Data.Modals;
+using DefaultNamespace.Steam;
 using Interfaces;
 using JetBrains.Annotations;
 using Managers;
 using Objects.Characters;
 using Objects.Stage;
+using UI.Main_Menu.REWORK.Scripts;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -134,8 +137,18 @@ public class CharacterSelectionScreenManager : MonoBehaviour, IStackableWindow
     {
         if (IsLockedByAnimation) 
             return;
-        
-        if (_isCoopSelect)
+
+        if (_isCoopSelect && SaveFile.Instance.IsSteamCoop())
+        {
+            if (!SteamManager.instance.IsJoinedLobby())
+            {
+                ModalManager.instance.Open(ButtonCombination.Yes, "Not in a lobby", "To join a Steam game you need to first join the lobby.\n\nDo so by accepting an invite or request to join through Steam friend list.", modalState: ModalState.Info, textYes: "Close");
+                return;
+            }
+            
+            FindFirstObjectByType<MultiplayerManager>().StartClient();
+        }
+        else if (_isCoopSelect)
             mainCharacterCard.JoinGameScreen();
         else
             mainCharacterCard.OpenGameSettingsMenu();

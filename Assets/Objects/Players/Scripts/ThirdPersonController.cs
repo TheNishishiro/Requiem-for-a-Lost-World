@@ -1,6 +1,8 @@
-﻿using DefaultNamespace.Data.Game;
+﻿using DefaultNamespace.Data;
+using DefaultNamespace.Data.Game;
 using Managers;
 using Objects.Players.Scripts;
+using Unity.Mathematics;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -167,7 +169,7 @@ namespace StarterAssets
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
                 //Don't multiply mouse input by Time.deltaTime;
-                float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+                float deltaTimeMultiplier = (IsCurrentDeviceMouse ? 1.0f : Time.deltaTime) * SaveFile.Instance.ConfigurationFile.MouseSensitivity;
 
                 _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
                 _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;

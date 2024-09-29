@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Text;
 using DefaultNamespace;
+using DefaultNamespace.Data.Locale;
 using DefaultNamespace.Extensions;
 using Objects.Players.Scripts;
 using Unity.Mathematics;
@@ -104,7 +105,7 @@ namespace Objects.Abilities
 		{
 			var rarityFactor = isUnlock ? GetUnlockRarityFactor(rarity) : GetUpgradeRarityFactor(rarity);
 
-			return description
+			return description.Translate()
 				.Replace("{AttackCount}", StatToString(AttackCount))
 				.Replace("{Damage}", StatToString(Damage, rarityFactor))
 				.Replace("{Cooldown}", StatToString(Cooldown, rarityFactor))

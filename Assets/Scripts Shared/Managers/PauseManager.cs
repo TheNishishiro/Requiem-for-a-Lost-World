@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using DefaultNamespace;
 using DefaultNamespace.Data.Game;
 using Unity.Netcode;
 using UnityEngine;
@@ -8,42 +12,75 @@ namespace Managers
 	public class PauseManager : NetworkBehaviour
 	{
 		public static PauseManager instance;
-		[SerializeField] private CursorManager cursorManager;
-		private GamePauseStates _gamePauseStates;
+		private readonly Dictionary<GamePauseStates, int> _gamePauseStateCounter = new ();
 
 		public void Start()
 		{
 			if (instance == null)
+			{
 				instance = this;
+				foreach (var pauseState in Utilities.EnumToEnumerable<GamePauseStates>())
+				{
+					_gamePauseStateCounter.TryAdd(pauseState, 0);
+				}
+			}
 		}
 		
-		public void PauseGame(bool forcePause = false)
+		public void PauseGame(bool awaitPlayerVotes = false)
 		{
-			cursorManager.ShowCursor();
-
-			if ((IsHost && NetworkManager.Singleton.ConnectedClients.Count <= 1) || forcePause)
-				Time.timeScale = 0;
+			if (IsHost)
+			{
+				RpcManager.instance.PauseRpc(awaitPlayerVotes);
+			}
+			else
+			{
+				CursorManager.instance.ShowCursor();
+			}
 		}
 
-		public void UnPauseGame()
+		public void UnPauseGame(bool awaitPlayerVotes = false)
 		{
-			cursorManager.HideCursor();
-			Time.timeScale = 1;
+			if (IsHost)
+			{
+				if (awaitPlayerVotes)
+					StartCoroutine(AwaitPlayersReadyForUnPause());
+				else
+					RpcManager.instance.UnPauseRpc();
+			}
+			else
+			{
+				CursorManager.instance.HideCursor();
+			}
+		}
+
+		private IEnumerator AwaitPlayersReadyForUnPause()
+		{
+			var players = NetworkManager.Singleton.ConnectedClients
+				.Select(x => x.Value.PlayerObject.GetComponent<MultiplayerPlayer>())
+				.ToList();
+			do
+			{
+				yield return new WaitForSecondsRealtime(0.1f);
+			} while (players.Count > 1 && players.Any(x => !x.isVoteUnpause.Value));
+
+			RpcManager.instance.UnPauseRpc();
 		}
 
 		public void AddPauseState(GamePauseStates pauseState)
 		{
-			_gamePauseStates |= pauseState;
+			_gamePauseStateCounter[pauseState]++;
 		}
 
 		public void RemovePauseState(GamePauseStates pauseState)
 		{
-			_gamePauseStates &= ~pauseState;
+			_gamePauseStateCounter[pauseState]--;
+			if (_gamePauseStateCounter[pauseState] < 0)
+				_gamePauseStateCounter[pauseState] = 0;
 		}
 
 		public bool IsPauseStateSet(GamePauseStates pauseState)
 		{
-			return (_gamePauseStates & pauseState) != 0;
+			return _gamePauseStateCounter[pauseState] > 0;
 		}
 
 		public void SetFullPause()
@@ -56,7 +93,10 @@ namespace Managers
 
 		public void ClearFullPause()
 		{
-			_gamePauseStates = 0;
+			foreach (GamePauseStates state in Enum.GetValues(typeof(GamePauseStates)))
+			{
+				RemovePauseState(state);
+			}
 		}
 	}
 }

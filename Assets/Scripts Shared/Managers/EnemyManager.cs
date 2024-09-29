@@ -98,7 +98,7 @@ public class EnemyManager : NetworkBehaviour
 		var enemyComponent = enemy.GetComponent<Enemy>();
 		enemy.Spawn();
 		
-		var expIncrease = GameSettings.ExpDropModifier * playerCount <= 1 ? 1 : Mathf.Pow(0.9f, playerCount);
+		var expIncrease = GameSettings.ExpDropModifier * (1f / playerCount);
 		var healthIncrease = _healthMultiplier * playerCount <= 1 ? 1 : Mathf.Pow(1.075f, playerCount);
 		
 		enemyComponent.SetPlayerTarget(targetClient);

@@ -15,8 +15,8 @@ MonoBehaviour:
   Id: 2
   Name: Lucy
   Title: Bearer of Corruption
-  CharacterCard: {fileID: 21300000, guid: b7cf5b0a8555eb145ba8dedcc93b3265, type: 3}
-  GatchaArt: {fileID: 21300000, guid: 05e43bc3b19abb141a7d819e59548078, type: 3}
+  CharacterCard: {fileID: 21300000, guid: 5ef952bd15a4d6b45a6003fa5c588172, type: 3}
+  GatchaArt: {fileID: 21300000, guid: 4d7550b9d12f56447891157b39fcd1c6, type: 3}
   GachaSubArtOffset: {x: 15, y: -45}
   Avatar: {fileID: 21300000, guid: c25ebf5fc391e6949a788b7df64e878e, type: 3}
   CharacterSprite: {fileID: 21300000, guid: ba49fbf638fcf6f478b04d8ba9f1a37d, type: 3}
@@ -28,9 +28,19 @@ MonoBehaviour:
   AbilityDescription: Pick random enemies from the field to fight for you for 10
     seconds. Damage of enemies controlled in this way is affected by current <color=#FFC300>damage
     increase</color> provided by items or runes
+  Description:
+    englishText: 
+    polishText: 
+  SkillName:
+    englishText: 
+    polishText: 
+  SkillDescription:
+    englishText: 
+    polishText: 
   AbilityCooldown: 40
   SpecialPrefab: {fileID: 0}
   AbilityPrefab: {fileID: 0}
+  AchievementListenerPrefab: {fileID: 0}
   AbilityIcon: {fileID: 21300000, guid: e64e4c6b0606bcb408717399fde1765f, type: 3}
   ColorTheme: {r: 0.8117647, g: 0.65882355, b: 0.4862745, a: 1}
   Alignment: 2
@@ -43,6 +53,7 @@ MonoBehaviour:
   Stats:
     Health: 50
     HealthMax: 50
+    SpecialValue: 0
     SpecialMax: 0
     SpecialIncrease: 0
     MagnetSize: 0.4
@@ -90,6 +101,11 @@ MonoBehaviour:
     EarthDamageIncrease: 0
     DashCount: 2
     Stamina: 2
+    ElementalReactionEffectIncreasePercentage: 0
+    FollowUpDamageIncrease: 0
+    HealthIncreasePercentage: 0
+    ResPen: 0
+    CanDotCrit: 0
   skillNodes:
   - {fileID: 11400000, guid: 8260ce2dbfe02934bb44dccac611b20b, type: 2}
   - {fileID: 11400000, guid: aa884236ff11c314dbf4d24a44ab1b24, type: 2}

@@ -5,6 +5,7 @@
         Twitter = 1,
         ItchIo = 2,
         Discord = 3,
-        Feedback = 4
+        Feedback = 4,
+        Steam = 5,
     }
 }

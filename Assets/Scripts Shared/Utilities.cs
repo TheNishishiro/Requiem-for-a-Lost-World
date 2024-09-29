@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using DefaultNamespace.Data.Achievements;
 using Objects.Enemies;
+using Steamworks.Data;
 using Unity.Netcode;
 using UnityEngine;
+using Color = UnityEngine.Color;
 using Random = UnityEngine.Random;
 
 namespace DefaultNamespace
@@ -56,6 +58,11 @@ namespace DefaultNamespace
 			return Random.value < 0.5f ? Random.Range(min1, max1) : Random.Range(min2, max2);
 		}
 		
+		public static IEnumerable<T> EnumToEnumerable<T> ()
+		{
+			return Enum.GetValues (typeof (T)).Cast<T>();
+		}
+		
 		public static T RandomEnumValue<T> ()
 		{
 			var v = Enum.GetValues (typeof (T));
@@ -91,6 +98,27 @@ namespace DefaultNamespace
 			var minutes = (int)time / 60;
 			var seconds = (int)time % 60;
 			return new TimeSpan(0, 0, minutes, seconds);
+		}
+		
+		public static Texture2D CovertSteamAvatar(this Image image )
+		{
+			var avatar = new Texture2D( (int)image.Width, (int)image.Height, TextureFormat.ARGB32, false )
+				{
+					filterMode = FilterMode.Trilinear
+				};
+
+			// Flip image
+			for ( var x = 0; x < image.Width; x++ )
+			{
+				for ( var y = 0; y < image.Height; y++ )
+				{
+					var p = image.GetPixel( x, y );
+					avatar.SetPixel( x, (int)image.Height - y, new Color( p.r / 255.0f, p.g / 255.0f, p.b / 255.0f, p.a / 255.0f ) );
+				}
+			}
+	
+			avatar.Apply();
+			return avatar;
 		}
 		
 		public static Vector3 GetRandomInArea(Vector3 position, float size)

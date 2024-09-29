@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DefaultNamespace.Steam;
 using Interfaces;
 using Managers;
 using Objects.Stage;
+using Steamworks;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Main_Menu.REWORK.Scripts
 {
@@ -22,6 +26,9 @@ namespace UI.Main_Menu.REWORK.Scripts
         [SerializeField] private CollectionScreenManager collectionScreenManager;
         [SerializeField] private TutorialScreenManager tutorialScreenManager;
         [SerializeField] private List<MainMenuButton> mainMenuButtons;
+        [SerializeField] private GameObject goSteamOverlay;
+        [SerializeField] private Image imageSteamAvatar;
+        [SerializeField] private TextMeshProUGUI labelSteamName;
         private int selectedIndex;
 
         private void Start()
@@ -38,6 +45,14 @@ namespace UI.Main_Menu.REWORK.Scripts
             {
                 gameResultScreenManager.Open();
             }
+
+            goSteamOverlay.gameObject.SetActive(SteamClient.IsValid);
+            if (SteamClient.IsValid)
+            {
+                imageSteamAvatar.sprite = Sprite.Create(SteamManager.instance.SteamAvatar, new Rect(0.0f, 0.0f, SteamManager.instance.SteamAvatar.width, SteamManager.instance.SteamAvatar.height), new Vector2(0.5f, 0.5f), 100.0f);
+                labelSteamName.text = SteamClient.Name;
+            }
+           
         }
 
         public void Update()

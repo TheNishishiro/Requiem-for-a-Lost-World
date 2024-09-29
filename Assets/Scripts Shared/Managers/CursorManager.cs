@@ -10,7 +10,14 @@ namespace Managers
 {
 	public class CursorManager : MonoBehaviour
 	{
+		public static CursorManager instance;
 		private StarterAssetsInputs _starterAssetsInputs;
+
+		private void Start()
+		{
+			if (instance == null)
+				instance = this;
+		}
 
 		public void Setup(StarterAssetsInputs starterAssetsInputs)
 		{

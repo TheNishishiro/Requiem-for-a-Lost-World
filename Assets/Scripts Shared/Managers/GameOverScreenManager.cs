@@ -9,12 +9,12 @@ namespace Managers
 		[SerializeField] private GameObject screenVictory;
 		[SerializeField] private PauseManager pauseManager;
 		
-		public void OpenPanel(bool isWin, bool forcePause = false)
+		public void OpenPanel(bool isWin)
 		{
 			screenFailed.SetActive(!isWin);
 			screenVictory.SetActive(isWin);
 			
-			pauseManager.PauseGame(forcePause);
+			pauseManager.PauseGame();
 		}
 
 		public void QuitGame(bool isWin)

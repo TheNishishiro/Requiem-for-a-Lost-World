@@ -37,12 +37,12 @@ namespace Managers
 		public void OpenPanel()
 		{
 			_isWeaponOnly = false;
-			QueueableWindowManager.instance.QueueWindow(this);
+			QueueableWindowManager.instance.QueueWindow(this, false);
 		}
 
 		public void ClosePanel()
 		{
-			QueueableWindowManager.instance.DeQueueWindow();
+			QueueableWindowManager.instance.DeQueueWindow(false);
 		}
 
 		public void OpenPickWeapon()
@@ -83,12 +83,15 @@ namespace Managers
 		{
 			_timeOpened = 0;
 			ReloadUpgrades();
+			PauseManager.instance.PauseGame(true);
 		}
 
 		public void Close()
 		{
 			HideButtons();
 			panel.SetActive(false);
+			PauseManager.instance.UnPauseGame(true);
+			GameManager.instance.playerMpComponent.VoteUnpause();
 		}
 		
 		private void ReloadUpgrades()

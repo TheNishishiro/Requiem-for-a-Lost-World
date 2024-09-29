@@ -101,13 +101,13 @@ namespace UI.Main_Menu.REWORK.Scripts
                     _ => labelShardId.text
                 };
 
-                labelTitle.text = characterShard.currentShard.EidolonName;
+                labelTitle.text = characterShard.currentShard.GetEidolonName();
                 labelDescription.text = characterShard.currentShard.GetDescription();
                 labelQuote.text = string.Empty;
                 
                 if (!characterShard.IsUnlocked) continue;
                 characterShard.IsSelected = true;
-                labelQuote.text = characterShard.currentShard.EidolonQuote;
+                labelQuote.text = characterShard.currentShard.GetEidolonQuote();
             }
         }
         

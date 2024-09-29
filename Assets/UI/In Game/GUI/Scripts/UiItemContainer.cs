@@ -23,5 +23,11 @@ namespace UI.In_Game.GUI.Scripts
             imageIcon.sprite = image;
             gameObject.SetActive(true);
         }
+        
+        public void Setup(Sprite image)
+        {
+            imageIcon.sprite = image;
+            gameObject.SetActive(true);
+        }
     }
 }

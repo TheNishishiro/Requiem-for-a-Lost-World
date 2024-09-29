@@ -25,9 +25,10 @@ namespace Managers
             return _windowQueue.Count == 0;
         }
 
-        public void QueueWindow(IQueueableWindow window)
+        public void QueueWindow(IQueueableWindow window, bool isPauseGame = true)
         {
-            PauseGame();
+            if (isPauseGame)
+                PauseGame();
 
             if (_currentWindow == null)
             {
@@ -45,18 +46,20 @@ namespace Managers
                 QueueWindow(window);
         }
 
-        public void DeQueueWindow()
+        public void DeQueueWindow(bool isResumeGame = true)
         {
-            if (_currentWindow == null && _windowQueue.Count == 0)
+            if (_currentWindow == null && _windowQueue.Count == 0 )
             {
-                ResumeGame();
+                if (isResumeGame)
+                    ResumeGame();
                 return;
             }
 
             if (_windowQueue.Count == 0 && _currentWindow != null)
             {
                 _currentWindow.Close();
-                ResumeGame();
+                if (isResumeGame)
+                    ResumeGame();
                 _currentWindow = null;
                 return;
             }

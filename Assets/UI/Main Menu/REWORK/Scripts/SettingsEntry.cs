@@ -9,7 +9,7 @@ namespace UI.Main_Menu.REWORK.Scripts
 {
     public class SettingsEntry : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [BoxGroup("Description")] [SerializeField] [Multiline] private string description;
+        [BoxGroup("Description")] [SerializeField] [ResizableTextArea] private string description;
         [BoxGroup("Description")] [SerializeField] private Sprite exampleImage;
         [SerializeField] private CarouselUIElement carousel;
         [SerializeField] private Image background;

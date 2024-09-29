@@ -31,7 +31,7 @@ namespace Objects.Players.Scripts
 
 		public void AddExperience(float amount)
 		{
-			experience += amount * PlayerStatsScaler.GetScaler().GetExperienceIncrease() * GameData.GetCurrentDifficulty().ExperienceGainModifier;
+			experience += amount;
 			CheckLevelUp();
 			GuiManager.instance.UpdateExperience(experience, ToLevelUp);
 		}

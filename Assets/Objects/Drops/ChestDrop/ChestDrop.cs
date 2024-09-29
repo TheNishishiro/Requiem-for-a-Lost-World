@@ -11,7 +11,7 @@ namespace Objects.Drops.ChestDrop
 		{
 			if (!other.gameObject.CompareTag("Player") || other.gameObject.GetComponent<NetworkObject>()?.IsOwner != true) return;
 			
-			FindFirstObjectByType<ChestPanelManager>().OpenPanel();
+			ChestPanelManager.instance.OpenPanel();
 			PickupManager.instance.DestroyPickup(GetComponent<Pickup>());
 		}
 	}
