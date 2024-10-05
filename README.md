@@ -1,10 +1,13 @@
+## Notice
+Due to scope the project grew to I decided to migrate it away from github - which means the codebase here will no longer recieve any updates!
+
 # Requiem for a Lost World
 
 A Vampire Survivors like game in 3D with AI generated assets, focused on a story driven narrative through rouge like progression. 
 
 Features a single player, online or local co-op mode, a solid set of unique characters with unique abilities and multiple achievements to unlock!
 
-The project is in an early stage of development, but if you are willing to try it out, you can download the latest version from my [itch.io](https://thenishishiro.itch.io/requiem-for-a-lost-world) page!
+If you are willing to try it out, you can download the latest version from my [itch.io](https://thenishishiro.itch.io/requiem-for-a-lost-world) page or get it on [Steam](https://store.steampowered.com/app/3255660/Requiem_For_a_Lost_World/)
 
 If you want to report a bug or have an interesting idea then feel free to create an issue and I will get to it as soon as possible
 
